@@ -22,6 +22,7 @@ export const localRoutes = {
     ninVerification: '/ninVerification',
     participants: '/participants',
     billing: '/billing',
+    subscriptions: '/subscriptions',
     applicationsDetails: '/applications/:caseId',
     dashboard: '/dashboard',
     contacts: '/contacts',

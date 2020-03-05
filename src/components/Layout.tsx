@@ -199,6 +199,17 @@ function Layout(props: any) {
                             </Typography>
                         }/>
                 </ListItem>
+                <ListItem button onClick={onClick(localRoutes.subscriptions )} selected={isSelected(localRoutes.subscriptions)}>
+                    <ListItemIcon>
+                    <AssignmentIcon className={getCls(localRoutes.subscriptions)}/>
+                    </ListItemIcon>
+                    <ListItemText
+                        primary={
+                            <Typography className={getCls(localRoutes.subscriptions)}> 
+                                Subscriptions
+                            </Typography>
+                        }/>
+                </ListItem>
                 <ListItem button onClick={onClick(localRoutes.contacts)} selected={isSelected(localRoutes.billing)}>
                     <ListItemIcon>
                         <PeopleIcon className={getCls(localRoutes.contacts)}/>
