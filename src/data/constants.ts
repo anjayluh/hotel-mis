@@ -21,6 +21,7 @@ export const localRoutes = {
     pending: '/pending',
     ninVerification: '/ninVerification',
     participants: '/participants',
+    billing: '/billing',
     applicationsDetails: '/applications/:caseId',
     dashboard: '/dashboard',
     contacts: '/contacts',
