@@ -3,7 +3,8 @@ import {login, readMetadata} from "./login";
 import * as superagent from "superagent";
 import {fakeEntityRequest, fakeIndividualRequest, fakeJointRequest, fakeOtherRequest} from "./test-joint";
 import {createJsonFile, createZipFile, uploadFile, uploadZipAsync} from "./test-files";
-import {getGatewayDocsList} from "../modules/workflows/actions/templates/verify-documents/helpers";
+import {getGatewayDocsList} from "../modules/ninVerification/actions/templates/verify-documents/helpers";
+// "workflows/actions/templates/verify-documents/helpers";
 import {AccountCategory, GatewayDocument, GatewayMetadata} from "../data/types";
 
 

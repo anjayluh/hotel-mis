@@ -19,7 +19,7 @@ export const redux = {
 export const localRoutes = {
     callback: '/callback',
     pending: '/pending',
-    applications: '/applications',
+    ninVerification: '/ninVerification',
     applicationsDetails: '/applications/:caseId',
     dashboard: '/dashboard',
     contacts: '/contacts',

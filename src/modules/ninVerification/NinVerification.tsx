@@ -90,20 +90,20 @@ const Workflows = () => {
                 <Grid item xs={open ? 9 : 12} className={clsx(classes.content, {[classes.contentShift]: open})}>
                     <Grid container spacing={2}>
                         <Grid item sm={12}>
-                            <Typography variant='h4'>New Applications</Typography>
+                            <Typography variant='h4'>NIN Verification Requests</Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <XTable
                                 loading={loadingNew}
                                 headCells={workflowHeadCellsNew}
                                 data={newData}
-                                initialRowsPerPage={3}
+                                initialRowsPerPage={5}
                                 usePagination={true}
                                 initialSortBy={wfInitialSort}
                                 initialOrder="desc"
                             />
                         </Grid>
-                        <Grid item sm={12}>
+                        {/* <Grid item sm={12}>
                             <Typography variant='h4'>All Applications</Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -115,7 +115,7 @@ const Workflows = () => {
                                 initialSortBy={wfInitialSort}
                                 initialOrder="desc"
                             />
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                 </Grid>
                 <Grid item xs={3} style={{display: open ? "block" : "none"}}>

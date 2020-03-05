@@ -17,7 +17,7 @@ import {IState} from "../../../data/types";
 import Box from "@material-ui/core/Box";
 import {Flex} from "../../../components/widgets";
 import Typography from "@material-ui/core/Typography";
-import {trimCaseId} from "../../workflows/types";
+import {trimCaseId} from "../../ninVerification/types";
 import DetailView, {IRec} from "../../../components/DetailView";
 import Divider from "@material-ui/core/Divider";
 import {camelPad} from "../../../utils/stringHelpers";

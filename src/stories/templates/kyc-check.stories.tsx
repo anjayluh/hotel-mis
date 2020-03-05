@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button} from '@storybook/react/demo';
-import Index from "../../modules/workflows/actions/templates/kyc-check";
-import {ActionStatus, IAction} from "../../modules/workflows/types";
+import Index from "../../modules/ninVerification/actions/templates/kyc-check";
+import {ActionStatus, IAction} from "../../modules/ninVerification/types";
 import StoryWrapper from "../StoryWrapper";
 
 

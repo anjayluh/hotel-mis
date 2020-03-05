@@ -166,14 +166,14 @@ function Layout(props: any) {
                         </Typography>
                     }/>
                 </ListItem>
-                <ListItem button onClick={onClick(localRoutes.applications)}
-                          selected={isSelected(localRoutes.applications)}>
+                <ListItem button onClick={onClick(localRoutes.ninVerification)}
+                          selected={isSelected(localRoutes.ninVerification)}>
                     <ListItemIcon>
-                        <AssignmentIcon className={getCls(localRoutes.applications)}/>
+                        <AssignmentIcon className={getCls(localRoutes.ninVerification)}/>
                     </ListItemIcon>
                     <ListItemText primary={
-                        <Typography className={getCls(localRoutes.applications)}>
-                           Applications
+                        <Typography className={getCls(localRoutes.ninVerification)}>
+                           NIN Verification
                         </Typography>
                     }/>
                 </ListItem>
@@ -183,7 +183,7 @@ function Layout(props: any) {
                     </ListItemIcon>
                     <ListItemText
                         primary={
-                            <Typography className={getCls(localRoutes.contacts)}>
+                            <Typography className={getCls(localRoutes.contacts)}> 
                                 Contacts
                             </Typography>
                         }/>

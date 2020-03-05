@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const ApplicationLink = ({id, name}: IProps) => (
-    <Link style={{textDecoration: 'none', color: linkColor}} to={`${localRoutes.applications}/${id}`}>{name}</Link>
+    <Link style={{textDecoration: 'none', color: linkColor}} to={`${localRoutes.ninVerification}/${id}`}>{name}</Link>
 );
 
 export default ApplicationLink

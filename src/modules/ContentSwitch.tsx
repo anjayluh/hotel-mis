@@ -4,9 +4,9 @@ import {localRoutes, remoteRoutes} from "../data/constants";
 import Dashboard from "./dashboard/Dashboard";
 import Contacts from "./contacts/list/Contacts";
 import ContactDetails from "./contacts/details/Details";
-import ApplicationDetails from "./workflows/details/Details";
+import ApplicationDetails from "./ninVerification/details/Details";
 import Settings from "./settings/Settings";
-import Workflows from "./workflows/Workflows";
+import NinVerification from "./ninVerification/NinVerification";
 import Users from "./settings/users/List";
 import UserDetails from "./settings/users/Details";
 import Layout from "../components/Layout";
@@ -23,12 +23,12 @@ const ContentSwitch = () => {
         })
     }, [dispatch])
     return <Switch>
-        <Route exact={true} path="/" component={Workflows}/>
+        <Route exact={true} path="/" component={NinVerification}/>
         <Route path={localRoutes.dashboard} component={Dashboard}/>
+        <Route path={localRoutes.applicationsDetails} component={ApplicationDetails}/>
+        <Route path={localRoutes.ninVerification} component={NinVerification}/>
         <Route path={localRoutes.contactsDetails} component={ContactDetails}/>
         <Route path={localRoutes.contacts} component={Contacts}/>
-        <Route path={localRoutes.applicationsDetails} component={ApplicationDetails}/>
-        <Route path={localRoutes.applications} component={Workflows}/>
         <Route path={localRoutes.settings} component={Settings}/>
         <Route path={localRoutes.usersDetails} component={UserDetails}/>
         <Route path={localRoutes.users} component={Users}/>

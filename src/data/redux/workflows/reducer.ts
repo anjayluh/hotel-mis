@@ -1,4 +1,4 @@
-import {IWorkflow} from "../../../modules/workflows/types";
+import {IWorkflow} from "../../../modules/ninVerification/types";
 import {get} from "../../../utils/ajax";
 import {remoteRoutes} from "../../constants";
 import {Dispatch} from "redux";
