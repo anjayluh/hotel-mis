@@ -18,8 +18,17 @@ import MailIcon from '@material-ui/icons/Mail';
 import HiddenJs from "@material-ui/core/Hidden/HiddenJs";
 import {getInitials} from "../utils/stringHelpers";
 import {handleLogout} from "../data/redux/coreActions";
+import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        marginLeftAuto: {
+            marginLeft: 'auto',
+        },
+    }),
+);
 export const BarView = (props: any) => {
+    const classes = useStyles();
     const profile = useSelector((state: IState) => state.core.user)
     const dispatch = useDispatch();
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -46,7 +55,7 @@ export const BarView = (props: any) => {
         setAnchorEl(null);
     }
 
-    return <div>
+    return <div className={classes.marginLeftAuto}>
         <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"

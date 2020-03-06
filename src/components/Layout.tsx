@@ -81,6 +81,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         logoHolder: {
             flexGrow: 1,
+            maxWidth: '13.5rem',
         },
         logo: {
             [theme.breakpoints.only('xs')]: {
@@ -89,10 +90,6 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             height: 30,
             width: 'auto',
-        },
-        newRequestButton: {
-            marginTop: '-21px',
-            marginLeft: '29px',
         },
         menu: {
             color: grey[500]
@@ -266,9 +263,12 @@ function Layout(props: any) {
                         <MenuIcon/>
                     </IconButton>
                     <div className={classes.logoHolder}>
+                        {/* <Typography> 
+                            BoU Verification System
+                        </Typography> */}
                         <img src={logo} alt="logo" className={classes.logo}/>
-                        <Button variant='contained' color='primary' className={classes.newRequestButton}>New Request</Button>
                     </div>
+                    <Button variant='contained' color='primary'>New Request</Button>
                     <BarView textClass={classes.menuSelected}/>
                 </Toolbar>
             </AppBar>
