@@ -6,7 +6,7 @@ const Settings = () => {
 
     return <Navigation>
         <Grid spacing={2} container>
-
+        <h2>Settings</h2>
         </Grid>
 
     </Navigation>

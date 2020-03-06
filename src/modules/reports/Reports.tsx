@@ -1,10 +1,10 @@
 import * as React from "react";
 import Layout from "../../components/Layout";
 
-const Dashboard = () => (
+const Reports = () => (
     <Layout>
-        <h2>Subscriptions</h2>
+        <h2>Reports</h2>
     </Layout>
 )
 
-export default Dashboard
+export default Reports

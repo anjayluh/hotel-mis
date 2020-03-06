@@ -10,6 +10,8 @@ import NinVerification from "./ninVerification/NinVerification";
 import Participants from "./participants/Participants";
 import Billing from "./billing/Billing";
 import Subscriptions  from "./subscriptions/Subscriptions";
+import Reports  from "./reports/Reports";
+import DeveloperPortal  from "./developer_portal/DeveloperPortal";
 import Users from "./settings/users/List";
 import UserDetails from "./settings/users/Details";
 import Layout from "../components/Layout";
@@ -33,11 +35,13 @@ const ContentSwitch = () => {
         <Route path={localRoutes.participants} component={Participants}/>
         <Route path={localRoutes.billing} component={Billing}/>
         <Route path={localRoutes.subscriptions} component={Subscriptions}/>
+        <Route path={localRoutes.reports} component={Reports}/>
+        <Route path={localRoutes.developerPortal} component={DeveloperPortal}/>
         <Route path={localRoutes.contactsDetails} component={ContactDetails}/>
         <Route path={localRoutes.contacts} component={Contacts}/>
         <Route path={localRoutes.settings} component={Settings}/>
         <Route path={localRoutes.usersDetails} component={UserDetails}/>
-        <Route path={localRoutes.users} component={Users}/>
+        <Route path={localRoutes.settings} component={Settings}/>
         <Route component={NoMatch}/>
     </Switch>
 }

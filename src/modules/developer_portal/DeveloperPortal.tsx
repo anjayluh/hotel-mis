@@ -1,10 +1,10 @@
 import * as React from "react";
 import Layout from "../../components/Layout";
 
-const Subscriptions = () => (
+const DeveloperPortal = () => (
     <Layout>
-        <h2>Subscriptions</h2>
+        <h2>Developer Portal</h2>
     </Layout>
 )
 
-export default Subscriptions
+export default DeveloperPortal

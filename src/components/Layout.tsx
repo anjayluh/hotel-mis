@@ -210,25 +210,36 @@ function Layout(props: any) {
                             </Typography>
                         }/>
                 </ListItem>
-                <ListItem button onClick={onClick(localRoutes.contacts)} selected={isSelected(localRoutes.billing)}>
+                <ListItem button onClick={onClick(localRoutes.reports )} selected={isSelected(localRoutes.reports)}>
                     <ListItemIcon>
-                        <PeopleIcon className={getCls(localRoutes.contacts)}/>
+                    <AssignmentIcon className={getCls(localRoutes.subscriptions)}/>
                     </ListItemIcon>
                     <ListItemText
                         primary={
-                            <Typography className={getCls(localRoutes.contacts)}> 
-                                Contacts
+                            <Typography className={getCls(localRoutes.reports)}> 
+                                Reports
                             </Typography>
                         }/>
                 </ListItem>
-                <ListItem button onClick={onClick(localRoutes.users)} selected={isSelected(localRoutes.users)}>
+                <ListItem button onClick={onClick(localRoutes.settings)} selected={isSelected(localRoutes.settings)}>
                     <ListItemIcon>
-                        <SettingsIcon className={getCls(localRoutes.users)}/>
+                        <SettingsIcon className={getCls(localRoutes.settings)}/>
                     </ListItemIcon>
                     <ListItemText
                         primary={
-                            <Typography className={getCls(localRoutes.users)}>
-                                Users
+                            <Typography className={getCls(localRoutes.settings)}>
+                                Settings
+                            </Typography>
+                        }/>
+                </ListItem>
+                <ListItem button onClick={onClick(localRoutes.developerPortal)} selected={isSelected(localRoutes.developerPortal)}>
+                    <ListItemIcon>
+                        <SettingsIcon className={getCls(localRoutes.developerPortal)}/>
+                    </ListItemIcon>
+                    <ListItemText
+                        primary={
+                            <Typography className={getCls(localRoutes.developerPortal)}>
+                                Developer Portal
                             </Typography>
                         }/>
                 </ListItem>

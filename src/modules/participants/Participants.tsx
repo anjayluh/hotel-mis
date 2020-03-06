@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 
-const Workflows = () => {
+const Participants = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -138,4 +138,4 @@ const Workflows = () => {
     );
 }
 
-export default Workflows
+export default Participants

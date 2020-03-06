@@ -23,6 +23,8 @@ export const localRoutes = {
     participants: '/participants',
     billing: '/billing',
     subscriptions: '/subscriptions',
+    reports: '/reports',
+    developerPortal: '/developer-portal',
     applicationsDetails: '/applications/:caseId',
     dashboard: '/dashboard',
     contacts: '/contacts',
