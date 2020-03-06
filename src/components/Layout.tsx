@@ -173,7 +173,7 @@ function Layout(props: any) {
                     }/>
                 </ListItem>
                 <ListItem button onClick={onClick(localRoutes.ninVerification)}
-                          selected={isSelected(localRoutes.ninVerification)}>
+                selected={isSelected(localRoutes.ninVerification)}>
                     <ListItemIcon>
                         <VerifiedUserIcon className={getCls(localRoutes.ninVerification)}/>
                     </ListItemIcon>
@@ -196,7 +196,7 @@ function Layout(props: any) {
                 </ListItem>
                 <ListItem button onClick={onClick(localRoutes.billing)} selected={isSelected(localRoutes.billing)}>
                     <ListItemIcon>
-                    <ReceiptIcon className={getCls(localRoutes.ninVerification)}/>
+                    <ReceiptIcon className={getCls(localRoutes.billing)}/>
                     </ListItemIcon>
                     <ListItemText
                         primary={
@@ -218,7 +218,7 @@ function Layout(props: any) {
                 </ListItem>
                 <ListItem button onClick={onClick(localRoutes.reports )} selected={isSelected(localRoutes.reports)}>
                     <ListItemIcon>
-                    <AssignmentIcon className={getCls(localRoutes.subscriptions)}/>
+                    <AssignmentIcon className={getCls(localRoutes.reports)}/>
                     </ListItemIcon>
                     <ListItemText
                         primary={
