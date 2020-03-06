@@ -5,6 +5,7 @@ import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
+import Button from "@material-ui/core/Button";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -88,6 +89,10 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             height: 30,
             width: 'auto',
+        },
+        newRequestButton: {
+            marginTop: '-21px',
+            marginLeft: '29px',
         },
         menu: {
             color: grey[500]
@@ -262,6 +267,7 @@ function Layout(props: any) {
                     </IconButton>
                     <div className={classes.logoHolder}>
                         <img src={logo} alt="logo" className={classes.logo}/>
+                        <Button variant='contained' color='primary' className={classes.newRequestButton}>New Request</Button>
                     </div>
                     <BarView textClass={classes.menuSelected}/>
                 </Toolbar>
