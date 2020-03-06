@@ -11,7 +11,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import AppsIcon from '@material-ui/icons/Apps';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import Dashboard from '@material-ui/icons/Dashboard';
+import BookmarkIcon from '@material-ui/icons/Bookmark'; 
+import CodeIcon from '@material-ui/icons/Code';
 import PeopleIcon from '@material-ui/icons/People';
 import SettingsIcon from '@material-ui/icons/Settings';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -160,7 +164,7 @@ function Layout(props: any) {
             <List>
                 <ListItem button onClick={onClick(localRoutes.dashboard)} selected={isSelected(localRoutes.dashboard)}>
                     <ListItemIcon>
-                        <AppsIcon className={getCls(localRoutes.dashboard)}/>
+                        <Dashboard className={getCls(localRoutes.dashboard)}/>
                     </ListItemIcon>
                     <ListItemText primary={
                         <Typography className={getCls(localRoutes.dashboard)}>
@@ -171,7 +175,7 @@ function Layout(props: any) {
                 <ListItem button onClick={onClick(localRoutes.ninVerification)}
                           selected={isSelected(localRoutes.ninVerification)}>
                     <ListItemIcon>
-                        <AssignmentIcon className={getCls(localRoutes.ninVerification)}/>
+                        <VerifiedUserIcon className={getCls(localRoutes.ninVerification)}/>
                     </ListItemIcon>
                     <ListItemText primary={
                         <Typography className={getCls(localRoutes.ninVerification)}>
@@ -192,7 +196,7 @@ function Layout(props: any) {
                 </ListItem>
                 <ListItem button onClick={onClick(localRoutes.billing)} selected={isSelected(localRoutes.billing)}>
                     <ListItemIcon>
-                    <AssignmentIcon className={getCls(localRoutes.ninVerification)}/>
+                    <ReceiptIcon className={getCls(localRoutes.ninVerification)}/>
                     </ListItemIcon>
                     <ListItemText
                         primary={
@@ -203,7 +207,7 @@ function Layout(props: any) {
                 </ListItem>
                 <ListItem button onClick={onClick(localRoutes.subscriptions )} selected={isSelected(localRoutes.subscriptions)}>
                     <ListItemIcon>
-                    <AssignmentIcon className={getCls(localRoutes.subscriptions)}/>
+                    <BookmarkIcon  className={getCls(localRoutes.subscriptions)}/>
                     </ListItemIcon>
                     <ListItemText
                         primary={
@@ -236,7 +240,7 @@ function Layout(props: any) {
                 </ListItem>
                 <ListItem button onClick={onClick(localRoutes.developerPortal)} selected={isSelected(localRoutes.developerPortal)}>
                     <ListItemIcon>
-                        <SettingsIcon className={getCls(localRoutes.developerPortal)}/>
+                        <CodeIcon className={getCls(localRoutes.developerPortal)}/>
                     </ListItemIcon>
                     <ListItemText
                         primary={
@@ -263,9 +267,6 @@ function Layout(props: any) {
                         <MenuIcon/>
                     </IconButton>
                     <div className={classes.logoHolder}>
-                        {/* <Typography> 
-                            BoU Verification System
-                        </Typography> */}
                         <img src={logo} alt="logo" className={classes.logo}/>
                     </div>
                     <Button variant='contained' color='primary'>New Request</Button>
