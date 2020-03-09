@@ -45,7 +45,7 @@ const servers: any = {
         Payments: "https://emata-poc-payments-test.laboremus.no",
     },
     test: {
-        Auth: 'https://bou-auth-api-test.test001.laboremus.no',
+        Auth: 'https://bou-auth-api-test.proxy001.laboremus.no',
         Crm: 'https://crmservice-test.laboremus.no',
         Case: 'https://dfcu-customeronboarding-casehandling-test.laboremus.no',
         Gateway: 'https://dfcu-customeronboarding-gateway-test.laboremus.no',
