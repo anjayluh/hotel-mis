@@ -38,7 +38,7 @@ const servers: any = {
     dev: {
         Auth: 'https://bou-auth-api-test.test001.laboremus.no',
         Crm: 'https://crmservice-test.laboremus.no',
-        Case: 'https://dfcu-customeronboarding-casehandling-test.laboremus.no',
+        Case: 'https://bou-niv-workflow-api-test.test001.laboremus.no',
         Gateway: 'https://dfcu-customeronboarding-gateway-test.laboremus.no',
         Kyc: "https://kyc-connector-staging.onboarding.dfcugroup.com",
         Notification: "https://emata-poc-smsservice-test.laboremus.no",
@@ -47,7 +47,7 @@ const servers: any = {
     test: {
         Auth: 'https://bou-auth-api-test.proxy001.laboremus.no',
         Crm: 'https://crmservice-test.laboremus.no',
-        Case: 'https://dfcu-customeronboarding-casehandling-test.laboremus.no',
+        Case: 'https://bou-niv-workflow-api-test.test001.laboremus.no',
         Gateway: 'https://dfcu-customeronboarding-gateway-test.laboremus.no',
         Kyc: 'https://dfcu-customeronboarding-kycconnector-test.laboremus.no',
         Notification: 'https://notificationservice-test.laboremus.no',
