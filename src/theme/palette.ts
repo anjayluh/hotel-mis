@@ -2,6 +2,7 @@ import {colors} from '@material-ui/core';
 
 const white = '#FFFFFF';
 const black = '#000000';
+const themeBlue = '#303f4f';
 
 const palette={
     primary: {
@@ -13,7 +14,7 @@ const palette={
     secondary: {
         contrastText: white,
         dark: colors.blue[900],
-        main: colors.blue['A400'],
+        main: themeBlue,
         light: colors.blue['A400']
     },
     error: {
@@ -29,7 +30,7 @@ const palette={
     },
     background: {
         default: '#F4F6F8',
-        paper: white
+        paper:' white'
     },
     divider: colors.grey[200]
 };

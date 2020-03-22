@@ -15,12 +15,11 @@ interface IProps {
 const Filter = ({onFilter, loading}: IProps) => {
     const [data, setData] = useState({
         query: '',
-        category: '',
-        contactType: '',
-        email: '',
-        phone: '',
-        nin: ''
+        name: '',
+        type: '',
+        dateCreated: ''
     })
+    const participantTypes = ['Commercial Bank', 'Microfinance', 'Forex Bureau']
 
     function submitForm(values: any) {
         onFilter(values)
@@ -39,10 +38,10 @@ const Filter = ({onFilter, loading}: IProps) => {
         <Grid spacing={3} container>
             <Grid item xs={12}>
                 <TextField
-                    name="query"
-                    value={data['query']}
+                    name="name"
+                    value={data['name']}
                     onChange={handleChange}
-                    label="Name"
+                    label="Participant"
                     variant="outlined"
                     fullWidth
                     size='small'
@@ -50,46 +49,21 @@ const Filter = ({onFilter, loading}: IProps) => {
             </Grid>
             <Grid item xs={12}>
                 <PSelectInput
-                    name="category"
-                    value={data['category']}
+                    name="type"
+                    value={data['type']}
                     onChange={handleChange}
-                    label="Categories"
+                    label="Participant Type"
                     variant="outlined"
                     size='small'
-                    options={toOptions(['Company', 'Person'])}
+                    options={toOptions(participantTypes)}
                 />
             </Grid>
             <Grid item xs={12}>
                 <TextField
-                    name="email"
-                    value={data['email']}
+                    name="dateCreated"
+                    value={data['dateCreated']}
                     onChange={handleChange}
-                    label="Email"
-                    type="email"
-                    variant='outlined'
-                    size='small'
-                    fullWidth
-                />
-            </Grid>
-            <Grid item xs={12}>
-                <TextField
-                    name="phone"
-                    value={data['phone']}
-                    onChange={handleChange}
-                    label="Phone"
-                    type="text"
-                    variant='outlined'
-                    size='small'
-                    fullWidth
-                />
-            </Grid>
-            <Grid item xs={12}>
-                <TextField
-                    name="nin"
-                    value={data['nin']}
-                    onChange={handleChange}
-                    label="NIN"
-                    type="text"
+                    label="Date Created"
                     variant='outlined'
                     size='small'
                     fullWidth
@@ -99,9 +73,9 @@ const Filter = ({onFilter, loading}: IProps) => {
                 <Box display="flex" flexDirection="row-reverse" >
                     <Button
                         disabled={loading}
-                        variant="outlined"
-                        color="primary"
-                        onClick={submitForm}>Excel Export</Button>
+                        variant="contained"
+                        color="secondary"
+                        onClick={submitForm}>Apply FIlter</Button>
                 </Box>
             </Grid>
         </Grid>

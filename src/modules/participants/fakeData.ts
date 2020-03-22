@@ -83,8 +83,7 @@ const organisationNames = ['Stanbic bank Uganda Limited', 'Pride Microfinance Li
 'Micro Credit Development Trust','Opportunity Bank uganda','Centenary Bank',
 'Metroplex Forex Bureau','Equity Bank Uganda Limited (EBUL)','United Bank of Africa']
 
-const organisationTypes = ['Commercial Bank', 'Microfinance', 'Forex Bureau',
-]
+const organisationTypes = ['Commercial Bank', 'Microfinance', 'Forex Bureau']
 export const fakeParticipant = () : IParticipant => {
     return {
         id: faker.random.uuid(),
