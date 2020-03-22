@@ -1,5 +1,6 @@
 import {ICoreState} from "./redux/coreReducer";
 import {ICrmState} from "./redux/contacts/reducer";
+import {IParticipantsState} from "./redux/participants/reducer";
 import {IWorkflowState} from "./redux/workflows/reducer";
 import {IUserState} from "./redux/users/reducer";
 
@@ -26,6 +27,7 @@ export interface ILoginResponse {
 
 export interface IState {
     core: ICoreState
+    participants: IParticipantsState
     workflows: IWorkflowState
     crm: ICrmState
     users: IUserState

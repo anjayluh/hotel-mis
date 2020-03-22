@@ -1,5 +1,11 @@
 import {BaseModel} from "../../data/types";
 
+export interface IParticipant {
+    id: string
+    name: string
+    type: string
+    dateCreated: string
+}
 export interface IWorkflowInclude {
     caseData?: boolean
     tasks?: boolean

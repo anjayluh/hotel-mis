@@ -20,6 +20,7 @@ export const localRoutes = {
     callback: '/callback',
     pending: '/pending',
     ninVerification: '/ninVerification',
+    participantsDetails: '/participants/:participantId',
     participants: '/participants',
     billing: '/billing',
     subscriptions: '/subscriptions',

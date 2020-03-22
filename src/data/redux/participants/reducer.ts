@@ -1,37 +1,37 @@
-import {IWorkflow} from "../../../modules/ninVerification/types";
+import {IWorkflow, IParticipant} from "../../../modules/participants/types";
+
 import {get} from "../../../utils/ajax";
 import {remoteRoutes} from "../../constants";
 import {Dispatch} from "redux";
 
-export const workflowConstants = {
-    workflowsStartFetch: "workflowsStartFetch",
-    workflowsStopFetch: "workflowsStopFetch",
-    workflowsCommitFetch: "workflowsCommitFetch",
+export const participantsConstants = {
+    participantsFetchAll: "participantsFetchAll",
+    participantsFetchLoading: "participantsFetchLoading",
+
 }
 
-export interface IWorkflowState {
+export interface IParticipantsState {
     loading: boolean
-    workflow?: IWorkflow
+    participant?: IParticipant
+    data: any
 }
 
-const initialState: IWorkflowState = {
-    workflow: undefined,
-    loading: false
+const initialState: IParticipantsState = {
+    loading: false,
+    participant: undefined,
+    data: []
 }
+
 
 export default function reducer(state = initialState, action: any) {
     switch (action.type) {
-
-        case workflowConstants.workflowsStartFetch: {
-            return {...state, loading: true}
+        case participantsConstants.participantsFetchAll: {
+            console.log('result', action.payload)
+            return {...state, loading: false, data: action.payload}
         }
-        case workflowConstants.workflowsStopFetch: {
-            return {...state, loading: false}
-        }
-
-        case workflowConstants.workflowsCommitFetch: {
-            const workflow: IWorkflow = action.payload
-            return {...state, workflow, loading: true}
+        
+        case participantsConstants.participantsFetchLoading: {
+            return {...state, loading: action.payload}
         }
 
         default: {
@@ -40,19 +40,8 @@ export default function reducer(state = initialState, action: any) {
     }
 }
 
-
-export function startWorkflowFetch() {
-    return {type: workflowConstants.workflowsStartFetch}
+export function participantsStartFetch() {
+    return {
+        type: participantsConstants.participantsFetchAll}
 }
 
-export function fetchWorkflowAsync(caseId: string) {
-    const url = `${remoteRoutes.workflows}/${caseId}`
-    return (dispatch: Dispatch<any>) => {
-        get(
-            url,
-            resp => dispatch({type: workflowConstants.workflowsCommitFetch, payload: resp}),
-            undefined,
-            () => dispatch({type: workflowConstants.workflowsStopFetch})
-        )
-    };
-}

@@ -1,140 +1,147 @@
 import React, {useEffect, useState} from "react";
-import Navigation from "../../components/Layout";
+import Layout from "../../components/Layout";
 import Paper from '@material-ui/core/Paper';
 import {createStyles, makeStyles, Theme} from "@material-ui/core";
-import clsx from 'clsx';
-import XTable from "../../components/table/XTable";
-import Grid from '@material-ui/core/Grid';
 import {IWorkflowFilter} from "./types";
+import XTable from "../../components/table/XTable";
+import {XHeadCell} from "../../components/table/XTableHead";
+import Grid from '@material-ui/core/Grid';
 import Filter from "./Filter";
-import Typography from "@material-ui/core/Typography";
 import {search} from "../../utils/ajax";
 import {remoteRoutes} from "../../data/constants";
-import {wfInitialSort, workflowHeadCells, workflowHeadCellsNew, workflowTypes} from "./config";
+import Loading from "../../components/Loading";
+// import NewPersonForm from "./forms/NewPersonForm";
 import Box from "@material-ui/core/Box";
+import EditDialog from "../../components/EditDialog";
+import Typography from "@material-ui/core/Typography";
+import {useDispatch, useSelector} from "react-redux";
+import {participantsConstants, IParticipantsState} from "../../data/redux/participants/reducer";
+import {IState} from "../../data/types";
+import {columns} from "./config";
+import {fakeParticipant} from "./fakeData";
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             flexGrow: 1,
         },
-        drawer: {
+        filterPaper: {
             borderRadius: 0,
+            padding: theme.spacing(2)
         },
-        content: {
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen,
-            })
-        },
-        contentShift: {
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-            })
+        fab: {
+            position: 'absolute',
+            bottom: theme.spacing(2),
+            right: theme.spacing(2),
         },
     }),
 );
 
-
+const headCells: XHeadCell[] = [...columns];
 
 
 const Participants = () => {
+    const dispatch = useDispatch();
+    const [createDialog, setCreateDialog] = useState(false);
+    const {data, loading}: IParticipantsState = useSelector((state: IState) => state.participants)
+    console.log('dattttaaaa', data)
+    const [filter, setFilter] = useState<IWorkflowFilter>({});
     const classes = useStyles();
-    const [open, setOpen] = useState(true);
-    const [loading, setLoading] = useState(false);
-    const [loadingNew, setLoadingNew] = useState(false);
-    const [newData, setNewData] = useState([]);
-    const [data, setData] = useState([]);
-
-    const [filter, setFilter] = useState<IWorkflowFilter>({
-        workflowTypes: workflowTypes,
-        showNew: false,
-        showAssigned: true
-    });
 
 
     useEffect(() => {
-        setLoadingNew(true)
-        const newFilter = {
-            workflowTypes: workflowTypes,
-            showNew: true,
-            showAssigned: false
-        };
-        search(remoteRoutes.workflows, newFilter, resp => {
-            setNewData(resp)
-        }, undefined, () => {
-            setLoadingNew(false)
+        dispatch({
+            type: participantsConstants.participantsFetchLoading,
+            payload: true,
         })
-    }, [])
+        dispatch({
+            type: participantsConstants.participantsFetchAll,
+            payload: [...callfakeParticipant(5)],
+        })
+        /* search(
+            remoteRoutes.contacts,
+            filter,
+            (resp) => { 
+                let x = callfakeParticipant(5);
+                console.log('x', x)
+                dispatch({
+                    type: participantsConstants.participantsFetchAll,
+                    payload: [...resp],
+                })
+            },
+            undefined,
+            () => {
+                dispatch({
+                    type: participantsConstants.participantsFetchLoading,
+                    payload: false,
+                })
+            }) */
+    }, [filter, dispatch])
 
-    useEffect(() => {
-        console.log("Filter", filter)
-        setLoading(true)
-        search(remoteRoutes.workflows, filter, resp => {
-            setData(resp)
-        }, undefined, () => setLoading(false))
-    }, [filter])
-
-    function handleFilterToggle() {
-        setOpen(!open);
+    function callfakeParticipant(length: number) {
+        let participants = []
+        // console.log('fake', fakeParticipant())
+        while (length > 0){
+            participants.push(fakeParticipant())
+            length = length - 1
+        }
+        return participants
+    }
+    
+    function handleFilter(value: any) {
+        setFilter({...filter, ...value})
     }
 
-    function handleFilter(f: IWorkflowFilter) {
-        setFilter({...filter, ...f})
+    function handleNew() {
+        setCreateDialog(true)
+    }
+
+    function closeCreateDialog() {
+        setCreateDialog(false)
     }
 
     return (
-        <Navigation>
-            <Grid container spacing={3}>
-                <Grid item xs={open ? 9 : 12} className={clsx(classes.content, {[classes.contentShift]: open})}>
-                    <Grid container spacing={2}>
-                        <Grid item sm={12}>
-                            <Typography variant='h4'>Participants</Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <XTable
-                                loading={loadingNew}
-                                headCells={workflowHeadCellsNew}
-                                data={newData}
-                                initialRowsPerPage={5}
-                                usePagination={true}
-                                initialSortBy={wfInitialSort}
-                                initialOrder="desc"
-                            />
-                        </Grid>
-                        {/* <Grid item sm={12}>
-                            <Typography variant='h4'>All Applications</Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <XTable
-                                loading={loading}
-                                headCells={workflowHeadCells}
-                                data={data}
-                                onFilterToggle={handleFilterToggle}
-                                initialSortBy={wfInitialSort}
-                                initialOrder="desc"
-                            />
-                        </Grid> */}
-                    </Grid>
+        <Layout>
+            <Grid container spacing={2}>
+                <Grid item xs={9}>
+                    <Box p={1} className={classes.root}>
+                        <Box pb={2}>
+                            <Grid container>
+                                <Grid item sm={12}>
+                                    <Typography variant='h5'>Participants</Typography>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                        {
+                            loading ? <Loading/> :
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12}>
+                                        <XTable
+                                            headCells={headCells}
+                                            data={data}
+                                            initialRowsPerPage={10}
+                                        />
+                                    </Grid>
+                                </Grid>
+                        }
+                    </Box>
                 </Grid>
-                <Grid item xs={3} style={{display: open ? "block" : "none"}}>
-                    <Grid container spacing={2}>
-                        <Grid item sm={12}>
-                            <Typography variant='h4'>&nbsp;</Typography>
-                        </Grid>
-                        <Grid item sm={12}>
-                            <Paper elevation={0} style={{borderRadius: 0}}>
-                                <Box p={2}>
-                                    <Filter onFilter={handleFilter} loading={loading}/>
-                                </Box>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-
+                <Grid item xs={3} >
+                    <Box pb={2}>
+                        <Typography variant='h5'>&nbsp;</Typography>
+                    </Box>
+                    <Box pt={1}>
+                        <Paper className={classes.filterPaper} elevation={0}>
+                            <Filter onFilter={handleFilter} loading={loading}/>
+                        </Paper>
+                    </Box>
                 </Grid>
             </Grid>
-        </Navigation>
+            <EditDialog title="New Person" open={createDialog} onClose={closeCreateDialog}>
+                {/* <NewPersonForm data={{}} done={closeCreateDialog}/> */}
+            </EditDialog>
+        </Layout>
     );
 }
 
