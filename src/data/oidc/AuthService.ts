@@ -8,7 +8,7 @@ class AuthService {
     constructor() {
         const clientRoot = this.clientRoot
         const settings = {
-            client_id: 'boubackoffice',
+            client_id: 'bou:backoffice',
             redirect_uri: `${clientRoot}/signin-callback.html`,
             post_logout_redirect_uri: clientRoot,
             response_type: 'token id_token',
