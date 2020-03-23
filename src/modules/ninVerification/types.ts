@@ -85,11 +85,29 @@ export interface IWorkflow extends BaseModel {
     assigneeId?: string
     assignedDate?: string
 }
+export interface IVerificationStatus {
+    id: string,
+    name: string
+}
+export interface IVerificationRequest {
+    id: string,
+    date: Date,
+    name: string,
+    nin: string,
+    status: IVerificationStatus,
+    requestId: string
+}
 
 export enum WorkflowStatus {
     Open = 'Open',
     Error = 'Error',
     Closed = 'Closed'
+}
+
+export enum WorkflowNinStatus {
+    Pending = 'Pending',
+    Error = 'Error',
+    Verified = 'Verified'
 }
 
 export enum WorkflowSubStatus {

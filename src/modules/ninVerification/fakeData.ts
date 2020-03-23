@@ -1,7 +1,20 @@
 import * as faker from "faker";
-import {ActionStatus, IAction, ITask, IWorkflow, TaskStatus, WorkflowStatus, WorkflowSubStatus} from "./types";
+import {
+    ActionStatus,
+    IAction,
+    ITask,
+    IWorkflow,
+    TaskStatus,
+    WorkflowStatus,
+    WorkflowSubStatus,
+    IVerificationRequest,
+    IVerificationStatus,
+    WorkflowNinStatus
+} from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
+import {format} from "date-fns";
+import {getRandomStr} from "../../utils/stringHelpers";
 
 const uuid = require('uuid/v4');
 
@@ -76,5 +89,20 @@ export const fakeAction = (): IAction => {
 
         inputData: '',
         outputData: ''
+    }
+}
+
+export const fakeVerificationRequest = (): IVerificationRequest => {
+    return {
+        id: uuid(),
+        date: faker.date.past(),
+        name: faker.name.findName(),
+        nin: getRandomStr(13),
+        status: {
+            id: uuid(),
+            name: faker.random.arrayElement(enumToArray(WorkflowNinStatus)) as WorkflowNinStatus
+        },
+        requestId: uuid(10)
+
     }
 }
