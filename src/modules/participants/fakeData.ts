@@ -90,6 +90,6 @@ export const fakeParticipant = () : IParticipant => {
         id: faker.random.uuid(),
         name: faker.random.arrayElement(organisationNames),
         type: faker.random.arrayElement(organisationTypes),
-        dateCreated: format(new Date(faker.date.past(1)), 'mm-dd-Y')
+        dateCreated: new Date(faker.date.past(1))
     }
 };

@@ -44,12 +44,12 @@ const useStyles = makeStyles((theme: Theme) =>
             color: '#428BCA',
             textTransform: 'capitalize',
             fontStyle: 'italic',
+            fontSize: '12px',
             lineHeight: '0.75',
-            marginLeft: '2px',
+            marginBottom: '-5px',
+            marginLeft: '5px',
+            fontWeight: 'normal'
         },
-        addNewIcon: {
-            marginRight: 'unset'
-        }
     }),
 );
 
@@ -143,7 +143,7 @@ const Participants = () => {
                     <Box pb={2}>
                         <Typography variant='h5'>&nbsp;</Typography>
                     </Box>
-                    <Box pt={1}>
+                    <Box pt={1.5}>
                         <Paper className={classes.filterPaper} elevation={0}>
                             <Filter onFilter={handleFilter} loading={loading}/>
                         </Paper>

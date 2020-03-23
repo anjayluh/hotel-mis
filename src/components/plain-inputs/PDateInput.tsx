@@ -29,6 +29,7 @@ export default function PDateInput({value=null,onChange,variant,label,inputVaria
                 value={value}
                 onChange={onChange}
                 autoComplete='off'
+                color="secondary"
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
                 }}

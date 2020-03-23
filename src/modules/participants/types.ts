@@ -4,7 +4,7 @@ export interface IParticipant {
     id: string
     name: string
     type: string
-    dateCreated: string
+    dateCreated: Date
 }
 export interface IWorkflowInclude {
     caseData?: boolean

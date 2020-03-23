@@ -8,9 +8,20 @@ import {toOptions} from "../../components/inputs/inputHelpers";
 import {Box} from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import PSelectInput from "../../components/plain-inputs/PSelectInput";
+import Divider from '@material-ui/core/Divider';
 import {participantsConstants, IParticipantsState} from "../../data/redux/participants/reducer";
 import {useDispatch, useSelector} from "react-redux";
+import {Typography} from "@material-ui/core";
+import classes from "*.module.css";
+import {createStyles, makeStyles, Theme} from "@material-ui/core";
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        heading: {
+            marginBottom: '16px',
+        },
+    }),
+);
 interface IProps {
     onFilter: (data: any) => any
     loading: boolean
@@ -22,6 +33,8 @@ const Filter = ({onFilter, loading}: IProps) => {
         type: '',
         dateCreated: new Date('2014-08-18T21:11:54')
     })
+    const classes = useStyles();
+
     const participantTypes = ['Commercial Bank', 'Microfinance', 'Forex Bureau']
 
     function submitForm(values: any) {
@@ -46,6 +59,12 @@ const Filter = ({onFilter, loading}: IProps) => {
     }
     return <form>
         <Grid spacing={3} container>
+            <Grid item xs={12}>
+            <Typography component="h6" variant="h6" className={classes.heading}>
+                Search
+            </Typography>
+            <Divider/>
+            </Grid>
             <Grid item xs={12}>
                 <TextField
                     name="name"

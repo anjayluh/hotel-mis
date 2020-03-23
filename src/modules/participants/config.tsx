@@ -1,6 +1,7 @@
 import {XHeadCell} from "../../components/table/XTableHead";
 import ParticipantLink from "../../components/links/ParticipantLink";
 import React from "react";
+import { format, compareAsc } from 'date-fns'
 
 export const columns: XHeadCell[] = [
     {
@@ -19,6 +20,7 @@ export const columns: XHeadCell[] = [
     },
     {
         name: 'dateCreated', label: 'Date Created',
+    render: (value, rec) => <span>{format(new Date(value), 'mm.dd.Y')}</span>,
         cellProps: {
             style: {
                 width: 60,
