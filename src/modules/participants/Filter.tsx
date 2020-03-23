@@ -17,8 +17,6 @@ interface IProps {
 }
 
 const Filter = ({onFilter, loading}: IProps) => {
-    const dispatch = useDispatch();
-
     const [data, setData] = useState({
         name: '',
         type: '',
@@ -86,7 +84,7 @@ const Filter = ({onFilter, loading}: IProps) => {
                         disabled={loading}
                         variant="contained"
                         color="secondary"
-                        onClick={submitForm}>Apply FIlter</Button>
+                        onClick={submitForm}>Apply Filter</Button>
                 </Box>
             </Grid>
         </Grid>

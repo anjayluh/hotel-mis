@@ -2,6 +2,7 @@ import * as faker from "faker";
 import {ActionStatus, IAction, ITask, IWorkflow, TaskStatus, WorkflowStatus, WorkflowSubStatus, IParticipant} from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
+import { format, compareAsc } from 'date-fns'
 
 const uuid = require('uuid/v4');
 
@@ -89,6 +90,6 @@ export const fakeParticipant = () : IParticipant => {
         id: faker.random.uuid(),
         name: faker.random.arrayElement(organisationNames),
         type: faker.random.arrayElement(organisationTypes),
-        dateCreated: faker.date.past(1).toString()
+        dateCreated: format(new Date(faker.date.past(1)), 'mm-dd-Y')
     }
 };

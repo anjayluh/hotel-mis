@@ -7,7 +7,6 @@ import {Dispatch} from "redux";
 export const participantsConstants = {
     participantsFetchAll: "participantsFetchAll",
     participantsFetchLoading: "participantsFetchLoading",
-    participantsFilter: "participantsFilter",
 
 }
 
@@ -32,20 +31,6 @@ export default function reducer(state = initialState, action: any) {
         
         case participantsConstants.participantsFetchLoading: {
             return {...state, loading: action.payload}
-        }
-
-        case participantsConstants.participantsFilter: {
-            let result: any = [];
-            if(action.payload.name !== ''){
-                result = state.data.filter((data: any) => {
-                let matchedItems: any = [];
-                if(data.name.toLowerCase().indexOf(action.payload.name.toLowerCase()) !== -1){
-                    matchedItems.push(data)
-                    return matchedItems
-                }
-                })
-            }
-            return {...state, loading: false, data: result}
         }
 
         default: {

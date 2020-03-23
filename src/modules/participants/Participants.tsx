@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import Layout from "../../components/Layout";
 import Paper from '@material-ui/core/Paper';
 import {createStyles, makeStyles, Theme} from "@material-ui/core";
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 import {IWorkflowFilter} from "./types";
 import XTable from "../../components/table/XTable";
 import {XHeadCell} from "../../components/table/XTableHead";
@@ -35,6 +37,19 @@ const useStyles = makeStyles((theme: Theme) =>
             bottom: theme.spacing(2),
             right: theme.spacing(2),
         },
+        pageHeading: {
+            display: 'flex'
+        },
+        addNewButton: {
+            color: '#428BCA',
+            textTransform: 'capitalize',
+            fontStyle: 'italic',
+            lineHeight: '0.75',
+            marginTop: '-5px',
+        },
+        addNewIcon: {
+            marginRight: 'unset'
+        }
     }),
 );
 
@@ -54,28 +69,13 @@ const Participants = () => {
             type: participantsConstants.participantsFetchLoading,
             payload: true,
         })
-        console.log(checkEmptyObject(filter))
-        if(checkEmptyObject(filter)){
-            dispatch({
-                type: participantsConstants.participantsFetchAll,
-                payload: [...callfakeParticipant(10)],
-            })
-        }
-        else{
-            dispatch({
-                type: participantsConstants.participantsFilter,
-                payload: filter,
-            })
-        }
-        /* search(
+        search(
             remoteRoutes.contacts,
             filter,
             (resp) => { 
-                let x = callfakeParticipant(5);
-                console.log('x', x)
                 dispatch({
                     type: participantsConstants.participantsFetchAll,
-                    payload: [...resp],
+                    payload: [...callfakeParticipant(15)],
                 })
             },
             undefined,
@@ -84,12 +84,11 @@ const Participants = () => {
                     type: participantsConstants.participantsFetchLoading,
                     payload: false,
                 })
-            }) */
+            })
     }, [filter, dispatch])
 
     function callfakeParticipant(length: number) {
         let participants = []
-        // console.log('fake', fakeParticipant())
         while (length > 0){
             participants.push(fakeParticipant())
             length = length - 1
@@ -99,20 +98,6 @@ const Participants = () => {
     
     function handleFilter(value: any) {
         setFilter({...filter, ...value})
-    }
-
-    function checkEmptyObject(value: any){
-        if(Object.keys(value).length === 0){
-            return true
-        }
-        else {
-            Object.keys(value).some(function(a) {
-                if(value[a] !== ""){
-                    return true
-                }
-            });
-            // return false
-        }
     }
 
     function handleNew() {
@@ -130,8 +115,12 @@ const Participants = () => {
                     <Box p={1} className={classes.root}>
                         <Box pb={2}>
                             <Grid container>
-                                <Grid item sm={12}>
+                                <Grid item sm={12} className={classes.pageHeading}>
                                     <Typography variant='h5'>Participants</Typography>
+                                    <Button className={classes.addNewButton} startIcon={<AddIcon/>}
+                                    variant="text" href="#">
+                                        Add New
+                                    </Button>
                                 </Grid>
                             </Grid>
                         </Box>
