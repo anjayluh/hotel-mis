@@ -10,8 +10,11 @@ import Filter from "./Filter";
 import Typography from "@material-ui/core/Typography";
 import {search} from "../../utils/ajax";
 import {remoteRoutes} from "../../data/constants";
-import {wfInitialSort, workflowHeadCells, workflowHeadCellsNew, workflowTypes} from "./config";
+import {wfInitialSort, ninVerificationHeadCells, workflowTypes} from "./config";
 import Box from "@material-ui/core/Box";
+
+import {verificationRequests} from "./fakeData";
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -37,9 +40,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
+const verificationRequestData = verificationRequests()
 
-
-const Workflows = () => {
+const NinVerifications = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -54,27 +57,35 @@ const Workflows = () => {
     });
 
 
-    useEffect(() => {
-        setLoadingNew(true)
-        const newFilter = {
-            workflowTypes: workflowTypes,
-            showNew: true,
-            showAssigned: false
-        };
-        search(remoteRoutes.workflows, newFilter, resp => {
-            setNewData(resp)
-        }, undefined, () => {
-            setLoadingNew(false)
-        })
-    }, [])
+    // useEffect(() => {
+    //     setLoadingNew(true)
+    //     const newFilter = {
+    //         workflowTypes: workflowTypes,
+    //         showNew: true,
+    //         showAssigned: false
+    //     };
+    //     search(remoteRoutes.workflows, newFilter, resp => {
+    //         setNewData(resp)
+    //     }, undefined, () => {
+    //         setLoadingNew(false)
+    //     })
+    // }, [])
+    //
+    // useEffect(() => {
+    //     console.log("Filter", filter)
+    //     setLoading(true)
+    //     search(remoteRoutes.workflows, filter, resp => {
+    //         setData(resp)
+    //     }, undefined, () => setLoading(false))
+    // }, [filter])
 
     useEffect(() => {
-        console.log("Filter", filter)
-        setLoading(true)
-        search(remoteRoutes.workflows, filter, resp => {
-            setData(resp)
-        }, undefined, () => setLoading(false))
-    }, [filter])
+            console.log("Filter", filter)
+            setLoading(true)
+            setData(verificationRequestData)
+        }, [])
+    let na = data[0]
+    console.log(na)
 
     function handleFilterToggle() {
         setOpen(!open);
@@ -95,8 +106,8 @@ const Workflows = () => {
                         <Grid item xs={12}>
                             <XTable
                                 loading={loadingNew}
-                                headCells={workflowHeadCellsNew}
-                                data={newData}
+                                headCells={ninVerificationHeadCells}
+                                data={data}
                                 initialRowsPerPage={5}
                                 usePagination={true}
                                 initialSortBy={wfInitialSort}
@@ -138,4 +149,4 @@ const Workflows = () => {
     );
 }
 
-export default Workflows
+export default NinVerifications

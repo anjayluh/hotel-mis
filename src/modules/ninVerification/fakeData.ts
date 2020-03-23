@@ -91,18 +91,31 @@ export const fakeAction = (): IAction => {
         outputData: ''
     }
 }
-
-export const fakeVerificationRequest = (): IVerificationRequest => {
+let arr_elem = ['rr','jjh', 'ggg']
+const fakeVerificationRequest = (): IVerificationRequest => {
     return {
         id: uuid(),
-        date: faker.date.past(),
+        date: format(new Date(faker.date.past(1)), 'mm-dd-Y'),
         name: faker.name.findName(),
         nin: getRandomStr(13),
         status: {
             id: uuid(),
             name: faker.random.arrayElement(enumToArray(WorkflowNinStatus)) as WorkflowNinStatus
         },
-        requestId: uuid(10)
+        requestId: getRandomStr(8)
 
     }
+}
+
+export const verificationRequests = () => {
+    let verifications: any = []
+    for(let i = 0; i < 100; i++) {
+        verifications.push(fakeVerificationRequest())
+    }
+    return verifications
+}
+
+export const getStatus  = (verificationRequest: IVerificationRequest) => {
+    // const {name} = verificationRequest.status
+    return verificationRequest.status.name
 }
