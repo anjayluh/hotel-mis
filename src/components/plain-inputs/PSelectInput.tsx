@@ -12,13 +12,14 @@ interface IProps {
     label?: any
     name?: any
     size?: 'small' | 'medium'
+    color?: any
     variant?: 'standard' | 'outlined' | 'filled'
     helperText?: string
     options: IOption[]
     multiple?: boolean;
 }
 
-const PSelectInput = ({name, multiple, helperText, size, options, variant, label, value, onChange}: IProps) => {
+const PSelectInput = ({name, multiple, helperText, size, color, options, variant, label, value, onChange}: IProps) => {
     const inputLabel = React.useRef<HTMLLabelElement>(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
     React.useEffect(() => {
@@ -26,13 +27,14 @@ const PSelectInput = ({name, multiple, helperText, size, options, variant, label
     }, []);
     return (
         <FormControl variant={variant} fullWidth size={size}>
-            <InputLabel ref={inputLabel}>{label}</InputLabel>
+            <InputLabel color={color} ref={inputLabel}>{label}</InputLabel>
             <Select
                 name={name}
                 value={value}
                 onChange={onChange}
                 labelWidth={variant === "outlined" ? labelWidth : undefined}
                 multiple={multiple}
+                color={color}
             >
                 {options.map(it => <MenuItem value={it.value} key={it.value}>{it.label}</MenuItem>)}
             </Select>

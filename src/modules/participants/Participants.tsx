@@ -45,7 +45,6 @@ const Participants = () => {
     const dispatch = useDispatch();
     const [createDialog, setCreateDialog] = useState(false);
     const {data, loading}: IParticipantsState = useSelector((state: IState) => state.participants)
-    console.log('dattttaaaa', data)
     const [filter, setFilter] = useState<IWorkflowFilter>({});
     const classes = useStyles();
 
@@ -55,10 +54,19 @@ const Participants = () => {
             type: participantsConstants.participantsFetchLoading,
             payload: true,
         })
-        dispatch({
-            type: participantsConstants.participantsFetchAll,
-            payload: [...callfakeParticipant(5)],
-        })
+        console.log(checkEmptyObject(filter))
+        if(checkEmptyObject(filter)){
+            dispatch({
+                type: participantsConstants.participantsFetchAll,
+                payload: [...callfakeParticipant(10)],
+            })
+        }
+        else{
+            dispatch({
+                type: participantsConstants.participantsFilter,
+                payload: filter,
+            })
+        }
         /* search(
             remoteRoutes.contacts,
             filter,
@@ -91,6 +99,20 @@ const Participants = () => {
     
     function handleFilter(value: any) {
         setFilter({...filter, ...value})
+    }
+
+    function checkEmptyObject(value: any){
+        if(Object.keys(value).length === 0){
+            return true
+        }
+        else {
+            Object.keys(value).some(function(a) {
+                if(value[a] !== ""){
+                    return true
+                }
+            });
+            // return false
+        }
     }
 
     function handleNew() {

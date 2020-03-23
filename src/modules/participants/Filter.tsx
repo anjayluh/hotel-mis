@@ -2,10 +2,14 @@ import * as React from "react";
 import {useState} from "react";
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import InsertInvitation from '@material-ui/icons/InsertInvitation';
 import {toOptions} from "../../components/inputs/inputHelpers";
 import {Box} from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import PSelectInput from "../../components/plain-inputs/PSelectInput";
+import {participantsConstants, IParticipantsState} from "../../data/redux/participants/reducer";
+import {useDispatch, useSelector} from "react-redux";
 
 interface IProps {
     onFilter: (data: any) => any
@@ -13,8 +17,9 @@ interface IProps {
 }
 
 const Filter = ({onFilter, loading}: IProps) => {
+    const dispatch = useDispatch();
+
     const [data, setData] = useState({
-        query: '',
         name: '',
         type: '',
         dateCreated: ''
@@ -22,13 +27,13 @@ const Filter = ({onFilter, loading}: IProps) => {
     const participantTypes = ['Commercial Bank', 'Microfinance', 'Forex Bureau']
 
     function submitForm(values: any) {
-        onFilter(values)
+        onFilter(values);        
     }
+
 
     function handleChange(event: React.ChangeEvent<any>) {
         const name = event.target.name
         const value = event.target.value
-        console.log({name,value})
         const newData = {...data, [name]: value}
         setData({...newData})
         submitForm(newData)
@@ -45,6 +50,7 @@ const Filter = ({onFilter, loading}: IProps) => {
                     variant="outlined"
                     fullWidth
                     size='small'
+                    color="secondary"
                 />
             </Grid>
             <Grid item xs={12}>
@@ -55,6 +61,7 @@ const Filter = ({onFilter, loading}: IProps) => {
                     label="Participant Type"
                     variant="outlined"
                     size='small'
+                    color="secondary"
                     options={toOptions(participantTypes)}
                 />
             </Grid>
@@ -66,11 +73,15 @@ const Filter = ({onFilter, loading}: IProps) => {
                     label="Date Created"
                     variant='outlined'
                     size='small'
+                    color="secondary"
                     fullWidth
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end"><InsertInvitation /></InputAdornment>,
+                      }}
                 />
             </Grid>
             <Grid item xs={12}>
-                <Box display="flex" flexDirection="row-reverse" >
+                <Box display="flex" flexDirection="row" >
                     <Button
                         disabled={loading}
                         variant="contained"
