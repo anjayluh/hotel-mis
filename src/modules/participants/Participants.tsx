@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
             textTransform: 'capitalize',
             fontStyle: 'italic',
             lineHeight: '0.75',
-            marginTop: '-5px',
+            marginLeft: '2px',
         },
         addNewIcon: {
             marginRight: 'unset'
@@ -117,7 +117,8 @@ const Participants = () => {
                             <Grid container>
                                 <Grid item sm={12} className={classes.pageHeading}>
                                     <Typography variant='h5'>Participants</Typography>
-                                    <Button className={classes.addNewButton} startIcon={<AddIcon/>}
+                                    {/* Temporarily removed add icon from button startIcon={<AddIcon/> */}
+                                    <Button className={classes.addNewButton}
                                     variant="text" href="#">
                                         Add New
                                     </Button>
