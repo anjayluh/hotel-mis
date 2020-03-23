@@ -9,6 +9,9 @@ export interface IWorkflowInclude {
 export interface IWorkflowFilter {
     id?: string
     referenceNumber?: string
+    nin?: string
+    requestId?: string
+    initiator?: []
     externalReference?: string
     userId?: string
     applicant?: string

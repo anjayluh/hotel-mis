@@ -14,6 +14,7 @@ import {wfInitialSort, ninVerificationHeadCells, workflowTypes} from "./config";
 import Box from "@material-ui/core/Box";
 
 import {verificationRequests} from "./fakeData";
+import Loading from "../../components/Loading";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -83,7 +84,9 @@ const NinVerifications = () => {
             console.log("Filter", filter)
             setLoading(true)
             setData(verificationRequestData)
+        setLoading(false)
         }, [])
+
     let na = data[0]
     console.log(na)
 
@@ -103,17 +106,19 @@ const NinVerifications = () => {
                         <Grid item sm={12}>
                             <Typography variant='h4'>NIN Verification Requests</Typography>
                         </Grid>
-                        <Grid item xs={12}>
-                            <XTable
-                                loading={loadingNew}
-                                headCells={ninVerificationHeadCells}
-                                data={data}
-                                initialRowsPerPage={5}
-                                usePagination={true}
-                                initialSortBy={wfInitialSort}
-                                initialOrder="desc"
-                            />
-                        </Grid>
+                        {
+                            loading ? <Loading/> :
+                                <Grid item xs={12}>
+                                    <XTable
+                                        loading={loadingNew}
+                                        headCells={ninVerificationHeadCells}
+                                        data={data}
+                                        initialRowsPerPage={5}
+                                        usePagination={true}
+                                        initialSortBy={wfInitialSort}
+                                        initialOrder="desc"
+                                    />
+                                </Grid>}
                         {/* <Grid item sm={12}>
                             <Typography variant='h4'>All Applications</Typography>
                         </Grid>

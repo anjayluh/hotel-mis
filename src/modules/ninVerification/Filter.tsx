@@ -20,21 +20,18 @@ interface IProps {
 
 const Filter = ({onFilter, loading}: IProps) => {
     const [data, setData] = useState<IWorkflowFilter>({
+        nin: '',
+        statuses: [],
+        requestId: '',
         from: null,
         to: null,
-        statuses: [],
-        subStatuses: [],
-        workflowTypes: [],
-        applicant: '',
-        assignee: '',
-        referenceNumber: '',
-        userId: ''
+        initiator: []
     })
 
     function submitForm(values: any) {
         onFilter(values)
     }
-
+    console.log(data, 'fffffffffffffffffffliter')
     function handleChange(event: React.ChangeEvent<any>) {
         const name = event.target.name
         const value = event.target.value
@@ -64,10 +61,10 @@ const Filter = ({onFilter, loading}: IProps) => {
         <Grid spacing={3} container>
             <Grid item xs={12}>
                 <TextField
-                    name="referenceNumber"
-                    value={data['referenceNumber']}
+                    name="nin"
+                    value={data['nin']}
                     onChange={handleChange}
-                    label="Nin"
+                    label="NIN"
                     type="text"
                     variant='outlined'
                     size='small'
@@ -76,7 +73,7 @@ const Filter = ({onFilter, loading}: IProps) => {
             </Grid>
             <Grid item xs={12}>
                 <PSelectInput
-                    name="statuses"
+                    name="status"
                     value={data['statuses']}
                     onChange={handleChange}
                     multiple
@@ -88,11 +85,11 @@ const Filter = ({onFilter, loading}: IProps) => {
             </Grid>
             <Grid item xs={12}>
                 <TextField
-                    name="email"
-                    value={data['statuses']}
+                    name="requestId"
+                    value={data['requestId']}
                     onChange={handleChange}
-                    label="Request id"
-                    type="email"
+                    label="Request ID"
+                    type="text"
                     variant='outlined'
                     size='small'
                     fullWidth
@@ -130,83 +127,6 @@ const Filter = ({onFilter, loading}: IProps) => {
                     options={toOptions(enumToArray(WorkflowNinStatus))}
                 />
             </Grid>
-            {/*<Grid item xs={12}>*/}
-            {/*    <PSelectInput*/}
-            {/*        name="subStatuses"*/}
-            {/*        value={data['subStatuses']}*/}
-            {/*        onChange={handleChange}*/}
-            {/*        multiple*/}
-            {/*        label="Sub Status"*/}
-            {/*        variant="outlined"*/}
-            {/*        size='small'*/}
-            {/*        options={toOptions(enumToArray(WorkflowSubStatus))}*/}
-            {/*    />*/}
-            {/*</Grid>*/}
-
-            {/*<Grid item xs={12}>*/}
-            {/*    <PSelectInput*/}
-            {/*        name="workflowTypes"*/}
-            {/*        value={data['workflowTypes']}*/}
-            {/*        onChange={handleChange}*/}
-            {/*        multiple*/}
-            {/*        label="Account Type"*/}
-            {/*        variant="outlined"*/}
-            {/*        size='small'*/}
-            {/*        options={toOptions(workflowTypes)}*/}
-            {/*    />*/}
-            {/*</Grid>*/}
-
-            {/*<Grid item xs={12}>*/}
-            {/*    <PRemoteSelect*/}
-            {/*        name="applicant"*/}
-            {/*        value={data['applicant']}*/}
-            {/*        onChange={handleComboValueChange('applicant')}*/}
-            {/*        label="Applicant"*/}
-            {/*        remote={remoteRoutes.workflowsCombo}*/}
-            {/*        parser={({id, name}: any) => ({id, label: name})}*/}
-            {/*        textFieldProps={*/}
-            {/*            {variant: "outlined", size: "small"}*/}
-            {/*        }*/}
-            {/*        filter={{*/}
-            {/*            'IdField':'MetaData.ApplicantName',*/}
-            {/*            'DisplayField':'MetaData.ApplicantName',*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*</Grid>*/}
-            {/*<Grid item xs={12}>*/}
-            {/*    <PRemoteSelect*/}
-            {/*        name="assignee"*/}
-            {/*        value={data['assignee']}*/}
-            {/*        onChange={handleComboValueChange('assignee')}*/}
-            {/*        label="Assignee"*/}
-            {/*        remote={remoteRoutes.workflowsCombo}*/}
-            {/*        parser={({id, name}: any) => ({id, label: name})}*/}
-            {/*        textFieldProps={*/}
-            {/*            {variant: "outlined", size: "small"}*/}
-            {/*        }*/}
-            {/*        filter={{*/}
-            {/*            'IdField':'UserId',*/}
-            {/*            'DisplayField':'MetaData.userName',*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*</Grid>*/}
-            {/*<Grid item xs={12}>*/}
-            {/*    <PRemoteSelect*/}
-            {/*        name="userId"*/}
-            {/*        value={data['userId']}*/}
-            {/*        onChange={handleComboValueChange('userId')}*/}
-            {/*        label="CSO User/Agent"*/}
-            {/*        remote={remoteRoutes.workflowsCombo}*/}
-            {/*        parser={({id, name}: any) => ({id, label: name})}*/}
-            {/*        textFieldProps={*/}
-            {/*            {variant: "outlined", size: "small"}*/}
-            {/*        }*/}
-            {/*        filter={{*/}
-            {/*            'IdField':'UserId',*/}
-            {/*            'DisplayField':'MetaData.userName',*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*</Grid>*/}
             <Grid item xs={12}>
                 <Box display="flex" flexDirection="row">
                     <Button
