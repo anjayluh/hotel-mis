@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme: Theme) =>
         root: {
             padding: '20px',
             width: '400px',
+            [theme.breakpoints.down('sm')]: {
+                width: '100%',
+            }
         },
         title: {
             marginLeft: '8px',

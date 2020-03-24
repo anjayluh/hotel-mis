@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Details = (props: IProps) => {
-    const caseId = getRouteParam(props, 'caseId')
+    const participantId = getRouteParam(props, 'participantId')
     const wfClasses = useWfStyles()
     const classes = useStyles()
     const [blocker, setBlocker] = useState<boolean>(false)
@@ -81,15 +81,15 @@ const Details = (props: IProps) => {
 
     function loadData() {
         dispatch(startWorkflowFetch())
-        dispatch(fetchWorkflowAsync(caseId))
+        dispatch(fetchWorkflowAsync(participantId))
     }
 
     useEffect(() => {
         loadData()
-    }, [caseId,dispatch])
+    }, [participantId,dispatch])
 
     function onResume() {
-        const url = `${remoteRoutes.workflows}/${caseId}`
+        const url = `${remoteRoutes.workflows}/${participantId}`
         setBlocker(true)
         put(url, {},
             resp => loadData(),

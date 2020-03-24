@@ -14,6 +14,8 @@ import {toOptions} from "../../../components/inputs/inputHelpers";
 import {useDispatch} from 'react-redux'
 import {INewParticipant} from "../types";
 import XSelectInput from "../../../components/inputs/XSelectInput";
+import { Redirect } from 'react-router';
+import {localRoutes} from "../../../data/constants";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -39,7 +41,6 @@ const schema = yup.object().shape(
         name: reqString,
         type: reqString,
         phoneNumberPrimary: reqString,
-        phoneNumberSecondary: reqString,
         email: reqString
     }
 )
@@ -82,6 +83,7 @@ const NewParticipantForm = () => {
             officialEmail: values.email,
             dateCreated: new Date()
         }
+        return <Redirect to={`${localRoutes.participants}/${toSave.id}`} />
     }
 
     function handleCancel(){
@@ -102,13 +104,13 @@ const NewParticipantForm = () => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    {/* <XSelectInput
+                    <XSelectInput
                         name="type"
                         label="Type"
                         options={toOptions(organisationTypeCategories)}
                         variant='outlined'
-                    /> */}
-                    <PSelectInput
+                    />
+                   {/*  <PSelectInput
                     name="type"
                     value={data['type']}
                     label="Type"
@@ -116,11 +118,11 @@ const NewParticipantForm = () => {
                     size='small'
                     color="secondary"
                     options={toOptions(organisationTypeCategories)}
-                />
+                /> */}
                 </Grid>
                 <Grid item xs={12}>
                     <XTextInput
-                        name="phoneNumber"
+                        name="phoneNumberPrimary"
                         label="Phone Number (Primary)"
                         type="text"
                         variant='outlined'
@@ -129,7 +131,7 @@ const NewParticipantForm = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <XTextInput
-                        name="phoneNumber"
+                        name="phoneNumberOther"
                         label="Phone Number (Other)"
                         type="text"
                         variant='outlined'
