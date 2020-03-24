@@ -9,6 +9,9 @@ export interface IWorkflowInclude {
 export interface IWorkflowFilter {
     id?: string
     referenceNumber?: string
+    nin?: string
+    requestId?: string
+    initiator?: []
     externalReference?: string
     userId?: string
     applicant?: string
@@ -85,11 +88,29 @@ export interface IWorkflow extends BaseModel {
     assigneeId?: string
     assignedDate?: string
 }
+export interface IVerificationStatus {
+    id: string,
+    name: string
+}
+export interface IVerificationRequest {
+    id: string,
+    date: string,
+    name: string,
+    nin: string,
+    status: IVerificationStatus,
+    requestId: string
+}
 
 export enum WorkflowStatus {
     Open = 'Open',
     Error = 'Error',
     Closed = 'Closed'
+}
+
+export enum WorkflowNinStatus {
+    Pending = 'Pending',
+    Error = 'Error',
+    Verified = 'Verified'
 }
 
 export enum WorkflowSubStatus {

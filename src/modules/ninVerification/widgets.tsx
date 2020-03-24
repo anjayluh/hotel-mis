@@ -1,10 +1,32 @@
 import React from "react";
-import {ITask, TaskStatus, WorkflowStatus, WorkflowSubStatus} from "./types";
+import {ITask, TaskStatus, WorkflowStatus, WorkflowSubStatus, WorkflowNinStatus} from "./types";
 import {ErrorIcon, SuccessIcon, WarningIcon} from "../../components/xicons";
 import {errorColor, successColor, warningColor} from "../../theme/custom-colors";
 import {Chip} from "@material-ui/core";
 
 
+export const renderNinStatus = (value: WorkflowNinStatus) => {
+    let color = successColor
+    switch (value) {
+        case WorkflowNinStatus.Verified:
+            color = successColor
+            break
+        case WorkflowNinStatus.Error:
+            color = errorColor
+            break
+        case WorkflowNinStatus.Pending:
+            color = warningColor
+            break
+    }
+
+    return <Chip
+        color='primary'
+        variant='default'
+        size='small'
+        label={value}
+        style={{padding: 0, height: 18, backgroundColor: color, marginBottom: 2}}
+    />
+}
 export const renderStatus = (value: WorkflowStatus) => {
     let color = successColor
     switch (value) {

@@ -10,8 +10,12 @@ import Filter from "./Filter";
 import Typography from "@material-ui/core/Typography";
 import {search} from "../../utils/ajax";
 import {remoteRoutes} from "../../data/constants";
-import {wfInitialSort, workflowHeadCells, workflowHeadCellsNew, workflowTypes} from "./config";
+import {wfInitialSort, ninVerificationHeadCells, workflowTypes} from "./config";
 import Box from "@material-ui/core/Box";
+
+import {verificationRequests} from "./fakeData";
+import Loading from "../../components/Loading";
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -37,9 +41,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
+const verificationRequestData = verificationRequests()
 
-
-const Workflows = () => {
+const NinVerifications = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -61,8 +65,8 @@ const Workflows = () => {
             showNew: true,
             showAssigned: false
         };
-        search(remoteRoutes.workflows, newFilter, resp => {
-            setNewData(resp)
+        search(remoteRoutes.contacts, newFilter, resp => {
+            setNewData(verificationRequestData)
         }, undefined, () => {
             setLoadingNew(false)
         })
@@ -71,10 +75,11 @@ const Workflows = () => {
     useEffect(() => {
         console.log("Filter", filter)
         setLoading(true)
-        search(remoteRoutes.workflows, filter, resp => {
-            setData(resp)
+        search(remoteRoutes.contacts, filter, resp => {
+            setData(verificationRequestData)
         }, undefined, () => setLoading(false))
     }, [filter])
+
 
     function handleFilterToggle() {
         setOpen(!open);
@@ -92,17 +97,19 @@ const Workflows = () => {
                         <Grid item sm={12}>
                             <Typography variant='h4'>NIN Verification Requests</Typography>
                         </Grid>
-                        <Grid item xs={12}>
-                            <XTable
-                                loading={loadingNew}
-                                headCells={workflowHeadCellsNew}
-                                data={newData}
-                                initialRowsPerPage={5}
-                                usePagination={true}
-                                initialSortBy={wfInitialSort}
-                                initialOrder="desc"
-                            />
-                        </Grid>
+                        {
+                            loading ? <Loading/> :
+                                <Grid item xs={12}>
+                                    <XTable
+                                        loading={loadingNew}
+                                        headCells={ninVerificationHeadCells}
+                                        data={newData}
+                                        initialRowsPerPage={10}
+                                        usePagination={true}
+                                        initialSortBy={wfInitialSort}
+                                        initialOrder="desc"
+                                    />
+                                </Grid>}
                         {/* <Grid item sm={12}>
                             <Typography variant='h4'>All Applications</Typography>
                         </Grid>
@@ -138,4 +145,4 @@ const Workflows = () => {
     );
 }
 
-export default Workflows
+export default NinVerifications
