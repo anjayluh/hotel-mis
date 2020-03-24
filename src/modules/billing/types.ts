@@ -3,11 +3,11 @@ import {BaseModel} from "../../data/types";
 export interface IBill {
     id: string
     name: string
-    billNumber: number
+    billNumber: any
     dateCreated: Date,
-    consumption: number
+    consumption: any
     rate: number
-    billAmount: number
+    billAmount: any
 }
 export interface IWorkflowInclude {
     caseData?: boolean

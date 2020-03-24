@@ -89,11 +89,21 @@ export const fakeBill = () : IBill => {
     return {
         id: faker.random.uuid(),
         name: faker.random.arrayElement(organisationNames),
-        billNumber: faker.random.number({'min': 100, 'max': 50}),
+        billNumber: faker.finance.account(5),
         dateCreated: new Date(faker.date.past(1)),
-        consumption: faker.random.number({'min': 10, 'max': 50}),
-        rate: faker.random.number({'min': 10, 'max': 50}),
-        billAmount: faker.random.number({'min': 10, 'max': 50}),
+        consumption: faker.finance.account(5),
+        rate: faker.random.number({'min': 20, 'max': 50}),
+        billAmount: faker.finance.account(7),
 
     }
 };
+
+export const getConsumption = (data:IBill) => {
+    let consumption = data.consumption
+    return consumption.slice(0, 2) + ',' + consumption.slice(2)
+}
+export const getbillAmount = (data:IBill) => {
+    let billAmount = data.billAmount
+    return billAmount.slice(0, 1) + ',' + billAmount.slice(1, 4)+ ',' + billAmount.slice(4)
+
+}
