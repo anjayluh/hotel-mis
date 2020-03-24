@@ -21,7 +21,7 @@ interface IProps {
 const Filter = ({onFilter, loading}: IProps) => {
     const [data, setData] = useState<IWorkflowFilter>({
         nin: '',
-        statuses: [],
+        status: '',
         requestId: '',
         from: null,
         to: null,
@@ -71,16 +71,17 @@ const Filter = ({onFilter, loading}: IProps) => {
                     fullWidth
                 />
             </Grid>
+
             <Grid item xs={12}>
-                <PSelectInput
+                <TextField
                     name="status"
                     value={data['statuses']}
                     onChange={handleChange}
-                    multiple
                     label="Status"
-                    variant="outlined"
+                    type="text"
+                    variant='outlined'
                     size='small'
-                    options={toOptions(enumToArray(WorkflowNinStatus))}
+                    fullWidth
                 />
             </Grid>
             <Grid item xs={12}>
@@ -117,13 +118,13 @@ const Filter = ({onFilter, loading}: IProps) => {
             </Grid>
             <Grid item xs={12}>
                 <PSelectInput
-                    name="statuses"
-                    value={data['statuses']}
+                    name="initiator"
+                    value={data['initiator']}
                     onChange={handleChange}
-                    multiple
                     label="Initiator"
                     variant="outlined"
                     size='small'
+                    color="secondary"
                     options={toOptions(enumToArray(WorkflowNinStatus))}
                 />
             </Grid>
