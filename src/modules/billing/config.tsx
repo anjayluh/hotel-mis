@@ -6,7 +6,7 @@ import { format, compareAsc } from 'date-fns'
 import {getConsumption} from "./fakeData";
 import {getbillAmount} from "./fakeData";
 
-export const columns: XHeadCell[] = [
+export const Billingcolumns: XHeadCell[] = [
     {
         name: 'dateCreated', label: 'Bill date',
         render: (value, rec) => <span>{printDate(value)}</span>,

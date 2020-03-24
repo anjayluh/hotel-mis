@@ -19,7 +19,7 @@ import Typography from "@material-ui/core/Typography";
 import {useDispatch, useSelector} from "react-redux";
 import {BillingsConstants, IBillingState} from "../../data/redux/billing/reducer";
 import {IState} from "../../data/types";
-import {columns} from "./config";
+import {Billingcolumns} from "./config";
 import {fakeBill} from "./fakeData";
 
 
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const headCells: XHeadCell[] = [...columns];
+const headCells: XHeadCell[] = [...Billingcolumns];
 
 
 const Billings = () => {
