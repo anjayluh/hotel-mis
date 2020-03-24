@@ -59,7 +59,7 @@ const XForm = (props: IProps) => {
                                         props.onCancel &&
                                         <Grid item>
                                             <Button
-                                                variant='contained'
+                                                variant='text'
                                                 color='default'
                                                 onClick={props.onCancel}
                                                 disabled={isSubmitting}
@@ -72,7 +72,7 @@ const XForm = (props: IProps) => {
                                             color='primary'
                                             onClick={submitForm}
                                             disabled={isSubmitting}
-                                        >Submit</Button>
+                                        >Save</Button>
                                     </Grid>
                                 </Grid>
                             </Box>

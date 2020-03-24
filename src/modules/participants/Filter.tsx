@@ -27,7 +27,6 @@ const Filter = ({onFilter, loading}: IProps) => {
         onFilter(values);        
     }
 
-
     function handleChange(event: React.ChangeEvent<any>) {
         const name = event.target.name
         const value = event.target.value
@@ -48,8 +47,8 @@ const Filter = ({onFilter, loading}: IProps) => {
             <Grid item xs={12}>
             <Grid item xs={12}>
                 <div style={{minWidth: '100%', overflow: 'auto'}}>
-                <IBox title='Search'>
-                </IBox>
+                    <IBox title='Search'>
+                    </IBox>
                 </div>
             </Grid>
                 <TextField

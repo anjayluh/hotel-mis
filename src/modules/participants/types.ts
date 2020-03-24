@@ -6,6 +6,16 @@ export interface IParticipant {
     type: string
     dateCreated: Date
 }
+
+export interface INewParticipant {
+    id: string
+    name: string
+    type: object
+    phoneNumber: object[]
+    status: object
+    officialEmail: string
+    dateCreated: Date
+}
 export interface IWorkflowInclude {
     caseData?: boolean
     tasks?: boolean

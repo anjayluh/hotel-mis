@@ -13,8 +13,10 @@ import {search} from "../../utils/ajax";
 import {remoteRoutes} from "../../data/constants";
 import Loading from "../../components/Loading";
 // import NewPersonForm from "./forms/NewPersonForm";
+import NewParticipantForm from "./forms/NewParticipantForm";
 import Box from "@material-ui/core/Box";
 import EditDialog from "../../components/EditDialog";
+import SlideOutDrawer from "../../components/SlideOutDrawer";
 import Typography from "@material-ui/core/Typography";
 import {useDispatch, useSelector} from "react-redux";
 import {participantsConstants, IParticipantsState} from "../../data/redux/participants/reducer";
@@ -55,10 +57,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const headCells: XHeadCell[] = [...columns];
 
+type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 const Participants = () => {
     const dispatch = useDispatch();
     const [createDialog, setCreateDialog] = useState(false);
+    const [anchor, setAnchor]= useState<Anchor>('right');
+    const [openSlideOut, setOpenSlideOut] = useState(false);
     const {data, loading}: IParticipantsState = useSelector((state: IState) => state.participants)
     const [filter, setFilter] = useState<IWorkflowFilter>({});
     const classes = useStyles();
@@ -100,6 +105,11 @@ const Participants = () => {
         setFilter({...filter, ...value})
     }
 
+    function handleToggleDrawer() {
+        setOpenSlideOut(!openSlideOut)
+        setAnchor('right')
+    }
+
     function handleNew() {
         setCreateDialog(true)
     }
@@ -119,7 +129,7 @@ const Participants = () => {
                                     <Typography variant='h5'>Participants</Typography>
                                     {/* Temporarily removed add icon from button startIcon={<AddIcon/> */}
                                     <Button className={classes.addNewButton}
-                                    variant="text" href="#">
+                                    variant="text" onClick={handleToggleDrawer}>
                                         Add New
                                     </Button>
                                 </Grid>
@@ -150,6 +160,10 @@ const Participants = () => {
                     </Box>
                 </Grid>
             </Grid>
+            
+            <SlideOutDrawer handleToggleDrawer={handleToggleDrawer} open={openSlideOut} anchor={anchor} title="Add New Participants">
+                <NewParticipantForm></NewParticipantForm>
+            </SlideOutDrawer>
             <EditDialog title="New Person" open={createDialog} onClose={closeCreateDialog}>
                 {/* <NewPersonForm data={{}} done={closeCreateDialog}/> */}
             </EditDialog>
