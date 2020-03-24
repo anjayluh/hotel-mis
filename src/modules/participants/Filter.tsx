@@ -46,8 +46,12 @@ const Filter = ({onFilter, loading}: IProps) => {
     return <form>
         <Grid spacing={3} container>
             <Grid item xs={12}>
+            <Grid item xs={12}>
+                <div style={{minWidth: '100%', overflow: 'auto'}}>
                 <IBox title='Search'>
                 </IBox>
+                </div>
+            </Grid>
                 <TextField
                     name="name"
                     value={data['name']}
