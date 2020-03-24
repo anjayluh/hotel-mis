@@ -115,7 +115,7 @@ const Billings = () => {
                         <Box pb={2}>
                             <Grid container>
                                 <Grid item sm={12} className={classes.pageHeading}>
-                                    <Typography variant='h5'>Participants</Typography>
+                                    <Typography variant='h5'>Billing</Typography>
                                     {/* Temporarily removed add icon from button startIcon={<AddIcon/> */}
 
                                 </Grid>
