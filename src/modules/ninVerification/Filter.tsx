@@ -31,7 +31,7 @@ const Filter = ({onFilter, loading}: IProps) => {
     function submitForm(values: any) {
         onFilter(values)
     }
-    console.log(data, 'fffffffffffffffffffliter')
+
     function handleChange(event: React.ChangeEvent<any>) {
         const name = event.target.name
         const value = event.target.value
@@ -131,11 +131,12 @@ const Filter = ({onFilter, loading}: IProps) => {
                 <Box display="flex" flexDirection="row">
                     <Button
                         disabled={loading}
-                        variant="outlined"
+                        variant="contained"
                         color="secondary"
                         onClick={submitForm}>Apply Filter</Button>
                 </Box>
             </Grid>
+
         </Grid>
     </form>
 

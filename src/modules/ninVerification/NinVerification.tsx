@@ -58,37 +58,28 @@ const NinVerifications = () => {
     });
 
 
-    // useEffect(() => {
-    //     setLoadingNew(true)
-    //     const newFilter = {
-    //         workflowTypes: workflowTypes,
-    //         showNew: true,
-    //         showAssigned: false
-    //     };
-    //     search(remoteRoutes.workflows, newFilter, resp => {
-    //         setNewData(resp)
-    //     }, undefined, () => {
-    //         setLoadingNew(false)
-    //     })
-    // }, [])
-    //
-    // useEffect(() => {
-    //     console.log("Filter", filter)
-    //     setLoading(true)
-    //     search(remoteRoutes.workflows, filter, resp => {
-    //         setData(resp)
-    //     }, undefined, () => setLoading(false))
-    // }, [filter])
+    useEffect(() => {
+        setLoadingNew(true)
+        const newFilter = {
+            workflowTypes: workflowTypes,
+            showNew: true,
+            showAssigned: false
+        };
+        search(remoteRoutes.contacts, newFilter, resp => {
+            setNewData(verificationRequestData)
+        }, undefined, () => {
+            setLoadingNew(false)
+        })
+    }, [])
 
     useEffect(() => {
-            console.log("Filter", filter)
-            setLoading(true)
+        console.log("Filter", filter)
+        setLoading(true)
+        search(remoteRoutes.contacts, filter, resp => {
             setData(verificationRequestData)
-        setLoading(false)
-        }, [])
+        }, undefined, () => setLoading(false))
+    }, [filter])
 
-    let na = data[0]
-    console.log(na)
 
     function handleFilterToggle() {
         setOpen(!open);
@@ -112,8 +103,8 @@ const NinVerifications = () => {
                                     <XTable
                                         loading={loadingNew}
                                         headCells={ninVerificationHeadCells}
-                                        data={data}
-                                        initialRowsPerPage={5}
+                                        data={newData}
+                                        initialRowsPerPage={10}
                                         usePagination={true}
                                         initialSortBy={wfInitialSort}
                                         initialOrder="desc"
