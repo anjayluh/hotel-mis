@@ -1,20 +1,8 @@
 import * as faker from "faker";
-import {
-    ActionStatus,
-    IAction,
-    ITask,
-    IWorkflow,
-    TaskStatus,
-    WorkflowStatus,
-    WorkflowSubStatus,
-    IVerificationRequest,
-    IVerificationStatus,
-    WorkflowNinStatus
-} from "./types";
+import {ActionStatus, IAction, ITask, IWorkflow, TaskStatus, WorkflowStatus, WorkflowSubStatus, IBill} from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
-import {format} from "date-fns";
-import {getRandomStr} from "../../utils/stringHelpers";
+import { format, compareAsc } from 'date-fns'
 
 const uuid = require('uuid/v4');
 
@@ -91,31 +79,31 @@ export const fakeAction = (): IAction => {
         outputData: ''
     }
 }
-let arr_elem = ['rr','jjh', 'ggg']
-const fakeVerificationRequest = (): IVerificationRequest => {
+export const organisationNames = ['Stanbic bank Uganda Limited', 'Pride Microfinance Limited',
+'Absa Bank Uganda Limited','Bamunanika Cooperative Society','Bank of India (Uganda) Limited',
+'Micro Credit Development Trust','Opportunity Bank uganda','Centenary Bank',
+'Metroplex Forex Bureau','Equity Bank Uganda Limited (EBUL)','United Bank of Africa']
+
+
+export const fakeBill = () : IBill => {
     return {
-        id: uuid(),
-        date: format(new Date(faker.date.past(1)), 'mm-dd-Y'),
-        name: faker.name.findName(),
-        nin: getRandomStr(13),
-        status: {
-            id: uuid(),
-            name: faker.random.arrayElement(enumToArray(WorkflowNinStatus)) as WorkflowNinStatus
-        },
-        requestId: getRandomStr(8)
+        id: faker.random.uuid(),
+        name: faker.random.arrayElement(organisationNames),
+        billNumber: faker.finance.account(5),
+        dateCreated: new Date(faker.date.past(1)),
+        consumption: faker.finance.account(5),
+        rate: faker.random.number({'min': 20, 'max': 50}),
+        billAmount: faker.finance.account(7),
 
     }
-}
+};
 
-export const verificationRequests = () => {
-    let verifications: any = []
-    for(let i = 0; i < 100; i++) {
-        verifications.push(fakeVerificationRequest())
-    }
-    return verifications
+export const getConsumption = (data:IBill) => {
+    let consumption = data.consumption
+    return consumption.slice(0, 2) + ',' + consumption.slice(2)
 }
+export const getbillAmount = (data:IBill) => {
+    let billAmount = data.billAmount
+    return billAmount.slice(0, 1) + ',' + billAmount.slice(1, 4)+ ',' + billAmount.slice(4)
 
-export const getStatus  = (verificationRequest: IVerificationRequest) => {
-    // const {name} = verificationRequest.status
-    return verificationRequest.status.name
 }

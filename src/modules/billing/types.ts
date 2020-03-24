@@ -1,5 +1,14 @@
 import {BaseModel} from "../../data/types";
 
+export interface IBill {
+    id: string
+    name: string
+    billNumber: any
+    dateCreated: Date,
+    consumption: any
+    rate: number
+    billAmount: any
+}
 export interface IWorkflowInclude {
     caseData?: boolean
     tasks?: boolean
@@ -9,9 +18,6 @@ export interface IWorkflowInclude {
 export interface IWorkflowFilter {
     id?: string
     referenceNumber?: string
-    nin?: string
-    requestId?: string
-    initiator?: []
     externalReference?: string
     userId?: string
     applicant?: string
@@ -19,7 +25,6 @@ export interface IWorkflowFilter {
     showNew?: boolean
     showAssigned?: boolean
     statuses?: string[]
-    status?: string
     from?: Date|null
     to?: Date|null
     subStatuses?: string[]
@@ -89,29 +94,11 @@ export interface IWorkflow extends BaseModel {
     assigneeId?: string
     assignedDate?: string
 }
-export interface IVerificationStatus {
-    id: string,
-    name: string
-}
-export interface IVerificationRequest {
-    id: string,
-    date: string,
-    name: string,
-    nin: string,
-    status: IVerificationStatus,
-    requestId: string
-}
 
 export enum WorkflowStatus {
     Open = 'Open',
     Error = 'Error',
     Closed = 'Closed'
-}
-
-export enum WorkflowNinStatus {
-    Pending = 'Pending',
-    Error = 'Error',
-    Verified = 'Verified'
 }
 
 export enum WorkflowSubStatus {
