@@ -1,7 +1,7 @@
 import React from "react";
 import {ITask, TaskStatus, WorkflowStatus, WorkflowSubStatus, WorkflowNinStatus} from "./types";
 import {ErrorIcon, SuccessIcon, WarningIcon} from "../../components/xicons";
-import {errorColor, successColor, warningColor} from "../../theme/custom-colors";
+import {errorColor, successColor, warningColor, pendingColor} from "../../theme/custom-colors";
 import {Chip} from "@material-ui/core";
 
 
@@ -15,7 +15,7 @@ export const renderNinStatus = (value: WorkflowNinStatus) => {
             color = errorColor
             break
         case WorkflowNinStatus.Pending:
-            color = warningColor
+            color = pendingColor
             break
     }
 
