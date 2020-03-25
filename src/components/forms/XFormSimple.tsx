@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
         submit: {
             position: 'fixed',
             bottom: '15px',
-            right: '20px',
+            right: '28px',
             marginLeft: 'auto'
         },
         submitButton: {
