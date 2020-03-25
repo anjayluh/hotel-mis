@@ -114,7 +114,8 @@ const Details = (props: IProps) => {
     const caseData = workflow as IWorkflow
     return (
         <Navigation>
-            <div className={classes.root} >
+            <Typography variant='h3'>Details page</Typography>
+            {/* <div className={classes.root} >
                 <LoaderDialog open={blocker} onClose={() => setBlocker(false)}/>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -159,7 +160,7 @@ const Details = (props: IProps) => {
                         </Box>
                     </Grid>
                 </Grid>
-            </div>
+            </div> */}
         </Navigation>
     );
 }

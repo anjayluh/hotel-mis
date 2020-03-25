@@ -7,6 +7,7 @@ import ContactDetails from "./contacts/details/Details";
 import ApplicationDetails from "./ninVerification/details/Details";
 import Settings from "./settings/Settings";
 import NinVerification from "./ninVerification/NinVerification";
+import ParticipantsDetails from "./participants/details/Details";
 import Participants from "./participants/Participants";
 import Billing from "./billing/Billing";
 import Subscriptions  from "./subscriptions/Subscriptions";
@@ -32,6 +33,7 @@ const ContentSwitch = () => {
         <Route path={localRoutes.dashboard} component={Dashboard}/>
         <Route path={localRoutes.applicationsDetails} component={ApplicationDetails}/>
         <Route path={localRoutes.ninVerification} component={NinVerification}/>
+        <Route path={localRoutes.participantsDetails} component={ParticipantsDetails}/>
         <Route path={localRoutes.participants} component={Participants}/>
         <Route path={localRoutes.billing} component={Billing}/>
         <Route path={localRoutes.subscriptions} component={Subscriptions}/>

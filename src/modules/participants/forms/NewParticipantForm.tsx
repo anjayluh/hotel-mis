@@ -5,15 +5,14 @@ import * as faker from "faker";
 import {reqDate, reqString} from "../../../data/validations";
 import {organisationTypeCategories} from "../../../data/comboCategories";
 import {FormikActions} from "formik";
-import { createBrowserHistory as history} from 'history';
 import Grid from "@material-ui/core/Grid";
-import XForm from "../../../components/forms/XForm";
+import XFormSimple from "../../../components/forms/XFormSimple";
 import XTextInput from "../../../components/inputs/XTextInput";
 import {toOptions} from "../../../components/inputs/inputHelpers";
 import {useDispatch} from 'react-redux'
 import {INewParticipant} from "../types";
 import XSelectInput from "../../../components/inputs/XSelectInput";
-import { Redirect } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
 import {localRoutes} from "../../../data/constants";
 import PSelectInput from "../../../components/plain-inputs/PSelectInput";
 
@@ -38,7 +37,7 @@ const NewParticipantForm = (props: IProps) => {
         phoneNumberOther: '',
         email: ''
     })
-
+    const history = useHistory();
     const dispatch = useDispatch();
 
     function handleSubmit(values: any, actions: FormikActions<any>) {
@@ -69,7 +68,7 @@ const NewParticipantForm = (props: IProps) => {
             dateCreated: new Date()
         }
         console.log(toSave);
-        console.log(history)
+        history.push(`${localRoutes.participants}/${toSave.id}`)
     }
 
     function handleClose(){
@@ -77,7 +76,7 @@ const NewParticipantForm = (props: IProps) => {
     }
 
     return (
-        <XForm onSubmit={handleSubmit} schema={schema} initialValues={data}
+        <XFormSimple onSubmit={handleSubmit} schema={schema} initialValues={data}
         onCancel={handleClose}>
             <Grid spacing={1} container direction='column'>
                 <Grid item xs={12}>
@@ -126,7 +125,7 @@ const NewParticipantForm = (props: IProps) => {
                     />
                 </Grid>
             </Grid>
-        </XForm>
+        </XFormSimple>
     );
 }
 

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Form, Formik, FormikActions} from 'formik';
+import {createStyles, makeStyles, Theme} from "@material-ui/core";
 import {Grid} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
@@ -14,7 +15,26 @@ interface IProps {
     initialValues?: any
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        actions:{
+            position: 'fixed',
+            bottom: '0px',
+        },
+        buttonClose: {
+            textTransform: 'capitalize',
+            fontWeight: 'normal',
+            marginRight: '206px',
+
+        },
+        submit: {
+            marginLeft: 'auto'
+        }
+    }),
+);
+
 const XForm = (props: IProps) => {
+    const classes = useStyles()
     const [count, setCount] = useState<number>(0)
     function handleDelete() {
         if (count === 1) {
@@ -41,11 +61,11 @@ const XForm = (props: IProps) => {
                             </Box>
                         </Grid>
                         <Grid item xs={12}>
-                            <Box p={1} mt={16}>
-                                <Grid container spacing={1} alignContent='flex-end' justify='flex-end'>
+                            <Box p={1} mt={16} className={classes.actions}>
+                                <Grid container spacing={1}>
                                     {
                                         props.onDelete &&
-                                        <Grid item>
+                                        <Grid item justify='space-between'>
                                             <Button
                                                 variant='contained'
                                                 color='default'
@@ -58,20 +78,21 @@ const XForm = (props: IProps) => {
                                         props.onCancel &&
                                         <Grid item>
                                             <Button
-                                                variant='contained'
+                                            className={classes.buttonClose}
+                                                variant='text'
                                                 color='default'
                                                 onClick={props.onCancel}
                                                 disabled={isSubmitting}
-                                            >Cancel</Button>
+                                            >Close</Button>
                                         </Grid>
                                     }
-                                    <Grid item>
+                                    <Grid item className={classes.submit}>
                                         <Button
                                             variant='contained'
                                             color='primary'
                                             onClick={submitForm}
                                             disabled={isSubmitting}
-                                        >Submit</Button>
+                                        >Save</Button>
                                     </Grid>
                                 </Grid>
                             </Box>
