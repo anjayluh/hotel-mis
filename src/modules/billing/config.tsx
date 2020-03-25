@@ -12,7 +12,7 @@ export const Billingcolumns: XHeadCell[] = [
         render: (value, rec) => <span>{printDate(value)}</span>,
         cellProps: {
             style: {
-                width: 60,
+                width: 20,
                 whiteSpace: 'nowrap'
             }
         }
@@ -20,13 +20,13 @@ export const Billingcolumns: XHeadCell[] = [
     {
         name: 'name', label: 'Participant',
         render: (value, rec) => <ParticipantLink id={rec.id} name={rec.name}/>,
-        cellProps: {style: {width: 70}}
+        cellProps: {style: {width: 250}}
     },
     {
         name: 'billNumber', label: 'Bill number',
         cellProps: {
             style: {
-                width: 80,
+                width: 40,
                 whiteSpace: 'nowrap'
             }
         }
@@ -44,7 +44,7 @@ export const Billingcolumns: XHeadCell[] = [
         name: 'rate', label: 'Rate',
         cellProps: {
             style: {
-                width: 80,
+                width: 30,
                 whiteSpace: 'nowrap'
             }
         }
