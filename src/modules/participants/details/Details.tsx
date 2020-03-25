@@ -5,7 +5,6 @@ import {getRouteParam} from "../../../utils/routHelpers";
 import Loading from "../../../components/Loading";
 import Error from "../../../components/Error";
 import {createStyles, Grid, makeStyles, Theme} from "@material-ui/core";
-
 import {IWorkflow, trimCaseId} from "../types";
 import Typography from "@material-ui/core/Typography";
 import {Flex} from "../../../components/widgets";

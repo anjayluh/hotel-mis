@@ -162,7 +162,7 @@ const Participants = () => {
             </Grid>
             
             <SlideOutDrawer handleToggleDrawer={handleToggleDrawer} open={openSlideOut} anchor={anchor} title="Add New Participants">
-                <NewParticipantForm></NewParticipantForm>
+                <NewParticipantForm closeSlideOut={handleToggleDrawer}></NewParticipantForm>
             </SlideOutDrawer>
             <EditDialog title="New Person" open={createDialog} onClose={closeCreateDialog}>
                 {/* <NewPersonForm data={{}} done={closeCreateDialog}/> */}

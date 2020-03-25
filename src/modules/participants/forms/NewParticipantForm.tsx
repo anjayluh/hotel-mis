@@ -2,11 +2,10 @@ import React from 'react';
 import {useState} from "react";
 import * as yup from "yup";
 import * as faker from "faker";
-import {createStyles, makeStyles, Theme} from "@material-ui/core";
 import {reqDate, reqString} from "../../../data/validations";
 import {organisationTypeCategories} from "../../../data/comboCategories";
 import {FormikActions} from "formik";
-import PSelectInput from "../../../components/plain-inputs/PSelectInput";
+import { createBrowserHistory as history} from 'history';
 import Grid from "@material-ui/core/Grid";
 import XForm from "../../../components/forms/XForm";
 import XTextInput from "../../../components/inputs/XTextInput";
@@ -16,26 +15,8 @@ import {INewParticipant} from "../types";
 import XSelectInput from "../../../components/inputs/XSelectInput";
 import { Redirect } from 'react-router';
 import {localRoutes} from "../../../data/constants";
+import PSelectInput from "../../../components/plain-inputs/PSelectInput";
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            flexGrow: 1,
-        },
-        filterPaper: {
-            borderRadius: 0,
-            padding: theme.spacing(2)
-        },
-        fab: {
-            position: 'absolute',
-            bottom: theme.spacing(2),
-            right: theme.spacing(2),
-        },
-        pageHeading: {
-            display: 'flex'
-        },
-    }),
-);
 const schema = yup.object().shape(
     {
         name: reqString,
@@ -45,7 +26,11 @@ const schema = yup.object().shape(
     }
 )
 
-const NewParticipantForm = () => {
+interface IProps {
+    closeSlideOut: () => any
+}
+
+const NewParticipantForm = (props: IProps) => {
     const [data, setData] = useState({
         name: '',
         type: '',
@@ -83,16 +68,17 @@ const NewParticipantForm = () => {
             officialEmail: values.email,
             dateCreated: new Date()
         }
-        return <Redirect to={`${localRoutes.participants}/${toSave.id}`} />
+        console.log(toSave);
+        console.log(history)
     }
 
-    function handleCancel(){
-
+    function handleClose(){
+        props.closeSlideOut();
     }
 
     return (
         <XForm onSubmit={handleSubmit} schema={schema} initialValues={data}
-        onCancel={handleCancel}>
+        onCancel={handleClose}>
             <Grid spacing={1} container direction='column'>
                 <Grid item xs={12}>
                     <XTextInput
@@ -105,20 +91,12 @@ const NewParticipantForm = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <XSelectInput
+                        size='small'
                         name="type"
                         label="Type"
                         options={toOptions(organisationTypeCategories)}
                         variant='outlined'
                     />
-                   {/*  <PSelectInput
-                    name="type"
-                    value={data['type']}
-                    label="Type"
-                    variant="outlined"
-                    size='small'
-                    color="secondary"
-                    options={toOptions(organisationTypeCategories)}
-                /> */}
                 </Grid>
                 <Grid item xs={12}>
                     <XTextInput

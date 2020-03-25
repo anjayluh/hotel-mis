@@ -10,6 +10,7 @@ import {hasValue, IOption} from "./inputHelpers";
 interface IProps {
     label: string
     name: string
+    size?: 'small' | 'medium'
     options: IOption[]
     multiple?: boolean
     variant?: 'standard' | 'outlined' | 'filled'
@@ -44,7 +45,7 @@ const Component = (props: FieldProps & IProps) => {
         setLabelWidth(inputLabel.current!.offsetWidth);
     }, []);
 
-    return <FormControl error={showError} fullWidth variant={props.variant} margin='normal'>
+    return <FormControl error={showError} fullWidth  size={props.size} variant={props.variant} margin='normal'>
         <InputLabel htmlFor={name} ref={inputLabel}>{rest.label}</InputLabel>
         <Select
             onClose={handleTouched}
@@ -55,6 +56,7 @@ const Component = (props: FieldProps & IProps) => {
             multiple={rest.multiple}
             inputProps={{name}}
             labelWidth={labelWidth}
+
         >
             {
                 options.map(
