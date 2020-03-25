@@ -32,11 +32,11 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         cancel: {
             position: 'fixed',
-            bottom: '20px',
+            bottom: '15px',
         },
         submit: {
             position: 'fixed',
-            bottom: '20px',
+            bottom: '15px',
             right: '20px',
             marginLeft: 'auto'
         }

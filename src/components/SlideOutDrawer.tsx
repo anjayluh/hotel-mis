@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            padding: '20px',
+            padding: '25px',
             width: '400px',
             [theme.breakpoints.down('sm')]: {
                 width: '100%',
