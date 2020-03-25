@@ -19,8 +19,8 @@ const Filter = ({onFilter, loading}: IProps) => {
     const [data, setData] = useState({
         participantName: '',
         type: '',
-        from: new Date('2014-08-18T21:11:54'),
-        to: new Date('2020-08-18T21:11:54'),
+        from: null,
+        to: null,
         billNumber: ''
     })
 
