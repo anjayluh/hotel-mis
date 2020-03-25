@@ -1,6 +1,6 @@
 import {XHeadCell} from "../../components/table/XTableHead";
 import ApplicationLink from "../../components/links/ApplicationLink";
-import {printDateTime} from "../../utils/dateHelpers";
+import {printDate, printDateTime} from "../../utils/dateHelpers";
 import ContactLink from "../../components/links/ContactLink";
 import {getInitials, trimString} from "../../utils/stringHelpers";
 import React from "react";
@@ -16,22 +16,23 @@ export const ninVerificationHeadCells: XHeadCell[] = [
 
     {
         name: 'date', label: 'Date',
+        render: (value, rec) => <span>{printDateTime(value)}</span>,
         cellProps: {
             style: {
-                width: 80,
+                width: 40,
                 whiteSpace: 'nowrap'
             }
         }
     },
     {
-        name: 'name', label: 'name.',
-        cellProps: {style: {width: 70}}
+        name: 'name', label: 'name',
+        cellProps: {style: {width: 150}}
     },
     {
         name: 'nin', label: 'nin',
         cellProps: {
             style: {
-                width: 60,
+                width: 40,
                 whiteSpace: 'nowrap'
             }
         }
@@ -40,7 +41,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
         name: 'status', label: 'Status', render: (_, rec) => renderNinStatus(rec.status.name),
         cellProps: {
             style: {
-                width: 60
+                width: 40
             }
         }
     },
@@ -48,7 +49,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
         name: 'requestId', label: 'Request id',
         cellProps: {
             style: {
-                width: 80,
+                width: 40,
                 whiteSpace: 'nowrap'
             }
         }
