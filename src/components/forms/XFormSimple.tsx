@@ -17,14 +17,6 @@ interface IProps {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        actions:{
-            position: 'fixed',
-            bottom: '0',
-            right: '0',
-            left: '0',
-            marginLeft: '20px',
-            marginRight: '20px',
-        },
         buttonClose: {
             textTransform: 'capitalize',
             fontWeight: 'normal',

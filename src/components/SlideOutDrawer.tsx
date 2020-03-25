@@ -16,9 +16,6 @@ const useStyles = makeStyles((theme: Theme) =>
         title: {
             marginLeft: '8px',
         },
-        content: {
-            
-        }
     }),
 );
 
@@ -63,7 +60,7 @@ export default function SlideOutDrawer(props: IProps) {
                 paper: classes.root
             }}>
                 <Typography variant='h5' className={classes.title}>{props.title}</Typography>
-                <div className={classes.content}>
+                <div>
                     {props.children}
                 </div>
           </Drawer>
