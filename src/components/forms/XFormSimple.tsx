@@ -67,7 +67,7 @@ const XForm = (props: IProps) => {
                         </Grid>
                         <Grid item xs={12}>
                             <Box p={1} mt={16}>
-                                <Grid container spacing={1} justify='space-between'>
+                                <Grid container spacing={1}>
                                     {
                                         props.onDelete &&
                                         <Grid item >

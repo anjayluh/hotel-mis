@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme: Theme) =>
         root: {
             padding: '25px',
             width: '400px',
+            marginTop: '64px',
             [theme.breakpoints.down('sm')]: {
                 width: '100%',
             }
@@ -56,6 +57,7 @@ export default function SlideOutDrawer(props: IProps) {
     <div>
         <React.Fragment key='right'>
             <Drawer anchor={props.anchor} open={props.open}
+            BackdropProps={{ invisible: true }}
             onClose={toggleDrawer(props.anchor, false)} classes={{
                 paper: classes.root
             }}>
