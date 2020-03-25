@@ -95,7 +95,7 @@ export interface IVerificationStatus {
 }
 export interface IVerificationRequest {
     id: string,
-    date: string,
+    date: Date,
     name: string,
     nin: string,
     status: IVerificationStatus,

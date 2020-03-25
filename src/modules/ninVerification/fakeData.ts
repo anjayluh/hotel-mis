@@ -95,7 +95,7 @@ let arr_elem = ['rr','jjh', 'ggg']
 const fakeVerificationRequest = (): IVerificationRequest => {
     return {
         id: uuid(),
-        date: format(new Date(faker.date.past(1)), 'mm-dd-Y'),
+        date: new Date(faker.date.past(1)),
         name: faker.name.findName(),
         nin: getRandomStr(13),
         status: {
