@@ -19,15 +19,25 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         actions:{
             position: 'fixed',
-            bottom: '0px',
+            bottom: '0',
+            right: '0',
+            left: '0',
+            marginLeft: '20px',
+            marginRight: '20px',
         },
         buttonClose: {
             textTransform: 'capitalize',
             fontWeight: 'normal',
-            marginRight: '206px',
 
         },
+        cancel: {
+            position: 'fixed',
+            bottom: '20px',
+        },
         submit: {
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
             marginLeft: 'auto'
         }
     }),
@@ -61,11 +71,11 @@ const XForm = (props: IProps) => {
                             </Box>
                         </Grid>
                         <Grid item xs={12}>
-                            <Box p={1} mt={16} className={classes.actions}>
-                                <Grid container spacing={1}>
+                            <Box p={1} mt={16}>
+                                <Grid container spacing={1} justify='space-between'>
                                     {
                                         props.onDelete &&
-                                        <Grid item justify='space-between'>
+                                        <Grid item >
                                             <Button
                                                 variant='contained'
                                                 color='default'
@@ -76,7 +86,7 @@ const XForm = (props: IProps) => {
                                     }
                                     {
                                         props.onCancel &&
-                                        <Grid item>
+                                        <Grid item className={classes.cancel}>
                                             <Button
                                             className={classes.buttonClose}
                                                 variant='text'
