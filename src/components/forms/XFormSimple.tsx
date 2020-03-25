@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme: Theme) =>
             bottom: '15px',
             right: '20px',
             marginLeft: 'auto'
+        },
+        submitButton: {
+            padding: '4px 30px',
         }
     }),
 );
@@ -85,15 +88,18 @@ const XForm = (props: IProps) => {
                                                 color='default'
                                                 onClick={props.onCancel}
                                                 disabled={isSubmitting}
+                                                size='small'
                                             >Close</Button>
                                         </Grid>
                                     }
                                     <Grid item className={classes.submit}>
                                         <Button
+                                            className={classes.submitButton}
                                             variant='contained'
                                             color='primary'
                                             onClick={submitForm}
                                             disabled={isSubmitting}
+                                            size='small'
                                         >Save</Button>
                                     </Grid>
                                 </Grid>
