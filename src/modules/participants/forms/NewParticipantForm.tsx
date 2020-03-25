@@ -2,7 +2,7 @@ import React from 'react';
 import {useState} from "react";
 import * as yup from "yup";
 import * as faker from "faker";
-import {reqDate, reqString} from "../../../data/validations";
+import {reqEmail, reqString} from "../../../data/validations";
 import {organisationTypeCategories} from "../../../data/comboCategories";
 import {FormikActions} from "formik";
 import Grid from "@material-ui/core/Grid";
@@ -12,7 +12,7 @@ import {toOptions} from "../../../components/inputs/inputHelpers";
 import {useDispatch} from 'react-redux'
 import {INewParticipant} from "../types";
 import XSelectInput from "../../../components/inputs/XSelectInput";
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import {localRoutes} from "../../../data/constants";
 import PSelectInput from "../../../components/plain-inputs/PSelectInput";
 
@@ -21,7 +21,7 @@ const schema = yup.object().shape(
         name: reqString,
         type: reqString,
         phoneNumberPrimary: reqString,
-        email: reqString
+        email: reqEmail
     }
 )
 
