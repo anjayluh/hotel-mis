@@ -1,167 +1,118 @@
 import React, {useEffect, useState} from 'react';
 import {RouteComponentProps, withRouter} from "react-router";
-import Navigation from "../../../components/Layout";
+import Layout from "../../../components/Layout";
 import {getRouteParam} from "../../../utils/routHelpers";
+import {IParticipant} from "../types";
 import Loading from "../../../components/Loading";
 import Error from "../../../components/Error";
 import {createStyles, Grid, makeStyles, Theme} from "@material-ui/core";
-import {IWorkflow, trimCaseId} from "../types";
-import Typography from "@material-ui/core/Typography";
-import {Flex} from "../../../components/widgets";
-import Summary from "./Summary";
-import WorkflowView from "./WorkflowView";
-import {put} from "../../../utils/ajax";
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
+import {get} from "../../../utils/ajax";
 import {remoteRoutes} from "../../../data/constants";
-import Button from "@material-ui/core/Button";
-import LoaderDialog from "../../../components/LoaderDialog";
-import {Dispatch} from "redux";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchWorkflowAsync, IWorkflowState, startWorkflowFetch} from "../../../data/redux/workflows/reducer";
-import {successColor} from "../../../theme/custom-colors";
-import {renderStatus, renderSubStatus} from "../widgets";
-import Box from "@material-ui/core/Box";
-import Divider from "@material-ui/core/Divider";
-
+import {participantsConstants} from "../../../data/redux/participants/reducer";
+import Profile from "./info/Profile";
+import Info from "./info/Info";
 
 interface IProps extends RouteComponentProps {
 
 }
 
-const useWfStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            padding: 0,
-            backgroundColor: 'transparent'
-        },
-        stepPaper: {
-            borderRadius: 0,
-        },
-        stepLabel: {
-            padding: theme.spacing(1)
-        },
-        stepContent: {
-            paddingRight: 0,
-            paddingBottom: theme.spacing(1)
-
-        },
-        taskIcon: {
-            marginTop: 1
-        },
-        successIcon: {
-            color: successColor
-        }
-    })
-);
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            borderRadius: 0,
             padding: theme.spacing(1),
-            height: '100%',
-            overflow: 'auto'
+            borderRadius: 0,
+            minHeight: '100%',
+            overflow: 'show'
         },
         divider: {
             marginTop: theme.spacing(2)
         },
-        noPaddingLeft: {
-            paddingLeft: 0
+        noPadding: {
+            padding: 0
         }
     })
 );
 
 const Details = (props: IProps) => {
-    const participantId = getRouteParam(props, 'participantId')
-    const wfClasses = useWfStyles()
-    const classes = useStyles()
-    const [blocker, setBlocker] = useState<boolean>(false)
-    const {loading, workflow}: IWorkflowState = useSelector((state: any) => state.workflows)
-    const dispatch: Dispatch<any> = useDispatch();
+    const participantId = getRouteParam(props, 'participantId');
+    const classes = useStyles();
+    const dispatch = useDispatch();
+    // to test with actual form replace selected with fakeselected
+    const data: IParticipant | undefined = useSelector((state: any) => state.participants.selected);
+    const [loading, setLoading] = useState<boolean>(true)
+    const [value, setValue] = React.useState('one');
+    const tempData = {
+        id: "429e16b7-eec4-463f-48b7-08d7bb6a08a2",
+        name: "ABI Bank",
+        phoneNumber: [
+            {
+                id: "429e16b7-eec4-463f-48b7-08d7bb6a08a3", 
+                type: "primary", 
+                value: "0396767798"},
+            {
+                id: "429e16b7-eec4-463f-48b7-08d7bb6a08a4", 
+                type: "other", 
+                value: "0396767798"},
+            ],
+        type: {
+            id: "429e16b7-eec4-463f-48b7-08d7bb6a08a5",
+            name: "Commercial Bank"
+        },
+        status: {
+            id: "429e16b7-eec4-463f-48b7-08d7bb6a08a6",
+            name: "Inactive"
+        },
+        officialEmail: "info@abcbank.ug",
+        dateCreated: new Date()
+    };
 
-    function loadData() {
-        dispatch(startWorkflowFetch())
-        dispatch(fetchWorkflowAsync(participantId))
-    }
-
+    const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+        setValue(newValue);
+    };
     useEffect(() => {
-        loadData()
-    }, [participantId,dispatch])
-
-    function onResume() {
-        const url = `${remoteRoutes.workflows}/${participantId}`
-        setBlocker(true)
-        put(url, {},
-            resp => loadData(),
+        setLoading(true)
+        
+        get(
+            `${remoteRoutes.participants}/${participantId}`,
+            resp => dispatch({
+                type: participantsConstants.participantsFetchOne,
+                payload: tempData,
+            }),
             undefined,
             () => {
-                setBlocker(false)
-            })
-    }
+                dispatch({
+                    type: participantsConstants.participantsFetchOne,
+                    payload: tempData,
+                })
+                setLoading(false)
+            }
+            )        
+    }, [dispatch, participantId])
 
-    if (loading)
-        return <Navigation>
-            <Loading/>
-        </Navigation>
-
-    const hasError = !loading && !workflow
-    if (hasError)
-        return <Navigation>
-            <Error text='Failed load case data'/>
-        </Navigation>
-
-
-
-    const caseData = workflow as IWorkflow
+    const hasError = !loading && !data
     return (
-        <Navigation>
-            <Typography variant='h3'>Details page</Typography>
-            {/* <div className={classes.root} >
-                <LoaderDialog open={blocker} onClose={() => setBlocker(false)}/>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Flex>
-                            <Typography variant='h3'>
-                                Case #{trimCaseId(caseData.id)}
-                            </Typography>
-                            <div style={{marginTop: 4}}>&nbsp;&nbsp;{renderStatus(caseData.status)}</div>
-                            <div style={{marginTop: 4}}>&nbsp;&nbsp;{renderSubStatus(caseData.subStatus)}</div>
-                        </Flex>
-
+        <Layout>
+            {loading && <Loading/>}
+            {hasError && <Error text='Failed load contact'/>}
+            {
+                data &&
+                <div className={classes.root}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} style={{paddingBottom: 0}}>
+                            <Profile data={data}/>
+                            <Divider className={classes.divider}/>
+                        </Grid>
+                        <Grid item xs={12} style={{paddingTop: 0}}>
+                            <Info data={data}/>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={9}>
-                        <Box display='flex' py={1}>
-                            <Box flexGrow={1} pt={1}>
-                                <Typography variant='h5'>Details</Typography>
-                            </Box>
-                            <Box>
-                                <Button size='small' variant="outlined" color='primary' onClick={onResume}>
-                                    Preview Docs
-                                </Button>
-                                &nbsp;
-                                <Button size='small' variant="outlined" color='primary' onClick={onResume}>
-                                    Resume Case
-                                </Button>
-                            </Box>
-                        </Box>
-                        <Divider/>
-                        <Box pt={1}>
-                            <WorkflowView data={caseData} classes={wfClasses} />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={3}>
-                        <Box display='flex' py={1}>
-                            <Box flexGrow={1} pt={1}>
-                                <Typography variant='h5'>Summary</Typography>
-                            </Box>
-                        </Box>
-                        <Divider/>
-                        <Box pt={1}>
-                            <Summary data={caseData} />
-                        </Box>
-                    </Grid>
-                </Grid>
-            </div> */}
-        </Navigation>
+                </div>
+            }
+        </Layout>
     );
 }
 

@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import {createStyles, makeStyles, Theme} from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import {IWorkflowFilter} from "./types";
+import {IParticipantsFilter} from "./types";
 import XTable from "../../components/table/XTable";
 import {XHeadCell} from "../../components/table/XTableHead";
 import Grid from '@material-ui/core/Grid';
@@ -66,7 +66,7 @@ const Participants = () => {
     const [anchor, setAnchor]= useState<Anchor>('right');
     const [openSlideOut, setOpenSlideOut] = useState(false);
     const {data, loading}: IParticipantsState = useSelector((state: IState) => state.participants)
-    const [filter, setFilter] = useState<IWorkflowFilter>({});
+    const [filter, setFilter] = useState<IParticipantsFilter>({});
     const classes = useStyles();
 
 

@@ -1,21 +1,57 @@
 import {BaseModel} from "../../data/types";
 
+export interface IGeneratedParticipant {
+    id?: string
+    name?: string
+    type?: string
+    dateCreated?: Date
+}
+export interface IParticipantType {
+    id: string
+    name: string
+}
+
+export interface IParticipantPhone {
+    id: string
+    type: string
+    value: string
+}
+
+export interface IParticipantStatus {
+    id: string
+    name: string
+}
 export interface IParticipant {
     id: string
     name: string
-    type: string
-    dateCreated: Date
-}
-
-export interface INewParticipant {
-    id: string
-    name: string
-    type: object
-    phoneNumber: object[]
-    status: object
+    type: IParticipantType
+    phoneNumber: IParticipantPhone[]
+    status: IParticipantStatus
     officialEmail: string
     dateCreated: Date
 }
+export interface IParticipantsFilter {
+    id?: string
+    name?: string
+    type?: string
+    dateCreated?: Date
+}
+/* 
+export const renderName = (participant: IParticipant): string => {
+    if (contact.category === ContactCategory.Person) {
+        const person = contact.person
+        const name: string =
+            salutation ?
+                `${person.salutation || ''} ${person.firstName || ''} ${person.middleName || ''} ${person.lastName || ''}`
+                : `${person.firstName || ''} ${person.middleName || ''} ${person.lastName || ''}`;
+
+        return name.trim().replace(/\s+/g, ' ');
+    } else {
+        console.log(contact)
+        return contact.company.name
+    }
+
+}; */
 export interface IWorkflowInclude {
     caseData?: boolean
     tasks?: boolean
