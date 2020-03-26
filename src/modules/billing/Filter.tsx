@@ -9,6 +9,8 @@ import {Box} from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import PSelectInput from "../../components/plain-inputs/PSelectInput";
 import {organisationNames} from "./fakeData";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 
 interface IProps {
     onFilter: (data: any) => any
@@ -48,6 +50,14 @@ const Filter = ({onFilter, loading}: IProps) => {
     }
     return <form>
                 <Grid spacing={3} container>
+                    <Grid item xs={12}>
+                        <Box display='flex' pb={1}>
+                            <Box flexGrow={1}>
+                                <Typography color={'textSecondary'} variant='h5'>Search</Typography>
+                            </Box>
+                        </Box>
+                        <Divider/>
+                    </Grid>
                     <Grid item xs={12}>
                         <PDateInput
                             name="from"
