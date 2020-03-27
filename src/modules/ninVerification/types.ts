@@ -1,4 +1,7 @@
 import {BaseModel} from "../../data/types";
+import * as faker from "faker";
+import {enumToArray, getRandomStr} from "../../utils/stringHelpers";
+import {organisationNames} from "../billing/fakeData";
 
 export interface IWorkflowInclude {
     caseData?: boolean
@@ -101,6 +104,19 @@ export interface IVerificationRequest {
     status: IVerificationStatus,
     requestId: string
 }
+export interface IRequestDetailsStatus {
+    status: string,
+    date: Date
+}
+export interface IRequestDetails {
+    requestDate: Date,
+    nin: string,
+    dateOfBirth: Date,
+    referenceNumber: any,
+    initiator: string,
+    participant: string,
+    requestStatus: IRequestDetailsStatus
+}
 
 export enum WorkflowStatus {
     Open = 'Open',
@@ -112,6 +128,14 @@ export enum WorkflowNinStatus {
     Pending = 'Pending',
     Error = 'Error',
     Verified = 'Verified'
+}
+
+export enum WorkflowRequestStatus {
+    RequestReceived='Request Received',
+    AuthenticationSuccessful='Authentication Successful',
+    RequestSubmitted='Request submitted to NIRA',
+    ResultReceived='Result Received',
+    ResponseReturned='Response Returned'
 }
 
 export enum WorkflowSubStatus {

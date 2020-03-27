@@ -9,12 +9,15 @@ import {
     WorkflowSubStatus,
     IVerificationRequest,
     IVerificationStatus,
-    WorkflowNinStatus
+    WorkflowNinStatus,
+    WorkflowRequestStatus,
+    IRequestDetails
 } from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
 import {format} from "date-fns";
 import {getRandomStr} from "../../utils/stringHelpers";
+import {organisationNames} from "../billing/fakeData";
 
 const uuid = require('uuid/v4');
 
@@ -118,4 +121,20 @@ export const verificationRequests = () => {
 export const getStatus  = (verificationRequest: IVerificationRequest) => {
     // const {name} = verificationRequest.status
     return verificationRequest.status.name
+}
+
+const fakeRequestDetails =():IRequestDetails => {
+    return {
+        requestDate: new Date(faker.date.past(1)),
+        nin: getRandomStr(13),
+        dateOfBirth:new Date(faker.date.past(18)),
+        referenceNumber: faker.finance.account(7),
+        initiator: faker.name.findName(),
+        participant: faker.random.arrayElement(organisationNames),
+        requestStatus: {
+            status: faker.random.arrayElement(enumToArray(WorkflowRequestStatus)) as WorkflowRequestStatus,
+            date: new Date(faker.date.past(1))
+        }
+    }
+
 }
