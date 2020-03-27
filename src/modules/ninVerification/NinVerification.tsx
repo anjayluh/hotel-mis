@@ -15,6 +15,7 @@ import Box from "@material-ui/core/Box";
 
 import {verificationRequests} from "./fakeData";
 import Loading from "../../components/Loading";
+import Button from "@material-ui/core/Button";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -36,6 +37,9 @@ const useStyles = makeStyles((theme: Theme) =>
                 easing: theme.transitions.easing.easeOut,
                 duration: theme.transitions.duration.enteringScreen,
             })
+        },
+        pageHeading: {
+            display: 'flex'
         },
     }),
 );
@@ -91,39 +95,35 @@ const NinVerifications = () => {
 
     return (
         <Navigation>
-            <Grid container spacing={3}>
-                <Grid item xs={open ? 9 : 12} className={clsx(classes.content, {[classes.contentShift]: open})}>
-                    <Grid container spacing={2}>
-                        <Grid item sm={12}>
-                            <Typography variant='h4'>NIN Verification Requests</Typography>
-                        </Grid>
+            <Grid container spacing={2}>
+                <Grid item xs={9}>
+                    <Box p={1} className={classes.root}>
+                        <Box pb={2}>
+                            <Grid container>
+                                <Grid item sm={12} className={classes.pageHeading}>
+                                    <Typography variant='h4'>NIN Verification Requests</Typography>
+                                    {/* Temporarily removed add icon from button startIcon={<AddIcon/> */}
+                                    {/*<Button className={classes.addNewButton}*/}
+                                    {/*        variant="text" onClick={handleNew}>*/}
+                                    {/*    Add New*/}
+                                    {/*</Button>*/}
+                                </Grid>
+                            </Grid>
+                        </Box>
                         {
-                            loading ? <Loading/> :
-                                <Grid item xs={12}>
-                                    <XTable
-                                        loading={loadingNew}
-                                        headCells={ninVerificationHeadCells}
-                                        data={newData}
-                                        initialRowsPerPage={10}
-                                        usePagination={true}
-                                        initialSortBy={wfInitialSort}
-                                        initialOrder="desc"
-                                    />
-                                </Grid>}
-                        {/* <Grid item sm={12}>
-                            <Typography variant='h4'>All Applications</Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <XTable
-                                loading={loading}
-                                headCells={workflowHeadCells}
-                                data={data}
-                                onFilterToggle={handleFilterToggle}
-                                initialSortBy={wfInitialSort}
-                                initialOrder="desc"
-                            />
-                        </Grid> */}
-                    </Grid>
+                            <Grid item xs={12}>
+                                <XTable
+                                    loading={loadingNew}
+                                    headCells={ninVerificationHeadCells}
+                                    data={newData}
+                                    initialRowsPerPage={10}
+                                    usePagination={true}
+                                    initialSortBy={wfInitialSort}
+                                    initialOrder="desc"
+                                />
+                            </Grid>
+                        }
+                    </Box>
                 </Grid>
                 <Grid item xs={3} style={{display: open ? "block" : "none"}}>
                     <Grid container spacing={2}>

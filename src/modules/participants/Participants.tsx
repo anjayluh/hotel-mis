@@ -128,7 +128,7 @@ const Participants = () => {
                         <Box pb={2}>
                             <Grid container>
                                 <Grid item sm={12} className={classes.pageHeading}>
-                                    <Typography variant='h5'>Participants</Typography>
+                                    <Typography variant='h4'>Participants</Typography>
                                     {/* Temporarily removed add icon from button startIcon={<AddIcon/> */}
                                     <Button className={classes.addNewButton}
                                     variant="text" onClick={handleNew}>
