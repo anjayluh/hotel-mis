@@ -152,10 +152,7 @@ const Participants = () => {
                     </Box>
                 </Grid>
                 <Grid item xs={3} >
-                    <Box pb={2}>
-                        <Typography variant='h5'>&nbsp;</Typography>
-                    </Box>
-                    <Box pt={1}>
+                    <Box pt={6}>
                         <Paper className={classes.filterPaper} elevation={0}>
                             <Filter onFilter={handleFilter} loading={loading}/>
                         </Paper>

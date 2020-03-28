@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme: Theme) =>
         root: {
             flexGrow: 1,
         },
+        filterPaper: {
+            borderRadius: 0,
+            padding: theme.spacing(2)
+        },
         drawer: {
             borderRadius: 0,
         },
@@ -126,18 +130,11 @@ const NinVerifications = () => {
                     </Box>
                 </Grid>
                 <Grid item xs={3} style={{display: open ? "block" : "none"}}>
-                    <Grid container spacing={2}>
-                        <Grid item sm={12}>
-                            <Typography variant='h4'>&nbsp;</Typography>
-                        </Grid>
-                        <Grid item sm={12}>
-                            <Paper elevation={0} style={{borderRadius: 0}}>
-                                <Box p={2}>
-                                    <Filter onFilter={handleFilter} loading={loading}/>
-                                </Box>
-                            </Paper>
-                        </Grid>
-                    </Grid>
+                    <Box pt={6}>
+                        <Paper className={classes.filterPaper} elevation={0}>
+                            <Filter onFilter={handleFilter} loading={loading}/>
+                        </Paper>
+                    </Box>
 
                 </Grid>
             </Grid>
