@@ -112,7 +112,7 @@ const fakeVerificationRequest = (): IVerificationRequest => {
 
 export const verificationRequests = () => {
     let verifications: any = []
-    for(let i = 0; i < 100; i++) {
+    for(let i = 0; i < 1; i++) {
         verifications.push(fakeVerificationRequest())
     }
     return verifications
@@ -123,18 +123,45 @@ export const getStatus  = (verificationRequest: IVerificationRequest) => {
     return verificationRequest.status.name
 }
 
-const fakeRequestDetails =():IRequestDetails => {
+export const fakeRequestDetails =():IRequestDetails => {
     return {
+        requestId: faker.finance.account(6),
         requestDate: new Date(faker.date.past(1)),
         nin: getRandomStr(13),
         dateOfBirth:new Date(faker.date.past(18)),
         referenceNumber: faker.finance.account(7),
         initiator: faker.name.findName(),
         participant: faker.random.arrayElement(organisationNames),
-        requestStatus: {
-            status: faker.random.arrayElement(enumToArray(WorkflowRequestStatus)) as WorkflowRequestStatus,
-            date: new Date(faker.date.past(1))
-        }
+        requestStatus: [
+            {
+                order: 1,
+                task: "Request Received",
+                status: faker.random.arrayElement(enumToArray(ActionStatus)) as ActionStatus,
+                date: new Date(faker.date.past(1))
+            },
+            {
+                order: 2,
+                task: "Authentication Successful",
+                status: faker.random.arrayElement(enumToArray(ActionStatus)) as ActionStatus,
+                date: new Date(faker.date.past(1))
+            },
+            {
+                order: 3,
+                task: "Request Submitted to NIRA",
+                status: faker.random.arrayElement(enumToArray(ActionStatus)) as ActionStatus,
+                date: new Date(faker.date.past(1))
+            },
+            {
+                order: 4,
+                task: "Result Received",
+                status: faker.random.arrayElement(enumToArray(ActionStatus)) as ActionStatus,
+            },
+            {
+                order: 5,
+                task: "Response Received",
+                status: faker.random.arrayElement(enumToArray(ActionStatus)) as ActionStatus,
+            }
+        ]
     }
 
 }
