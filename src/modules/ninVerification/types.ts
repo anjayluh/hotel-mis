@@ -105,17 +105,20 @@ export interface IVerificationRequest {
     requestId: string
 }
 export interface IRequestDetailsStatus {
+    order: number,
+    task:string,
     status: string,
-    date: Date
+    date?: Date
 }
 export interface IRequestDetails {
+    requestId: any,
     requestDate: Date,
     nin: string,
     dateOfBirth: Date,
     referenceNumber: any,
     initiator: string,
     participant: string,
-    requestStatus: IRequestDetailsStatus
+    requestStatus: IRequestDetailsStatus[]
 }
 
 export enum WorkflowStatus {

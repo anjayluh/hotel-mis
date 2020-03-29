@@ -6,12 +6,12 @@ import Loading from "../../../components/Loading";
 import Error from "../../../components/Error";
 import {createStyles, Grid, makeStyles, Theme} from "@material-ui/core";
 
-import {IWorkflow, trimCaseId} from "../types";
+import {IRequestDetails, IWorkflow, trimCaseId} from "../types";
 import Typography from "@material-ui/core/Typography";
 import {Flex} from "../../../components/widgets";
 import Summary from "./Summary";
 import WorkflowView from "./WorkflowView";
-import {put} from "../../../utils/ajax";
+import {put, search} from "../../../utils/ajax";
 import {remoteRoutes} from "../../../data/constants";
 import Button from "@material-ui/core/Button";
 import LoaderDialog from "../../../components/LoaderDialog";
@@ -22,9 +22,14 @@ import {successColor} from "../../../theme/custom-colors";
 import {renderStatus, renderSubStatus} from "../widgets";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
+import {fakeRequestDetails} from "../fakeData";
+import {VerificationRequestConstants, IVerificationRequestState} from "../../../data/redux/ninVerification/reducer";
+import {participantsConstants} from "../../../data/redux/participants/reducer";
+import {IState} from "../../../data/types";
 
 
-interface IProps extends RouteComponentProps {
+interface IProps {
+    closeSlideOut?: () => any
 
 }
 
@@ -58,9 +63,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             borderRadius: 0,
-            padding: theme.spacing(1),
-            height: '100%',
-            overflow: 'auto'
+            padding: theme.spacing(1)
         },
         divider: {
             marginTop: theme.spacing(2)
@@ -70,99 +73,77 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     })
 );
+const requestDetails = [fakeRequestDetails()];
 
 const Details = (props: IProps) => {
     const caseId = getRouteParam(props, 'caseId')
     const wfClasses = useWfStyles()
     const classes = useStyles()
     const [blocker, setBlocker] = useState<boolean>(false)
-    const {loading, workflow}: IWorkflowState = useSelector((state: any) => state.workflows)
+    const requestData = useSelector((state: IState) => state.verificationRequests.requestDetails);
+    const [loadindDetails, setLoading] = useState<boolean>(true)
     const dispatch: Dispatch<any> = useDispatch();
 
-    function loadData() {
-        dispatch(startWorkflowFetch())
-        dispatch(fetchWorkflowAsync(caseId))
-    }
+    // const [requestData, setRequestData] = useState<any>([]);
+
+
+    // useEffect(() => {
+    //     setRequestData(requestDetails)
+    // }, [])
 
     useEffect(() => {
-        loadData()
-    }, [caseId,dispatch])
-
-    function onResume() {
-        const url = `${remoteRoutes.workflows}/${caseId}`
-        setBlocker(true)
-        put(url, {},
-            resp => loadData(),
+        setLoading(true)
+        search(
+            remoteRoutes.contacts,
+            'filter',
+            (resp) => {
+                dispatch({
+                    type: VerificationRequestConstants.RequestDetails,
+                    payload: requestDetails
+                })
+            },
             undefined,
             () => {
-                setBlocker(false)
+                setLoading(false)
             })
+    }, [dispatch])
+
+    function handleClose(){
+        if (props.closeSlideOut) {
+            props.closeSlideOut()
+        }
     }
-
-    if (loading)
-        return <Navigation>
-            <Loading/>
-        </Navigation>
-
-    const hasError = !loading && !workflow
-    if (hasError)
-        return <Navigation>
-            <Error text='Failed load case data'/>
-        </Navigation>
-
-
-
-    const caseData = workflow as IWorkflow
+    // console.log(typeof requestData, 'jjjjjjjjjjjjjjjjjjjjjjj')
+    // let caseData = requestData
+    console.log(requestData, 'This prints the arrya data')
+    // console.log(caseData[0], 'This prints the individual element, the first one')
+    // console.log(Object.keys(caseData), 'Holyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
+    // for(let i = 0; i< caseData.length; i++){
+    //     console.log(caseData[i].nin)
+    // }
     return (
-        <Navigation>
+    <div>
             <div className={classes.root} >
-                <LoaderDialog open={blocker} onClose={() => setBlocker(false)}/>
+
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <Flex>
-                            <Typography variant='h3'>
-                                Case #{trimCaseId(caseData.id)}
-                            </Typography>
-                            <div style={{marginTop: 4}}>&nbsp;&nbsp;{renderStatus(caseData.status)}</div>
-                            <div style={{marginTop: 4}}>&nbsp;&nbsp;{renderSubStatus(caseData.subStatus)}</div>
-                        </Flex>
-
-                    </Grid>
-                    <Grid item xs={12} sm={9}>
                         <Box display='flex' py={1}>
                             <Box flexGrow={1} pt={1}>
-                                <Typography variant='h5'>Details</Typography>
-                            </Box>
-                            <Box>
-                                <Button size='small' variant="outlined" color='primary' onClick={onResume}>
-                                    Preview Docs
-                                </Button>
-                                &nbsp;
-                                <Button size='small' variant="outlined" color='primary' onClick={onResume}>
-                                    Resume Case
-                                </Button>
+                                <Typography variant='h5'>Request Id</Typography>
                             </Box>
                         </Box>
                         <Divider/>
-                        <Box pt={1}>
-                            <WorkflowView data={caseData} classes={wfClasses} />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={3}>
-                        <Box display='flex' py={1}>
-                            <Box flexGrow={1} pt={1}>
-                                <Typography variant='h5'>Summary</Typography>
-                            </Box>
-                        </Box>
-                        <Divider/>
-                        <Box pt={1}>
-                            <Summary data={caseData} />
-                        </Box>
+                        {/*<Box pt={1}>*/}
+                        {/*    <Summary data={requestData[0]} />*/}
+                        {/*</Box>*/}
                     </Grid>
                 </Grid>
+
             </div>
-        </Navigation>
+
+    </div>
+
     );
 }
 
-export default withRouter(Details);
+export default Details;
