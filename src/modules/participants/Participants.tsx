@@ -93,6 +93,12 @@ const Participants = () => {
             })
     }, [filter, dispatch])
 
+    console.log(data, 'neshssssssssssssssssss')
+    console.log(data[0], 'neshssssssssssssssssss')
+
+    const passs = data[0]
+    // console.log(passs.name, 'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
+
     function callfakeParticipant(length: number) {
         let participants = []
         while (length > 0){
