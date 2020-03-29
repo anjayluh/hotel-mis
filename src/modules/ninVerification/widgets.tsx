@@ -12,10 +12,10 @@ export const renderNinStatus = (value: WorkflowNinStatus) => {
             color = successColor
             break
         case WorkflowNinStatus.Error:
-            color = errorColor
+            color = warningColor
             break
         case WorkflowNinStatus.Pending:
-            color = pendingColor
+            color = errorColor
             break
     }
 

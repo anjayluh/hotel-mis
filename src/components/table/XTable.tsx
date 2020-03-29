@@ -147,7 +147,7 @@ export default function XTable(props: XTableProps) {
                                                     tabIndex={-1}
                                                     key={row.id}
                                                     selected={isItemSelected}
-                                                    style={{backgroundColor: isEven(index) ? 'white' : grey[50]}}
+                                                    style={{backgroundColor: isEven(index) ? 'white' : '#fafafa'}}
                                                 >
                                                     {
                                                         useCheckbox &&

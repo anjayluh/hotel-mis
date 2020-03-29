@@ -10,23 +10,28 @@ import XFormSimple from "../../../components/forms/XFormSimple";
 import XTextInput from "../../../components/inputs/XTextInput";
 import {toOptions} from "../../../components/inputs/inputHelpers";
 import {useDispatch} from 'react-redux'
-import {INewParticipant} from "../types";
+import {IParticipant} from "../types";
 import XSelectInput from "../../../components/inputs/XSelectInput";
 import { useHistory } from 'react-router';
 import {localRoutes} from "../../../data/constants";
-import PSelectInput from "../../../components/plain-inputs/PSelectInput";
+import {remoteRoutes} from "../../../data/constants";
+import {post} from "../../../utils/ajax";
+import Toast from "../../../utils/Toast";
+import {participantsConstants} from "../../../data/redux/participants/reducer";
 
 const schema = yup.object().shape(
     {
         name: reqString,
         type: reqString,
         phoneNumberPrimary: reqString,
-        email: reqEmail
+        officialEmail: reqEmail,
+        primaryEmail: reqEmail,
     }
 )
 
 interface IProps {
     closeSlideOut: () => any
+    done?: () => any
 }
 
 const NewParticipantForm = (props: IProps) => {
@@ -35,13 +40,14 @@ const NewParticipantForm = (props: IProps) => {
         type: '',
         phoneNumberPrimary: '',
         phoneNumberOther: '',
-        email: ''
+        officialEmail: '',
+        primaryEmail: ''
     })
     const history = useHistory();
     const dispatch = useDispatch();
 
     function handleSubmit(values: any, actions: FormikActions<any>) {
-        const toSave: INewParticipant = {
+        const toSave: IParticipant = {
             id: faker.random.uuid(),
             name: values.name,
             phoneNumber: [
@@ -52,7 +58,7 @@ const NewParticipantForm = (props: IProps) => {
                 },
                 {
                     id: faker.random.uuid(), 
-                    type: "primary", 
+                    type: "primary",
                     value: values.phoneNumberOther
                 },
             ],
@@ -62,11 +68,34 @@ const NewParticipantForm = (props: IProps) => {
             },
             status: {
                 id: faker.random.uuid(), 
-                name: "Inactive"
+                name: "Active"
             },
-            officialEmail: values.email,
+            officialEmail: values.officialEmail,
+            primaryEmail: values.primaryEmail,
             dateCreated: new Date()
         }
+        post(remoteRoutes.participants, toSave,
+            (data) => {
+                Toast.info('Operation successful')
+                actions.resetForm()
+                dispatch({
+                    type: participantsConstants.participantsAddParticipant,
+                    payload: {...toSave},
+                })
+                if (props.done)
+                props.done()
+            },
+            undefined,
+            () => {
+                dispatch({
+                    type: participantsConstants.participantsAddParticipant,
+                    payload: {...toSave},
+                })
+                actions.setSubmitting(false);
+
+            }
+        )
+        // Will move this to post when the endpoints are available
         console.log(toSave);
         history.push(`${localRoutes.participants}/${toSave.id}`)
     }
@@ -117,8 +146,17 @@ const NewParticipantForm = (props: IProps) => {
                 </Grid>
                 <Grid item xs={12}>
                     <XTextInput
-                        name="email"
+                        name="officialEmail"
                         label="Official Email"
+                        type="email"
+                        variant='outlined'
+                        size='small'
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <XTextInput
+                        name="primaryEmail"
+                        label="Primary Email"
                         type="email"
                         variant='outlined'
                         size='small'

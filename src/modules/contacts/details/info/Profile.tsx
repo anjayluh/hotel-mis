@@ -44,6 +44,7 @@ const Profile = ({data}: IProps) => {
                         <PeopleIcon fontSize='large'/>}</Avatar>
                     <Grid item className={classes.nameHolder}>
                         <Typography variant='h5'>{renderName(data)}</Typography>
+                        
                         <Typography variant='body2'>{data.category}</Typography>
                         {
                             isPerson?

@@ -132,6 +132,3 @@ export const downLoad = (url: string, callBack: CallbackFunction, errorCallBack?
         .responseType('blob')
         .end(handleResponse(callBack, errorCallBack, endCallBack))
 }
-
-
-
