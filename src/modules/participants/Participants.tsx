@@ -20,7 +20,7 @@ import SlideOutDrawer from "../../components/SlideOutDrawer";
 import Typography from "@material-ui/core/Typography";
 import {useDispatch, useSelector} from "react-redux";
 import {participantsConstants, IParticipantsState} from "../../data/redux/participants/reducer";
-import {IState} from "../../data/types";
+import {IState, Anchor} from "../../data/types";
 import {columns} from "./config";
 import {fakeParticipant} from "./fakeData";
 
@@ -47,17 +47,23 @@ const useStyles = makeStyles((theme: Theme) =>
             textTransform: 'capitalize',
             fontStyle: 'italic',
             fontSize: '12px',
-            lineHeight: '0.75',
+            lineHeight: '0.5',
             marginBottom: '-5px',
-            marginLeft: '5px',
+            marginLeft: '8px',
+            marginTop: '-6px',
             fontWeight: 'normal'
         },
+        addIcon:{
+            marginLeft: '-5px',
+            marginRight: '-10px',
+            height: '0.7em',
+            fontSize: '13px',
+        }
     }),
 );
 
 const headCells: XHeadCell[] = [...columns];
 
-type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 const Participants = () => {
     const dispatch = useDispatch();
@@ -131,6 +137,7 @@ const Participants = () => {
                                     <Typography variant='h5'>Participants</Typography>
                                     {/* Temporarily removed add icon from button startIcon={<AddIcon/> */}
                                     <Button className={classes.addNewButton}
+                                    startIcon={<AddIcon className={classes.addIcon}/>}
                                     variant="text" onClick={handleNew}>
                                         Add New
                                     </Button>

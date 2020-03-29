@@ -24,7 +24,8 @@ const schema = yup.object().shape(
         name: reqString,
         type: reqString,
         phoneNumberPrimary: reqString,
-        email: reqEmail
+        officialEmail: reqEmail,
+        primaryEmail: reqEmail,
     }
 )
 
@@ -39,7 +40,8 @@ const NewParticipantForm = (props: IProps) => {
         type: '',
         phoneNumberPrimary: '',
         phoneNumberOther: '',
-        email: ''
+        officialEmail: '',
+        primaryEmail: ''
     })
     const history = useHistory();
     const dispatch = useDispatch();
@@ -68,7 +70,8 @@ const NewParticipantForm = (props: IProps) => {
                 id: faker.random.uuid(), 
                 name: "Active"
             },
-            officialEmail: values.email,
+            officialEmail: values.officialEmail,
+            primaryEmail: values.primaryEmail,
             dateCreated: new Date()
         }
         post(remoteRoutes.participants, toSave,
@@ -143,8 +146,17 @@ const NewParticipantForm = (props: IProps) => {
                 </Grid>
                 <Grid item xs={12}>
                     <XTextInput
-                        name="email"
+                        name="officialEmail"
                         label="Official Email"
+                        type="email"
+                        variant='outlined'
+                        size='small'
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <XTextInput
+                        name="primaryEmail"
+                        label="Primary Email"
                         type="email"
                         variant='outlined'
                         size='small'

@@ -99,6 +99,7 @@ const notificationURL = env.Notification
 
 
 export const remoteRoutes = {
+    contactPersons: crmURL + '/api/participants/contact',
     participants: crmURL + '/api/participants',
     authServer: authURL,
     gatewayUpload: gatewayURL + '/files',

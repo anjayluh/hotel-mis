@@ -1,16 +1,11 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-// import {ContactCategory, getNin, IContact, renderName, IParticipant} from "../../types";
-// import {getNin} from "../../types";
 import { IParticipant} from "../../types";
-import {Box, createStyles, makeStyles, Theme} from "@material-ui/core";
+import {createStyles, makeStyles, Theme} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import PersonIcon from "@material-ui/icons/Person";
-import PeopleIcon from "@material-ui/icons/Business";
-import {grey} from "@material-ui/core/colors";
-import {SuccessIcon} from "../../../../components/xicons";
 
 interface IProps {
     data: IParticipant
@@ -32,17 +27,16 @@ const useStyles = makeStyles((theme: Theme) =>
         nameHolder: {
             paddingTop: theme.spacing(1)
         },
-        profileButton: {
+        summaryButton: {
             backgroundColor: '#4bb050',
-            padding: '0px 10px',
+            padding: '1px 10px 0px 10px',
+            textTransform: 'capitalize'
         }
     })
 );
 
-const Profile = ({data}: IProps) => {
+const ParticipantSummary = ({data}: IProps) => {
     const classes = useStyles()
-    // const nin = getNin(data)
-    // const isPerson = data.category === ContactCategory.Person
     return (
         <Grid container>
             <Grid item sm={6}>
@@ -51,7 +45,7 @@ const Profile = ({data}: IProps) => {
                     <Grid item className={classes.nameHolder}>
                         <Typography variant='h5'>{data.name}</Typography>
                         <Typography variant='body2'>{data.type.name}</Typography>
-                        <Button size='small' variant="contained" color='primary' className={classes.profileButton}>
+                        <Button size='small' variant="contained" color='primary' className={classes.summaryButton}>
                             {data.status.name}
                         </Button>
                        
@@ -61,4 +55,4 @@ const Profile = ({data}: IProps) => {
         </Grid>
     );
 }
-export default Profile;
+export default ParticipantSummary;

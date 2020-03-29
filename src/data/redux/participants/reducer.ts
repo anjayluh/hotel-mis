@@ -8,6 +8,7 @@ export const participantsConstants = {
     participantsFetchLoading: "participantsFetchLoading",
     participantsAddParticipant: "participantsAddParticipant",
     participantsFetchOne: "participantsFetchOne",
+    contactPersonsFetchAll: 'contactPersonsFetchAll'
 
 }
 
@@ -15,8 +16,9 @@ export interface IParticipantsState {
     loading: boolean,
     selected?: IParticipant,
     fakeSelected?:  IParticipant,
-    participant?: IParticipant
+    participant?: IParticipant,
     data: any,
+    contactPersons: any
 }
 
 const initialState: IParticipantsState = {
@@ -24,12 +26,15 @@ const initialState: IParticipantsState = {
     participant: undefined,
     data: [],
     selected: undefined,
-    fakeSelected:  undefined
+    fakeSelected:  undefined,
+    contactPersons: []
 }
-
 
 export default function reducer(state = initialState, action: any) {
     switch (action.type) {
+        case participantsConstants.contactPersonsFetchAll: {
+            return {...state, contactPersons: action.payload}
+        }
         case participantsConstants.participantsFetchAll: {
             return {...state, loading: false, data: action.payload}
         }
@@ -39,7 +44,7 @@ export default function reducer(state = initialState, action: any) {
         case participantsConstants.participantsAddParticipant: {
             const newParticipant: IParticipant[] = action.payload
             // Will remove fakeSelected when endpoint is available
-            return {...state, data: [...state.data, newParticipant], fakeSelected: newParticipant}
+            return {...state, data: [...state.data, newParticipant], selected: newParticipant}
         }
         case participantsConstants.participantsFetchOne: {
             const selected: IParticipant = action.payload

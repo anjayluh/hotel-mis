@@ -16,7 +16,11 @@ export interface IParticipantPhone {
     type: string
     value: string
 }
-
+export enum IParticipantStatusName {
+    Active = 'Active',
+    Inactive = 'Inactive',
+    Suspended = 'Suspended'
+}
 export interface IParticipantStatus {
     id: string
     name: string
@@ -28,6 +32,7 @@ export interface IParticipant {
     phoneNumber: IParticipantPhone[]
     status: IParticipantStatus
     officialEmail: string
+    primaryEmail: string
     dateCreated: Date
 }
 export interface IParticipantsFilter {
@@ -36,6 +41,27 @@ export interface IParticipantsFilter {
     type?: string
     dateCreated?: Date
 }
+export interface ISubscription {
+    id?: string
+    accountNumber: number
+    status?: string
+    billingCategory?: string
+    service: string
+    subscriptionDate: Date
+    monthlyCap: number
+}
+export interface IContactPersonPhone {
+    id: string
+    value: string
+}
+export interface IContactPerson {
+    id?: string
+    name: string
+    category: string
+    phone: IContactPersonPhone
+    email: string
+}
+
 /* 
 export const renderName = (participant: IParticipant): string => {
     if (contact.category === ContactCategory.Person) {
