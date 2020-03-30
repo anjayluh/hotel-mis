@@ -12,6 +12,8 @@ import {IWorkflowFilter, WorkflowNinStatus, WorkflowSubStatus} from "./types";
 import {workflowTypes} from "./config";
 import {PRemoteSelect} from "../../components/inputs/XRemoteSelect";
 import {remoteRoutes} from "../../data/constants";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 
 interface IProps {
     onFilter: (data: any) => any
@@ -59,6 +61,14 @@ const Filter = ({onFilter, loading}: IProps) => {
 
     return <form>
         <Grid spacing={3} container>
+            <Grid item xs={12}>
+                <Box display='flex' pb={1}>
+                    <Box flexGrow={1}>
+                        <Typography color={'textSecondary'} variant='h5'>Search</Typography>
+                    </Box>
+                </Box>
+                <Divider/>
+            </Grid>
             <Grid item xs={12}>
                 <TextField
                     name="nin"

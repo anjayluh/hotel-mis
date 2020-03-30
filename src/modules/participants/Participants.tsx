@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import {createStyles, makeStyles, Theme} from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import {IWorkflowFilter} from "./types";
+import {IParticipantsFilter} from "./types";
 import XTable from "../../components/table/XTable";
 import {XHeadCell} from "../../components/table/XTableHead";
 import Grid from '@material-ui/core/Grid';
@@ -20,7 +20,7 @@ import SlideOutDrawer from "../../components/SlideOutDrawer";
 import Typography from "@material-ui/core/Typography";
 import {useDispatch, useSelector} from "react-redux";
 import {participantsConstants, IParticipantsState} from "../../data/redux/participants/reducer";
-import {IState} from "../../data/types";
+import {IState, Anchor} from "../../data/types";
 import {columns} from "./config";
 import {fakeParticipant} from "./fakeData";
 
@@ -47,17 +47,23 @@ const useStyles = makeStyles((theme: Theme) =>
             textTransform: 'capitalize',
             fontStyle: 'italic',
             fontSize: '12px',
-            lineHeight: '0.75',
+            lineHeight: '0.5',
             marginBottom: '-5px',
-            marginLeft: '5px',
+            marginLeft: '8px',
+            marginTop: '-6px',
             fontWeight: 'normal'
         },
+        addIcon:{
+            marginLeft: '-5px',
+            marginRight: '-10px',
+            height: '0.7em',
+            fontSize: '13px',
+        }
     }),
 );
 
 const headCells: XHeadCell[] = [...columns];
 
-type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 const Participants = () => {
     const dispatch = useDispatch();
@@ -66,7 +72,7 @@ const Participants = () => {
     const [anchor, setAnchor]= useState<Anchor>('right');
     const [openSlideOut, setOpenSlideOut] = useState(false);
     const {data, loading}: IParticipantsState = useSelector((state: IState) => state.participants)
-    const [filter, setFilter] = useState<IWorkflowFilter>({});
+    const [filter, setFilter] = useState<IParticipantsFilter>({});
     const classes = useStyles();
 
 
@@ -134,9 +140,10 @@ const Participants = () => {
                         <Box pb={2}>
                             <Grid container>
                                 <Grid item sm={12} className={classes.pageHeading}>
-                                    <Typography variant='h5'>Participants</Typography>
+                                    <Typography variant='h4'>Participants</Typography>
                                     {/* Temporarily removed add icon from button startIcon={<AddIcon/> */}
                                     <Button className={classes.addNewButton}
+                                    startIcon={<AddIcon className={classes.addIcon}/>}
                                     variant="text" onClick={handleNew}>
                                         Add New
                                     </Button>
@@ -158,10 +165,7 @@ const Participants = () => {
                     </Box>
                 </Grid>
                 <Grid item xs={3} >
-                    <Box pb={2}>
-                        <Typography variant='h5'>&nbsp;</Typography>
-                    </Box>
-                    <Box pt={1}>
+                    <Box pt={6}>
                         <Paper className={classes.filterPaper} elevation={0}>
                             <Filter onFilter={handleFilter} loading={loading}/>
                         </Paper>

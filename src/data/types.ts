@@ -115,3 +115,5 @@ export interface District {
     code:     string;
     counties: GatewayStatus[];
 }
+
+export type Anchor = 'top' | 'left' | 'bottom' | 'right';

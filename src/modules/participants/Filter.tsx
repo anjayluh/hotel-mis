@@ -3,11 +3,12 @@ import {useState} from "react";
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import PDateInput from "../../components/plain-inputs/PDateInput";
-import IBox from "../../components/ibox/IBox";
 import {toOptions} from "../../components/inputs/inputHelpers";
 import {Box} from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import PSelectInput from "../../components/plain-inputs/PSelectInput";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 
 interface IProps {
     onFilter: (data: any) => any
@@ -45,12 +46,14 @@ const Filter = ({onFilter, loading}: IProps) => {
     return <form>
         <Grid spacing={3} container>
             <Grid item xs={12}>
-            <Grid item xs={12}>
-                <div style={{minWidth: '100%', overflow: 'auto'}}>
-                    <IBox title='Search'>
-                    </IBox>
-                </div>
+                <Box display='flex' pb={1}>
+                    <Box flexGrow={1}>
+                        <Typography color={'textSecondary'} variant='h5'>Search</Typography>
+                    </Box>
+                </Box>
+                <Divider/>
             </Grid>
+            <Grid item xs={12}>
                 <TextField
                     name="name"
                     value={data['name']}
