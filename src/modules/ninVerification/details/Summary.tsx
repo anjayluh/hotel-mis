@@ -11,6 +11,7 @@ import LabelIcon from '@material-ui/icons/Label';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from "@material-ui/core/Divider";
 import {errorColor, successColor, warningColor} from "../../../theme/custom-colors";
+import ParticipantLink from "../../../components/links/ParticipantLink";
 
 interface IProps {
     data: IRequestDetails
@@ -40,7 +41,7 @@ const Summary = ({data}: IProps) => {
         },
         {
             label: 'Participant',
-            value: data.participant
+            value: <ParticipantLink id={data.requestId} name={data.participant}/>
         },
 
     ]
