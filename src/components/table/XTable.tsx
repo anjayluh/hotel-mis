@@ -24,11 +24,13 @@ interface XTableProps {
     data: any[]
     useCheckbox?: boolean
     handleSelection?: (id: any) => any
+    handleEnter?: (id: any) => any
     onFilterToggle?: () => any
     usePagination?: boolean
     headerSize?: Size
     bodySize?: Size
     loading?: boolean
+    hoverClass?: any
 }
 
 export default function XTable(props: XTableProps) {
@@ -39,6 +41,7 @@ export default function XTable(props: XTableProps) {
     const [selected, setSelected] = React.useState<string[]>([]);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(initialRowsPerPage);
+
 
     function handleRequestSort(event: React.MouseEvent<unknown>, property: string) {
         const isDesc = orderBy === property && order === 'desc';
@@ -64,6 +67,9 @@ export default function XTable(props: XTableProps) {
             }
         }
     }
+
+    const hoverClass = props.hoverClass && props.hoverClass
+
 
     function handleCheckboxSelection(event: React.MouseEvent<unknown>, id: string) {
         const selectedIndex = selected.indexOf(id);
@@ -148,6 +154,7 @@ export default function XTable(props: XTableProps) {
                                                     key={row.id}
                                                     selected={isItemSelected}
                                                     style={{backgroundColor: isEven(index) ? 'white' : grey[50]}}
+                                                    className={hoverClass}
                                                 >
                                                     {
                                                         useCheckbox &&

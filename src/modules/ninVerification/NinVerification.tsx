@@ -44,9 +44,14 @@ const useStyles = makeStyles((theme: Theme) =>
                 duration: theme.transitions.duration.enteringScreen,
             })
         },
+        rowHover: {
+                '&:hover': {
+                    cursor: 'pointer',
+            },
+        },
         close: {
             position: 'fixed',
-            bottom: '15px',
+            bottom: '30px',
         },
         closeButton: {
             padding: '4px 30px',
@@ -102,9 +107,7 @@ const NinVerifications = () => {
     }, [filter, dispatch])
 
 
-    console.log(data, 'hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
     function handleToggleDrawer(id?: any) {
-        console.log(id,'uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
         setOpenSlideOut(!openSlideOut)
         setAnchor('right')
     }
@@ -112,6 +115,8 @@ const NinVerifications = () => {
     function handleFilter(f: IWorkflowFilter) {
         setFilter({...filter, ...f})
     }
+
+
 
     return (
         <Navigation>
@@ -133,6 +138,7 @@ const NinVerifications = () => {
                                         initialSortBy={wfInitialSort}
                                         initialOrder="desc"
                                         handleSelection={handleToggleDrawer}
+                                        hoverClass = {classes.rowHover}
                                     />
                                 </Grid>}
                     </Grid>
