@@ -1,14 +1,14 @@
 import {BaseModel} from "../../data/types";
 
-export interface IBill {
-    id: string
-    name: string
-    billNumber: any
-    dateCreated: Date,
-    consumption: any
-    rate: number
-    billAmount: any
+export interface ISubscription {
+    accountNumber: string
+    status: string
+    service: string
+    billingCategory: string
+    subscriptionDate: Date
+    monthlyCap: string
 }
+
 export interface IWorkflowInclude {
     caseData?: boolean
     tasks?: boolean
@@ -145,6 +145,12 @@ export enum TaskStatus {
     Pending = 'Pending',
     Done = 'Done',
     Error = 'Error'
+}
+
+export enum SubscriptionStatus {
+    Suspended = 'Suspended',
+    Inactive = 'Inactive',
+    Active = 'Active',
 }
 
 export enum DocumentType {

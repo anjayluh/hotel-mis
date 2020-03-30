@@ -1,7 +1,8 @@
 import * as faker from "faker";
-import {ActionStatus, IAction, ITask, IWorkflow, TaskStatus, WorkflowStatus, WorkflowSubStatus, IBill} from "./types";
+import {ActionStatus, IAction, ITask, IWorkflow, TaskStatus, WorkflowStatus, WorkflowSubStatus, ISubscription, SubscriptionStatus} from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
+import {printMoney} from "../../utils/numberHelpers";
 import { format, compareAsc } from 'date-fns'
 
 const uuid = require('uuid/v4');
@@ -79,31 +80,21 @@ export const fakeAction = (): IAction => {
         outputData: ''
     }
 }
-export const organisationNames = ['Stanbic bank Uganda Limited', 'Pride Microfinance Limited',
-'Absa Bank Uganda Limited','Bamunanika Cooperative Society','Bank of India (Uganda) Limited',
-'Micro Credit Development Trust','Opportunity Bank uganda','Centenary Bank',
-'Metroplex Forex Bureau','Equity Bank Uganda Limited (EBUL)','United Bank of Africa']
+export const billingCategories = ['Standard']
 
 
-export const fakeBill = () : IBill => {
+export const fakeSubscription = () : ISubscription => {
     return {
-        id: faker.random.uuid(),
-        name: faker.random.arrayElement(organisationNames),
-        billNumber: faker.finance.account(5),
-        dateCreated: new Date(faker.date.past(1)),
-        consumption: faker.finance.account(5),
-        rate: faker.random.number({'min': 20, 'max': 50}),
-        billAmount: faker.finance.account(7),
-
+        accountNumber: faker.finance.account(8),
+        status: faker.random.arrayElement(enumToArray(SubscriptionStatus)) as SubscriptionStatus,
+        service: 'NIN Verification',
+        billingCategory: faker.random.arrayElement(billingCategories),
+        subscriptionDate: faker.date.past(),
+        monthlyCap: faker.finance.account(5)
     }
 };
 
-export const getConsumption = (data:IBill) => {
-    let consumption = data.consumption
-    return consumption.slice(0, 2) + ',' + consumption.slice(2)
-}
-export const getbillAmount = (data:IBill) => {
-    let billAmount = data.billAmount
-    return billAmount.slice(0, 1) + ',' + billAmount.slice(1, 4)+ ',' + billAmount.slice(4)
-
+export const monthlyCap = (data:ISubscription) => {
+    let monthlyCap = parseInt(data.monthlyCap, 10)
+    return printMoney(monthlyCap)
 }
