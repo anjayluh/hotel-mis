@@ -21,6 +21,7 @@ import NewParticipantForm from "../participants/forms/NewParticipantForm";
 import SlideOutDrawer from "../../components/SlideOutDrawer";
 import {IState} from "../../data/types";
 import Details from "./details/Details";
+import Button from "@material-ui/core/Button";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -43,6 +44,13 @@ const useStyles = makeStyles((theme: Theme) =>
                 duration: theme.transitions.duration.enteringScreen,
             })
         },
+        close: {
+            position: 'fixed',
+            bottom: '15px',
+        },
+        closeButton: {
+            padding: '4px 30px',
+        }
     }),
 );
 
@@ -93,18 +101,7 @@ const NinVerifications = () => {
         })
     }, [filter, dispatch])
 
-    // useEffect(() => {
-    //     console.log("Filter", filter)
-    //     setLoading(true)
-    //     search(remoteRoutes.contacts, filter, resp => {
-    //         setData(verificationRequestData)
-    //     }, undefined, () => setLoading(false))
-    // }, [filter])
 
-
-    // function handleFilterToggle() {
-    //     setOpen(!open);
-    // }
     console.log(data, 'hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
     function handleToggleDrawer(id?: any) {
         console.log(id,'uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
@@ -157,10 +154,19 @@ const NinVerifications = () => {
                 </Grid>
             </Grid>
             <SlideOutDrawer handleToggleDrawer={handleToggleDrawer} open={openSlideOut} anchor={anchor} title="">
-                {/*<NewParticipantForm closeSlideOut={handleToggleDrawer}></NewParticipantForm> :*/}
                 <Details closeSlideOut={handleToggleDrawer}></Details>
 
-                    <p>Edit coming soon...</p>
+                <Grid item xs={12} className={classes.close}>
+                    <Button
+                        className={classes.closeButton}
+                        onClick={handleToggleDrawer}
+                        variant='contained'
+                        color='primary'
+                        size='small'
+                    >
+                        Close
+                    </Button>
+                </Grid>
             </SlideOutDrawer>
         </Navigation>
     );
