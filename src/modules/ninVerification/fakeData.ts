@@ -112,7 +112,7 @@ const fakeVerificationRequest = (): IVerificationRequest => {
 
 export const verificationRequests = () => {
     let verifications: any = []
-    for(let i = 0; i < 1; i++) {
+    for(let i = 0; i < 50; i++) {
         verifications.push(fakeVerificationRequest())
     }
     return verifications
