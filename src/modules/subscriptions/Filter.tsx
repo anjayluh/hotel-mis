@@ -8,9 +8,11 @@ import {toOptions} from "../../components/inputs/inputHelpers";
 import {Box} from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import PSelectInput from "../../components/plain-inputs/PSelectInput";
-import {organisationNames} from "./fakeData";
+import {billingCategories} from "./fakeData";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import {enumToArray} from "../../utils/stringHelpers";
+import {SubscriptionStatus} from "./types";
 
 interface IProps {
     onFilter: (data: any) => any
@@ -19,14 +21,15 @@ interface IProps {
 
 const Filter = ({onFilter, loading}: IProps) => {
     const [data, setData] = useState({
-        participantName: '',
-        type: '',
-        from: null,
-        to: null,
-        billNumber: ''
+        accountNumber: '',
+        monthlyCap: '',
+        status: '',
+        billingCategory: '',
+        billNumber: '',
+        from: null
     })
 
-    const rates = ['20', '30', '40']
+    const monthlyCap = ['20,000', '10,000', '30,000']
 
     function submitForm(values: any) {
         onFilter(values);        
@@ -58,60 +61,64 @@ const Filter = ({onFilter, loading}: IProps) => {
                         </Box>
                         <Divider/>
                     </Grid>
-                    <Grid item xs={12}>
-                        <PDateInput
-                            name="from"
-                            value={data['from'] || null}
-                            onChange={handleValueChange('from')}
-                            label="From"
-                            variant="inline"
-                            inputVariant='outlined'
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <PDateInput
-                            name="to"
-                            value={data['to'] || null}
-                            onChange={handleValueChange('to')}
-                            label="To"
-                            variant="inline"
-                            inputVariant='outlined'
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <PSelectInput
-                            name="participantName"
-                            value={data['participantName']}
-                            onChange={handleChange}
-                            label="Participant"
-                            variant="outlined"
-                            size='small'
-                            color="secondary"
-                            options={toOptions(organisationNames)}
-                        />
-                    </Grid>
+
                     <Grid item xs={12}>
                         <TextField
-                            name="billNumber"
-                            value={data['billNumber']}
+                            name="accountNumber"
+                            value={data['accountNumber']}
                             onChange={handleChange}
-                            label="Bill Number"
+                            label="Account Number"
                             variant="outlined"
                             fullWidth
                             size='small'
                             color="secondary"
                         />
                     </Grid>
+
                     <Grid item xs={12}>
                         <PSelectInput
-                            name="type"
-                            value={data['type']}
+                            name="monthlyCap"
+                            value={data['monthlyCap']}
                             onChange={handleChange}
-                            label="Rate"
+                            label="Monthly Cap"
                             variant="outlined"
                             size='small'
                             color="secondary"
-                            options={toOptions(rates)}
+                            options={toOptions(monthlyCap)}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <PSelectInput
+                            name="status"
+                            value={data['status']}
+                            onChange={handleChange}
+                            label="Status"
+                            variant="outlined"
+                            size='small'
+                            color="secondary"
+                            options={toOptions(enumToArray(SubscriptionStatus))}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <PSelectInput
+                            name="billingCategory"
+                            value={data['billingCategory']}
+                            onChange={handleChange}
+                            label="Billing Category"
+                            variant="outlined"
+                            size='small'
+                            color="secondary"
+                            options={toOptions(billingCategories)}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <PDateInput
+                            name="from"
+                            value={data['from'] || null}
+                            onChange={handleValueChange('from')}
+                            label="Subscription date"
+                            variant="inline"
+                            inputVariant='outlined'
                         />
                     </Grid>
                     <Grid item xs={12}>
