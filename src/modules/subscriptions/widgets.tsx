@@ -1,9 +1,34 @@
 import React from "react";
-import {ITask, TaskStatus, WorkflowStatus, WorkflowSubStatus} from "./types";
+import {ITask, SubscriptionStatus, TaskStatus, WorkflowStatus, WorkflowSubStatus} from "./types";
 import {ErrorIcon, SuccessIcon, WarningIcon} from "../../components/xicons";
-import {errorColor, successColor, warningColor} from "../../theme/custom-colors";
+import {errorColor, pendingColor, successColor,  warningColor} from "../../theme/custom-colors";
 import {Chip} from "@material-ui/core";
 
+export const renderSubscriptionStatus = (value: SubscriptionStatus) => {
+    let color = successColor
+    let suspendedColor = errorColor
+    let activeColor = successColor
+    let inactiveColor = pendingColor
+    switch (value) {
+        case SubscriptionStatus.Active:
+            color = activeColor
+            break
+        case SubscriptionStatus.Suspended:
+            color = suspendedColor
+            break
+        case SubscriptionStatus.Inactive:
+            color = inactiveColor
+            break
+    }
+
+    return <Chip
+        color='primary'
+        variant='default'
+        size='small'
+        label={value}
+        style={{padding: 0, height: 18, backgroundColor: color, marginBottom: 2}}
+    />
+}
 
 export const renderStatus = (value: WorkflowStatus) => {
     let color = successColor

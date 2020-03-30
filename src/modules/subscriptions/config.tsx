@@ -1,26 +1,26 @@
 import {XHeadCell} from "../../components/table/XTableHead";
-import ParticipantLink from "../../components/links/ParticipantLink";
 import {printDate} from "../../utils/dateHelpers";
 import React from "react";
 import { format, compareAsc } from 'date-fns'
 import {getMonthlyCap} from "./fakeData";
+import {renderSubscriptionStatus} from "./widgets";
 
 
-export const Subscriptioncolumns: XHeadCell[] = [
+export const SubscriptionColumns: XHeadCell[] = [
     {
         name: 'accountNumber', label: 'Account Number',
         cellProps: {
             style: {
-                width: 40,
+                width: 30,
                 whiteSpace: 'nowrap'
             }
         }
     },
     {
-        name: 'status', label: 'Status',
+        name: 'status', label: 'Status', render: (_, rec) => renderSubscriptionStatus(rec.status),
         cellProps: {
             style: {
-                width: 80,
+                width: 40,
                 whiteSpace: 'nowrap'
             }
         }

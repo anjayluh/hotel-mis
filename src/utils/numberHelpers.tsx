@@ -12,6 +12,16 @@ export const printMoney = (money: number) => {
     }
 }
 
+export const printsMoney = (money: number) => {
+    try {
+        return money ? <span>
+            {new Intl.NumberFormat('en-US', {maximumFractionDigits: 2}).format(money)}
+            </span> : ""
+    } catch (e) {
+        return ''
+    }
+}
+
 export const printFormattedMoney = (money: number) => {
     try {
         return money ? <span>
