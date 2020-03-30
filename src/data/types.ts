@@ -2,6 +2,7 @@ import {ICoreState} from "./redux/coreReducer";
 import {ICrmState} from "./redux/contacts/reducer";
 import {IParticipantsState} from "./redux/participants/reducer";
 import {IBillingState} from "./redux/billing/reducer";
+import {ISubscriptionState} from "./redux/subscription/redux";
 import {IVerificationRequestState} from "./redux/ninVerification/reducer";
 import {IWorkflowState} from "./redux/workflows/reducer";
 import {IUserState} from "./redux/users/reducer";
@@ -32,6 +33,7 @@ export interface IState {
     participants: IParticipantsState
     billing: IBillingState
     verificationRequests:IVerificationRequestState
+    subscriptions: ISubscriptionState
     workflows: IWorkflowState
     crm: ICrmState
     users: IUserState
