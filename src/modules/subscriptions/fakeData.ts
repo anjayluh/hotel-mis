@@ -2,7 +2,7 @@ import * as faker from "faker";
 import {ActionStatus, IAction, ITask, IWorkflow, TaskStatus, WorkflowStatus, WorkflowSubStatus, ISubscription, SubscriptionStatus} from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
-import {printMoney} from "../../utils/numberHelpers";
+import {printsMoney} from "../../utils/numberHelpers";
 import { format, compareAsc } from 'date-fns'
 
 const uuid = require('uuid/v4');
@@ -83,7 +83,7 @@ export const fakeAction = (): IAction => {
 export const billingCategories = ['Standard']
 
 
-export const fakeSubscription = () : ISubscription => {
+const fakeSubscription = () : ISubscription => {
     return {
         accountNumber: faker.finance.account(8),
         status: faker.random.arrayElement(enumToArray(SubscriptionStatus)) as SubscriptionStatus,
@@ -96,5 +96,14 @@ export const fakeSubscription = () : ISubscription => {
 
 export const getMonthlyCap = (data:ISubscription) => {
     let monthlyCap = parseInt(data.monthlyCap, 10)
-    return printMoney(monthlyCap)
+    return printsMoney(monthlyCap)
+}
+
+export function fakeSubscriptions(length: number) {
+    let Subscriptions = []
+    while (length > 0){
+        Subscriptions.push(fakeSubscription())
+        length = length - 1
+    }
+    return Subscriptions
 }

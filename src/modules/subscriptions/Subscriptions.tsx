@@ -12,15 +12,15 @@ import Filter from "./Filter";
 import {search} from "../../utils/ajax";
 import {remoteRoutes} from "../../data/constants";
 import Loading from "../../components/Loading";
-// import NewPersonForm from "./forms/NewPersonForm";
 import Box from "@material-ui/core/Box";
 import EditDialog from "../../components/EditDialog";
 import Typography from "@material-ui/core/Typography";
 import {useDispatch, useSelector} from "react-redux";
 import {BillingsConstants, IBillingState} from "../../data/redux/billing/reducer";
+import {SubscriptionConstants, ISubscriptionState} from "../../data/redux/subscription/redux";
 import {IState} from "../../data/types";
-import {Billingcolumns} from "./config";
-import {fakeBill} from "./fakeData";
+import {SubscriptionColumns} from "./config";
+import {fakeSubscriptions} from "./fakeData";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -53,19 +53,19 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const headCells: XHeadCell[] = [...Billingcolumns];
+const headCells: XHeadCell[] = [...SubscriptionColumns];
 
 
-const Billings = () => {
+const Subscription = () => {
     const dispatch = useDispatch();
     const [createDialog, setCreateDialog] = useState(false);
-    const {data, loading}: IBillingState = useSelector((state: IState) => state.billing)
+    const {data, loading}: ISubscriptionState = useSelector((state: IState) => state.subscriptions)
     const [filter, setFilter] = useState<IWorkflowFilter>({});
     const classes = useStyles();
 
     useEffect(() => {
         dispatch({
-            type: BillingsConstants.BillingsFetchLoading,
+            type: SubscriptionConstants.SubscriptionsFetchLoading,
             payload: true,
         })
         search(
@@ -73,27 +73,20 @@ const Billings = () => {
             filter,
             (resp) => {
                 dispatch({
-                    type: BillingsConstants.BillingsFetchAll,
-                    payload: [...callfakeBill(15)],
+                    type: SubscriptionConstants.SubscriptionsFetchAll,
+                    payload: [...fakeSubscriptions(15)],
                 })
             },
             undefined,
             () => {
                 dispatch({
-                    type: BillingsConstants.BillingsFetchLoading,
+                    type: SubscriptionConstants.SubscriptionsFetchLoading,
                     payload: false,
                 })
             })
     }, [filter, dispatch])
 
-    function callfakeBill(length: number) {
-        let Billings = []
-        while (length > 0){
-            Billings.push(fakeBill())
-            length = length - 1
-        }
-        return Billings
-    }
+
 
     function handleFilter(value: any) {
         setFilter({...filter, ...value})
@@ -115,7 +108,7 @@ const Billings = () => {
                         <Box pb={2}>
                             <Grid container>
                                 <Grid item sm={12} className={classes.pageHeading}>
-                                    <Typography variant='h4'>Billing</Typography>
+                                    <Typography variant='h4'>Subscriptions</Typography>
                                 </Grid>
                             </Grid>
                         </Box>
@@ -141,11 +134,8 @@ const Billings = () => {
                     </Box>
                 </Grid>
             </Grid>
-            <EditDialog title="New Person" open={createDialog} onClose={closeCreateDialog}>
-                {/* <NewPersonForm data={{}} done={closeCreateDialog}/> */}
-            </EditDialog>
         </Layout>
     );
 }
 
-export default Billings
+export default Subscription
