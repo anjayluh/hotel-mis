@@ -3,7 +3,7 @@ import {Grid} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import {ITask, IWorkflow, TaskStatus, IRequestDetails, IRequestDetailsStatus} from "../types";
 import DetailView, {IRec} from "../../../components/DetailView";
-import {printDateTime} from "../../../utils/dateHelpers";
+import {printDateTime, printDate} from "../../../utils/dateHelpers";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -14,10 +14,9 @@ import {errorColor, successColor, warningColor} from "../../../theme/custom-colo
 
 interface IProps {
     data: IRequestDetails
-    onTaskClick?: (id: string) => any
 }
 
-const Summary = ({data, onTaskClick}: IProps) => {
+const Summary = ({data}: IProps) => {
     const fields: IRec[] = [
         {
             label: 'Request Date',
@@ -29,7 +28,7 @@ const Summary = ({data, onTaskClick}: IProps) => {
         },
         {
             label: 'Date of Birth',
-            value: data.dateOfBirth
+            value: printDate(data.dateOfBirth)
         },
         {
             label: 'Ref.Number',
@@ -58,20 +57,22 @@ const Summary = ({data, onTaskClick}: IProps) => {
                 <List dense>
                     {
 
-                        // data.requestStatus.map(it => (
-                        //     <Fragment key={it.order}>
-                        //         <ListItem onClick={() => onTaskClick && onTaskClick(it.status)}>
-                        //             <ListItemIcon>
-                        //                 <LabelIcon style={{color: getTaskColor(it)}}/>
-                        //             </ListItemIcon>
-                        //             <ListItemText
-                        //                 primary={it.task}
-                        //             />
-                        //         </ListItem>
-                        //         <Divider/>
-                        //     </Fragment>
-                        //
-                        // ))
+                        data.requestStatus.map(it => (
+                            <Fragment key={it.order}>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <LabelIcon style={{color: getTaskColor(it)}}/>
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={it.task}
+                                        secondary={it.date && printDateTime(it.date)}
+                                    />
+
+                                </ListItem>
+                                <Divider/>
+                            </Fragment>
+
+                        ))
                     }
                 </List>
             </Grid>
