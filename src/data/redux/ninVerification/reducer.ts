@@ -13,13 +13,13 @@ export const VerificationRequestConstants = {
 export interface IVerificationRequestState {
     loading: boolean
     data: IVerificationRequest[]
-    requestDetails?:IRequestDetails[]
+    requestDetails?:IRequestDetails
 }
 
 const initialState: IVerificationRequestState = {
     loading: false,
     data: [],
-    requestDetails: []
+    requestDetails: undefined
 
 }
 
@@ -35,7 +35,7 @@ export default function reducer(state = initialState, action: any) {
         }
 
         case VerificationRequestConstants.RequestDetails: {
-            return {...state, loading: action.payload, requestDetails: action.payload}
+            return {...state, requestDetails: action.payload}
         }
 
 
