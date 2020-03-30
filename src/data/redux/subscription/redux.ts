@@ -1,7 +1,7 @@
 import {ISubscription} from "../../../modules/subscriptions/types";
 import {IBill} from "../../../modules/billing/types";
 export const SubscriptionConstants = {
-    SubscriptionConstants: "SubscriptionsFetchAll",
+    SubscriptionsFetchAll: "SubscriptionsFetchAll",
     SubscriptionsFetchLoading: "SubscriptionsFetchLoading",
 
 }
@@ -19,7 +19,7 @@ const initialState: ISubscriptionState = {
 
 export default function reducer(state = initialState, action: any) {
     switch (action.type) {
-        case SubscriptionConstants.SubscriptionConstants: {
+        case SubscriptionConstants.SubscriptionsFetchAll: {
             return {...state, loading: false, data: action.payload}
         }
 
