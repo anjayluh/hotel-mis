@@ -94,7 +94,7 @@ export const fakeSubscription = () : ISubscription => {
     }
 };
 
-export const monthlyCap = (data:ISubscription) => {
+export const getMonthlyCap = (data:ISubscription) => {
     let monthlyCap = parseInt(data.monthlyCap, 10)
     return printMoney(monthlyCap)
 }

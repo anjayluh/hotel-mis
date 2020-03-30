@@ -3,12 +3,48 @@ import ParticipantLink from "../../components/links/ParticipantLink";
 import {printDate} from "../../utils/dateHelpers";
 import React from "react";
 import { format, compareAsc } from 'date-fns'
-import {getConsumption} from "./fakeData";
-import {getbillAmount} from "./fakeData";
+import {getMonthlyCap} from "./fakeData";
 
-export const Billingcolumns: XHeadCell[] = [
+
+export const Subscriptioncolumns: XHeadCell[] = [
     {
-        name: 'dateCreated', label: 'Bill date',
+        name: 'accountNumber', label: 'Account Number',
+        cellProps: {
+            style: {
+                width: 40,
+                whiteSpace: 'nowrap'
+            }
+        }
+    },
+    {
+        name: 'status', label: 'Status',
+        cellProps: {
+            style: {
+                width: 80,
+                whiteSpace: 'nowrap'
+            }
+        }
+    },
+    {
+        name: 'service', label: 'Service',
+        cellProps: {
+            style: {
+                width: 30,
+                whiteSpace: 'nowrap'
+            }
+        }
+    },
+    {
+        name: 'billingCategory', label: 'Billing Category',
+        cellProps: {
+            style: {
+                width: 30,
+                whiteSpace: 'nowrap'
+            }
+        }
+    },
+    {
+        name: 'subscriptionDate', label: 'Subscription date',
         render: (value, rec) => <span>{printDate(value)}</span>,
         cellProps: {
             style: {
@@ -18,21 +54,7 @@ export const Billingcolumns: XHeadCell[] = [
         }
     },
     {
-        name: 'name', label: 'Participant',
-        render: (value, rec) => <ParticipantLink id={rec.id} name={rec.name}/>,
-        cellProps: {style: {width: 250}}
-    },
-    {
-        name: 'billNumber', label: 'Bill number',
-        cellProps: {
-            style: {
-                width: 40,
-                whiteSpace: 'nowrap'
-            }
-        }
-    },
-    {
-        name: 'consumption', label: 'Consumption', render: (value, rec) => getConsumption(rec),
+        name: 'monthlyCap', label: 'Bill amount', render: (value, rec) => getMonthlyCap(rec),
         cellProps: {
             style: {
                 width: 80,
@@ -40,23 +62,6 @@ export const Billingcolumns: XHeadCell[] = [
             }
         }
     },
-    {
-        name: 'rate', label: 'Rate',
-        cellProps: {
-            style: {
-                width: 30,
-                whiteSpace: 'nowrap'
-            }
-        }
-    },
-    {
-        name: 'billAmount', label: 'Bill amount', render: (value, rec) => getbillAmount(rec),
-        cellProps: {
-            style: {
-                width: 80,
-                whiteSpace: 'nowrap'
-            }
-        }
-    },
+
 
 ];
