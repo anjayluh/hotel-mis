@@ -36,7 +36,8 @@ export const Billingcolumns: XHeadCell[] = [
         cellProps: {
             style: {
                 width: 80,
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
+                textAlign: 'right'
             }
         }
     },
@@ -45,7 +46,8 @@ export const Billingcolumns: XHeadCell[] = [
         cellProps: {
             style: {
                 width: 30,
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
+                textAlign: 'right'
             }
         }
     },
@@ -54,7 +56,8 @@ export const Billingcolumns: XHeadCell[] = [
         cellProps: {
             style: {
                 width: 80,
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
+                textAlign: 'right'
             }
         }
     },
