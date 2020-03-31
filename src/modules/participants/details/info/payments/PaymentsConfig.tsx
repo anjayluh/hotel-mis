@@ -24,7 +24,6 @@ export const columns: XHeadCell[] = [
         cellProps: {
             style: {
                 width: 30,
-                textAlign: 'right'
             }
         }
     },
