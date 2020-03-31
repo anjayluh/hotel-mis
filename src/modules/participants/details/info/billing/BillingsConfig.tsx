@@ -25,7 +25,8 @@ export const columns: XHeadCell[] = [
         cellProps: {
             style: {
                 width: 30,
-                textAlign: 'right'
+                textAlign: 'right',
+                paddingRight: 80
 
             }
         }
@@ -34,7 +35,8 @@ export const columns: XHeadCell[] = [
         name: 'rate', label: 'Rate',
         cellProps: {
             style: {
-                width: 100,
+                width: 30,
+                textAlign: 'right'
             }
         }
     },
@@ -43,7 +45,7 @@ export const columns: XHeadCell[] = [
         render: (value, rec) => printFormattedMoney(value),
         cellProps: {
             style: {
-                width: 30,
+                width: 80,
                 textAlign: 'right'
             }
         }
