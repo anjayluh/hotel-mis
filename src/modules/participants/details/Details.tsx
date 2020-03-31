@@ -68,6 +68,7 @@ const Details = (props: IProps) => {
     const dispatch = useDispatch();
     const [showParticipantsOverview, setShowParticipantsOverview] = useState<boolean>(true)
     const [showBillingsView, setShowBillingsView] = useState<boolean>(true)
+    const [showPaymentsView, setShowPaymentsView] = useState<boolean>(true)
     const data: IParticipant = useSelector((state: any) => state.participants.selected);
     const [headings, setHeadings] = useState([
         {text: 'Participants Overview', status: true},
@@ -98,7 +99,12 @@ const Details = (props: IProps) => {
                     setShowBillingsView(true)
                 }else setShowBillingsView(false)
 
-              return {
+                if(heading.text === 'Payments'){
+                    setShowPaymentsView(true)
+                }else setShowPaymentsView(false)
+
+
+                return {
                 ...heading,
                 text: heading.text,
                 status: true,
@@ -134,6 +140,9 @@ const Details = (props: IProps) => {
                         <Subscriptions></Subscriptions>
                     }
                     { showBillingsView &&
+                    <Billings></Billings>
+                    }
+                    { showPaymentsView &&
                     <Billings></Billings>
                     }
                 </div>
