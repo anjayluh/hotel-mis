@@ -1,5 +1,5 @@
 import * as faker from "faker";
-import { IGeneratedParticipant, ISubscription, IContactPerson} from "./types";
+import { IGeneratedParticipant, ISubscription, IContactPerson, IBill} from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
 import { format, compareAsc } from 'date-fns'
@@ -47,5 +47,17 @@ export const fakeContactPersons = () : IContactPerson => {
             value: faker.phone.phoneNumber()
         },
         email: faker.internet.email(),
+    }
+};
+
+export const fakeBill = () : IBill => {
+    return {
+        id: faker.random.uuid(),
+        billDate: new Date(faker.date.past(1)),
+        billNumber: faker.finance.account(5),
+        consumption: faker.random.number({min:10000, max:99999}),
+        rate: faker.random.number({'min': 20, 'max': 50}),
+        billAmount: faker.random.number({min:999999, max:9999999}),
+
     }
 };

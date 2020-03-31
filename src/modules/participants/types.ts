@@ -62,6 +62,15 @@ export interface IContactPerson {
     email: string
 }
 
+export interface IBill {
+    id: string
+    billDate: Date,
+    billNumber: any
+    consumption: any
+    rate: number
+    billAmount: any
+}
+
 /* 
 export const renderName = (participant: IParticipant): string => {
     if (contact.category === ContactCategory.Person) {
