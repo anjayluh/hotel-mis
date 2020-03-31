@@ -14,7 +14,7 @@ import Suscriptions from "./info/overview/Subscriptions";
 import {get} from "../../../utils/ajax";
 import {remoteRoutes} from "../../../data/constants";
 import {useDispatch, useSelector} from "react-redux";
-import BillingsView from "./BillingsView";
+import Billings from "./info/billing/Billings"
 
 interface IProps extends RouteComponentProps {
 
@@ -128,9 +128,7 @@ const Details = (props: IProps) => {
                         { showParticipantsOverview &&
                             <ParticipantsOverview data={{...data}} ></ParticipantsOverview>
                         }
-                        { showBillingsView &&
-                        <BillingsView></BillingsView>
-                        }
+
                     </Grid>
                     { showParticipantsOverview &&
                         <Suscriptions></Suscriptions>

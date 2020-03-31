@@ -12,11 +12,13 @@ import Loading from "../../../../../components/Loading";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import {useDispatch, useSelector} from "react-redux";
-import {IParticipantsState} from "../../../../../data/redux/participants/reducer";
 import {IState, Anchor} from "../../../../../data/types";
-import {columns} from "./SubscriptionConfig";
+import {columns} from "./BillingsConfig";
 import {fakeSubscriptions} from "../../../fakeData";
 import { ISubscription} from "../../../types";
+import {participantsConstants, IParticipantsState} from "../../../../../data/redux/participants/reducer";
+import {remoteRoutes} from "../../../../../data/constants";
+import {fakeBill} from "../../../fakeData";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -60,27 +62,36 @@ const headCells: XHeadCell[] = [...columns];
 
 const Billings = () => {
     const dispatch = useDispatch();
-    const [loading, setLoading] = useState(true)
-    const [data, setData] = useState<ISubscription[]>([])
+    const billingData = useSelector((state: IState) => state.participants.billings)
+    const [loading, setLoading] = useState<boolean>(false)
     const classes = useStyles();
 
     useEffect(() => {
-        setData(callFakeSubscriptions(5));
-    }, [dispatch])
+        setLoading(true)
+        search(
+            remoteRoutes.contacts,
+            'filter',
+            (resp) => {
+                dispatch({
+                    type: participantsConstants.participantsBillsFetchAll,
+                    payload: [...callfakeBill(15)],
+                })
+            },
+            undefined,
+            () => {
+                setLoading(false)
+            })
+    }, [])
 
-    function callFakeSubscriptions(length: number) {
-        let subscriptions = []
+    function callfakeBill(length: number) {
+        let Billings = []
         while (length > 0){
-            subscriptions.push(fakeSubscriptions())
+            Billings.push(fakeBill())
             length = length - 1
         }
-        setLoading(false)
-
-        return subscriptions
+        return Billings
     }
-    function handleNew() {
-
-    }
+    console.log(billingData)
 
     return (
         <Grid container spacing={2}>
@@ -99,7 +110,7 @@ const Billings = () => {
                                 <Grid item xs={12}>
                                     <XTable
                                         headCells={headCells}
-                                        data={data}
+                                        data={billingData}
                                         initialRowsPerPage={10}
                                         usePagination={false}
                                     />
