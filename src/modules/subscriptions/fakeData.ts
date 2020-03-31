@@ -82,7 +82,7 @@ export const fakeAction = (): IAction => {
 }
 export const billingCategories = ['Standard']
 
-
+const monthlyCap = [10000, 20000]
 const fakeSubscription = () : ISubscription => {
     return {
         accountNumber: faker.finance.account(8),
@@ -90,14 +90,10 @@ const fakeSubscription = () : ISubscription => {
         service: 'NIN Verification',
         billingCategory: faker.random.arrayElement(billingCategories),
         subscriptionDate: faker.date.past(),
-        monthlyCap: faker.finance.account(5)
+        monthlyCap: faker.random.arrayElement(monthlyCap)
     }
 };
 
-export const getMonthlyCap = (data:ISubscription) => {
-    let monthlyCap = parseInt(data.monthlyCap, 10)
-    return printsMoney(monthlyCap)
-}
 
 export function fakeSubscriptions(length: number) {
     let Subscriptions = []

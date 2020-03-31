@@ -6,7 +6,7 @@ export interface ISubscription {
     service: string
     billingCategory: string
     subscriptionDate: Date
-    monthlyCap: string
+    monthlyCap: number
 }
 
 export interface IWorkflowInclude {

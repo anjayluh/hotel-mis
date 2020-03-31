@@ -2,7 +2,7 @@ import {XHeadCell} from "../../components/table/XTableHead";
 import {printDate} from "../../utils/dateHelpers";
 import React from "react";
 import { format, compareAsc } from 'date-fns'
-import {getMonthlyCap} from "./fakeData";
+import {printsMoney} from "../../utils/numberHelpers";
 import {renderSubscriptionStatus} from "./widgets";
 
 
@@ -54,11 +54,12 @@ export const SubscriptionColumns: XHeadCell[] = [
         }
     },
     {
-        name: 'monthlyCap', label: 'Bill amount', render: (value, rec) => getMonthlyCap(rec),
+        name: 'monthlyCap', label: 'Monthly Cap', render: (value, rec) => printsMoney(value),
         cellProps: {
             style: {
                 width: 80,
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
+                textAlign: 'right'
             }
         }
     },
