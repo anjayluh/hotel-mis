@@ -70,6 +70,13 @@ export interface IBill {
     rate: number
     billAmount: any
 }
+export interface IPayment {
+    id: string
+    paymentDate: Date,
+    paymentType: any
+    referenceNumber: any
+    amount: number
+}
 
 /* 
 export const renderName = (participant: IParticipant): string => {
