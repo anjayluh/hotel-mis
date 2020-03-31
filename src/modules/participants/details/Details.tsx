@@ -10,7 +10,7 @@ import {participantsConstants, IParticipantsState} from "../../../data/redux/par
 import ParticipantSummary from "./participantsOverview/ParticipantSummary";
 import DetailsHeading from "./DetailsHeading";
 import ParticipantsOverview from "./ParticipantOverview";
-import Suscriptions from "./info/overview/Subscriptions";
+import Subscriptions from "./info/overview/Subscriptions";
 import {get} from "../../../utils/ajax";
 import {remoteRoutes} from "../../../data/constants";
 import {useDispatch, useSelector} from "react-redux";
@@ -131,7 +131,7 @@ const Details = (props: IProps) => {
 
                     </Grid>
                     { showParticipantsOverview &&
-                        <Suscriptions></Suscriptions>
+                        <Subscriptions></Subscriptions>
                     }
                     { showBillingsView &&
                     <Billings></Billings>

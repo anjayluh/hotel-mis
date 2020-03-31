@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const headCells: XHeadCell[] = [...columns];
 
 
-const Suscriptions = () => {
+const Subscriptions = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState<ISubscription[]>([])
@@ -89,7 +89,7 @@ const Suscriptions = () => {
                     <Box pb={2}>
                         <Grid container>
                             <Grid item sm={12} className={classes.pageHeading}>
-                                <Typography variant='h5'>Suscription</Typography>
+                                <Typography variant='h5'>Subscription</Typography>
                                 <Button className={classes.addNewButton}
                                 startIcon={<AddIcon className={classes.addIcon}/>}
                                 variant="text" onClick={handleNew}>
@@ -117,4 +117,4 @@ const Suscriptions = () => {
     );
 }
 
-export default Suscriptions
+export default Subscriptions
