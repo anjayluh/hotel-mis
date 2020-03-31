@@ -15,6 +15,7 @@ import {get} from "../../../utils/ajax";
 import {remoteRoutes} from "../../../data/constants";
 import {useDispatch, useSelector} from "react-redux";
 import Billings from "./info/billing/Billings"
+import Payments from "./info/payments/Payments";
 
 interface IProps extends RouteComponentProps {
 
@@ -143,7 +144,7 @@ const Details = (props: IProps) => {
                     <Billings></Billings>
                     }
                     { showPaymentsView &&
-                    <Billings></Billings>
+                    <Payments></Payments>
                     }
                 </div>
                 

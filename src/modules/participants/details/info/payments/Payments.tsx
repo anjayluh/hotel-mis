@@ -35,23 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
         pageHeading: {
             display: 'flex'
         },
-        addNewButton: {
-            color: '#428BCA',
-            textTransform: 'capitalize',
-            fontStyle: 'italic',
-            fontSize: '12px',
-            lineHeight: '0.5',
-            marginBottom: '-5px',
-            marginLeft: '8px',
-            marginTop: '-6px',
-            fontWeight: 'normal'
-        },
-        addIcon:{
-            marginLeft: '-5px',
-            marginRight: '-10px',
-            height: '0.7em',
-            fontSize: '13px',
-        }
+
     }),
 );
 
