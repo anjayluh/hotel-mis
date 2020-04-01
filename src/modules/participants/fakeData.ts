@@ -75,7 +75,7 @@ export const fakePayment = () : IPayment => {
 
 export const fakePaymentDetails =(): IPaymentDetails => {
     return {
-        paymentId: faker.random.uuid(),
+        paymentId: faker.finance.account(6),
         paymentDate: new Date(faker.date.past(1)),
         paymentType: faker.random.arrayElement(paymentTypes),
         amount: faker.random.number({min:999999, max:9999999}),

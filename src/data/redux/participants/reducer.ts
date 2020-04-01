@@ -1,4 +1,4 @@
-import {IBill, IParticipant, IPayment} from "../../../modules/participants/types";
+import {IBill, IParticipant, IPayment, IPaymentDetails} from "../../../modules/participants/types";
 import {get} from "../../../utils/ajax";
 import {remoteRoutes} from "../../constants";
 import {Dispatch} from "redux";
@@ -10,7 +10,8 @@ export const participantsConstants = {
     participantsFetchOne: "participantsFetchOne",
     contactPersonsFetchAll: 'contactPersonsFetchAll',
     participantsBillsFetchAll: 'participantsBillsFetchAll',
-    participantsPaymentsFetchAll: 'participantsPaymentsFetchAll'
+    participantsPaymentsFetchAll: 'participantsPaymentsFetchAll',
+    PaymentsDetailsFetchAll: 'PaymentsDetailsFetchAll',
 
 }
 
@@ -23,6 +24,7 @@ export interface IParticipantsState {
     contactPersons: any
     billings:IBill[]
     payments:IPayment[]
+    paymentDetails?: IPaymentDetails
 }
 
 const initialState: IParticipantsState = {
@@ -33,7 +35,8 @@ const initialState: IParticipantsState = {
     fakeSelected:  undefined,
     contactPersons: [],
     billings:[],
-    payments:[]
+    payments:[],
+    paymentDetails: undefined
 }
 
 export default function reducer(state = initialState, action: any) {
@@ -65,6 +68,10 @@ export default function reducer(state = initialState, action: any) {
             return {...state, payments}
         }
 
+        case participantsConstants.PaymentsDetailsFetchAll: {
+            const paymentDetails: IPaymentDetails = action.payload
+            return {...state, paymentDetails}
+        }
         default: {
             return state
         }
