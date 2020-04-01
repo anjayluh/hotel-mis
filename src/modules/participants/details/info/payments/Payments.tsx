@@ -49,6 +49,23 @@ const useStyles = makeStyles((theme: Theme) =>
         closeButton: {
             padding: '4px 30px',
         },
+        addNewButton: {
+            color: '#428BCA',
+            textTransform: 'capitalize',
+            fontStyle: 'italic',
+            fontSize: '12px',
+            lineHeight: '0.5',
+            marginBottom: '-5px',
+            marginLeft: '8px',
+            marginTop: '-6px',
+            fontWeight: 'normal'
+        },
+        addIcon:{
+            marginLeft: '-5px',
+            marginRight: '-10px',
+            height: '0.7em',
+            fontSize: '13px',
+        }
 
     }),
 );
@@ -95,6 +112,10 @@ const Payments = () => {
         setAnchor('right')
     }
 
+    function handleNewPayment() {
+
+    }
+
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -103,6 +124,11 @@ const Payments = () => {
                         <Grid container>
                             <Grid item sm={12} className={classes.pageHeading}>
                                 <Typography variant='h5'>All Bills</Typography>
+                                <Button className={classes.addNewButton}
+                                        startIcon={<AddIcon className={classes.addIcon}/>}
+                                        variant="text" onClick={handleNewPayment}>
+                                    Add New
+                                </Button>
                             </Grid>
                         </Grid>
                     </Box>
