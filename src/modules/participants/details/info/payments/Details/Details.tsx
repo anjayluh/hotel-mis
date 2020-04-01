@@ -114,7 +114,7 @@ const Details = (props: IProps) => {
                     <Grid item xs={12}>
                         <Box display='flex' py={1}>
                             <Box flexGrow={1} pt={1}>
-                                <Typography variant='h5'>Request ID: {paymentData ? paymentData.paymentId: 'loading'}</Typography>
+                                <Typography variant='h5'>Payment ID: { paymentData ? paymentData.paymentId: 'loading'}</Typography>
                             </Box>
                         </Box>
                         <Divider/>
