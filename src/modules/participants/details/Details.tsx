@@ -69,9 +69,9 @@ const Details = (props: IProps) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [showParticipantsOverview, setShowParticipantsOverview] = useState<boolean>(true)
-    const [showBillingsView, setShowBillingsView] = useState<boolean>(true)
-    const [showPaymentsView, setShowPaymentsView] = useState<boolean>(true)
-    const [showAccountStatementView, setShowAccountStatementView] = useState<boolean>(true)
+    const [showBillingsView, setShowBillingsView] = useState<boolean>(false)
+    const [showPaymentsView, setShowPaymentsView] = useState<boolean>(false)
+    const [showAccountStatementView, setShowAccountStatementView] = useState<boolean>(false)
     const data: IParticipant = useSelector((state: any) => state.participants.selected);
     const [headings, setHeadings] = useState([
         {text: 'Participants Overview', status: true},
