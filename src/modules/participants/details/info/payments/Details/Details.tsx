@@ -57,13 +57,18 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             borderRadius: 0,
-            padding: theme.spacing(1)
+            padding: theme.spacing(1),
+            position: 'relative'
         },
         divider: {
             marginTop: theme.spacing(2)
         },
         noPaddingLeft: {
             paddingLeft: 0
+        },
+        loading: {
+            position: 'absolute',
+            top: 120
         }
     })
 );
@@ -120,7 +125,7 @@ const Details = (props: IProps) => {
                         <Divider/>
                         <Box pt={1}>
                             {
-                                loading ? <Loading/> :
+                                loading ? <Loading loaderClass={classes.loading}/> :
                                     <Summary data={paymentData}/>
                             }
                         </Box>
