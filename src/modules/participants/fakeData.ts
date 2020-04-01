@@ -4,6 +4,7 @@ import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
 import { format, compareAsc } from 'date-fns'
 import { value } from "jsonpath";
+import {paymentTypes} from "../../data/comboCategories";
 
 const uuid = require('uuid/v4');
 
@@ -61,7 +62,7 @@ export const fakeBill = () : IBill => {
 
     }
 };
-const paymentTypes = ['Direct debit', 'EFT', 'Cheque']
+
 export const fakePayment = () : IPayment => {
     return {
         id: faker.random.uuid(),

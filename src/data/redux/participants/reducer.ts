@@ -12,6 +12,7 @@ export const participantsConstants = {
     participantsBillsFetchAll: 'participantsBillsFetchAll',
     participantsPaymentsFetchAll: 'participantsPaymentsFetchAll',
     PaymentsDetailsFetchAll: 'PaymentsDetailsFetchAll',
+    participantsAddPayment: "participantsAddPayment",
 
 }
 
@@ -25,6 +26,7 @@ export interface IParticipantsState {
     billings:IBill[]
     payments:IPayment[]
     paymentDetails?: IPaymentDetails
+    addedPayment?: IPayment
 }
 
 const initialState: IParticipantsState = {
@@ -36,7 +38,8 @@ const initialState: IParticipantsState = {
     contactPersons: [],
     billings:[],
     payments:[],
-    paymentDetails: undefined
+    paymentDetails: undefined,
+    addedPayment: undefined
 }
 
 export default function reducer(state = initialState, action: any) {
@@ -71,6 +74,12 @@ export default function reducer(state = initialState, action: any) {
         case participantsConstants.PaymentsDetailsFetchAll: {
             const paymentDetails: IPaymentDetails = action.payload
             return {...state, paymentDetails}
+        }
+
+        case participantsConstants.participantsAddPayment: {
+            const newPayment: IPayment= action.payload
+            // Will remove fakeSelected when endpoint is available
+            return {...state, payments: [...state.payments, newPayment]}
         }
         default: {
             return state

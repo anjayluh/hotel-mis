@@ -76,6 +76,8 @@ export interface IPayment {
     paymentType: any
     referenceNumber: any
     amount: number
+    dateOfEntry?: Date
+    enteredBy?: string
 }
 export interface IPaymentDetails {
     paymentId: string
