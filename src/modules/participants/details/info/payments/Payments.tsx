@@ -187,7 +187,6 @@ const Payments = () => {
                     showNewPaymentForm &&
                         <NewPaymentForm closeSlideOut={handleNewPayment}></NewPaymentForm>
                 }
-                    {/*<NewPaymentForm closeSlideOut={handleNewPayment}></NewPaymentForm>*/}
             </SlideOutDrawer>
 
         </Grid>

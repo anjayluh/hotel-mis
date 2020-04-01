@@ -100,7 +100,7 @@ const NewPaymentForm = (props: IProps) => {
                     <PDateInput
                         name="paymentDate"
                         value={data['paymentDate']}
-                        onChange={handleValueChange('from')}
+                        onChange={handleValueChange('paymentDate')}
                         label="Payment Date"
                         variant="inline"
                         inputVariant='outlined'
@@ -137,7 +137,7 @@ const NewPaymentForm = (props: IProps) => {
                     <PDateInput
                         name="dateOfEntry"
                         value={data['dateOfEntry']}
-                        onChange={handleValueChange('from')}
+                        onChange={handleValueChange('dateOfEntry')}
                         label="Date of entry"
                         variant="inline"
                         inputVariant='outlined'
