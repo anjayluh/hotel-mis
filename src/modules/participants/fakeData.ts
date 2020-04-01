@@ -1,5 +1,5 @@
 import * as faker from "faker";
-import {IGeneratedParticipant, ISubscription, IContactPerson, IBill, IPayment} from "./types";
+import {IGeneratedParticipant, ISubscription, IContactPerson, IBill, IPayment, IPaymentDetails} from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
 import { format, compareAsc } from 'date-fns'
@@ -72,3 +72,15 @@ export const fakePayment = () : IPayment => {
 
     }
 };
+
+export const fakePaymentDetails =(): IPaymentDetails => {
+    return {
+        paymentId: faker.random.uuid(),
+        paymentDate: new Date(faker.date.past(1)),
+        paymentType: faker.random.arrayElement(paymentTypes),
+        amount: faker.random.number({min:999999, max:9999999}),
+        dateOfEntry: new Date(faker.date.past(1)),
+        enteredBy: faker.name.findName(),
+        referenceNumber: faker.finance.account(5),
+    }
+}

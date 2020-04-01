@@ -77,6 +77,15 @@ export interface IPayment {
     referenceNumber: any
     amount: number
 }
+export interface IPaymentDetails {
+    paymentId: string
+    paymentDate: Date
+    paymentType: any
+    amount: number
+    dateOfEntry: Date
+    enteredBy: string
+    referenceNumber: any
+}
 
 /* 
 export const renderName = (participant: IParticipant): string => {
