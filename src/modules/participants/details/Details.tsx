@@ -16,6 +16,7 @@ import {remoteRoutes} from "../../../data/constants";
 import {useDispatch, useSelector} from "react-redux";
 import Billings from "./info/billing/Billings"
 import Payments from "./info/payments/Payments";
+import AccountStatement from "./info/accountStatement/AccountStatement";
 
 interface IProps extends RouteComponentProps {
 
@@ -70,12 +71,13 @@ const Details = (props: IProps) => {
     const [showParticipantsOverview, setShowParticipantsOverview] = useState<boolean>(true)
     const [showBillingsView, setShowBillingsView] = useState<boolean>(true)
     const [showPaymentsView, setShowPaymentsView] = useState<boolean>(true)
+    const [showAccountStatementView, setShowAccountStatementView] = useState<boolean>(true)
     const data: IParticipant = useSelector((state: any) => state.participants.selected);
     const [headings, setHeadings] = useState([
         {text: 'Participants Overview', status: true},
         {text: 'Billing', status: false},
         {text: 'Payments', status: false},
-        {text: 'Acount Statement', status: false}
+        {text: 'Account Statement', status: false}
     ])
     const [loading, setLoading] = useState<boolean>(true)
     
@@ -103,6 +105,10 @@ const Details = (props: IProps) => {
                 if(heading.text === 'Payments'){
                     setShowPaymentsView(true)
                 }else setShowPaymentsView(false)
+
+                if(heading.text === 'Account Statement'){
+                    setShowAccountStatementView(true)
+                }else setShowAccountStatementView(false)
 
 
                 return {
@@ -145,6 +151,9 @@ const Details = (props: IProps) => {
                     }
                     { showPaymentsView &&
                     <Payments></Payments>
+                    }
+                    { showAccountStatementView &&
+                    <AccountStatement></AccountStatement>
                     }
                 </div>
                 
