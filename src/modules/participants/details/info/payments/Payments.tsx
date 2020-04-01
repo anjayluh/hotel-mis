@@ -134,7 +134,7 @@ const Payments = () => {
                     <Box pb={2}>
                         <Grid container>
                             <Grid item sm={12} className={classes.pageHeading}>
-                                <Typography variant='h5'>All Bills</Typography>
+                                <Typography variant='h5'>Payments</Typography>
                                 <Button className={classes.addNewButton}
                                         startIcon={<AddIcon className={classes.addIcon}/>}
                                         variant="text" onClick={handleNewPayment}>
