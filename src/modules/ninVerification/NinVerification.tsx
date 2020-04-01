@@ -172,8 +172,6 @@ const NinVerifications = () => {
                     <Button
                         className={classes.closeButton}
                         onClick={handleToggleDrawer}
-                        variant='contained'
-                        color='primary'
                         size='small'
                     >
                         Close
