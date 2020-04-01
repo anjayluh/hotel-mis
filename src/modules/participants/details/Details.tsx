@@ -15,6 +15,7 @@ import {get} from "../../../utils/ajax";
 import {remoteRoutes} from "../../../data/constants";
 import {useDispatch, useSelector} from "react-redux";
 import Billings from "./info/billing/Billings"
+import Payments from "./info/payments/Payments";
 
 interface IProps extends RouteComponentProps {
 
@@ -68,6 +69,7 @@ const Details = (props: IProps) => {
     const dispatch = useDispatch();
     const [showParticipantsOverview, setShowParticipantsOverview] = useState<boolean>(true)
     const [showBillingsView, setShowBillingsView] = useState<boolean>(true)
+    const [showPaymentsView, setShowPaymentsView] = useState<boolean>(true)
     const data: IParticipant = useSelector((state: any) => state.participants.selected);
     const [headings, setHeadings] = useState([
         {text: 'Participants Overview', status: true},
@@ -98,7 +100,12 @@ const Details = (props: IProps) => {
                     setShowBillingsView(true)
                 }else setShowBillingsView(false)
 
-              return {
+                if(heading.text === 'Payments'){
+                    setShowPaymentsView(true)
+                }else setShowPaymentsView(false)
+
+
+                return {
                 ...heading,
                 text: heading.text,
                 status: true,
@@ -135,6 +142,9 @@ const Details = (props: IProps) => {
                     }
                     { showBillingsView &&
                     <Billings></Billings>
+                    }
+                    { showPaymentsView &&
+                    <Payments></Payments>
                     }
                 </div>
                 
