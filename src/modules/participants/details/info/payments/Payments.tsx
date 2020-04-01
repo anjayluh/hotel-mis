@@ -19,6 +19,7 @@ import {remoteRoutes} from "../../../../../data/constants";
 import {fakePayment} from "../../../fakeData";
 import Details from './Details/Details';
 import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
+import NewPaymentForm from "./forms/NewPaymentForm";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -80,6 +81,8 @@ const Payments = () => {
     const [anchor, setAnchor]= useState<Anchor>('right');
     const [openSlideOut, setOpenSlideOut] = useState(false);
     const classes = useStyles();
+    const [showPaymentDetails, setShowPaymentDetails] = useState<boolean>(false)
+    const [showNewPaymentForm, setShowNewPaymentForm] = useState<boolean>(false)
 
     useEffect(() => {
         setLoading(true)
@@ -107,13 +110,21 @@ const Payments = () => {
         return Payments
     }
 
+
     function handleToggleDrawer(id?: any) {
         setOpenSlideOut(!openSlideOut)
         setAnchor('right')
     }
 
     function handleNewPayment() {
-
+        setShowPaymentDetails(false);
+        setShowNewPaymentForm(true);
+        handleToggleDrawer();
+    }
+    function handlePaymentDetails() {
+        setShowNewPaymentForm(false);
+        setShowPaymentDetails(true);
+        handleToggleDrawer();
     }
 
     return (
@@ -141,7 +152,7 @@ const Payments = () => {
                                         data={paymentsData}
                                         initialRowsPerPage={10}
                                         usePagination={false}
-                                        handleSelection={handleToggleDrawer}
+                                        handleSelection={handlePaymentDetails}
                                         hoverClass = {classes.rowHover}
                                     />
                                 </Grid>
@@ -149,19 +160,36 @@ const Payments = () => {
                     }
                 </Box>
             </Grid>
-            <SlideOutDrawer handleToggleDrawer={handleToggleDrawer} open={openSlideOut} anchor={anchor} title="">
-                <Details closeSlideOut={handleToggleDrawer}></Details>
+            <SlideOutDrawer
+                handleToggleDrawer={handlePaymentDetails} open={openSlideOut} anchor={anchor}
+                title={showNewPaymentForm ? "Add new Payment" : ''}
+            >
+                {
+                    showPaymentDetails &&
+                        <div>
+                            <Details closeSlideOut={handlePaymentDetails}></Details>
 
-                <Grid item xs={12} className={classes.close}>
-                    <Button
-                        className={classes.closeButton}
-                        onClick={handleToggleDrawer}
-                        size='small'
-                    >
-                        Close
-                    </Button>
-                </Grid>
+                            <Grid item xs={12} className={classes.close}>
+                                <Button
+                                    className={classes.closeButton}
+                                    onClick={handleToggleDrawer}
+                                    size='small'
+                                >
+                                    Close
+                                </Button>
+                            </Grid>
+                        </div>
+
+                }
+
+
+                {
+                    showNewPaymentForm &&
+                        <NewPaymentForm closeSlideOut={handleNewPayment}></NewPaymentForm>
+                }
+                    {/*<NewPaymentForm closeSlideOut={handleNewPayment}></NewPaymentForm>*/}
             </SlideOutDrawer>
+
         </Grid>
     );
 }
