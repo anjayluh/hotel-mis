@@ -17,6 +17,8 @@ import {columns} from "./PaymentsConfig";
 import {participantsConstants} from "../../../../../data/redux/participants/reducer";
 import {remoteRoutes} from "../../../../../data/constants";
 import {fakePayment} from "../../../fakeData";
+import Details from './Details/Details';
+import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -35,6 +37,18 @@ const useStyles = makeStyles((theme: Theme) =>
         pageHeading: {
             display: 'flex'
         },
+        rowHover: {
+            '&:hover': {
+                cursor: 'pointer',
+            },
+        },
+        close: {
+            position: 'fixed',
+            bottom: '30px',
+        },
+        closeButton: {
+            padding: '4px 30px',
+        },
 
     }),
 );
@@ -46,6 +60,8 @@ const Payments = () => {
     const dispatch = useDispatch();
     const paymentsData = useSelector((state: IState) => state.participants.payments)
     const [loading, setLoading] = useState<boolean>(false)
+    const [anchor, setAnchor]= useState<Anchor>('right');
+    const [openSlideOut, setOpenSlideOut] = useState(false);
     const classes = useStyles();
 
     useEffect(() => {
@@ -74,6 +90,11 @@ const Payments = () => {
         return Payments
     }
 
+    function handleToggleDrawer(id?: any) {
+        setOpenSlideOut(!openSlideOut)
+        setAnchor('right')
+    }
+
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -94,12 +115,29 @@ const Payments = () => {
                                         data={paymentsData}
                                         initialRowsPerPage={10}
                                         usePagination={false}
+                                        handleSelection={handleToggleDrawer}
+                                        hoverClass = {classes.rowHover}
                                     />
                                 </Grid>
                             </Grid>
                     }
                 </Box>
             </Grid>
+            <SlideOutDrawer handleToggleDrawer={handleToggleDrawer} open={openSlideOut} anchor={anchor} title="">
+                <Details closeSlideOut={handleToggleDrawer}></Details>
+
+                <Grid item xs={12} className={classes.close}>
+                    <Button
+                        className={classes.closeButton}
+                        onClick={handleToggleDrawer}
+                        variant='contained'
+                        color='primary'
+                        size='small'
+                    >
+                        Close
+                    </Button>
+                </Grid>
+            </SlideOutDrawer>
         </Grid>
     );
 }
