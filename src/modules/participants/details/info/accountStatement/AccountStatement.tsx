@@ -79,7 +79,7 @@ const AccountStatement = () => {
                                     </Grid>
                                     <Grid item>
                                         <PDateInput
-                                            name="dateCreated"
+                                            name="to"
                                             value={data['to'] || null}
                                             onChange={handleValueChange('to')}
                                             label="To"
@@ -92,7 +92,9 @@ const AccountStatement = () => {
                                             // disabled={loading}
                                             variant="contained"
                                             color="primary"
-                                            onClick={downloadStatement}>Download statement
+                                            onClick={downloadStatement}
+                                        >
+                                            Download statement
                                         </Button>
                                     </Grid>
                                 </Grid>
