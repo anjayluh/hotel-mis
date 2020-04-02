@@ -150,7 +150,7 @@ const Payments = () => {
                                     <XTable
                                         headCells={headCells}
                                         data={paymentsData}
-                                        initialRowsPerPage={10}
+                                        initialRowsPerPage={5}
                                         usePagination={false}
                                         handleSelection={handlePaymentDetails}
                                         hoverClass = {classes.rowHover}

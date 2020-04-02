@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             flexGrow: 1,
+
         },
         filterPaper: {
             borderRadius: 0,
@@ -100,12 +101,12 @@ const Subscriptions = () => {
                     </Box>
                     {
                         loading ? <Loading/> :
-                            <Grid container spacing={2}>
+                            <Grid container spacing={2} style={{overflow:'visible'}}>
                                 <Grid item xs={12}>
                                     <XTable
                                         headCells={headCells}
                                         data={data}
-                                        initialRowsPerPage={10}
+                                        initialRowsPerPage={5}
                                         usePagination={false}
                                     />
                                 </Grid>
