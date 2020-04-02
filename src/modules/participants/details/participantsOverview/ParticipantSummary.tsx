@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
+import {Chip} from "@material-ui/core";
 import { IParticipant} from "../../types";
 import {createStyles, makeStyles, Theme} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -45,9 +46,11 @@ const ParticipantSummary = ({data}: IProps) => {
                     <Grid item className={classes.nameHolder}>
                         <Typography variant='h5'>{data.name}</Typography>
                         <Typography variant='body2'>{data.type.name}</Typography>
-                        <Button size='small' variant="contained" color='primary' className={classes.summaryButton}>
-                            {data.status.name}
-                        </Button>
+                        <Chip
+                            size='small' variant="default" color='primary' className={classes.summaryButton}
+                            label={data.status.name}
+                        />
+
                        
                     </Grid>
                 </Grid>
