@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: theme.spacing(1),
             borderRadius: 0,
             minHeight: '100%',
-            overflow: 'show'
+            overflowX: 'hidden',
         },
         divider: {
             marginTop: theme.spacing(2)
