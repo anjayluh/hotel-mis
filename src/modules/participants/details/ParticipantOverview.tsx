@@ -166,8 +166,8 @@ const ParticipantOverview = ({data}: IProps) => {
     const contactPersonsColumnTwo = contactPersonsTwo(callContactPersons(1));
     const bold= false;
     return (
-        <Grid container spacing={1}>
-            <Grid item xs={12} style={{paddingTop: 0}}>
+        <Grid container spacing={1} style={{paddingBottom: 30}}>
+            <Grid item xs={12} style={{paddingTop: 20}}>
             <Grid item xs={12} lg={12} md={12}>
                 <Grid container spacing={spacing}>
                     <Grid item lg={12} xs={12}>
@@ -196,7 +196,7 @@ const ParticipantOverview = ({data}: IProps) => {
                 </Grid>
             </Grid>
             </Grid>
-            <Grid container direction='row'>
+            <Grid container direction='row' style={{paddingTop: 5}}>
                 <Grid item xs={6} container direction='row'>
                     <Grid item xs={6}>
                         <Box p={1} ml={3}>
@@ -210,7 +210,7 @@ const ParticipantOverview = ({data}: IProps) => {
                     </Grid>
                 </Grid>
                 <Grid item xs={6} container direction='row'>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} >
                         <Box p={1}>
                             <table className={classes.root}>
                                 <tbody>
@@ -223,7 +223,7 @@ const ParticipantOverview = ({data}: IProps) => {
                                     </tr>
                                     <tr key={contactPersonsColumnOne[1].value} className={classes.row}>
                                         <td className={clsx(classes.col, classes.label)}>
-                                            <DataLabel noColon={true} bold={bold}>
+                                            <DataLabel noColon={true} bold={bold} noWrap={false}>
                                                 {contactPersonsColumnOne[1].value}
                                             </DataLabel>
                                         </td>
@@ -245,7 +245,7 @@ const ParticipantOverview = ({data}: IProps) => {
                                 </tr>
                                 <tr key={contactPersonsColumnTwo[1].label} className={classes.row}>
                                     <td className={clsx(classes.col, classes.label)}>
-                                        <DataLabel noColon={true} bold={bold}>
+                                        <DataLabel noColon={true} bold={bold} noWrap={false}>
                                             {contactPersonsColumnTwo[1].value}
                                         </DataLabel>
                                     </td>
