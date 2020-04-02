@@ -40,7 +40,6 @@ interface IProps {
 }
 
 const NewPaymentForm = (props: IProps) => {
-    const paymentsData = useSelector((state: IState) => state.participants.payments)
     const [data, setData] = useState({
         paymentDate: null,
         paymentType: '',
@@ -82,21 +81,12 @@ const NewPaymentForm = (props: IProps) => {
                 actions.resetForm()
                 actions.setSubmitting(false);
 
-                console.log(paymentsData, 'ggggggggggggggggggggggggggggggggggggggggg')
-
             }
         )
     }
 
     function handleClose(){
         props.closeSlideOut();
-    }
-    const handleValueChange = (name: string) => (value: any) => {
-        if (name === 'paymentDate' || name === 'dateOfEntry') {
-            value = value ? value.toISOString() : value
-        }
-        const newData = {...data, [name]: value}
-        setData(newData)
     }
 
     return (
