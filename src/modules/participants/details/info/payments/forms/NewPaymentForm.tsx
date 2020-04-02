@@ -10,10 +10,11 @@ import Grid from "@material-ui/core/Grid";
 import XFormSimple from "../../../../../../components/forms/XFormSimple"
 import XTextInput from "../../../../../../components/inputs/XTextInput";
 import {toOptions} from "../../../../../../components/inputs/inputHelpers";
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {IPayment} from "../../../../types";
 import XSearchInput from "../../../../../../components/inputs/XSearchInput";
 import XSelectInput from "../../../../../../components/inputs/XSelectInput"
+import XDateInput from "../../../../../../components/inputs/XDateInput";
 import { useHistory } from 'react-router';
 import {localRoutes} from "../../../../../../data/constants";
 import {remoteRoutes} from "../../../../../../data/constants";
@@ -21,6 +22,7 @@ import {post} from "../../../../../../utils/ajax";
 import Toast from "../../../../../../utils/Toast";
 import {participantsConstants} from "../../../../../../data/redux/participants/reducer";
 import PDateInput from "../../../../../../components/plain-inputs/PDateInput";
+import {IState} from "../../../../../../data/types";
 
 const schema = yup.object().shape(
     {
@@ -38,8 +40,9 @@ interface IProps {
 }
 
 const NewPaymentForm = (props: IProps) => {
+    const paymentsData = useSelector((state: IState) => state.participants.payments)
     const [data, setData] = useState({
-        paymentDate: new Date('2014-08-18T21:11:54'),
+        paymentDate: null,
         paymentType: '',
         referenceNumber: '',
         amount: '',
@@ -75,7 +78,11 @@ const NewPaymentForm = (props: IProps) => {
                     type: participantsConstants.participantsAddPayment,
                     payload: {...toSave},
                 })
+                Toast.info('Operation successful')
+                actions.resetForm()
                 actions.setSubmitting(false);
+
+                console.log(paymentsData, 'ggggggggggggggggggggggggggggggggggggggggg')
 
             }
         )
@@ -97,20 +104,18 @@ const NewPaymentForm = (props: IProps) => {
                      onCancel={handleClose}>
             <Grid spacing={2} container direction='column'>
                 <Grid item xs={12}>
-                    <PDateInput
+                    <XDateInput
                         name="paymentDate"
-                        value={data['paymentDate']}
-                        onChange={handleValueChange('paymentDate')}
                         label="Payment Date"
-                        variant="inline"
                         inputVariant='outlined'
+                        size='small'
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <XSelectInput
                         size='small'
-                        name="type"
-                        label="Type"
+                        name="paymentType"
+                        label="paymentType"
                         options={toOptions(paymentTypes)}
                         variant='outlined'
                     />
@@ -128,19 +133,17 @@ const NewPaymentForm = (props: IProps) => {
                     <XTextInput
                         name="amount"
                         label="Amount"
-                        type="number"
+                        type="text"
                         variant='outlined'
                         size='small'
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <PDateInput
+                    <XDateInput
                         name="dateOfEntry"
-                        value={data['dateOfEntry']}
-                        onChange={handleValueChange('dateOfEntry')}
                         label="Date of entry"
-                        variant="inline"
                         inputVariant='outlined'
+                        size='small'
                     />
                 </Grid>
                 <Grid item xs={12}>

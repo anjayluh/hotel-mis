@@ -92,7 +92,7 @@ const Payments = () => {
             (resp) => {
                 dispatch({
                     type: participantsConstants.participantsPaymentsFetchAll,
-                    payload: [...callFakePayment(15)],
+                    payload: [...callFakePayment(5)],
                 })
             },
             undefined,
