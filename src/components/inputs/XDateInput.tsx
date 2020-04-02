@@ -13,6 +13,7 @@ interface IProps {
     label: string
     value?: string
     inputVariant?: 'outlined'|'filled'|'standard'
+    size?: 'small' | 'medium'
 }
 
 const Component = ({field, form, ...other}: FieldProps) => {
