@@ -1,5 +1,13 @@
 import * as faker from "faker";
-import {IGeneratedParticipant, ISubscription, IContactPerson, IBill, IPayment, IPaymentDetails} from "./types";
+import {
+    IGeneratedParticipant,
+    ISubscription,
+    IContactPerson,
+    IBill,
+    IPayment,
+    IPaymentDetails,
+    IParticipant, IParticipantType, IParticipantPhone, IParticipantStatus
+} from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
 import { format, compareAsc } from 'date-fns'
@@ -20,6 +28,45 @@ export const fakeParticipant = () : IGeneratedParticipant => {
         name: faker.random.arrayElement(organisationNames),
         type: faker.random.arrayElement(organisationTypes),
         dateCreated: new Date(faker.date.past(1))
+    }
+};
+export interface IParticipant {
+    id: string
+    name: string
+    type: IParticipantType
+    phoneNumber: IParticipantPhone[]
+    status: IParticipantStatus
+    officialEmail: string
+    primaryEmail: string
+    dateCreated: Date
+}
+export const fakeParticipantDetails = () : IParticipant => {
+    return {
+        id: faker.random.uuid(),
+        name: faker.name.findName(),
+        phoneNumber: [
+            {
+                id: faker.random.uuid(),
+                type: "primary",
+                value: faker.phone.phoneNumber()
+            },
+            {
+                id: faker.random.uuid(),
+                type: "primary",
+                value: faker.phone.phoneNumber()
+            },
+        ],
+        type: {
+            id: faker.random.uuid(),
+            name: "primary"
+        },
+        status: {
+            id: faker.random.uuid(),
+            name: "Active"
+        },
+        officialEmail: faker.internet.email(),
+        primaryEmail: faker.internet.email(),
+        dateCreated: new Date()
     }
 };
 
