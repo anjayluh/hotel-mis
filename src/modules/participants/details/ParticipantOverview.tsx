@@ -166,35 +166,35 @@ const ParticipantOverview = ({data}: IProps) => {
     const contactPersonsColumnTwo = contactPersonsTwo(callContactPersons(1));
     const bold= false;
     return (
-        <Grid container spacing={1} style={{paddingBottom: 30}}>
-            <Grid item xs={12} style={{paddingTop: 20}}>
-            <Grid item xs={12} lg={12} md={12}>
-                <Grid container spacing={spacing}>
-                    <Grid item lg={12} xs={12}>
-                        <Grid container spacing={1}>
-                            <Grid item container direction='row' lg={12} justify="space-evenly" spacing={5}>
-                                <Grid item xs={6} lg={6} md={6}>
-                                    <SectionTitle
-                                        title='General Contact Overview'
-                                        icon={<PersonIcon fontSize='inherit'/>}
-                                    />
-                                    <Divider/>
+        <Grid container spacing={1} style={{marginBottom: 25}}>
+            <Grid item xs={12}>
+                <Grid item xs={12} lg={12} md={12}>
+                    <Grid container spacing={spacing}>
+                        <Grid item lg={12} xs={12}>
+                            <Grid container spacing={1}>
+                                <Grid item container direction='row' lg={12} justify="space-evenly" spacing={5}>
+                                    <Grid item xs={6} lg={6} md={6}>
+                                        <SectionTitle
+                                            title='General Contact Overview'
+                                            icon={<PersonIcon fontSize='inherit'/>}
+                                        />
+                                        <Divider/>
+                                    </Grid>
+                                    <Grid item xs={6} lg={6} md={6}>
+                                        <SectionTitle
+                                            title='Contact Persons'
+                                            icon={<FormatListBulletedIcon fontSize='inherit'/>}
+                                        />
+                                        <Divider/>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={6} lg={6} md={6}>
-                                    <SectionTitle
-                                        title='Contact Persons'
-                                        icon={<FormatListBulletedIcon fontSize='inherit'/>}
-                                    />
-                                    <Divider/>
-                                </Grid>
+                                <EditDialog title='Edit Basic Data' open={dialog} onClose={handleClose}>
+                                    {/* <PersonEditor data={data.person} contactId={id} done={handleClose}/> */}
+                                </EditDialog>
                             </Grid>
-                            <EditDialog title='Edit Basic Data' open={dialog} onClose={handleClose}>
-                                {/* <PersonEditor data={data.person} contactId={id} done={handleClose}/> */}
-                            </EditDialog>
                         </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
             </Grid>
             <Grid container direction='row' style={{paddingTop: 5}}>
                 <Grid item xs={6} container direction='row'>
