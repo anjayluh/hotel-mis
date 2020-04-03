@@ -43,7 +43,7 @@ export interface IParticipant {
 export const fakeParticipantDetails = () : IParticipant => {
     return {
         id: faker.random.uuid(),
-        name: faker.name.findName(),
+        name: 'Stanbic bank Uganda Limited',
         phoneNumber: [
             {
                 id: faker.random.uuid(),
@@ -58,7 +58,7 @@ export const fakeParticipantDetails = () : IParticipant => {
         ],
         type: {
             id: faker.random.uuid(),
-            name: "primary"
+            name: 'Commercial Bank'
         },
         status: {
             id: faker.random.uuid(),
