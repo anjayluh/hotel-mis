@@ -166,7 +166,7 @@ const ParticipantOverview = ({data}: IProps) => {
     const contactPersonsColumnTwo = contactPersonsTwo(callContactPersons(1));
     const bold= false;
     return (
-        <Grid container spacing={1} style={{marginBottom: 25}}>
+        <Grid container spacing={1} style={{marginBottom: 15}}>
             <Grid item xs={12}>
                 <Grid item xs={12} lg={12} md={12}>
                     <Grid container spacing={spacing}>

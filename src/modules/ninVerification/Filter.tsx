@@ -7,11 +7,6 @@ import {Box} from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import PSelectInput from "../../components/plain-inputs/PSelectInput";
 import PDateInput from "../../components/plain-inputs/PDateInput";
-import {enumToArray} from "../../utils/stringHelpers";
-import {IWorkflowFilter, WorkflowNinStatus, WorkflowSubStatus} from "./types";
-import {workflowTypes} from "./config";
-import {PRemoteSelect} from "../../components/inputs/XRemoteSelect";
-import {remoteRoutes} from "../../data/constants";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 
@@ -21,13 +16,13 @@ interface IProps {
 }
 
 const Filter = ({onFilter, loading}: IProps) => {
-    const [data, setData] = useState<IWorkflowFilter>({
+    const [data, setData] = useState({
         nin: '',
         status: '',
         requestId: '',
         from: null,
         to: null,
-        initiator: []
+        initiator: ''
     })
 
     function submitForm(values: any) {
@@ -51,13 +46,15 @@ const Filter = ({onFilter, loading}: IProps) => {
         submitForm(newData)
     }
 
-    const handleComboValueChange = (name: string) => (value: any) => {
+    // const handleComboValueChange = (name: string) => (value: any) => {
+    //
+    //     const newData = {...data, [name]: value}
+    //     const newFilterData = {...data, [name]: value?value.id:null}
+    //     setData(newData)
+    //     submitForm(newFilterData)
+    // }
 
-        const newData = {...data, [name]: value}
-        const newFilterData = {...data, [name]: value?value.id:null}
-        setData(newData)
-        submitForm(newFilterData)
-    }
+    const initiators = ['Angella', 'Evie', 'TimK']
 
     return <form>
         <Grid spacing={3} container>
@@ -85,7 +82,7 @@ const Filter = ({onFilter, loading}: IProps) => {
             <Grid item xs={12}>
                 <TextField
                     name="status"
-                    value={data['statuses']}
+                    value={data['status']}
                     onChange={handleChange}
                     label="Status"
                     type="text"
@@ -135,7 +132,7 @@ const Filter = ({onFilter, loading}: IProps) => {
                     variant="outlined"
                     size='small'
                     color="secondary"
-                    options={toOptions(enumToArray(WorkflowNinStatus))}
+                    options={toOptions(initiators)}
                 />
             </Grid>
             <Grid item xs={12}>

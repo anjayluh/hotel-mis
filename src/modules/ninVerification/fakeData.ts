@@ -8,14 +8,12 @@ import {
     WorkflowStatus,
     WorkflowSubStatus,
     IVerificationRequest,
-    IVerificationStatus,
     WorkflowNinStatus,
-    WorkflowRequestStatus,
     IRequestDetails
 } from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
-import {format} from "date-fns";
+// import {format} from "date-fns";
 import {getRandomStr} from "../../utils/stringHelpers";
 import {organisationNames} from "../billing/fakeData";
 
