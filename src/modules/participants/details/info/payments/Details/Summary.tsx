@@ -30,7 +30,7 @@ const Summary = ({data}: IProps) => {
             value: printDateTime(data.dateOfEntry)
         },
         {
-            label: 'EnteredBy',
+            label: 'Entered By',
             value: data.enteredBy
         },
         {

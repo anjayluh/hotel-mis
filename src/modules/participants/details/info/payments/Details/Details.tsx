@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         loading: {
             position: 'absolute',
-            top: 120
+            top: 300,
         }
     })
 );
