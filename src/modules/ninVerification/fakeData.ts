@@ -94,7 +94,7 @@ export const fakeAction = (): IAction => {
         outputData: ''
     }
 }
-let arr_elem = ['rr','jjh', 'ggg']
+
 const fakeVerificationRequest = (): IVerificationRequest => {
     return {
         id: uuid(),
@@ -158,7 +158,7 @@ export const fakeRequestDetails =():IRequestDetails => {
             },
             {
                 order: 5,
-                task: "Response Received",
+                task: "Response Returned",
                 status: faker.random.arrayElement(enumToArray(ActionStatus)) as ActionStatus,
             }
         ]
