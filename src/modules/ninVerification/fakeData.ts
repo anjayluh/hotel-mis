@@ -148,18 +148,18 @@ export const fakeRequestDetails =():IRequestDetails => {
             {
                 order: 3,
                 task: "Request Submitted to NIRA",
-                status: 'Pending' as ActionStatus,
+                status: 'Done' as ActionStatus,
                 date: new Date(faker.date.past(1))
             },
             {
                 order: 4,
                 task: "Result Received",
-                status: 'Done' as ActionStatus,
+                status: 'Error' as ActionStatus,
             },
             {
                 order: 5,
                 task: "Response Returned",
-                status: faker.random.arrayElement(enumToArray(ActionStatus)) as ActionStatus,
+                status: 'Error' as ActionStatus
             }
         ]
     }

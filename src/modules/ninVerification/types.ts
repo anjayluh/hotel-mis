@@ -108,7 +108,7 @@ export interface IRequestDetailsStatus {
     order: number,
     task:string,
     status: string,
-    date?: Date
+    date?: Date | null
 }
 export interface IRequestDetails {
     requestId: any,

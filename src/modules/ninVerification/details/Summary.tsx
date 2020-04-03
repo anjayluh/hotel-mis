@@ -66,7 +66,7 @@ const Summary = ({data}: IProps) => {
                                     </ListItemIcon>
                                     <ListItemText
                                         primary={it.task}
-                                        secondary={it.date && printDateTime(it.date)}
+                                        secondary={it.date ? printDateTime(it.date) : '-'}
                                     />
 
                                 </ListItem>
