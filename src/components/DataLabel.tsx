@@ -8,16 +8,16 @@ interface IProps {
     noWrap?: false | true
 }
 
-const DataLabel = (props: IProps) => {
-    if (props.bold)
+const DataLabel = ({bold, noColon, children,...props}: IProps) => {
+    if (bold)
         return (
             <Typography variant='body2' noWrap component='div' {...props}>
-                <b>{props.children}{props.noColon ? '' : ':'}</b>
+                <b>{children}{noColon ? '' : ':'}</b>
             </Typography>
         );
     return (
         <Typography variant='body2' noWrap component='div' {...props}>
-            {props.children}{props.noColon ? '' : ':'}
+            {children}{noColon ? '' : ':'}
         </Typography>
     );
 }
