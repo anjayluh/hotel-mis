@@ -51,17 +51,20 @@ const AccountStatement = () => {
     return (
         <Grid container spacing={spacing}>
             <Grid item xs={12}>
-                    <Box pb={2}>
-                        <Grid container>
-                            <Grid item sm={12} className={classes.pageHeading}>
-                                <Typography variant='h5'>Account Statement</Typography>
+                    <Box p={2} className={classes.root}>
+                        <Box pb={2}>
+                            <Grid container>
+                                <Grid item sm={12} className={classes.pageHeading}>
+                                    <Typography variant='h5'>Account Statement</Typography>
+                                </Grid>
+                                <Grid item sm={12}>
+                                    <Typography variant='body2' noWrap component='div'>
+                                        Choose from and to dates then download the account statement in Excel format
+                                    </Typography>
+                                </Grid>
                             </Grid>
-                            <Grid item sm={12}>
-                                <Typography variant='body2' noWrap component='div'>
-                                    Choose from and to dates then download the account statement in Excel format
-                                </Typography>
-                            </Grid>
-                        </Grid>
+                        </Box>
+
                     </Box>
                     <form>
                         <Grid container spacing={2} className={classes.root}>
