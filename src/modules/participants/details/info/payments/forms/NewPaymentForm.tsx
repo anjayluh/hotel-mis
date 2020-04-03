@@ -79,7 +79,8 @@ const NewPaymentForm = (props: IProps) => {
                 })
                 Toast.info('Operation successful')
                 actions.resetForm()
-                actions.setSubmitting(false);
+                handleClose()
+                // actions.setSubmitting(false);
 
             }
         )
