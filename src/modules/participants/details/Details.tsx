@@ -134,7 +134,7 @@ const Details = (props: IProps) => {
                 data &&
                 <div className={classes.root}>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} style={{paddingBottom: 0}}>
+                        <Grid item xs={12} style={{paddingBottom: 25}}>
                             <ParticipantSummary data={data}/>
                         </Grid>
                         <DetailsHeading data={headings} handleClickedItem={handleClick}></DetailsHeading>
