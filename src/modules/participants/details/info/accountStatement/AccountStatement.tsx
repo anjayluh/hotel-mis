@@ -52,7 +52,7 @@ const AccountStatement = () => {
         <Grid container spacing={spacing}>
             <Grid item xs={12}>
                     <Box p={2} className={classes.root}>
-                        <Box pb={2}>
+                        <Box pb={4}>
                             <Grid container>
                                 <Grid item sm={12} className={classes.pageHeading}>
                                     <Typography variant='h5'>Account Statement</Typography>
@@ -64,46 +64,47 @@ const AccountStatement = () => {
                                 </Grid>
                             </Grid>
                         </Box>
-
-                    </Box>
-                    <form>
-                        <Grid container spacing={2} className={classes.root}>
-                            <Grid item xs={12}>
-                                <Grid container spacing={spacing}>
-                                    <Grid item>
-                                        <PDateInput
-                                            name="from"
-                                            value={data['from'] || null}
-                                            onChange={handleValueChange('from')}
-                                            label="From"
-                                            variant="inline"
-                                            inputVariant='outlined'
-                                        />
-                                    </Grid>
-                                    <Grid item>
-                                        <PDateInput
-                                            name="to"
-                                            value={data['to'] || null}
-                                            onChange={handleValueChange('to')}
-                                            label="To"
-                                            variant="inline"
-                                            inputVariant='outlined'
-                                        />
-                                    </Grid>
-                                    <Grid item>
-                                        <Button
-                                            // disabled={loading}
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={downloadStatement}
-                                        >
-                                            Download statement
-                                        </Button>
+                        <form>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <Grid container spacing={spacing}>
+                                        <Grid item>
+                                            <PDateInput
+                                                name="from"
+                                                value={data['from'] || null}
+                                                onChange={handleValueChange('from')}
+                                                label="From"
+                                                variant="inline"
+                                                inputVariant='outlined'
+                                            />
+                                        </Grid>
+                                        <Grid item>
+                                            <PDateInput
+                                                name="to"
+                                                value={data['to'] || null}
+                                                onChange={handleValueChange('to')}
+                                                label="To"
+                                                variant="inline"
+                                                inputVariant='outlined'
+                                            />
+                                        </Grid>
+                                        <Grid item>
+                                            <Button
+                                                // disabled={loading}
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={downloadStatement}
+                                            >
+                                                Download statement
+                                            </Button>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                    </form>
+                        </form>
+
+                    </Box>
+
             </Grid>
         </Grid>
     );

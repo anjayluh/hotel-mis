@@ -128,7 +128,7 @@ const Payments = () => {
     }
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
             <Grid item xs={12}>
                 <Box p={2} className={classes.root}>
                     <Box pb={2}>
