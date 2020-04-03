@@ -18,22 +18,26 @@ const ParticipantLink = ({id, name}: IProps) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        search(
-            remoteRoutes.contacts,
-            'filter',
-            (resp) => {
-                dispatch({
-                    type: participantsConstants.participantsFetchOne,
-                    payload: {...fakeParticipantDetails()}
-                })
-            },
-            undefined,
-            () => {
-                dispatch({
-                    type: participantsConstants.participantsFetchLoading,
-                    payload: false,
-                })
-            })
+        dispatch({
+            type: participantsConstants.participantsFetchOne,
+            payload: {...fakeParticipantDetails()}
+        })
+        // search(
+        //     remoteRoutes.contacts,
+        //     'filter',
+        //     (resp) => {
+        //         dispatch({
+        //             type: participantsConstants.participantsFetchOne,
+        //             payload: {...fakeParticipantDetails()}
+        //         })
+        //     },
+        //     undefined,
+        //     () => {
+        //         dispatch({
+        //             type: participantsConstants.participantsFetchLoading,
+        //             payload: false,
+        //         })
+        //     })
     }, [id, dispatch])
     return (
         <Link style={{textDecoration: 'none' ,color:linkColor}} to={`${localRoutes.participants}/${id}`}>{name}</Link>
