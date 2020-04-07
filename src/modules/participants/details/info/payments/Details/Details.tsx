@@ -82,11 +82,11 @@ const Details = (props: IProps) => {
     const classes = useStyles()
     const [blocker, setBlocker] = useState<boolean>(false)
     const paymentData = useSelector((state: IState) => state.participants.paymentDetails);
-    const loading = useSelector((state: IState) => state.participants.loading);
+    const loading = useSelector((state: IState) => state.participants.paymentsDetailsLoading);
 
     useEffect(() => {
         dispatch({
-            type: participantsConstants.participantsFetchLoading,
+            type: participantsConstants.paymentsDetailsFetchAllLoading,
             payload: true,
         })
         search(
@@ -94,14 +94,14 @@ const Details = (props: IProps) => {
             'filter',
             (resp) => {
                 dispatch({
-                    type: participantsConstants.PaymentsDetailsFetchAll,
+                    type: participantsConstants.paymentsDetailsFetchAll,
                     payload: paymentDetails
                 })
             },
             undefined,
             () => {
                 dispatch({
-                    type: participantsConstants.participantsFetchLoading,
+                    type: participantsConstants.paymentsDetailsFetchAllLoading,
                     payload: false,
                 })
             })
@@ -112,6 +112,7 @@ const Details = (props: IProps) => {
             props.closeSlideOut()
         }
     }
+    console.log(loading, 'loading')
     return (
     <div>
         {

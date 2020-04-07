@@ -12,7 +12,8 @@ export const participantsConstants = {
     participantsBillsFetchAll: "participantsBillsFetchAll",
     participantsPaymentsFetchAll: "participantsPaymentsFetchAll",
     participantsPaymentsFetchLoading: "participantsPaymentsFetchLoading",
-    PaymentsDetailsFetchAll: "PaymentsDetailsFetchAll",
+    paymentsDetailsFetchAll: "paymentsDetailsFetchAll",
+    paymentsDetailsFetchAllLoading: "paymentsDetailsFetchAllLoading",
     participantsAddPayment: "participantsAddPayment",
     participantsBillsFetchLoading: "participantsBillsFetchLoading"
 }
@@ -28,6 +29,7 @@ export interface IParticipantsState {
     billings:IBill[]
     payments:IPayment[]
     paymentsLoading: boolean
+    paymentsDetailsLoading: boolean
     paymentDetails?: IPaymentDetails
     addedPayment?: IPayment
 }
@@ -42,6 +44,7 @@ const initialState: IParticipantsState = {
     billingsLoading: false,
     billings:[],
     paymentsLoading: false,
+    paymentsDetailsLoading: false,
     payments:[],
     paymentDetails: undefined,
     addedPayment: undefined
@@ -74,14 +77,18 @@ export default function reducer(state = initialState, action: any) {
             const billings: IBill = action.payload
             return {...state, billings, billsLoading: false}
         }
+        
         case participantsConstants.participantsPaymentsFetchLoading: {
             return {...state, paymentsLoading: action.payload}
+        }
+        case participantsConstants.paymentsDetailsFetchAllLoading: {
+            return {...state, paymentsDetailsLoading: action.payload}
         }
         case participantsConstants.participantsPaymentsFetchAll: {
             const payments: IPayment = action.payload
             return {...state, payments, loading: false}
         }
-        case participantsConstants.PaymentsDetailsFetchAll: {
+        case participantsConstants.paymentsDetailsFetchAll: {
             const paymentDetails: IPaymentDetails = action.payload
             return {...state, paymentDetails, loading: false}
         }
