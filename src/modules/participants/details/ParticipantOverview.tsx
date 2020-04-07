@@ -202,7 +202,7 @@ const ParticipantOverview = ({data}: IProps) => {
             <Grid container direction='row' style={{paddingTop: 5}}>
                 <Grid item xs={6} container direction='row'>
                     <Grid item xs={6}>
-                        <Box pl={3}>
+                        <Box style={{paddingLeft: 30}}>
                             <DetailView data={displayGeneralContactColumnOne} noColon={noColon} />
                         </Box>
                     </Grid>
