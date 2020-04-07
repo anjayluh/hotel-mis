@@ -9,11 +9,12 @@ export const participantsConstants = {
     participantsAddParticipant: "participantsAddParticipant",
     participantsFetchOne: "participantsFetchOne",
     contactPersonsFetchAll: 'contactPersonsFetchAll',
-    participantsBillsFetchAll: 'participantsBillsFetchAll',
-    participantsPaymentsFetchAll: 'participantsPaymentsFetchAll',
-    PaymentsDetailsFetchAll: 'PaymentsDetailsFetchAll',
+    participantsBillsFetchAll: "participantsBillsFetchAll",
+    participantsPaymentsFetchAll: "participantsPaymentsFetchAll",
+    participantsPaymentsFetchLoading: "participantsPaymentsFetchLoading",
+    PaymentsDetailsFetchAll: "PaymentsDetailsFetchAll",
     participantsAddPayment: "participantsAddPayment",
-    participantsPaymentsFetchLoading: "participantsPaymentsFetchLoading"
+    participantsBillsFetchLoading: "participantsBillsFetchLoading"
 }
 
 export interface IParticipantsState {
@@ -23,8 +24,10 @@ export interface IParticipantsState {
     participant?: IParticipant,
     data: any,
     contactPersons: any
+    billingsLoading?: boolean
     billings:IBill[]
     payments:IPayment[]
+    paymentsLoading: boolean
     paymentDetails?: IPaymentDetails
     addedPayment?: IPayment
 }
@@ -36,7 +39,9 @@ const initialState: IParticipantsState = {
     selected: undefined,
     fakeSelected:  undefined,
     contactPersons: [],
+    billingsLoading: false,
     billings:[],
+    paymentsLoading: false,
     payments:[],
     paymentDetails: undefined,
     addedPayment: undefined
@@ -60,23 +65,25 @@ export default function reducer(state = initialState, action: any) {
         }
         case participantsConstants.participantsFetchOne: {
             const selected: IParticipant = action.payload
-            return {...state, selected}
+            return {...state, selected, loading: false}
+        }
+        case participantsConstants.participantsBillsFetchLoading: {
+            return {...state, billingsLoading: action.payload}
         }
         case participantsConstants.participantsBillsFetchAll: {
             const billings: IBill = action.payload
-            return {...state, billings}
+            return {...state, billings, billsLoading: false}
         }
         case participantsConstants.participantsPaymentsFetchLoading: {
-            return {...state, loading: action.payload}
+            return {...state, paymentsLoading: action.payload}
         }
         case participantsConstants.participantsPaymentsFetchAll: {
             const payments: IPayment = action.payload
             return {...state, payments, loading: false}
         }
-
         case participantsConstants.PaymentsDetailsFetchAll: {
             const paymentDetails: IPaymentDetails = action.payload
-            return {...state, paymentDetails}
+            return {...state, paymentDetails, loading: false}
         }
 
         case participantsConstants.participantsAddPayment: {

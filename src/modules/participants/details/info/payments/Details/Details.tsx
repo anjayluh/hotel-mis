@@ -82,13 +82,13 @@ const Details = (props: IProps) => {
     const classes = useStyles()
     const [blocker, setBlocker] = useState<boolean>(false)
     const paymentData = useSelector((state: IState) => state.participants.paymentDetails);
-    const [loading, setLoading] = useState<boolean>(false)
-
-
-
+    const loading = useSelector((state: IState) => state.participants.loading);
 
     useEffect(() => {
-        setLoading(true)
+        dispatch({
+            type: participantsConstants.participantsFetchLoading,
+            payload: true,
+        })
         search(
             remoteRoutes.contacts,
             'filter',
@@ -100,7 +100,10 @@ const Details = (props: IProps) => {
             },
             undefined,
             () => {
-                setLoading(false)
+                dispatch({
+                    type: participantsConstants.participantsFetchLoading,
+                    payload: false,
+                })
             })
     }, [])
 
@@ -114,7 +117,6 @@ const Details = (props: IProps) => {
         {
             paymentData &&
             <div className={classes.root} >
-
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Box display='flex' py={1}>
@@ -130,9 +132,7 @@ const Details = (props: IProps) => {
                             }
                         </Box>
                     </Grid>
-
                 </Grid>
-
             </div>
         }
 

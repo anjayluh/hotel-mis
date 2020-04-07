@@ -28,11 +28,12 @@ export const columns: XHeadCell[] = [
     },
     {
         name: 'amount', label: 'Amount',
+        numeric: true,
         render: (value, rec) => printFormattedMoney(value),
         cellProps: {
             style: {
                 width: 80,
-                textAlign: 'right',
+                paddingRight: 40
 
             }
         }

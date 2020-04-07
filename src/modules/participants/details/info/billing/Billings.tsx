@@ -63,11 +63,14 @@ const headCells: XHeadCell[] = [...columns];
 const Billings = () => {
     const dispatch = useDispatch();
     const billingData = useSelector((state: IState) => state.participants.billings)
-    const [loading, setLoading] = useState<boolean>(false)
+    const loading = useSelector((state: IState) => state.participants.billingsLoading)
     const classes = useStyles();
 
     useEffect(() => {
-        setLoading(true)
+        dispatch({
+            type: participantsConstants.participantsBillsFetchLoading,
+            payload: true,
+        })
         search(
             remoteRoutes.contacts,
             'filter',
@@ -79,7 +82,10 @@ const Billings = () => {
             },
             undefined,
             () => {
-                setLoading(false)
+                dispatch({
+                    type: participantsConstants.participantsBillsFetchLoading,
+                    payload: false,
+                })
             })
     }, [])
 
@@ -91,7 +97,6 @@ const Billings = () => {
         }
         return Billings
     }
-    console.log(billingData)
 
     return (
         <Grid container spacing={2}>

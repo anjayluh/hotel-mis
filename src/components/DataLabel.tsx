@@ -9,6 +9,7 @@ interface IProps {
 }
 
 const DataLabel = ({bold, noColon, children,...props}: IProps) => {
+    children = children ? children : '-'
     if (bold)
         return (
             <Typography variant='body2' noWrap component='div' {...props}>

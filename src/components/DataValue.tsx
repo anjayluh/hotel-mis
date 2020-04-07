@@ -3,6 +3,7 @@ import {Typography} from "@material-ui/core";
 
 
 const DataValue = ({children,...props}: any) => {
+    children = children ? children : '-'
     return (
         <Typography variant='body1' component='div' {...props} >
             {children}

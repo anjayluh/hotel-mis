@@ -11,20 +11,26 @@ export const columns: XHeadCell[] = [
         render: (value, rec) => <span>{printDate(value)}</span>,
         cellProps: {
             style: {
-                width: 60
+                width: 70
             }
         }
     },
     {
         name: 'billNumber', label: 'Bill Number',
-        cellProps: {style: {width: 70}}
+        cellProps: {
+            style: {
+                width: 70,
+                paddingLeft: 80
+            }
+        }
     },
     {
         name: 'consumption', label: 'Consumption',
+        numeric: true,
         render: (value, rec) => printFormattedMoney(value),
         cellProps: {
             style: {
-                width: 30,
+                width: 100,
                 textAlign: 'right',
                 paddingRight: 80
 
@@ -33,20 +39,22 @@ export const columns: XHeadCell[] = [
     },
     {
         name: 'rate', label: 'Rate',
+        numeric: true,
         cellProps: {
             style: {
-                width: 30,
-                textAlign: 'right'
+                width: 80,
+                paddingRight: 80
             }
         }
     },
     {
         name: 'billAmount', label: 'Bill amount',
+        numeric: true,
         render: (value, rec) => printFormattedMoney(value),
         cellProps: {
             style: {
                 width: 80,
-                textAlign: 'right'
+                paddingRight: 40
             }
         }
     },
