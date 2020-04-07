@@ -94,10 +94,6 @@ const Payments = () => {
             type: participantsConstants.participantsPaymentsFetchAll,
             payload: [...callFakePayment(5)],
         })
-        dispatch({
-            type: participantsConstants.participantsPaymentsFetchLoading,
-            payload: false,
-        })
     }, [])
 
     function callFakePayment(length: number) {
@@ -108,7 +104,6 @@ const Payments = () => {
         }
         return Payments
     }
-
 
     function handleToggleDrawer(id?: any) {
         setOpenSlideOut(!openSlideOut)

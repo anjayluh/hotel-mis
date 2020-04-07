@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
       backgroundColor: '#ffffff',
+      borderBottom: '1px solid #cccccc'
     },
     link: {
         cursor: 'pointer'
@@ -40,6 +41,7 @@ const DetailsHeading = (props: IProps) => {
                         key={heading.text}
                         title={heading.text}
                         status={heading.status}
+                        customStyles='padding'
                         />
                         ))
                 }

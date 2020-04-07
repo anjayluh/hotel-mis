@@ -71,7 +71,7 @@ export default function reducer(state = initialState, action: any) {
         }
         case participantsConstants.participantsPaymentsFetchAll: {
             const payments: IPayment = action.payload
-            return {...state, payments}
+            return {...state, payments, loading: false}
         }
 
         case participantsConstants.PaymentsDetailsFetchAll: {

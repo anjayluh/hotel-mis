@@ -8,7 +8,8 @@ interface IProps {
     editButton?: any
     icon?: any
     handleClickedItem?: (item: any) => any
-    status?: any
+    status?: any,
+    customStyles?: any
 }
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,10 +18,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     active: {
         borderBottom: '3px solid'
+    },
+    padding: {
+        paddingLeft: '20px',
+        paddingRight: '20px'
     }
   }),
 );
-const SectionTitle = ({title, editButton, icon, handleClickedItem, status}: IProps) => {
+const SectionTitle = ({title, editButton, icon, handleClickedItem, status, customStyles}: IProps) => {
     const classes = useStyles();
     const [canEdit, setCanEdit] = useState<boolean>(false)
     const [isActive, setIsActive] = useState(status);
@@ -40,14 +45,15 @@ const SectionTitle = ({title, editButton, icon, handleClickedItem, status}: IPro
         }
     }
     const active = isActive ? classes.active : ''
+    const padding = customStyles === 'padding'  ? classes.padding : ''
     return (
         <Box display="flex" px={1} py={1}
              onMouseEnter={handleEntered}
              onMouseLeave={handleLeave}
              onClick={handleClick}
-            className={`has-hidden-icon ${active}`}
+            className={`has-hidden-icon ${active} ${padding}`}
         >
-            <Box display='flex' flexGrow={1} className={classes.heading} mr={2} ml={2}>
+            <Box display='flex' flexGrow={1} className={classes.heading}>
                 <Box>
                     <Typography variant='body1'>{icon}</Typography>
                 </Box>

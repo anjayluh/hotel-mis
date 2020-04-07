@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import {Chip} from "@material-ui/core";
-import { IParticipant} from "../../types";
+import {IParticipant} from "../../types";
 import {createStyles, makeStyles, Theme} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -28,10 +28,14 @@ const useStyles = makeStyles((theme: Theme) =>
         nameHolder: {
             paddingTop: theme.spacing(1)
         },
-        summaryButton: {
+        summaryChip: {
             backgroundColor: '#4bb050',
-            padding: '1px 10px 0px 10px',
-            textTransform: 'capitalize'
+            marginTop: '4px',
+            padding: '0px 5px',
+            borderRadius: '3px',
+            textTransform: 'capitalize',
+            height: '18px',
+            fontSize: '0.75rem'
         }
     })
 );
@@ -47,7 +51,7 @@ const ParticipantSummary = ({data}: IProps) => {
                         <Typography variant='h5'>{data.name}</Typography>
                         <Typography variant='body2'>{data.type.name}</Typography>
                         <Chip
-                            size='small' variant="default" color='primary' className={classes.summaryButton}
+                            size='small' variant="default" color='primary' className={classes.summaryChip}
                             label={data.status.name}
                         />
 

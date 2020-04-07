@@ -48,11 +48,12 @@ export const columns: XHeadCell[] = [
     },
     {
         name: 'monthlyCap', label: 'Monthly Cap',
+        numeric: true,
         render: (value, rec) => <span>{printFormattedMoney(value)}</span>,
         cellProps: {
             style: {
                 width: 60,
-                textAlign: 'right'
+                paddingRight: 40
             }
         }
     },

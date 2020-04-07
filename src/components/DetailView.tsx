@@ -44,10 +44,11 @@ interface IProps {
     data: IRec[]
     columns?: number,
     useGrid?: boolean,
-    bold?:boolean
+    bold?:boolean,
+    noColon?: boolean
 }
 
-const TableView = ({data, useGrid = false,bold=false}: IProps) => {
+const TableView = ({data, useGrid = false,bold=false, noColon=true}: IProps) => {
     const classes = useStyles();
     if (useGrid)
         return (
@@ -77,7 +78,7 @@ const TableView = ({data, useGrid = false,bold=false}: IProps) => {
             {data.map(row => row.label !== '' ? (
                 <tr key={row.label} className={classes.row}>
                     <td className={clsx(classes.col, classes.label)}>
-                        <DataLabel bold={bold}>
+                        <DataLabel bold={bold} noColon={noColon}>
                             {row.label}
                         </DataLabel>
                     </td>

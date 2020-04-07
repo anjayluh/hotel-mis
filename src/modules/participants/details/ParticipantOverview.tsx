@@ -165,6 +165,7 @@ const ParticipantOverview = ({data}: IProps) => {
     const contactPersonsColumnOne = contactPersonsOne(callContactPersons(1));
     const contactPersonsColumnTwo = contactPersonsTwo(callContactPersons(1));
     const bold= false;
+    const noColon = true;
     return (
         <Grid container spacing={1} style={{marginBottom: 15}}>
             <Grid item xs={12}>
@@ -173,18 +174,20 @@ const ParticipantOverview = ({data}: IProps) => {
                         <Grid item lg={12} xs={12}>
                             <Grid container spacing={1}>
                                 <Grid item container direction='row' lg={12} justify="space-evenly" spacing={5}>
-                                    <Grid item xs={6} lg={6} md={6}>
-                                        <SectionTitle
-                                            title='General Contact Overview'
-                                            icon={<PersonIcon fontSize='inherit'/>}
-                                        />
+                                    <Grid item xs={6} lg={6} md={6} style={{paddingLeft: 28}}>
+                                        <Grid style={{paddingLeft: 8}}>
+                                            <SectionTitle
+                                                title='General Contact Overview'
+                                                icon={<PersonIcon fontSize='inherit'/>}
+                                            />
+                                        </Grid>
                                         <Divider/>
                                     </Grid>
-                                    <Grid item xs={6} lg={6} md={6}>
+                                    <Grid item xs={6} lg={6} md={6} style={{paddingLeft: 28}}>
                                         <SectionTitle
                                             title='Contact Persons'
                                             icon={<FormatListBulletedIcon fontSize='inherit'/>}
-                                        />
+                                        />                                    
                                         <Divider/>
                                     </Grid>
                                 </Grid>
@@ -199,19 +202,19 @@ const ParticipantOverview = ({data}: IProps) => {
             <Grid container direction='row' style={{paddingTop: 5}}>
                 <Grid item xs={6} container direction='row'>
                     <Grid item xs={6}>
-                        <Box p={1} ml={3}>
-                        <DetailView data={displayGeneralContactColumnOne} />
-                    </Box>
+                        <Box pl={3}>
+                            <DetailView data={displayGeneralContactColumnOne} noColon={noColon} />
+                        </Box>
                     </Grid>
                     <Grid item xs={6}>
-                        <Box p={1}>
-                        <DetailView data={displayGeneralContactColumnTwo} />
-                    </Box>
+                        <Box pl={5}>
+                            <DetailView data={displayGeneralContactColumnTwo} noColon={noColon} />
+                        </Box>
                     </Grid>
                 </Grid>
                 <Grid item xs={6} container direction='row'>
-                    <Grid item xs={6} >
-                        <Box p={1}>
+                    <Grid item xs={6} style={{paddingLeft: 8}}>
+                        <Box pl={1}>
                             <table className={classes.root}>
                                 <tbody>
                                     <tr key={contactPersonsColumnOne[0].value} className={classes.row}>
@@ -233,7 +236,7 @@ const ParticipantOverview = ({data}: IProps) => {
                         </Box>
                     </Grid>
                     <Grid item xs={6}>
-                        <Box p={1}>
+                        <Box pl={1}>
                         <table className={classes.root}>
                             <tbody>
                                 <tr key={contactPersonsColumnTwo[0].value} className={classes.row}>
