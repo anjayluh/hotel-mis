@@ -17,10 +17,9 @@ interface IProps {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        buttonClose: {
-            textTransform: 'capitalize',
-            fontWeight: 'normal',
-
+        closeButton: {
+            padding: '4px 30px',
+            backgroundColor: "rgba(38, 50, 56, 0.04)"
         },
         cancel: {
             position: 'fixed',
@@ -83,7 +82,7 @@ const XForm = (props: IProps) => {
                                         props.onCancel &&
                                         <Grid item className={classes.cancel}>
                                             <Button
-                                            className={classes.buttonClose}
+                                                className={classes.closeButton}
                                                 variant='text'
                                                 color='default'
                                                 onClick={props.onCancel}

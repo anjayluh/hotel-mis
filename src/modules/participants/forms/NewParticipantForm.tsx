@@ -2,7 +2,7 @@ import React from 'react';
 import {useState} from "react";
 import * as yup from "yup";
 import * as faker from "faker";
-import {reqEmail, reqString} from "../../../data/validations";
+import { reqEmail, reqString, phoneNumber, reqPhoneNumber } from "../../../data/validations";
 import {organisationTypeCategories} from "../../../data/comboCategories";
 import {FormikActions} from "formik";
 import Grid from "@material-ui/core/Grid";
@@ -23,7 +23,8 @@ const schema = yup.object().shape(
     {
         name: reqString,
         type: reqString,
-        phoneNumberPrimary: reqString,
+        phoneNumberPrimary: reqPhoneNumber,
+        phoneNumberOther: phoneNumber,
         officialEmail: reqEmail,
         primaryEmail: reqEmail,
     }

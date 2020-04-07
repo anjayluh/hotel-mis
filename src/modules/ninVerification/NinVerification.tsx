@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         closeButton: {
             padding: '4px 30px',
+            backgroundColor: "rgba(38, 50, 56, 0.04)"            
         },
 
         pageHeading: {
