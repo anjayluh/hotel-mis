@@ -19,7 +19,7 @@ export const columns: XHeadCell[] = [
         cellProps: {style: {width: 70}}
     },
     {
-        name: 'referenceNumber', label: 'Reference number',
+        name: 'referenceNumber', label: 'Ref. Number',
         cellProps: {
             style: {
                 width: 80,
