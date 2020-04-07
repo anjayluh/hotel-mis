@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         closeButton: {
             padding: '4px 30px',
+            backgroundColor: 'rgba(38, 50, 56, 0.04)'
         },
         addNewButton: {
             color: '#428BCA',
@@ -77,7 +78,7 @@ const headCells: XHeadCell[] = [...columns];
 const Payments = () => {
     const dispatch = useDispatch();
     const paymentsData = useSelector((state: IState) => state.participants.payments)
-    const [loading, setLoading] = useState<boolean>(false)
+    const loading = useSelector((state: IState) => state.participants.loading)
     const [anchor, setAnchor]= useState<Anchor>('right');
     const [openSlideOut, setOpenSlideOut] = useState(false);
     const classes = useStyles();
@@ -85,20 +86,18 @@ const Payments = () => {
     const [showNewPaymentForm, setShowNewPaymentForm] = useState<boolean>(false)
 
     useEffect(() => {
-        setLoading(true)
-        search(
-            remoteRoutes.contacts,
-            'filter',
-            (resp) => {
-                dispatch({
-                    type: participantsConstants.participantsPaymentsFetchAll,
-                    payload: [...callFakePayment(5)],
-                })
-            },
-            undefined,
-            () => {
-                setLoading(false)
-            })
+        dispatch({
+            type: participantsConstants.participantsPaymentsFetchLoading,
+            payload: true,
+        })
+        dispatch({
+            type: participantsConstants.participantsPaymentsFetchAll,
+            payload: [...callFakePayment(5)],
+        })
+        dispatch({
+            type: participantsConstants.participantsPaymentsFetchLoading,
+            payload: false,
+        })
     }, [])
 
     function callFakePayment(length: number) {

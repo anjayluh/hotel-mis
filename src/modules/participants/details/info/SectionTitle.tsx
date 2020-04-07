@@ -31,7 +31,6 @@ const SectionTitle = ({title, editButton, icon, handleClickedItem, status}: IPro
         setCanEdit(false)
     }
     useEffect(() => {
-        console.log('hi')
         setIsActive(status)
     }
         , [status]);

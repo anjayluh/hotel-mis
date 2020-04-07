@@ -93,7 +93,7 @@ const NewPaymentForm = (props: IProps) => {
     return (
         <XFormSimple onSubmit={handleSubmit} schema={schema} initialValues={data}
                      onCancel={handleClose}>
-            <Grid spacing={2} container direction='column'>
+            <Grid spacing={1} container direction='column'>
                 <Grid item xs={12}>
                     <XDateInput
                         name="paymentDate"
@@ -106,7 +106,7 @@ const NewPaymentForm = (props: IProps) => {
                     <XSelectInput
                         size='small'
                         name="paymentType"
-                        label="paymentType"
+                        label="Payment Type"
                         options={toOptions(paymentTypes)}
                         variant='outlined'
                     />
@@ -132,7 +132,7 @@ const NewPaymentForm = (props: IProps) => {
                 <Grid item xs={12}>
                     <XDateInput
                         name="dateOfEntry"
-                        label="Date of entry"
+                        label="Date of Entry"
                         inputVariant='outlined'
                         size='small'
                     />
@@ -140,7 +140,7 @@ const NewPaymentForm = (props: IProps) => {
                 <Grid item xs={12}>
                     <XTextInput
                         name="enteredBy"
-                        label="Entered by"
+                        label="Entered By"
                         type="text"
                         variant='outlined'
                         size='small'

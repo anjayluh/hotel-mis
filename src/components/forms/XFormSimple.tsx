@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         closeButton: {
             padding: '4px 30px',
-            backgroundColor: "rgba(38, 50, 56, 0.04)"
+            backgroundColor: 'rgba(38, 50, 56, 0.04)'
         },
         cancel: {
             position: 'fixed',
