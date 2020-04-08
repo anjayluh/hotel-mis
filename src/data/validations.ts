@@ -10,6 +10,9 @@ export const reqEmail = yup.string().email('Must be a valid email').required("Em
 export const email = yup.string().email('Must be a valid email')
 export const reqDate = yup.date().required(reqMsg).notOneOf(invalidInputs, reqMsg).nullable(true)
 
+const inRegExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]{13,13}$/
+export const reqNin = yup.string().matches(inRegExp, 'Must be a valid NIN').required('Phone number is required').notOneOf(invalidInputs, reqMsg)
+
 const phoneRegExp = /^0\d{9,9}$/;
 export const phoneNumber = yup.string().matches(phoneRegExp, 'Must be a valid phone number')
-export const reqPhoneNumber = yup.string().matches(phoneRegExp, 'Must be a valid phone number').required('Phone number is required')
+export const reqPhoneNumber = yup.string().matches(phoneRegExp, 'Must be a valid phone number').required('Phone number is required').notOneOf(invalidInputs, reqMsg)

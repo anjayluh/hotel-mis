@@ -118,7 +118,9 @@ export const verificationRequests = () => {
 
 export const getStatus  = (verificationRequest: IVerificationRequest) => {
     // const {name} = verificationRequest.status
-    return verificationRequest.status.name
+    if(verificationRequest.status){
+        return verificationRequest.status.name
+    }else return
 }
 
 export const fakeRequestDetails =():IRequestDetails => {

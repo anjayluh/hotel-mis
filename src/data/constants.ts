@@ -101,6 +101,7 @@ const notificationURL = env.Notification
 export const remoteRoutes = {
     contactPersons: crmURL + '/api/participants/contact',
     participants: crmURL + '/api/participants',
+    ninVerification: crmURL + '/api/ninVerification',
     authServer: authURL,
     gatewayUpload: gatewayURL + '/files',
     login: authURL + '/api/test/login',
@@ -118,15 +119,12 @@ export const remoteRoutes = {
     contactsPhone: crmURL + '/api/phone',
     contactsAddress: crmURL + '/api/address',
     contactsIdentification: crmURL + '/api/identification',
-
     workflows: caseHandlingURL + '/api/workflows',
     workflowsCombo: caseHandlingURL + '/api/queries/combo',
     documentsDownload: caseHandlingURL + '/api/documents/download',
     workflowsManual: caseHandlingURL + '/api/manual',
     samplePdf: caseHandlingURL + '/sample.pdf',
     gatewayMetadata: gatewayURL + '/api/meta/data',
-
-
     users: authURL + '/api/user',
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import {useDispatch} from "react-redux";
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
@@ -29,6 +30,7 @@ import logo from "../assets/download.png";
 import {Typography} from "@material-ui/core";
 import {themeBackground} from "../theme/custom-colors";
 import Paper from "@material-ui/core/Paper";
+import {verificationRequestConstants, IVerificationRequestState} from "../data/redux/ninVerification/reducer";
 
 const drawerWidth = 240;
 
@@ -125,7 +127,7 @@ const useStyles = makeStyles((theme: Theme) =>
 function Layout(props: any) {
     const classes = useStyles();
     const theme = useTheme();
-
+    const dispatch = useDispatch();
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     function handleDrawerToggle() {
@@ -152,6 +154,12 @@ function Layout(props: any) {
         return pathMatches(path, pathStr)
     }
 
+    function addNewRequest(){
+        dispatch({
+            type:verificationRequestConstants.RequestsAddNew,
+            payload: true
+        })
+    }
 
     const drawer = (
         <div style={{backgroundColor: themeBackground, color: 'white'}}>
@@ -269,7 +277,7 @@ function Layout(props: any) {
                     <div className={classes.logoHolder}>
                         <img src={logo} alt="logo" className={classes.logo}/>
                     </div>
-                    <Button variant='contained' color='primary'>New Request</Button>
+                    <Button variant='contained' color='primary' onClick={addNewRequest}>New Request</Button>
                     <BarView textClass={classes.menuSelected}/>
                 </Toolbar>
             </AppBar>

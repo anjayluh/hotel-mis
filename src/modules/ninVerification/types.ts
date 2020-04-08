@@ -98,11 +98,13 @@ export interface IVerificationStatus {
 }
 export interface IVerificationRequest {
     id: string,
-    date: Date,
+    date?: Date,
     name: string,
     nin: string,
+    dateOfBirth?: Date,
     status: IVerificationStatus,
-    requestId: string
+    requestId?: string,
+    cardNumber?: string
 }
 export interface IRequestDetailsStatus {
     order: number,
