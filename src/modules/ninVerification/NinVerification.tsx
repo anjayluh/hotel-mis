@@ -123,7 +123,9 @@ const NinVerifications = () => {
   function handleToggleDrawer(id?: any) {
     if (id) {
       setViewDetails(id);
-    } else setViewDetails(null);
+    } else {
+      setViewDetails(null);
+    }
     dispatch({
       type: verificationRequestConstants.RequestsAddNew,
       payload: !turnOnSlideOut
