@@ -174,7 +174,6 @@ const Payments = () => {
                     showPaymentDetails &&
                         <div>
                             <Details closeSlideOut={handlePaymentDetails}></Details>
-
                             <Grid item xs={12} className={classes.close}>
                                 <Button
                                     className={classes.closeButton}

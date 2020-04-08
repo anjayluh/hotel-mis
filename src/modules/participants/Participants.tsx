@@ -68,7 +68,7 @@ const headCells: XHeadCell[] = [...columns];
 const Participants = () => {
     const dispatch = useDispatch();
     const [createDialog, setCreateDialog] = useState(false);
-    const [Add, setAdd] = useState(false);
+    const [add, setAdd] = useState(false);
     const [anchor, setAnchor]= useState<Anchor>('right');
     const [openSlideOut, setOpenSlideOut] = useState(false);
     const {data, loading}: IParticipantsState = useSelector((state: IState) => state.participants)
@@ -136,7 +136,6 @@ const Participants = () => {
                             <Grid container>
                                 <Grid item sm={12} className={classes.pageHeading}>
                                     <Typography variant='h4'>Participants</Typography>
-                                    {/* Temporarily removed add icon from button startIcon={<AddIcon/> */}
                                     <Button className={classes.addNewButton}
                                     startIcon={<AddIcon className={classes.addIcon}/>}
                                     variant="text" onClick={handleNew}>
@@ -170,7 +169,7 @@ const Participants = () => {
             
             <SlideOutDrawer handleToggleDrawer={handleToggleDrawer} open={openSlideOut} anchor={anchor} title="Add New Participants">
             {
-                Add ? <NewParticipantForm closeSlideOut={handleToggleDrawer}></NewParticipantForm> :
+                add ? <NewParticipantForm closeSlideOut={handleToggleDrawer}></NewParticipantForm> :
                 <p>Edit coming soon...</p>
             }
             </SlideOutDrawer>

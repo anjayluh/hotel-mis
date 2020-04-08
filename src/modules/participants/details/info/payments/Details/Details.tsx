@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-const paymentDetails: IPaymentDetails = fakePaymentDetails();
+const tempPaymentDetails: IPaymentDetails = fakePaymentDetails();
 
 const Details = (props: IProps) => {
     const dispatch: Dispatch<any> = useDispatch();
@@ -81,8 +81,7 @@ const Details = (props: IProps) => {
     const wfClasses = useWfStyles()
     const classes = useStyles()
     const [blocker, setBlocker] = useState<boolean>(false)
-    const paymentData = useSelector((state: IState) => state.participants.paymentDetails);
-    const loading = useSelector((state: IState) => state.participants.paymentsDetailsLoading);
+    const {paymentDetails, paymentsDetailsLoading} = useSelector((state: IState) => state.participants);
 
     useEffect(() => {
         dispatch({
@@ -95,14 +94,14 @@ const Details = (props: IProps) => {
             (resp) => {
                 dispatch({
                     type: participantsConstants.paymentsDetailsFetchAll,
-                    payload: paymentDetails
+                    payload: tempPaymentDetails
                 })
             },
             undefined,
             () => {
                 dispatch({
-                    type: participantsConstants.paymentsDetailsFetchAllLoading,
-                    payload: false,
+                    type: participantsConstants.paymentsDetailsFetchAll,
+                    payload: tempPaymentDetails
                 })
             })
     }, [])
@@ -112,31 +111,40 @@ const Details = (props: IProps) => {
             props.closeSlideOut()
         }
     }
+    console.log(paymentDetails, paymentsDetailsLoading)
     return (
     <div>
+        
         {
-            paymentData &&
+            paymentsDetailsLoading ?
+            <div className={classes.root} >
+                <Grid container spacing={1}>
+                    <Grid item xs={12}>
+                        <Box>
+                        <Loading loaderClass={classes.loading}/> 
+                        </Box>
+                    </Grid>
+                </Grid>
+            </div> :
             <div className={classes.root} >
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Box display='flex' py={1}>
                             <Box flexGrow={1} pt={1}>
-                                <Typography variant='h5'>Payment ID: { paymentData ? paymentData.paymentId: 'loading'}</Typography>
+                               <Typography variant='h5'>Payment ID: { paymentDetails ? paymentDetails.paymentId: 'loading'}</Typography>
                             </Box>
                         </Box>
                         <Divider/>
                         <Box pt={1}>
                             {
-                                loading ? <Loading loaderClass={classes.loading}/> :
-                                    <Summary data={paymentData}/>
+                                paymentDetails &&
+                            <Summary data={paymentDetails}/>
                             }
                         </Box>
                     </Grid>
                 </Grid>
             </div>
         }
-
-
     </div>
 
     );

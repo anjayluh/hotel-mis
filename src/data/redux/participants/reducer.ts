@@ -81,16 +81,16 @@ export default function reducer(state = initialState, action: any) {
         case participantsConstants.participantsPaymentsFetchLoading: {
             return {...state, paymentsLoading: action.payload}
         }
-        case participantsConstants.paymentsDetailsFetchAllLoading: {
-            return {...state, paymentsDetailsLoading: action.payload}
-        }
         case participantsConstants.participantsPaymentsFetchAll: {
             const payments: IPayment = action.payload
             return {...state, payments, loading: false}
         }
+        case participantsConstants.paymentsDetailsFetchAllLoading: {
+            return {...state, paymentsDetailsLoading: action.payload}
+        }
         case participantsConstants.paymentsDetailsFetchAll: {
             const paymentDetails: IPaymentDetails = action.payload
-            return {...state, paymentDetails, loading: false}
+            return {...state, paymentDetails, paymentsDetailsLoading: false}
         }
 
         case participantsConstants.participantsAddPayment: {

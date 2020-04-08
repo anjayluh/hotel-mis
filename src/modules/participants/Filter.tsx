@@ -19,7 +19,7 @@ const Filter = ({onFilter, loading}: IProps) => {
     const [data, setData] = useState({
         name: '',
         type: '',
-        dateCreated: new Date('2014-08-18T21:11:54')
+        dateCreated: null
     })
 
     const participantTypes = ['Commercial Bank', 'Microfinance', 'Forex Bureau']
