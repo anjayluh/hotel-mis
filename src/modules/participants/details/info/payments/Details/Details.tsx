@@ -112,7 +112,6 @@ const Details = (props: IProps) => {
             props.closeSlideOut()
         }
     }
-    console.log(loading, 'loading')
     return (
     <div>
         {
