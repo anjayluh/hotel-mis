@@ -115,8 +115,8 @@ const Billings = () => {
                 <XTable
                   headCells={headCells}
                   data={billingData}
-                  initialRowsPerPage={4}
-                  usePagination={false}
+                  initialRowsPerPage={10}
+                  usePagination={true}
                 />
               </Grid>
             </Grid>
