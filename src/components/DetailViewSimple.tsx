@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { chunkArray } from "../utils/arrayHelpers";
 import DataLabel from "./DataLabel";
@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
+import { EditIconButton, DeleteIconButton } from "./EditIconButton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,6 +32,19 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     value: {
       width: "100%"
+    },
+    contactPersonsCol: {
+      marginLeft: 0,
+      paddingLeft: 0,
+      paddingBottom: "unset"
+    },
+    contacts: {
+      position: "relative"
+    },
+    contactActions: {
+      position: "absolute",
+      top: "0px",
+      right: "0px"
     }
   })
 );
@@ -46,22 +60,41 @@ interface IProps {
   useGrid?: boolean;
   bold?: boolean;
   noColon?: boolean;
+  handleClickedItem?: (method: string, item: any) => any;
+  editButton: any;
+  deleteButton?: any;
 }
 
-const TableView = ({
-  data,
-  useGrid = false,
-  bold = false,
-  noColon = true
-}: IProps) => {
+const TableView = (props: IProps) => {
   const classes = useStyles();
-  if (useGrid)
+  const [canEdit, setCanEdit] = useState<boolean>(false);
+  const [canDelete, setCanDelete] = useState<boolean>(false);
+
+  const handleEntered = () => {
+    setCanEdit(true);
+    setCanDelete(true);
+  };
+  const handleLeave = () => {
+    setCanEdit(false);
+    setCanDelete(false);
+  };
+  const handleEdit = () => {
+    if (props.handleClickedItem) {
+      props.handleClickedItem("edit", props.data);
+    }
+  };
+  const handleDelete = (itemData: any) => {
+    if (props.handleClickedItem) {
+      props.handleClickedItem("delete", props.data);
+    }
+  };
+  if (props.useGrid)
     return (
       <Grid container spacing={0}>
-        {data.map(it => (
+        {props.data.map(it => (
           <Grid item xs={12} key={it.value}>
             <Box display="flex" pb={0}>
-              {bold ? (
+              {props.bold ? (
                 <Box flexGrow={1}>
                   <Typography variant="body1" noWrap>
                     {it.value}
@@ -84,33 +117,49 @@ const TableView = ({
       </Grid>
     );
   return (
-    <table className={classes.root}>
-      <tbody>
-        {data.map((row, index) =>
-          row.value !== "" ? (
-            <tr key={index} className={classes.row}>
-              <td className={clsx(classes.col, classes.label)}>
-                <DataLabel bold={bold} noColon={noColon}>
-                  {row.label}
-                </DataLabel>
-              </td>
-              <td className={clsx(classes.col, classes.value)}>
-                <DataValue>{row.value}</DataValue>
-              </td>
-            </tr>
-          ) : (
-            <tr key={row.value} className={classes.row}>
-              <td colSpan={2} />
-              &nbsp;
-            </tr>
-          )
+    <Box
+      pl={1}
+      className={classes.contacts}
+      onMouseEnter={handleEntered}
+      onMouseLeave={handleLeave}
+    >
+      <table className={classes.root}>
+        <tbody>
+          <tr key={props.data[0].value} className={classes.row}>
+            <td className={clsx(classes.contactPersonsCol, classes.value)}>
+              <DataValue>{props.data[0].value}</DataValue>
+            </td>
+          </tr>
+          <tr key={props.data[1].label} className={classes.row}>
+            <td className={clsx(classes.col, classes.label)}>
+              <DataLabel noColon={true} bold={props.bold} noWrap={false}>
+                {props.data[1].value}
+              </DataLabel>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <Box className={classes.contactActions} display="flex">
+        {props.editButton && (
+          <Box onClick={handleEdit}>{canEdit && props.editButton}</Box>
         )}
-      </tbody>
-    </table>
+        {props.deleteButton && (
+          <Box onClick={handleDelete}>{canDelete && props.deleteButton}</Box>
+        )}
+      </Box>
+    </Box>
   );
 };
 
-const DetailView = ({ data, columns, useGrid, bold }: IProps) => {
+const DetailView = ({
+  data,
+  columns,
+  useGrid,
+  bold,
+  editButton,
+  deleteButton,
+  handleClickedItem
+}: IProps) => {
   if (columns) {
     const parts = chunkArray(data, columns);
     const size: any = 12 / columns;
@@ -118,13 +167,29 @@ const DetailView = ({ data, columns, useGrid, bold }: IProps) => {
       <Grid container>
         {parts.map((it, index) => (
           <Grid item xs={size} key={index}>
-            <TableView data={it} useGrid={useGrid} bold={bold} />
+            <TableView
+              data={it}
+              useGrid={useGrid}
+              bold={bold}
+              editButton={editButton}
+              deleteButton={deleteButton}
+              handleClickedItem={handleClickedItem}
+            />
           </Grid>
         ))}
       </Grid>
     );
   } else {
-    return <TableView data={data} useGrid={useGrid} bold={bold} />;
+    return (
+      <TableView
+        data={data}
+        useGrid={useGrid}
+        bold={bold}
+        editButton={editButton}
+        deleteButton={deleteButton}
+        handleClickedItem={handleClickedItem}
+      />
+    );
   }
 };
 

@@ -57,7 +57,7 @@ export interface IContactPersonPhone {
 export interface IContactPerson {
     id?: string
     name: string
-    category: string
+    role: string
     phone: IContactPersonPhone
     email: string
 }

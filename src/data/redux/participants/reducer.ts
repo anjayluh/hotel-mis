@@ -1,4 +1,4 @@
-import {IBill, IParticipant, IPayment, IPaymentDetails} from "../../../modules/participants/types";
+import {IBill, IParticipant, IPayment, IPaymentDetails, IContactPerson} from "../../../modules/participants/types";
 import {get} from "../../../utils/ajax";
 import {remoteRoutes} from "../../constants";
 import {Dispatch} from "redux";
@@ -15,7 +15,9 @@ export const participantsConstants = {
     paymentsDetailsFetchAll: "paymentsDetailsFetchAll",
     paymentsDetailsFetchAllLoading: "paymentsDetailsFetchAllLoading",
     participantsAddPayment: "participantsAddPayment",
-    participantsBillsFetchLoading: "participantsBillsFetchLoading"
+    participantsBillsFetchLoading: "participantsBillsFetchLoading",
+    participantsAddContactPerson: "participantsAddContactPerson",
+    participantsUpdateContactPerson: "participantsUpdateContactPerson"
 }
 
 export interface IParticipantsState {
@@ -24,7 +26,7 @@ export interface IParticipantsState {
     fakeSelected?:  IParticipant,
     participant?: IParticipant,
     data: any,
-    contactPersons: any
+    contactPersons: IContactPerson[]
     billingsLoading?: boolean
     billings:IBill[]
     payments:IPayment[]
@@ -96,6 +98,14 @@ export default function reducer(state = initialState, action: any) {
         case participantsConstants.participantsAddPayment: {
             const newPayment: IPayment= action.payload
             return {...state, payments: [...state.payments, newPayment]}
+        }
+        case participantsConstants.participantsAddContactPerson: {
+            const newContactPerson: IContactPerson[] = action.payload
+            return {...state, data: [...state.contactPersons, newContactPerson]}
+        }
+        case participantsConstants.participantsUpdateContactPerson: {
+            const updatedContactPerson: IContactPerson[] = action.payload
+            return {...state, data: [...state.contactPersons, updatedContactPerson]}
         }
         default: {
             return state

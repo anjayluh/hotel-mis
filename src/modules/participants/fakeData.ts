@@ -13,6 +13,7 @@ import {createArray} from "../../utils/arrayHelpers";
 import { format, compareAsc } from 'date-fns'
 import { value } from "jsonpath";
 import {paymentTypes} from "../../data/comboCategories";
+import { contactPersonCategories } from "../../data/comboCategories";
 
 const uuid = require('uuid/v4');
 
@@ -84,12 +85,12 @@ export const fakeSubscriptions = () : ISubscription => {
         monthlyCap: faker.random.arrayElement(monthlyCap)
     }
 };
-const contactPersonCategories = ['Billing', 'Technical']
+
 export const fakeContactPersons = () : IContactPerson => {
     return {
         id: faker.random.uuid(),
         name: faker.name.firstName() + ' ' + faker.name.lastName(),
-        category: faker.random.arrayElement(contactPersonCategories),
+        role: faker.random.arrayElement(contactPersonCategories),
         phone: {
             id: faker.random.uuid(),
             value: faker.phone.phoneNumber()
