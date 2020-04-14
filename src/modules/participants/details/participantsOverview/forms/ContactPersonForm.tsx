@@ -96,7 +96,7 @@ const ContactPersonForm = (props: IProps) => {
           Toast.info("Operation successful");
           actions.resetForm();
           dispatch({
-            type: participantsConstants.participantsAddContactPerson,
+            type: participantsConstants.participantsUpdateContactPerson,
             payload: { ...toSave }
           });
           if (props.done) props.done();
@@ -104,7 +104,7 @@ const ContactPersonForm = (props: IProps) => {
         undefined,
         () => {
           dispatch({
-            type: participantsConstants.participantsAddContactPerson,
+            type: participantsConstants.participantsUpdateContactPerson,
             payload: { ...toSave }
           });
           Toast.info("Operation successful");

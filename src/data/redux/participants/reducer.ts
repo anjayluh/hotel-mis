@@ -17,7 +17,8 @@ export const participantsConstants = {
     participantsAddPayment: "participantsAddPayment",
     participantsBillsFetchLoading: "participantsBillsFetchLoading",
     participantsAddContactPerson: "participantsAddContactPerson",
-    participantsUpdateContactPerson: "participantsUpdateContactPerson"
+    participantsUpdateContactPerson: "participantsUpdateContactPerson",
+    participantsDeleteContactPerson: "participantsDeleteContactPerson"
 }
 
 export interface IParticipantsState {
@@ -101,11 +102,20 @@ export default function reducer(state = initialState, action: any) {
         }
         case participantsConstants.participantsAddContactPerson: {
             const newContactPerson: IContactPerson[] = action.payload
-            return {...state, data: [...state.contactPersons, newContactPerson]}
+            return {...state, contactPersons: [...state.contactPersons, newContactPerson]}
         }
         case participantsConstants.participantsUpdateContactPerson: {
-            const updatedContactPerson: IContactPerson[] = action.payload
-            return {...state, data: [...state.contactPersons, updatedContactPerson]}
+            return {
+                ...state, contactPersons: state.contactPersons.map((contact, index) => {
+                    if (contact.id === action.payload.id) {
+                        contact = action.payload
+                    }
+                })
+            }
+        }
+        case participantsConstants.participantsDeleteContactPerson: {
+            let contacts =  state.contactPersons.filter(function(contact) { return contact.id !== action.payload.id; });
+            return {...state, contactPersons: contacts}
         }
         default: {
             return state

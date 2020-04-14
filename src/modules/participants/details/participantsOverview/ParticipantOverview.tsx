@@ -155,7 +155,7 @@ const ParticipantOverview = ({ data }: IProps) => {
         });
       }
     );
-  }, [data.id]);
+  }, [anchor]);
   function callContactPersons(length: number) {
     let tempcontactPersons = [];
     while (length > 0) {
@@ -194,6 +194,10 @@ const ParticipantOverview = ({ data }: IProps) => {
       setFormData(null);
       setAdd(false);
       setEdit(false);
+      dispatch({
+        type: participantsConstants.participantsDeleteContactPerson,
+        payload: callContactPersons(2)
+      });
     } else {
       setOpenSlideOut(!openSlideOut);
       setAdd(true);
