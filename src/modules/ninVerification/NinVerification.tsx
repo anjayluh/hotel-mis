@@ -181,11 +181,7 @@ const NinVerifications = () => {
         handleToggleDrawer={handleToggleDrawer}
         open={turnOnSlideOut}
         anchor={anchor}
-        title={
-          viewDetails
-            ? "NIN Verification Request"
-            : "New NIN Verification Request"
-        }
+        title={viewDetails ? null : "New NIN Verification Request"}
       >
         {viewDetails ? (
           <div>
