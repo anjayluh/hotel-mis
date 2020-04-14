@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { get } from "../../../../utils/ajax";
-import { IParticipant } from "../../types";
+import { IParticipant, IContactPerson } from "../../types";
 import { remoteRoutes } from "../../../../data/constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,6 +20,7 @@ import EditDialog from "../../../../components/EditDialog";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
+import Loading from "../../../../components/Loading";
 import SectionTitle from "../info/SectionTitle";
 import ContactPersonForm from "./forms/ContactPersonForm";
 import SlideOutDrawer from "../../../../components/SlideOutDrawer";
@@ -73,7 +74,7 @@ const setValue = (value: any) => {
     return "-";
   } else return value;
 };
-const generalContactInfoOne = (data: IParticipant): IRec[] => {
+const officialContactInfo = (data: IParticipant): IRec[] => {
   return [
     {
       label: "Official Email",
@@ -85,7 +86,7 @@ const generalContactInfoOne = (data: IParticipant): IRec[] => {
     }
   ];
 };
-const generalContactInfoTwo = (data: IParticipant): IRec[] => {
+const primaryContactInfo = (data: IParticipant): IRec[] => {
   return [
     {
       label: "Primary Email",
@@ -97,27 +98,15 @@ const generalContactInfoTwo = (data: IParticipant): IRec[] => {
     }
   ];
 };
-const contactPersonsOne = (data: Array<any>): IRec[] => {
+const contactToRecords = (data: IContactPerson): IRec[] => {
   return [
     {
       label: "",
-      value: setValue(data[0].name) + ` (${setValue(data[0].role)})`
+      value: setValue(data.name) + ` (${setValue(data.role)})`
     },
     {
       label: "",
-      value: setValue(data[0].phone.value) + ` / (${setValue(data[0].email)})`
-    }
-  ];
-};
-const contactPersonsTwo = (data: Array<any>): IRec[] => {
-  return [
-    {
-      label: "",
-      value: setValue(data[0].name) + ` (${setValue(data[0].role)})`
-    },
-    {
-      label: "",
-      value: setValue(data[0].phone.value) + ` / (${setValue(data[0].email)})`
+      value: setValue(data.phone.value) + ` / (${setValue(data.email)})`
     }
   ];
 };
@@ -148,18 +137,18 @@ const ParticipantOverview = ({ data }: IProps) => {
       resp =>
         dispatch({
           type: participantsConstants.contactPersonsFetchAll,
-          payload: callContactPersons(2)
+          payload: generateContactPersons(2)
         }),
       undefined,
       () => {
         dispatch({
           type: participantsConstants.contactPersonsFetchAll,
-          payload: callContactPersons(2)
+          payload: generateContactPersons(2)
         });
       }
     );
   }, [dispatch]);
-  function callContactPersons(length: number) {
+  function generateContactPersons(length: number) {
     let tempcontactPersons = [];
     while (length > 0) {
       tempcontactPersons.push(fakeContactPersons());
@@ -196,9 +185,15 @@ const ParticipantOverview = ({ data }: IProps) => {
       setFormData(null);
       setAdd(false);
       setEdit(false);
+      const contact = contactPersons.filter(function(contact) {
+        return (
+          contact.name !==
+          actionData[0].value.substring(0, actionData[0].value.indexOf("(") - 1)
+        );
+      });
       dispatch({
         type: participantsConstants.participantsDeleteContactPerson,
-        payload: callContactPersons(2)
+        payload: contact[0]
       });
     } else {
       setOpenSlideOut(!openSlideOut);
@@ -212,12 +207,12 @@ const ParticipantOverview = ({ data }: IProps) => {
   const handleClose = () => {
     setDialog(false);
   };
-  const generalContactColumnOne = generalContactInfoOne(data);
-  const generalContactColumnTwo = generalContactInfoTwo(data);
-  const contactPersonsColumns = [
-    contactPersonsOne(callContactPersons(1)),
-    contactPersonsTwo(callContactPersons(1))
-  ];
+  const officialContactColumn = officialContactInfo(data);
+  const primaryContactColumn = primaryContactInfo(data);
+  const contactPersonsColumns: IRec[][] = [];
+  contactPersons.forEach(contact => {
+    contactPersonsColumns.push(contactToRecords(contact));
+  });
   const bold = false;
   const noColon = true;
   return (
@@ -266,35 +261,41 @@ const ParticipantOverview = ({ data }: IProps) => {
         <Grid item xs={6} container direction="row">
           <Grid item xs={6}>
             <Box style={{ paddingLeft: 30 }}>
-              <DetailView data={generalContactColumnOne} noColon={noColon} />
+              <DetailView data={officialContactColumn} noColon={noColon} />
             </Box>
           </Grid>
           <Grid item xs={6}>
             <Box pl={5}>
-              <DetailView data={generalContactColumnTwo} noColon={noColon} />
+              <DetailView data={primaryContactColumn} noColon={noColon} />
             </Box>
           </Grid>
         </Grid>
         <Grid item xs={6} container direction="row">
-          {contactPersonsColumns.map((contactPerson: any, index: number) => (
-            <Grid
-              container
-              item
-              xs={6}
-              style={{ paddingLeft: index === 0 ? 8 : 0 }}
-              direction="row"
-              key={index}
-            >
-              <DetailViewSimple
-                data={contactPerson}
-                noColon={noColon}
-                bold={bold}
-                editButton={<EditIconButton />}
-                deleteButton={<DeleteIconButton />}
-                handleClickedItem={handleToggleDrawer}
-              />
-            </Grid>
-          ))}
+          {contactPersons.length ? (
+            contactPersonsColumns.map((contactPerson: any, index: number) => (
+              <Grid
+                container
+                item
+                xs={6}
+                style={{ paddingLeft: index === 0 ? 8 : 0 }}
+                direction="row"
+                key={index}
+              >
+                <DetailViewSimple
+                  data={contactPerson}
+                  noColon={noColon}
+                  bold={bold}
+                  editButton={<EditIconButton />}
+                  deleteButton={
+                    contactPersons.length > 1 ? <DeleteIconButton /> : null
+                  }
+                  handleClickedItem={handleToggleDrawer}
+                />
+              </Grid>
+            ))
+          ) : (
+            <Loading />
+          )}
         </Grid>
       </Grid>
       {!deleteItem && (

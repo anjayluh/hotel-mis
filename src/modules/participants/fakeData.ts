@@ -93,7 +93,7 @@ export const fakeContactPersons = () : IContactPerson => {
         role: faker.random.arrayElement(contactPersonCategories),
         phone: {
             id: faker.random.uuid(),
-            value: faker.phone.phoneNumber()
+            value: faker.phone.phoneNumberFormat(0)
         },
         email: faker.internet.email(),
     }

@@ -125,18 +125,22 @@ const TableView = (props: IProps) => {
     >
       <table className={classes.root}>
         <tbody>
-          <tr key={props.data[0].value} className={classes.row}>
-            <td className={clsx(classes.contactPersonsCol, classes.value)}>
-              <DataValue>{props.data[0].value}</DataValue>
-            </td>
-          </tr>
-          <tr key={props.data[1].label} className={classes.row}>
-            <td className={clsx(classes.col, classes.label)}>
-              <DataLabel noColon={true} bold={props.bold} noWrap={false}>
-                {props.data[1].value}
-              </DataLabel>
-            </td>
-          </tr>
+          {props.data[0] && (
+            <tr key={props.data[0].value} className={classes.row}>
+              <td className={clsx(classes.contactPersonsCol, classes.value)}>
+                <DataValue>{props.data[0].value}</DataValue>
+              </td>
+            </tr>
+          )}
+          {props.data[1] && (
+            <tr key={props.data[1].label} className={classes.row}>
+              <td className={clsx(classes.col, classes.label)}>
+                <DataLabel noColon={true} bold={props.bold} noWrap={false}>
+                  {props.data[1].value}
+                </DataLabel>
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
       <Box className={classes.contactActions} display="flex">

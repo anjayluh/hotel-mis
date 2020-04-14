@@ -106,15 +106,14 @@ export default function reducer(state = initialState, action: any) {
         }
         case participantsConstants.participantsUpdateContactPerson: {
             return {
-                ...state, contactPersons: state.contactPersons.map((contact, index) => {
-                    if (contact.id === action.payload.id) {
-                        contact = action.payload
-                    }
-                })
+                ...state, contactPersons: state.contactPersons.map(
+                    (contact, index) =>
+                        (contact.name === action.payload.name) ?
+                            action.payload : contact)
             }
         }
         case participantsConstants.participantsDeleteContactPerson: {
-            let contacts =  state.contactPersons.filter(function(contact) { return contact.id !== action.payload.id; });
+            let contacts =  state.contactPersons.filter(function(contact) { return contact.name === action.payload.name; });
             return {...state, contactPersons: contacts}
         }
         default: {
