@@ -3,7 +3,10 @@ import { get } from "../../../../utils/ajax";
 import { IParticipant } from "../../types";
 import { remoteRoutes } from "../../../../data/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { participantsConstants } from "../../../../data/redux/participants/reducer";
+import {
+  participantsConstants,
+  IParticipantsState
+} from "../../../../data/redux/participants/reducer";
 import { fakeContactPersons } from "../../fakeData";
 import {
   EditIconButton,
@@ -20,7 +23,7 @@ import Divider from "@material-ui/core/Divider";
 import SectionTitle from "../info/SectionTitle";
 import ContactPersonForm from "./forms/ContactPersonForm";
 import SlideOutDrawer from "../../../../components/SlideOutDrawer";
-import { Anchor } from "../../../../data/types";
+import { IState, Anchor } from "../../../../data/types";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import DataLabel from "../../../../components/DataLabel";
@@ -124,8 +127,8 @@ const ParticipantOverview = ({ data }: IProps) => {
   const [anchor, setAnchor] = useState<Anchor>("right");
   const [selected, setSelected] = useState<any | null>(null);
   const [openSlideOut, setOpenSlideOut] = useState(false);
-  const contactPersons: any = useSelector(
-    (state: any) => state.participants.contactPersons
+  const { contactPersons }: IParticipantsState = useSelector(
+    (state: IState) => state.participants
   );
   const spacing = 5;
   const [dialog, setDialog] = useState(false);
@@ -141,7 +144,7 @@ const ParticipantOverview = ({ data }: IProps) => {
   const { id = "" } = data;
   useEffect(() => {
     get(
-      `${remoteRoutes.contactPersons}/${data.id}`,
+      `${remoteRoutes.contactPersons}`,
       resp =>
         dispatch({
           type: participantsConstants.contactPersonsFetchAll,
@@ -155,7 +158,7 @@ const ParticipantOverview = ({ data }: IProps) => {
         });
       }
     );
-  }, [anchor]);
+  }, [dispatch]);
   function callContactPersons(length: number) {
     let tempcontactPersons = [];
     while (length > 0) {
@@ -165,7 +168,6 @@ const ParticipantOverview = ({ data }: IProps) => {
     return tempcontactPersons;
   }
   function handleToggleDrawer(methodType?: string, actionData?: any) {
-    setAnchor("right");
     if (methodType === "edit") {
       setOpenSlideOut(!openSlideOut);
       setFormData({
