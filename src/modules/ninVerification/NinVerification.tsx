@@ -27,6 +27,7 @@ import SlideOutDrawer from "../../components/SlideOutDrawer";
 import { IState } from "../../data/types";
 import Details from "./details/Details";
 import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,7 +70,24 @@ const useStyles = makeStyles((theme: Theme) =>
 
     pageHeading: {
       display: "flex"
-    }
+    },
+      addNewButton: {
+          color: '#428BCA',
+          textTransform: 'capitalize',
+          fontStyle: 'italic',
+          fontSize: '12px',
+          lineHeight: '0.5',
+          marginBottom: '-5px',
+          marginLeft: '8px',
+          marginTop: '-6px',
+          fontWeight: 'normal'
+      },
+      addIcon:{
+          marginLeft: '-5px',
+          marginRight: '-10px',
+          height: '0.7em',
+          fontSize: '13px',
+      }
   })
 );
 
@@ -120,6 +138,13 @@ const NinVerifications = () => {
     );
   }, [filter, dispatch]);
 
+    function addNewRequest(){
+        dispatch({
+            type:verificationRequestConstants.RequestsAddNew,
+            payload: true
+        })
+    }
+
   function handleToggleDrawer(id?: any) {
     if (id) {
       setViewDetails(id);
@@ -144,9 +169,12 @@ const NinVerifications = () => {
             <Box pb={2}>
               <Grid container>
                 <Grid item sm={12} className={classes.pageHeading}>
-                  <Typography variant="h4">
-                    NIN Verification Requests
-                  </Typography>
+                  <Typography variant="h4">NIN Verification Requests</Typography>
+                    <Button className={classes.addNewButton}
+                            startIcon={<AddIcon className={classes.addIcon}/>}
+                            variant="text" onClick={addNewRequest}>
+                        New Request
+                    </Button>
                 </Grid>
               </Grid>
             </Box>
