@@ -277,10 +277,7 @@ function Layout(props: any) {
                     <div className={classes.logoHolder}>
                         <img src={logo} alt="logo" className={classes.logo}/>
                     </div>
-                    {
-                        props.location.pathname !== '/ninVerification' &&
-                            <Button variant='contained' color='primary' onClick={addNewRequest}>New Request</Button>
-                    }
+                    <Button variant='contained' color='primary' onClick={addNewRequest}>New Request</Button>
                     <BarView textClass={classes.menuSelected}/>
                 </Toolbar>
             </AppBar>
