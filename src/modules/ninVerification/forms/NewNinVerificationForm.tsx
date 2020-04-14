@@ -31,7 +31,7 @@ const NewParticipantForm = (props: IProps) => {
   const [data, setData] = useState({
     name: "",
     nin: "",
-    dateOfBirth: null,
+    dateOfBirth: new Date("01.01.1990"),
     cardNumber: ""
   });
   const dispatch = useDispatch();
