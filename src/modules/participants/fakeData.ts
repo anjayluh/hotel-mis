@@ -6,7 +6,7 @@ import {
     IBill,
     IPayment,
     IPaymentDetails,
-    IParticipant, IParticipantType, IParticipantPhone, IParticipantStatus, IParticipantDetails
+    IParticipant, IParticipantType, IParticipantPhone, IParticipantStatus
 } from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
@@ -23,15 +23,8 @@ const organisationNames = ['Stanbic bank Uganda Limited', 'Pride Microfinance Li
 'Metroplex Forex Bureau','Equity Bank Uganda Limited (EBUL)','United Bank of Africa']
 
 const organisationTypes = ['Commercial Bank', 'Microfinance', 'Forex Bureau']
-// export const fakeParticipant = () : IGeneratedParticipant => {
-//     return {
-//         id: faker.random.uuid(),
-//         name: faker.random.arrayElement(organisationNames),
-//         type: faker.random.arrayElement(organisationTypes),
-//         dateCreated: new Date(faker.date.past(1))
-//     }
-// };
-export const fakeParticipant = (): IParticipantDetails => {
+
+export const fakeParticipant = (): IParticipant => {
     return {
         category: faker.random.arrayElement(organisationTypes),
         person: null,
@@ -104,45 +97,6 @@ export const fakeParticipant = (): IParticipantDetails => {
     }
 }
 
-export interface IParticipant {
-    id: string
-    name: string
-    type: IParticipantType
-    phoneNumber: IParticipantPhone[]
-    status: IParticipantStatus
-    officialEmail: string
-    primaryEmail: string
-    dateCreated: Date
-}
-// export const fakeParticipantDetails = () : IParticipant => {
-//     return {
-//         id: faker.random.uuid(),
-//         name: 'Stanbic bank Uganda Limited',
-//         phoneNumber: [
-//             {
-//                 id: faker.random.uuid(),
-//                 type: "primary",
-//                 value: faker.phone.phoneNumber()
-//             },
-//             {
-//                 id: faker.random.uuid(),
-//                 type: "primary",
-//                 value: faker.phone.phoneNumber()
-//             },
-//         ],
-//         type: {
-//             id: faker.random.uuid(),
-//             name: 'Commercial Bank'
-//         },
-//         status: {
-//             id: faker.random.uuid(),
-//             name: "Active"
-//         },
-//         officialEmail: faker.internet.email(),
-//         primaryEmail: faker.internet.email(),
-//         dateCreated: new Date()
-//     }
-// };
 
 const subscriptionStatus = ['Active', 'Inactive', 'Suspended']
 const monthlyCap = [10000, 20000]

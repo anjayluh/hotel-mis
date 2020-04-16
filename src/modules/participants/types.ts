@@ -26,16 +26,6 @@ export interface IParticipantStatus {
     name: string
 }
 export interface IParticipant {
-    id: string
-    name: string
-    type: IParticipantType
-    phoneNumber: IParticipantPhone[]
-    status: IParticipantStatus
-    officialEmail: string
-    primaryEmail: string
-    dateCreated: Date
-}
-export interface IParticipantDetails {
     category: string
     person: string | null
     company: ICompany
@@ -49,7 +39,6 @@ export interface IParticipantDetails {
     lastUpdated: Date | null
     isDeleted: false
     subscriptions: ISubscription[]
-
 }
 
 export interface ICompany {
@@ -116,14 +105,14 @@ export interface IParticipantsFilter {
 
 export interface ISubscription {
     id?: string
-    companyId: string
+    companyId?: string
     accountNumber: number | null
     dateCreated: Date | null
     subscriptionStatus?: string
     serviceCategoryId: string
     billingCategory?: string
     service?: string
-    monthlyCap?: number
+    monthlyCap?: number | null
 }
 
 export interface IContactPersonPhone {

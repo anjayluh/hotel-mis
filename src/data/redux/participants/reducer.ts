@@ -1,11 +1,4 @@
-import {
-    IBill,
-    IParticipant,
-    IPayment,
-    IPaymentDetails,
-    IContactPerson,
-    IParticipantDetails
-} from "../../../modules/participants/types";
+import {IBill, IParticipant, IPayment, IPaymentDetails, IContactPerson, ISubscription} from "../../../modules/participants/types";
 import {get} from "../../../utils/ajax";
 import {remoteRoutes} from "../../constants";
 import {Dispatch} from "redux";
@@ -25,14 +18,14 @@ export const participantsConstants = {
     participantsBillsFetchLoading: "participantsBillsFetchLoading",
     participantsAddContactPerson: "participantsAddContactPerson",
     participantsUpdateContactPerson: "participantsUpdateContactPerson",
-    participantsDeleteContactPerson: "participantsDeleteContactPerson"
+    participantsDeleteContactPerson: "participantsDeleteContactPerson",
+    participantsAddSubscription: "participantsAddSubscription"
 }
 
 export interface IParticipantsState {
     loading: boolean,
     // selected?: IParticipant,
-    selected?: IParticipantDetails,
-    fakeSelected?:  IParticipant,
+    selected?: IParticipant,
     participant?: IParticipant,
     data: any,
     contactPersons: IContactPerson[]
@@ -50,7 +43,6 @@ const initialState: IParticipantsState = {
     participant: undefined,
     data: [],
     selected: undefined,
-    fakeSelected:  undefined,
     contactPersons: [],
     billingsLoading: false,
     billings:[],
@@ -58,7 +50,9 @@ const initialState: IParticipantsState = {
     paymentsDetailsLoading: false,
     payments:[],
     paymentDetails: undefined,
-    addedPayment: undefined
+    addedPayment: undefined/* ,
+    subscriptions: [],
+    subscriptionsLoading: false */
 }
 
 export default function reducer(state = initialState, action: any) {
@@ -73,12 +67,12 @@ export default function reducer(state = initialState, action: any) {
             return {...state, loading: action.payload}
         }
         case participantsConstants.participantsAddParticipant: {
-            const newParticipant: IParticipantDetails[] = action.payload
+            const newParticipant: IParticipant[] = action.payload
             // Will remove fakeSelected when endpoint is available
             return {...state, data: [...state.data, newParticipant], selected: newParticipant}
         }
         case participantsConstants.participantsFetchOne: {
-            const selected: IParticipantDetails = action.payload
+            const selected: IParticipant = action.payload
             return {...state, selected, loading: false}
         }
         case participantsConstants.participantsBillsFetchLoading: {
@@ -88,7 +82,6 @@ export default function reducer(state = initialState, action: any) {
             const billings: IBill = action.payload
             return {...state, billings, billsLoading: false}
         }
-        
         case participantsConstants.participantsPaymentsFetchLoading: {
             return {...state, paymentsLoading: action.payload}
         }
@@ -103,10 +96,18 @@ export default function reducer(state = initialState, action: any) {
             const paymentDetails: IPaymentDetails = action.payload
             return {...state, paymentDetails, paymentsDetailsLoading: false}
         }
-
         case participantsConstants.participantsAddPayment: {
             const newPayment: IPayment= action.payload
             return {...state, payments: [...state.payments, newPayment]}
+        }
+        case participantsConstants.participantsAddSubscription: {
+            const newSubscription: ISubscription = action.payload
+            return {
+                ...state, selected: state.selected && {
+                    ...state.selected,
+                    subscriptions: [...state.selected.subscriptions, newSubscription]
+                }
+            }
         }
         case participantsConstants.participantsAddContactPerson: {
             const newContactPerson: IContactPerson[] = action.payload

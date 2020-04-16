@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router";
 import Layout from "../../../components/Layout";
 import { getRouteParam } from "../../../utils/routHelpers";
-import {IParticipant, IParticipantDetails} from "../types";
+import { IParticipant } from "../types";
 import Loading from "../../../components/Loading";
 import Error from "../../../components/Error";
 import { createStyles, Grid, makeStyles, Theme } from "@material-ui/core";
 import ParticipantSummary from "./participantsOverview/ParticipantSummary";
 import DetailsHeading from "./DetailsHeading";
 import ParticipantsOverview from "./participantsOverview/ParticipantOverview";
-import Subscriptions from "./participantsOverview/overview/Subscriptions";
+import Subscriptions from "./participantsOverview/overview/subscriptions/Subscriptions";
 import { useDispatch, useSelector } from "react-redux";
 import Billings from "./info/billing/Billings";
 import Payments from "./info/payments/Payments";
@@ -74,9 +74,9 @@ const Details = (props: IProps) => {
   // const data: IParticipant = useSelector(
   //   (state: any) => state.participants.selected
   // );
-    const data: IParticipantDetails = useSelector(
-        (state: any) => state.participants.selected
-    );
+  const data: IParticipant = useSelector(
+    (state: any) => state.participants.selected
+  );
   const [headings, setHeadings] = useState([
     { text: "Participants Overview", status: true },
     { text: "Billing", status: false },

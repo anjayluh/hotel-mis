@@ -1,10 +1,8 @@
-import { XHeadCell } from "../../../../../components/table/XTableHead";
-import ParticipantLink from "../../../../../components/links/ParticipantLink";
-import { printDate } from "../../../../../utils/dateHelpers";
-import { printFormattedMoney } from "../../../../../utils/numberHelpers";
+import { XHeadCell } from "../../../../../../components/table/XTableHead";
+import { printDate } from "../../../../../../utils/dateHelpers";
+import { printFormattedMoney } from "../../../../../../utils/numberHelpers";
 import React from "react";
-import { format, compareAsc } from "date-fns";
-import { renderSubscriptionStatus } from "../../info/widgets";
+import { renderSubscriptionStatus } from "../../../info/widgets";
 
 export const columns: XHeadCell[] = [
   {

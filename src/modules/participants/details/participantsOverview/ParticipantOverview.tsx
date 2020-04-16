@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { get } from "../../../../utils/ajax";
-import {IContactPerson } from "../../types";
-import {IParticipant, IParticipantDetails} from "../../types";
+import { IContactPerson } from "../../types";
+import { IParticipant } from "../../types";
 import { remoteRoutes } from "../../../../data/constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,7 +17,6 @@ import {
 import DetailView, { IRec } from "../../../../components/DetailView";
 import DetailViewSimple from "../../../../components/DetailViewSimple";
 import PersonIcon from "@material-ui/icons/PermIdentity";
-import EditDialog from "../../../../components/EditDialog";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
@@ -28,12 +27,9 @@ import SlideOutDrawer from "../../../../components/SlideOutDrawer";
 import { IState, Anchor } from "../../../../data/types";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import DataLabel from "../../../../components/DataLabel";
-import DataValue from "../../../../components/DataValue";
-import clsx from "clsx";
 
 interface IProps {
-  data: IParticipantDetails;
+  data: IParticipant;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -80,9 +76,9 @@ const setValue = (value: any) => {
 // ||||||| merged common ancestors
 // const generalContactInfoOne = (data: IParticipant): IRec[] => {
 // =======
-const officialContactInfo = (data: IParticipantDetails): IRec[] => {
-  const officialEmail = data.emails.filter((email) => email.isPrimary === false)
-  const officialPhone = data.phones.filter((phone) => phone.isPrimary === false)
+const officialContactInfo = (data: IParticipant): IRec[] => {
+  const officialEmail = data.emails.filter(email => email.isPrimary === false);
+  const officialPhone = data.phones.filter(phone => phone.isPrimary === false);
 
   return [
     {
@@ -92,7 +88,7 @@ const officialContactInfo = (data: IParticipantDetails): IRec[] => {
     {
       label: "Phone Number",
       value: officialEmail.length > 0 && setValue(officialPhone[0].value)
-    },
+    }
     // {
     //   label: "Phone Number",
     //   value: !data.emails[0].isPrimary && setValue(data.phones[0].value)
@@ -104,9 +100,9 @@ const officialContactInfo = (data: IParticipantDetails): IRec[] => {
 // ||||||| merged common ancestors
 // const generalContactInfoTwo = (data: IParticipant): IRec[] => {
 // =======
-const primaryContactInfo = (data: IParticipantDetails): IRec[] => {
-  const primaryEmail = data.emails.filter((email) => email.isPrimary)
-  const primaryPhone = data.phones.filter((phone) => phone.isPrimary)
+const primaryContactInfo = (data: IParticipant): IRec[] => {
+  const primaryEmail = data.emails.filter(email => email.isPrimary);
+  const primaryPhone = data.phones.filter(phone => phone.isPrimary);
 
   return [
     {
@@ -141,7 +137,6 @@ const ParticipantOverview = ({ data }: IProps) => {
     (state: IState) => state.participants
   );
   const spacing = 5;
-  const [dialog, setDialog] = useState(false);
   const [add, setAdd] = useState(false);
   const [edit, setEdit] = useState<boolean>(false);
   const [deleteItem, setDeleteItem] = useState<boolean>(false);
@@ -225,9 +220,6 @@ const ParticipantOverview = ({ data }: IProps) => {
     }
   }
 
-  const handleClose = () => {
-    setDialog(false);
-  };
   const officialContactColumn = officialContactInfo(data);
   const primaryContactColumn = primaryContactInfo(data);
   const contactPersonsColumns: IRec[][] = [];
@@ -328,7 +320,6 @@ const ParticipantOverview = ({ data }: IProps) => {
         >
           <ContactPersonForm
             closeSlideOut={handleToggleDrawer}
-            initialData={formData}
           ></ContactPersonForm>
         </SlideOutDrawer>
       )}
