@@ -320,6 +320,7 @@ const ParticipantOverview = ({ data }: IProps) => {
         >
           <ContactPersonForm
             closeSlideOut={handleToggleDrawer}
+            initialData={formData}
           ></ContactPersonForm>
         </SlideOutDrawer>
       )}
