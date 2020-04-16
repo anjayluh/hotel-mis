@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { Chip } from "@material-ui/core";
-import { IParticipant } from "../../types";
+import {IParticipant, IParticipantDetails} from "../../types";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -9,7 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import PersonIcon from "@material-ui/icons/Person";
 
 interface IProps {
-  data: IParticipant;
+  data: IParticipantDetails;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -50,14 +50,14 @@ const ParticipantSummary = ({ data }: IProps) => {
             <PersonIcon fontSize="large" />
           </Avatar>
           <Grid item className={classes.nameHolder}>
-            <Typography variant="h5">{data.name}</Typography>
-            <Typography variant="body2">{data.type.name}</Typography>
+            <Typography variant="h5">{data.category}</Typography>
+            <Typography variant="body2">{data.company.name}</Typography>
             <Chip
               size="small"
               variant="default"
               color="primary"
               className={classes.summaryChip}
-              label={data.status.name}
+              label={data.subscriptions[0].subscriptionStatus}
             />
           </Grid>
         </Grid>
