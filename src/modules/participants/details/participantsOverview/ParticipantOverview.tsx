@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { get } from "../../../../utils/ajax";
-import { IParticipant, IContactPerson } from "../../types";
+import {IContactPerson } from "../../types";
+import {IParticipant, IParticipantDetails} from "../../types";
 import { remoteRoutes } from "../../../../data/constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -32,7 +33,7 @@ import DataValue from "../../../../components/DataValue";
 import clsx from "clsx";
 
 interface IProps {
-  data: IParticipant;
+  data: IParticipantDetails;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -74,27 +75,47 @@ const setValue = (value: any) => {
     return "-";
   } else return value;
 };
-const officialContactInfo = (data: IParticipant): IRec[] => {
+// <<<<<<< Updated upstream
+// const officialContactInfo = (data: IParticipant): IRec[] => {
+// ||||||| merged common ancestors
+// const generalContactInfoOne = (data: IParticipant): IRec[] => {
+// =======
+const officialContactInfo = (data: IParticipantDetails): IRec[] => {
+  const officialEmail = data.emails.filter((email) => email.isPrimary === false)
+  const officialPhone = data.phones.filter((phone) => phone.isPrimary === false)
+
   return [
     {
       label: "Official Email",
-      value: setValue(data.officialEmail)
+      value: officialPhone.length > 0 && setValue(officialEmail[0].value)
     },
     {
       label: "Phone Number",
-      value: setValue(data.phoneNumber[0].value)
-    }
+      value: officialEmail.length > 0 && setValue(officialPhone[0].value)
+    },
+    // {
+    //   label: "Phone Number",
+    //   value: !data.emails[0].isPrimary && setValue(data.phones[0].value)
+    // }
   ];
 };
-const primaryContactInfo = (data: IParticipant): IRec[] => {
+// <<<<<<< Updated upstream
+// const primaryContactInfo = (data: IParticipant): IRec[] => {
+// ||||||| merged common ancestors
+// const generalContactInfoTwo = (data: IParticipant): IRec[] => {
+// =======
+const primaryContactInfo = (data: IParticipantDetails): IRec[] => {
+  const primaryEmail = data.emails.filter((email) => email.isPrimary)
+  const primaryPhone = data.phones.filter((phone) => phone.isPrimary)
+
   return [
     {
       label: "Primary Email",
-      value: setValue(data.primaryEmail)
+      value: primaryEmail.length > 0 && setValue(primaryEmail[0].value)
     },
     {
       label: "Phone Number",
-      value: setValue(data.phoneNumber[1].value)
+      value: primaryPhone.length > 0 && setValue(primaryPhone[0].value)
     }
   ];
 };
