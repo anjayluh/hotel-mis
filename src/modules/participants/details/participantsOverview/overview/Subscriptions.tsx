@@ -11,7 +11,9 @@ import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { columns } from "./SubscriptionConfig";
 import { fakeSubscriptions } from "../../../fakeData";
-import { ISubscription } from "../../../types";
+import {IParticipantDetails, ISubscription} from "../../../types";
+import {IParticipantsState} from "../../../../../data/redux/participants/reducer";
+import {IState} from "../../../../../data/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,11 +57,14 @@ const headCells: XHeadCell[] = [...columns];
 const Subscriptions = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<ISubscription[]>([]);
+  // const [data, setData] = useState<ISubscription[]>([]);
+  const {selected} = useSelector((state: IState) => state.participants)
   const classes = useStyles();
 
   useEffect(() => {
-    setData(callFakeSubscriptions(5));
+    // setData(callFakeSubscriptions(5));
+      setLoading(false)
+
   }, [dispatch]);
 
   function callFakeSubscriptions(length: number) {
@@ -68,7 +73,7 @@ const Subscriptions = () => {
       subscriptions.push(fakeSubscriptions());
       length = length - 1;
     }
-    setLoading(false);
+    // setLoading(false);
 
     return subscriptions;
   }
@@ -96,11 +101,12 @@ const Subscriptions = () => {
           {loading ? (
             <Loading />
           ) : (
+            selected &&
             <Grid container spacing={2} style={{ overflow: "visible" }}>
               <Grid item xs={12}>
                 <XTable
                   headCells={headCells}
-                  data={data}
+                  data={selected.subscriptions }
                   initialRowsPerPage={4}
                   usePagination={false}
                 />

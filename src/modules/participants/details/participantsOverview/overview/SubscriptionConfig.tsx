@@ -13,9 +13,9 @@ export const columns: XHeadCell[] = [
     cellProps: { style: { width: 70 } }
   },
   {
-    name: "status",
+    name: "subscriptionStatus",
     label: "Status",
-    render: (_, rec) => renderSubscriptionStatus(rec.status),
+    render: (_, rec) => renderSubscriptionStatus(rec.subscriptionStatus),
     cellProps: {
       style: {
         width: 60
@@ -43,7 +43,7 @@ export const columns: XHeadCell[] = [
     }
   },
   {
-    name: "subscriptionDate",
+    name: "dateCreated",
     label: "Subscription Date",
     render: (value, rec) => <span>{printDate(value)}</span>,
     cellProps: {

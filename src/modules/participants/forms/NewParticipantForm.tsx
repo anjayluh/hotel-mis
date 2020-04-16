@@ -10,7 +10,7 @@ import XFormSimple from "../../../components/forms/XFormSimple";
 import XTextInput from "../../../components/inputs/XTextInput";
 import {toOptions} from "../../../components/inputs/inputHelpers";
 import {useDispatch} from 'react-redux'
-import {IParticipant} from "../types";
+import {IParticipant, IParticipantDetails} from "../types";
 import XSelectInput from "../../../components/inputs/XSelectInput";
 import { useHistory } from 'react-router';
 import {localRoutes} from "../../../data/constants";
@@ -48,32 +48,121 @@ const NewParticipantForm = (props: IProps) => {
     const dispatch = useDispatch();
 
     function handleSubmit(values: any, actions: FormikActions<any>) {
-        const toSave: IParticipant = {
-            id: faker.random.uuid(),
-            name: values.name,
-            phoneNumber: [
+        // const toSave: IParticipant = {
+        //     id: faker.random.uuid(),
+        //     name: values.name,
+        //     phoneNumber: [
+        //         {
+        //             id: faker.random.uuid(),
+        //             type: "primary",
+        //             value: values.phoneNumberPrimary
+        //         },
+        //         {
+        //             id: faker.random.uuid(),
+        //             type: "primary",
+        //             value: values.phoneNumberOther
+        //         },
+        //     ],
+        //     type: {
+        //         id: faker.random.uuid(),
+        //         name: values.type
+        //     },
+        //     status: {
+        //         id: faker.random.uuid(),
+        //         name: "Active"
+        //     },
+        //     officialEmail: values.officialEmail,
+        //     primaryEmail: values.primaryEmail,
+        //     dateCreated: new Date()
+        // }
+        const toSave: IParticipantDetails = {
+            category: values.type,
+            person: null,
+            company: {
+                name: values.name,
+                id: "994712fb-593d-432d-2d2c-08d7daebc584",
+                createdAt: new Date(faker.date.past(1)),
+                lastUpdated: null,
+                isDeleted: false
+            },
+            identifications: [
                 {
-                    id: faker.random.uuid(), 
-                    type: "primary", 
-                    value: values.phoneNumberPrimary
-                },
-                {
-                    id: faker.random.uuid(), 
-                    type: "primary",
-                    value: values.phoneNumberOther
-                },
+                    category: "Nin",
+                    contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
+                    value: "DE128398323",
+                    cardNumber: null,
+                    issuingCountry: null,
+                    issueDate: new Date(faker.date.past(1)),
+                    expiryDate: new Date(faker.date.past(1)),
+                    isPrimary: true,
+                    id: "3994b03c-0e22-4e9c-8ce1-08d7daebc586",
+                    createdAt: new Date(faker.date.past(1)),
+                    lastUpdated: null,
+                    isDeleted: false
+                }
             ],
-            type: {
-                id: faker.random.uuid(), 
-                name: values.type
-            },
-            status: {
-                id: faker.random.uuid(), 
-                name: "Active"
-            },
-            officialEmail: values.officialEmail,
-            primaryEmail: values.primaryEmail,
-            dateCreated: new Date()
+            phones: [
+                {
+                    category: "Mobile",
+                    contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
+                    value: values.phoneNumberPrimary,
+                    isPrimary: true,
+                    id: faker.random.uuid(),
+                    createdAt: new Date(faker.date.past(1)),
+                    lastUpdated: null,
+                    isDeleted: false
+                },
+                {
+                    category: "Mobile",
+                    contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
+                    value: values.phoneNumberOther,
+                    isPrimary: false,
+                    id: faker.random.uuid(),
+                    createdAt: new Date(faker.date.past(1)),
+                    lastUpdated: null,
+                    isDeleted: false
+                },
+
+
+            ],
+            emails: [
+                {
+                    category: "Personal",
+                    contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
+                    value: values.primaryEmail,
+                    isPrimary: true,
+                    id: faker.random.uuid(),
+                    createdAt: new Date(),
+                    lastUpdated: null,
+                    isDeleted: false
+                },
+                {
+                    category: "Personal",
+                    contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
+                    value: values.officialEmail,
+                    isPrimary: false,
+                    id: faker.random.uuid(),
+                    createdAt: new Date(faker.date.past(1)),
+                    lastUpdated: null,
+                    isDeleted: false
+                }
+            ],
+            addresses: [],
+            tags: null,
+            id: "04c8a212-3b79-44c5-6649-08d7daebc579",
+            createdAt: new Date(),
+            lastUpdated: null,
+            isDeleted: false,
+            subscriptions: [
+                {
+                    id: "234f65e2-dbfd-4610-a8b0-08d7d24bdd64",
+                    companyId: "04c8a212-3b79-44c5-6649-08d7daebc579",
+                    accountNumber: null,
+                    dateCreated: new Date(faker.date.past(1)),
+                    subscriptionStatus: "Active",
+                    serviceCategoryId: "cef84215-8f9d-4ebd-0895-08d7d24bc164"
+                }
+            ]
         }
         post(remoteRoutes.participants, toSave,
             (data) => {
