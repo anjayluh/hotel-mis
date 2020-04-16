@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router";
 import Layout from "../../../components/Layout";
 import { getRouteParam } from "../../../utils/routHelpers";
-import { IParticipant } from "../types";
+import {IParticipant, IParticipantDetails} from "../types";
 import Loading from "../../../components/Loading";
 import Error from "../../../components/Error";
 import { createStyles, Grid, makeStyles, Theme } from "@material-ui/core";
@@ -71,9 +71,12 @@ const Details = (props: IProps) => {
   const [showAccountStatementView, setShowAccountStatementView] = useState<
     boolean
   >(false);
-  const data: IParticipant = useSelector(
-    (state: any) => state.participants.selected
-  );
+  // const data: IParticipant = useSelector(
+  //   (state: any) => state.participants.selected
+  // );
+    const data: IParticipantDetails = useSelector(
+        (state: any) => state.participants.selected
+    );
   const [headings, setHeadings] = useState([
     { text: "Participants Overview", status: true },
     { text: "Billing", status: false },
