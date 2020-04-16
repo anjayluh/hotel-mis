@@ -6,7 +6,7 @@ import {
     IBill,
     IPayment,
     IPaymentDetails,
-    IParticipant, IParticipantType, IParticipantPhone, IParticipantStatus
+    IParticipant, IParticipantType, IParticipantPhone, IParticipantStatus, IParticipantDetails
 } from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
@@ -23,14 +23,87 @@ const organisationNames = ['Stanbic bank Uganda Limited', 'Pride Microfinance Li
 'Metroplex Forex Bureau','Equity Bank Uganda Limited (EBUL)','United Bank of Africa']
 
 const organisationTypes = ['Commercial Bank', 'Microfinance', 'Forex Bureau']
-export const fakeParticipant = () : IGeneratedParticipant => {
+// export const fakeParticipant = () : IGeneratedParticipant => {
+//     return {
+//         id: faker.random.uuid(),
+//         name: faker.random.arrayElement(organisationNames),
+//         type: faker.random.arrayElement(organisationTypes),
+//         dateCreated: new Date(faker.date.past(1))
+//     }
+// };
+export const fakeParticipant = (): IParticipantDetails => {
     return {
+        category: faker.random.arrayElement(organisationTypes),
+        person: null,
+        company: {
+            name: faker.random.arrayElement(organisationNames),
+            id: faker.random.uuid(),
+            createdAt: new Date(faker.date.past(1)),
+            lastUpdated: null,
+            isDeleted: false
+        },
+        identifications: [
+            {
+                category: "Nin",
+                contactId: faker.random.uuid(),
+                value: "DE128398323",
+                cardNumber: null,
+                issuingCountry: null,
+                issueDate: new Date(faker.date.past(1)),
+                expiryDate: new Date(faker.date.past(1)),
+                isPrimary: true,
+                id: faker.random.uuid(),
+                createdAt: new Date(faker.date.past(1)),
+                lastUpdated: null,
+                isDeleted: false
+            }
+        ],
+        phones: [
+            {
+                category: "Mobile",
+                contactId: faker.random.uuid(),
+                value: "0414100100",
+                isPrimary: true,
+                id: faker.random.uuid(),
+                createdAt: new Date(faker.date.past(1)),
+                lastUpdated: null,
+                isDeleted: false
+            }
+        ],
+        emails: [
+            {
+                category: "Personal",
+                contactId: faker.random.uuid(),
+                value: "reach_out@stanbic.co.ug",
+                isPrimary: true,
+                id: faker.random.uuid(),
+                createdAt: new Date(faker.date.past(1)),
+                lastUpdated: null,
+                isDeleted: false
+            }
+        ],
+        addresses: [],
+        tags: null,
         id: faker.random.uuid(),
-        name: faker.random.arrayElement(organisationNames),
-        type: faker.random.arrayElement(organisationTypes),
-        dateCreated: new Date(faker.date.past(1))
+        createdAt: new Date(faker.date.past(1)),
+        lastUpdated: null,
+        isDeleted: false,
+        subscriptions: [
+            {
+                id: faker.random.uuid(),
+                companyId: faker.random.uuid(),
+                accountNumber: null,
+                dateCreated: new Date(faker.date.past(1)),
+                subscriptionStatus: faker.random.arrayElement(subscriptionStatus),
+                serviceCategoryId: faker.random.uuid(),
+                billingCategory: 'Standard',
+                service: 'NIN Verification',
+                monthlyCap: faker.random.arrayElement(monthlyCap)
+            }
+        ]
     }
-};
+}
+
 export interface IParticipant {
     id: string
     name: string
@@ -41,35 +114,35 @@ export interface IParticipant {
     primaryEmail: string
     dateCreated: Date
 }
-export const fakeParticipantDetails = () : IParticipant => {
-    return {
-        id: faker.random.uuid(),
-        name: 'Stanbic bank Uganda Limited',
-        phoneNumber: [
-            {
-                id: faker.random.uuid(),
-                type: "primary",
-                value: faker.phone.phoneNumber()
-            },
-            {
-                id: faker.random.uuid(),
-                type: "primary",
-                value: faker.phone.phoneNumber()
-            },
-        ],
-        type: {
-            id: faker.random.uuid(),
-            name: 'Commercial Bank'
-        },
-        status: {
-            id: faker.random.uuid(),
-            name: "Active"
-        },
-        officialEmail: faker.internet.email(),
-        primaryEmail: faker.internet.email(),
-        dateCreated: new Date()
-    }
-};
+// export const fakeParticipantDetails = () : IParticipant => {
+//     return {
+//         id: faker.random.uuid(),
+//         name: 'Stanbic bank Uganda Limited',
+//         phoneNumber: [
+//             {
+//                 id: faker.random.uuid(),
+//                 type: "primary",
+//                 value: faker.phone.phoneNumber()
+//             },
+//             {
+//                 id: faker.random.uuid(),
+//                 type: "primary",
+//                 value: faker.phone.phoneNumber()
+//             },
+//         ],
+//         type: {
+//             id: faker.random.uuid(),
+//             name: 'Commercial Bank'
+//         },
+//         status: {
+//             id: faker.random.uuid(),
+//             name: "Active"
+//         },
+//         officialEmail: faker.internet.email(),
+//         primaryEmail: faker.internet.email(),
+//         dateCreated: new Date()
+//     }
+// };
 
 const subscriptionStatus = ['Active', 'Inactive', 'Suspended']
 const monthlyCap = [10000, 20000]
@@ -77,11 +150,13 @@ const monthlyCap = [10000, 20000]
 export const fakeSubscriptions = () : ISubscription => {
     return {
         id: faker.random.uuid(),
+        companyId: faker.random.uuid(),
         accountNumber: faker.random.number({min:10000, max:99999}),
-        status: faker.random.arrayElement(subscriptionStatus),
+        dateCreated: new Date(faker.date.past(5)),
+        subscriptionStatus: faker.random.arrayElement(subscriptionStatus),
+        serviceCategoryId: faker.random.uuid(),
         billingCategory: 'Standard',
         service: 'NIN Verification',
-        subscriptionDate: new Date(faker.date.past(5)),
         monthlyCap: faker.random.arrayElement(monthlyCap)
     }
 };

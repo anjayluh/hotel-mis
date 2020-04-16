@@ -50,6 +50,7 @@ const servers: any = {
         Crm: 'https://crmservice-test.laboremus.no',
         Case: 'https://bou-niv-workflow-api-test.test001.laboremus.no',
         Gateway: 'https://dfcu-customeronboarding-gateway-test.laboremus.no',
+        GatewayBou: 'https://bou-niv-gatewayservice-test.test001.laboremus.no/',
         Kyc: 'https://dfcu-customeronboarding-kycconnector-test.laboremus.no',
         Notification: 'https://notificationservice-test.laboremus.no',
         Log: 'https://dfcu-customeronboarding-logging-test.laboremus.no'
@@ -94,6 +95,7 @@ const authURL = env.Auth
 const crmURL = env.Crm
 const caseHandlingURL = env.Case
 const gatewayURL = env.Gateway
+const bouGatewayURL = env.GatewayBou
 const kycURL = env.Kyc
 const notificationURL = env.Notification
 
@@ -101,6 +103,7 @@ const notificationURL = env.Notification
 export const remoteRoutes = {
     contactPersons: crmURL + '/api/participants/contact',
     participants: crmURL + '/api/participants',
+    participantsOverview: bouGatewayURL + '/api/aggregations/contact-subscriptions/04c8a212-3b79-44c5-6649-08d7daebc579',
     ninVerification: crmURL + '/api/ninVerification',
     authServer: authURL,
     gatewayUpload: gatewayURL + '/files',
