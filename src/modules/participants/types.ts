@@ -35,21 +35,97 @@ export interface IParticipant {
     primaryEmail: string
     dateCreated: Date
 }
+export interface IParticipantDetails {
+    category: string
+    person: string | null
+    company: ICompany
+    identifications: Identifications[]
+    phones: IPhones[]
+    emails: IEmail[]
+    addresses?: []
+    tags?: any
+    id: string
+    createdAt: Date | null
+    lastUpdated: Date | null
+    isDeleted: false
+    subscriptions: ISubscription[]
+
+}
+
+export interface ICompany {
+    name: string
+    id: string
+    createdAt: Date | null
+    lastUpdated: Date | null
+    isDeleted: false
+
+}
+export interface Identifications {
+    category: string
+    contactId: string
+    value: string
+    cardNumber: string | null
+    issuingCountry: boolean | null
+    issueDate: Date
+    expiryDate: Date
+    isPrimary: boolean
+    id: string
+    createdAt: Date | null
+    lastUpdated: Date | null
+    isDeleted: false
+
+}
+
+export interface IPhones {
+    category: string
+    contactId: string
+    value: string
+    isPrimary: boolean
+    id: string
+    createdAt: Date | null
+    lastUpdated: Date | null
+    isDeleted: false
+}
+export interface IEmail {
+    category: string
+    contactId: string
+    value: string
+    isPrimary: boolean
+    id: string
+    createdAt: Date | null
+    lastUpdated: Date | null
+    isDeleted: false
+}
+
+
 export interface IParticipantsFilter {
     id?: string
     name?: string
     type?: string
     dateCreated?: Date
 }
+// export interface ISubscription {
+//     id?: string
+//     accountNumber: number
+//     status?: string
+//     billingCategory?: string
+//     service: string
+//     subscriptionDate: Date
+//     monthlyCap: number
+// }
+
 export interface ISubscription {
     id?: string
-    accountNumber: number
-    status?: string
+    companyId: string
+    accountNumber: number | null
+    dateCreated: Date | null
+    subscriptionStatus?: string
+    serviceCategoryId: string
     billingCategory?: string
-    service: string
-    subscriptionDate: Date
-    monthlyCap: number
+    service?: string
+    monthlyCap?: number
 }
+
 export interface IContactPersonPhone {
     id: string
     value: string

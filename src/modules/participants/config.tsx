@@ -7,11 +7,11 @@ import { format, compareAsc } from 'date-fns'
 export const columns: XHeadCell[] = [
     {
         name: 'name', label: 'Participant',
-        render: (value, rec) => <ParticipantLink id={rec.id} name={rec.name}/>,
+        render: (value, rec) => <ParticipantLink id={rec.id} name={rec.company.name}/>,
         cellProps: {style: {width: 70}}
     },
     {
-        name: 'type', label: 'Participant Type',
+        name: 'category', label: 'Participant Type',
         cellProps: {
             style: {
                 width: 80,
@@ -20,7 +20,7 @@ export const columns: XHeadCell[] = [
         }
     },
     {
-        name: 'dateCreated', label: 'Date Created',
+        name: 'createdAt', label: 'Date Created',
     render: (value, rec) => <span>{printDate(value)}</span>,
         cellProps: {
             style: {
