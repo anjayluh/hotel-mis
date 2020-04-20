@@ -38,7 +38,7 @@ interface IProps {
   done?: () => any;
 }
 
-const NewParticipantForm = (props: IProps) => {
+const ParticipantForm = (props: IProps) => {
   const [data, setData] = useState({
     name: "",
     type: "",
@@ -235,4 +235,4 @@ const NewParticipantForm = (props: IProps) => {
   );
 };
 
-export default NewParticipantForm;
+export default ParticipantForm;

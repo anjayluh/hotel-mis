@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import Info from "../../info/Info";
-import { IParticipant } from "../../../types";
+import Info from "../../../info/Info";
+import { IParticipant } from "../../../../types";
 
 interface IProps {
   data: IParticipant;

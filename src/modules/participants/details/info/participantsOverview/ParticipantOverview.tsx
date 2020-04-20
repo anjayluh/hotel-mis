@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { get } from "../../../../utils/ajax";
-import { IContactPerson } from "../../types";
-import { IParticipant } from "../../types";
-import { remoteRoutes } from "../../../../data/constants";
+import { get } from "../../../../../utils/ajax";
+import { IContactPerson } from "../../../types";
+import { IParticipant } from "../../../types";
+import { remoteRoutes } from "../../../../../data/constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
   participantsConstants,
   IParticipantsState
-} from "../../../../data/redux/participants/reducer";
-import { fakeContactPersons } from "../../fakeData";
+} from "../../../../../data/redux/participants/reducer";
+import { fakeContactPersons } from "../../../fakeData";
 import {
   EditIconButton,
   AddIconButton,
   DeleteIconButton
-} from "../../../../components/EditIconButton";
-import DetailView, { IRec } from "../../../../components/DetailView";
-import DetailViewSimple from "../../../../components/DetailViewSimple";
+} from "../../../../../components/EditIconButton";
+import DetailView, { IRec } from "../../../../../components/DetailView";
+import DetailViewSimple from "../../../../../components/DetailViewSimple";
 import PersonIcon from "@material-ui/icons/PermIdentity";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
-import Loading from "../../../../components/Loading";
-import SectionTitle from "../info/SectionTitle";
+import Loading from "../../../../../components/Loading";
+import SectionTitle from "../../info/SectionTitle";
 import ContactPersonForm from "./forms/ContactPersonForm";
-import SlideOutDrawer from "../../../../components/SlideOutDrawer";
-import { IState, Anchor } from "../../../../data/types";
+import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
+import { IState, Anchor } from "../../../../../data/types";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 

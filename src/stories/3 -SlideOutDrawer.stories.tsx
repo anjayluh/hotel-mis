@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NewParticipantForm from "../modules/participants/forms/NewParticipantForm";
+import ParticipantForm from "../modules/participants/forms/ParticipantForm";
 import SlideOutDrawer from "../components/SlideOutDrawer";
 import { Anchor } from "../data/types";
 import Typography from "@material-ui/core/Typography";
@@ -32,9 +32,9 @@ export const SlideOut = () => {
         anchor="right"
         title="Story Book"
       >
-        {/* <NewParticipantForm
+        {/* <ParticipantForm
           closeSlideOut={handleToggleDrawer}
-        ></NewParticipantForm> */}
+        ></ParticipantForm> */}
       </SlideOutDrawer>
     </Grid>
   );

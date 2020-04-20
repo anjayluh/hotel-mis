@@ -17,7 +17,7 @@ import { remoteRoutes } from "../../../../../data/constants";
 import { fakePayment } from "../../../fakeData";
 import Details from "./Details/Details";
 import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
-import NewPaymentForm from "./forms/NewPaymentForm";
+import PaymentForm from "./forms/PaymentForm";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -83,7 +83,7 @@ const Payments = () => {
   const [openSlideOut, setOpenSlideOut] = useState(false);
   const classes = useStyles();
   const [showPaymentDetails, setShowPaymentDetails] = useState<boolean>(false);
-  const [showNewPaymentForm, setShowNewPaymentForm] = useState<boolean>(false);
+  const [showPaymentForm, setShowPaymentForm] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch({
@@ -125,11 +125,11 @@ const Payments = () => {
 
   function handleNewPayment() {
     setShowPaymentDetails(false);
-    setShowNewPaymentForm(true);
+    setShowPaymentForm(true);
     handleToggleDrawer();
   }
   function handlePaymentDetails() {
-    setShowNewPaymentForm(false);
+    setShowPaymentForm(false);
     setShowPaymentDetails(true);
     handleToggleDrawer();
   }
@@ -175,7 +175,7 @@ const Payments = () => {
         handleToggleDrawer={handlePaymentDetails}
         open={openSlideOut}
         anchor={anchor}
-        title={showNewPaymentForm ? "Add new Payment" : ""}
+        title={showPaymentForm ? "Add new Payment" : ""}
       >
         {showPaymentDetails && (
           <div>
@@ -192,8 +192,8 @@ const Payments = () => {
           </div>
         )}
 
-        {showNewPaymentForm && (
-          <NewPaymentForm closeSlideOut={handleNewPayment}></NewPaymentForm>
+        {showPaymentForm && (
+          <PaymentForm closeSlideOut={handleNewPayment}></PaymentForm>
         )}
       </SlideOutDrawer>
     </Grid>

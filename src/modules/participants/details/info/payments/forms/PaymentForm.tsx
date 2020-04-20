@@ -35,7 +35,7 @@ interface IProps {
   done?: () => any;
 }
 
-const NewPaymentForm = (props: IProps) => {
+const PaymentForm = (props: IProps) => {
   const [data, setData] = useState({
     paymentDate: null,
     paymentType: "",
@@ -151,4 +151,4 @@ const NewPaymentForm = (props: IProps) => {
   );
 };
 
-export default NewPaymentForm;
+export default PaymentForm;

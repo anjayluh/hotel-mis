@@ -22,7 +22,7 @@ import {
 } from "../../data/redux/ninVerification/reducer";
 import { verificationRequests } from "./fakeData";
 import Loading from "../../components/Loading";
-import NewNinVerificationForm from "./forms/NewNinVerificationForm";
+import NinVerificationForm from "./forms/NinVerificationForm";
 import SlideOutDrawer from "../../components/SlideOutDrawer";
 import { IState } from "../../data/types";
 import Details from "./details/Details";
@@ -71,23 +71,23 @@ const useStyles = makeStyles((theme: Theme) =>
     pageHeading: {
       display: "flex"
     },
-      addNewButton: {
-          color: '#428BCA',
-          textTransform: 'capitalize',
-          fontStyle: 'italic',
-          fontSize: '12px',
-          lineHeight: '0.5',
-          marginBottom: '-5px',
-          marginLeft: '8px',
-          marginTop: '-6px',
-          fontWeight: 'normal'
-      },
-      addIcon:{
-          marginLeft: '-5px',
-          marginRight: '-10px',
-          height: '0.7em',
-          fontSize: '13px',
-      }
+    addNewButton: {
+      color: "#428BCA",
+      textTransform: "capitalize",
+      fontStyle: "italic",
+      fontSize: "12px",
+      lineHeight: "0.5",
+      marginBottom: "-5px",
+      marginLeft: "8px",
+      marginTop: "-6px",
+      fontWeight: "normal"
+    },
+    addIcon: {
+      marginLeft: "-5px",
+      marginRight: "-10px",
+      height: "0.7em",
+      fontSize: "13px"
+    }
   })
 );
 
@@ -138,12 +138,12 @@ const NinVerifications = () => {
     );
   }, [filter, dispatch]);
 
-    function addNewRequest(){
-        dispatch({
-            type:verificationRequestConstants.RequestsAddNew,
-            payload: true
-        })
-    }
+  function addNewRequest() {
+    dispatch({
+      type: verificationRequestConstants.RequestsAddNew,
+      payload: true
+    });
+  }
 
   function handleToggleDrawer(id?: any) {
     if (id) {
@@ -169,12 +169,17 @@ const NinVerifications = () => {
             <Box pb={2}>
               <Grid container>
                 <Grid item sm={12} className={classes.pageHeading}>
-                  <Typography variant="h4">NIN Verification Requests</Typography>
-                    <Button className={classes.addNewButton}
-                            startIcon={<AddIcon className={classes.addIcon}/>}
-                            variant="text" onClick={addNewRequest}>
-                        New Request
-                    </Button>
+                  <Typography variant="h4">
+                    NIN Verification Requests
+                  </Typography>
+                  <Button
+                    className={classes.addNewButton}
+                    startIcon={<AddIcon className={classes.addIcon} />}
+                    variant="text"
+                    onClick={addNewRequest}
+                  >
+                    New Request
+                  </Button>
                 </Grid>
               </Grid>
             </Box>
@@ -225,9 +230,9 @@ const NinVerifications = () => {
             </Grid>
           </div>
         ) : (
-          <NewNinVerificationForm
+          <NinVerificationForm
             closeSlideOut={handleToggleDrawer}
-          ></NewNinVerificationForm>
+          ></NinVerificationForm>
         )}
       </SlideOutDrawer>
     </Navigation>

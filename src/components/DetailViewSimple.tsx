@@ -7,7 +7,6 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
-import { EditIconButton, DeleteIconButton } from "./EditIconButton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

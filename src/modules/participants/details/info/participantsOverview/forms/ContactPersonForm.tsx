@@ -2,25 +2,31 @@ import React from "react";
 import { useState } from "react";
 import * as yup from "yup";
 import * as faker from "faker";
-import { reqString, reqDate } from "../../../../../../../data/validations";
-import { subscriptionsServiceTypes } from "../../../../../../../data/comboCategories";
+import {
+  reqEmail,
+  reqString,
+  reqPhoneNumber
+} from "../../../../../../data/validations";
+import { contactPersonCategories } from "../../../../../../data/comboCategories";
 import { FormikActions } from "formik";
 import Grid from "@material-ui/core/Grid";
-import XFormSimple from "../../../../../../../components/forms/XFormSimple";
-import XTextInput from "../../../../../../../components/inputs/XTextInput";
-import XDateInput from "../../../../../../../components/inputs/XDateInput";
-import { toOptions } from "../../../../../../../components/inputs/inputHelpers";
+import XFormSimple from "../../../../../../components/forms/XFormSimple";
+import XTextInput from "../../../../../../components/inputs/XTextInput";
+import { toOptions } from "../../../../../../components/inputs/inputHelpers";
 import { useDispatch } from "react-redux";
-import { ISubscription } from "../../../../../types";
-import XSelectInput from "../../../../../../../components/inputs/XSelectInput";
-import { remoteRoutes } from "../../../../../../../data/constants";
-import { post, put } from "../../../../../../../utils/ajax";
-import Toast from "../../../../../../../utils/Toast";
-import { participantsConstants } from "../../../../../../../data/redux/participants/reducer";
+import { IContactPerson } from "../../../../types";
+import XSelectInput from "../../../../../../components/inputs/XSelectInput";
+import { useHistory } from "react-router";
+import { remoteRoutes } from "../../../../../../data/constants";
+import { post, put } from "../../../../../../utils/ajax";
+import Toast from "../../../../../../utils/Toast";
+import { participantsConstants } from "../../../../../../data/redux/participants/reducer";
 
 const schema = yup.object().shape({
-  serviceType: reqString,
-  subscriptionDate: reqDate
+  name: reqString,
+  role: reqString,
+  phone: reqPhoneNumber,
+  email: reqEmail
 });
 
 interface IProps {
@@ -29,7 +35,7 @@ interface IProps {
   initialData?: any;
 }
 
-const SubscriptionsForm = (props: IProps) => {
+const ContactPersonForm = (props: IProps) => {
   const [isEdit, setIsEdit] = useState<boolean>(
     props.initialData ? true : false
   );
@@ -37,23 +43,24 @@ const SubscriptionsForm = (props: IProps) => {
     props.initialData
       ? props.initialData
       : {
-          serviceType: "",
-          subscriptionDate: null
+          name: "",
+          role: "",
+          phone: "",
+          email: ""
         }
   );
   const dispatch = useDispatch();
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
-    const toSave: ISubscription = {
+    const toSave: IContactPerson = {
       id: faker.random.uuid(),
-      companyId: faker.random.uuid(),
-      accountNumber: null,
-      service: values.serviceType,
-      dateCreated: values.subscriptionDate,
-      subscriptionStatus: "Active",
-      serviceCategoryId: "",
-      billingCategory: "",
-      monthlyCap: null
+      name: values.name,
+      role: values.role,
+      phone: {
+        id: faker.random.uuid(),
+        value: values.phone
+      },
+      email: values.email
     };
     if (!isEdit) {
       post(
@@ -63,7 +70,7 @@ const SubscriptionsForm = (props: IProps) => {
           Toast.info("Operation successful");
           actions.resetForm();
           dispatch({
-            type: participantsConstants.participantsAddSubscription,
+            type: participantsConstants.participantsAddContactPerson,
             payload: { ...toSave }
           });
           if (props.done) props.done();
@@ -71,7 +78,7 @@ const SubscriptionsForm = (props: IProps) => {
         undefined,
         () => {
           dispatch({
-            type: participantsConstants.participantsAddSubscription,
+            type: participantsConstants.participantsAddContactPerson,
             payload: { ...toSave }
           });
           Toast.info("Operation successful");
@@ -81,13 +88,13 @@ const SubscriptionsForm = (props: IProps) => {
       );
     } else {
       put(
-        remoteRoutes.subscriptions,
+        remoteRoutes.ninVerification,
         toSave,
         data => {
           Toast.info("Operation successful");
           actions.resetForm();
           dispatch({
-            type: participantsConstants.participantsAddSubscription,
+            type: participantsConstants.participantsUpdateContactPerson,
             payload: { ...toSave }
           });
           if (props.done) props.done();
@@ -95,7 +102,7 @@ const SubscriptionsForm = (props: IProps) => {
         undefined,
         () => {
           dispatch({
-            type: participantsConstants.participantsAddSubscription,
+            type: participantsConstants.participantsUpdateContactPerson,
             payload: { ...toSave }
           });
           Toast.info("Operation successful");
@@ -120,19 +127,38 @@ const SubscriptionsForm = (props: IProps) => {
     >
       <Grid spacing={1} container direction="column">
         <Grid item xs={12}>
+          <XTextInput
+            name="name"
+            label="Name"
+            type="text"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
           <XSelectInput
             size="small"
-            name="serviceType"
-            label="Service Type"
-            options={toOptions(subscriptionsServiceTypes)}
+            name="role"
+            label="Role"
+            options={toOptions(contactPersonCategories)}
             variant="outlined"
           />
         </Grid>
         <Grid item xs={12}>
-          <XDateInput
-            name="subscriptionDate"
-            label="Subscription Date"
-            inputVariant="outlined"
+          <XTextInput
+            name="phone"
+            label="Phone Number"
+            type="text"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <XTextInput
+            name="email"
+            label="Email"
+            type="email"
+            variant="outlined"
             size="small"
           />
         </Grid>
@@ -141,4 +167,4 @@ const SubscriptionsForm = (props: IProps) => {
   );
 };
 
-export default SubscriptionsForm;
+export default ContactPersonForm;
