@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
     value: {
       width: "100%"
     },
-    contactPersonsCol: {
+    simpleCol: {
       marginLeft: 0,
       paddingLeft: 0,
       paddingBottom: "unset"
@@ -127,7 +127,7 @@ const TableView = (props: IProps) => {
         <tbody>
           {props.data[0] && (
             <tr key={props.data[0].value} className={classes.row}>
-              <td className={clsx(classes.contactPersonsCol, classes.value)}>
+              <td className={clsx(classes.simpleCol, classes.value)}>
                 <DataValue>{props.data[0].value}</DataValue>
               </td>
             </tr>

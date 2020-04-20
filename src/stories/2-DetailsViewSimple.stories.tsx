@@ -23,12 +23,14 @@ let data: IRec[] = [
   }
 ];
 export const Details = () => (
-  <Grid container item justify="center">
-    <DetailsViewSimple
-      data={data}
-      editButton={<EditIconButton />}
-      deleteButton={<DeleteIconButton />}
-    ></DetailsViewSimple>
+  <Grid item xs={6} container direction="row">
+    <Grid container item xs={12} style={{ paddingLeft: 8 }} direction="row">
+      <DetailsViewSimple
+        data={data}
+        editButton={<EditIconButton />}
+        deleteButton={<DeleteIconButton />}
+      ></DetailsViewSimple>
+    </Grid>
   </Grid>
 );
 
