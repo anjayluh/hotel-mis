@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "absolute",
       top: "0px",
       right: "0px"
-    }
+    },
   })
 );
 const setValue = (value: any) => {
@@ -95,11 +95,7 @@ const officialContactInfo = (data: IParticipant): IRec[] => {
     // }
   ];
 };
-// <<<<<<< Updated upstream
-// const primaryContactInfo = (data: IParticipant): IRec[] => {
-// ||||||| merged common ancestors
-// const generalContactInfoTwo = (data: IParticipant): IRec[] => {
-// =======
+
 const primaryContactInfo = (data: IParticipant): IRec[] => {
   const primaryEmail = data.emails.filter(email => email.isPrimary);
   const primaryPhone = data.phones.filter(phone => phone.isPrimary);
@@ -229,7 +225,7 @@ const ParticipantOverview = ({ data }: IProps) => {
   const bold = false;
   const noColon = true;
   return (
-    <Grid container spacing={1} style={{ marginBottom: 15 }}>
+    <Grid container style={{ marginBottom: 15 }}>
       <Grid item xs={12}>
         <Grid item xs={12} lg={12} md={12}>
           <Grid container spacing={spacing}>
@@ -243,8 +239,8 @@ const ParticipantOverview = ({ data }: IProps) => {
                   justify="space-evenly"
                   spacing={5}
                 >
-                  <Grid item xs={6} lg={6} md={6} style={{ paddingLeft: 30 }}>
-                    <Grid style={{ paddingLeft: 8 }}>
+                  <Grid item xs={6} lg={6} md={6} style={{ paddingLeft: 25 }}>
+                    <Grid style={{ paddingLeft: 0 }}>
                       <SectionTitle
                         title="General Contact Overview"
                         icon={<PersonIcon fontSize="inherit" />}
@@ -252,16 +248,18 @@ const ParticipantOverview = ({ data }: IProps) => {
                     </Grid>
                     <Divider />
                   </Grid>
-                  <Grid item xs={6} lg={6} md={6} style={{ paddingLeft: 28 }}>
-                    <SectionTitle
-                      title="Contact Persons"
-                      addButton={
-                        contactPersons.length < 2 ? (
-                          <AddIconButton onClick={handleToggleDrawer} />
-                        ) : null
-                      }
-                      icon={<FormatListBulletedIcon fontSize="inherit" />}
-                    />
+                  <Grid item xs={6} lg={6} md={6} style={{ paddingLeft: 28, paddingRight: 0, marginRight: -12,}} >
+                    <Grid>
+                      <SectionTitle
+                        title="Contact Persons"
+                        addButton={
+                          contactPersons.length < 2 ? (
+                            <AddIconButton onClick={handleToggleDrawer} />
+                          ) : null
+                        }
+                        icon={<FormatListBulletedIcon fontSize="inherit" />}
+                      />
+                    </Grid>
                     <Divider />
                   </Grid>
                 </Grid>
@@ -270,15 +268,15 @@ const ParticipantOverview = ({ data }: IProps) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid container direction="row" style={{ paddingTop: 5 }}>
-        <Grid item xs={6} container direction="row">
+      <Grid container direction="row" style={{ paddingTop: 5 }} spacing={5} justify="space-between">
+        <Grid item xs={6} container direction="row" justify="space-between">
           <Grid item xs={6}>
-            <Box style={{ paddingLeft: 30 }}>
+            <Box style={{ paddingLeft: 8 }}>
               <DetailView data={officialContactColumn} noColon={noColon} />
             </Box>
           </Grid>
           <Grid item xs={6}>
-            <Box pl={5}>
+            <Box>
               <DetailView data={primaryContactColumn} noColon={noColon} />
             </Box>
           </Grid>

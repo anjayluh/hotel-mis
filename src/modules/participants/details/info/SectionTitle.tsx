@@ -57,7 +57,6 @@ const SectionTitle = ({
   return (
     <Box
       display="flex"
-      px={1}
       py={1}
       onMouseEnter={handleEntered}
       onMouseLeave={handleLeave}
