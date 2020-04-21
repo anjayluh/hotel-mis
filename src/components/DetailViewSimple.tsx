@@ -117,7 +117,6 @@ const TableView = (props: IProps) => {
     );
   return (
     <Box
-      pl={1}
       className={classes.contacts}
       onMouseEnter={handleEntered}
       onMouseLeave={handleLeave}
