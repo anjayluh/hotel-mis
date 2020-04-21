@@ -235,7 +235,6 @@ const ParticipantOverview = ({ data }: IProps) => {
                   item
                   container
                   direction="row"
-                  lg={12}
                   justify="space-evenly"
                   spacing={5}
                 >
@@ -248,7 +247,7 @@ const ParticipantOverview = ({ data }: IProps) => {
                     </Grid>
                     <Divider />
                   </Grid>
-                  <Grid item xs={6} lg={6} md={6} style={{ paddingLeft: 28, paddingRight: 0, marginRight: -12,}} >
+                  <Grid item xs={6} lg={6} md={6} style={{ paddingLeft: 28, paddingRight: 36, marginRight: -12,}} >
                     <Grid>
                       <SectionTitle
                         title="Contact Persons"
@@ -275,7 +274,7 @@ const ParticipantOverview = ({ data }: IProps) => {
               <DetailView data={officialContactColumn} noColon={noColon} />
             </Box>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} style={{ overflowWrap: 'anywhere'}}>
             <Box>
               <DetailView data={primaryContactColumn} noColon={noColon} />
             </Box>
