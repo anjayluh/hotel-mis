@@ -200,11 +200,11 @@ export default function XTable(props: XTableProps) {
                       </TableRow>
                     );
                   })}
-                {emptyRows > 0 && (
+                {/* {emptyRows > 0 && (
                   <TableRow style={{ height: 49 * emptyRows }}>
                     <TableCell colSpan={headCells.length} />
                   </TableRow>
-                )}
+                )} */}
               </TableBody>
             )}
           </Table>
