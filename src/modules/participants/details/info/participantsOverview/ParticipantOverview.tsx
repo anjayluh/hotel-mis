@@ -225,103 +225,186 @@ const ParticipantOverview = ({ data }: IProps) => {
   const bold = false;
   const noColon = true;
   return (
-    <Grid container style={{ marginBottom: 15 }}>
-      <Grid item xs={12}>
-        <Grid item xs={12} lg={12} md={12}>
-          <Grid container spacing={spacing}>
-            <Grid item lg={12} xs={12}>
-              <Grid container spacing={1}>
-                <Grid
-                  item
-                  container
-                  direction="row"
-                  justify="space-evenly"
-                  spacing={5}
-                >
-                  <Grid item xs={6} lg={6} md={6} style={{ paddingLeft: 25 }}>
-                    <Grid style={{ paddingLeft: 0 }}>
-                      <SectionTitle
-                        title="General Contact Overview"
-                        icon={<PersonIcon fontSize="inherit" />}
-                      />
-                    </Grid>
-                    <Divider />
-                  </Grid>
-                  <Grid item xs={6} lg={6} md={6} style={{ paddingLeft: 28, paddingRight: 36, marginRight: -12,}} >
-                    <Grid>
-                      <SectionTitle
-                        title="Contact Persons"
-                        addButton={
-                          contactPersons.length < 2 ? (
-                            <AddIconButton onClick={handleToggleDrawer} />
-                          ) : null
-                        }
-                        icon={<FormatListBulletedIcon fontSize="inherit" />}
-                      />
-                    </Grid>
-                    <Divider />
-                  </Grid>
-                </Grid>
-              </Grid>
+      <Grid container direction="row" spacing={5} justify="space-between" style={{ marginBottom: 15 }}>
+        <Grid container item xs={12} lg={6}>
+          <Grid item xs={12} style={{ paddingLeft: 8 }}>
+            <Grid style={{ paddingLeft: 0 }}>
+              <SectionTitle
+                  title="General Contact Overview"
+                  icon={<PersonIcon fontSize="inherit" />}
+              />
+            </Grid>
+            <Divider />
+          </Grid>
+          <Grid item container direction="row" justify="space-between" xs={8} lg={12}>
+            <Grid item xs={6} style={{ overflowWrap: 'anywhere'}}>
+             <Box style={{ paddingLeft: 8 }}>
+              <DetailView data={officialContactColumn} noColon={noColon} />
+             </Box>
+           </Grid>
+            <Grid item xs={6} style={{ overflowWrap: 'anywhere'}}>
+              <Box>
+                 <DetailView data={primaryContactColumn} noColon={noColon} />
+              </Box>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid container direction="row" style={{ paddingTop: 5 }} spacing={5} justify="space-between">
-        <Grid item xs={6} container direction="row" justify="space-between">
-          <Grid item xs={6} style={{ overflowWrap: 'anywhere'}}>
-            <Box style={{ paddingLeft: 8 }}>
-              <DetailView data={officialContactColumn} noColon={noColon} />
-            </Box>
-          </Grid>
-          <Grid item xs={6} style={{ overflowWrap: 'anywhere'}}>
-            <Box>
-              <DetailView data={primaryContactColumn} noColon={noColon} />
-            </Box>
-          </Grid>
-        </Grid>
-        <Grid item xs={6} container direction="row">
-          {contactPersons.length ? (
-            contactPersonsColumns.map((contactPerson: any, index: number) => (
-              <Grid
-                container
-                item
-                xs={6}
-                style={{ paddingLeft: index === 0 ? 8 : 0 }}
-                direction="row"
-                key={index}
-              >
-                <DetailViewSimple
-                  data={contactPerson}
-                  noColon={noColon}
-                  bold={bold}
-                  editButton={<EditIconButton />}
-                  deleteButton={
-                    contactPersons.length > 1 ? <DeleteIconButton /> : null
+        <Grid container item  xs={12} lg={6}>
+          <Grid item xs={12} style={{ paddingLeft: 8 }}>
+            <Grid>
+               <SectionTitle
+                  title="Contact Persons"
+                  addButton={
+                    contactPersons.length < 2 ? (
+                      <AddIconButton onClick={handleToggleDrawer} />
+                    ) : null
                   }
-                  handleClickedItem={handleToggleDrawer}
+                  icon={<FormatListBulletedIcon fontSize="inherit" />}
                 />
-              </Grid>
-            ))
-          ) : (
-            <Loading />
-          )}
+            </Grid>
+            <Divider />
+          </Grid>
+          <Grid item container direction="row" justify="space-between" xs={8} lg={12}>
+            {contactPersons.length ? (
+               contactPersonsColumns.map((contactPerson: any, index: number) => (
+                 <Grid
+                   container
+                   item
+                   xs={6}
+                   style={{ paddingLeft: 0 }}
+                   direction="row"
+                   key={index}
+                 >
+                   <DetailViewSimple
+                     data={contactPerson}
+                     noColon={noColon}
+                     bold={bold}
+                     editButton={<EditIconButton />}
+                     deleteButton={
+                       contactPersons.length > 1 ? <DeleteIconButton /> : null
+                     }
+                     handleClickedItem={handleToggleDrawer}
+                   />
+                 </Grid>
+               ))
+             ) : (
+               <Loading />
+            )}
+          </Grid>
         </Grid>
+        {!deleteItem && (
+            <SlideOutDrawer
+                handleToggleDrawer={handleToggleDrawer}
+                open={openSlideOut}
+                anchor={anchor}
+                title={add ? "New Contact Person" : "Edit Contact Person"}
+            >
+              <ContactPersonForm
+                  closeSlideOut={handleToggleDrawer}
+                  initialData={formData}
+              ></ContactPersonForm>
+            </SlideOutDrawer>
+        )}
       </Grid>
-      {!deleteItem && (
-        <SlideOutDrawer
-          handleToggleDrawer={handleToggleDrawer}
-          open={openSlideOut}
-          anchor={anchor}
-          title={add ? "New Contact Person" : "Edit Contact Person"}
-        >
-          <ContactPersonForm
-            closeSlideOut={handleToggleDrawer}
-            initialData={formData}
-          ></ContactPersonForm>
-        </SlideOutDrawer>
-      )}
-    </Grid>
   );
+  // return (
+  //   <Grid container style={{ marginBottom: 15 }}>
+  //     <Grid item xs={12}>
+  //       <Grid item xs={12} lg={12} md={12}>
+  //         <Grid container spacing={spacing}>
+  //           <Grid item lg={12} xs={12}>
+  //             <Grid container spacing={1}>
+  //               <Grid
+  //                 item
+  //                 container
+  //                 direction="row"
+  //                 justify="space-evenly"
+  //                 spacing={5}
+  //               >
+  //                 <Grid item xs={6} lg={6} md={6} style={{ paddingLeft: 25 }}>
+  //                   <Grid style={{ paddingLeft: 0 }}>
+  //                     <SectionTitle
+  //                       title="General Contact Overview"
+  //                       icon={<PersonIcon fontSize="inherit" />}
+  //                     />
+  //                   </Grid>
+  //                   <Divider />
+  //                 </Grid>
+  //                 <Grid item xs={6} lg={6} md={6} style={{ paddingLeft: 28, paddingRight: 36, marginRight: -12,}} >
+  //                   <Grid>
+  //                     <SectionTitle
+  //                       title="Contact Persons"
+  //                       addButton={
+  //                         contactPersons.length < 2 ? (
+  //                           <AddIconButton onClick={handleToggleDrawer} />
+  //                         ) : null
+  //                       }
+  //                       icon={<FormatListBulletedIcon fontSize="inherit" />}
+  //                     />
+  //                   </Grid>
+  //                   <Divider />
+  //                 </Grid>
+  //               </Grid>
+  //             </Grid>
+  //           </Grid>
+  //         </Grid>
+  //       </Grid>
+  //     </Grid>
+  //     <Grid container direction="row" style={{ paddingTop: 5 }} spacing={5} justify="space-between">
+  //       <Grid item xs={6} container direction="row" justify="space-between">
+  //         <Grid item xs={6} style={{ overflowWrap: 'anywhere'}}>
+  //           <Box style={{ paddingLeft: 8 }}>
+  //             <DetailView data={officialContactColumn} noColon={noColon} />
+  //           </Box>
+  //         </Grid>
+  //         <Grid item xs={6} style={{ overflowWrap: 'anywhere'}}>
+  //           <Box>
+  //             <DetailView data={primaryContactColumn} noColon={noColon} />
+  //           </Box>
+  //         </Grid>
+  //       </Grid>
+  //       <Grid item xs={6} container direction="row">
+  //         {contactPersons.length ? (
+  //           contactPersonsColumns.map((contactPerson: any, index: number) => (
+  //             <Grid
+  //               container
+  //               item
+  //               xs={6}
+  //               style={{ paddingLeft: index === 0 ? 8 : 0 }}
+  //               direction="row"
+  //               key={index}
+  //             >
+  //               <DetailViewSimple
+  //                 data={contactPerson}
+  //                 noColon={noColon}
+  //                 bold={bold}
+  //                 editButton={<EditIconButton />}
+  //                 deleteButton={
+  //                   contactPersons.length > 1 ? <DeleteIconButton /> : null
+  //                 }
+  //                 handleClickedItem={handleToggleDrawer}
+  //               />
+  //             </Grid>
+  //           ))
+  //         ) : (
+  //           <Loading />
+  //         )}
+  //       </Grid>
+  //     </Grid>
+  //     {!deleteItem && (
+  //       <SlideOutDrawer
+  //         handleToggleDrawer={handleToggleDrawer}
+  //         open={openSlideOut}
+  //         anchor={anchor}
+  //         title={add ? "New Contact Person" : "Edit Contact Person"}
+  //       >
+  //         <ContactPersonForm
+  //           closeSlideOut={handleToggleDrawer}
+  //           initialData={formData}
+  //         ></ContactPersonForm>
+  //       </SlideOutDrawer>
+  //     )}
+  //   </Grid>
+  // );
 };
 export default ParticipantOverview;
