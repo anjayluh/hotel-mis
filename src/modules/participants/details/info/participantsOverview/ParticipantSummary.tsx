@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import PersonIcon from "@material-ui/icons/Person";
+import EditIconButton from "../../../../../components/EditIconButton";
 
 interface IProps {
   data: IParticipant;
@@ -50,7 +51,10 @@ const ParticipantSummary = ({ data }: IProps) => {
             <PersonIcon fontSize="large" />
           </Avatar>
           <Grid item className={classes.nameHolder}>
-            <Typography variant="h5">{data.category}</Typography>
+              <Grid container direction="row" justify="space-between">
+                  <Typography variant="h5">{data.category}</Typography>
+                  <EditIconButton style={{marginTop: -5}}/>
+              </Grid>
             <Typography variant="body2">{data.company.name}</Typography>
             <Chip
               size="small"
