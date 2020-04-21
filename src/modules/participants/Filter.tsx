@@ -22,7 +22,12 @@ const Filter = ({ onFilter, loading }: IProps) => {
     // dateCreated: null
   });
 
-  const participantTypes = ["Commercial Bank", "Microfinance", "Forex Bureau"];
+  const participantTypes = [
+    "All",
+    "Commercial Bank",
+    "Microfinance",
+    "Forex Bureau"
+  ];
 
   function submitForm(values: any) {
     onFilter(values);
