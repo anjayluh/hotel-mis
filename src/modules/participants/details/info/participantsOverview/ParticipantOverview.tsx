@@ -227,7 +227,7 @@ const ParticipantOverview = ({ data }: IProps) => {
   return (
       <Grid container direction="row" spacing={5} justify="space-between" style={{ marginBottom: 15 }}>
         <Grid container item xs={12} lg={6}>
-          <Grid item xs={12} style={{ paddingLeft: 8 }}>
+          <Grid item xs={12} style={{ paddingLeft: 8, paddingRight: 8 }}>
             <Grid style={{ paddingLeft: 0 }}>
               <SectionTitle
                   title="General Contact Overview"
@@ -236,21 +236,21 @@ const ParticipantOverview = ({ data }: IProps) => {
             </Grid>
             <Divider />
           </Grid>
-          <Grid item container direction="row" justify="space-between" xs={8} lg={12}>
+          <Grid item container direction="row" justify="space-between" xs={8} md={10} lg={12}>
             <Grid item xs={6} style={{ overflowWrap: 'anywhere'}}>
              <Box style={{ paddingLeft: 8 }}>
               <DetailView data={officialContactColumn} noColon={noColon} />
              </Box>
            </Grid>
             <Grid item xs={6} style={{ overflowWrap: 'anywhere'}}>
-              <Box>
+              <Box style={{ paddingLeft: 8 }}>
                  <DetailView data={primaryContactColumn} noColon={noColon} />
               </Box>
             </Grid>
           </Grid>
         </Grid>
         <Grid container item  xs={12} lg={6}>
-          <Grid item xs={12} style={{ paddingLeft: 8 }}>
+          <Grid item xs={12} style={{ paddingLeft: 8, paddingRight: 8 }}>
             <Grid>
                <SectionTitle
                   title="Contact Persons"
@@ -264,7 +264,7 @@ const ParticipantOverview = ({ data }: IProps) => {
             </Grid>
             <Divider />
           </Grid>
-          <Grid item container direction="row" justify="space-between" xs={8} lg={12}>
+          <Grid item container direction="row" justify="space-between" xs={8} md={10}  lg={12}>
             {contactPersons.length ? (
                contactPersonsColumns.map((contactPerson: any, index: number) => (
                  <Grid
