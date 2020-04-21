@@ -270,7 +270,7 @@ const ParticipantOverview = ({ data }: IProps) => {
       </Grid>
       <Grid container direction="row" style={{ paddingTop: 5 }} spacing={5} justify="space-between">
         <Grid item xs={6} container direction="row" justify="space-between">
-          <Grid item xs={6}>
+          <Grid item xs={6} style={{ overflowWrap: 'anywhere'}}>
             <Box style={{ paddingLeft: 8 }}>
               <DetailView data={officialContactColumn} noColon={noColon} />
             </Box>
