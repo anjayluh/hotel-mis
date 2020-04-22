@@ -23,7 +23,7 @@ const ParticipantLink = ({id, name}: IProps) => {
         //     payload: {...fakeParticipantDetails()}
         // })
         get(
-            'https://bou-niv-gatewayservice-test.test001.laboremus.no/api/aggregations/contact-subscriptions/04c8a212-3b79-44c5-6649-08d7daebc579',
+            remoteRoutes.participantsOverview,
             (resp) => {
                 dispatch({
                     type: participantsConstants.participantsFetchOne,

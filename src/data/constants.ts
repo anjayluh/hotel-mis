@@ -41,8 +41,7 @@ const servers: any = {
         Crm: 'https://crmservice-test.laboremus.no',
         Case: 'https://bou-niv-workflow-api-test.test001.laboremus.no',
         Nin: 'https://bou-niv-api-test.test001.laboremus.no',
-        Gateway: 'https://dfcu-customeronboarding-gateway-test.laboremus.no',
-        GatewayBou: 'https://bou-niv-gatewayservice-test.test001.laboremus.no',
+        Gateway: 'https://bou-niv-gatewayservice-test.test001.laboremus.no',
         Kyc: "https://kyc-connector-staging.onboarding.dfcugroup.com",
         Notification: "https://emata-poc-smsservice-test.laboremus.no",
         Payments: "https://emata-poc-payments-test.laboremus.no",
@@ -52,8 +51,7 @@ const servers: any = {
         Crm: 'https://crmservice-test.laboremus.no',
         Case: 'https://bou-niv-workflow-api-test.test001.laboremus.no',
         Nin: 'https://bou-niv-api-test.test001.laboremus.no',
-        Gateway: 'https://dfcu-customeronboarding-gateway-test.laboremus.no',
-        GatewayBou: 'https://bou-niv-gatewayservice-test.test001.laboremus.no',
+        Gateway: 'https://bou-niv-gatewayservice-test.test001.laboremus.no',
         Kyc: 'https://dfcu-customeronboarding-kycconnector-test.laboremus.no',
         Notification: 'https://notificationservice-test.laboremus.no',
         Log: 'https://dfcu-customeronboarding-logging-test.laboremus.no'
@@ -63,8 +61,7 @@ const servers: any = {
         Crm: 'https://crm-test.onboarding.dfcugroup.com',
         Case: 'https://casehandling-test.onboarding.dfcugroup.com/',
         Nin: 'https://bou-niv-api-test.test001.laboremus.no',
-        Gateway: 'https://gateway-test.onboarding.dfcugroup.com',
-        GatewayBou: 'https://bou-niv-gatewayservice-test.test001.laboremus.no',
+        Gateway: 'https://bou-niv-gatewayservice-test.test001.laboremus.no',
         Kyc: 'https://kyc-connector-test.onboarding.dfcugroup.com',
         Notification: 'https://notification-test.onboarding.dfcugroup.com',
         Accounts: 'https://finacle-connector-test.onboarding.dfcugroup.com',
@@ -75,8 +72,7 @@ const servers: any = {
         Crm: "https://crm-staging.onboarding.dfcugroup.com",
         Case: "https://casehandling-staging.onboarding.dfcugroup.com",
         Nin: 'https://bou-niv-api-staging.laboremus.no',
-        Gateway: "https://gateway-staging.onboarding.dfcugroup.com",
-        GatewayBou: 'https://bou-niv-gatewayservice-staging.laboremus.no',
+        Gateway: "https://bou-niv-gatewayservice-staging.laboremus.no",
         Kyc: "https://kyc-connector-staging.onboarding.dfcugroup.com",
         Notification: "https://notification-staging.onboarding.dfcugroup.com",
         Accounts: "https://finacle-connector-staging.onboarding.dfcugroup.com",
@@ -87,8 +83,7 @@ const servers: any = {
         Crm: "https://crm.onboarding.dfcugroup.com",
         Case: "https://casehandling.onboarding.dfcugroup.com",
         Nin: 'https://bou-niv-api.laboremus.no',
-        Gateway: "https://gateway.onboarding.dfcugroup.com",
-        GatewayBou: 'https://bou-niv-gatewayservice.laboremus.no',
+        Gateway: "https://bou-niv-gatewayservice.laboremus.no",
         Kyc: "https://kyc-connector.onboarding.dfcugroup.com",
         Notification: "https://notification.onboarding.dfcugroup.com",
         Accounts: "https://finacle-connector.onboarding.dfcugroup.com",
@@ -105,7 +100,6 @@ const crmURL = env.Crm
 const caseHandlingURL = env.Case
 const NinVerificationURL = env.Nin
 const gatewayURL = env.Gateway
-const bouGatewayURL = env.GatewayBou
 const kycURL = env.Kyc
 const notificationURL = env.Notification
 
@@ -114,7 +108,7 @@ export const remoteRoutes = {
     contactPersons: crmURL + '/api/participants/contact',
     subscriptions: crmURL + '/api/participants/subscriptions',
     participants: crmURL + '/api/participants',
-    participantsOverview: bouGatewayURL + '/api/aggregations/contact-subscriptions/04c8a212-3b79-44c5-6649-08d7daebc579',
+    participantsOverview: gatewayURL + '/api/aggregations/contact-subscriptions/04c8a212-3b79-44c5-6649-08d7daebc579',
     ninVerification: NinVerificationURL + '/api/national-id/verify',
     authServer: authURL,
     gatewayUpload: gatewayURL + '/files',
