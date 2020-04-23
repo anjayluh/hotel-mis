@@ -93,6 +93,18 @@ export const fakeParticipant = (): IParticipant => {
                 service: 'NIN Verification',
                 monthlyCap: faker.random.arrayElement(monthlyCap)
             }
+        ],
+        contactPersons: [
+            {
+                id: faker.random.uuid(),
+                name: faker.name.firstName() + ' ' + faker.name.lastName(),
+                role: faker.random.arrayElement(contactPersonCategories),
+                phone: {
+                    id: faker.random.uuid(),
+                    value: faker.phone.phoneNumberFormat(0)
+                },
+                email: faker.internet.email(),
+            }
         ]
     }
 }

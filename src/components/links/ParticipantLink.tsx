@@ -7,6 +7,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {IGeneratedParticipant} from "../../modules/participants/types";
 import {participantsConstants} from "../../data/redux/participants/reducer";
 import {search, get} from "../../utils/ajax";
+import * as faker from "faker";
+import {contactPersonCategories} from "../../data/comboCategories";
 // import {fakeParticipantDetails} from "../../modules/participants/fakeData";
 
 interface IProps {
@@ -25,6 +27,7 @@ const ParticipantLink = ({id, name}: IProps) => {
         get(
             remoteRoutes.participantsOverview,
             (resp) => {
+
                 dispatch({
                     type: participantsConstants.participantsFetchOne,
                     payload: {...resp}

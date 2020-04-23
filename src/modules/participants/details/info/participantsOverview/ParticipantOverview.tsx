@@ -71,11 +71,7 @@ const setValue = (value: any) => {
     return "-";
   } else return value;
 };
-// <<<<<<< Updated upstream
-// const officialContactInfo = (data: IParticipant): IRec[] => {
-// ||||||| merged common ancestors
-// const generalContactInfoOne = (data: IParticipant): IRec[] => {
-// =======
+
 const officialContactInfo = (data: IParticipant): IRec[] => {
   const officialEmail = data.emails.filter(email => email.isPrimary === false);
   const officialPhone = data.phones.filter(phone => phone.isPrimary === false);
@@ -89,10 +85,7 @@ const officialContactInfo = (data: IParticipant): IRec[] => {
       label: "Phone Number",
       value: officialEmail.length > 0 && setValue(officialPhone[0].value)
     }
-    // {
-    //   label: "Phone Number",
-    //   value: !data.emails[0].isPrimary && setValue(data.phones[0].value)
-    // }
+
   ];
 };
 
@@ -129,9 +122,10 @@ const ParticipantOverview = ({ data }: IProps) => {
   const [anchor, setAnchor] = useState<Anchor>("right");
   const [selected, setSelected] = useState<any | null>(null);
   const [openSlideOut, setOpenSlideOut] = useState(false);
-  const { contactPersons }: IParticipantsState = useSelector(
-    (state: IState) => state.participants
-  );
+  // const { contactPersons }: IParticipantsState = useSelector(
+  //   (state: IState) => state.participants
+  // );
+
   const spacing = 5;
   const [add, setAdd] = useState(false);
   const [edit, setEdit] = useState<boolean>(false);
@@ -197,7 +191,7 @@ const ParticipantOverview = ({ data }: IProps) => {
       setFormData(null);
       setAdd(false);
       setEdit(false);
-      const contact = contactPersons.filter(function(contact) {
+      const contact = data.contactPersons.filter(function(contact) {
         return (
           contact.name !==
           actionData[0].value.substring(0, actionData[0].value.indexOf("(") - 1)
@@ -219,9 +213,9 @@ const ParticipantOverview = ({ data }: IProps) => {
   const officialContactColumn = officialContactInfo(data);
   const primaryContactColumn = primaryContactInfo(data);
   const contactPersonsColumns: IRec[][] = [];
-  contactPersons.forEach(contact => {
-    contactPersonsColumns.push(contactToRecords(contact));
-  });
+  // contactPersons.forEach(contact => {
+  //   contactPersonsColumns.push(contactToRecords(contact));
+  // });
   const bold = false;
   const noColon = true;
   return (
@@ -255,7 +249,7 @@ const ParticipantOverview = ({ data }: IProps) => {
                <SectionTitle
                   title="Contact Persons"
                   addButton={
-                    contactPersons.length < 2 ? (
+                    data.contactPersons && data.contactPersons.length < 2 || data.contactPersons === undefined? (
                       <AddIconButton onClick={handleToggleDrawer} />
                     ) : null
                   }
@@ -264,33 +258,37 @@ const ParticipantOverview = ({ data }: IProps) => {
             </Grid>
             <Divider />
           </Grid>
-          <Grid item container direction="row" justify="space-between" xs={8} md={10}  lg={12}>
-            {contactPersons.length ? (
-               contactPersonsColumns.map((contactPerson: any, index: number) => (
-                 <Grid
-                   container
-                   item
-                   xs={6}
-                   style={{ paddingLeft: 0 }}
-                   direction="row"
-                   key={index}
-                 >
-                   <DetailViewSimple
-                     data={contactPerson}
-                     noColon={noColon}
-                     bold={bold}
-                     editButton={<EditIconButton />}
-                     deleteButton={
-                       contactPersons.length > 1 ? <DeleteIconButton /> : null
-                     }
-                     handleClickedItem={handleToggleDrawer}
-                   />
-                 </Grid>
-               ))
-             ) : (
-               <Loading />
-            )}
-          </Grid>
+          {
+            data.contactPersons &&
+            <Grid item container direction="row" justify="space-between" xs={8} md={10}  lg={12}>
+              {data.contactPersons.length ? (
+                  contactPersonsColumns.map((contactPerson: any, index: number) => (
+                      <Grid
+                          container
+                          item
+                          xs={6}
+                          style={{ paddingLeft: 0 }}
+                          direction="row"
+                          key={index}
+                      >
+                        <DetailViewSimple
+                            data={contactPerson}
+                            noColon={noColon}
+                            bold={bold}
+                            editButton={<EditIconButton />}
+                            deleteButton={
+                              data.contactPersons.length > 1 ? <DeleteIconButton /> : null
+                            }
+                            handleClickedItem={handleToggleDrawer}
+                        />
+                      </Grid>
+                  ))
+              ) : (
+                  <Loading />
+              )}
+            </Grid>
+          }
+
         </Grid>
         {!deleteItem && (
             <SlideOutDrawer

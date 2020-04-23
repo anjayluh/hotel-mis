@@ -8,7 +8,7 @@ import {
   phoneNumber,
   reqPhoneNumber
 } from "../../../data/validations";
-import { organisationTypeCategories } from "../../../data/comboCategories";
+import {contactPersonCategories, organisationTypeCategories} from "../../../data/comboCategories";
 import { FormikActions } from "formik";
 import Grid from "@material-ui/core/Grid";
 import XFormSimple from "../../../components/forms/XFormSimple";
@@ -135,6 +135,18 @@ const ParticipantForm = (props: IProps) => {
           dateCreated: new Date(faker.date.past(1)),
           subscriptionStatus: "Active",
           serviceCategoryId: "cef84215-8f9d-4ebd-0895-08d7d24bc164"
+        }
+      ],
+      contactPersons: [
+        {
+          id: faker.random.uuid(),
+          name: '',
+          role: '',
+          phone: {
+            id: '',
+            value: ''
+          },
+          email: '',
         }
       ]
     };

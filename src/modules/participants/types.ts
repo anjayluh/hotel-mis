@@ -39,6 +39,7 @@ export interface IParticipant {
     lastUpdated: Date | null
     isDeleted: false
     subscriptions: ISubscription[]
+    contactPersons: IContactPerson[]
 }
 
 export interface ICompany {

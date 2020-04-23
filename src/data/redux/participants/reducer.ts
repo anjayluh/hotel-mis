@@ -28,7 +28,7 @@ export interface IParticipantsState {
     selected?: IParticipant,
     participant?: IParticipant,
     data: any,
-    contactPersons: IContactPerson[]
+    // contactPersons: IContactPerson[]
     billingsLoading?: boolean
     billings:IBill[]
     payments:IPayment[]
@@ -43,7 +43,7 @@ const initialState: IParticipantsState = {
     participant: undefined,
     data: [],
     selected: undefined,
-    contactPersons: [],
+    // contactPersons: [],
     billingsLoading: false,
     billings:[],
     paymentsLoading: false,
@@ -111,20 +111,24 @@ export default function reducer(state = initialState, action: any) {
         }
         case participantsConstants.participantsAddContactPerson: {
             const newContactPerson: IContactPerson[] = action.payload
-            return {...state, contactPersons: [...state.contactPersons, newContactPerson]}
-        }
-        case participantsConstants.participantsUpdateContactPerson: {
-            return {
-                ...state, contactPersons: state.contactPersons.map(
-                    (contact, index) =>
-                        (contact.name === action.payload.name) ?
-                            action.payload : contact)
+            return {...state, selected: state.selected && {
+                    ...state.selected,
+                    contactPersons: [newContactPerson]
+                }
             }
         }
-        case participantsConstants.participantsDeleteContactPerson: {
-            let contacts =  state.contactPersons.filter(function(contact) { return contact.name === action.payload.name; });
-            return {...state, contactPersons: contacts}
-        }
+        // case participantsConstants.participantsUpdateContactPerson: {
+        //     return {
+        //         ...state, contactPersons: state.contactPersons.map(
+        //             (contact, index) =>
+        //                 (contact.name === action.payload.name) ?
+        //                     action.payload : contact)
+        //     }
+        // }
+        // case participantsConstants.participantsDeleteContactPerson: {
+        //     let contacts =  state.contactPersons.filter(function(contact) { return contact.name === action.payload.name; });
+        //     return {...state, contactPersons: contacts}
+        // }
         default: {
             return state
         }
