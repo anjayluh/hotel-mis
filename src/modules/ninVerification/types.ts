@@ -132,7 +132,11 @@ export enum WorkflowStatus {
 export enum WorkflowNinStatus {
     Pending = 'Pending',
     Error = 'Error',
-    Verified = 'Verified'
+    Verified = 'Verified',
+    Successful = 'Successful',
+    Failed = 'Failed',
+    Rejected = 'Rejected'
+
 }
 
 export enum WorkflowRequestStatus {

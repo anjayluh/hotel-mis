@@ -15,7 +15,7 @@ export const wfInitialSort = 'applicationDate';
 export const ninVerificationHeadCells: XHeadCell[] = [
 
     {
-        name: 'date', label: 'Date',
+        name: 'submittedAt', label: 'Date',
         render: (value, rec) => <span>{printDateTime(value)}</span>,
         cellProps: {
             style: {
@@ -38,7 +38,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
         }
     },
     {
-        name: 'status', label: 'Status', render: (_, rec) => renderNinStatus(rec.status.name),
+        name: 'status', label: 'Status', render: (_, rec) => renderNinStatus(rec.status),
         cellProps: {
             style: {
                 width: 40
@@ -46,7 +46,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
         }
     },
     {
-        name: 'requestId', label: 'Request id',
+        name: 'id', label: 'Request id',
         cellProps: {
             style: {
                 width: 40,

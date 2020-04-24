@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import { IWorkflowFilter } from "./types";
 import Filter from "./Filter";
 import Typography from "@material-ui/core/Typography";
-import { search } from "../../utils/ajax";
+import {search} from "../../utils/ajax";
 import { remoteRoutes } from "../../data/constants";
 import {
   wfInitialSort,
@@ -20,7 +20,6 @@ import {
   verificationRequestConstants,
   IVerificationRequestState
 } from "../../data/redux/ninVerification/reducer";
-import { verificationRequests } from "./fakeData";
 import Loading from "../../components/Loading";
 import NinVerificationForm from "./forms/NinVerificationForm";
 import SlideOutDrawer from "../../components/SlideOutDrawer";
@@ -92,7 +91,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type Anchor = "top" | "left" | "bottom" | "right";
-const verificationRequestData = verificationRequests();
 
 const NinVerifications = () => {
   const dispatch = useDispatch();
@@ -106,6 +104,11 @@ const NinVerifications = () => {
   }: IVerificationRequestState = useSelector(
     (state: IState) => state.verificationRequests
   );
+  const [rowsPerPage, setRowsPerPage] = useState({
+    "page":1,
+    "itemsPerPage":5,
+    "totalItems":10
+  },);
   const [viewDetails, setViewDetails] = useState<any | null>(null);
   const [anchor, setAnchor] = useState<Anchor>("right");
   const [filter, setFilter] = useState<IWorkflowFilter>({
@@ -119,23 +122,24 @@ const NinVerifications = () => {
       type: verificationRequestConstants.RequestsFetchLoading,
       payload: true
     });
+
     search(
-      remoteRoutes.contacts,
-      filter,
-      resp => {
-        dispatch({
-          type: verificationRequestConstants.RequestsFetchAll,
-          payload: [...verificationRequestData]
-        });
-      },
-      undefined,
-      () => {
-        dispatch({
-          type: verificationRequestConstants.RequestsFetchLoading,
-          payload: false
-        });
-      }
-    );
+        remoteRoutes.ninVerificationRequests,'filter',
+        (resp) => {
+          setRowsPerPage(resp.pagination)
+          dispatch({
+            type: verificationRequestConstants.RequestsFetchAll,
+            payload: [...resp.requests]
+          })
+        },
+        undefined,
+        () => {
+          console.log('failed to access')
+          dispatch({
+            type: verificationRequestConstants.RequestsFetchLoading,
+            payload: false
+          })
+        })
   }, [filter, dispatch]);
 
   function addNewRequest() {

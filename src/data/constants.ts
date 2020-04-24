@@ -109,6 +109,7 @@ export const remoteRoutes = {
     subscriptions: crmURL + '/api/participants/subscriptions',
     participants: crmURL + '/api/participants',
     participantsOverview: gatewayURL + '/api/aggregations/contact-subscriptions/04c8a212-3b79-44c5-6649-08d7daebc579',
+    ninVerificationRequests:gatewayURL + '/niv/api/request/search',
     ninVerification: NinVerificationURL + '/api/national-id/verify',
     authServer: authURL,
     gatewayUpload: gatewayURL + '/files',

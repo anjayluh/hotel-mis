@@ -8,14 +8,17 @@ import {Chip} from "@material-ui/core";
 export const renderNinStatus = (value: WorkflowNinStatus) => {
     let color = successColor
     switch (value) {
-        case WorkflowNinStatus.Verified:
+        case WorkflowNinStatus.Successful:
             color = successColor
             break
-        case WorkflowNinStatus.Error:
+        case WorkflowNinStatus.Rejected:
             color = warningColor
             break
-        case WorkflowNinStatus.Pending:
+        case WorkflowNinStatus.Failed:
             color = errorColor
+            break
+        case WorkflowNinStatus.Pending:
+            color = pendingColor
             break
     }
 
