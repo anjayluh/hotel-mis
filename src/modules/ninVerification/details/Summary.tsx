@@ -1,7 +1,15 @@
 import React, {Fragment} from 'react';
 import {Grid} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import {ITask, IWorkflow, TaskStatus, IRequestDetails, IRequestDetailsStatus} from "../types";
+import {
+    ITask,
+    IWorkflow,
+    TaskStatus,
+    IRequestDetails,
+    IRequestDetailsStatus,
+    WorkflowNinStatus,
+    ActionStatus
+} from "../types";
 import DetailView, {IRec} from "../../../components/DetailView";
 import {printDateTime, printDate} from "../../../utils/dateHelpers";
 import List from '@material-ui/core/List';
@@ -10,8 +18,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import LabelIcon from '@material-ui/icons/Label';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from "@material-ui/core/Divider";
-import {errorColor, successColor, warningColor} from "../../../theme/custom-colors";
-import ParticipantLink from "../../../components/links/ParticipantLink";
+import {errorColor, successColor, warningColor, pendingColor} from "../../../theme/custom-colors";
 
 interface IProps {
     data: IRequestDetails
@@ -20,30 +27,44 @@ interface IProps {
 const Summary = ({data}: IProps) => {
     const fields: IRec[] = [
         {
-            label: 'Request Date',
-            value: printDateTime(data.requestDate)
-        },
-        {
-            label: 'NIN',
+            label: 'NIN:',
             value: data.nin
         },
         {
-            label: 'Date of Birth',
+            label: 'Date of Birth:',
             value: printDate(data.dateOfBirth)
         },
         {
-            label: 'Ref.Number',
-            value: data.referenceNumber
+            label: 'Card Number:',
+            value: data.cardNumber
         },
         {
-            label: 'Initiator',
+            label: 'Initiator:',
             value: data.initiator
         },
         {
-            label: 'Participant',
-            value: <ParticipantLink id={data.requestId} name={data.participant}/>
+            label: 'Name:',
+            value: data.name
         },
 
+    ]
+    const requestStatus = [
+        {
+            task: "Request Received",
+            date: data.receivedAt
+        },
+        {
+            task: "Submitted to NIRA",
+            date: data.submittedAt
+        },
+        {
+            task: "Verification Completed",
+            date: data.receivedFromNira
+        },
+        {
+            task: "Billing Updated",
+            date: null
+        },
     ]
 
     return (
@@ -57,9 +78,8 @@ const Summary = ({data}: IProps) => {
                 <Typography>Request Status</Typography>
                 <List dense>
                     {
-
-                        data.requestStatus.map(it => (
-                            <Fragment key={it.order}>
+                        requestStatus.map(it => (
+                            <Fragment key={it.task}>
                                 <ListItem>
                                     <ListItemIcon>
                                         <LabelIcon style={{color: getTaskColor(it)}}/>
@@ -75,21 +95,29 @@ const Summary = ({data}: IProps) => {
 
                         ))
                     }
+
+
                 </List>
             </Grid>
         </Grid>
     );
 }
 
-export function getTaskColor(task: IRequestDetailsStatus): any {
-    switch (task.status) {
-        case TaskStatus.Done:
-            return successColor
-        case TaskStatus.Error:
-            return errorColor
-        case TaskStatus.Pending:
-            return warningColor
+export function getTaskColor(task: any): any {
+    if (task.date) {
+        return successColor
     }
+    else {
+        return errorColor
+    }
+    // switch (task.status) {
+    //     case WorkflowNinStatus.Successful:
+    //         return successColor
+    //     case WorkflowNinStatus.Failed:
+    //         return errorColor
+    //     case WorkflowNinStatus.Pending:
+    //         return pendingColor
+    // }
 }
 
 

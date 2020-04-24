@@ -113,13 +113,20 @@ export interface IRequestDetailsStatus {
     date?: Date | null
 }
 export interface IRequestDetails {
+    id?: any,
     requestId: any,
-    requestDate: Date,
+    requestDate?: Date,
     nin: string,
     dateOfBirth: Date,
-    referenceNumber: any,
+    referenceNumber?: any,
+    cardNumber?: any
     initiator: string,
     participant: string,
+    name?: string
+    status?: string
+    receivedFromNira?:string
+    receivedAt?: string
+    submittedAt?: string
     requestStatus: IRequestDetailsStatus[]
 }
 

@@ -142,6 +142,8 @@ const NinVerifications = () => {
         })
   }, [filter, dispatch]);
 
+
+
   function addNewRequest() {
     dispatch({
       type: verificationRequestConstants.RequestsAddNew,
@@ -152,6 +154,13 @@ const NinVerifications = () => {
   function handleToggleDrawer(id?: any) {
     if (id) {
       setViewDetails(id);
+      const requestDetails = data.filter((requestDetails) => {
+        return requestDetails.id === id
+      })
+      dispatch({
+        type: verificationRequestConstants.RequestDetails,
+        payload: requestDetails[0]
+      });
     } else {
       setViewDetails(null);
     }

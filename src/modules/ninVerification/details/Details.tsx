@@ -64,7 +64,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-const requestDetails: IRequestDetails = fakeRequestDetails();
 
 const Details = (props: IProps) => {
   const dispatch: Dispatch<any> = useDispatch();
@@ -73,36 +72,14 @@ const Details = (props: IProps) => {
     (state: IState) => state.verificationRequests.requestDetails
   );
   const [loading, setLoading] = useState<boolean>(false);
-
   useEffect(() => {
     let mounted = true;
     if (mounted) {
       setLoading(true);
-      search(
-        remoteRoutes.contacts,
-        "filter",
-        resp => {
-          dispatch({
-            type: verificationRequestConstants.RequestDetails,
-            payload: requestDetails
-          });
-
-          if (requestDetails) {
-            setLoading(false);
-          }
-        },
-        undefined,
-        () => {
-          dispatch({
-            type: verificationRequestConstants.RequestDetails,
-            payload: requestDetails
-          });
-
-          if (requestDetails) {
-            setLoading(false);
-          }
+      if (requestData) {
+          setLoading(false);
         }
-      );
+
     }
   }, [requestData]);
 
@@ -128,12 +105,16 @@ const Details = (props: IProps) => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Box display="flex" py={1}>
-                <Box flexGrow={1} pt={1}>
-                  <Typography variant="h5">
-                    Request ID:{" "}
-                    {requestData ? requestData.referenceNumber : "loading"}
+                <Box flexBasis={100} mr={1}>
+                  <Typography variant="h5" >
+                    Request ID:
                   </Typography>
                 </Box>
+                  <Box>
+                      <Typography variant="h5">
+                          {requestData ? requestData.id : "loading"}
+                      </Typography>
+                  </Box>
               </Box>
               <Divider />
               <Box pt={1}>{requestData && <Summary data={requestData} />}</Box>
