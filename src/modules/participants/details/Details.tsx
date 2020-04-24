@@ -85,6 +85,7 @@ const Details = (props: IProps) => {
   ]);
   const [loading, setLoading] = useState<boolean>(true);
 
+
   // const data: IParticipant = tempParticipant;
   useEffect(() => {
     if (participantId) {

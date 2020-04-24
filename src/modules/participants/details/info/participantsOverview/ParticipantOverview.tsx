@@ -213,9 +213,9 @@ const ParticipantOverview = ({ data }: IProps) => {
   const officialContactColumn = officialContactInfo(data);
   const primaryContactColumn = primaryContactInfo(data);
   const contactPersonsColumns: IRec[][] = [];
-  // contactPersons.forEach(contact => {
-  //   contactPersonsColumns.push(contactToRecords(contact));
-  // });
+  data.contactPersons && data.contactPersons.forEach(contact => {
+    contactPersonsColumns.push(contactToRecords(contact));
+  });
   const bold = false;
   const noColon = true;
   return (

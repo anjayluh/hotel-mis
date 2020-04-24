@@ -113,22 +113,29 @@ export default function reducer(state = initialState, action: any) {
             const newContactPerson: IContactPerson[] = action.payload
             return {...state, selected: state.selected && {
                     ...state.selected,
-                    contactPersons: [newContactPerson]
+                    contactPersons: state.selected.contactPersons ? [...state.selected.contactPersons, newContactPerson] : [newContactPerson]
                 }
             }
         }
-        // case participantsConstants.participantsUpdateContactPerson: {
-        //     return {
-        //         ...state, contactPersons: state.contactPersons.map(
-        //             (contact, index) =>
-        //                 (contact.name === action.payload.name) ?
-        //                     action.payload : contact)
-        //     }
-        // }
-        // case participantsConstants.participantsDeleteContactPerson: {
-        //     let contacts =  state.contactPersons.filter(function(contact) { return contact.name === action.payload.name; });
-        //     return {...state, contactPersons: contacts}
-        // }
+        case participantsConstants.participantsUpdateContactPerson: {
+            return {
+                ...state, selected: state.selected && {
+                    ...state.selected,
+                    contactPersons: state.selected.contactPersons.map(
+                        (contact, index) =>
+                            (contact.name === action.payload.name) ?
+                                action.payload : contact)
+                }
+            }
+        }
+        case participantsConstants.participantsDeleteContactPerson: {
+            let contacts =  state.selected && state.selected.contactPersons && state.selected.contactPersons.filter(function(contact) {
+                return contact.name === action.payload.name;
+            });
+            return {...state, selected: state.selected && {
+                ...state.selected, contactPersons: contacts}
+            }
+        }
         default: {
             return state
         }
