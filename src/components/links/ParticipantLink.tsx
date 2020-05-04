@@ -14,33 +14,17 @@ import {contactPersonCategories} from "../../data/comboCategories";
 interface IProps {
     id: string
     name: string
+    rec?: any
 }
 
-const ParticipantLink = ({id, name}: IProps) => {
+const ParticipantLink = ({id, name, rec}: IProps) => {
     const dispatch = useDispatch();
-
     useEffect(() => {
-        // dispatch({
-        //     type: participantsConstants.participantsFetchOne,
-        //     payload: {...fakeParticipantDetails()}
-        // })
-        get(
-            remoteRoutes.participantsOverview,
-            (resp) => {
+        dispatch({
+            type: participantsConstants.getParticipantDetails,
+            payload: {id}
+        })
 
-                dispatch({
-                    type: participantsConstants.participantsFetchOne,
-                    payload: {...resp}
-                })
-            },
-            undefined,
-            () => {
-                console.log('failed to access')
-                dispatch({
-                    type: participantsConstants.participantsFetchLoading,
-                    payload: false,
-                })
-            })
     }, [id, dispatch])
     return (
         <Link style={{textDecoration: 'none' ,color:linkColor}} to={`${localRoutes.participants}/${id}`}>{name}</Link>

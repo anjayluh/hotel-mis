@@ -6,16 +6,18 @@ import { format, compareAsc } from 'date-fns'
 
 export const columns: XHeadCell[] = [
     {
-        name: 'name', label: 'Participant',
-        render: (value, rec) => <ParticipantLink id={rec.id} name={rec.company.name}/>,
+        name: 'company.name', label: 'Participant',
+        render: (value, rec) => <ParticipantLink id={rec.id} name={value} />,
         cellProps: {style: {width: 70}}
     },
+
     {
         name: 'category', label: 'Participant Type',
         cellProps: {
             style: {
                 width: 80,
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
+                display: 'none'
             }
         }
     },

@@ -7,7 +7,7 @@ export const participantsConstants = {
     participantsFetchAll: "participantsFetchAll",
     participantsFetchLoading: "participantsFetchLoading",
     participantsAddParticipant: "participantsAddParticipant",
-    participantsFetchOne: "participantsFetchOne",
+    getParticipantDetails: "getParticipantDetails",
     contactPersonsFetchAll: 'contactPersonsFetchAll',
     participantsBillsFetchAll: "participantsBillsFetchAll",
     participantsPaymentsFetchAll: "participantsPaymentsFetchAll",
@@ -24,11 +24,9 @@ export const participantsConstants = {
 
 export interface IParticipantsState {
     loading: boolean,
-    // selected?: IParticipant,
     selected?: IParticipant,
     participant?: IParticipant,
     data: any,
-    // contactPersons: IContactPerson[]
     billingsLoading?: boolean
     billings:IBill[]
     payments:IPayment[]
@@ -43,16 +41,14 @@ const initialState: IParticipantsState = {
     participant: undefined,
     data: [],
     selected: undefined,
-    // contactPersons: [],
     billingsLoading: false,
     billings:[],
     paymentsLoading: false,
     paymentsDetailsLoading: false,
     payments:[],
     paymentDetails: undefined,
-    addedPayment: undefined/* ,
-    subscriptions: [],
-    subscriptionsLoading: false */
+    addedPayment: undefined,
+
 }
 
 export default function reducer(state = initialState, action: any) {
@@ -68,12 +64,15 @@ export default function reducer(state = initialState, action: any) {
         }
         case participantsConstants.participantsAddParticipant: {
             const newParticipant: IParticipant[] = action.payload
-            // Will remove fakeSelected when endpoint is available
             return {...state, data: [...state.data, newParticipant], selected: newParticipant}
         }
-        case participantsConstants.participantsFetchOne: {
-            const selected: IParticipant = action.payload
+        case participantsConstants.getParticipantDetails: {
+            const participantDetails = state.data.filter((participantDetails: IParticipant) => {
+                return action.payload === participantDetails.id
+            })
+            const selected: IParticipant = participantDetails[0]
             return {...state, selected, loading: false}
+
         }
         case participantsConstants.participantsBillsFetchLoading: {
             return {...state, billingsLoading: action.payload}

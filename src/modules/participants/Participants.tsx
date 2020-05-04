@@ -25,7 +25,6 @@ import {
 } from "../../data/redux/participants/reducer";
 import { IState, Anchor } from "../../data/types";
 import { columns } from "./config";
-import { fakeParticipant } from "./fakeData";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -84,12 +83,12 @@ const Participants = () => {
       payload: true
     });
     search(
-      remoteRoutes.contacts,
+      remoteRoutes.participants,
       filter,
       resp => {
         dispatch({
           type: participantsConstants.participantsFetchAll,
-          payload: [...callfakeParticipant(15)]
+          payload: [...resp]
         });
       },
       undefined,
@@ -101,15 +100,6 @@ const Participants = () => {
       }
     );
   }, [filter, dispatch]);
-
-  function callfakeParticipant(length: number) {
-    let participants = [];
-    while (length > 0) {
-      participants.push(fakeParticipant());
-      length = length - 1;
-    }
-    return participants;
-  }
 
   function handleFilter(value: any) {
     setFilter({ ...filter, ...value });

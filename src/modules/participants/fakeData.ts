@@ -1,12 +1,11 @@
 import * as faker from "faker";
 import {
-    IGeneratedParticipant,
     ISubscription,
     IContactPerson,
     IBill,
     IPayment,
     IPaymentDetails,
-    IParticipant, IParticipantType, IParticipantPhone, IParticipantStatus
+    IParticipant,
 } from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";

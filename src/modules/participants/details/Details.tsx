@@ -71,12 +71,11 @@ const Details = (props: IProps) => {
   const [showAccountStatementView, setShowAccountStatementView] = useState<
     boolean
   >(false);
-  // const data: IParticipant = useSelector(
-  //   (state: any) => state.participants.selected
-  // );
+
   const data: IParticipant = useSelector(
     (state: any) => state.participants.selected
   );
+
   const [headings, setHeadings] = useState([
     { text: "Participants Overview", status: true },
     { text: "Billing", status: false },
@@ -86,7 +85,6 @@ const Details = (props: IProps) => {
   const [loading, setLoading] = useState<boolean>(true);
 
 
-  // const data: IParticipant = tempParticipant;
   useEffect(() => {
     if (participantId) {
       setLoading(false);
