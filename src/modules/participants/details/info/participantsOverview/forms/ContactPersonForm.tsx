@@ -53,7 +53,7 @@ const ContactPersonForm = (props: IProps) => {
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
     const toSave: IContactPerson = {
-      id: faker.random.uuid(),
+      id: values.id ? values.id : faker.random.uuid(),
       name: values.name,
       role: values.role,
       phone: {

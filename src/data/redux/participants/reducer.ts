@@ -8,6 +8,7 @@ export const participantsConstants = {
     participantsFetchLoading: "participantsFetchLoading",
     participantsAddParticipant: "participantsAddParticipant",
     getParticipantDetails: "getParticipantDetails",
+    participantsFetchOne: "participantsFetchOne",
     contactPersonsFetchAll: 'contactPersonsFetchAll',
     participantsBillsFetchAll: "participantsBillsFetchAll",
     participantsPaymentsFetchAll: "participantsPaymentsFetchAll",
@@ -34,6 +35,7 @@ export interface IParticipantsState {
     paymentsDetailsLoading: boolean
     paymentDetails?: IPaymentDetails
     addedPayment?: IPayment
+    fetchOne?: boolean
 }
 
 const initialState: IParticipantsState = {
@@ -47,8 +49,7 @@ const initialState: IParticipantsState = {
     paymentsDetailsLoading: false,
     payments:[],
     paymentDetails: undefined,
-    addedPayment: undefined,
-
+    addedPayment: undefined
 }
 
 export default function reducer(state = initialState, action: any) {
@@ -67,12 +68,11 @@ export default function reducer(state = initialState, action: any) {
             return {...state, data: [...state.data, newParticipant], selected: newParticipant}
         }
         case participantsConstants.getParticipantDetails: {
-            const participantDetails = state.data.filter((participantDetails: IParticipant) => {
-                return action.payload === participantDetails.id
-            })
-            const selected: IParticipant = participantDetails[0]
-            return {...state, selected, loading: false}
-
+            const selected = state.data.filter((participantDetails: IParticipant) => action.payload.participantId === participantDetails.id);
+            return { ...state, selected: selected[0], loading: false }
+        }
+        case participantsConstants.participantsFetchOne: {
+            return { ...state, selected: action.payload, loading: false }
         }
         case participantsConstants.participantsBillsFetchLoading: {
             return {...state, billingsLoading: action.payload}
@@ -104,7 +104,7 @@ export default function reducer(state = initialState, action: any) {
             return {
                 ...state, selected: state.selected && {
                     ...state.selected,
-                    subscriptions: [...state.selected.subscriptions, newSubscription]
+                    subscriptions: state.selected.subscriptions ? [...state.selected.subscriptions, newSubscription] : [newSubscription]
                 }
             }
         }
@@ -128,7 +128,7 @@ export default function reducer(state = initialState, action: any) {
             }
         }
         case participantsConstants.participantsDeleteContactPerson: {
-            let contacts =  state.selected && state.selected.contactPersons && state.selected.contactPersons.filter(function(contact) {
+            let contacts = state.selected && state.selected.contactPersons && state.selected.contactPersons.filter(function (contact) {
                 return contact.name === action.payload.name;
             });
             return {...state, selected: state.selected && {

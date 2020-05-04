@@ -14,6 +14,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Billings from "./info/billing/Billings";
 import Payments from "./info/payments/Payments";
 import AccountStatement from "./info/accountStatement/AccountStatement";
+import { participantsConstants } from "../../../data/redux/participants/reducer";
+import { remoteRoutes } from "../../../data/constants";
+import { get } from "../../../utils/ajax";
 
 interface IProps extends RouteComponentProps {}
 
@@ -59,6 +62,65 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const fakeSelected: IParticipant = {
+  category: "Company",
+  person: null,
+  subscriptions: [],
+  contactPersons: [],
+  company: {
+    name: "Stanbic Bank Uganda Limited",
+    id: "994712fb-593d-432d-2d2c-08d7daebc584",
+    createdAt: new Date(),
+    lastUpdated: null,
+    isDeleted: false
+  },
+  identifications: [
+    {
+      category: "Nin",
+      contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
+      value: "DE128398323",
+      cardNumber: null,
+      issuingCountry: null,
+      issueDate: new Date(),
+      expiryDate: new Date(),
+      isPrimary: true,
+      id: "3994b03c-0e22-4e9c-8ce1-08d7daebc586",
+      createdAt: new Date(),
+      lastUpdated: null,
+      isDeleted: false
+    }
+  ],
+  phones: [
+    {
+      category: "Mobile",
+      contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
+      value: "0414100100",
+      isPrimary: true,
+      id: "5d66befc-cfab-417c-654c-08d7daebc587",
+      createdAt: new Date(),
+      lastUpdated: null,
+      isDeleted: false
+    }
+  ],
+  emails: [
+    {
+      category: "Personal",
+      contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
+      value: "reach_out@stanbic.co.ug",
+      isPrimary: true,
+      id: "f365d61a-827e-4f86-ab0e-08d7daebc585",
+      createdAt: new Date(),
+      lastUpdated: null,
+      isDeleted: false
+    }
+  ],
+  addresses: [],
+  tags: null,
+  id: "04c8a212-3b79-44c5-6649-08d7daebc579",
+  createdAt: new Date(),
+  lastUpdated: null,
+  isDeleted: false
+};
 const Details = (props: IProps) => {
   const participantId = getRouteParam(props, "participantId");
   const classes = useStyles();
@@ -75,23 +137,41 @@ const Details = (props: IProps) => {
   const data: IParticipant = useSelector(
     (state: any) => state.participants.selected
   );
-
+  const allData: IParticipant[] = useSelector(
+    (state: any) => state.participants.data
+  );
   const [headings, setHeadings] = useState([
     { text: "Participants Overview", status: true },
     { text: "Billing", status: false },
     { text: "Payments", status: false },
     { text: "Account Statement", status: false }
   ]);
-  const [loading, setLoading] = useState<boolean>(true);
-
 
   useEffect(() => {
-    if (participantId) {
-      setLoading(false);
+    dispatch({
+      type: participantsConstants.getParticipantDetails,
+      payload: { participantId }
+    });
+    // This code below runs when the page has refreshed and we don't have the participants list data
+    if (allData.length === 0) {
+      get(
+        remoteRoutes.participants + `/${participantId}`,
+        resp => {
+          dispatch({
+            type: participantsConstants.participantsFetchOne,
+            payload: fakeSelected
+          });
+        },
+        () => {
+          // This is temporal until the endpoint is functioning
+          dispatch({
+            type: participantsConstants.participantsFetchOne,
+            payload: fakeSelected
+          });
+        }
+      );
     }
-  }, [dispatch, participantId, data]);
-
-  const hasError = !loading && !data;
+  }, [participantId, dispatch]);
 
   const handleClick = (value: any) => {
     setHeadings(
@@ -129,6 +209,9 @@ const Details = (props: IProps) => {
       })
     );
   };
+  const loading = participantId && data ? false : true;
+  const hasError = !loading && !data;
+
   return (
     <Layout>
       {loading && <Loading />}

@@ -58,7 +58,6 @@ const headCells: XHeadCell[] = [...columns];
 const Subscriptions = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  // const [data, setData] = useState<ISubscription[]>([]);
   const { selected } = useSelector((state: IState) => state.participants);
   const classes = useStyles();
   const [formData, setFormData] = useState<any | null>({
@@ -112,7 +111,9 @@ const Subscriptions = () => {
   function handleNewSubscription() {
     handleToggleDrawer("add");
   }
-
+  if (selected && !selected.subscriptions) {
+    selected.subscriptions = [];
+  }
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} style={{ paddingLeft: 0, paddingRight: 0 }}>

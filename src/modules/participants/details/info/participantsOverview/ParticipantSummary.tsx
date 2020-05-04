@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import { Chip } from "@material-ui/core";
 import { IParticipant } from "../../../types";
@@ -7,7 +7,9 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import PersonIcon from "@material-ui/icons/Person";
-import EditIconButton, {DeleteIconButton} from "../../../../../components/EditIconButton";
+import EditIconButton, {
+  DeleteIconButton
+} from "../../../../../components/EditIconButton";
 import Box from "@material-ui/core/Box";
 
 interface IProps {
@@ -30,9 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
     nameHolder: {
       paddingTop: theme.spacing(1)
     },
-      companyName: {
-          lineHeight: "30px"
-      },
+    companyName: {
+      lineHeight: "30px"
+    },
     summaryChip: {
       backgroundColor: "#4bb050",
       marginTop: "4px",
@@ -42,30 +44,28 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "18px",
       fontSize: "0.75rem"
     },
-      hideEditActions: {
-          opacity: 0,
-
-      },
-      showEditActions: {
-          opacity: 1,
-
-      }
+    hideEditActions: {
+      opacity: 0
+    },
+    showEditActions: {
+      opacity: 1
+    }
   })
 );
 
 const ParticipantSummary = ({ data }: IProps) => {
   const classes = useStyles();
-    const [canEdit, setCanEdit] = useState<boolean>(false);
-    const [canDelete, setCanDelete] = useState<boolean>(false);
+  const [canEdit, setCanEdit] = useState<boolean>(false);
+  const [canDelete, setCanDelete] = useState<boolean>(false);
 
-    const handleEntered = () => {
-        setCanEdit(true);
-        setCanDelete(true);
-    };
-    const handleLeave = () => {
-        setCanEdit(false);
-        setCanDelete(false);
-    };
+  const handleEntered = () => {
+    setCanEdit(true);
+    setCanDelete(true);
+  };
+  const handleLeave = () => {
+    setCanEdit(false);
+    setCanDelete(false);
+  };
 
   return (
     <Grid container>
@@ -75,22 +75,37 @@ const ParticipantSummary = ({ data }: IProps) => {
             <PersonIcon fontSize="large" />
           </Avatar>
           <Grid item className={classes.nameHolder}>
-              <Box display="flex" onMouseEnter={handleEntered} onMouseLeave={handleLeave}>
-                  <Box>
-                      <Typography variant="h5" className={classes.companyName}>{data.company.name}</Typography>
-                  </Box>
-                  <Box ml={2} className={canEdit ? classes.showEditActions : classes.hideEditActions}>
-                      <EditIconButton/>
-                  </Box>
+            {data.company && (
+              <Box
+                display="flex"
+                onMouseEnter={handleEntered}
+                onMouseLeave={handleLeave}
+              >
+                <Box>
+                  <Typography variant="h5" className={classes.companyName}>
+                    {data.company.name}
+                  </Typography>
+                </Box>
+                <Box
+                  ml={2}
+                  className={
+                    canEdit ? classes.showEditActions : classes.hideEditActions
+                  }
+                >
+                  <EditIconButton />
+                </Box>
               </Box>
+            )}
             <Typography variant="body2">{data.category}</Typography>
-            <Chip
-              size="small"
-              variant="default"
-              color="primary"
-              className={classes.summaryChip}
-              label={data.subscriptions[0].subscriptionStatus}
-            />
+            {data.company && (
+              <Chip
+                size="small"
+                variant="default"
+                color="primary"
+                className={classes.summaryChip}
+                label={data.company.isDeleted ? "Inactive" : "Active"}
+              />
+            )}
           </Grid>
         </Grid>
       </Grid>
