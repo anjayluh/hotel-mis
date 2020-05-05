@@ -243,12 +243,12 @@ const ParticipantOverview = ({ data }: IProps) => {
         >
           <Grid item xs={6} style={{ overflowWrap: "anywhere" }}>
             <Box style={{ paddingLeft: 8 }}>
-              <DetailView data={officialContactColumn} noColon={noColon} />
+              <DetailView data={primaryContactColumn} noColon={noColon} />
             </Box>
           </Grid>
           <Grid item xs={6} style={{ overflowWrap: "anywhere" }}>
             <Box style={{ paddingLeft: 8 }}>
-              <DetailView data={primaryContactColumn} noColon={noColon} />
+              <DetailView data={officialContactColumn} noColon={noColon} />
             </Box>
           </Grid>
         </Grid>
