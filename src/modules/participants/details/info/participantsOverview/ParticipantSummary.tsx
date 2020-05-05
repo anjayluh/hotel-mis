@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: theme.spacing(1)
     },
     companyName: {
-      lineHeight: "30px"
+      // lineHeight: "30px"
+        marginTop: "15px"
     },
     summaryChip: {
       backgroundColor: "#4bb050",
@@ -92,7 +93,7 @@ const ParticipantSummary = ({ data }: IProps) => {
                     canEdit ? classes.showEditActions : classes.hideEditActions
                   }
                 >
-                  <EditIconButton />
+                  <EditIconButton style={{ marginTop: 7 }}/>
                 </Box>
               </Box>
             )}
