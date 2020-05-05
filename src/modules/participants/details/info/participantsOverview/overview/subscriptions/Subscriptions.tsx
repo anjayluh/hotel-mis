@@ -13,25 +13,25 @@ import { columns } from "./SubscriptionConfig";
 import { fakeSubscriptions } from "../../../../../fakeData";
 import { IState } from "../../../../../../../data/types";
 import SlideOutDrawer from "../../../../../../../components/SlideOutDrawer";
-import SubscriptionsForm from "./forms/SubscriptionsForm";
+import SubscriptionsForm from "../../forms/SubscriptionsForm";
 import { Anchor } from "../../../../../../../data/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     filterPaper: {
       borderRadius: 0,
-      padding: theme.spacing(2)
+      padding: theme.spacing(2),
     },
     fab: {
       position: "absolute",
       bottom: theme.spacing(2),
-      right: theme.spacing(2)
+      right: theme.spacing(2),
     },
     pageHeading: {
-      display: "flex"
+      display: "flex",
     },
     addNewButton: {
       color: "#428BCA",
@@ -42,14 +42,14 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: "-5px",
       marginLeft: "8px",
       marginTop: "-6px",
-      fontWeight: "normal"
+      fontWeight: "normal",
     },
     addIcon: {
       marginLeft: "-5px",
       marginRight: "-10px",
       height: "0.7em",
-      fontSize: "13px"
-    }
+      fontSize: "13px",
+    },
   })
 );
 
@@ -62,7 +62,7 @@ const Subscriptions = () => {
   const classes = useStyles();
   const [formData, setFormData] = useState<any | null>({
     service: "",
-    subscriptionDate: null
+    subscriptionDate: null,
   });
   const [add, setAdd] = useState(false);
   const [openSlideOut, setOpenSlideOut] = useState(false);
@@ -73,16 +73,6 @@ const Subscriptions = () => {
     setLoading(false);
   }, [dispatch]);
 
-  function generateFakeSubscriptions(length: number) {
-    let subscriptions = [];
-    while (length > 0) {
-      subscriptions.push(fakeSubscriptions());
-      length = length - 1;
-    }
-    // setLoading(false);
-
-    return subscriptions;
-  }
   function handleToggleDrawer(methodType?: string, actionData?: any) {
     setOpenSlideOut(!openSlideOut);
     if (methodType === "add") {
@@ -104,7 +94,7 @@ const Subscriptions = () => {
         email: actionData[1].value.substring(
           actionData[1].value.indexOf("(") + 1,
           actionData[1].value.length - 1
-        )
+        ),
       });
     }
   }

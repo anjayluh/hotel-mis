@@ -3,14 +3,14 @@ import Grid from "@material-ui/core/Grid";
 import { Chip } from "@material-ui/core";
 import { IParticipant } from "../../../types";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import PersonIcon from "@material-ui/icons/Person";
-import EditIconButton, {
-  DeleteIconButton
-} from "../../../../../components/EditIconButton";
+import EditIconButton from "../../../../../components/EditIconButton";
 import Box from "@material-ui/core/Box";
+import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
+import ParticipantDetailsForm from "./forms/ParticipantDetailsForm";
+import { Anchor } from "../../../../../data/types";
 
 interface IProps {
   data: IParticipant;
@@ -20,20 +20,20 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       padding: theme.spacing(2),
-      borderRadius: 0
+      borderRadius: 0,
     },
 
     image: {
       height: 60,
       width: 60,
       marginRight: theme.spacing(1),
-      marginTop: theme.spacing(1)
+      marginTop: theme.spacing(1),
     },
     nameHolder: {
-      paddingTop: theme.spacing(1)
+      paddingTop: theme.spacing(1),
     },
     companyName: {
-      lineHeight: "30px"
+      lineHeight: "30px",
     },
     summaryChip: {
       backgroundColor: "#4bb050",
@@ -42,31 +42,31 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: "3px",
       textTransform: "capitalize",
       height: "18px",
-      fontSize: "0.75rem"
+      fontSize: "0.75rem",
     },
     hideEditActions: {
-      opacity: 0
+      opacity: 0,
     },
     showEditActions: {
-      opacity: 1
-    }
+      opacity: 1,
+    },
   })
 );
 
 const ParticipantSummary = ({ data }: IProps) => {
   const classes = useStyles();
   const [canEdit, setCanEdit] = useState<boolean>(false);
-  const [canDelete, setCanDelete] = useState<boolean>(false);
-
+  const [anchor, setAnchor] = useState<Anchor>("right");
+  const [openSlideOut, setOpenSlideOut] = useState(false);
   const handleEntered = () => {
     setCanEdit(true);
-    setCanDelete(true);
   };
   const handleLeave = () => {
     setCanEdit(false);
-    setCanDelete(false);
   };
-
+  function handleEdit() {
+    setOpenSlideOut(!openSlideOut);
+  }
   return (
     <Grid container>
       <Grid item sm={6}>
@@ -92,7 +92,7 @@ const ParticipantSummary = ({ data }: IProps) => {
                     canEdit ? classes.showEditActions : classes.hideEditActions
                   }
                 >
-                  <EditIconButton />
+                  <EditIconButton onClick={handleEdit} />
                 </Box>
               </Box>
             )}
@@ -109,6 +109,17 @@ const ParticipantSummary = ({ data }: IProps) => {
           </Grid>
         </Grid>
       </Grid>
+      <SlideOutDrawer
+        handleToggleDrawer={handleEdit}
+        open={openSlideOut}
+        anchor={anchor}
+        title={"Edit Participant Details"}
+      >
+        <ParticipantDetailsForm
+          closeSlideOut={handleEdit}
+          initialData={data}
+        ></ParticipantDetailsForm>
+      </SlideOutDrawer>
     </Grid>
   );
 };

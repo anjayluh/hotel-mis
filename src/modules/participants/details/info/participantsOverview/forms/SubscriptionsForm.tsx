@@ -3,23 +3,23 @@ import { useState } from "react";
 import * as yup from "yup";
 import * as faker from "faker";
 import { useDispatch } from "react-redux";
-import { reqString, reqDate } from "../../../../../../../../data/validations";
-import { subscriptionsServiceTypes } from "../../../../../../../../data/comboCategories";
+import { reqString, reqDate } from "../../../../../../data/validations";
+import { subscriptionsServiceTypes } from "../../../../../../data/comboCategories";
 import { FormikActions } from "formik";
 import Grid from "@material-ui/core/Grid";
-import XFormSimple from "../../../../../../../../components/forms/XFormSimple";
-import XDateInput from "../../../../../../../../components/inputs/XDateInput";
-import { toOptions } from "../../../../../../../../components/inputs/inputHelpers";
-import { ISubscription } from "../../../../../../types";
-import XSelectInput from "../../../../../../../../components/inputs/XSelectInput";
-import { remoteRoutes } from "../../../../../../../../data/constants";
-import { post, put } from "../../../../../../../../utils/ajax";
-import Toast from "../../../../../../../../utils/Toast";
-import { participantsConstants } from "../../../../../../../../data/redux/participants/reducer";
+import XFormSimple from "../../../../../../components/forms/XFormSimple";
+import XDateInput from "../../../../../../components/inputs/XDateInput";
+import { toOptions } from "../../../../../../components/inputs/inputHelpers";
+import { ISubscription } from "../../../../types";
+import XSelectInput from "../../../../../../components/inputs/XSelectInput";
+import { remoteRoutes } from "../../../../../../data/constants";
+import { post, put } from "../../../../../../utils/ajax";
+import Toast from "../../../../../../utils/Toast";
+import { participantsConstants } from "../../../../../../data/redux/participants/reducer";
 
 const schema = yup.object().shape({
   serviceType: reqString,
-  subscriptionDate: reqDate
+  subscriptionDate: reqDate,
 });
 
 interface IProps {
@@ -37,7 +37,7 @@ const SubscriptionsForm = (props: IProps) => {
       ? props.initialData
       : {
           serviceType: "",
-          subscriptionDate: null
+          subscriptionDate: null,
         }
   );
   const dispatch = useDispatch();
@@ -52,18 +52,18 @@ const SubscriptionsForm = (props: IProps) => {
       subscriptionStatus: "Active",
       serviceCategoryId: "",
       billingCategory: "",
-      monthlyCap: null
+      monthlyCap: null,
     };
     if (!isEdit) {
       post(
         remoteRoutes.ninVerification,
         toSave,
-        data => {
+        (data) => {
           Toast.info("Operation successful");
           actions.resetForm();
           dispatch({
             type: participantsConstants.participantsAddSubscription,
-            payload: { ...toSave }
+            payload: { ...toSave },
           });
           if (props.done) props.done();
         },
@@ -71,7 +71,7 @@ const SubscriptionsForm = (props: IProps) => {
         () => {
           dispatch({
             type: participantsConstants.participantsAddSubscription,
-            payload: { ...toSave }
+            payload: { ...toSave },
           });
           Toast.info("Operation successful");
           actions.resetForm();
@@ -82,12 +82,12 @@ const SubscriptionsForm = (props: IProps) => {
       put(
         remoteRoutes.subscriptions,
         toSave,
-        data => {
+        (data) => {
           Toast.info("Operation successful");
           actions.resetForm();
           dispatch({
             type: participantsConstants.participantsAddSubscription,
-            payload: { ...toSave }
+            payload: { ...toSave },
           });
           if (props.done) props.done();
         },
@@ -95,7 +95,7 @@ const SubscriptionsForm = (props: IProps) => {
         () => {
           dispatch({
             type: participantsConstants.participantsAddSubscription,
-            payload: { ...toSave }
+            payload: { ...toSave },
           });
           Toast.info("Operation successful");
           actions.resetForm();

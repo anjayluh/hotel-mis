@@ -5,6 +5,7 @@ import {Dispatch} from "redux";
 
 export const participantsConstants = {
     participantsFetchAll: "participantsFetchAll",
+    participantsUpdateParticipant: "participantsUpdateParticipant",
     participantsFetchLoading: "participantsFetchLoading",
     participantsAddParticipant: "participantsAddParticipant",
     getParticipantDetails: "getParticipantDetails",
@@ -56,6 +57,15 @@ export default function reducer(state = initialState, action: any) {
     switch (action.type) {
         case participantsConstants.contactPersonsFetchAll: {
             return {...state, contactPersons: action.payload}
+        }
+        case participantsConstants.participantsUpdateParticipant: {
+            const updatedData = state.data.map(
+                        (item: any, index: number) =>
+                            (item.id === action.payload.id) ?
+                        action.payload : item)
+            return {
+                ...state, selected: action.payload, data: updatedData
+            }
         }
         case participantsConstants.participantsFetchAll: {
             return {...state, loading: false, data: action.payload}

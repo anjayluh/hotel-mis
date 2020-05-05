@@ -71,7 +71,6 @@ const ParticipantForm = (props: IProps) => {
       (data) => {
         Toast.info("Operation successful");
         actions.resetForm();
-        toSave.id = data.company.id;
         dispatch({
           type: participantsConstants.participantsAddParticipant,
           payload: { ...data },
