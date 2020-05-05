@@ -15,6 +15,9 @@ import { IState } from "../../../../../../../data/types";
 import SlideOutDrawer from "../../../../../../../components/SlideOutDrawer";
 import SubscriptionsForm from "../../forms/SubscriptionsForm";
 import { Anchor } from "../../../../../../../data/types";
+import { participantsConstants } from "../../../../../../../data/redux/participants/reducer";
+import { remoteRoutes } from "../../../../../../../data/constants";
+import { get } from "../../../../../../../utils/ajax";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,9 +56,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+interface IProps {
+  id: any;
+}
 const headCells: XHeadCell[] = [...columns];
 
-const Subscriptions = () => {
+const Subscriptions = ({ id }: IProps) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const { selected } = useSelector((state: IState) => state.participants);
@@ -69,8 +75,19 @@ const Subscriptions = () => {
   const [anchor, setAnchor] = useState<Anchor>("right");
 
   useEffect(() => {
-    // setData(callFakeSubscriptions(5));
-    setLoading(false);
+    get(
+      remoteRoutes.subscriptions + `?companyIds=${id}`,
+      (resp) => {
+        dispatch({
+          type: participantsConstants.participantSubscriptionsFetchAll,
+          payload: resp,
+        });
+        setLoading(false);
+      },
+      () => {
+        setLoading(false);
+      }
+    );
   }, [dispatch]);
 
   function handleToggleDrawer(methodType?: string, actionData?: any) {
@@ -148,6 +165,7 @@ const Subscriptions = () => {
         title={add ? "Add New Subscription" : "Edit Subscription"}
       >
         <SubscriptionsForm
+          id={id}
           closeSlideOut={handleToggleDrawer}
           initialData={formData}
         ></SubscriptionsForm>

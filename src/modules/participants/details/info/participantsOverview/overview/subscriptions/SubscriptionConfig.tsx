@@ -8,7 +8,7 @@ export const columns: XHeadCell[] = [
   {
     name: "accountNumber",
     label: "Account Number",
-    cellProps: { style: { width: 70 } }
+    cellProps: { style: { width: 70 } },
   },
   {
     name: "subscriptionStatus",
@@ -16,9 +16,9 @@ export const columns: XHeadCell[] = [
     render: (_, rec) => renderSubscriptionStatus(rec.subscriptionStatus),
     cellProps: {
       style: {
-        width: 60
-      }
-    }
+        width: 60,
+      },
+    },
   },
   {
     name: "billingCategory",
@@ -26,19 +26,19 @@ export const columns: XHeadCell[] = [
     cellProps: {
       style: {
         width: 80,
-        whiteSpace: "nowrap"
-      }
-    }
+        whiteSpace: "nowrap",
+      },
+    },
   },
   {
-    name: "service",
+    name: "serviceCategoryId",
     label: "Service",
     cellProps: {
       style: {
         width: 80,
-        whiteSpace: "nowrap"
-      }
-    }
+        whiteSpace: "nowrap",
+      },
+    },
   },
   {
     name: "dateCreated",
@@ -46,9 +46,9 @@ export const columns: XHeadCell[] = [
     render: (value, rec) => <span>{printDate(value)}</span>,
     cellProps: {
       style: {
-        width: 60
-      }
-    }
+        width: 60,
+      },
+    },
   },
   {
     name: "monthlyCap",
@@ -58,8 +58,8 @@ export const columns: XHeadCell[] = [
     cellProps: {
       style: {
         width: 60,
-        paddingRight: 40
-      }
-    }
-  }
+        paddingRight: 40,
+      },
+    },
+  },
 ];

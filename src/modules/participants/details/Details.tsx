@@ -168,7 +168,7 @@ const Details = (props: IProps) => {
               <ParticipantsOverview data={{ ...data }}></ParticipantsOverview>
             )}
           </Grid>
-          {showParticipantsOverview && <Subscriptions></Subscriptions>}
+          {showParticipantsOverview && <Subscriptions id={participantId} />}
           {showBillingsView && <Billings></Billings>}
           {showPaymentsView && <Payments></Payments>}
           {showAccountStatementView && <AccountStatement></AccountStatement>}

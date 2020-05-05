@@ -26,6 +26,7 @@ interface IProps {
   closeSlideOut: () => any;
   done?: () => any;
   initialData?: any;
+  id: any;
 }
 
 const SubscriptionsForm = (props: IProps) => {
@@ -56,7 +57,25 @@ const SubscriptionsForm = (props: IProps) => {
     };
     if (!isEdit) {
       post(
-        remoteRoutes.ninVerification,
+        remoteRoutes.subscriptions + `?companyIds=${props.id}`,
+        toSave,
+        (data) => {
+          Toast.info("Operation successful");
+          actions.resetForm();
+          dispatch({
+            type: participantsConstants.participantsAddParticipant,
+            payload: { ...data },
+          });
+          if (props.done) props.done();
+          actions.setSubmitting(false);
+        },
+        () => {
+          Toast.error("Operation failed");
+          actions.setSubmitting(false);
+        }
+      );
+      post(
+        remoteRoutes.subscriptions + `?companyIds=${props.id}`,
         toSave,
         (data) => {
           Toast.info("Operation successful");
@@ -66,16 +85,12 @@ const SubscriptionsForm = (props: IProps) => {
             payload: { ...toSave },
           });
           if (props.done) props.done();
-        },
-        undefined,
-        () => {
-          dispatch({
-            type: participantsConstants.participantsAddSubscription,
-            payload: { ...toSave },
-          });
-          Toast.info("Operation successful");
-          actions.resetForm();
+          actions.setSubmitting(false);
           handleClose();
+        },
+        () => {
+          Toast.error("Operation failed");
+          actions.setSubmitting(false);
         }
       );
     } else {

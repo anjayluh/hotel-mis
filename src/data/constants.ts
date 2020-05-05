@@ -106,7 +106,7 @@ const notificationURL = env.Notification
 
 export const remoteRoutes = {
     contactPersons: crmURL + '/api/participants/contact',
-    subscriptions: crmURL + '/api/participants/subscriptions',
+    subscriptions: gatewayURL + '/billing/api/subscriptions',
     participants: gatewayURL + '/crm/api/contact',
     participantsOverview: gatewayURL + '/api/aggregations/contact-subscriptions/04c8a212-3b79-44c5-6649-08d7daebc579',
     ninVerificationRequests:gatewayURL + '/niv/api/request/search',

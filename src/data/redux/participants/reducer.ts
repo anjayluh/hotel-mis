@@ -21,6 +21,7 @@ export const participantsConstants = {
     participantsAddContactPerson: "participantsAddContactPerson",
     participantsUpdateContactPerson: "participantsUpdateContactPerson",
     participantsDeleteContactPerson: "participantsDeleteContactPerson",
+    participantSubscriptionsFetchAll: "participantSubscriptionsFetchAll",
     participantsAddSubscription: "participantsAddSubscription"
 }
 
@@ -83,6 +84,14 @@ export default function reducer(state = initialState, action: any) {
         }
         case participantsConstants.participantsFetchOne: {
             return { ...state, selected: action.payload, loading: false }
+        }
+        case participantsConstants.participantSubscriptionsFetchAll: {
+            return {
+                ...state, selected: state.selected && {
+                    ...state.selected,
+                    subscriptions: action.payload
+                }
+            }
         }
         case participantsConstants.participantsBillsFetchLoading: {
             return {...state, billingsLoading: action.payload}
