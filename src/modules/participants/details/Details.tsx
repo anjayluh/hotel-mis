@@ -17,6 +17,7 @@ import AccountStatement from "./info/accountStatement/AccountStatement";
 import { participantsConstants } from "../../../data/redux/participants/reducer";
 import { remoteRoutes } from "../../../data/constants";
 import { get } from "../../../utils/ajax";
+import Toast from "../../../utils/Toast";
 
 interface IProps extends RouteComponentProps {}
 
@@ -26,28 +27,28 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1),
       borderRadius: 0,
       minHeight: "100%",
-      overflowX: "hidden"
+      overflowX: "hidden",
     },
     divider: {
-      marginTop: theme.spacing(2)
+      marginTop: theme.spacing(2),
     },
     noPadding: {
-      padding: 0
+      padding: 0,
     },
     tableRoot: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     filterPaper: {
       borderRadius: 0,
-      padding: theme.spacing(2)
+      padding: theme.spacing(2),
     },
     fab: {
       position: "absolute",
       bottom: theme.spacing(2),
-      right: theme.spacing(2)
+      right: theme.spacing(2),
     },
     pageHeading: {
-      display: "flex"
+      display: "flex",
     },
     addNewButton: {
       color: "#428BCA",
@@ -57,70 +58,11 @@ const useStyles = makeStyles((theme: Theme) =>
       lineHeight: "0.75",
       marginBottom: "-5px",
       marginLeft: "5px",
-      fontWeight: "normal"
-    }
+      fontWeight: "normal",
+    },
   })
 );
 
-const fakeSelected: IParticipant = {
-  category: "Company",
-  person: null,
-  subscriptions: [],
-  contactPersons: [],
-  company: {
-    name: "Stanbic Bank Uganda Limited",
-    id: "994712fb-593d-432d-2d2c-08d7daebc584",
-    createdAt: new Date(),
-    lastUpdated: null,
-    isDeleted: false
-  },
-  identifications: [
-    {
-      category: "Nin",
-      contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
-      value: "DE128398323",
-      cardNumber: null,
-      issuingCountry: null,
-      issueDate: new Date(),
-      expiryDate: new Date(),
-      isPrimary: true,
-      id: "3994b03c-0e22-4e9c-8ce1-08d7daebc586",
-      createdAt: new Date(),
-      lastUpdated: null,
-      isDeleted: false
-    }
-  ],
-  phones: [
-    {
-      category: "Mobile",
-      contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
-      value: "0414100100",
-      isPrimary: true,
-      id: "5d66befc-cfab-417c-654c-08d7daebc587",
-      createdAt: new Date(),
-      lastUpdated: null,
-      isDeleted: false
-    }
-  ],
-  emails: [
-    {
-      category: "Personal",
-      contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
-      value: "reach_out@stanbic.co.ug",
-      isPrimary: true,
-      id: "f365d61a-827e-4f86-ab0e-08d7daebc585",
-      createdAt: new Date(),
-      lastUpdated: null,
-      isDeleted: false
-    }
-  ],
-  addresses: [],
-  tags: null,
-  id: "04c8a212-3b79-44c5-6649-08d7daebc579",
-  createdAt: new Date(),
-  lastUpdated: null,
-  isDeleted: false
-};
 const Details = (props: IProps) => {
   const participantId = getRouteParam(props, "participantId");
   const classes = useStyles();
@@ -144,30 +86,26 @@ const Details = (props: IProps) => {
     { text: "Participants Overview", status: true },
     { text: "Billing", status: false },
     { text: "Payments", status: false },
-    { text: "Account Statement", status: false }
+    { text: "Account Statement", status: false },
   ]);
 
   useEffect(() => {
     dispatch({
       type: participantsConstants.getParticipantDetails,
-      payload: { participantId }
+      payload: { participantId },
     });
     // This code below runs when the page has refreshed and we don't have the participants list data
     if (allData.length === 0) {
       get(
         remoteRoutes.participants + `/${participantId}`,
-        resp => {
+        (resp) => {
           dispatch({
             type: participantsConstants.participantsFetchOne,
-            payload: fakeSelected
+            payload: resp,
           });
         },
         () => {
-          // This is temporal until the endpoint is functioning
-          dispatch({
-            type: participantsConstants.participantsFetchOne,
-            payload: fakeSelected
-          });
+          Toast.error("Operation failed");
         }
       );
     }
@@ -175,7 +113,7 @@ const Details = (props: IProps) => {
 
   const handleClick = (value: any) => {
     setHeadings(
-      [...headings].map(heading => {
+      [...headings].map((heading) => {
         if (heading.text === value) {
           heading.status = true;
           if (heading.text === "Participants Overview") {
@@ -197,13 +135,13 @@ const Details = (props: IProps) => {
           return {
             ...heading,
             text: heading.text,
-            status: true
+            status: true,
           };
         } else {
           return {
             ...heading,
             text: heading.text,
-            status: false
+            status: false,
           };
         }
       })
