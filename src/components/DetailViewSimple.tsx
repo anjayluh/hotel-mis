@@ -11,40 +11,40 @@ import clsx from "clsx";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "100%"
+      width: "100%",
     },
     row: {
       marginLeft: 0,
       paddingLeft: 0,
-      paddingBottom: theme.spacing(2)
+      paddingBottom: theme.spacing(2),
     },
     col: {
       marginLeft: 0,
       paddingLeft: 0,
-      paddingBottom: theme.spacing(1)
+      paddingBottom: theme.spacing(1),
     },
     label: {
       margin: 0,
       paddingLeft: 0,
       paddingRight: theme.spacing(2),
-      width: "auto"
+      width: "auto",
     },
     value: {
-      width: "100%"
+      width: "100%",
     },
     simpleCol: {
       marginLeft: 0,
       paddingLeft: 0,
-      paddingBottom: "unset"
+      paddingBottom: "unset",
     },
     contacts: {
-      position: "relative"
+      position: "relative",
     },
     contactActions: {
       position: "absolute",
       top: "0px",
-      right: "0px"
-    }
+      right: "0px",
+    },
   })
 );
 
@@ -90,7 +90,7 @@ const TableView = (props: IProps) => {
   if (props.useGrid)
     return (
       <Grid container spacing={0}>
-        {props.data.map(it => (
+        {props.data.map((it) => (
           <Grid item xs={12} key={it.value}>
             <Box display="flex" pb={0}>
               {props.bold ? (
@@ -161,7 +161,7 @@ const DetailView = ({
   bold,
   editButton,
   deleteButton,
-  handleClickedItem
+  handleClickedItem,
 }: IProps) => {
   if (columns) {
     const parts = chunkArray(data, columns);
@@ -220,7 +220,7 @@ export const BoldTableView = ({ data }: IProps) => {
   return (
     <table className={classes.root}>
       <tbody>
-        {data.map(row => (
+        {data.map((row) => (
           <tr key={row.value}>
             <td style={{ width: 100 }}>
               <DataLabel>{row.label}</DataLabel>

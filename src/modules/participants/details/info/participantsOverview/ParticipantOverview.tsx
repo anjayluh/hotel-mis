@@ -6,13 +6,13 @@ import { remoteRoutes } from "../../../../../data/constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
   participantsConstants,
-  IParticipantsState
+  IParticipantsState,
 } from "../../../../../data/redux/participants/reducer";
 import { fakeContactPersons } from "../../../fakeData";
 import {
   EditIconButton,
   AddIconButton,
-  DeleteIconButton
+  DeleteIconButton,
 } from "../../../../../components/EditIconButton";
 import DetailView, { IRec } from "../../../../../components/DetailView";
 import DetailViewSimple from "../../../../../components/DetailViewSimple";
@@ -35,35 +35,35 @@ interface IProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "100%"
+      width: "100%",
     },
     row: {
       marginLeft: 0,
       paddingLeft: 0,
-      paddingBottom: theme.spacing(2)
+      paddingBottom: theme.spacing(2),
     },
     col: {
       marginLeft: 0,
       paddingLeft: 0,
-      paddingBottom: theme.spacing(1)
+      paddingBottom: theme.spacing(1),
     },
     label: {
       margin: 0,
       paddingLeft: 0,
       paddingRight: theme.spacing(2),
-      width: "auto"
+      width: "auto",
     },
     value: {
-      width: "100%"
+      width: "100%",
     },
     contacts: {
-      position: "relative"
+      position: "relative",
     },
     contactActions: {
       position: "absolute",
       top: "0px",
-      right: "0px"
-    }
+      right: "0px",
+    },
   })
 );
 const setValue = (value: any) => {
@@ -74,9 +74,9 @@ const setValue = (value: any) => {
 
 const officialContactInfo = (data: IParticipant): IRec[] => {
   const officialEmail =
-    data.emails && data.emails.filter(email => email.isPrimary === false);
+    data.emails && data.emails.filter((email) => email.isPrimary === false);
   const officialPhone =
-    data.emails && data.phones.filter(phone => phone.isPrimary === false);
+    data.emails && data.phones.filter((phone) => phone.isPrimary === false);
 
   return [
     {
@@ -84,23 +84,23 @@ const officialContactInfo = (data: IParticipant): IRec[] => {
       value:
         officialPhone &&
         officialPhone.length > 0 &&
-        setValue(officialEmail[0].value)
+        setValue(officialEmail[0].value),
     },
     {
       label: "Phone Number",
       value:
         officialEmail &&
         officialEmail.length > 0 &&
-        setValue(officialPhone[0].value)
-    }
+        setValue(officialPhone[0].value),
+    },
   ];
 };
 
 const primaryContactInfo = (data: IParticipant): IRec[] => {
   const primaryEmail =
-    data.emails && data.emails.filter(email => email.isPrimary);
+    data.emails && data.emails.filter((email) => email.isPrimary);
   const primaryPhone =
-    data.phones && data.phones.filter(phone => phone.isPrimary);
+    data.phones && data.phones.filter((phone) => phone.isPrimary);
 
   return [
     {
@@ -108,27 +108,32 @@ const primaryContactInfo = (data: IParticipant): IRec[] => {
       value:
         primaryEmail &&
         primaryEmail.length > 0 &&
-        setValue(primaryEmail[0].value)
+        setValue(primaryEmail[0].value),
     },
     {
       label: "Phone Number",
       value:
         primaryPhone &&
         primaryPhone.length > 0 &&
-        setValue(primaryPhone[0].value)
-    }
+        setValue(primaryPhone[0].value),
+    },
   ];
 };
 const contactToRecords = (data: IContactPerson): IRec[] => {
   return [
     {
       label: "",
-      value: setValue(data.name) + ` (${setValue(data.role)})`
+      value:
+        data.name !== "" &&
+        setValue(data.name) + ` (${data.role !== "" && setValue(data.role)})`,
     },
     {
       label: "",
-      value: setValue(data.phone.value) + ` / (${setValue(data.email)})`
-    }
+      value:
+        data.phone.value !== "" &&
+        setValue(data.phone.value) +
+          ` / (${data.email !== "" && setValue(data.email)})`,
+    },
   ];
 };
 const ParticipantOverview = ({ data }: IProps) => {
@@ -145,7 +150,7 @@ const ParticipantOverview = ({ data }: IProps) => {
     name: "",
     role: "",
     phone: "",
-    email: ""
+    email: "",
   });
   function handleToggleDrawer(methodType?: string, actionData?: any) {
     if (methodType === "edit") {
@@ -166,7 +171,7 @@ const ParticipantOverview = ({ data }: IProps) => {
         email: actionData[1].value.substring(
           actionData[1].value.indexOf("(") + 1,
           actionData[1].value.length - 1
-        )
+        ),
       });
       setEdit(true);
       setAdd(false);
@@ -176,7 +181,7 @@ const ParticipantOverview = ({ data }: IProps) => {
       setFormData(null);
       setAdd(false);
       setEdit(false);
-      const contact = data.contactPersons.filter(function(contact) {
+      const contact = data.contactPersons.filter(function (contact) {
         return (
           contact.name !==
           actionData[0].value.substring(0, actionData[0].value.indexOf("(") - 1)
@@ -184,7 +189,7 @@ const ParticipantOverview = ({ data }: IProps) => {
       });
       dispatch({
         type: participantsConstants.participantsDeleteContactPerson,
-        payload: contact[0]
+        payload: contact[0],
       });
     } else {
       setOpenSlideOut(!openSlideOut);
@@ -199,7 +204,8 @@ const ParticipantOverview = ({ data }: IProps) => {
   const primaryContactColumn = primaryContactInfo(data);
   const contactPersonsColumns: IRec[][] = [];
   data.contactPersons &&
-    data.contactPersons.forEach(contact => {
+    data.contactPersons.length > 1 &&
+    data.contactPersons.forEach((contact) => {
       contactPersonsColumns.push(contactToRecords(contact));
     });
   const bold = false;
@@ -282,16 +288,20 @@ const ParticipantOverview = ({ data }: IProps) => {
                 direction="row"
                 key={index}
               >
-                <DetailViewSimple
-                  data={contactPerson}
-                  noColon={noColon}
-                  bold={bold}
-                  editButton={<EditIconButton />}
-                  deleteButton={
-                    data.contactPersons.length > 1 ? <DeleteIconButton /> : null
-                  }
-                  handleClickedItem={handleToggleDrawer}
-                />
+                {contactPerson.name !== "" && (
+                  <DetailViewSimple
+                    data={contactPerson}
+                    noColon={noColon}
+                    bold={bold}
+                    editButton={<EditIconButton />}
+                    deleteButton={
+                      data.contactPersons.length > 1 ? (
+                        <DeleteIconButton />
+                      ) : null
+                    }
+                    handleClickedItem={handleToggleDrawer}
+                  />
+                )}
               </Grid>
             ))
           ) : (

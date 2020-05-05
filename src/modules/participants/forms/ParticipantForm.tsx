@@ -6,9 +6,12 @@ import {
   reqEmail,
   reqString,
   phoneNumber,
-  reqPhoneNumber
+  reqPhoneNumber,
 } from "../../../data/validations";
-import {contactPersonCategories, organisationTypeCategories} from "../../../data/comboCategories";
+import {
+  contactPersonCategories,
+  organisationTypeCategories,
+} from "../../../data/comboCategories";
 import { FormikActions } from "formik";
 import Grid from "@material-ui/core/Grid";
 import XFormSimple from "../../../components/forms/XFormSimple";
@@ -28,9 +31,9 @@ const schema = yup.object().shape({
   name: reqString,
   type: reqString,
   phoneNumberPrimary: reqPhoneNumber,
-  phoneNumberOther: phoneNumber,
-  officialEmail: reqEmail,
-  primaryEmail: reqEmail
+  // phoneNumberOther: phoneNumber,
+  // officialEmail: reqEmail,
+  primaryEmail: reqEmail,
 });
 
 interface IProps {
@@ -43,137 +46,45 @@ const ParticipantForm = (props: IProps) => {
     name: "",
     type: "",
     phoneNumberPrimary: "",
-    phoneNumberOther: "",
-    officialEmail: "",
-    primaryEmail: ""
+    // phoneNumberOther: "",
+    // officialEmail: "",
+    primaryEmail: "",
   });
   const history = useHistory();
   const dispatch = useDispatch();
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
-    const toSave: IParticipant = {
-      category: values.type,
-      person: null,
-      company: {
-        name: values.name,
-        id: "994712fb-593d-432d-2d2c-08d7daebc584",
-        createdAt: new Date(faker.date.past(1)),
-        lastUpdated: null,
-        isDeleted: false
-      },
-      identifications: [
-        {
-          category: "Nin",
-          contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
-          value: "DE128398323",
-          cardNumber: null,
-          issuingCountry: null,
-          issueDate: new Date(faker.date.past(1)),
-          expiryDate: new Date(faker.date.past(1)),
-          isPrimary: true,
-          id: "3994b03c-0e22-4e9c-8ce1-08d7daebc586",
-          createdAt: new Date(faker.date.past(1)),
-          lastUpdated: null,
-          isDeleted: false
-        }
-      ],
-      phones: [
-        {
-          category: "Mobile",
-          contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
-          value: values.phoneNumberPrimary,
-          isPrimary: true,
-          id: faker.random.uuid(),
-          createdAt: new Date(faker.date.past(1)),
-          lastUpdated: null,
-          isDeleted: false
-        },
-        {
-          category: "Mobile",
-          contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
-          value: values.phoneNumberOther,
-          isPrimary: false,
-          id: faker.random.uuid(),
-          createdAt: new Date(faker.date.past(1)),
-          lastUpdated: null,
-          isDeleted: false
-        }
-      ],
-      emails: [
-        {
-          category: "Personal",
-          contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
-          value: values.primaryEmail,
-          isPrimary: true,
-          id: faker.random.uuid(),
-          createdAt: new Date(),
-          lastUpdated: null,
-          isDeleted: false
-        },
-        {
-          category: "Personal",
-          contactId: "04c8a212-3b79-44c5-6649-08d7daebc579",
-          value: values.officialEmail,
-          isPrimary: false,
-          id: faker.random.uuid(),
-          createdAt: new Date(faker.date.past(1)),
-          lastUpdated: null,
-          isDeleted: false
-        }
-      ],
-      addresses: [],
-      tags: null,
-      id: "04c8a212-3b79-44c5-6649-08d7daebc579",
-      createdAt: new Date(),
-      lastUpdated: null,
-      isDeleted: false,
-      subscriptions: [
-        {
-          id: "234f65e2-dbfd-4610-a8b0-08d7d24bdd64",
-          companyId: "04c8a212-3b79-44c5-6649-08d7daebc579",
-          accountNumber: null,
-          dateCreated: new Date(faker.date.past(1)),
-          subscriptionStatus: "Active",
-          serviceCategoryId: "cef84215-8f9d-4ebd-0895-08d7d24bc164"
-        }
-      ],
-      contactPersons: [
-        {
-          id: faker.random.uuid(),
-          name: '',
-          role: '',
-          phone: {
-            id: '',
-            value: ''
-          },
-          email: '',
-        }
-      ]
+    const toSave: any = {
+      companyType: "Limited",
+      name: values.name,
+      category: "Company",
+      email: values.primaryEmail,
+      phone: values.phoneNumberPrimary,
+      identificationNumber: Date.parse(new Date().toISOString()).toString(),
+      identificationValidFrom: new Date(),
+      identificationValidTo: new Date(),
     };
+
     post(
-      remoteRoutes.participants,
+      remoteRoutes.participants + `/company`,
       toSave,
-      data => {
+      (data) => {
         Toast.info("Operation successful");
         actions.resetForm();
+        toSave.id = data.company.id;
         dispatch({
           type: participantsConstants.participantsAddParticipant,
-          payload: { ...toSave }
+          payload: { ...data },
         });
         if (props.done) props.done();
+        actions.setSubmitting(false);
+        history.push(`${localRoutes.participants}/${data.id}`);
       },
-      undefined,
       () => {
-        dispatch({
-          type: participantsConstants.participantsAddParticipant,
-          payload: { ...toSave }
-        });
+        Toast.error("Operation failed");
         actions.setSubmitting(false);
       }
     );
-    // Will move this to post when the endpoints are available
-    console.log(toSave);
-    history.push(`${localRoutes.participants}/${toSave.id}`);
   }
 
   function handleClose() {
@@ -208,6 +119,15 @@ const ParticipantForm = (props: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <XTextInput
+            name="primaryEmail"
+            label="Primary Email"
+            type="email"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <XTextInput
             name="phoneNumberPrimary"
             label="Phone Number (Primary)"
             type="text"
@@ -215,7 +135,7 @@ const ParticipantForm = (props: IProps) => {
             size="small"
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <XTextInput
             name="phoneNumberOther"
             label="Phone Number (Other)"
@@ -232,16 +152,7 @@ const ParticipantForm = (props: IProps) => {
             variant="outlined"
             size="small"
           />
-        </Grid>
-        <Grid item xs={12}>
-          <XTextInput
-            name="primaryEmail"
-            label="Primary Email"
-            type="email"
-            variant="outlined"
-            size="small"
-          />
-        </Grid>
+        </Grid> */}
       </Grid>
     </XFormSimple>
   );
