@@ -21,7 +21,7 @@ import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import {
   participantsConstants,
-  IParticipantsState
+  IParticipantsState,
 } from "../../data/redux/participants/reducer";
 import { IState, Anchor } from "../../data/types";
 import { columns } from "./config";
@@ -29,19 +29,19 @@ import { columns } from "./config";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     filterPaper: {
       borderRadius: 0,
-      padding: theme.spacing(2)
+      padding: theme.spacing(2),
     },
     fab: {
       position: "absolute",
       bottom: theme.spacing(2),
-      right: theme.spacing(2)
+      right: theme.spacing(2),
     },
     pageHeading: {
-      display: "flex"
+      display: "flex",
     },
     addNewButton: {
       color: "#428BCA",
@@ -52,14 +52,14 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: "-5px",
       marginLeft: "8px",
       marginTop: "-6px",
-      fontWeight: "normal"
+      fontWeight: "normal",
     },
     addIcon: {
       marginLeft: "-5px",
       marginRight: "-10px",
       height: "0.7em",
-      fontSize: "13px"
-    }
+      fontSize: "13px",
+    },
   })
 );
 
@@ -80,22 +80,22 @@ const Participants = () => {
   useEffect(() => {
     dispatch({
       type: participantsConstants.participantsFetchLoading,
-      payload: true
+      payload: true,
     });
     search(
-      remoteRoutes.participants,
+      remoteRoutes.participants + `?Categories=Company`,
       filter,
-      resp => {
+      (resp) => {
         dispatch({
           type: participantsConstants.participantsFetchAll,
-          payload: [...resp]
+          payload: [...resp],
         });
       },
       undefined,
       () => {
         dispatch({
           type: participantsConstants.participantsFetchLoading,
-          payload: false
+          payload: false,
         });
       }
     );
