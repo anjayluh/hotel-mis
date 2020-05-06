@@ -8,10 +8,7 @@ import {
   phoneNumber,
   reqPhoneNumber,
 } from "../../../data/validations";
-import {
-  contactPersonCategories,
-  organisationTypeCategories,
-} from "../../../data/comboCategories";
+import { organisationTypeCategories } from "../../../data/comboCategories";
 import { FormikActions } from "formik";
 import Grid from "@material-ui/core/Grid";
 import XFormSimple from "../../../components/forms/XFormSimple";
