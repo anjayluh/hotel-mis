@@ -120,7 +120,7 @@ const ParticipantDetailsForm = (props: IProps) => {
             size="small"
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <XSelectInput
             size="small"
             name="type"
@@ -128,7 +128,7 @@ const ParticipantDetailsForm = (props: IProps) => {
             options={toOptions(organisationTypeCategories)}
             variant="outlined"
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <XTextInput
             name="emailPrimary"
