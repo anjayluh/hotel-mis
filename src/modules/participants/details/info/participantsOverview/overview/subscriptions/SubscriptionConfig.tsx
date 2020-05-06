@@ -8,6 +8,7 @@ export const columns: XHeadCell[] = [
   {
     name: "accountNumber",
     label: "Account Number",
+    render: (value, rec) => <span>{value ? value : "null"}</span>,
     cellProps: { style: { width: 70 } },
   },
   {
@@ -27,6 +28,7 @@ export const columns: XHeadCell[] = [
       style: {
         width: 80,
         whiteSpace: "nowrap",
+        display: "none",
       },
     },
   },
@@ -59,6 +61,7 @@ export const columns: XHeadCell[] = [
       style: {
         width: 60,
         paddingRight: 40,
+        display: "none",
       },
     },
   },
