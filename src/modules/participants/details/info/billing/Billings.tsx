@@ -52,8 +52,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const headCells: XHeadCell[] = [...columns];
+interface IProps {
+    id: any;
+}
 
-const Billings = () => {
+const Billings = ({ id }: IProps) => {
   const dispatch = useDispatch();
   const billingData = useSelector(
     (state: IState) => state.participants.billings
@@ -69,7 +72,7 @@ const Billings = () => {
       payload: true
     });
     search(
-      remoteRoutes.participantsBilling,
+      remoteRoutes.participantsBilling + `?companyIds=${id}`,
       "filter",
       resp => {
         dispatch({
