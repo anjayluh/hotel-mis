@@ -30,7 +30,6 @@ interface IProps {
 }
 
 const SubscriptionsForm = (props: IProps) => {
-  console.log(props.initialData, "initialData");
   const [isEdit, setIsEdit] = useState<boolean>(
     props.initialData ? true : false
   );
