@@ -69,12 +69,12 @@ const Billings = () => {
       payload: true
     });
     search(
-      remoteRoutes.contacts,
+      remoteRoutes.participantsBilling,
       "filter",
       resp => {
         dispatch({
           type: participantsConstants.participantsBillsFetchAll,
-          payload: [...callfakeBill(15)]
+          payload: [...resp]
         });
       },
       undefined,
@@ -87,14 +87,6 @@ const Billings = () => {
     );
   }, []);
 
-  function callfakeBill(length: number) {
-    let Billings = [];
-    while (length > 0) {
-      Billings.push(fakeBill());
-      length = length - 1;
-    }
-    return Billings;
-  }
 
   return (
     <Grid container spacing={2}>

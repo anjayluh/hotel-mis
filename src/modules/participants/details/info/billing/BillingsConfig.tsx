@@ -26,10 +26,10 @@ export const columns: XHeadCell[] = [
     }
   },
   {
-    name: "consumption",
+    name: "consumptionAmount",
     label: "Consumption",
     numeric: true,
-    render: (value, rec) => printFormattedMoney(value),
+    render: (value, rec) => value === 0 ? value : printFormattedMoney(value),
     cellProps: {
       style: {
         width: 200,
@@ -39,7 +39,7 @@ export const columns: XHeadCell[] = [
     }
   },
   {
-    name: "rate",
+    name: "unitPrice",
     label: "Rate",
     numeric: true,
     cellProps: {
@@ -50,10 +50,10 @@ export const columns: XHeadCell[] = [
     }
   },
   {
-    name: "billAmount",
+    name: "amountDue",
     label: "Bill amount",
     numeric: true,
-    render: (value, rec) => printFormattedMoney(value),
+    render: (value, rec) => value === 0 ? value : printFormattedMoney(value),
     cellProps: {
       style: {
         width: 150,
