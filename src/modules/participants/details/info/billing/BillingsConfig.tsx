@@ -18,6 +18,7 @@ export const columns: XHeadCell[] = [
   {
     name: "billNumber",
     label: "Bill Number",
+    render: (value, rec) => value === null ? 'null' : value,
     cellProps: {
       style: {
         width: 60,
