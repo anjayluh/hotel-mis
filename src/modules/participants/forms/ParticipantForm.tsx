@@ -76,6 +76,7 @@ const ParticipantForm = (props: IProps) => {
         if (props.done) props.done();
         actions.setSubmitting(false);
         history.push(`${localRoutes.participants}/${data.id}`);
+        handleClose();
       },
       () => {
         Toast.error("Operation failed");

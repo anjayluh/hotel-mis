@@ -65,7 +65,12 @@ export default function reducer(state = initialState, action: any) {
                             (item.id === action.payload.id) ?
                         action.payload : item)
             return {
-                ...state, selected: action.payload, data: updatedData
+                ...state,
+                selected: state.selected && {
+                    ...state.selected,
+                    company: action.payload.company
+                },
+                data: updatedData
             }
         }
         case participantsConstants.participantsFetchAll: {

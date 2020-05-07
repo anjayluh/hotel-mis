@@ -62,6 +62,7 @@ const SubscriptionsForm = (props: IProps) => {
           });
           if (props.done) props.done();
           actions.setSubmitting(false);
+          handleClose();
         },
         () => {
           Toast.error("Operation failed");

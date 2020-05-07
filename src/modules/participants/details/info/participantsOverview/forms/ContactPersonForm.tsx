@@ -99,6 +99,7 @@ const ContactPersonForm = (props: IProps) => {
           });
           if (props.done) props.done();
           actions.setSubmitting(false);
+          handleClose();
         },
         () => {
           dispatch({
