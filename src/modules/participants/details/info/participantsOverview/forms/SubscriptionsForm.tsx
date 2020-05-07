@@ -30,6 +30,7 @@ interface IProps {
 }
 
 const SubscriptionsForm = (props: IProps) => {
+  console.log(props.initialData, "initialData");
   const [isEdit, setIsEdit] = useState<boolean>(
     props.initialData ? true : false
   );
@@ -44,26 +45,20 @@ const SubscriptionsForm = (props: IProps) => {
   const dispatch = useDispatch();
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
-    const toSave: ISubscription = {
-      id: faker.random.uuid(),
-      companyId: faker.random.uuid(),
-      accountNumber: null,
-      service: values.serviceType,
-      dateCreated: values.subscriptionDate,
-      subscriptionStatus: "Active",
-      serviceCategoryId: "",
-      billingCategory: "",
-      monthlyCap: null,
+    actions.setSubmitting(true);
+    const toSave: any = {
+      companyId: props.id,
+      serviceCategoryId: "50c9d131-363d-477b-e27d-08d7d18a3105",
     };
     if (!isEdit) {
       post(
-        remoteRoutes.subscriptions + `?companyIds=${props.id}`,
+        remoteRoutes.subscriptions,
         toSave,
         (data) => {
           Toast.info("Operation successful");
           actions.resetForm();
           dispatch({
-            type: participantsConstants.participantsAddParticipant,
+            type: participantsConstants.participantsAddSubscription,
             payload: { ...data },
           });
           if (props.done) props.done();
@@ -74,7 +69,8 @@ const SubscriptionsForm = (props: IProps) => {
           actions.setSubmitting(false);
         }
       );
-      post(
+    } else {
+      put(
         remoteRoutes.subscriptions + `?companyIds=${props.id}`,
         toSave,
         (data) => {
@@ -82,40 +78,16 @@ const SubscriptionsForm = (props: IProps) => {
           actions.resetForm();
           dispatch({
             type: participantsConstants.participantsAddSubscription,
-            payload: { ...toSave },
+            payload: { ...data },
           });
-          if (props.done) props.done();
-          actions.setSubmitting(false);
-          handleClose();
-        },
-        () => {
-          Toast.error("Operation failed");
-          actions.setSubmitting(false);
-        }
-      );
-    } else {
-      put(
-        remoteRoutes.subscriptions,
-        toSave,
-        (data) => {
-          Toast.info("Operation successful");
-          actions.resetForm();
-          dispatch({
-            type: participantsConstants.participantsAddSubscription,
-            payload: { ...toSave },
-          });
-          if (props.done) props.done();
-        },
-        undefined,
-        () => {
-          dispatch({
-            type: participantsConstants.participantsAddSubscription,
-            payload: { ...toSave },
-          });
-          Toast.info("Operation successful");
           actions.resetForm();
           handleClose();
-          // actions.setSubmitting(false);
+          if (props.done) props.done();
+          actions.setSubmitting(false);
+        },
+        () => {
+          Toast.error("Operation successful");
+          actions.setSubmitting(false);
         }
       );
     }
