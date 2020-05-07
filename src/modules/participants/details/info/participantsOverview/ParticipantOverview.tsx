@@ -89,8 +89,8 @@ const officialContactInfo = (data: IParticipant): IRec[] => {
     {
       label: "Phone Number",
       value:
-        officialEmail &&
-        officialEmail.length > 0 &&
+        officialPhone &&
+        officialPhone.length > 0 &&
         setValue(officialPhone[0].value),
     },
   ];
