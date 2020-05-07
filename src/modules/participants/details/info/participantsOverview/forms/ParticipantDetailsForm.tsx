@@ -58,6 +58,7 @@ const ParticipantDetailsForm = (props: IProps) => {
   const dispatch = useDispatch();
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
+    actions.setSubmitting(true);
     const toSave: any = {
       category: props.initialData.category,
       company: {
@@ -91,6 +92,7 @@ const ParticipantDetailsForm = (props: IProps) => {
         if (props.done) props.done();
         actions.setSubmitting(false);
         handleClose();
+        actions.setSubmitting(false);
       },
       () => {
         Toast.error("Operation failed");

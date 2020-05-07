@@ -129,14 +129,16 @@ const Subscriptions = ({ id }: IProps) => {
             <Grid container>
               <Grid item sm={12} className={classes.pageHeading}>
                 <Typography variant="h5">Subscription</Typography>
-                <Button
-                  className={classes.addNewButton}
-                  startIcon={<AddIcon className={classes.addIcon} />}
-                  variant="text"
-                  onClick={handleNewSubscription}
-                >
-                  Add New
-                </Button>
+                {!loading && selected && selected.subscriptions.length < 1 && (
+                  <Button
+                    className={classes.addNewButton}
+                    startIcon={<AddIcon className={classes.addIcon} />}
+                    variant="text"
+                    onClick={handleNewSubscription}
+                  >
+                    Add New
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </Box>
@@ -167,7 +169,6 @@ const Subscriptions = ({ id }: IProps) => {
         <SubscriptionsForm
           id={id}
           closeSlideOut={handleToggleDrawer}
-          initialData={formData}
         ></SubscriptionsForm>
       </SlideOutDrawer>
     </Grid>

@@ -51,6 +51,7 @@ const ParticipantForm = (props: IProps) => {
   const dispatch = useDispatch();
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
+    actions.setSubmitting(true);
     const toSave: any = {
       companyType: "Limited",
       name: values.name,

@@ -5,7 +5,7 @@ import * as faker from "faker";
 import {
   reqEmail,
   reqString,
-  reqPhoneNumber
+  reqPhoneNumber,
 } from "../../../../../../data/validations";
 import { contactPersonCategories } from "../../../../../../data/comboCategories";
 import { FormikActions } from "formik";
@@ -26,7 +26,7 @@ const schema = yup.object().shape({
   name: reqString,
   role: reqString,
   phone: reqPhoneNumber,
-  email: reqEmail
+  email: reqEmail,
 });
 
 interface IProps {
@@ -46,40 +46,40 @@ const ContactPersonForm = (props: IProps) => {
           name: "",
           role: "",
           phone: "",
-          email: ""
+          email: "",
         }
   );
   const dispatch = useDispatch();
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
+    actions.setSubmitting(true);
     const toSave: IContactPerson = {
       id: values.id ? values.id : faker.random.uuid(),
       name: values.name,
       role: values.role,
       phone: {
         id: faker.random.uuid(),
-        value: values.phone
+        value: values.phone,
       },
-      email: values.email
+      email: values.email,
     };
     if (!isEdit) {
       post(
         remoteRoutes.ninVerification,
         toSave,
-        data => {
+        (data) => {
           Toast.info("Operation successful");
           actions.resetForm();
           dispatch({
             type: participantsConstants.participantsAddContactPerson,
-            payload: { ...toSave }
+            payload: { ...toSave },
           });
           if (props.done) props.done();
         },
-        undefined,
         () => {
           dispatch({
             type: participantsConstants.participantsAddContactPerson,
-            payload: { ...toSave }
+            payload: { ...toSave },
           });
           Toast.info("Operation successful");
           actions.resetForm();
@@ -90,25 +90,25 @@ const ContactPersonForm = (props: IProps) => {
       put(
         remoteRoutes.ninVerification,
         toSave,
-        data => {
+        (data) => {
           Toast.info("Operation successful");
           actions.resetForm();
           dispatch({
             type: participantsConstants.participantsUpdateContactPerson,
-            payload: { ...toSave }
+            payload: { ...toSave },
           });
           if (props.done) props.done();
+          actions.setSubmitting(false);
         },
-        undefined,
         () => {
           dispatch({
             type: participantsConstants.participantsUpdateContactPerson,
-            payload: { ...toSave }
+            payload: { ...toSave },
           });
           Toast.info("Operation successful");
           actions.resetForm();
           handleClose();
-          // actions.setSubmitting(false);
+          actions.setSubmitting(false);
         }
       );
     }
