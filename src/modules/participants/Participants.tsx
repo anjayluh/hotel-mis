@@ -148,6 +148,8 @@ const Participants = () => {
                     headCells={headCells}
                     data={data}
                     initialRowsPerPage={10}
+                    initialSortBy={"createdAt"}
+                    initialOrder={"desc"}
                   />
                 </Grid>
               </Grid>
