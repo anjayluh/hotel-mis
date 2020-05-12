@@ -204,7 +204,7 @@ const ParticipantOverview = ({ data }: IProps) => {
   const primaryContactColumn = primaryContactInfo(data);
   const contactPersonsColumns: IRec[][] = [];
   data.contactPersons &&
-    data.contactPersons.length > 1 &&
+    data.contactPersons.length >= 1 &&
     data.contactPersons.forEach((contact) => {
       contactPersonsColumns.push(contactToRecords(contact));
     });
