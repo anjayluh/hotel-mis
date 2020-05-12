@@ -75,11 +75,12 @@ const SubscriptionsForm = (props: IProps) => {
           subscriptionDate: null,
         }
   );
-
+  const baseUrl = remoteRoutes.participantsBilling.split("bills").pop();
+  const bilingUrl = baseUrl + "/services";
   const dispatch = useDispatch();
   useEffect(() => {
     get(
-      "https://bou-niv-gatewayservice-test.test001.laboremus.no/billing/api/services",
+      bilingUrl,
       (resp) => {
         setAllCategories(resp);
       },
