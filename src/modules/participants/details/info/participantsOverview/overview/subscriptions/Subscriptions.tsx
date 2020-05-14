@@ -10,14 +10,13 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { columns } from "./SubscriptionConfig";
-import { fakeSubscriptions } from "../../../../../fakeData";
 import { IState } from "../../../../../../../data/types";
 import SlideOutDrawer from "../../../../../../../components/SlideOutDrawer";
 import SubscriptionsForm from "../../forms/SubscriptionsForm";
 import { Anchor } from "../../../../../../../data/types";
 import { participantsConstants } from "../../../../../../../data/redux/participants/reducer";
 import { remoteRoutes } from "../../../../../../../data/constants";
-import { get } from "../../../../../../../utils/ajax";
+import { search } from "../../../../../../../utils/ajax";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,8 +74,9 @@ const Subscriptions = ({ id }: IProps) => {
   const [anchor, setAnchor] = useState<Anchor>("right");
 
   useEffect(() => {
-    get(
-      remoteRoutes.subscriptions + `?companyIds=${id}`,
+    search(
+      remoteRoutes.subscriptions,
+      { companyIds: id },
       (resp) => {
         dispatch({
           type: participantsConstants.participantSubscriptionsFetchAll,

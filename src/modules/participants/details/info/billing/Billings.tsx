@@ -17,19 +17,19 @@ import { fakeBill } from "../../../fakeData";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     filterPaper: {
       borderRadius: 0,
-      padding: theme.spacing(2)
+      padding: theme.spacing(2),
     },
     fab: {
       position: "absolute",
       bottom: theme.spacing(2),
-      right: theme.spacing(2)
+      right: theme.spacing(2),
     },
     pageHeading: {
-      display: "flex"
+      display: "flex",
     },
     addNewButton: {
       color: "#428BCA",
@@ -40,20 +40,20 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: "-5px",
       marginLeft: "8px",
       marginTop: "-6px",
-      fontWeight: "normal"
+      fontWeight: "normal",
     },
     addIcon: {
       marginLeft: "-5px",
       marginRight: "-10px",
       height: "0.7em",
-      fontSize: "13px"
-    }
+      fontSize: "13px",
+    },
   })
 );
 
 const headCells: XHeadCell[] = [...columns];
 interface IProps {
-    id: any;
+  id: any;
 }
 
 const Billings = ({ id }: IProps) => {
@@ -69,27 +69,26 @@ const Billings = ({ id }: IProps) => {
   useEffect(() => {
     dispatch({
       type: participantsConstants.participantsBillsFetchLoading,
-      payload: true
+      payload: true,
     });
     search(
-      remoteRoutes.participantsBilling + `?companyIds=${id}`,
-      "filter",
-      resp => {
+      remoteRoutes.participantsBilling,
+      { companyIds: id },
+      (resp) => {
         dispatch({
           type: participantsConstants.participantsBillsFetchAll,
-          payload: [...resp]
+          payload: [...resp],
         });
       },
       undefined,
       () => {
         dispatch({
           type: participantsConstants.participantsBillsFetchLoading,
-          payload: false
+          payload: false,
         });
       }
     );
   }, []);
-
 
   return (
     <Grid container spacing={2}>

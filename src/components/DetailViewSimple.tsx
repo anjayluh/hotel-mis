@@ -45,6 +45,12 @@ const useStyles = makeStyles((theme: Theme) =>
       top: "0px",
       right: "0px",
     },
+    hideAction: {
+      visibility: "hidden",
+    },
+    showAction: {
+      visibility: "visible",
+    },
   })
 );
 
@@ -118,9 +124,9 @@ const TableView = (props: IProps) => {
   return (
     <Box
       pl={1}
-      className={classes.contacts}
       onMouseEnter={handleEntered}
       onMouseLeave={handleLeave}
+      display="flex"
     >
       <table className={classes.root}>
         <tbody>
@@ -142,12 +148,22 @@ const TableView = (props: IProps) => {
           )}
         </tbody>
       </table>
-      <Box className={classes.contactActions} display="flex">
+      <Box display="flex">
         {props.editButton && (
-          <Box onClick={handleEdit}>{canEdit && props.editButton}</Box>
+          <Box
+            onClick={handleEdit}
+            className={canEdit ? classes.showAction : classes.hideAction}
+          >
+            {props.editButton}
+          </Box>
         )}
         {props.deleteButton && (
-          <Box onClick={handleDelete}>{canDelete && props.deleteButton}</Box>
+          <Box
+            onClick={handleDelete}
+            className={canDelete ? classes.showAction : classes.hideAction}
+          >
+            {props.deleteButton}
+          </Box>
         )}
       </Box>
     </Box>

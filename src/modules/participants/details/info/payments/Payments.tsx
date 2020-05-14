@@ -5,7 +5,7 @@ import AddIcon from "@material-ui/icons/Add";
 import XTable from "../../../../../components/table/XTable";
 import { XHeadCell } from "../../../../../components/table/XTableHead";
 import Grid from "@material-ui/core/Grid";
-import { get } from "../../../../../utils/ajax";
+import { search, get } from "../../../../../utils/ajax";
 import Loading from "../../../../../components/Loading";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -18,6 +18,7 @@ import Details from "./Details/Details";
 import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
 import PaymentForm from "./forms/PaymentForm";
 import Toast from "../../../../../utils/Toast";
+import typography from "../../../../../theme/typography";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,6 +67,11 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "0.7em",
       fontSize: "13px",
     },
+    helperText: {
+      marginLeft: 7,
+      marginTop: 2,
+      fontStyle: "italic",
+    },
   })
 );
 
@@ -92,8 +98,9 @@ const Payments = (props: IProps) => {
       payload: true,
     });
     if (props.subscriptionId) {
-      get(
-        paymentsUrl + `?=${props.subscriptionId}`,
+      search(
+        paymentsUrl,
+        { subscriptionIds: props.subscriptionId },
         (data) => {
           dispatch({
             type: participantsConstants.participantsPaymentsFetchAll,
@@ -151,14 +158,20 @@ const Payments = (props: IProps) => {
             <Grid container>
               <Grid item sm={12} className={classes.pageHeading}>
                 <Typography variant="h5">Payments</Typography>
-                <Button
-                  className={classes.addNewButton}
-                  startIcon={<AddIcon className={classes.addIcon} />}
-                  variant="text"
-                  onClick={handleNewPayment}
-                >
-                  Add New
-                </Button>
+                {props.subscriptionId ? (
+                  <Button
+                    className={classes.addNewButton}
+                    startIcon={<AddIcon className={classes.addIcon} />}
+                    variant="text"
+                    onClick={handleNewPayment}
+                  >
+                    Add New
+                  </Button>
+                ) : (
+                  <Typography variant="body2" className={classes.helperText}>
+                    Please first create a subscription
+                  </Typography>
+                )}
               </Grid>
             </Grid>
           </Box>
@@ -172,7 +185,7 @@ const Payments = (props: IProps) => {
                     headCells={headCells}
                     data={selected.payments}
                     initialRowsPerPage={4}
-                    usePagination={false}
+                    usePagination={true}
                     handleSelection={handlePaymentDetails}
                     hoverClass={classes.rowHover}
                   />
@@ -204,7 +217,10 @@ const Payments = (props: IProps) => {
         )}
 
         {showPaymentForm && (
-          <PaymentForm closeSlideOut={handleNewPayment}></PaymentForm>
+          <PaymentForm
+            closeSlideOut={handleNewPayment}
+            subscriptionId={props.subscriptionId && props.subscriptionId}
+          ></PaymentForm>
         )}
       </SlideOutDrawer>
     </Grid>

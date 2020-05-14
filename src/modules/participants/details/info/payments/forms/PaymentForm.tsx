@@ -5,7 +5,7 @@ import * as faker from "faker";
 import {
   reqString,
   reqDate,
-  reqNumber
+  reqNumber,
 } from "../../../../../../data/validations";
 import { paymentTypes } from "../../../../../../data/comboCategories";
 import { FormikActions } from "formik";
@@ -16,6 +16,7 @@ import { toOptions } from "../../../../../../components/inputs/inputHelpers";
 import { useDispatch } from "react-redux";
 import { IPayment } from "../../../../types";
 import XSelectInput from "../../../../../../components/inputs/XSelectInput";
+import XTextAreaInput from "../../../../../../components/inputs/XTextAreaInput";
 import XDateInput from "../../../../../../components/inputs/XDateInput";
 import { remoteRoutes } from "../../../../../../data/constants";
 import { post } from "../../../../../../utils/ajax";
@@ -27,12 +28,14 @@ const schema = yup.object().shape({
   paymentType: reqString,
   referenceNumber: reqNumber,
   dateOfEntry: reqDate,
-  enteredBy: reqString
+  enteredBy: reqString,
+  comment: reqString,
 });
 
 interface IProps {
   closeSlideOut: () => any;
   done?: () => any;
+  subscriptionId: string | undefined;
 }
 
 const PaymentForm = (props: IProps) => {
@@ -42,42 +45,39 @@ const PaymentForm = (props: IProps) => {
     referenceNumber: "",
     amount: "",
     dateOfEntry: null,
-    enteredBy: ""
+    enteredBy: "",
+    comment: "",
   });
   const dispatch = useDispatch();
-
+  const baseUrl = remoteRoutes.participantsBilling.split("bills")[0];
+  const paymentsUrl = baseUrl + "payments";
   function handleSubmit(values: any, actions: FormikActions<any>) {
-    const toSave: IPayment = {
-      id: faker.random.uuid(),
-      paymentDate: values.paymentDate,
-      paymentType: values.paymentType,
-      referenceNumber: values.referenceNumber,
+    const toSave: any = {
+      subscriptionId: props.subscriptionId,
       amount: values.amount,
-      dateOfEntry: values.dateOfEntry,
-      enteredBy: values.enteredBy
+      referenceNumber: values.referenceNumber,
+      comment: values.comment,
+      paymentType: values.paymentType,
+      enteredBy: values.enteredBy,
+      paymentDate: values.paymentDate,
     };
     post(
-      remoteRoutes.participants,
+      paymentsUrl,
       toSave,
-      data => {
-        Toast.info("Operation successful");
-        actions.resetForm();
+      (data) => {
         dispatch({
           type: participantsConstants.participantsAddPayment,
-          payload: { ...toSave }
+          payload: data,
         });
         if (props.done) props.done();
-      },
-      undefined,
-      () => {
-        dispatch({
-          type: participantsConstants.participantsAddPayment,
-          payload: { ...toSave }
-        });
+
         Toast.info("Operation successful");
         actions.resetForm();
         handleClose();
-        // actions.setSubmitting(false);
+      },
+      () => {
+        Toast.info("Operation successful");
+        actions.setSubmitting(false);
       }
     );
   }
@@ -124,7 +124,7 @@ const PaymentForm = (props: IProps) => {
           <XTextInput
             name="amount"
             label="Amount"
-            type="text"
+            type="number"
             variant="outlined"
             size="small"
           />
@@ -144,6 +144,16 @@ const PaymentForm = (props: IProps) => {
             type="text"
             variant="outlined"
             size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <XTextAreaInput
+            name="comment"
+            label="Comment"
+            type="text"
+            variant="outlined"
+            size="small"
+            maxLength={{ maxLength: 160 }}
           />
         </Grid>
       </Grid>
