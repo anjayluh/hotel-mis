@@ -5,7 +5,7 @@ import AddIcon from "@material-ui/icons/Add";
 import XTable from "../../../../../components/table/XTable";
 import { XHeadCell } from "../../../../../components/table/XTableHead";
 import Grid from "@material-ui/core/Grid";
-import { search } from "../../../../../utils/ajax";
+import { get } from "../../../../../utils/ajax";
 import Loading from "../../../../../components/Loading";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -14,40 +14,40 @@ import { IState, Anchor } from "../../../../../data/types";
 import { columns } from "./PaymentsConfig";
 import { participantsConstants } from "../../../../../data/redux/participants/reducer";
 import { remoteRoutes } from "../../../../../data/constants";
-import { fakePayment } from "../../../fakeData";
 import Details from "./Details/Details";
 import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
 import PaymentForm from "./forms/PaymentForm";
+import Toast from "../../../../../utils/Toast";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     filterPaper: {
       borderRadius: 0,
-      padding: theme.spacing(2)
+      padding: theme.spacing(2),
     },
     fab: {
       position: "absolute",
       bottom: theme.spacing(2),
-      right: theme.spacing(2)
+      right: theme.spacing(2),
     },
     pageHeading: {
-      display: "flex"
+      display: "flex",
     },
     rowHover: {
       "&:hover": {
-        cursor: "pointer"
-      }
+        cursor: "pointer",
+      },
     },
     close: {
       position: "fixed",
-      bottom: "30px"
+      bottom: "30px",
     },
     closeButton: {
       padding: "4px 30px",
-      backgroundColor: "rgba(38, 50, 56, 0.04)"
+      backgroundColor: "rgba(38, 50, 56, 0.04)",
     },
     addNewButton: {
       color: "#428BCA",
@@ -58,24 +58,24 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: "-5px",
       marginLeft: "8px",
       marginTop: "-6px",
-      fontWeight: "normal"
+      fontWeight: "normal",
     },
     addIcon: {
       marginLeft: "-5px",
       marginRight: "-10px",
       height: "0.7em",
-      fontSize: "13px"
-    }
+      fontSize: "13px",
+    },
   })
 );
 
 const headCells: XHeadCell[] = [...columns];
-
-const Payments = () => {
+interface IProps {
+  subscriptionId: string | undefined;
+}
+const Payments = (props: IProps) => {
   const dispatch = useDispatch();
-  const paymentsData = useSelector(
-    (state: IState) => state.participants.payments
-  );
+  const { selected } = useSelector((state: IState) => state.participants);
   const loading = useSelector(
     (state: IState) => state.participants.paymentsLoading
   );
@@ -84,39 +84,46 @@ const Payments = () => {
   const classes = useStyles();
   const [showPaymentDetails, setShowPaymentDetails] = useState<boolean>(false);
   const [showPaymentForm, setShowPaymentForm] = useState<boolean>(false);
-
+  const baseUrl = remoteRoutes.participantsBilling.split("bills")[0];
+  const paymentsUrl = baseUrl + "payments";
   useEffect(() => {
     dispatch({
       type: participantsConstants.participantsPaymentsFetchLoading,
-      payload: true
+      payload: true,
     });
-    search(
-      remoteRoutes.contacts,
-      "filter",
-      resp => {
-        dispatch({
-          type: participantsConstants.participantsPaymentsFetchAll,
-          payload: [...callFakePayment(5)]
-        });
-      },
-      undefined,
-      () => {
-        dispatch({
-          type: participantsConstants.participantsPaymentsFetchLoading,
-          payload: false
-        });
-      }
-    );
+    if (props.subscriptionId) {
+      get(
+        paymentsUrl + `?=${props.subscriptionId}`,
+        (data) => {
+          dispatch({
+            type: participantsConstants.participantsPaymentsFetchAll,
+            payload: data,
+          });
+        },
+        () => {
+          dispatch({
+            type: participantsConstants.participantsPaymentsFetchLoading,
+            payload: false,
+          });
+          Toast.error("Operation failed");
+        }
+      );
+    } else {
+      dispatch({
+        type: participantsConstants.participantsPaymentsFetchLoading,
+        payload: false,
+      });
+    }
   }, []);
 
-  function callFakePayment(length: number) {
+  /* function callFakePayment(length: number) {
     let Payments = [];
     while (length > 0) {
       Payments.push(fakePayment());
       length = length - 1;
     }
     return Payments;
-  }
+  } */
 
   function handleToggleDrawer(id?: any) {
     setOpenSlideOut(!openSlideOut);
@@ -133,7 +140,9 @@ const Payments = () => {
     setShowPaymentDetails(true);
     handleToggleDrawer();
   }
-
+  if (selected && !selected.payments) {
+    selected.payments = [];
+  }
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
@@ -156,18 +165,20 @@ const Payments = () => {
           {loading ? (
             <Loading />
           ) : (
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <XTable
-                  headCells={headCells}
-                  data={paymentsData}
-                  initialRowsPerPage={4}
-                  usePagination={false}
-                  handleSelection={handlePaymentDetails}
-                  hoverClass={classes.rowHover}
-                />
+            selected && (
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <XTable
+                    headCells={headCells}
+                    data={selected.payments}
+                    initialRowsPerPage={4}
+                    usePagination={false}
+                    handleSelection={handlePaymentDetails}
+                    hoverClass={classes.rowHover}
+                  />
+                </Grid>
               </Grid>
-            </Grid>
+            )
           )}
         </Box>
       </Grid>

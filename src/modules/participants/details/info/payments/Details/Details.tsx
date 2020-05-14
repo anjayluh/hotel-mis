@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Loading from "../../../../../../components/Loading";
 import { createStyles, Grid, makeStyles, Theme } from "@material-ui/core";
-import { IPaymentDetails } from "../../../../types";
+import { IPayment } from "../../../../types";
 import Typography from "@material-ui/core/Typography";
 import Summary from "./Summary";
 // import WorkflowView from "./WorkflowView";
@@ -24,22 +24,22 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       borderRadius: 0,
       padding: theme.spacing(1),
-      position: "relative"
+      position: "relative",
     },
     divider: {
-      marginTop: theme.spacing(2)
+      marginTop: theme.spacing(2),
     },
     noPaddingLeft: {
-      paddingLeft: 0
+      paddingLeft: 0,
     },
     loading: {
       position: "absolute",
-      top: 300
-    }
+      top: 300,
+    },
   })
 );
 
-const tempPaymentDetails: IPaymentDetails = fakePaymentDetails();
+const tempPaymentDetails: IPayment = fakePaymentDetails();
 
 const Details = (props: IProps) => {
   const dispatch: Dispatch<any> = useDispatch();
@@ -51,22 +51,22 @@ const Details = (props: IProps) => {
   useEffect(() => {
     dispatch({
       type: participantsConstants.paymentsDetailsFetchAllLoading,
-      payload: true
+      payload: true,
     });
     search(
       remoteRoutes.contacts,
       "filter",
-      resp => {
+      (resp) => {
         dispatch({
           type: participantsConstants.paymentsDetailsFetchAll,
-          payload: tempPaymentDetails
+          payload: tempPaymentDetails,
         });
       },
       undefined,
       () => {
         dispatch({
           type: participantsConstants.paymentsDetailsFetchAll,
-          payload: tempPaymentDetails
+          payload: tempPaymentDetails,
         });
       }
     );

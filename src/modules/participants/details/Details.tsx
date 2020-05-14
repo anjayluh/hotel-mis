@@ -170,7 +170,11 @@ const Details = (props: IProps) => {
           </Grid>
           {showParticipantsOverview && <Subscriptions id={participantId} />}
           {showBillingsView && <Billings id={participantId} />}
-          {showPaymentsView && <Payments></Payments>}
+          {showPaymentsView && (
+            <Payments
+              subscriptionId={data.subscriptions[0] && data.subscriptions[0].id}
+            ></Payments>
+          )}
           {showAccountStatementView && <AccountStatement></AccountStatement>}
         </div>
       )}

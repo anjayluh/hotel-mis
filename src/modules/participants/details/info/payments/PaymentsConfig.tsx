@@ -5,32 +5,32 @@ import React from "react";
 
 export const columns: XHeadCell[] = [
   {
-    name: "paymentDate",
+    name: "dateCreated",
     label: "Payment date",
     render: (value, rec) => <span>{printDate(value)}</span>,
     cellProps: {
       style: {
-        width: 200
-      }
-    }
+        width: 200,
+      },
+    },
   },
   {
     name: "paymentType",
     label: "Payment type",
     cellProps: {
       style: {
-        width: 200
-      }
-    }
+        width: 200,
+      },
+    },
   },
   {
     name: "referenceNumber",
     label: "Ref. Number",
     cellProps: {
       style: {
-        width: 100
-      }
-    }
+        width: 100,
+      },
+    },
   },
   {
     name: "amount",
@@ -40,8 +40,8 @@ export const columns: XHeadCell[] = [
     cellProps: {
       style: {
         width: 80,
-        paddingRight: 40
-      }
-    }
-  }
+        paddingRight: 40,
+      },
+    },
+  },
 ];
