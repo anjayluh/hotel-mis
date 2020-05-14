@@ -75,12 +75,12 @@ const SubscriptionsForm = (props: IProps) => {
           subscriptionDate: null,
         }
   );
-  const baseUrl = remoteRoutes.participantsBilling.split("bills").pop();
-  const bilingUrl = baseUrl + "/services";
+  const baseUrl = remoteRoutes.participantsBilling.split("bills")[0];
+  const billingUrl = baseUrl + "services";
   const dispatch = useDispatch();
   useEffect(() => {
     get(
-      bilingUrl,
+      billingUrl,
       (resp) => {
         setAllCategories(resp);
       },
