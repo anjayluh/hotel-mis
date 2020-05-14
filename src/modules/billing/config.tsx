@@ -6,7 +6,7 @@ import { format, compareAsc } from "date-fns";
 import { getConsumption } from "./fakeData";
 import { getbillAmount } from "./fakeData";
 
-export const Billingcolumns: XHeadCell[] = [
+export const columns: XHeadCell[] = [
   {
     name: "dateCreated",
     label: "Bill date",
@@ -14,17 +14,17 @@ export const Billingcolumns: XHeadCell[] = [
     cellProps: {
       style: {
         width: 100,
-        whiteSpace: "nowrap"
-      }
-    }
+        whiteSpace: "nowrap",
+      },
+    },
   },
   {
     name: "name",
     label: "Participant",
     render: (value, rec) => <ParticipantLink id={rec.id} name={rec.name} />,
     cellProps: {
-      style: { width: 250 }
-    }
+      style: { width: 250 },
+    },
   },
   {
     name: "billNumber",
@@ -32,9 +32,9 @@ export const Billingcolumns: XHeadCell[] = [
     cellProps: {
       style: {
         width: 100,
-        whiteSpace: "nowrap"
-      }
-    }
+        whiteSpace: "nowrap",
+      },
+    },
   },
   {
     name: "consumption",
@@ -45,9 +45,9 @@ export const Billingcolumns: XHeadCell[] = [
       style: {
         width: 100,
         whiteSpace: "nowrap",
-        textAlign: "right"
-      }
-    }
+        textAlign: "right",
+      },
+    },
   },
   {
     name: "rate",
@@ -57,9 +57,9 @@ export const Billingcolumns: XHeadCell[] = [
       style: {
         width: 200,
         whiteSpace: "nowrap",
-        textAlign: "right"
-      }
-    }
+        textAlign: "right",
+      },
+    },
   },
   {
     name: "billAmount",
@@ -70,8 +70,8 @@ export const Billingcolumns: XHeadCell[] = [
       style: {
         width: 200,
         whiteSpace: "nowrap",
-        paddingRight: 40
-      }
-    }
-  }
+        paddingRight: 40,
+      },
+    },
+  },
 ];
