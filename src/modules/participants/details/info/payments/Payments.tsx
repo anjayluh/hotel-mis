@@ -68,9 +68,10 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: "13px",
     },
     helperText: {
-      marginLeft: 7,
+      marginLeft: 15,
       marginTop: 2,
       fontStyle: "italic",
+      fontSize: 11
     },
   })
 );
@@ -166,7 +167,7 @@ const Payments = (props: IProps) => {
                   </Button>
                 ) : (
                   <Typography variant="body2" className={classes.helperText}>
-                    Please first create a subscription
+                    * Please first create a subscription
                   </Typography>
                 )}
               </Grid>
