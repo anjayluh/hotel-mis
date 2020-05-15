@@ -90,6 +90,7 @@ const Payments = (props: IProps) => {
   const classes = useStyles();
   const [showPaymentDetails, setShowPaymentDetails] = useState<boolean>(false);
   const [showPaymentForm, setShowPaymentForm] = useState<boolean>(false);
+  const [selectedPaymentId, setSelectedPaymentId] = useState<string>("");
   const baseUrl = remoteRoutes.participantsBilling.split("bills")[0];
   const paymentsUrl = baseUrl + "payments";
   useEffect(() => {
@@ -123,15 +124,6 @@ const Payments = (props: IProps) => {
     }
   }, []);
 
-  /* function callFakePayment(length: number) {
-    let Payments = [];
-    while (length > 0) {
-      Payments.push(fakePayment());
-      length = length - 1;
-    }
-    return Payments;
-  } */
-
   function handleToggleDrawer(id?: any) {
     setOpenSlideOut(!openSlideOut);
     setAnchor("right");
@@ -142,7 +134,8 @@ const Payments = (props: IProps) => {
     setShowPaymentForm(true);
     handleToggleDrawer();
   }
-  function handlePaymentDetails() {
+  function handlePaymentDetails(id?: any) {
+    setSelectedPaymentId(id);
     setShowPaymentForm(false);
     setShowPaymentDetails(true);
     handleToggleDrawer();
@@ -203,7 +196,10 @@ const Payments = (props: IProps) => {
       >
         {showPaymentDetails && (
           <div>
-            <Details closeSlideOut={handlePaymentDetails}></Details>
+            <Details
+              closeSlideOut={handlePaymentDetails}
+              paymentId={selectedPaymentId}
+            ></Details>
             <Grid item xs={12} className={classes.close}>
               <Button
                 className={classes.closeButton}

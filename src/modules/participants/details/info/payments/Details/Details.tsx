@@ -5,7 +5,7 @@ import { IPayment } from "../../../../types";
 import Typography from "@material-ui/core/Typography";
 import Summary from "./Summary";
 // import WorkflowView from "./WorkflowView";
-import { put, search } from "../../../../../../utils/ajax";
+import { get } from "../../../../../../utils/ajax";
 import { remoteRoutes } from "../../../../../../data/constants";
 import { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,10 +13,10 @@ import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
 import { participantsConstants } from "../../../../../../data/redux/participants/reducer";
 import { IState } from "../../../../../../data/types";
-import { fakePaymentDetails } from "../../../../fakeData";
 
 interface IProps {
   closeSlideOut?: () => any;
+  paymentId: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,34 +39,32 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const tempPaymentDetails: IPayment = fakePaymentDetails();
-
 const Details = (props: IProps) => {
   const dispatch: Dispatch<any> = useDispatch();
   const classes = useStyles();
   const { paymentDetails, paymentsDetailsLoading } = useSelector(
     (state: IState) => state.participants
   );
+  const baseUrl = remoteRoutes.participantsBilling.split("bills")[0];
+  const paymentsUrl = baseUrl + `payments/${props.paymentId}`;
 
   useEffect(() => {
     dispatch({
       type: participantsConstants.paymentsDetailsFetchAllLoading,
       payload: true,
     });
-    search(
-      remoteRoutes.contacts,
-      "filter",
+    get(
+      paymentsUrl,
       (resp) => {
         dispatch({
           type: participantsConstants.paymentsDetailsFetchAll,
-          payload: tempPaymentDetails,
+          payload: resp,
         });
       },
-      undefined,
       () => {
         dispatch({
-          type: participantsConstants.paymentsDetailsFetchAll,
-          payload: tempPaymentDetails,
+          type: participantsConstants.paymentsDetailsFetchAllLoading,
+          payload: false,
         });
       }
     );

@@ -11,12 +11,12 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "400px",
       marginTop: "64px",
       [theme.breakpoints.down("sm")]: {
-        width: "100%"
-      }
+        width: "100%",
+      },
     },
     title: {
-      marginLeft: "8px"
-    }
+      marginLeft: "8px",
+    },
   })
 );
 
@@ -36,7 +36,7 @@ export default function SlideOutDrawer(props: IProps) {
     top: false,
     left: false,
     bottom: false,
-    right: false
+    right: false,
   });
 
   const toggleDrawer = (anchor: string, open: boolean) => (
@@ -62,7 +62,7 @@ export default function SlideOutDrawer(props: IProps) {
           BackdropProps={{ invisible: true }}
           onClose={toggleDrawer(props.anchor, false)}
           classes={{
-            paper: classes.root
+            paper: classes.root,
           }}
         >
           <Typography variant="h5" className={classes.title}>
