@@ -51,13 +51,24 @@ const PaymentForm = (props: IProps) => {
   const dispatch = useDispatch();
   const baseUrl = remoteRoutes.participantsBilling.split("bills")[0];
   const paymentsUrl = baseUrl + "payments";
+  function getSelectedPaymentType(value: string) {
+    let selectedPaymentType = "";
+    if (value === "Electronic funds transfer (EFT)") {
+      selectedPaymentType = "Eft";
+    } else if (value === "Direct Debit") {
+      selectedPaymentType = "DirectDebit";
+    } else {
+      selectedPaymentType = value;
+    }
+    return selectedPaymentType;
+  }
   function handleSubmit(values: any, actions: FormikActions<any>) {
     const toSave: any = {
       subscriptionId: props.subscriptionId,
       amount: values.amount,
       referenceNumber: values.referenceNumber,
       comment: values.comment,
-      paymentType: values.paymentType,
+      paymentType: getSelectedPaymentType(values.paymentType),
       enteredBy: values.enteredBy,
       paymentDate: values.paymentDate,
     };
