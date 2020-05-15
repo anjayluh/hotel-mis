@@ -143,6 +143,10 @@ const Payments = (props: IProps) => {
   if (selected && !selected.payments) {
     selected.payments = [];
   }
+  const showPagination =
+    selected && selected.payments && selected.payments.length > 4
+      ? true
+      : false;
   return (
     <Grid container spacing={1}>
       <Grid item xs={12}>
@@ -178,7 +182,7 @@ const Payments = (props: IProps) => {
                     headCells={headCells}
                     data={selected.payments}
                     initialRowsPerPage={4}
-                    usePagination={true}
+                    usePagination={showPagination}
                     handleSelection={handlePaymentDetails}
                     hoverClass={classes.rowHover}
                   />
