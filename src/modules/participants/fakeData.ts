@@ -4,7 +4,6 @@ import {
   IContactPerson,
   IBill,
   IPayment,
-  IPaymentDetails,
   IParticipant,
 } from "./types";
 import { enumToArray } from "../../utils/stringHelpers";

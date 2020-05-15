@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Loading from "../../../../../../components/Loading";
 import { createStyles, Grid, makeStyles, Theme } from "@material-ui/core";
-import { IPayment } from "../../../../types";
 import Typography from "@material-ui/core/Typography";
 import Summary from "./Summary";
 // import WorkflowView from "./WorkflowView";
@@ -89,8 +88,7 @@ const Details = (props: IProps) => {
               <Box display="flex" py={1}>
                 <Box flexGrow={1} pt={1}>
                   <Typography variant="h5">
-                    Payment ID:{" "}
-                    {paymentDetails ? paymentDetails.paymentId : "loading"}
+                    Payment ID: {paymentDetails ? paymentDetails.id : "loading"}
                   </Typography>
                 </Box>
               </Box>

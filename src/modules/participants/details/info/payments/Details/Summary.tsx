@@ -4,10 +4,10 @@ import Typography from "@material-ui/core/Typography";
 import DetailView, { IRec } from "../../../../../../components/DetailView";
 import { printDateTime, printDate } from "../../../../../../utils/dateHelpers";
 import { printFormattedMoney } from "../../../../../../utils/numberHelpers";
-import { IPaymentDetails } from "../../../../types";
+import { IPayment } from "../../../../types";
 
 interface IProps {
-  data: IPaymentDetails;
+  data: IPayment;
 }
 
 const Summary = ({ data }: IProps) => {
@@ -26,7 +26,7 @@ const Summary = ({ data }: IProps) => {
     },
     {
       label: "Date of Entry",
-      value: data.dateOfEntry ? printDateTime(data.dateOfEntry) : "-",
+      value: data.dateCreated ? printDateTime(data.dateCreated) : "-",
     },
     {
       label: "Entered By",
@@ -35,6 +35,10 @@ const Summary = ({ data }: IProps) => {
     {
       label: "Ref.Number",
       value: data.referenceNumber ? data.referenceNumber : "-",
+    },
+    {
+      label: "Comment",
+      value: data.comment ? data.comment : "-",
     },
   ];
 

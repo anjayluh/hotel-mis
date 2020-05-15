@@ -137,20 +137,13 @@ export interface IBill {
 export interface IPayment {
   id: string;
   paymentDate: Date;
+  dateCreated?: Date;
   paymentType: any;
   referenceNumber: any;
   amount: number;
   dateOfEntry?: Date;
   enteredBy?: string;
-}
-export interface IPaymentDetails {
-  paymentId: string;
-  paymentDate: Date;
-  paymentType: any;
-  amount: number;
-  dateOfEntry: Date;
-  enteredBy: string;
-  referenceNumber: any;
+  comment?: string
 }
 
 /* 

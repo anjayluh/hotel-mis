@@ -5,7 +5,7 @@ import React from "react";
 
 export const columns: XHeadCell[] = [
   {
-    name: "dateCreated",
+    name: "paymentDate",
     label: "Payment date",
     render: (value, rec) => <span>{printDate(value)}</span>,
     cellProps: {

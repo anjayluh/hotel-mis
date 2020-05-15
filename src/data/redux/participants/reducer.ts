@@ -2,7 +2,6 @@ import {
   IBill,
   IParticipant,
   IPayment,
-  IPaymentDetails,
   IContactPerson,
   ISubscription,
 } from "../../../modules/participants/types";
@@ -41,7 +40,7 @@ export interface IParticipantsState {
   billings: IBill[];
   paymentsLoading: boolean;
   paymentsDetailsLoading: boolean;
-  paymentDetails?: IPaymentDetails;
+  paymentDetails?: IPayment;
   addedPayment?: IPayment;
   fetchOne?: boolean;
 }
