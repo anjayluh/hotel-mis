@@ -27,23 +27,23 @@ interface IProps {
 const Summary = ({data}: IProps) => {
     const fields: IRec[] = [
         {
-            label: 'NIN:',
+            label: 'NIN',
             value: data.nin
         },
         {
-            label: 'Date of Birth:',
+            label: 'Date of Birth',
             value: printDate(data.dateOfBirth)
         },
         {
-            label: 'Card Number:',
+            label: 'Card Number',
             value: data.cardNumber
         },
         {
-            label: 'Initiator:',
+            label: 'Initiator',
             value: data.initiator
         },
         {
-            label: 'Name:',
+            label: 'Name',
             value: data.name
         },
 
