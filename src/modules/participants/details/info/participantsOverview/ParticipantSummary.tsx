@@ -6,6 +6,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import PersonIcon from "@material-ui/icons/Person";
+import CompanyIcon from "@material-ui/icons/AccountBalance";
 import EditIconButton from "../../../../../components/EditIconButton";
 import Box from "@material-ui/core/Box";
 import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
@@ -75,7 +76,7 @@ const ParticipantSummary = ({ data }: IProps) => {
       <Grid item sm={6}>
         <Grid container justify="flex-start" alignItems="flex-start">
           <Avatar className={classes.image}>
-            <PersonIcon fontSize="large" />
+            <CompanyIcon fontSize="large" />
           </Avatar>
           <Grid item className={classes.nameHolder}>
             {data.company && (
