@@ -11,6 +11,17 @@ interface IProps {
 }
 
 const Summary = ({ data }: IProps) => {
+  function paymentType(value: string) {
+    let paymentType = "";
+    if (value === "Eft") {
+      paymentType = "Electronic funds transfer (EFT)";
+    } else if (value === "DirectDebit") {
+      paymentType = "Direct Debit";
+    } else {
+      paymentType = value;
+    }
+    return paymentType;
+  }
   const fields: IRec[] = [
     {
       label: "Payment Date",
@@ -18,7 +29,7 @@ const Summary = ({ data }: IProps) => {
     },
     {
       label: "Payment Type",
-      value: data.paymentType ? data.paymentType : "-",
+      value: data.paymentType ? paymentType(data.paymentType) : "-",
     },
     {
       label: "Amount",

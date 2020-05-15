@@ -134,6 +134,7 @@ export const fakeParticipant = (): IParticipant => {
       },
     ],
     payments: [fakePaymentDetails()],
+    billings: [fakeBill()]
   };
 };
 

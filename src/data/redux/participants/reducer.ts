@@ -37,7 +37,6 @@ export interface IParticipantsState {
   participant?: IParticipant;
   data: any;
   billingsLoading?: boolean;
-  billings: IBill[];
   paymentsLoading: boolean;
   paymentsDetailsLoading: boolean;
   paymentDetails?: IPayment;
@@ -51,7 +50,6 @@ const initialState: IParticipantsState = {
   data: [],
   selected: undefined,
   billingsLoading: false,
-  billings: [],
   paymentsLoading: false,
   paymentsDetailsLoading: false,
   paymentDetails: undefined,
@@ -104,8 +102,14 @@ export default function reducer(state = initialState, action: any) {
       return { ...state, billingsLoading: action.payload };
     }
     case participantsConstants.participantsBillsFetchAll: {
-      const billings: IBill = action.payload;
-      return { ...state, billings, billsLoading: false };
+      return {
+        ...state,
+        billingsLoading: false,
+        selected: state.selected && {
+          ...state.selected,
+          billings: action.payload,
+        },
+      };
     }
     case participantsConstants.participantsPaymentsFetchLoading: {
       return { ...state, paymentsLoading: action.payload };

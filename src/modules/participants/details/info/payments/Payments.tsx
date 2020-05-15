@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: 15,
       marginTop: 2,
       fontStyle: "italic",
-      fontSize: 11
+      fontSize: 11,
     },
   })
 );
@@ -102,7 +102,7 @@ const Payments = (props: IProps) => {
     if (props.subscriptionId) {
       search(
         paymentsUrl,
-        { subscriptionIds: props.subscriptionId },
+        { SubscriptionIds: props.subscriptionId },
         (data) => {
           dispatch({
             type: participantsConstants.participantsPaymentsFetchAll,
@@ -145,7 +145,7 @@ const Payments = (props: IProps) => {
     selected.payments = [];
   }
   const showPagination =
-    selected && selected.payments && selected.payments.length > 4
+    selected && selected.payments && selected.payments.length > 5
       ? true
       : false;
   return (
@@ -182,7 +182,7 @@ const Payments = (props: IProps) => {
                   <XTable
                     headCells={headCells}
                     data={selected.payments}
-                    initialRowsPerPage={4}
+                    initialRowsPerPage={5}
                     usePagination={showPagination}
                     handleSelection={handlePaymentDetails}
                     hoverClass={classes.rowHover}

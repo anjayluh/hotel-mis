@@ -41,6 +41,7 @@ export interface IParticipant {
   subscriptions: ISubscription[];
   contactPersons: IContactPerson[];
   payments: IPayment[];
+  billings: IBill[];
 }
 
 export interface ICompany {
