@@ -181,7 +181,7 @@ const Payments = (props: IProps) => {
                   <XTable
                     headCells={headCells}
                     data={selected.payments}
-                    initialRowsPerPage={4}
+                    initialRowsPerPage={5}
                     usePagination={showPagination}
                     handleSelection={handlePaymentDetails}
                     hoverClass={classes.rowHover}
