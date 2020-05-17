@@ -4,7 +4,7 @@ import 'date-fns';
 import {useTheme} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import DateFnsUtils from '@date-io/date-fns';
-import {DatePicker, KeyboardDatePicker, MuiPickersUtilsProvider,} from '@material-ui/pickers'
+import {DatePicker, KeyboardDatePicker, MuiPickersUtilsProvider,TimePicker} from '@material-ui/pickers'
 import {hasValue} from "./inputHelpers";
 import {dateFormat} from "../../utils/dateHelpers";
 
@@ -34,45 +34,78 @@ const Component = ({field, form, ...other}: FieldProps) => {
     }
 
     return <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        {
-            isSmall?
-                <DatePicker
-                    fullWidth
-                    margin="normal"
-                    format={dateFormat}
-                    name={field.name}
-                    value={field.value || null}
-                    helperText={showError && error}
-                    error={Boolean(showError)}
-                    onClose={handleTouch}
-                    onChange={handleChange}
-                    onTouchEnd={handleTouch}
-                    onBlur={handleTouch}
-                    autoOk
+        <DatePicker
+            fullWidth
+            margin="normal"
+            format={dateFormat}
+            name={field.name}
+            value={field.value || null}
+            helperText={showError && error}
+            error={Boolean(showError)}
+            onClose={handleTouch}
+            onChange={handleChange}
+            onTouchEnd={handleTouch}
+            onBlur={handleTouch}
+            autoOk
+            variant="inline"
+            PopoverProps={{
+                anchorOrigin: { horizontal: "left", vertical: "bottom" },
+                transformOrigin: { horizontal: "left", vertical: "top" },
 
-                    {...other}
-                />
-                :
-                <KeyboardDatePicker
-                    fullWidth
-                    variant="inline"
-                    margin="normal"
-                    format={dateFormat}
-                    KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                    }}
-                    autoOk
-                    name={field.name}
-                    value={field.value || null}
-                    helperText={showError && error}
-                    error={Boolean(showError)}
-                    onClose={handleTouch}
-                    onChange={handleChange}
-                    onTouchEnd={handleTouch}
-                    onBlur={handleTouch}
-                    {...other}
-                />
-        }
+            }}
+
+            {...other}
+        />
+        {/*{*/}
+        {/*    isSmall?*/}
+        {/*        <DatePicker*/}
+        {/*            fullWidth*/}
+        {/*            margin="normal"*/}
+        {/*            format={dateFormat}*/}
+        {/*            name={field.name}*/}
+        {/*            value={field.value || null}*/}
+        {/*            helperText={showError && error}*/}
+        {/*            error={Boolean(showError)}*/}
+        {/*            onClose={handleTouch}*/}
+        {/*            onChange={handleChange}*/}
+        {/*            onTouchEnd={handleTouch}*/}
+        {/*            onBlur={handleTouch}*/}
+        {/*            autoOk*/}
+        {/*            variant="inline"*/}
+        {/*            PopoverProps={{*/}
+        {/*                anchorOrigin: { horizontal: "left", vertical: "bottom" },*/}
+        {/*                transformOrigin: { horizontal: "left", vertical: "top" },*/}
+
+        {/*            }}*/}
+
+        {/*            {...other}*/}
+        {/*        />*/}
+        {/*        :*/}
+        {/*        <KeyboardDatePicker*/}
+        {/*            variant="inline"*/}
+        {/*            fullWidth*/}
+        {/*            margin="normal"*/}
+        {/*            format={dateFormat}*/}
+        {/*            KeyboardButtonProps={{*/}
+        {/*                'aria-label': 'change date',*/}
+        {/*            }}*/}
+        {/*            autoOk*/}
+        {/*            name={field.name}*/}
+        {/*            value={field.value || null}*/}
+        {/*            helperText={showError && error}*/}
+        {/*            error={Boolean(showError)}*/}
+        {/*            onClose={handleTouch}*/}
+        {/*            onChange={handleChange}*/}
+        {/*            onTouchEnd={handleTouch}*/}
+        {/*            onBlur={handleTouch}*/}
+        {/*            PopoverProps={{*/}
+        {/*                anchorOrigin: { horizontal: "left", vertical: "bottom" },*/}
+        {/*                transformOrigin: { horizontal: "left", vertical: "top" },*/}
+
+        {/*            }}*/}
+        {/*            {...other}*/}
+        {/*        />*/}
+        {/*}*/}
     </MuiPickersUtilsProvider>
 }
 
