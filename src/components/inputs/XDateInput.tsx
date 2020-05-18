@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Field, FieldProps, getIn} from 'formik';
 import 'date-fns';
 import {useTheme} from '@material-ui/core/styles';
@@ -24,88 +24,71 @@ const Component = ({field, form, ...other}: FieldProps) => {
     const isTouched = getIn(form.touched, field.name);
     const wasSubmitted = form.submitCount > 0;
     const showError = hasValue(error) && (isTouched || wasSubmitted)
+    const[open, handleOpen] = useState(false)
 
     function handleTouch() {
         return form.setFieldTouched(field.name, true, true);
     }
 
     function handleChange(date: any) {
+        handleOpen(false)
         return form.setFieldValue(field.name, date, true);
     }
 
     return <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <DatePicker
-            fullWidth
-            margin="normal"
-            format={dateFormat}
-            name={field.name}
-            value={field.value || null}
-            helperText={showError && error}
-            error={Boolean(showError)}
-            onClose={handleTouch}
-            onChange={handleChange}
-            onTouchEnd={handleTouch}
-            onBlur={handleTouch}
-            autoOk
-            variant="inline"
-            PopoverProps={{
-                anchorOrigin: { horizontal: "left", vertical: "bottom" },
-                transformOrigin: { horizontal: "left", vertical: "top" },
 
-            }}
+        {
+            isSmall?
+                <DatePicker
+                    fullWidth
+                    margin="normal"
+                    format={dateFormat}
+                    name={field.name}
+                    value={field.value || null}
+                    helperText={showError && error}
+                    error={Boolean(showError)}
+                    onClose={handleTouch}
+                    onChange={handleChange}
+                    onTouchEnd={handleTouch}
+                    onBlur={handleTouch}
+                    autoOk
+                    variant="inline"
+                    PopoverProps={{
+                        anchorOrigin: { horizontal: "left", vertical: "bottom" },
+                        transformOrigin: { horizontal: "left", vertical: "top" },
 
-            {...other}
-        />
-        {/*{*/}
-        {/*    isSmall?*/}
-        {/*        <DatePicker*/}
-        {/*            fullWidth*/}
-        {/*            margin="normal"*/}
-        {/*            format={dateFormat}*/}
-        {/*            name={field.name}*/}
-        {/*            value={field.value || null}*/}
-        {/*            helperText={showError && error}*/}
-        {/*            error={Boolean(showError)}*/}
-        {/*            onClose={handleTouch}*/}
-        {/*            onChange={handleChange}*/}
-        {/*            onTouchEnd={handleTouch}*/}
-        {/*            onBlur={handleTouch}*/}
-        {/*            autoOk*/}
-        {/*            variant="inline"*/}
-        {/*            PopoverProps={{*/}
-        {/*                anchorOrigin: { horizontal: "left", vertical: "bottom" },*/}
-        {/*                transformOrigin: { horizontal: "left", vertical: "top" },*/}
+                    }}
 
-        {/*            }}*/}
+                    {...other}
+                />
+                :
+                <KeyboardDatePicker
+                    variant="inline"
+                    fullWidth
+                    margin="normal"
+                    format={dateFormat}
+                    KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                    }}
+                    autoOk
+                    name={field.name}
+                    value={field.value || null}
+                    helperText={showError && error}
+                    error={Boolean(showError)}
+                    onClose={()=> handleOpen(false)}
+                    onChange={handleChange}
+                    onTouchEnd={handleTouch}
+                    onBlur={handleTouch}
+                    open={open}
+                    onClick={() => handleOpen(true)}
+                    PopoverProps={{
+                        anchorOrigin: { horizontal: "left", vertical: "bottom" },
+                        transformOrigin: { horizontal: "left", vertical: "top" },
 
-        {/*            {...other}*/}
-        {/*        />*/}
-        {/*        :*/}
-        {/*        <KeyboardDatePicker*/}
-        {/*            variant="inline"*/}
-        {/*            fullWidth*/}
-        {/*            margin="normal"*/}
-        {/*            format={dateFormat}*/}
-        {/*            KeyboardButtonProps={{*/}
-        {/*                'aria-label': 'change date',*/}
-        {/*            }}*/}
-        {/*            autoOk*/}
-        {/*            name={field.name}*/}
-        {/*            value={field.value || null}*/}
-        {/*            helperText={showError && error}*/}
-        {/*            error={Boolean(showError)}*/}
-        {/*            onClose={handleTouch}*/}
-        {/*            onChange={handleChange}*/}
-        {/*            onTouchEnd={handleTouch}*/}
-        {/*            onBlur={handleTouch}*/}
-        {/*            PopoverProps={{*/}
-        {/*                anchorOrigin: { horizontal: "left", vertical: "bottom" },*/}
-        {/*                transformOrigin: { horizontal: "left", vertical: "top" },*/}
-
-        {/*            }}*/}
-        {/*            {...other}*/}
-        {/*        />*/}
-        {/*}*/}
+                    }}
+                    {...other}
+                />
+        }
     </MuiPickersUtilsProvider>
 }
 
