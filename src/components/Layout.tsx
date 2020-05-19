@@ -22,7 +22,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import {createStyles, makeStyles, Theme, useTheme} from '@material-ui/core/styles';
-import {withRouter} from 'react-router'
+import {withRouter, RouteComponentProps} from 'react-router'
 import {localRoutes} from "../data/constants";
 import grey from '@material-ui/core/colors/grey';
 import {BarView} from "./Profile";
@@ -123,8 +123,10 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
-
-function Layout(props: any) {
+interface IProps extends RouteComponentProps {
+    hideRequestButton?: boolean;
+}
+const Layout: React.FC<IProps> = (props: any) => {
     const classes = useStyles();
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -278,7 +280,7 @@ function Layout(props: any) {
                         <img src={logo} alt="logo" className={classes.logo}/>
                     </div>
                     {
-                        props.location.pathname !== '/ninVerification' &&
+                        !props.hideRequestButton &&
                         <Button variant='contained' color='primary' onClick={addNewRequest}>New Request</Button>
                     }
 

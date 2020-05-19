@@ -175,7 +175,7 @@ const NinVerifications = () => {
     setFilter({ ...filter, ...f });
   }
   return (
-    <Navigation>
+    <Navigation hideRequestButton={true}>
       <Grid container spacing={2}>
         <Grid item xs={9}>
           <Box p={1} className={classes.root}>
