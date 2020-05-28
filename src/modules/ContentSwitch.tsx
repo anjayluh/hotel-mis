@@ -13,8 +13,8 @@ import Billing from "./billing/Billing";
 import Subscriptions from "./subscriptions/Subscriptions";
 import Reports from "./reports/Reports";
 import DeveloperPortal from "./developer_portal/DeveloperPortal";
-// import Users from "./settings/users/List";
-import Users from "./users/Users";
+import Users from "./settings/users/List";
+import User from "./users/User";
 import UserDetails from "./settings/users/Details";
 import Layout from "../components/Layout";
 import { useDispatch } from "react-redux";
@@ -45,7 +45,7 @@ const ContentSwitch = () => {
       <Route path={localRoutes.billing} component={Billing} />
       <Route path={localRoutes.subscriptions} component={Subscriptions} />
       <Route path={localRoutes.reports} component={Reports} />
-      <Route path={localRoutes.users} component={Users} />
+      <Route path={localRoutes.users} component={User} />
       <Route path={localRoutes.developerPortal} component={DeveloperPortal} />
       <Route path={localRoutes.contactsDetails} component={ContactDetails} />
       <Route path={localRoutes.contacts} component={Contacts} />
