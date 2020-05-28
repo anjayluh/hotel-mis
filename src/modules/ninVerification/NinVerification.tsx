@@ -8,17 +8,17 @@ import Grid from "@material-ui/core/Grid";
 import { IWorkflowFilter } from "./types";
 import Filter from "./Filter";
 import Typography from "@material-ui/core/Typography";
-import {search} from "../../utils/ajax";
+import { search } from "../../utils/ajax";
 import { remoteRoutes } from "../../data/constants";
 import {
   wfInitialSort,
   ninVerificationHeadCells,
-  workflowTypes
+  workflowTypes,
 } from "./config";
 import Box from "@material-ui/core/Box";
 import {
   verificationRequestConstants,
-  IVerificationRequestState
+  IVerificationRequestState,
 } from "../../data/redux/ninVerification/reducer";
 import Loading from "../../components/Loading";
 import NinVerificationForm from "./forms/NinVerificationForm";
@@ -31,44 +31,44 @@ import AddIcon from "@material-ui/icons/Add";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     filterPaper: {
       borderRadius: 0,
-      padding: theme.spacing(2)
+      padding: theme.spacing(2),
     },
     drawer: {
-      borderRadius: 0
+      borderRadius: 0,
     },
     content: {
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      })
+        duration: theme.transitions.duration.leavingScreen,
+      }),
     },
     contentShift: {
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen
-      })
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     },
 
     rowHover: {
       "&:hover": {
-        cursor: "pointer"
-      }
+        cursor: "pointer",
+      },
     },
     close: {
       position: "fixed",
-      bottom: "30px"
+      bottom: "30px",
     },
     closeButton: {
       padding: "4px 30px",
-      backgroundColor: "rgba(38, 50, 56, 0.04)"
+      backgroundColor: "rgba(38, 50, 56, 0.04)",
     },
 
     pageHeading: {
-      display: "flex"
+      display: "flex",
     },
     addNewButton: {
       color: "#428BCA",
@@ -79,14 +79,14 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: "-5px",
       marginLeft: "8px",
       marginTop: "-6px",
-      fontWeight: "normal"
+      fontWeight: "normal",
     },
     addIcon: {
       marginLeft: "-5px",
       marginRight: "-10px",
       height: "0.7em",
-      fontSize: "13px"
-    }
+      fontSize: "13px",
+    },
   })
 );
 
@@ -100,54 +100,54 @@ const NinVerifications = () => {
   const {
     data,
     loading,
-    turnOnSlideOut
+    turnOnSlideOut,
   }: IVerificationRequestState = useSelector(
     (state: IState) => state.verificationRequests
   );
   const [rowsPerPage, setRowsPerPage] = useState({
-    "page":1,
-    "itemsPerPage":5,
-    "totalItems":10
-  },);
+    page: 1,
+    itemsPerPage: 5,
+    totalItems: 10,
+  });
   const [viewDetails, setViewDetails] = useState<any | null>(null);
   const [anchor, setAnchor] = useState<Anchor>("right");
   const [filter, setFilter] = useState<IWorkflowFilter>({
     workflowTypes: workflowTypes,
     showNew: false,
-    showAssigned: true
+    showAssigned: true,
   });
 
   useEffect(() => {
     dispatch({
       type: verificationRequestConstants.RequestsFetchLoading,
-      payload: true
+      payload: true,
     });
 
     search(
-        remoteRoutes.ninVerificationRequests,'filter',
-        (resp) => {
-          setRowsPerPage(resp.pagination)
-          dispatch({
-            type: verificationRequestConstants.RequestsFetchAll,
-            payload: [...resp.requests]
-          })
-        },
-        undefined,
-        () => {
-          console.log('failed to access')
-          dispatch({
-            type: verificationRequestConstants.RequestsFetchLoading,
-            payload: false
-          })
-        })
+      remoteRoutes.ninVerificationRequests,
+      "filter",
+      (resp) => {
+        setRowsPerPage(resp.pagination);
+        dispatch({
+          type: verificationRequestConstants.RequestsFetchAll,
+          payload: [...resp.requests],
+        });
+      },
+      undefined,
+      () => {
+        console.log("failed to access");
+        dispatch({
+          type: verificationRequestConstants.RequestsFetchLoading,
+          payload: false,
+        });
+      }
+    );
   }, [filter, dispatch]);
-
-
 
   function addNewRequest() {
     dispatch({
       type: verificationRequestConstants.RequestsAddNew,
-      payload: true
+      payload: true,
     });
   }
 
@@ -155,18 +155,18 @@ const NinVerifications = () => {
     if (id) {
       setViewDetails(id);
       const requestDetails = data.filter((requestDetails) => {
-        return requestDetails.id === id
-      })
+        return requestDetails.id === id;
+      });
       dispatch({
         type: verificationRequestConstants.RequestDetails,
-        payload: requestDetails[0]
+        payload: requestDetails[0],
       });
     } else {
       setViewDetails(null);
     }
     dispatch({
       type: verificationRequestConstants.RequestsAddNew,
-      payload: !turnOnSlideOut
+      payload: !turnOnSlideOut,
     });
     setAnchor("right");
   }
@@ -175,7 +175,7 @@ const NinVerifications = () => {
     setFilter({ ...filter, ...f });
   }
   return (
-    <Navigation hideRequestButton={true}>
+    <Navigation>
       <Grid container spacing={2}>
         <Grid item xs={9}>
           <Box p={1} className={classes.root}>

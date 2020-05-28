@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import * as yup from "yup";
-import * as faker from "faker";
 import {
   reqEmail,
   reqString,
@@ -15,7 +14,6 @@ import XFormSimple from "../../../components/forms/XFormSimple";
 import XTextInput from "../../../components/inputs/XTextInput";
 import { toOptions } from "../../../components/inputs/inputHelpers";
 import { useDispatch } from "react-redux";
-import { IParticipant } from "../types";
 import XSelectInput from "../../../components/inputs/XSelectInput";
 import { useHistory } from "react-router";
 import { localRoutes } from "../../../data/constants";

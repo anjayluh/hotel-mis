@@ -120,7 +120,7 @@ const Participants = () => {
   }
 
   return (
-    <Layout hideRequestButton={true}>
+    <Layout>
       <Grid container spacing={2}>
         <Grid item xs={9}>
           <Box p={1} className={classes.root}>
