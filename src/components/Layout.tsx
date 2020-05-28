@@ -279,6 +279,22 @@ const Layout: React.FC<IProps> = (props: any) => {
         </ListItem>
         <ListItem
           button
+          onClick={onClick(localRoutes.users)}
+          selected={isSelected(localRoutes.users)}
+        >
+          <ListItemIcon>
+            <PeopleIcon className={getCls(localRoutes.users)} />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <Typography className={getCls(localRoutes.users)}>
+                Users
+              </Typography>
+            }
+          />
+        </ListItem>
+        <ListItem
+          button
           onClick={onClick(localRoutes.settings)}
           selected={isSelected(localRoutes.settings)}
         >
