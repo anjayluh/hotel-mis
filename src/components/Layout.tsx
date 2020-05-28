@@ -36,7 +36,6 @@ import { Typography } from "@material-ui/core";
 import { themeBackground } from "../theme/custom-colors";
 import Paper from "@material-ui/core/Paper";
 import { verificationRequestConstants } from "../data/redux/ninVerification/reducer";
-// import { useHistory } from "react-router";
 
 const drawerWidth = 240;
 
@@ -166,7 +165,7 @@ const Layout: React.FC<IProps> = (props: any) => {
   };
 
   function addNewRequest() {
-    props.history.push(`${localRoutes.ninVerification}`);
+    props.history.push(localRoutes.ninVerification);
     dispatch({
       type: verificationRequestConstants.RequestsAddNew,
       payload: true,
