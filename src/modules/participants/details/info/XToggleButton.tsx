@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
     button: {
       height: 23,
       fontWeight: 400,
+      color: "#666666",
       textTransform: "capitalize",
     },
     active: {
