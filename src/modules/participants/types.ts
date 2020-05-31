@@ -19,7 +19,7 @@ export interface IParticipantPhone {
 export enum IParticipantStatusName {
   Active = "Active",
   Inactive = "Inactive",
-  Suspended = "Suspended",
+  // Suspended = "Suspended",
 }
 export interface IParticipantStatus {
   id: string;

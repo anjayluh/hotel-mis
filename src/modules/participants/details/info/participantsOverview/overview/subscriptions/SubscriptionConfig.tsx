@@ -2,7 +2,7 @@ import { XHeadCell } from "../../../../../../../components/table/XTableHead";
 import { printDate } from "../../../../../../../utils/dateHelpers";
 import { printFormattedMoney } from "../../../../../../../utils/numberHelpers";
 import React from "react";
-import { renderSubscriptionStatus } from "../../../../info/widgets";
+import { XToggleButton } from "../../../../info/XToggleButton";
 
 export const columns: XHeadCell[] = [
   {
@@ -14,7 +14,7 @@ export const columns: XHeadCell[] = [
   {
     name: "subscriptionStatus",
     label: "Status",
-    render: (_, rec) => renderSubscriptionStatus(rec.subscriptionStatus),
+    render: (_, rec) => XToggleButton(rec.subscriptionStatus),
     cellProps: {
       style: {
         width: 60,

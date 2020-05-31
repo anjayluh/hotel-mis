@@ -3,13 +3,13 @@ import { IParticipantStatusName } from "../../types";
 import {
   ErrorIcon,
   SuccessIcon,
-  WarningIcon
+  WarningIcon,
 } from "../../../../components/xicons";
 import {
   errorColor,
   successColor,
   warningColor,
-  pendingColor
+  pendingColor,
 } from "../../../../theme/custom-colors";
 import { Chip } from "@material-ui/core";
 
@@ -22,9 +22,9 @@ export const renderSubscriptionStatus = (value: IParticipantStatusName) => {
     case IParticipantStatusName.Inactive:
       color = warningColor;
       break;
-    case IParticipantStatusName.Suspended:
+    /* case IParticipantStatusName.Suspended:
       color = errorColor;
-      break;
+      break; */
   }
 
   return (
@@ -37,7 +37,7 @@ export const renderSubscriptionStatus = (value: IParticipantStatusName) => {
         padding: 0,
         height: 18,
         backgroundColor: color,
-        marginBottom: 2
+        marginBottom: 2,
       }}
     />
   );
