@@ -33,7 +33,7 @@ export const columns: XHeadCell[] = [
     },
   },
   {
-    name: "serviceCategoryId",
+    name: "serviceName",
     label: "Service",
     cellProps: {
       style: {
