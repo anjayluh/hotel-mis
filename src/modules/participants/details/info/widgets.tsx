@@ -38,7 +38,8 @@ export const renderSubscriptionStatus = (value: IParticipantStatusName) => {
         padding: 0,
         height: 18,
         backgroundColor: color,
-        marginBottom: 2,
+        marginBottom: 3,
+        width: 65,
       }}
     />
   );
