@@ -29,6 +29,8 @@ export const participantsConstants = {
   participantsDeleteContactPerson: "participantsDeleteContactPerson",
   participantSubscriptionsFetchAll: "participantSubscriptionsFetchAll",
   participantsAddSubscription: "participantsAddSubscription",
+  participantsToggleAction: "participantsToggleAction",
+  participantsUpdateSubscriptionStatus: "participantsUpdateSubscriptionStatus",
 };
 
 export interface IParticipantsState {
@@ -42,6 +44,7 @@ export interface IParticipantsState {
   paymentDetails?: IPayment;
   addedPayment?: IPayment;
   fetchOne?: boolean;
+  showAction?: boolean;
 }
 
 const initialState: IParticipantsState = {
@@ -54,6 +57,7 @@ const initialState: IParticipantsState = {
   paymentsDetailsLoading: false,
   paymentDetails: undefined,
   addedPayment: undefined,
+  showAction: false
 };
 
 export default function reducer(state = initialState, action: any) {
@@ -200,6 +204,29 @@ export default function reducer(state = initialState, action: any) {
         selected: state.selected && {
           ...state.selected,
           contactPersons: contacts,
+        },
+      };
+    }
+    case participantsConstants.participantsToggleAction: {
+      return { ...state, showAction: action.payload };
+    }
+    case participantsConstants.participantsUpdateSubscriptionStatus: {
+      const status = action.payload.value === "left" ? "Active" : "Inactive";
+      let subscriptions =
+        state.selected &&
+        state.selected.subscriptions &&
+        state.selected.subscriptions.map(function (subscription) {
+          if (subscription.id === action.payload.record.id) {
+            subscription.subscriptionStatus = status;
+          }
+          return subscription;
+        });
+      
+      return {
+        ...state,
+        selected: state.selected && {
+          ...state.selected,
+          subscriptions: subscriptions,
         },
       };
     }

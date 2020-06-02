@@ -14,7 +14,8 @@ import {
 import { Chip } from "@material-ui/core";
 
 export const renderSubscriptionStatus = (value: IParticipantStatusName) => {
-  let color = successColor;
+  let color =
+    value === IParticipantStatusName.Active ? successColor : warningColor;
   switch (value) {
     case IParticipantStatusName.Active:
       color = successColor;

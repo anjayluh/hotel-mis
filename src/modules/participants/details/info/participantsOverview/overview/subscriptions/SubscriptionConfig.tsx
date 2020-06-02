@@ -2,22 +2,26 @@ import { XHeadCell } from "../../../../../../../components/table/XTableHead";
 import { printDate } from "../../../../../../../utils/dateHelpers";
 import { printFormattedMoney } from "../../../../../../../utils/numberHelpers";
 import React from "react";
+import { renderSubscriptionStatus } from "../../../../info/widgets";
 import { XToggleButton } from "../../../../info/XToggleButton";
-
 export const columns: XHeadCell[] = [
   {
     name: "accountNumber",
     label: "Account Number",
     render: (value, rec) => <span>{value ? value : "null"}</span>,
-    cellProps: { style: { width: 70 } },
+    cellProps: {
+      style: {
+        width: 500,
+      },
+    },
   },
   {
     name: "subscriptionStatus",
     label: "Status",
-    render: (_, rec) => XToggleButton(rec.subscriptionStatus),
+    render: (_, rec) => renderSubscriptionStatus(rec.subscriptionStatus),
     cellProps: {
       style: {
-        width: 60,
+        width: 500,
       },
     },
   },
@@ -26,7 +30,7 @@ export const columns: XHeadCell[] = [
     label: "Billing Category",
     cellProps: {
       style: {
-        width: 80,
+        width: 500,
         whiteSpace: "nowrap",
         display: "none",
       },
@@ -37,7 +41,7 @@ export const columns: XHeadCell[] = [
     label: "Service",
     cellProps: {
       style: {
-        width: 80,
+        width: 600,
         whiteSpace: "nowrap",
       },
     },
@@ -48,7 +52,7 @@ export const columns: XHeadCell[] = [
     render: (value, rec) => <span>{printDate(value)}</span>,
     cellProps: {
       style: {
-        width: 60,
+        width: 300,
       },
     },
   },
@@ -59,9 +63,20 @@ export const columns: XHeadCell[] = [
     render: (value, rec) => <span>{printFormattedMoney(value)}</span>,
     cellProps: {
       style: {
-        width: 60,
+        width: 500,
         paddingRight: 40,
         display: "none",
+      },
+    },
+  },
+  {
+    name: "action",
+    label: "",
+    numeric: true,
+    render: (_, rec) => XToggleButton(rec.subscriptionStatus, rec),
+    cellProps: {
+      style: {
+        paddingRight: 14,
       },
     },
   },

@@ -17,6 +17,7 @@ import { Anchor } from "../../../../../../../data/types";
 import { participantsConstants } from "../../../../../../../data/redux/participants/reducer";
 import { remoteRoutes } from "../../../../../../../data/constants";
 import { search } from "../../../../../../../utils/ajax";
+import { IParticipantsState } from "../../../../../../../data/redux/participants/reducer";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,6 +53,14 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "0.7em",
       fontSize: "13px",
     },
+    rowHover: {
+      "&:hover": {
+        cursor: "pointer",
+      },
+      ".container": {
+        visibility: "visible",
+      },
+    },
   })
 );
 
@@ -72,6 +81,9 @@ const Subscriptions = ({ id }: IProps) => {
   const [add, setAdd] = useState(false);
   const [openSlideOut, setOpenSlideOut] = useState(false);
   const [anchor, setAnchor] = useState<Anchor>("right");
+  const { showAction }: IParticipantsState = useSelector(
+    (state: IState) => state.participants
+  );
 
   useEffect(() => {
     search(
@@ -118,6 +130,18 @@ const Subscriptions = ({ id }: IProps) => {
   function handleNewSubscription() {
     handleToggleDrawer("add");
   }
+  function showStatusButton() {
+    dispatch({
+      type: participantsConstants.participantsToggleAction,
+      payload: true,
+    });
+  }
+  function hideStatusButton() {
+    dispatch({
+      type: participantsConstants.participantsToggleAction,
+      payload: false,
+    });
+  }
   if (selected && !selected.subscriptions) {
     selected.subscriptions = [];
   }
@@ -153,6 +177,9 @@ const Subscriptions = ({ id }: IProps) => {
                     data={selected.subscriptions}
                     initialRowsPerPage={4}
                     usePagination={false}
+                    hoverClass={classes.rowHover}
+                    mouseEnter={showStatusButton}
+                    mouseLeave={hideStatusButton}
                   />
                 </Grid>
               </Grid>

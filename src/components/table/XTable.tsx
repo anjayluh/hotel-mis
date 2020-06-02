@@ -31,6 +31,8 @@ interface XTableProps {
   bodySize?: Size;
   loading?: boolean;
   hoverClass?: any;
+  mouseEnter?: (id: any) => any;
+  mouseLeave?: (id: any) => any;
 }
 
 export default function XTable(props: XTableProps) {
@@ -44,7 +46,7 @@ export default function XTable(props: XTableProps) {
     initialOrder = "asc",
     initialRowsPerPage = 10,
     headerSize = "medium",
-    bodySize = "medium"
+    bodySize = "medium",
   } = props;
   const classes = useTableStyles();
   const [order, setOrder] = React.useState<Order>(initialOrder);
@@ -53,6 +55,20 @@ export default function XTable(props: XTableProps) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(initialRowsPerPage);
 
+  function handleMouseEnter(
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+  ) {
+    if (props.mouseEnter) {
+      props.mouseEnter(event);
+    }
+  }
+  function handleMouseLeave(
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+  ) {
+    if (props.mouseLeave) {
+      props.mouseLeave(event);
+    }
+  }
   function handleRequestSort(
     event: React.MouseEvent<unknown>,
     property: string
@@ -64,7 +80,7 @@ export default function XTable(props: XTableProps) {
 
   function handleSelectAllClick(event: React.ChangeEvent<HTMLInputElement>) {
     if (event.target.checked) {
-      const newSelected = data.map(n => n.name);
+      const newSelected = data.map((n) => n.name);
       setSelected(newSelected);
     } else {
       setSelected([]);
@@ -165,16 +181,18 @@ export default function XTable(props: XTableProps) {
                     return (
                       <TableRow
                         hover
-                        onClick={event => handleClick(event, row.id)}
+                        onClick={(event) => handleClick(event, row.id)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
                         key={row.id}
                         selected={isItemSelected}
                         style={{
-                          backgroundColor: isEven(index) ? "white" : grey[50]
+                          backgroundColor: isEven(index) ? "white" : grey[50],
                         }}
                         className={hoverClass}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
                       >
                         {useCheckbox && (
                           <TableCell padding="checkbox" size={bodySize}>
@@ -184,7 +202,7 @@ export default function XTable(props: XTableProps) {
                             />
                           </TableCell>
                         )}
-                        {headCells.map(it => (
+                        {headCells.map((it) => (
                           <TableCell
                             size={bodySize}
                             key={it.name}
@@ -217,10 +235,10 @@ export default function XTable(props: XTableProps) {
             rowsPerPage={rowsPerPage}
             page={page}
             backIconButtonProps={{
-              "aria-label": "previous page"
+              "aria-label": "previous page",
             }}
             nextIconButtonProps={{
-              "aria-label": "next page"
+              "aria-label": "next page",
             }}
             onChangePage={handleChangePage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
