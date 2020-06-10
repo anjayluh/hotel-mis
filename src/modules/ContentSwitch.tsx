@@ -24,9 +24,9 @@ import { search } from "../utils/ajax";
 const ContentSwitch = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    search(remoteRoutes.gatewayMetadata, {}, (resp) => {
+    /* search(remoteRoutes.gatewayMetadata, {}, (resp) => {
       dispatch(loadMetadata(resp));
-    });
+    }); */
   }, [dispatch]);
   return (
     <Switch>
