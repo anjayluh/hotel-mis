@@ -27,7 +27,6 @@ const schema = yup.object().shape({
   paymentDate: reqDate,
   paymentType: reqString,
   referenceNumber: reqNumber,
-  dateOfEntry: reqDate,
   enteredBy: reqString,
   comment: reqString,
 });
@@ -44,7 +43,6 @@ const PaymentForm = (props: IProps) => {
     paymentType: "",
     referenceNumber: "",
     amount: "",
-    dateOfEntry: null,
     enteredBy: "",
     comment: "",
   });
@@ -140,14 +138,7 @@ const PaymentForm = (props: IProps) => {
             size="small"
           />
         </Grid>
-        <Grid item xs={12}>
-          <XDateInput
-            name="dateOfEntry"
-            label="Date of Entry"
-            inputVariant="outlined"
-            size="small"
-          />
-        </Grid>
+
         <Grid item xs={12}>
           <XTextInput
             name="enteredBy"

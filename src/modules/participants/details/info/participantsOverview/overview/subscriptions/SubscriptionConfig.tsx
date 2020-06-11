@@ -73,7 +73,7 @@ export const columns: XHeadCell[] = [
     name: "action",
     label: "",
     numeric: true,
-    render: (_, rec) => XToggleButton(rec.subscriptionStatus, rec),
+    render: (_, rec) => <XToggleButton value={rec.subscriptionStatus} record={rec}/>,
     cellProps: {
       style: {
         paddingRight: 14,
