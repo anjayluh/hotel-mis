@@ -14,7 +14,7 @@ const Summary = ({ data }: IProps) => {
   function paymentType(value: string) {
     let paymentType = "";
     if (value === "Eft") {
-      paymentType = "Electronic funds transfer (EFT)";
+      paymentType = "Electronic Funds Transfer (EFT)";
     } else if (value === "DirectDebit") {
       paymentType = "Direct Debit";
     } else {
