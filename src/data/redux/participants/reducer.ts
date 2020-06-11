@@ -211,7 +211,7 @@ export default function reducer(state = initialState, action: any) {
       return { ...state, showAction: action.payload };
     }
     case participantsConstants.participantsUpdateSubscriptionStatus: {
-      const status = action.payload.value === "left" ? "Active" : "Inactive";
+      const status = action.payload.value === "left" ? "Active" : "InActive";
       let subscriptions =
         state.selected &&
         state.selected.subscriptions &&

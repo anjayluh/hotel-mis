@@ -6,6 +6,8 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import { IParticipantsState } from "../../../../data/redux/participants/reducer";
 import { IState } from "../../../../data/types";
 import { participantsConstants } from "../../../../data/redux/participants/reducer";
+import { put } from "../../../../utils/ajax";
+import { remoteRoutes } from "../../../../data/constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,25 +44,35 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const XToggleButton = (value: any, record: any) => {
   const dispatch = useDispatch();
-  const { showAction }: IParticipantsState = useSelector(
-    (state: IState) => state.participants
-  );
   const classes = useStyles();
-  const [status, setStatus] = useState(value);
   const [alignment, setAlignment] = useState(
     value === "Active" ? "left" : "right"
   );
-
+  const { showAction }: IParticipantsState = useSelector(
+    (state: IState) => state.participants
+  );
+  const url = remoteRoutes.subscriptions + `/${record.id}`;
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string
   ) => {
-    setAlignment(newAlignment);
-    setStatus(newAlignment === "left" ? "Active" : "Active");
-    dispatch({
-      type: participantsConstants.participantsUpdateSubscriptionStatus,
-      payload: { value: newAlignment, record: record },
-    });
+    let updates = {
+      companyId: record.companyId,
+      serviceCategoryId: record.serviceCategoryId,
+      subscriptionStatus: newAlignment === "left" ? "Active" : "Inactive",
+    };
+    put(
+      url,
+      updates,
+      (data) => {
+        dispatch({
+          type: participantsConstants.participantsUpdateSubscriptionStatus,
+          payload: { value: newAlignment, record: record },
+        });
+        setAlignment(newAlignment);
+      },
+      () => {}
+    );
   };
 
   return (
