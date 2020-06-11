@@ -20,5 +20,5 @@ export const organisationTypeCategories = [
   "Forex Bureau",
 ];
 export const contactPersonCategories = ["Billing", "Technical"];
-export const paymentTypes = ["Electronic funds transfer (EFT)", "Cheque", "Direct Debit"];
+export const paymentTypes = ["Electronic Funds Transfer (EFT)", "Cheque", "Direct Debit"];
 export const subscriptionsServiceTypes = ["NIN Verification"];

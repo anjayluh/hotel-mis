@@ -51,8 +51,8 @@ const PaymentForm = (props: IProps) => {
   const paymentsUrl = baseUrl + "payments";
   function getSelectedPaymentType(value: string) {
     let selectedPaymentType = "";
-    if (value === "Electronic funds transfer (EFT)") {
-      selectedPaymentType = "Eft";
+    if (value === "Electronic Funds Transfer (EFT)") {
+      selectedPaymentType = "EFT";
     } else if (value === "Direct Debit") {
       selectedPaymentType = "DirectDebit";
     } else {
