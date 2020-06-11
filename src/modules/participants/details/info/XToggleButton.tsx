@@ -40,7 +40,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const XToggleButton = (value: any, record: any) => {
+interface IProps {
+  value: any;
+  record: any;
+}
+export const XToggleButton = ({value, record}: IProps) => {
   const dispatch = useDispatch();
   const { showAction }: IParticipantsState = useSelector(
     (state: IState) => state.participants
