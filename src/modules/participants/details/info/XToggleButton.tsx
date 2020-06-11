@@ -46,7 +46,7 @@ interface IProps {
   value: any;
   record: any;
 }
-export const XToggleButton = ({value, record}: IProps) => {
+export const XToggleButton = ({ value, record }: IProps) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [alignment, setAlignment] = useState(
@@ -63,7 +63,7 @@ export const XToggleButton = ({value, record}: IProps) => {
     let updates = {
       companyId: record.companyId,
       serviceCategoryId: record.serviceCategoryId,
-      subscriptionStatus: newAlignment === "left" ? "Active" : "Inactive",
+      subscriptionStatus: newAlignment === "left" ? "Active" : "InActive",
     };
     put(
       url,
