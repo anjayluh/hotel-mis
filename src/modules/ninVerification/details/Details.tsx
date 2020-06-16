@@ -104,17 +104,13 @@ const Details = (props: IProps) => {
         <div className={classes.root}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Box display="flex" py={1}>
-                <Box flexBasis={100} mr={1}>
+              <Box display="flex" flexDirection="column" py={1}>
                   <Typography variant="h5" >
-                    Request ID:
+                    REQUEST
                   </Typography>
-                </Box>
-                  <Box>
-                      <Typography variant="h5">
-                          {requestData ? requestData.id : "loading"}
-                      </Typography>
-                  </Box>
+                  <Typography variant="body2">
+                    ID: {requestData ? requestData.id : "loading"}
+                  </Typography>
               </Box>
               <Divider />
               <Box pt={1}>{requestData && <Summary data={requestData} />}</Box>
