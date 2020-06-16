@@ -90,7 +90,7 @@ const Details = (props: IProps) => {
                   <Typography variant="h5">
                     PAYMENT
                   </Typography>
-                  <Typography>
+                  <Typography variant="caption">
                     ID: {paymentDetails ? paymentDetails.id : "loading"}
                   </Typography>
                 </Box>
