@@ -8,6 +8,8 @@ import { IState } from "../../../../data/types";
 import { participantsConstants } from "../../../../data/redux/participants/reducer";
 import { put } from "../../../../utils/ajax";
 import { remoteRoutes } from "../../../../data/constants";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,13 +33,21 @@ const useStyles = makeStyles((theme: Theme) =>
     activate: {
       backgroundColor: "#259100!important",
       color: "#FFFFFF!important",
-      width: 82,
+      width: 120,
     },
 
     deactivate: {
       backgroundColor: "#D7143B!important",
       color: "#FFFFFF!important",
-      width: 82,
+      width: 120,
+    },
+    disabled: {
+      cursor: "not-allowed",
+    },
+    progress: {
+      color: "#fffaf8",
+      marginBottom: 2,
+      marginRight: 0.5,
     },
   })
 );
@@ -52,6 +62,7 @@ export const XToggleButton = ({ value, record }: IProps) => {
   const [alignment, setAlignment] = useState(
     value === "Active" ? "left" : "right"
   );
+  const [loading, setLoading] = useState(false);
   const { showAction }: IParticipantsState = useSelector(
     (state: IState) => state.participants
   );
@@ -60,6 +71,9 @@ export const XToggleButton = ({ value, record }: IProps) => {
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string
   ) => {
+    // Turn on progress loader
+    setLoading(true);
+    // Format the data to be saved
     let updates = {
       companyId: record.companyId,
       serviceCategoryId: record.serviceCategoryId,
@@ -74,8 +88,11 @@ export const XToggleButton = ({ value, record }: IProps) => {
           payload: { value: newAlignment, record: record },
         });
         setAlignment(newAlignment);
+        setLoading(false);
       },
-      () => {}
+      () => {
+        setLoading(false);
+      }
     );
   };
 
@@ -85,7 +102,9 @@ export const XToggleButton = ({ value, record }: IProps) => {
       value={alignment}
       exclusive
       onChange={handleChange}
-      className={`${showAction ? classes.show : classes.hide}`}
+      className={`${showAction || loading ? classes.show : classes.hide} ${
+        loading && classes.disabled
+      }`} // Show button if loading or hover
     >
       <ToggleButton
         value="left"
@@ -94,8 +113,19 @@ export const XToggleButton = ({ value, record }: IProps) => {
           alignment !== "left" ? classes.activate : classes.displayNone
         }`}
         style={{ borderRadius: 4 }}
+        disabled={loading}
       >
-        Activate
+        {loading && (
+          <Box
+            width="100%"
+            display="flex"
+            alignContent="center"
+            justifyContent="center"
+          >
+            <CircularProgress className={classes.progress} size={11} />
+          </Box>
+        )}
+        {loading ? "Activating..." : "Activate"}
       </ToggleButton>
       <ToggleButton
         value="right"
@@ -104,8 +134,19 @@ export const XToggleButton = ({ value, record }: IProps) => {
           alignment !== "right" ? classes.deactivate : classes.displayNone
         }`}
         style={{ borderRadius: 4 }}
+        disabled={loading}
       >
-        Deactivate
+        {loading && (
+          <Box
+            width="100%"
+            display="flex"
+            alignContent="center"
+            justifyContent="center"
+          >
+            <CircularProgress className={classes.progress} size={11} />
+          </Box>
+        )}
+        {loading ? "Deactivating..." : "Deactivate"}
       </ToggleButton>
     </ToggleButtonGroup>
   );
