@@ -27,9 +27,12 @@ import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
 import { IState, Anchor } from "../../../../../data/types";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Toast from "../../../../../utils/Toast";
+import Typography from "@material-ui/core/Typography";
 
 interface IProps {
   data: IParticipant;
+  participantId: any;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -63,6 +66,12 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "absolute",
       top: "0px",
       right: "0px",
+    },
+    helperText: {
+      marginLeft: 15,
+      marginTop: 2,
+      fontStyle: "italic",
+      fontSize: 11,
     },
   })
 );
@@ -136,13 +145,14 @@ const contactToRecords = (data: IContactPerson): IRec[] => {
     },
   ];
 };
-const ParticipantOverview = ({ data }: IProps) => {
+const ParticipantOverview = ({ data, participantId }: IProps) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [anchor, setAnchor] = useState<Anchor>("right");
   const [openSlideOut, setOpenSlideOut] = useState(false);
-
-  const spacing = 5;
+  const loading = useSelector(
+    (state: IState) => state.participants.contactPersonsLoading
+  );
   const [add, setAdd] = useState(false);
   const [edit, setEdit] = useState<boolean>(false);
   const [deleteItem, setDeleteItem] = useState<boolean>(false);
@@ -152,6 +162,33 @@ const ParticipantOverview = ({ data }: IProps) => {
     phone: "",
     email: "",
   });
+  useEffect(() => {
+    dispatch({
+      type: participantsConstants.participantsFetchContactPersonsLoading,
+      payload: true,
+    });
+    get(
+      remoteRoutes.participantsContactPersons + `/${participantId}/persons`,
+      (resp) => {
+        dispatch({
+          type: participantsConstants.participantsFetchContactPersons,
+          payload: resp,
+        });
+        dispatch({
+          type: participantsConstants.participantsFetchContactPersonsLoading,
+          payload: false,
+        });
+      },
+      () => {
+        dispatch({
+          type: participantsConstants.participantsFetchContactPersonsLoading,
+          payload: false,
+        });
+        Toast.error("Operation failed");
+      }
+    );
+  }, [participantId, dispatch]);
+
   function handleToggleDrawer(methodType?: string, actionData?: any) {
     if (methodType === "edit") {
       setOpenSlideOut(!openSlideOut);
@@ -278,7 +315,8 @@ const ParticipantOverview = ({ data }: IProps) => {
           md={10}
           lg={12}
         >
-          {data.contactPersons && data.contactPersons.length >= 0 ? (
+          {data.contactPersons &&
+            data.contactPersons.length > 0 &&
             contactPersonsColumns.map((contactPerson: any, index: number) => (
               <Grid
                 container
@@ -294,19 +332,19 @@ const ParticipantOverview = ({ data }: IProps) => {
                     noColon={noColon}
                     bold={bold}
                     editButton={<EditIconButton />}
-                    deleteButton={
-                      data.contactPersons.length > 1 ? (
-                        <DeleteIconButton />
-                      ) : null
-                    }
+                    deleteButton={<DeleteIconButton />}
                     handleClickedItem={handleToggleDrawer}
                   />
                 )}
               </Grid>
-            ))
-          ) : (
-            <Loading />
+            ))}
+
+          {data.contactPersons.length <= 0 && (
+            <Typography variant="body2" className={classes.helperText}>
+              * No contact persons yet
+            </Typography>
           )}
+          {loading && <Loading />}
         </Grid>
       </Grid>
       {!deleteItem && (
@@ -319,6 +357,7 @@ const ParticipantOverview = ({ data }: IProps) => {
           <ContactPersonForm
             closeSlideOut={handleToggleDrawer}
             initialData={formData}
+            participantId={participantId}
           ></ContactPersonForm>
         </SlideOutDrawer>
       )}

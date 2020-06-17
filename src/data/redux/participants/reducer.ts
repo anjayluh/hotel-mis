@@ -31,6 +31,8 @@ export const participantsConstants = {
   participantsAddSubscription: "participantsAddSubscription",
   participantsToggleAction: "participantsToggleAction",
   participantsUpdateSubscriptionStatus: "participantsUpdateSubscriptionStatus",
+  participantsFetchContactPersons: "participantsFetchContactPersons",
+  participantsFetchContactPersonsLoading: "participantsFetchContactPersonsLoading"
 };
 
 export interface IParticipantsState {
@@ -45,6 +47,7 @@ export interface IParticipantsState {
   addedPayment?: IPayment;
   fetchOne?: boolean;
   showAction?: boolean;
+  contactPersonsLoading?: boolean;
 }
 
 const initialState: IParticipantsState = {
@@ -57,7 +60,8 @@ const initialState: IParticipantsState = {
   paymentsDetailsLoading: false,
   paymentDetails: undefined,
   addedPayment: undefined,
-  showAction: false
+  showAction: false,
+  contactPersonsLoading: false
 };
 
 export default function reducer(state = initialState, action: any) {
@@ -166,6 +170,18 @@ export default function reducer(state = initialState, action: any) {
           subscriptions: state.selected.subscriptions
             ? [...state.selected.subscriptions, newSubscription]
             : [newSubscription],
+        },
+      };
+    }
+      case participantsConstants.participantsFetchContactPersonsLoading: {
+      return { ...state, contactPersonsLoading: action.payload };
+    }
+    case participantsConstants.participantsFetchContactPersons: {
+      return {
+        ...state,
+        selected: state.selected && {
+          ...state.selected,
+          contactPersons: action.payload,
         },
       };
     }

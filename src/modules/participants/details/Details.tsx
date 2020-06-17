@@ -167,11 +167,13 @@ const Details = (props: IProps) => {
             {showParticipantsOverview && (
               <ParticipantsOverview
                 data={{ ...data }}
-                id={participantId}
+                participantId={participantId}
               ></ParticipantsOverview>
             )}
           </Grid>
-          {showParticipantsOverview && <Subscriptions id={participantId} />}
+          {showParticipantsOverview && (
+            <Subscriptions participantId={participantId} />
+          )}
           {showBillingsView && (
             <Billings
               subscriptionId={data.subscriptions[0] && data.subscriptions[0].id}

@@ -107,9 +107,7 @@ export const remoteRoutes = {
   contactPersons: crmURL + "/api/participants/contact",
   subscriptions: gatewayURL + "/billing/api/subscriptions",
   participants: gatewayURL + "/crm/api/contact",
-  participantsOverview:
-    gatewayURL +
-    "/api/aggregations/contact-subscriptions/04c8a212-3b79-44c5-6649-08d7daebc579",
+  participantsContactPersons: gatewayURL + "/crm/api/v3.0/contact",
   participantsBilling: gatewayURL + "/billing/api/bills",
   ninVerificationRequests: gatewayURL + "/niv/api/request/search",
   ninVerification: NinVerificationURL + "/api/national-id/verify",
