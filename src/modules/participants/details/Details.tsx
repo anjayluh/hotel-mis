@@ -165,7 +165,10 @@ const Details = (props: IProps) => {
               handleClickedItem={handleClick}
             ></DetailsHeading>
             {showParticipantsOverview && (
-              <ParticipantsOverview data={{ ...data }}></ParticipantsOverview>
+              <ParticipantsOverview
+                data={{ ...data }}
+                id={participantId}
+              ></ParticipantsOverview>
             )}
           </Grid>
           {showParticipantsOverview && <Subscriptions id={participantId} />}

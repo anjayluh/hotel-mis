@@ -18,7 +18,6 @@ import Details from "./Details/Details";
 import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
 import PaymentForm from "./forms/PaymentForm";
 import Toast from "../../../../../utils/Toast";
-import typography from "../../../../../theme/typography";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

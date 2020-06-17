@@ -8,12 +8,8 @@ import { Form, Formik, FormikActions } from "formik";
 import { Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-import XFormSimple from "../../../../../../components/forms/XFormSimple";
 import XDateInput from "../../../../../../components/inputs/XDateInput";
-import {
-  toOptions,
-  IOption,
-} from "../../../../../../components/inputs/inputHelpers";
+import { toOptions } from "../../../../../../components/inputs/inputHelpers";
 import XSelectInput from "../../../../../../components/inputs/XSelectInput";
 import { remoteRoutes } from "../../../../../../data/constants";
 import { get, post, put } from "../../../../../../utils/ajax";

@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface IProps {
-  id: any;
+  participantId: any;
 }
 const headCells: XHeadCell[] = [...columns];
 
