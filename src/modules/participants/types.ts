@@ -1,4 +1,5 @@
 import { BaseModel } from "../../data/types";
+import { date } from "faker";
 
 export interface IGeneratedParticipant {
   id?: string;
@@ -114,17 +115,40 @@ export interface ISubscription {
   service?: string;
   monthlyCap?: number | null;
 }
-
 export interface IContactPersonPhone {
+  category: string;
+  contactId: string;
+  createdAt: Date;
   id: string;
+  isDeleted: boolean;
+  isPrimary: boolean;
+  lastUpdated: Date | null;
   value: string;
+}
+export interface IContactPersonEmail {
+  category: string;
+  contactId: string;
+  createdAt: Date;
+  id: string;
+  isDeleted: boolean;
+  isPrimary: boolean;
+  lastUpdated: Date | null;
+  value: string;
+}
+export interface IContactPersonRole {
+  createdAt: Date;
+  id: string;
+  isDeleted: boolean;
+  lastUpdated: null
+  personId: string;
+  roleName: string;
 }
 export interface IContactPerson {
   id?: string;
   name: string;
-  role: string;
-  phone: IContactPersonPhone;
-  email: string;
+  roles: IContactPersonRole[];
+  telephones: IContactPersonPhone[];
+  emails: IContactPersonEmail[];
 }
 
 export interface IBill {

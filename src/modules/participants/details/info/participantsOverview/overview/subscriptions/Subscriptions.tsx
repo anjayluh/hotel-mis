@@ -69,7 +69,7 @@ interface IProps {
 }
 const headCells: XHeadCell[] = [...columns];
 
-const Subscriptions = ({ id }: IProps) => {
+const Subscriptions = ({ participantId }: IProps) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const { selected } = useSelector((state: IState) => state.participants);
@@ -88,7 +88,7 @@ const Subscriptions = ({ id }: IProps) => {
   useEffect(() => {
     search(
       remoteRoutes.subscriptions,
-      { companyIds: id },
+      { companyIds: participantId },
       (resp) => {
         dispatch({
           type: participantsConstants.participantSubscriptionsFetchAll,
@@ -194,7 +194,7 @@ const Subscriptions = ({ id }: IProps) => {
         title={add ? "Add New Subscription" : "Edit Subscription"}
       >
         <SubscriptionsForm
-          id={id}
+          id={participantId}
           closeSlideOut={handleToggleDrawer}
         ></SubscriptionsForm>
       </SlideOutDrawer>

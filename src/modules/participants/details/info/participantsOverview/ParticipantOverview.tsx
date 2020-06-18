@@ -134,14 +134,24 @@ const contactToRecords = (data: IContactPerson): IRec[] => {
       label: "",
       value:
         data.name !== "" &&
-        setValue(data.name) + ` (${data.role !== "" && setValue(data.role)})`,
+        setValue(data.name) +
+          ` (${
+            data.roles.length > 0 &&
+            data.roles[0].roleName !== "" &&
+            setValue(data.roles[0].roleName)
+          })`,
     },
     {
       label: "",
       value:
-        data.phone.value !== "" &&
-        setValue(data.phone.value) +
-          ` / (${data.email !== "" && setValue(data.email)})`,
+        data.telephones.length &&
+        data.telephones[0].value !== "" &&
+        setValue(data.telephones[0].value) +
+          ` / (${
+            data.emails.length &&
+            data.emails[0].value !== "" &&
+            setValue(data.emails[0].value)
+          })`,
     },
   ];
 };
@@ -341,7 +351,7 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
 
           {data.contactPersons.length <= 0 && (
             <Typography variant="body2" className={classes.helperText}>
-              * No contact persons yet
+              No contact persons yet
             </Typography>
           )}
           {loading && <Loading />}

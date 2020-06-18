@@ -32,6 +32,7 @@ const schema = yup.object().shape({
 interface IProps {
   closeSlideOut: () => any;
   done?: () => any;
+  participantId: any;
   initialData?: any;
 }
 
@@ -53,19 +54,16 @@ const ContactPersonForm = (props: IProps) => {
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
     actions.setSubmitting(true);
-    const toSave: IContactPerson = {
-      id: values.id ? values.id : faker.random.uuid(),
+    const toSave: any = {
       name: values.name,
-      role: values.role,
-      phone: {
-        id: faker.random.uuid(),
-        value: values.phone,
-      },
+      telephone: values.phone,
       email: values.email,
+      personRoles: [values.role],
     };
     if (!isEdit) {
       post(
-        remoteRoutes.ninVerification,
+        remoteRoutes.participantsContactPersons +
+          `/${props.participantId}/persons`,
         toSave,
         (data) => {
           Toast.info("Operation successful");
@@ -75,15 +73,10 @@ const ContactPersonForm = (props: IProps) => {
             payload: { ...toSave },
           });
           if (props.done) props.done();
+          handleClose();
         },
         () => {
-          dispatch({
-            type: participantsConstants.participantsAddContactPerson,
-            payload: { ...toSave },
-          });
-          Toast.info("Operation successful");
-          actions.resetForm();
-          handleClose();
+          Toast.error("Operation failed");
         }
       );
     } else {

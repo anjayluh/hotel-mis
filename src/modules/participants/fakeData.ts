@@ -121,18 +121,7 @@ export const fakeParticipant = (): IParticipant => {
         monthlyCap: faker.random.arrayElement(monthlyCap),
       },
     ],
-    contactPersons: [
-      {
-        id: faker.random.uuid(),
-        name: faker.name.firstName() + " " + faker.name.lastName(),
-        role: faker.random.arrayElement(contactPersonCategories),
-        phone: {
-          id: faker.random.uuid(),
-          value: faker.phone.phoneNumberFormat(0),
-        },
-        email: faker.internet.email(),
-      },
-    ],
+    contactPersons: [],
     payments: [fakePaymentDetails()],
     billings: [fakeBill()]
   };
@@ -159,12 +148,40 @@ export const fakeContactPersons = (): IContactPerson => {
   return {
     id: faker.random.uuid(),
     name: faker.name.firstName() + " " + faker.name.lastName(),
-    role: faker.random.arrayElement(contactPersonCategories),
-    phone: {
-      id: faker.random.uuid(),
-      value: faker.phone.phoneNumberFormat(0),
-    },
-    email: faker.internet.email(),
+    roles: [
+      {
+        createdAt: new Date(faker.date.past(5)),
+        id: faker.random.uuid(),
+        isDeleted: false,
+        lastUpdated: null,
+        personId: faker.random.uuid(),
+        roleName: faker.random.arrayElement(contactPersonCategories),
+      }
+    ],
+    telephones: [
+      {
+        category: "Work",
+        contactId: faker.random.uuid(),
+        createdAt: new Date(faker.date.past(5)),
+        id: faker.random.uuid(),
+        isDeleted: false,
+        isPrimary: false,
+        lastUpdated: new Date(faker.date.past(5)),
+        value: faker.phone.phoneNumberFormat(0),
+      }
+    ],
+    emails: [
+      {
+        category: "Work",
+        contactId: faker.random.uuid(),
+        createdAt: new Date(faker.date.past(5)),
+        id: faker.random.uuid(),
+        isDeleted: false,
+        isPrimary: true,
+        lastUpdated: null,
+        value: faker.internet.email()
+      }
+    ],
   };
 };
 
