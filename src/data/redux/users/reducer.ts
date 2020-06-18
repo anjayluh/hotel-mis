@@ -1,4 +1,4 @@
-import {IUserView} from "../../../modules/settings/users/types";
+import {IUserView} from "../../../modules/settings/types";
 
 export const userConstants = {
     usersCommitFetch: "usersCommitFetch",
