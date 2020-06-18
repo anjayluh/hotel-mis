@@ -70,7 +70,7 @@ const ContactPersonForm = (props: IProps) => {
           actions.resetForm();
           dispatch({
             type: participantsConstants.participantsAddContactPerson,
-            payload: { ...toSave },
+            payload: data,
           });
           if (props.done) props.done();
           handleClose();
