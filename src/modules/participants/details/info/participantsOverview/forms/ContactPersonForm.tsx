@@ -81,7 +81,7 @@ const ContactPersonForm = (props: IProps) => {
             isDeleted: false,
             isPrimary: true,
             lastUpdated: new Date(faker.date.past(5)),
-            value: values.phone,
+            value: values.telephone,
           },
         ],
         emails: [
@@ -98,10 +98,16 @@ const ContactPersonForm = (props: IProps) => {
         ],
       };
     if (!isEdit) {
+      let toSave2 = {
+        name: values.name,
+        telephone: values.telephone,
+        email: values.email,
+        personRoles: [values.role],
+      };
       post(
         remoteRoutes.participantsContactPersons +
           `/${props.participantId}/persons`,
-        toSave,
+        toSave2,
         (data) => {
           Toast.info("Operation successful");
           actions.resetForm();

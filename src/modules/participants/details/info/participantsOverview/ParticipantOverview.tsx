@@ -352,7 +352,7 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
               </Grid>
             ))}
 
-          {data.contactPersons.length <= 0 && (
+          {!loading && data.contactPersons.length <= 0 && (
             <Typography variant="body2" className={classes.helperText}>
               No contact persons yet
             </Typography>
