@@ -14,9 +14,7 @@ import XFormSimple from "../../../../../../components/forms/XFormSimple";
 import XTextInput from "../../../../../../components/inputs/XTextInput";
 import { toOptions } from "../../../../../../components/inputs/inputHelpers";
 import { useDispatch } from "react-redux";
-import { IContactPerson } from "../../../../types";
 import XSelectInput from "../../../../../../components/inputs/XSelectInput";
-import { useHistory } from "react-router";
 import { remoteRoutes } from "../../../../../../data/constants";
 import { post, put } from "../../../../../../utils/ajax";
 import Toast from "../../../../../../utils/Toast";
@@ -25,7 +23,7 @@ import { participantsConstants } from "../../../../../../data/redux/participants
 const schema = yup.object().shape({
   name: reqString,
   role: reqString,
-  phone: reqPhoneNumber,
+  telephone: reqPhoneNumber,
   email: reqEmail,
 });
 
@@ -46,7 +44,7 @@ const ContactPersonForm = (props: IProps) => {
       : {
           name: "",
           role: "",
-          phone: "",
+          telephone: "",
           email: "",
         }
   );
@@ -54,12 +52,51 @@ const ContactPersonForm = (props: IProps) => {
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
     actions.setSubmitting(true);
-    const toSave: any = {
+    const toSave: any =
+      /* {
       name: values.name,
       telephone: values.phone,
       email: values.email,
       personRoles: [values.role],
-    };
+    } */
+      {
+        id: faker.random.uuid(),
+        name: values.name,
+        roles: [
+          {
+            createdAt: new Date(faker.date.past(5)),
+            id: faker.random.uuid(),
+            isDeleted: false,
+            lastUpdated: null,
+            personId: faker.random.uuid(),
+            roleName: values.role,
+          },
+        ],
+        telephones: [
+          {
+            category: "Work",
+            contactId: faker.random.uuid(),
+            createdAt: new Date(faker.date.past(5)),
+            id: faker.random.uuid(),
+            isDeleted: false,
+            isPrimary: true,
+            lastUpdated: new Date(faker.date.past(5)),
+            value: values.phone,
+          },
+        ],
+        emails: [
+          {
+            category: "Work",
+            contactId: faker.random.uuid(),
+            createdAt: new Date(faker.date.past(5)),
+            id: faker.random.uuid(),
+            isDeleted: false,
+            isPrimary: true,
+            lastUpdated: null,
+            value: values.email,
+          },
+        ],
+      };
     if (!isEdit) {
       post(
         remoteRoutes.participantsContactPersons +
@@ -140,7 +177,7 @@ const ContactPersonForm = (props: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <XTextInput
-            name="phone"
+            name="telephone"
             label="Phone Number"
             type="text"
             variant="outlined"

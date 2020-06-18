@@ -213,7 +213,7 @@ export default function reducer(state = initialState, action: any) {
         state.selected &&
         state.selected.contactPersons &&
         state.selected.contactPersons.filter(function (contact) {
-          return contact.name === action.payload.name;
+          return contact.id !== action.payload;
         });
       return {
         ...state,

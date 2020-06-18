@@ -29,6 +29,7 @@ import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Toast from "../../../../../utils/Toast";
 import Typography from "@material-ui/core/Typography";
+import { del } from "../../../../../utils/ajax";
 
 interface IProps {
   data: IParticipant;
@@ -131,6 +132,7 @@ const primaryContactInfo = (data: IParticipant): IRec[] => {
 const contactToRecords = (data: IContactPerson): IRec[] => {
   return [
     {
+      id: data.id,
       label: "",
       value:
         data.name !== "" &&
@@ -199,45 +201,42 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
     );
   }, [participantId, dispatch]);
 
-  function handleToggleDrawer(methodType?: string, actionData?: any) {
+  function deleteContactPerson(contactId: any) {
+    setDeleteItem(true);
+    setFormData(null);
+    setAdd(false);
+    setEdit(false);
+    del(
+      remoteRoutes.participantsContactPersons +
+        `/${participantId}/persons/${contactId}`,
+      (data) => {
+        // Toast.info("Operation successful");
+        dispatch({
+          type: participantsConstants.participantsDeleteContactPerson,
+          payload: contactId,
+        });
+      },
+      () => {
+        Toast.error("Operation failed");
+      }
+    );
+  }
+
+  function handleToggleDrawer(methodType?: string, contactId?: any) {
     if (methodType === "edit") {
       setOpenSlideOut(!openSlideOut);
+      let contact = data.contactPersons.filter(function (contact) {
+        return contact.id !== contactId;
+      })[0];
       setFormData({
-        name: actionData[0].value.substring(
-          0,
-          actionData[0].value.indexOf("(") - 1
-        ),
-        role: actionData[0].value.substring(
-          actionData[0].value.indexOf("(") + 1,
-          actionData[0].value.indexOf(")")
-        ),
-        phone: actionData[1].value.substring(
-          0,
-          actionData[1].value.indexOf("/") - 1
-        ),
-        email: actionData[1].value.substring(
-          actionData[1].value.indexOf("(") + 1,
-          actionData[1].value.length - 1
-        ),
+        name: contact.name,
+        role: contact.roles[0].roleName,
+        telephone: contact.telephones[0].value,
+        email: contact.emails[0].value,
       });
       setEdit(true);
       setAdd(false);
       setDeleteItem(false);
-    } else if (methodType === "delete") {
-      setDeleteItem(true);
-      setFormData(null);
-      setAdd(false);
-      setEdit(false);
-      const contact = data.contactPersons.filter(function (contact) {
-        return (
-          contact.name !==
-          actionData[0].value.substring(0, actionData[0].value.indexOf("(") - 1)
-        );
-      });
-      dispatch({
-        type: participantsConstants.participantsDeleteContactPerson,
-        payload: contact[0],
-      });
     } else {
       setOpenSlideOut(!openSlideOut);
       setAdd(true);
@@ -341,9 +340,13 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
                     data={contactPerson}
                     noColon={noColon}
                     bold={bold}
-                    editButton={<EditIconButton />}
-                    deleteButton={<DeleteIconButton />}
-                    handleClickedItem={handleToggleDrawer}
+                    editButton={<EditIconButton onClick={handleToggleDrawer} />}
+                    deleteButton={
+                      <DeleteIconButton
+                        onClick={deleteContactPerson}
+                        id={contactPerson[0].id}
+                      />
+                    }
                   />
                 )}
               </Grid>

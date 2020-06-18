@@ -10,18 +10,19 @@ import { errorColor } from "../theme/custom-colors";
 import { SvgIcon } from "@material-ui/core";
 
 interface IProps {
-  onClick?: (method?: string) => any;
+  onClick?: (method?: string, id?: string) => any;
   style?: any;
+  id?: any;
 }
 
 export const HiddenIcon = () => {
   return <SvgIcon style={{ fontSize: "1rem", margin: 4 }} />;
 };
 
-export const EditIconButton = ({ onClick, style }: IProps) => {
+export const EditIconButton = ({ onClick, style, id }: IProps) => {
   const handleClick = () => {
     if (onClick) {
-      onClick();
+      onClick("edit", id);
     }
   };
   return (
@@ -38,10 +39,10 @@ export const EditIconButton = ({ onClick, style }: IProps) => {
   );
 };
 
-export const DeleteIconButton = ({ onClick, style }: IProps) => {
+export const DeleteIconButton = ({ onClick, style, id }: IProps) => {
   const handleClick = () => {
     if (onClick) {
-      onClick();
+      onClick(id);
     }
   };
   return (
@@ -89,7 +90,7 @@ export const AddFabButton = ({ onClick }: IProps) => {
       style={{
         position: "absolute",
         bottom: theme.spacing(2),
-        right: theme.spacing(2)
+        right: theme.spacing(2),
       }}
       color="primary"
       onClick={handleClick}

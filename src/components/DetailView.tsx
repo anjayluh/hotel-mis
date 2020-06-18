@@ -11,31 +11,32 @@ import clsx from "clsx";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "100%"
+      width: "100%",
     },
     row: {
       marginLeft: 0,
       paddingLeft: 0,
-      paddingBottom: theme.spacing(2)
+      paddingBottom: theme.spacing(2),
     },
     col: {
       marginLeft: 0,
       paddingLeft: 0,
-      paddingBottom: theme.spacing(1)
+      paddingBottom: theme.spacing(1),
     },
     label: {
       margin: 0,
       paddingLeft: 0,
       paddingRight: theme.spacing(2),
-      width: "auto"
+      width: "auto",
     },
     value: {
-      width: "100%"
-    }
+      width: "100%",
+    },
   })
 );
 
 export interface IRec {
+  id?: any;
   label: any;
   value: any;
 }
@@ -52,13 +53,13 @@ const TableView = ({
   data,
   useGrid = false,
   bold = false,
-  noColon = true
+  noColon = true,
 }: IProps) => {
   const classes = useStyles();
   if (useGrid)
     return (
       <Grid container spacing={0}>
-        {data.map(it => (
+        {data.map((it) => (
           <Grid item xs={12} key={it.value}>
             <Box display="flex" pb={0}>
               {bold ? (
@@ -152,7 +153,7 @@ export const BoldTableView = ({ data }: IProps) => {
   return (
     <table className={classes.root}>
       <tbody>
-        {data.map(row => (
+        {data.map((row) => (
           <tr key={row.value}>
             <td style={{ width: 100 }}>
               <DataLabel>{row.label}</DataLabel>
