@@ -1,8 +1,8 @@
 import React from "react";
-import {XHeadCell} from "../../../components/table/XTableHead";
-import UserLink from "../../../components/links/UserLink";
-import {parseXpath} from "../../../utils/jsonHelpers";
-import {hasNoValue} from "../../../components/inputs/inputHelpers";
+import {XHeadCell} from "../../components/table/XTableHead";
+import UserLink from "../../components/links/UserLink";
+import {parseXpath} from "../../utils/jsonHelpers";
+import {hasNoValue} from "../../components/inputs/inputHelpers";
 
 export function localFilter(data: any, value: string) {
     if (hasNoValue(value)) {

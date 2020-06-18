@@ -15,7 +15,6 @@ import Reports from "./reports/Reports";
 import DeveloperPortal from "./developer_portal/DeveloperPortal";
 // import Users from "./settings/users/List";
 import Users from "./users/Users";
-import UserDetails from "./settings/users/Details";
 import Layout from "../components/Layout";
 import { useDispatch } from "react-redux";
 import { loadMetadata } from "../data/redux/coreActions";
@@ -50,7 +49,6 @@ const ContentSwitch = () => {
       <Route path={localRoutes.contactsDetails} component={ContactDetails} />
       <Route path={localRoutes.contacts} component={Contacts} />
       <Route path={localRoutes.settings} component={Settings} />
-      <Route path={localRoutes.usersDetails} component={UserDetails} />
       <Route path={localRoutes.settings} component={Settings} />
       <Route component={NoMatch} />
     </Switch>
