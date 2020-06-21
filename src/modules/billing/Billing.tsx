@@ -8,7 +8,7 @@ import { IWorkflowFilter } from "./types";
 import XTable from "../../components/table/XTable";
 import { XHeadCell } from "../../components/table/XTableHead";
 import Grid from "@material-ui/core/Grid";
-import Filter from "./Filter";
+import BillingCycle from "./BillingCycle";
 import { search } from "../../utils/ajax";
 import { remoteRoutes } from "../../data/constants";
 import Loading from "../../components/Loading";
@@ -51,6 +51,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: "-5px",
       marginLeft: "5px",
       fontWeight: "normal",
+    },
+    helperText: {
+      marginTop: 20,
     },
   })
 );
@@ -118,15 +121,27 @@ const Billings = () => {
   return (
     <Layout>
       <Grid container spacing={2}>
-        <Grid item xs={9}>
-          <Box p={1} className={classes.root}>
-            <Box pb={2}>
-              <Grid container>
-                <Grid item sm={12} className={classes.pageHeading}>
-                  <Typography variant="h4">Billing</Typography>
-                </Grid>
+        <Grid item xs={12}>
+          <Box p={1}>
+            <Grid container>
+              <Grid item sm={12} className={classes.pageHeading}>
+                <Typography variant="h4">Billing</Typography>
               </Grid>
-            </Box>
+            </Grid>
+          </Box>
+        </Grid>
+        <Grid item xs={3}>
+          <Box p={1} pt={0}>
+            <BillingCycle
+              onFilter={handleFilter}
+              loading={loading}
+              requestData={{}}
+              tableDataCount={data.length}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={9}>
+          <Box p={1} pt={0} className={classes.root}>
             {loading ? (
               <Loading />
             ) : (
@@ -137,16 +152,16 @@ const Billings = () => {
                     data={data}
                     initialRowsPerPage={10}
                   />
+                  <div className={classes.helperText}>
+                    {data.length === 0 && (
+                      <Typography variant={"body2"}>
+                        No Bills have been generated for the selected cycle yet
+                      </Typography>
+                    )}
+                  </div>
                 </Grid>
               </Grid>
             )}
-          </Box>
-        </Grid>
-        <Grid item xs={3}>
-          <Box pt={6}>
-            <Paper className={classes.filterPaper} elevation={0}>
-              <Filter onFilter={handleFilter} loading={loading} />
-            </Paper>
           </Box>
         </Grid>
       </Grid>

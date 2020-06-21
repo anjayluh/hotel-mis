@@ -8,22 +8,22 @@ import { getbillAmount } from "./fakeData";
 
 export const columns: XHeadCell[] = [
   {
+    name: "name",
+    label: "Participant",
+    render: (value, rec) => <ParticipantLink id={rec.id} name={rec.name} />,
+    cellProps: {
+      style: { width: 300 },
+    },
+  },
+  {
     name: "dateCreated",
     label: "Bill date",
     render: (value, rec) => <span>{printDate(value)}</span>,
     cellProps: {
       style: {
-        width: 100,
+        width: 200,
         whiteSpace: "nowrap",
       },
-    },
-  },
-  {
-    name: "name",
-    label: "Participant",
-    render: (value, rec) => <ParticipantLink id={rec.id} name={rec.name} />,
-    cellProps: {
-      style: { width: 250 },
     },
   },
   {

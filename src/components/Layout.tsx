@@ -229,7 +229,7 @@ const Layout: React.FC<IProps> = (props: any) => {
             }
           />
         </ListItem>
-        {/* <ListItem
+        <ListItem
           button
           onClick={onClick(localRoutes.billing)}
           selected={isSelected(localRoutes.billing)}
@@ -245,7 +245,7 @@ const Layout: React.FC<IProps> = (props: any) => {
             }
           />
         </ListItem>
-        <ListItem
+        {/*<ListItem
           button
           onClick={onClick(localRoutes.subscriptions)}
           selected={isSelected(localRoutes.subscriptions)}
