@@ -39,10 +39,10 @@ export const EditIconButton = ({ onClick, style, id }: IProps) => {
   );
 };
 
-export const DeleteIconButton = ({ onClick, style, id }: IProps) => {
+export const DeleteIconButton = ({ onClick, style }: IProps) => {
   const handleClick = () => {
     if (onClick) {
-      onClick(id);
+      onClick();
     }
   };
   return (

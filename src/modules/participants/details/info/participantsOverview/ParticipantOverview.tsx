@@ -24,6 +24,7 @@ import Loading from "../../../../../components/Loading";
 import SectionTitle from "../../info/SectionTitle";
 import ContactPersonForm from "./forms/ContactPersonForm";
 import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
+import DeleteDialog from "../../../../../components/DeleteDialog";
 import { IState, Anchor } from "../../../../../data/types";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
@@ -200,9 +201,10 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
       }
     );
   }, [participantId, dispatch]);
-
+  function handleDelete() {
+    setDeleteItem(false);
+  }
   function deleteContactPerson(contactId: any) {
-    setDeleteItem(true);
     setFormData(null);
     setAdd(false);
     setEdit(false);
@@ -260,6 +262,8 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
     data.contactPersons = [];
   }
 
+  const deleteText =
+    "Deleting will permanently remove this contact person from the system. This action cannot be undone!";
   return (
     <Grid
       container
@@ -342,13 +346,18 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
                     bold={bold}
                     editButton={<EditIconButton onClick={handleToggleDrawer} />}
                     deleteButton={
-                      <DeleteIconButton
-                        onClick={deleteContactPerson}
-                        id={contactPerson[0].id}
-                      />
+                      <DeleteIconButton onClick={() => setDeleteItem(true)} />
                     }
                   />
                 )}
+                <DeleteDialog
+                  title={"Are you sure?"}
+                  open={deleteItem}
+                  children={deleteText}
+                  handleCancel={handleDelete}
+                  handleDelete={deleteContactPerson}
+                  itemId={contactPerson[0].id}
+                ></DeleteDialog>
               </Grid>
             ))}
 
