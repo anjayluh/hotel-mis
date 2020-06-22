@@ -1,10 +1,15 @@
 import React, { Fragment, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { ITask, IWorkflow, TaskStatus, ActionStatus } from "../types";
 import DetailView, { IRec } from "../../../components/DetailView";
-import { printDateTime, printDate } from "../../../utils/dateHelpers";
+import {
+  printDateTime,
+  printDate,
+  printMonthYear,
+} from "../../../utils/dateHelpers";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -21,9 +26,16 @@ import Button from "@material-ui/core/Button";
 import PDateInput from "../../../components/plain-inputs/PDateInput";
 import { Box } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
+import {
+  BillingsConstants,
+  IBillingState,
+} from "../../../data/redux/billing/reducer";
+import { IState } from "../../../data/types";
 
 interface IProps {
-  data: any;
+  data?: any;
+  billingCycle?: any;
+  lastBillingCycle?: any;
   onFilter?: (data: any) => any;
 }
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,29 +46,34 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-const Summary = ({ data }: IProps) => {
+
+const Summary = ({ billingCycle, lastBillingCycle }: IProps) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const fields: IRec[] = [
-    {
-      label: "Status",
-      value: data.status ? data.status : "-",
-    },
-    {
-      label: "Started On",
-      value: data.startedOn ? data.startedOn : "-",
-    },
-    {
-      label: "Bill Generated On",
-      value: data.generatedOn ? data.generatedOn : "-",
-    },
-  ];
   const [formData, setData] = useState({
     participantName: "",
     type: "",
-    from: new Date("June, 2020"),
+    from: new Date(),
     to: null,
     billNumber: "",
   });
+  const { isBill } = useSelector((state: IState) => state.billing);
+  function createFields(cycle: any): IRec[] {
+    return [
+      {
+        label: "Status",
+        value: cycle.status ? cycle.status : "-",
+      },
+      {
+        label: "Started On",
+        value: cycle.startedOn ? cycle.startedOn : "-",
+      },
+      {
+        label: "Bill Generated On",
+        value: cycle.generatedOn ? cycle.generatedOn : "-",
+      },
+    ];
+  }
   function submitForm(values: any) {
     // onFilter(values);
   }
@@ -64,9 +81,21 @@ const Summary = ({ data }: IProps) => {
     // onFilter(values);
   }
   const handleValueChange = (name: string) => (value: any) => {
-    if (name === "from" || name === "to") {
+    /* if (name === "from" || name === "to") {
       value = value ? value.toISOString() : value;
+    } */
+    if (value.getMonth() !== new Date().getMonth()) {
+      dispatch({
+        type: BillingsConstants.BillingsIsBill,
+        payload: false,
+      });
+    } else {
+      dispatch({
+        type: BillingsConstants.BillingsIsBill,
+        payload: true,
+      });
     }
+    value = value ? value.toISOString() : value;
     const newData = { ...formData, [name]: value };
     setData(newData);
     submitForm(newData);
@@ -100,24 +129,25 @@ const Summary = ({ data }: IProps) => {
                   format={"MMMM, yyyy"}
                   variant="inline"
                   inputVariant="outlined"
+                  views={["month"]}
                 />
               </Grid>
             </form>
           </Grid>
           <Grid item xs={12} style={{ marginBottom: 6 }}>
             <div>
-              <DetailView data={fields} />
+              <DetailView data={createFields(billingCycle)} />
             </div>
           </Grid>
           <Grid item xs={12} style={{ marginBottom: 11 }}>
             <Box display="flex" flexDirection="row">
               {
                 <Button
-                  variant={data ? "outlined" : "contained"}
+                  variant={isBill ? "outlined" : "contained"}
                   color="primary"
-                  onClick={data ? submitForm : generateBills}
+                  onClick={isBill ? submitForm : generateBills}
                 >
-                  {data ? "Email bills to participants" : "Generate bills"}
+                  {isBill ? "Email bills to participants" : "Generate bills"}
                 </Button>
               }
             </Box>
@@ -142,7 +172,7 @@ const Summary = ({ data }: IProps) => {
           </Grid>
           <Grid item xs={12}>
             <div>
-              <DetailView data={fields} />
+              <DetailView data={createFields(lastBillingCycle)} />
             </div>
           </Grid>
         </Paper>

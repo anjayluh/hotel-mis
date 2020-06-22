@@ -69,7 +69,8 @@ const Billings = () => {
   );
   const [filter, setFilter] = useState<IWorkflowFilter>({});
   const classes = useStyles();
-
+  const { isBill } = useSelector((state: IState) => state.billing);
+  const updatedData = isBill ? data : [];
   useEffect(() => {
     dispatch({
       type: BillingsConstants.BillingsFetchLoading,
@@ -118,7 +119,14 @@ const Billings = () => {
   function closeCreateDialog() {
     setCreateDialog(false);
   }
-  const requestData = {
+  const billingCycle = isBill
+    ? {
+        status: "Successful",
+        startedOn: printDateTime(new Date("2020-05-29T08:48")),
+        generatedOn: printDateTime(new Date("2020-05-09T08:48")),
+      }
+    : {};
+  const lastBillingCycle = {
     status: "Successful",
     startedOn: printDateTime(new Date("2020-05-29T08:48")),
     generatedOn: printDateTime(new Date("2020-05-09T08:48")),
@@ -140,8 +148,9 @@ const Billings = () => {
             <BillingCycle
               onFilter={handleFilter}
               loading={loading}
-              requestData={requestData}
-              tableDataCount={data.length}
+              billingCycle={billingCycle}
+              lastBillingCycle={lastBillingCycle}
+              tableDataCount={updatedData.length}
             />
           </Box>
         </Grid>
@@ -154,11 +163,12 @@ const Billings = () => {
                 <Grid item xs={12}>
                   <XTable
                     headCells={headCells}
-                    data={data}
+                    data={updatedData}
                     initialRowsPerPage={10}
+                    usePagination={updatedData.length > 0}
                   />
                   <div className={classes.helperText}>
-                    {data.length === 0 && (
+                    {updatedData.length === 0 && (
                       <Typography variant={"body2"}>
                         No Bills have been generated for the selected cycle yet
                       </Typography>

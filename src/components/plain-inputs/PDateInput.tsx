@@ -1,5 +1,5 @@
 import "date-fns";
-import React from "react";
+import React, { useState } from "react";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   KeyboardDatePicker,
@@ -16,6 +16,7 @@ interface IProps {
   inputVariant?: "standard" | "outlined" | "filled";
   ariaLabel?: string;
   format?: string;
+  views?: any;
 }
 
 export default function PDateInput({
@@ -26,7 +27,9 @@ export default function PDateInput({
   inputVariant,
   ariaLabel,
   format,
+  views,
 }: IProps) {
+  const [open, setOpen] = useState(false);
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
@@ -42,9 +45,17 @@ export default function PDateInput({
         onChange={onChange}
         autoComplete="off"
         color="secondary"
+        open={open}
+        onClose={() => setOpen(false)}
+        onClick={() => setOpen(true)}
         KeyboardButtonProps={{
           "aria-label": ariaLabel ? ariaLabel : "change date",
         }}
+        PopoverProps={{
+          anchorOrigin: { horizontal: "left", vertical: "bottom" },
+          transformOrigin: { horizontal: "left", vertical: "top" },
+        }}
+        views={views}
       />
     </MuiPickersUtilsProvider>
   );
