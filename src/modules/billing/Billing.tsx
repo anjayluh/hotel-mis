@@ -24,6 +24,7 @@ import {
 import { IState } from "../../data/types";
 import { columns } from "./config";
 import { fakeBill } from "./fakeData";
+import { printDateTime } from "../../utils/dateHelpers";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -117,7 +118,11 @@ const Billings = () => {
   function closeCreateDialog() {
     setCreateDialog(false);
   }
-
+  const requestData = {
+    status: "Successful",
+    startedOn: printDateTime(new Date("2020-05-29T08:48")),
+    generatedOn: printDateTime(new Date("2020-05-09T08:48")),
+  };
   return (
     <Layout>
       <Grid container spacing={2}>
@@ -135,7 +140,7 @@ const Billings = () => {
             <BillingCycle
               onFilter={handleFilter}
               loading={loading}
-              requestData={{}}
+              requestData={requestData}
               tableDataCount={data.length}
             />
           </Box>

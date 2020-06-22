@@ -97,6 +97,7 @@ const Summary = ({ data }: IProps) => {
                   value={formData["from"]}
                   onChange={handleValueChange("from")}
                   ariaLabel={"From"}
+                  format={"MMMM, yyyy"}
                   variant="inline"
                   inputVariant="outlined"
                 />

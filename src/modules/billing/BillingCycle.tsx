@@ -1,18 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
 import { createStyles, Grid, makeStyles, Theme } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import PDateInput from "../../components/plain-inputs/PDateInput";
-import IBox from "../../components/ibox/IBox";
-import { toOptions } from "../../components/inputs/inputHelpers";
 import { Box } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
-import PSelectInput from "../../components/plain-inputs/PSelectInput";
-import { organisationNames } from "./fakeData";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import Summary from "./details/Summary";
-
 interface IProps {
   onFilter: (data: any) => any;
   loading: boolean;

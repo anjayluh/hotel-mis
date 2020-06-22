@@ -15,6 +15,7 @@ interface IProps {
   variant?: "inline";
   inputVariant?: "standard" | "outlined" | "filled";
   ariaLabel?: string;
+  format?: string;
 }
 
 export default function PDateInput({
@@ -24,6 +25,7 @@ export default function PDateInput({
   label,
   inputVariant,
   ariaLabel,
+  format,
 }: IProps) {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -33,7 +35,7 @@ export default function PDateInput({
         inputVariant={inputVariant}
         size="small"
         variant={variant}
-        format={dateFormat}
+        format={format ? format : dateFormat}
         id="date-picker-inline"
         label={label}
         value={value}
