@@ -19,6 +19,7 @@ import { remoteRoutes } from "../../../../../../data/constants";
 import { post, put } from "../../../../../../utils/ajax";
 import Toast from "../../../../../../utils/Toast";
 import { participantsConstants } from "../../../../../../data/redux/participants/reducer";
+import {useSnackbar} from "notistack";
 
 const schema = yup.object().shape({
   name: reqString,
@@ -35,6 +36,7 @@ interface IProps {
 }
 
 const ContactPersonForm = (props: IProps) => {
+  const { enqueueSnackbar } = useSnackbar();
   const [isEdit, setIsEdit] = useState<boolean>(
     props.initialData ? true : false
   );
@@ -109,7 +111,10 @@ const ContactPersonForm = (props: IProps) => {
           `/${props.participantId}/persons`,
         toSave2,
         (data) => {
-          Toast.info("Operation successful");
+          // Toast.info("Operation successful");
+          enqueueSnackbar('Operation successful', {
+            variant: 'success',
+          });
           actions.resetForm();
           dispatch({
             type: participantsConstants.participantsAddContactPerson,
@@ -119,7 +124,10 @@ const ContactPersonForm = (props: IProps) => {
           handleClose();
         },
         () => {
-          Toast.error("Operation failed");
+          // Toast.error("Operation failed");
+          enqueueSnackbar('Operation failed', {
+            variant: 'error',
+          });
         }
       );
     } else {
@@ -127,7 +135,10 @@ const ContactPersonForm = (props: IProps) => {
         remoteRoutes.ninVerification,
         toSave,
         (data) => {
-          Toast.info("Operation successful");
+          // Toast.info("Operation successful");
+          enqueueSnackbar('Operation successful', {
+            variant: 'success',
+          });
           actions.resetForm();
           dispatch({
             type: participantsConstants.participantsUpdateContactPerson,
@@ -142,7 +153,10 @@ const ContactPersonForm = (props: IProps) => {
             type: participantsConstants.participantsUpdateContactPerson,
             payload: { ...toSave },
           });
-          Toast.info("Operation successful");
+          // Toast.info("Operation successful");
+          enqueueSnackbar('Operation successful', {
+            variant: 'success',
+          });
           actions.resetForm();
           handleClose();
           actions.setSubmitting(false);

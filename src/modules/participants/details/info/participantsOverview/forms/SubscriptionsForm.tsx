@@ -18,6 +18,7 @@ import { participantsConstants } from "../../../../../../data/redux/participants
 import FormHelperText from "@material-ui/core/FormHelperText";
 import * as lodash from "lodash";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
+import {useSnackbar} from "notistack";
 
 const schema = yup.object().shape({
   serviceType: reqString,
@@ -55,6 +56,7 @@ interface IProps {
 }
 
 const SubscriptionsForm = (props: IProps) => {
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const [isEdit, setIsEdit] = useState<boolean>(
     props.initialData ? true : false
@@ -81,7 +83,10 @@ const SubscriptionsForm = (props: IProps) => {
         setAllCategories(resp);
       },
       () => {
-        Toast.error("Operation failed");
+        // Toast.error("Operation failed");
+        enqueueSnackbar('Operation failed', {
+          variant: 'error',
+        });
       }
     );
   }, [dispatch]);
@@ -109,7 +114,10 @@ const SubscriptionsForm = (props: IProps) => {
         remoteRoutes.subscriptions,
         toSave,
         (data) => {
-          Toast.info("Operation successful");
+          // Toast.info("Operation successful");
+          enqueueSnackbar('Operation successful', {
+            variant: 'success',
+          });
           actions.resetForm();
           dispatch({
             type: participantsConstants.participantsAddSubscription,
@@ -120,7 +128,10 @@ const SubscriptionsForm = (props: IProps) => {
           handleClose();
         },
         () => {
-          Toast.error("Operation failed");
+          // Toast.error("Operation failed");
+          enqueueSnackbar('Operation failed', {
+            variant: 'error',
+          });
           actions.setSubmitting(false);
         }
       );
@@ -141,7 +152,10 @@ const SubscriptionsForm = (props: IProps) => {
           actions.setSubmitting(false);
         },
         () => {
-          Toast.error("Operation successful");
+          // Toast.error("Operation successful");
+          enqueueSnackbar('Operation successful', {
+            variant: 'success',
+          });
           actions.setSubmitting(false);
         }
       );

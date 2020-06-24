@@ -18,6 +18,7 @@ import { remoteRoutes } from "../../../../../../data/constants";
 import { put } from "../../../../../../utils/ajax";
 import Toast from "../../../../../../utils/Toast";
 import { participantsConstants } from "../../../../../../data/redux/participants/reducer";
+import {useSnackbar} from "notistack";
 
 const schema = yup.object().shape({
   name: reqString,
@@ -35,6 +36,7 @@ interface IProps {
 }
 
 const ParticipantDetailsForm = (props: IProps) => {
+  const { enqueueSnackbar } = useSnackbar();
   const [isEdit, setIsEdit] = useState<boolean>(
     props.initialData ? true : false
   );
@@ -84,7 +86,10 @@ const ParticipantDetailsForm = (props: IProps) => {
       remoteRoutes.participants,
       toSave,
       (data) => {
-        Toast.info("Operation successful");
+        // Toast.info("Operation successful");
+        enqueueSnackbar('Operation successful', {
+          variant: 'success',
+        });
         dispatch({
           type: participantsConstants.participantsUpdateParticipant,
           payload: data,
@@ -95,7 +100,10 @@ const ParticipantDetailsForm = (props: IProps) => {
         actions.setSubmitting(false);
       },
       () => {
-        Toast.error("Operation failed");
+        // Toast.error("Operation failed");
+        enqueueSnackbar('Operation failed', {
+          variant: 'error',
+        });
         actions.setSubmitting(false);
       }
     );

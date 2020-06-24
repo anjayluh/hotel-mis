@@ -12,8 +12,9 @@ import { useDispatch } from "react-redux";
 import { IVerificationRequest } from "../types";
 import { remoteRoutes } from "../../../data/constants";
 import { post } from "../../../utils/ajax";
-import Toast from "../../../utils/Toast";
+// import Toast from "../../../utils/Toast";
 import { verificationRequestConstants } from "../../../data/redux/ninVerification/reducer";
+import { useSnackbar} from 'notistack';
 
 const schema = yup.object().shape({
   name: reqString,
@@ -29,6 +30,7 @@ interface IProps {
 }
 
 const ParticipantForm = (props: IProps) => {
+  const { enqueueSnackbar } = useSnackbar();
   const [data, setData] = useState(
     props.initialData
       ? props.initialData
@@ -64,13 +66,19 @@ const ParticipantForm = (props: IProps) => {
           type: verificationRequestConstants.RequestsPostNew,
           payload: toSave
         });
-        Toast.info("Operation successful");
+        // Toast.info("Operation successful");
+        enqueueSnackbar('Operation successful', {
+          variant: 'success',
+        });
         actions.resetForm();
         handleClose();
         if (props.done) props.done();
       },
       () => {
-        Toast.error("Operation failed");
+        // Toast.error("Operation failed");
+        enqueueSnackbar('Operation failed', {
+          variant: 'error',
+        });
         // actions.setSubmitting(false);
       }
     );

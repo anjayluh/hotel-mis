@@ -18,6 +18,7 @@ import { participantsConstants } from "../../../data/redux/participants/reducer"
 import { remoteRoutes } from "../../../data/constants";
 import { get } from "../../../utils/ajax";
 import Toast from "../../../utils/Toast";
+import {useSnackbar} from "notistack";
 
 interface IProps extends RouteComponentProps {}
 
@@ -64,6 +65,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Details = (props: IProps) => {
+  const {enqueueSnackbar} = useSnackbar()
   const participantId = getRouteParam(props, "participantId");
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -105,7 +107,10 @@ const Details = (props: IProps) => {
           });
         },
         () => {
-          Toast.error("Operation failed");
+          // Toast.error("Operation failed");
+          enqueueSnackbar('Operation failed', {
+            variant: 'error',
+          });
         }
       );
     }
