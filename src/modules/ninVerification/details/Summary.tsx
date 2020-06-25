@@ -49,7 +49,7 @@ const Summary = ({ data }: IProps) => {
     },
     {
       label: "Name",
-      value: data.name,
+      value: data.surname,
     },
   ];
   const requestStatus = [

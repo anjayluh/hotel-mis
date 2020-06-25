@@ -122,7 +122,7 @@ export interface IRequestDetails {
     cardNumber?: any
     initiator: string,
     participant: string,
-    name?: string
+    surname?: string
     status?: string
     receivedFromNira?:string
     receivedAt?: string
