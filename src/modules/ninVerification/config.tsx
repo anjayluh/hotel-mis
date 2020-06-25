@@ -25,7 +25,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
         }
     },
     {
-        name: 'name', label: 'name',
+        name: 'surname', label: 'name',
         cellProps: {style: {width: 150}}
     },
     {

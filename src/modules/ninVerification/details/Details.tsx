@@ -102,6 +102,17 @@ const Details = (props: IProps) => {
         <div className={classes.root}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
+              <Box display="flex" flexDirection="column" py={1}>
+                <Box flexGrow={1} pt={1}>
+                  <Typography variant="h5">
+                    Ref. Number
+                  </Typography>
+                  <Typography variant="body2">
+                    {requestData ? requestData.referenceNumber : "loading"}
+                  </Typography>
+                </Box>
+              </Box>
+              <Divider />
               <Box pt={1}>{requestData && <Summary data={requestData} />}</Box>
             </Grid>
           </Grid>
