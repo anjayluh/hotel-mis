@@ -105,10 +105,7 @@ const Details = (props: IProps) => {
               <Box display="flex" flexDirection="column" py={1}>
                 <Box flexGrow={1} pt={1}>
                   <Typography variant="h5">
-                    Ref. Number
-                  </Typography>
-                  <Typography variant="body2">
-                    {requestData ? requestData.referenceNumber : "loading"}
+                    Ref. Number: {requestData ? requestData.referenceNumber : "loading"}
                   </Typography>
                 </Box>
               </Box>
