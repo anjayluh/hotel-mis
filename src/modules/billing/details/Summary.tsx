@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
@@ -31,11 +31,14 @@ import {
   IBillingState,
 } from "../../../data/redux/billing/reducer";
 import { IState } from "../../../data/types";
+import { get, post, search } from "../../../utils/ajax";
+import { remoteRoutes } from "../../../data/constants";
+import Toast from "../../../utils/Toast";
+import { date } from "faker";
+import { useSnackbar } from "notistack";
 
 interface IProps {
   data?: any;
-  billingCycle?: any;
-  lastBillingCycle?: any;
   onFilter?: (data: any) => any;
 }
 const useStyles = makeStyles((theme: Theme) =>
@@ -47,7 +50,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Summary = ({ billingCycle, lastBillingCycle }: IProps) => {
+const Summary = ({ data }: IProps) => {
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const classes = useStyles();
   const [formData, setData] = useState({
@@ -57,7 +61,17 @@ const Summary = ({ billingCycle, lastBillingCycle }: IProps) => {
     to: null,
     billNumber: "",
   });
-  const { isBill } = useSelector((state: IState) => state.billing);
+
+  const { generateBill } = useSelector((state: IState) => state.billing);
+  const [billingCycle, setBillingCycle]: any = useState({
+    status: "",
+    startDate: "",
+    endDate: "",
+  });
+  const { currentCycle }: IBillingState = useSelector(
+    (state: IState) => state.billing
+  );
+  const [lastBillingCycle, setLastBillingCycle]: any = useState({});
   function createFields(cycle: any): IRec[] {
     return [
       {
@@ -66,40 +80,139 @@ const Summary = ({ billingCycle, lastBillingCycle }: IProps) => {
       },
       {
         label: "Started On",
-        value: cycle.startedOn ? cycle.startedOn : "-",
+        value: cycle.startDate ? printDateTime(cycle.startDate) : "-",
       },
       {
         label: "Bill Generated On",
-        value: cycle.generatedOn ? cycle.generatedOn : "-",
+        value: cycle.billGeneratedOn
+          ? printDateTime(cycle.billGeneratedOn)
+          : "-",
       },
     ];
   }
-  function submitForm(values: any) {
+  function emailBills() {
     // onFilter(values);
   }
-  function generateBills(values: any) {
-    // onFilter(values);
+  function generateBills() {
+    post(
+      remoteRoutes.billingCycle + `/generate-bills`,
+      { billingCycleId: currentCycle && currentCycle.id },
+      (resp) => {
+        dispatch({
+          type: BillingsConstants.BillingsFetchCurrentCycle,
+          payload: resp,
+        });
+        dispatch({
+          type: BillingsConstants.BillingsFetchLoading,
+          payload: true,
+        });
+      },
+      () => {
+        enqueueSnackbar("Operation failed", {
+          variant: "error",
+        });
+        dispatch({
+          type: BillingsConstants.BillingsFetchLoading,
+          payload: false,
+        });
+      }
+    );
   }
+  function submit() {
+    generateBill ? generateBills() : emailBills();
+  }
+  function generateBillingCycle(value: any) {
+    post(
+      remoteRoutes.billingCycle,
+      value,
+      (resp) => {
+        dispatch({
+          type: BillingsConstants.BillingsFetchCurrentCycle,
+          payload: resp,
+        });
+        dispatch({
+          type: BillingsConstants.BillingsFetchLoading,
+          payload: true,
+        });
+      },
+      () => {
+        enqueueSnackbar("Operation failed", {
+          variant: "error",
+        });
+        dispatch({
+          type: BillingsConstants.BillingsFetchLoading,
+          payload: false,
+        });
+      }
+    );
+  }
+
+  function getBillingCycle(value: Date) {
+    dispatch({
+      type: BillingsConstants.BillingsFetchLoading,
+      payload: true,
+    });
+    get(
+      remoteRoutes.billingCycle,
+      (data) => {
+        let [month, year] = printMonthYear(value).split(",");
+        let date = month.substring(0, 3).toLowerCase().concat(year);
+        let cycle = data.filter((item: any) => {
+          return item.cycleName === date;
+        })[0];
+        if (cycle) {
+          setBillingCycle(cycle);
+          dispatch({
+            type: BillingsConstants.BillingsFetchCurrentCycle,
+            payload: cycle,
+          });
+          dispatch({
+            type: BillingsConstants.BillingsFetchLoading,
+            payload: false,
+          });
+        } else {
+          generateBillingCycle({
+            month: new Date(value).getMonth() + 1,
+            year: parseInt(year),
+          });
+        }
+      },
+      () => {
+        enqueueSnackbar("Operation failed", {
+          variant: "error",
+        });
+        dispatch({
+          type: BillingsConstants.BillingsFetchLoading,
+          payload: false,
+        });
+      }
+    );
+  }
+
   const handleValueChange = (name: string) => (value: any) => {
-    /* if (name === "from" || name === "to") {
-      value = value ? value.toISOString() : value;
-    } */
-    if (value.getMonth() !== new Date().getMonth()) {
-      dispatch({
-        type: BillingsConstants.BillingsIsBill,
-        payload: false,
-      });
-    } else {
-      dispatch({
-        type: BillingsConstants.BillingsIsBill,
-        payload: true,
-      });
-    }
     value = value ? value.toISOString() : value;
     const newData = { ...formData, [name]: value };
     setData(newData);
-    submitForm(newData);
+    getBillingCycle(value);
   };
+
+  useEffect(() => {
+    getBillingCycle(new Date());
+    // Get latest billing cycle
+    search(
+      remoteRoutes.billingCycle,
+      { PageNumber: 1, PageSize: 10 },
+      (resp) => {
+        setLastBillingCycle(resp[0]);
+      },
+      () => {
+        enqueueSnackbar("Operation failed", {
+          variant: "error",
+        });
+      }
+    );
+  }, []);
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -130,6 +243,7 @@ const Summary = ({ billingCycle, lastBillingCycle }: IProps) => {
                   variant="inline"
                   inputVariant="outlined"
                   views={["month"]}
+                  disableFuture={true}
                 />
               </Grid>
             </form>
@@ -143,11 +257,13 @@ const Summary = ({ billingCycle, lastBillingCycle }: IProps) => {
             <Box display="flex" flexDirection="row">
               {
                 <Button
-                  variant={isBill ? "outlined" : "contained"}
+                  variant={!generateBill ? "outlined" : "contained"}
                   color="primary"
-                  onClick={isBill ? submitForm : generateBills}
+                  onClick={submit}
                 >
-                  {isBill ? "Email bills to participants" : "Generate bills"}
+                  {!generateBill
+                    ? "Email bills to participants"
+                    : "Generate bills"}
                 </Button>
               }
             </Box>

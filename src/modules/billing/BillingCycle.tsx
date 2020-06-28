@@ -6,8 +6,6 @@ import Summary from "./details/Summary";
 interface IProps {
   onFilter: (data: any) => any;
   loading: boolean;
-  billingCycle: any;
-  lastBillingCycle: any;
   tableDataCount: any;
 }
 const requestData = {};
@@ -29,13 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-const Filter = ({
-  onFilter,
-  loading,
-  billingCycle,
-  tableDataCount,
-  lastBillingCycle,
-}: IProps) => {
+const Filter = ({ onFilter, loading, tableDataCount }: IProps) => {
   const classes = useStyles();
   const [data, setData] = useState({
     participantName: "",
@@ -69,14 +61,7 @@ const Filter = ({
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Box>
-          {requestData && (
-            <Summary
-              billingCycle={billingCycle}
-              lastBillingCycle={lastBillingCycle}
-            />
-          )}
-        </Box>
+        <Box>{requestData && <Summary />}</Box>
       </Grid>
     </Grid>
   );

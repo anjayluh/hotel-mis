@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import * as yup from "yup";
 import * as faker from "faker";
@@ -22,7 +22,7 @@ import { remoteRoutes } from "../../../../../../data/constants";
 import { post } from "../../../../../../utils/ajax";
 import Toast from "../../../../../../utils/Toast";
 import { participantsConstants } from "../../../../../../data/redux/participants/reducer";
-import { useSnackbar} from 'notistack';
+import { useSnackbar } from "notistack";
 
 const schema = yup.object().shape({
   paymentDate: reqDate,
@@ -49,7 +49,7 @@ const PaymentForm = (props: IProps) => {
   });
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
-  const baseUrl = remoteRoutes.participantsBilling.split("bills")[0];
+  const baseUrl = remoteRoutes.billing.split("bills")[0];
   const paymentsUrl = baseUrl + "payments";
   function getSelectedPaymentType(value: string) {
     let selectedPaymentType = "";
@@ -83,15 +83,15 @@ const PaymentForm = (props: IProps) => {
         if (props.done) props.done();
 
         // Toast.info("Operation successful");
-        enqueueSnackbar('Operation successful', {
-          variant: 'success',
+        enqueueSnackbar("Operation successful", {
+          variant: "success",
         });
         actions.resetForm();
         handleClose();
       },
       () => {
         // Toast.info("Operation successful");
-        enqueueSnackbar('Operation successful');
+        enqueueSnackbar("Operation successful");
       }
     );
   }
@@ -100,71 +100,70 @@ const PaymentForm = (props: IProps) => {
     props.closeSlideOut();
   }
   return (
-      <XFormSimple
-        onSubmit={handleSubmit}
-        schema={schema}
-        initialValues={data}
-        onCancel={handleClose}
-      >
-        <Grid spacing={1} container direction="column">
-          <Grid item xs={12}>
-            <XDateInput
-              name="paymentDate"
-              label="Payment Date"
-              inputVariant="outlined"
-              size="small"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <XSelectInput
-              size="small"
-              name="paymentType"
-              label="Payment Type"
-              options={toOptions(paymentTypes)}
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <XTextInput
-              name="referenceNumber"
-              label="Ref. Number"
-              type="text"
-              variant="outlined"
-              size="small"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <XTextInput
-              name="amount"
-              label="Amount"
-              type="number"
-              variant="outlined"
-              size="small"
-            />
-
-          </Grid>
-
-          <Grid item xs={12}>
-            <XTextInput
-              name="enteredBy"
-              label="Entered By"
-              type="text"
-              variant="outlined"
-              size="small"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <XTextAreaInput
-              name="comment"
-              label="Comment"
-              type="text"
-              variant="outlined"
-              size="small"
-              maxLength={{ maxLength: 160 }}
-            />
-          </Grid>
+    <XFormSimple
+      onSubmit={handleSubmit}
+      schema={schema}
+      initialValues={data}
+      onCancel={handleClose}
+    >
+      <Grid spacing={1} container direction="column">
+        <Grid item xs={12}>
+          <XDateInput
+            name="paymentDate"
+            label="Payment Date"
+            inputVariant="outlined"
+            size="small"
+          />
         </Grid>
-      </XFormSimple>
+        <Grid item xs={12}>
+          <XSelectInput
+            size="small"
+            name="paymentType"
+            label="Payment Type"
+            options={toOptions(paymentTypes)}
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <XTextInput
+            name="referenceNumber"
+            label="Ref. Number"
+            type="text"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <XTextInput
+            name="amount"
+            label="Amount"
+            type="number"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <XTextInput
+            name="enteredBy"
+            label="Entered By"
+            type="text"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <XTextAreaInput
+            name="comment"
+            label="Comment"
+            type="text"
+            variant="outlined"
+            size="small"
+            maxLength={{ maxLength: 160 }}
+          />
+        </Grid>
+      </Grid>
+    </XFormSimple>
   );
 };
 

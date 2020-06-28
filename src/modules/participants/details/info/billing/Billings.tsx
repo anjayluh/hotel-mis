@@ -70,7 +70,7 @@ const Billings = ({ subscriptionId }: IProps) => {
     });
     if (subscriptionId) {
       search(
-        remoteRoutes.participantsBilling,
+        remoteRoutes.billing,
         { SubscriptionIds: subscriptionId },
         (resp) => {
           dispatch({

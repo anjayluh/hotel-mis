@@ -1,12 +1,19 @@
 import {BaseModel} from "../../data/types";
 
+export interface IBillCycle {
+    id: string,
+    cycleName: string,
+    startDate: Date,
+    endDate: Date,
+    status?: Date
+}
 export interface IBill {
-    id: string
-    name: string
-    billNumber: any
+    id: string,
+    name: string,
+    billNumber: any,
     dateCreated: Date,
-    consumption: any
-    rate: number
+    consumption: any,
+    rate: number,
     billAmount: any
 }
 export interface IWorkflowInclude {
