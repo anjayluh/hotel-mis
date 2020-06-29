@@ -64,49 +64,53 @@ const headCells: XHeadCell[] = [...columns];
 const Billings = () => {
   const dispatch = useDispatch();
   const [createDialog, setCreateDialog] = useState(false);
-  const { data, loading }: IBillingState = useSelector(
+  const { data, loading, currentCycle }: IBillingState = useSelector(
     (state: IState) => state.billing
   );
   const [filter, setFilter] = useState<IWorkflowFilter>({});
   const classes = useStyles();
-  const { isBill } = useSelector((state: IState) => state.billing);
-  const updatedData = isBill ? data : [];
+  const { generateBill } = useSelector((state: IState) => state.billing);
+  // const updatedData = generateBill ? data : [];
   useEffect(() => {
-    dispatch({
-      type: BillingsConstants.BillingsFetchLoading,
-      payload: true,
-    });
-    search(
-      remoteRoutes.contacts,
-      filter,
-      (resp) => {
-        dispatch({
-          type: BillingsConstants.BillingsFetchAll,
-          payload: [...callfakeBill(15)],
-        });
-      },
-      undefined,
-      () => {
-        dispatch({
-          type: BillingsConstants.BillingsFetchLoading,
-          payload: false,
-        });
-        dispatch({
-          type: BillingsConstants.BillingsFetchAll,
-          payload: [...callfakeBill(15)],
-        });
-      }
-    );
-  }, [filter, dispatch]);
-
-  function callfakeBill(length: number) {
-    let Billings = [];
-    while (length > 0) {
-      Billings.push(fakeBill());
-      length = length - 1;
+    if (currentCycle) {
+      dispatch({
+        type: BillingsConstants.BillingsFetchLoading,
+        payload: true,
+      });
+      search(
+        remoteRoutes.billing,
+        { BillingCycleIds: currentCycle.id },
+        (resp) => {
+          dispatch({
+            type: BillingsConstants.BillingsFetchAll,
+            payload: resp,
+          });
+          dispatch({
+            type: BillingsConstants.BillingsFetchLoading,
+            payload: false,
+          });
+          if (resp.length > 0) {
+            dispatch({
+              type: BillingsConstants.BillingsGenerateBill,
+              payload: false,
+            });
+          } else {
+            dispatch({
+              type: BillingsConstants.BillingsGenerateBill,
+              payload: true,
+            });
+          }
+        },
+        undefined,
+        () => {
+          dispatch({
+            type: BillingsConstants.BillingsFetchLoading,
+            payload: false,
+          });
+        }
+      );
     }
-    return Billings;
-  }
+  }, [currentCycle, dispatch]);
 
   function handleFilter(value: any) {
     setFilter({ ...filter, ...value });
@@ -119,18 +123,7 @@ const Billings = () => {
   function closeCreateDialog() {
     setCreateDialog(false);
   }
-  const billingCycle = isBill
-    ? {
-        status: "Successful",
-        startedOn: printDateTime(new Date("2020-05-29T08:48")),
-        generatedOn: printDateTime(new Date("2020-05-09T08:48")),
-      }
-    : {};
-  const lastBillingCycle = {
-    status: "Successful",
-    startedOn: printDateTime(new Date("2020-05-29T08:48")),
-    generatedOn: printDateTime(new Date("2020-05-09T08:48")),
-  };
+
   return (
     <Layout>
       <Grid container spacing={2}>
@@ -148,9 +141,7 @@ const Billings = () => {
             <BillingCycle
               onFilter={handleFilter}
               loading={loading}
-              billingCycle={billingCycle}
-              lastBillingCycle={lastBillingCycle}
-              tableDataCount={updatedData.length}
+              tableDataCount={data.length}
             />
           </Box>
         </Grid>
@@ -163,12 +154,12 @@ const Billings = () => {
                 <Grid item xs={12}>
                   <XTable
                     headCells={headCells}
-                    data={updatedData}
+                    data={data}
                     initialRowsPerPage={10}
-                    usePagination={updatedData.length > 0}
+                    usePagination={data.length > 0}
                   />
                   <div className={classes.helperText}>
-                    {updatedData.length === 0 && (
+                    {generateBill && (
                       <Typography variant={"body2"}>
                         No Bills have been generated for the selected cycle yet
                       </Typography>

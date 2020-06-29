@@ -93,7 +93,7 @@ const Payments = (props: IProps) => {
   const [showPaymentDetails, setShowPaymentDetails] = useState<boolean>(false);
   const [showPaymentForm, setShowPaymentForm] = useState<boolean>(false);
   const [selectedPaymentId, setSelectedPaymentId] = useState<string>("");
-  const baseUrl = remoteRoutes.participantsBilling.split("bills")[0];
+  const baseUrl = remoteRoutes.billing.split("bills")[0];
   const paymentsUrl = baseUrl + "payments";
   useEffect(() => {
     dispatch({

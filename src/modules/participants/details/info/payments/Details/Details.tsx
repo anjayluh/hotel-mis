@@ -44,7 +44,7 @@ const Details = (props: IProps) => {
   const { paymentDetails, paymentsDetailsLoading } = useSelector(
     (state: IState) => state.participants
   );
-  const baseUrl = remoteRoutes.participantsBilling.split("bills")[0];
+  const baseUrl = remoteRoutes.billing.split("bills")[0];
   const paymentsUrl = baseUrl + `payments/${props.paymentId}`;
 
   useEffect(() => {
@@ -87,9 +87,7 @@ const Details = (props: IProps) => {
             <Grid item xs={12}>
               <Box display="flex" flexDirection="column" py={1}>
                 <Box flexGrow={1} pt={1}>
-                  <Typography variant="h5">
-                    PAYMENT
-                  </Typography>
+                  <Typography variant="h5">PAYMENT</Typography>
                   <Typography variant="body2">
                     ID: {paymentDetails ? paymentDetails.id : "loading"}
                   </Typography>

@@ -17,6 +17,7 @@ interface IProps {
   ariaLabel?: string;
   format?: string;
   views?: any;
+  disableFuture?: boolean;
 }
 
 export default function PDateInput({
@@ -28,6 +29,7 @@ export default function PDateInput({
   ariaLabel,
   format,
   views,
+  disableFuture,
 }: IProps) {
   const [open, setOpen] = useState(false);
   return (
@@ -56,6 +58,7 @@ export default function PDateInput({
           transformOrigin: { horizontal: "left", vertical: "top" },
         }}
         views={views}
+        disableFuture={disableFuture}
       />
     </MuiPickersUtilsProvider>
   );
