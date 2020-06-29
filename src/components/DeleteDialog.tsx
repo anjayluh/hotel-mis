@@ -10,6 +10,7 @@ import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
 import trash from "../assets/trash.svg";
 import { Grid } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
       "&:hover": {
         backgroundColor: "#DD004F",
       },
+      width: 125,
     },
     cancel: {
       color: "#1977DB",
@@ -46,6 +48,14 @@ const useStyles = makeStyles((theme: Theme) =>
     trash: {
       width: 22,
     },
+    actions: {
+      padding: "8px 24px 19px 24px",
+    },
+    progress: {
+      color: "#fffaf8",
+      marginBottom: 4,
+      marginRight: 5,
+    },
   })
 );
 
@@ -56,6 +66,7 @@ interface IProps {
   handleCancel: () => any;
   handleDelete: (item?: any) => any;
   itemId?: string;
+  loading?: boolean;
 }
 const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
@@ -68,6 +79,7 @@ export default function AlertDialogSlide({
   handleDelete,
   title,
   itemId,
+  loading,
 }: IProps) {
   const classes = useStyles();
   const onClose = () => {
@@ -108,7 +120,7 @@ export default function AlertDialogSlide({
             </Grid>
           </Grid>
         </DialogContent>
-        <DialogActions>
+        <DialogActions className={classes.actions}>
           <Button onClick={onClose} className={classes.cancel}>
             Cancel
           </Button>
@@ -117,6 +129,9 @@ export default function AlertDialogSlide({
             className={classes.delete}
             color={"primary"}
           >
+            {loading && (
+              <CircularProgress className={classes.progress} size={12} />
+            )}
             Delete
           </Button>
         </DialogActions>

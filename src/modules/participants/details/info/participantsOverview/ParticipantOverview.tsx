@@ -31,7 +31,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Toast from "../../../../../utils/Toast";
 import Typography from "@material-ui/core/Typography";
 import { del } from "../../../../../utils/ajax";
-import {useSnackbar} from "notistack";
+import { useSnackbar } from "notistack";
 
 interface IProps {
   data: IParticipant;
@@ -160,7 +160,7 @@ const contactToRecords = (data: IContactPerson): IRec[] => {
   ];
 };
 const ParticipantOverview = ({ data, participantId }: IProps) => {
-  const {enqueueSnackbar} = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [anchor, setAnchor] = useState<Anchor>("right");
@@ -177,6 +177,8 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
     phone: "",
     email: "",
   });
+  const [isProgress, setIsProgress] = useState<boolean>(false);
+
   useEffect(() => {
     dispatch({
       type: participantsConstants.participantsFetchContactPersonsLoading,
@@ -200,14 +202,14 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
           payload: false,
         });
         // Toast.error("Operation failed");
-        enqueueSnackbar('Operation failed', {
-          variant: 'error',
+        enqueueSnackbar("Operation failed", {
+          variant: "error",
         });
-
       }
     );
   }, [participantId, dispatch]);
-  function handleDelete() {
+
+  function handleCancel() {
     setDeleteItem(false);
   }
   function deleteContactPerson(contactId: any) {
@@ -226,8 +228,8 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
       },
       () => {
         // Toast.error("Operation failed");
-        enqueueSnackbar('Operation failed', {
-          variant: 'error',
+        enqueueSnackbar("Operation failed", {
+          variant: "error",
         });
       }
     );
@@ -256,7 +258,12 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
       setDeleteItem(false);
     }
   }
-
+  function onDelete() {
+    setDeleteItem(true);
+    setTimeout(function () {
+      setIsProgress(true);
+    }, 1000);
+  }
   const officialContactColumn = officialContactInfo(data);
   const primaryContactColumn = primaryContactInfo(data);
   const contactPersonsColumns: IRec[][] = [];
@@ -354,18 +361,17 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
                     noColon={noColon}
                     bold={bold}
                     editButton={<EditIconButton onClick={handleToggleDrawer} />}
-                    deleteButton={
-                      <DeleteIconButton onClick={() => setDeleteItem(true)} />
-                    }
+                    deleteButton={<DeleteIconButton onClick={onDelete} />}
                   />
                 )}
                 <DeleteDialog
                   title={"Are you sure?"}
                   open={deleteItem}
                   children={deleteText}
-                  handleCancel={handleDelete}
+                  handleCancel={handleCancel}
                   handleDelete={deleteContactPerson}
                   itemId={contactPerson[0].id}
+                  loading={isProgress}
                 ></DeleteDialog>
               </Grid>
             ))}
