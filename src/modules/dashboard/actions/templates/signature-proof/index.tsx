@@ -30,14 +30,14 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-
+import { useSnackbar } from 'notistack';
 
 interface IFormProps {
     onClose: () => any
 }
 
 const VerifyForm = (props: IFormProps & ITemplateProps) => {
-
+    const { enqueueSnackbar } = useSnackbar();
     const dispatch: Dispatch<any> = useDispatch();
     const initialState: any = {remarks: '', approved: false}
     const [metaData, setMetaData] = useState<any>(initialState)
@@ -66,7 +66,10 @@ const VerifyForm = (props: IFormProps & ITemplateProps) => {
     function handleDecision() {
         const hasRemarks = hasValue(metaData['remarks'])
         if (!metaData.approved && !hasRemarks) {
-            Toast.error("Please enter a remark")
+            // Toast.error("Please enter a remark")
+            enqueueSnackbar("Please enter a remark", {
+                variant: 'error',
+            });
             return
         }
         const data: IManualDecision = {

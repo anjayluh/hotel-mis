@@ -18,6 +18,7 @@ import Details from "./Details/Details";
 import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
 import PaymentForm from "./forms/PaymentForm";
 import Toast from "../../../../../utils/Toast";
+import {useSnackbar} from "notistack";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -80,6 +81,7 @@ interface IProps {
   subscriptionId: string | undefined;
 }
 const Payments = (props: IProps) => {
+  const {enqueueSnackbar} = useSnackbar();
   const dispatch = useDispatch();
   const { selected } = useSelector((state: IState) => state.participants);
   const loading = useSelector(
@@ -113,7 +115,10 @@ const Payments = (props: IProps) => {
             type: participantsConstants.participantsPaymentsFetchLoading,
             payload: false,
           });
-          Toast.error("Operation failed");
+          // Toast.error("Operation failed");
+          enqueueSnackbar('Operation failed', {
+            variant: 'error',
+          });
         }
       );
     } else {

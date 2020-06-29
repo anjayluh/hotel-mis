@@ -13,12 +13,14 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import {Button, TextField} from "@material-ui/core";
+import {useSnackbar} from "notistack";
 
 interface IProps {
     onClose: () => any
 }
 
 const RemarksForm = (props: IProps & ITemplateProps) => {
+    const {enqueueSnackbar} = useSnackbar();
     const dispatch: Dispatch<any> = useDispatch();
     const initialState: any = {remarks: '', approved: false}
     const [metaData, setMetaData] = useState<any>(initialState)
@@ -35,7 +37,10 @@ const RemarksForm = (props: IProps & ITemplateProps) => {
     function handleDecision() {
         const hasRemarks = hasValue(metaData['remarks'])
         if (!metaData.approved && !hasRemarks) {
-            Toast.error("Please enter a remark")
+            // Toast.error("Please enter a remark")
+            enqueueSnackbar("Please enter a remark", {
+                variant: 'error',
+            });
             return
         }
         const data: IManualDecision = {

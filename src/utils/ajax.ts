@@ -2,6 +2,7 @@ import * as superagent from 'superagent'
 import Toast from './Toast'
 import {AUTH_TOKEN_KEY} from "../data/constants";
 import authService from "../data/oidc/AuthService";
+import {useSnackbar} from "notistack";
 
 export const getToken = (): string | null => {
     return localStorage.getItem(AUTH_TOKEN_KEY)
@@ -12,9 +13,14 @@ type ErrorCallback = (err: any, res: superagent.Response) => void;
 type EndCallback = (data?: any) => void;
 
 export const handleError = (err: any = {}, res: superagent.Response) => {
+    // const { enqueueSnackbar } = useSnackbar();
     const defaultMessage = "Invalid request, please contact admin";
     if ((res && res.forbidden) || (res && res.unauthorized)) {
         Toast.error("Authentication Error")
+        // enqueueSnackbar("Authentication Error", {
+        //     variant: 'error',
+        // });
+
         // authService.login().then(()=>{
         //
         // })
@@ -28,16 +34,28 @@ export const handleError = (err: any = {}, res: superagent.Response) => {
             }
         }
         Toast.error(msg || defaultMessage)
+        // enqueueSnackbar(msg || defaultMessage, {
+        //     variant: 'error',
+        // });
     } else if ((res && res.clientError) || (res && res.notAcceptable) || (res && res.error)) {
         Toast.error(defaultMessage)
+        // enqueueSnackbar(defaultMessage, {
+        //     variant: 'error',
+        // });
     } else if (res && res.body && res.body.message) {
         Toast.error(res.body.message)
+        // enqueueSnackbar(res.body.message, {
+        //     variant: 'error',
+        // });
     } else {
         const message = err.message || 'Unknown error, contact admin'
         const finalMessage = message.indexOf("offline") !== -1
             ? "Can't reach server, Check connectivity"
             : message
         Toast.error(finalMessage)
+        // enqueueSnackbar(finalMessage, {
+        //     variant: 'error',
+        // });
     }
 }
 

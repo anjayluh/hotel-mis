@@ -140,7 +140,10 @@ const SubscriptionsForm = (props: IProps) => {
         remoteRoutes.subscriptions + `?companyIds=${props.id}`,
         toSave,
         (data) => {
-          Toast.info("Operation successful");
+          // Toast.info("Operation successful");
+          enqueueSnackbar('Operation successful', {
+            variant: 'success',
+          });
           actions.resetForm();
           dispatch({
             type: participantsConstants.participantsAddSubscription,

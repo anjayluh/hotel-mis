@@ -20,6 +20,7 @@ import {Dispatch} from "redux";
 import {useDispatch} from "react-redux";
 import {fetchWorkflowAsync, startWorkflowFetch} from "../../../../../data/redux/workflows/reducer";
 import {docMetadata} from "./documentsRules";
+import {useSnackbar} from "notistack";
 
 interface IProps {
     open: boolean
@@ -43,6 +44,7 @@ const useStyles = makeStyles(() =>
 );
 
 export default function Verify({open, onClose, docs, showCheckBoxes, ...props}: IProps) {
+    const {enqueueSnackbar} = useSnackbar();
     const classes = useStyles()
     const dispatch: Dispatch<any> = useDispatch();
     const initialState: any = {remarks: ''}
@@ -60,7 +62,10 @@ export default function Verify({open, onClose, docs, showCheckBoxes, ...props}: 
         const allChecked = docMetadata.every(it => metaData[it.name])
         const hasRemarks = hasValue(metaData['remarks'])
         if (!allChecked && !hasRemarks) {
-            Toast.error("Please enter a remark")
+            // Toast.error("Please enter a remark")
+            enqueueSnackbar("Please enter a remark", {
+                variant: 'error',
+            });
             return
         }
         const data: IManualDecision = {
