@@ -16,16 +16,21 @@ import Toast from "../../utils/Toast";
 import XTextInput from "../../components/inputs/XTextInput";
 import {useLoginStyles} from "./loginStyles";
 import {Dispatch} from "redux";
+import {useSnackbar} from "notistack";
 
 
 function Login() {
+    const {enqueueSnackbar} = useSnackbar();
     const classes = useLoginStyles();
     const dispatch: Dispatch<any> = useDispatch();
     const onSubmit = (data: any, actions: FormikActions<any>) => {
         post(remoteRoutes.login, data, resp => {
             dispatch(handleLogin(resp))
         }, () => {
-            Toast.error("Invalid username/password")
+            // Toast.error("Invalid username/password")
+          enqueueSnackbar("Invalid username/password", {
+            variant: 'error',
+          });
         }, () => {
             actions.setSubmitting(false)
         })

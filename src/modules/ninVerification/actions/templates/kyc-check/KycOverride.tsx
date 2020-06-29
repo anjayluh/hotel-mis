@@ -14,6 +14,7 @@ import {remoteRoutes} from "../../../../../data/constants";
 import {fetchWorkflowAsync, startWorkflowFetch} from "../../../../../data/redux/workflows/reducer";
 import {Dispatch} from "redux";
 import {IKycResponse} from "./index";
+import {useSnackbar} from "notistack";
 
 
 interface IFormProps {
@@ -21,7 +22,7 @@ interface IFormProps {
 }
 
 const KycOverride = (props: IFormProps & ITemplateProps) => {
-
+    const {enqueueSnackbar} = useSnackbar();
     const dataString = props.action.outputData
 
     const data: IKycResponse = JSON.parse(dataString);
@@ -40,7 +41,10 @@ const KycOverride = (props: IFormProps & ITemplateProps) => {
     function handleDecision() {
         const hasRemarks = hasValue(metaData['comment'])
         if (!metaData.approved && !hasRemarks) {
-            Toast.error("Please enter a remark")
+            // Toast.error("Please enter a remark")
+            enqueueSnackbar("Please enter a remark", {
+                variant: 'error',
+            });
             return
         }
         metaData.checkStatus = 'Passed';

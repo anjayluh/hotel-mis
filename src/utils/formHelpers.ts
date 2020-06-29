@@ -1,6 +1,7 @@
 import {handleError, post, put} from "./ajax";
 import Toast from "./Toast";
 import {FormikActions} from "formik";
+import { useSnackbar, withSnackbar } from 'notistack';
 
 export interface ISubmission {
     url: string
@@ -11,11 +12,15 @@ export interface ISubmission {
 }
 
 export function handleSubmission(submission: ISubmission) {
+  // const { enqueueSnackbar } = useSnackbar();
     const {isNew, actions, values, onAjaxComplete, url} = submission
     if (isNew) {
         post(url, values,
             (data) => {
                 Toast.info('Operation successful')
+              // enqueueSnackbar('Operation successful', {
+              //   variant: 'success',
+              // });
                 actions.resetForm()
                 onAjaxComplete && onAjaxComplete(data)
             },

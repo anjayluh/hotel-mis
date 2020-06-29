@@ -15,6 +15,7 @@ import {crmConstants} from "../../../data/redux/contacts/reducer";
 import {post} from "../../../utils/ajax";
 import Toast from "../../../utils/Toast";
 import XRadioInput from "../../../components/inputs/XRadioInput";
+import {useSnackbar} from "notistack";
 
 interface IProps {
     data: any | null
@@ -33,6 +34,7 @@ const schema = yup.object().shape(
 )
 
 const NewPersonForm = ({data, done}: IProps) => {
+    const {enqueueSnackbar} = useSnackbar();
     const dispatch = useDispatch();
 
     function handleSubmit(values: any, actions: FormikActions<any>) {
@@ -69,7 +71,10 @@ const NewPersonForm = ({data, done}: IProps) => {
         }
         post(remoteRoutes.contacts, toSave,
             (data) => {
-                Toast.info('Operation successful')
+                // Toast.info('Operation successful')
+                enqueueSnackbar('Operation successful', {
+                    variant: 'success',
+                });
                 actions.resetForm()
                 dispatch({
                     type: crmConstants.crmAddContact,

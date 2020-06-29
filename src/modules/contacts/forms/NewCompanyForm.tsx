@@ -16,6 +16,7 @@ import {post} from "../../../utils/ajax";
 import Toast from "../../../utils/Toast";
 import XSelectInput from "../../../components/inputs/XSelectInput";
 import {EmailCategory, IdentificationCategory, PhoneCategory} from "../types";
+import {useSnackbar} from "notistack";
 
 interface IProps {
     data: any | null
@@ -35,6 +36,7 @@ const schema = yup.object().shape(
 )
 
 const NewCompanyForm = ({data, done}: IProps) => {
+    const {enqueueSnackbar} = useSnackbar();
     const dispatch = useDispatch();
 
     function handleSubmit(values: any, actions: FormikActions<any>) {
@@ -74,7 +76,11 @@ const NewCompanyForm = ({data, done}: IProps) => {
         }
         post(remoteRoutes.contacts, toSave,
             (data) => {
-                Toast.info('Operation successful')
+                // Toast.info('Operation successful')
+                enqueueSnackbar('Operation successful', {
+                    variant: 'success',
+                });
+
                 actions.resetForm()
                 dispatch({
                     type: crmConstants.crmAddContact,

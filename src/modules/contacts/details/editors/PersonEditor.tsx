@@ -17,6 +17,7 @@ import Toast from "../../../../utils/Toast";
 import XRadioInput from "../../../../components/inputs/XRadioInput";
 import {IPerson} from "../../types";
 import XSelectInput from "../../../../components/inputs/XSelectInput";
+import {useSnackbar} from "notistack";
 
 interface IProps {
     data: IPerson
@@ -34,6 +35,7 @@ const schema = yup.object().shape(
 )
 
 const PersonEditor = ({data, done,contactId}: IProps) => {
+    const {enqueueSnackbar} = useSnackbar();
     const dispatch = useDispatch();
 
     function handleSubmit(values: any, actions: FormikActions<any>) {
@@ -48,7 +50,10 @@ const PersonEditor = ({data, done,contactId}: IProps) => {
         }
         put(remoteRoutes.contactsPerson, {...toSave,contactId},
             (data) => {
-                Toast.info('Operation successful')
+                // Toast.info('Operation successful')
+                enqueueSnackbar('Operation successful', {
+                    variant: 'success',
+                });
                 actions.resetForm()
                 dispatch({
                     type: crmConstants.crmEditPerson,

@@ -31,6 +31,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Toast from "../../../../../utils/Toast";
 import Typography from "@material-ui/core/Typography";
 import { del } from "../../../../../utils/ajax";
+import {useSnackbar} from "notistack";
 
 interface IProps {
   data: IParticipant;
@@ -159,6 +160,7 @@ const contactToRecords = (data: IContactPerson): IRec[] => {
   ];
 };
 const ParticipantOverview = ({ data, participantId }: IProps) => {
+  const {enqueueSnackbar} = useSnackbar();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [anchor, setAnchor] = useState<Anchor>("right");
@@ -197,7 +199,11 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
           type: participantsConstants.participantsFetchContactPersonsLoading,
           payload: false,
         });
-        Toast.error("Operation failed");
+        // Toast.error("Operation failed");
+        enqueueSnackbar('Operation failed', {
+          variant: 'error',
+        });
+
       }
     );
   }, [participantId, dispatch]);
@@ -219,7 +225,10 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
         });
       },
       () => {
-        Toast.error("Operation failed");
+        // Toast.error("Operation failed");
+        enqueueSnackbar('Operation failed', {
+          variant: 'error',
+        });
       }
     );
   }
