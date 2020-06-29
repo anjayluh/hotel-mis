@@ -7,6 +7,7 @@ import { ITask, IWorkflow, TaskStatus, ActionStatus } from "../types";
 import DetailView, { IRec } from "../../../components/DetailView";
 import {
   printDateTime,
+  printYearDateTime,
   printDate,
   printMonthYear,
 } from "../../../utils/dateHelpers";
@@ -36,6 +37,7 @@ import { remoteRoutes } from "../../../data/constants";
 import Toast from "../../../utils/Toast";
 import { date } from "faker";
 import { useSnackbar } from "notistack";
+import Loading from "../../../components/Loading";
 
 interface IProps {
   data?: any;
@@ -72,6 +74,7 @@ const Summary = ({ data }: IProps) => {
     (state: IState) => state.billing
   );
   const [lastBillingCycle, setLastBillingCycle]: any = useState({});
+  const [loading, setLoading]: any = useState(true);
   function createFields(cycle: any): IRec[] {
     return [
       {
@@ -134,6 +137,7 @@ const Summary = ({ data }: IProps) => {
           type: BillingsConstants.BillingsFetchLoading,
           payload: true,
         });
+        setLoading(false);
       },
       () => {
         enqueueSnackbar("Operation failed", {
@@ -143,17 +147,25 @@ const Summary = ({ data }: IProps) => {
           type: BillingsConstants.BillingsFetchLoading,
           payload: false,
         });
+        setLoading(false);
       }
     );
   }
 
   function getBillingCycle(value: Date) {
+    let from = printYearDateTime(
+      new Date(value.getFullYear(), value.getMonth(), 1)
+    );
+    let to = printYearDateTime(
+      new Date(value.getFullYear(), value.getMonth() + 1, 0)
+    );
     dispatch({
       type: BillingsConstants.BillingsFetchLoading,
       payload: true,
     });
     get(
-      remoteRoutes.billingCycle,
+      remoteRoutes.billingCycle + `?DateRange.From=${from}&DateRange.To=${to}`,
+      // { dateTimeFrom: printYearDateTime(from), dateTimeTo: printYearDateTime(to)}
       (data) => {
         let [month, year] = printMonthYear(value).split(",");
         let date = month.substring(0, 3).toLowerCase().concat(year);
@@ -166,6 +178,7 @@ const Summary = ({ data }: IProps) => {
             type: BillingsConstants.BillingsFetchCurrentCycle,
             payload: cycle,
           });
+          setLoading(false);
           dispatch({
             type: BillingsConstants.BillingsFetchLoading,
             payload: false,
@@ -185,15 +198,17 @@ const Summary = ({ data }: IProps) => {
           type: BillingsConstants.BillingsFetchLoading,
           payload: false,
         });
+        setLoading(false);
       }
     );
   }
 
   const handleValueChange = (name: string) => (value: any) => {
+    setLoading(true);
     value = value ? value.toISOString() : value;
     const newData = { ...formData, [name]: value };
     setData(newData);
-    getBillingCycle(value);
+    getBillingCycle(new Date(value));
   };
 
   useEffect(() => {
@@ -250,7 +265,11 @@ const Summary = ({ data }: IProps) => {
           </Grid>
           <Grid item xs={12} style={{ marginBottom: 6 }}>
             <div>
-              <DetailView data={createFields(billingCycle)} />
+              {loading ? (
+                <Loading />
+              ) : (
+                <DetailView data={createFields(billingCycle)} />
+              )}
             </div>
           </Grid>
           <Grid item xs={12} style={{ marginBottom: 11 }}>
