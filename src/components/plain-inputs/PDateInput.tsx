@@ -32,6 +32,10 @@ export default function PDateInput({
   disableFuture,
 }: IProps) {
   const [open, setOpen] = useState(false);
+  function handleChange(e: any): any {
+    onChange(e);
+    setOpen(false);
+  }
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
@@ -44,7 +48,7 @@ export default function PDateInput({
         id="date-picker-inline"
         label={label}
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
         autoComplete="off"
         color="secondary"
         open={open}

@@ -32,6 +32,7 @@ import {
   IBillingState,
 } from "../../../data/redux/billing/reducer";
 import { IState } from "../../../data/types";
+import { IBillCycle } from "../../../modules/billing/types";
 import { get, post, search } from "../../../utils/ajax";
 import { remoteRoutes } from "../../../data/constants";
 import Toast from "../../../utils/Toast";
@@ -65,17 +66,17 @@ const Summary = ({ data }: IProps) => {
   });
 
   const { generateBill } = useSelector((state: IState) => state.billing);
-  const [billingCycle, setBillingCycle]: any = useState({
+  /* const [billingCycle, setBillingCycle]: any = useState({
     status: "",
     startDate: "",
     endDate: "",
-  });
+  }); */
   const { currentCycle }: IBillingState = useSelector(
     (state: IState) => state.billing
   );
   const [lastBillingCycle, setLastBillingCycle]: any = useState({});
   const [loading, setLoading]: any = useState(true);
-  function createFields(cycle: any): IRec[] {
+  function createFields(cycle: IBillCycle): IRec[] {
     return [
       {
         label: "Status",
@@ -87,9 +88,7 @@ const Summary = ({ data }: IProps) => {
       },
       {
         label: "Bill Generated On",
-        value: cycle.billGeneratedOn
-          ? printDateTime(cycle.billGeneratedOn)
-          : "-",
+        value: cycle.generatedOn ? printDateTime(cycle.generatedOn) : "-",
       },
     ];
   }
@@ -105,24 +104,32 @@ const Summary = ({ data }: IProps) => {
           type: BillingsConstants.BillingsFetchCurrentCycle,
           payload: resp,
         });
-        dispatch({
-          type: BillingsConstants.BillingsFetchLoading,
-          payload: true,
-        });
       },
       () => {
         enqueueSnackbar("Operation failed", {
           variant: "error",
-        });
-        dispatch({
-          type: BillingsConstants.BillingsFetchLoading,
-          payload: false,
         });
       }
     );
   }
   function submit() {
     generateBill ? generateBills() : emailBills();
+  }
+  function getCurrentCycleStatus(cycleId: string) {
+    get(
+      remoteRoutes.billingCycle + `/generate-bills/${cycleId}/status`,
+      (data) => {
+        dispatch({
+          type: BillingsConstants.BillingsFetchCurrentCycleStatus,
+          payload: data,
+        });
+      },
+      () => {
+        enqueueSnackbar("Operation failed", {
+          variant: "error",
+        });
+      }
+    );
   }
   function generateBillingCycle(value: any) {
     post(
@@ -133,19 +140,12 @@ const Summary = ({ data }: IProps) => {
           type: BillingsConstants.BillingsFetchCurrentCycle,
           payload: resp,
         });
-        dispatch({
-          type: BillingsConstants.BillingsFetchLoading,
-          payload: true,
-        });
+        resp && getCurrentCycleStatus(resp.id);
         setLoading(false);
       },
       () => {
         enqueueSnackbar("Operation failed", {
           variant: "error",
-        });
-        dispatch({
-          type: BillingsConstants.BillingsFetchLoading,
-          payload: false,
         });
         setLoading(false);
       }
@@ -159,13 +159,8 @@ const Summary = ({ data }: IProps) => {
     let to = printYearDateTime(
       new Date(value.getFullYear(), value.getMonth() + 1, 0)
     );
-    dispatch({
-      type: BillingsConstants.BillingsFetchLoading,
-      payload: true,
-    });
     get(
       remoteRoutes.billingCycle + `?DateRange.From=${from}&DateRange.To=${to}`,
-      // { dateTimeFrom: printYearDateTime(from), dateTimeTo: printYearDateTime(to)}
       (data) => {
         let [month, year] = printMonthYear(value).split(",");
         let date = month.substring(0, 3).toLowerCase().concat(year);
@@ -173,16 +168,12 @@ const Summary = ({ data }: IProps) => {
           return item.cycleName === date;
         })[0];
         if (cycle) {
-          setBillingCycle(cycle);
           dispatch({
             type: BillingsConstants.BillingsFetchCurrentCycle,
             payload: cycle,
           });
           setLoading(false);
-          dispatch({
-            type: BillingsConstants.BillingsFetchLoading,
-            payload: false,
-          });
+          cycle && getCurrentCycleStatus(cycle.id);
         } else {
           generateBillingCycle({
             month: new Date(value).getMonth() + 1,
@@ -193,10 +184,6 @@ const Summary = ({ data }: IProps) => {
       () => {
         enqueueSnackbar("Operation failed", {
           variant: "error",
-        });
-        dispatch({
-          type: BillingsConstants.BillingsFetchLoading,
-          payload: false,
         });
         setLoading(false);
       }
@@ -263,29 +250,34 @@ const Summary = ({ data }: IProps) => {
               </Grid>
             </form>
           </Grid>
+
           <Grid item xs={12} style={{ marginBottom: 6 }}>
-            <div>
-              {loading ? (
-                <Loading />
-              ) : (
-                <DetailView data={createFields(billingCycle)} />
-              )}
-            </div>
+            {loading ? (
+              <Loading />
+            ) : (
+              <div>
+                {currentCycle && (
+                  <DetailView data={createFields(currentCycle)} />
+                )}
+              </div>
+            )}
           </Grid>
           <Grid item xs={12} style={{ marginBottom: 11 }}>
-            <Box display="flex" flexDirection="row">
-              {
-                <Button
-                  variant={!generateBill ? "outlined" : "contained"}
-                  color="primary"
-                  onClick={submit}
-                >
-                  {!generateBill
-                    ? "Email bills to participants"
-                    : "Generate bills"}
-                </Button>
-              }
-            </Box>
+            {!loading && (
+              <Box display="flex" flexDirection="row">
+                {
+                  <Button
+                    variant={!generateBill ? "outlined" : "contained"}
+                    color="primary"
+                    onClick={submit}
+                  >
+                    {!generateBill
+                      ? "Email bills to participants"
+                      : "Generate bills"}
+                  </Button>
+                }
+              </Box>
+            )}
           </Grid>
         </Paper>
       </Grid>

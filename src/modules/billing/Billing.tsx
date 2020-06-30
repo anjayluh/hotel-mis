@@ -70,7 +70,6 @@ const Billings = () => {
   const [filter, setFilter] = useState<IWorkflowFilter>({});
   const classes = useStyles();
   const { generateBill } = useSelector((state: IState) => state.billing);
-  // const updatedData = generateBill ? data : [];
   useEffect(() => {
     if (currentCycle) {
       dispatch({
@@ -147,27 +146,24 @@ const Billings = () => {
         </Grid>
         <Grid item xs={9}>
           <Box p={1} pt={0} className={classes.root}>
-            {loading ? (
-              <Loading />
-            ) : (
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <XTable
-                    headCells={headCells}
-                    data={data}
-                    initialRowsPerPage={10}
-                    usePagination={data.length > 0}
-                  />
-                  <div className={classes.helperText}>
-                    {generateBill && (
-                      <Typography variant={"body2"}>
-                        No Bills have been generated for the selected cycle yet
-                      </Typography>
-                    )}
-                  </div>
-                </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <XTable
+                  headCells={headCells}
+                  data={data}
+                  initialRowsPerPage={10}
+                  usePagination={data.length > 0}
+                />
+                {/* {loading && <Loading />} */}
+                <div className={classes.helperText}>
+                  {generateBill && (
+                    <Typography variant={"body2"}>
+                      No Bills have been generated for the selected cycle yet
+                    </Typography>
+                  )}
+                </div>
               </Grid>
-            )}
+            </Grid>
           </Box>
         </Grid>
       </Grid>

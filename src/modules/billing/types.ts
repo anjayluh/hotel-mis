@@ -4,8 +4,10 @@ export interface IBillCycle {
     id: string,
     cycleName: string,
     startDate: Date,
-    endDate: Date,
-    status?: Date
+    generatedOn: Date,
+    status?: Date,
+    billCount?: number
+    subscriptionCount?: number
 }
 export interface IBill {
     id: string,

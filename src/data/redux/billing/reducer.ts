@@ -5,6 +5,7 @@ export const BillingsConstants = {
   BillingsFetchLoading: "BillingsFetchLoading",
   BillingsGenerateBill: "BillingsGenerateBill",
   BillingsFetchCurrentCycle: "BillingsFetchCurrentCycle",
+  BillingsFetchCurrentCycleStatus: "BillingsFetchCurrentCycleStatus",
 };
 
 export interface IBillingState {
@@ -37,6 +38,20 @@ export default function reducer(state = initialState, action: any) {
 
     case BillingsConstants.BillingsFetchCurrentCycle: {
       return { ...state, currentCycle: action.payload };
+    }
+      
+    case BillingsConstants.BillingsFetchCurrentCycleStatus: {
+      console.log(action.payload, 'BillingsFetchCurrentCycleStatus')
+      return {
+        ...state,
+        currentCycle: {
+          ...state.currentCycle,
+          status: action.payload.status,
+          generatedOn: action.payload.dateCreatedOn,
+          billCount: action.payload.billCount,
+          subscriptionCount: action.payload.subscriptionCount
+        }
+      };
     }
 
     default: {
