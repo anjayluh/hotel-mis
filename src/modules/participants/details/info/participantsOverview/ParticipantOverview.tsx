@@ -260,6 +260,7 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
   }
   function onDelete() {
     setDeleteItem(true);
+    setIsProgress(false);
     setTimeout(function () {
       setIsProgress(true);
     }, 1000);
