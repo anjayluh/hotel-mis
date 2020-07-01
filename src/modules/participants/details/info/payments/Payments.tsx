@@ -17,7 +17,6 @@ import { remoteRoutes } from "../../../../../data/constants";
 import Details from "./Details/Details";
 import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
 import PaymentForm from "./forms/PaymentForm";
-import Toast from "../../../../../utils/Toast";
 import {useSnackbar} from "notistack";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -186,7 +185,7 @@ const Payments = (props: IProps) => {
                   <XTable
                     headCells={headCells}
                     data={selected.payments}
-                    initialRowsPerPage={5}
+                    initialRowsPerPage={10}
                     usePagination={showPagination}
                     handleSelection={handlePaymentDetails}
                     hoverClass={classes.rowHover}

@@ -10,7 +10,7 @@ import { enumToArray } from "../../utils/stringHelpers";
 import { createArray } from "../../utils/arrayHelpers";
 import { format, compareAsc } from "date-fns";
 import { value } from "jsonpath";
-import { paymentTypes } from "../../data/comboCategories";
+import { PaymentTypeOptions } from "../../data/comboCategories";
 import { contactPersonCategories } from "../../data/comboCategories";
 
 const uuid = require("uuid/v4");
@@ -34,7 +34,7 @@ export const fakePayment = (): IPayment => {
   return {
     id: faker.random.uuid(),
     paymentDate: new Date(faker.date.past(1)),
-    paymentType: faker.random.arrayElement(paymentTypes),
+    paymentType: faker.random.arrayElement(PaymentTypeOptions.map(type => type.value)),
     referenceNumber: faker.finance.account(5),
     amount: faker.random.number({ min: 999999, max: 9999999 }),
   };
@@ -44,10 +44,10 @@ export const fakePaymentDetails = (): IPayment => {
   return {
     id: faker.finance.account(6),
     paymentDate: new Date(faker.date.past(1)),
-    paymentType: faker.random.arrayElement(paymentTypes),
+    paymentType: faker.random.arrayElement(PaymentTypeOptions.map(type => type.value)),
     amount: faker.random.number({ min: 999999, max: 9999999 }),
     dateOfEntry: new Date(faker.date.past(1)),
-    enteredBy: faker.name.findName(),
+    paymentMadeBy: faker.name.findName(),
     referenceNumber: faker.finance.account(5),
   };
 };

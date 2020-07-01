@@ -167,7 +167,7 @@ export interface IPayment {
   referenceNumber: any;
   amount: number;
   dateOfEntry?: Date;
-  enteredBy?: string;
+  paymentMadeBy?: string;
   comment?: string
 }
 
