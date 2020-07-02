@@ -216,6 +216,7 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
     setFormData(null);
     setAdd(false);
     setEdit(false);
+    setIsProgress(true);
     del(
       remoteRoutes.participantsContactPersons +
         `/${participantId}/persons/${contactId}`,
@@ -231,6 +232,10 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
         enqueueSnackbar("Operation failed", {
           variant: "error",
         });
+      },
+      () => {
+        setDeleteItem(false)
+        setIsProgress(false);
       }
     );
   }
@@ -260,10 +265,6 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
   }
   function onDelete() {
     setDeleteItem(true);
-    setIsProgress(false);
-    setTimeout(function () {
-      setIsProgress(true);
-    }, 1000);
   }
   const officialContactColumn = officialContactInfo(data);
   const primaryContactColumn = primaryContactInfo(data);
