@@ -98,6 +98,7 @@ const PaymentForm = (props: IProps) => {
             label="Payment Date"
             inputVariant="outlined"
             size="small"
+            disableFuture={true}
           />
         </Grid>
         <Grid item xs={12}>

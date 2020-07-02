@@ -19,9 +19,10 @@ interface IProps {
   value?: string;
   inputVariant?: "outlined" | "filled" | "standard";
   size?: "small" | "medium";
+  disableFuture?: boolean;
 }
 
-const Component = ({ field, form, ...other }: FieldProps) => {
+const Component = ({ field, form,  ...other }: FieldProps, {disableFuture}:IProps) => {
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -30,6 +31,7 @@ const Component = ({ field, form, ...other }: FieldProps) => {
   const wasSubmitted = form.submitCount > 0;
   const showError = hasValue(error) && (isTouched || wasSubmitted);
   const [open, setOpen] = useState(false);
+
 
   function handleTouch() {
     return form.setFieldTouched(field.name, true, true);
@@ -61,6 +63,7 @@ const Component = ({ field, form, ...other }: FieldProps) => {
             anchorOrigin: { horizontal: "left", vertical: "bottom" },
             transformOrigin: { horizontal: "left", vertical: "top" },
           }}
+          disableFuture={disableFuture}
           {...other}
         />
       ) : (
@@ -87,6 +90,7 @@ const Component = ({ field, form, ...other }: FieldProps) => {
             anchorOrigin: { horizontal: "left", vertical: "bottom" },
             transformOrigin: { horizontal: "left", vertical: "top" },
           }}
+          disableFuture={disableFuture}
           {...other}
         />
       )}
