@@ -226,6 +226,9 @@ const ParticipantOverview = ({ data, participantId }: IProps) => {
           type: participantsConstants.participantsDeleteContactPerson,
           payload: contactId,
         });
+        enqueueSnackbar("Operation successful", {
+          variant: "success",
+        });
       },
       () => {
         // Toast.error("Operation failed");
