@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import DetailView, { IRec } from "../../../../../../components/DetailView";
 import { printDateTime, printDate } from "../../../../../../utils/dateHelpers";
-import { printFormattedMoney } from "../../../../../../utils/numberHelpers";
+import { printsMoney } from "../../../../../../utils/numberHelpers";
 import { IPayment } from "../../../../types";
 
 interface IProps {
@@ -33,7 +33,7 @@ const Summary = ({ data }: IProps) => {
     },
     {
       label: "Amount",
-      value: data.amount ? printFormattedMoney(data.amount) : "-",
+      value: data.amount ? printsMoney(data.amount) : "-",
     },
     {
       label: "Date of Entry",

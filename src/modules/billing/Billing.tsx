@@ -78,7 +78,7 @@ const Billings = () => {
       });
       search(
         remoteRoutes.billing,
-        { BillingCycleIds: currentCycle.id },
+        { BillingCycleIds: currentCycle.billingCycleId },
         (resp) => {
           dispatch({
             type: BillingsConstants.BillingsFetchAll,
@@ -122,7 +122,6 @@ const Billings = () => {
   function closeCreateDialog() {
     setCreateDialog(false);
   }
-
   return (
     <Layout>
       <Grid container spacing={2}>

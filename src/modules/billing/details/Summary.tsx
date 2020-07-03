@@ -66,11 +66,6 @@ const Summary = ({ data }: IProps) => {
   });
 
   const { generateBill } = useSelector((state: IState) => state.billing);
-  /* const [billingCycle, setBillingCycle]: any = useState({
-    status: "",
-    startDate: "",
-    endDate: "",
-  }); */
   const { currentCycle }: IBillingState = useSelector(
     (state: IState) => state.billing
   );
@@ -84,21 +79,32 @@ const Summary = ({ data }: IProps) => {
       },
       {
         label: "Started On",
-        value: cycle.startDate ? printDateTime(cycle.startDate) : "-",
+        value: cycle.startDateTime ? printDateTime(cycle.startDateTime) : "-",
       },
       {
         label: "Bill Generated On",
-        value: cycle.generatedOn ? printDateTime(cycle.generatedOn) : "-",
+        value: cycle.billGeneratedOn
+          ? printDateTime(cycle.billGeneratedOn)
+          : "-",
       },
     ];
   }
   function emailBills() {
-    // onFilter(values);
+    post(
+      remoteRoutes.billingCycle + `/email-bills`,
+      { billingCycleId: currentCycle && currentCycle.billingCycleId },
+      (resp) => {},
+      () => {
+        enqueueSnackbar("Operation failed", {
+          variant: "error",
+        });
+      }
+    );
   }
   function generateBills() {
     post(
       remoteRoutes.billingCycle + `/generate-bills`,
-      { billingCycleId: currentCycle && currentCycle.id },
+      { billingCycleId: currentCycle && currentCycle.billingCycleId },
       (resp) => {
         dispatch({
           type: BillingsConstants.BillingsFetchCurrentCycle,
@@ -163,7 +169,7 @@ const Summary = ({ data }: IProps) => {
       remoteRoutes.billingCycle + `?DateRange.From=${from}&DateRange.To=${to}`,
       (data) => {
         let [month, year] = printMonthYear(value).split(",");
-        let date = month.substring(0, 3).toLowerCase().concat(year);
+        let date = month.substring(0, 3).concat(year);
         let cycle = data.filter((item: any) => {
           return item.cycleName === date;
         })[0];
@@ -175,10 +181,12 @@ const Summary = ({ data }: IProps) => {
           setLoading(false);
           cycle && getCurrentCycleStatus(cycle.id);
         } else {
+          // if (new Date(value).getMonth() + 1 === new Date().getMonth() + 1) {
           generateBillingCycle({
             month: new Date(value).getMonth() + 1,
             year: parseInt(year),
           });
+          // }
         }
       },
       () => {
@@ -213,7 +221,28 @@ const Summary = ({ data }: IProps) => {
         });
       }
     );
-  }, []);
+    if (lastBillingCycle.id) {
+      get(
+        remoteRoutes.billingCycle +
+          `/generate-bills/${lastBillingCycle.id}/status`,
+        (data) => {
+          setLastBillingCycle({
+            ...lastBillingCycle,
+            billingCycleId: data.billingCycleId,
+            status: data.status,
+            billGeneratedOn: data.dateCreated,
+            billCount: data.billCount,
+            subscriptionCount: data.subscriptionCount,
+          });
+        },
+        () => {
+          enqueueSnackbar("Operation failed", {
+            variant: "error",
+          });
+        }
+      );
+    }
+  }, [lastBillingCycle.id, dispatch]);
 
   return (
     <Grid container spacing={3}>
@@ -287,7 +316,8 @@ const Summary = ({ data }: IProps) => {
             <Box display="flex" pb={1}>
               <Box flexGrow={1}>
                 <Typography color={"textSecondary"} variant="h5">
-                  Last Billing Cycle: May 2020
+                  Last Billing Cycle:{" "}
+                  {printMonthYear(lastBillingCycle.startDateTime)}
                 </Typography>
               </Box>
             </Box>

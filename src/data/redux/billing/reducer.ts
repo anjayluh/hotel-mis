@@ -31,7 +31,7 @@ export default function reducer(state = initialState, action: any) {
     case BillingsConstants.BillingsFetchLoading: {
       return { ...state, loading: action.payload };
     }
-      
+
     case BillingsConstants.BillingsGenerateBill: {
       return { ...state, generateBill: action.payload };
     }
@@ -39,18 +39,18 @@ export default function reducer(state = initialState, action: any) {
     case BillingsConstants.BillingsFetchCurrentCycle: {
       return { ...state, currentCycle: action.payload };
     }
-      
+
     case BillingsConstants.BillingsFetchCurrentCycleStatus: {
-      console.log(action.payload, 'BillingsFetchCurrentCycleStatus')
       return {
         ...state,
         currentCycle: {
           ...state.currentCycle,
+          billingCycleId: action.payload.billingCycleId,
           status: action.payload.status,
-          generatedOn: action.payload.dateCreatedOn,
+          billGeneratedOn: action.payload.dateCreated,
           billCount: action.payload.billCount,
-          subscriptionCount: action.payload.subscriptionCount
-        }
+          subscriptionCount: action.payload.subscriptionCount,
+        },
       };
     }
 

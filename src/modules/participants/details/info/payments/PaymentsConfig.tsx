@@ -1,6 +1,6 @@
 import { XHeadCell } from "../../../../../components/table/XTableHead";
 import { printDate } from "../../../../../utils/dateHelpers";
-import { printFormattedMoney } from "../../../../../utils/numberHelpers";
+import { printsMoney } from "../../../../../utils/numberHelpers";
 import React from "react";
 
 export const columns: XHeadCell[] = [
@@ -36,7 +36,7 @@ export const columns: XHeadCell[] = [
     name: "amount",
     label: "Amount",
     numeric: true,
-    render: (value, rec) => printFormattedMoney(value),
+    render: (value, rec) => printsMoney(value),
     cellProps: {
       style: {
         width: 80,
