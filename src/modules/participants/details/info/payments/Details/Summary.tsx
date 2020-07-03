@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 import { Grid } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
 import DetailView, { IRec } from "../../../../../../components/DetailView";
-import { printDateTime, printDate } from "../../../../../../utils/dateHelpers";
+import { printDateTime } from "../../../../../../utils/dateHelpers";
 import { printsMoney } from "../../../../../../utils/numberHelpers";
+import { formatPaymentType } from "../../../../../../utils/BOUSpecificHelpers";
 import { IPayment } from "../../../../types";
 
 interface IProps {
@@ -11,17 +11,6 @@ interface IProps {
 }
 
 const Summary = ({ data }: IProps) => {
-  function paymentType(value: string) {
-    let paymentType = "";
-    if (value === "Eft") {
-      paymentType = "Electronic Funds Transfer (EFT)";
-    } else if (value === "DirectDebit") {
-      paymentType = "Direct Debit";
-    } else {
-      paymentType = value;
-    }
-    return paymentType;
-  }
   const fields: IRec[] = [
     {
       label: "Payment Date",
@@ -29,7 +18,7 @@ const Summary = ({ data }: IProps) => {
     },
     {
       label: "Payment Type",
-      value: data.paymentType ? paymentType(data.paymentType) : "-",
+      value: data.paymentType ? formatPaymentType(data.paymentType) : "-",
     },
     {
       label: "Amount",
@@ -40,8 +29,8 @@ const Summary = ({ data }: IProps) => {
       value: data.dateCreated ? printDateTime(data.dateCreated) : "-",
     },
     {
-      label: "Entered By",
-      value: data.enteredBy ? data.enteredBy : "-",
+      label: "Payment Made By",
+      value: data.paymentMadeBy ? data.paymentMadeBy : "-",
     },
     {
       label: "Ref.Number",

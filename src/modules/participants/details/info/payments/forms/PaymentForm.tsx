@@ -1,26 +1,22 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import * as yup from "yup";
-import * as faker from "faker";
 import {
   reqString,
   reqDate,
   reqNumber,
 } from "../../../../../../data/validations";
-import { paymentTypes } from "../../../../../../data/comboCategories";
+import { PaymentTypeOptions } from "../../../../../../data/comboCategories";
 import { FormikActions } from "formik";
 import Grid from "@material-ui/core/Grid";
 import XFormSimple from "../../../../../../components/forms/XFormSimple";
 import XTextInput from "../../../../../../components/inputs/XTextInput";
-import { toOptions } from "../../../../../../components/inputs/inputHelpers";
 import { useDispatch } from "react-redux";
-import { IPayment } from "../../../../types";
 import XSelectInput from "../../../../../../components/inputs/XSelectInput";
 import XTextAreaInput from "../../../../../../components/inputs/XTextAreaInput";
 import XDateInput from "../../../../../../components/inputs/XDateInput";
 import { remoteRoutes } from "../../../../../../data/constants";
 import { post } from "../../../../../../utils/ajax";
-import Toast from "../../../../../../utils/Toast";
 import { participantsConstants } from "../../../../../../data/redux/participants/reducer";
 import { useSnackbar } from "notistack";
 
@@ -28,8 +24,8 @@ const schema = yup.object().shape({
   paymentDate: reqDate,
   paymentType: reqString,
   referenceNumber: reqNumber,
-  enteredBy: reqString,
-  comment: reqString,
+  amount: reqNumber,
+  paymentMadeBy: reqString
 });
 
 interface IProps {
@@ -44,32 +40,21 @@ const PaymentForm = (props: IProps) => {
     paymentType: "",
     referenceNumber: "",
     amount: "",
-    enteredBy: "",
+    paymentMadeBy: "",
     comment: "",
   });
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const baseUrl = remoteRoutes.billing.split("bills")[0];
   const paymentsUrl = baseUrl + "payments";
-  function getSelectedPaymentType(value: string) {
-    let selectedPaymentType = "";
-    if (value === "Electronic Funds Transfer (EFT)") {
-      selectedPaymentType = "EFT";
-    } else if (value === "Direct Debit") {
-      selectedPaymentType = "DirectDebit";
-    } else {
-      selectedPaymentType = value;
-    }
-    return selectedPaymentType;
-  }
   function handleSubmit(values: any, actions: FormikActions<any>) {
     const toSave: any = {
       subscriptionId: props.subscriptionId,
       amount: values.amount,
       referenceNumber: values.referenceNumber,
       comment: values.comment,
-      paymentType: getSelectedPaymentType(values.paymentType),
-      enteredBy: values.enteredBy,
+      paymentType: values.paymentType,
+      paymentMadeBy: values.paymentMadeBy,
       paymentDate: values.paymentDate,
     };
     post(
@@ -113,6 +98,7 @@ const PaymentForm = (props: IProps) => {
             label="Payment Date"
             inputVariant="outlined"
             size="small"
+            disableFuture={true}
           />
         </Grid>
         <Grid item xs={12}>
@@ -120,7 +106,7 @@ const PaymentForm = (props: IProps) => {
             size="small"
             name="paymentType"
             label="Payment Type"
-            options={toOptions(paymentTypes)}
+            options={PaymentTypeOptions}
             variant="outlined"
           />
         </Grid>
@@ -145,8 +131,8 @@ const PaymentForm = (props: IProps) => {
 
         <Grid item xs={12}>
           <XTextInput
-            name="enteredBy"
-            label="Entered By"
+            name="paymentMadeBy"
+            label="Payment Made By"
             type="text"
             variant="outlined"
             size="small"

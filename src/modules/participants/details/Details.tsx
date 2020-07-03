@@ -17,7 +17,6 @@ import AccountStatement from "./info/accountStatement/AccountStatement";
 import { participantsConstants } from "../../../data/redux/participants/reducer";
 import { remoteRoutes } from "../../../data/constants";
 import { get } from "../../../utils/ajax";
-import Toast from "../../../utils/Toast";
 import {useSnackbar} from "notistack";
 
 interface IProps extends RouteComponentProps {}

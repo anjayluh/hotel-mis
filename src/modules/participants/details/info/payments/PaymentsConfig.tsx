@@ -1,13 +1,14 @@
 import { XHeadCell } from "../../../../../components/table/XTableHead";
 import { printDate } from "../../../../../utils/dateHelpers";
 import { printsMoney } from "../../../../../utils/numberHelpers";
+import { formatPaymentType } from "../../../../../utils/BOUSpecificHelpers";
 import React from "react";
 
 export const columns: XHeadCell[] = [
   {
     name: "paymentDate",
     label: "Payment date",
-    render: (value, rec) => <span>{printDate(value)}</span>,
+    render: (value) => <span>{printDate(value)}</span>,
     cellProps: {
       style: {
         width: 200,
@@ -17,6 +18,7 @@ export const columns: XHeadCell[] = [
   {
     name: "paymentType",
     label: "Payment type",
+    render: (value) => <span>{formatPaymentType(value)}</span>,
     cellProps: {
       style: {
         width: 200,

@@ -13,12 +13,16 @@ export const civilStatusCategories = ["Single", "Married", "Divorced", "Other"];
 export const emailCategories = ["Personal", "Work", "Other"];
 export const phoneCategories = ["Mobile", "Office", "Home", "Fax", "Other"];
 export const addressCategories = ["Home", "Work", "Other"];
-export const hobbyCategories = ["FootBall", "Work", "Other"];
 export const organisationTypeCategories = [
   "Commercial Bank",
   "Microfinance",
   "Forex Bureau",
 ];
 export const contactPersonCategories = ["Billing", "Technical"];
-export const paymentTypes = ["Electronic Funds Transfer (EFT)", "Cheque", "Direct Debit"];
+export const PaymentTypeOptions = [
+    {label: 'Electronic Funds Transfer (EFT)', value: 'Eft'},
+    {label: 'Cheque', value: 'Cheque'},
+    {label: 'Direct Debit', value: 'DirectDebit'},
+];
+
 export const subscriptionsServiceTypes = ["NIN Verification"];
