@@ -41,16 +41,12 @@ const fakeServiceCategories = [
       {
         from: 0,
         to: 100,
-        unitPrice: new Intl.NumberFormat("en-US", {
-          maximumFractionDigits: 2,
-        }).format(1000),
+        unitPrice: 1000,
       },
       {
         from: 101,
         to: 200,
-        unitPrice: new Intl.NumberFormat("en-US", {
-          maximumFractionDigits: 2,
-        }).format(2000),
+        unitPrice: 2000,
       },
     ],
   },
@@ -60,16 +56,12 @@ const fakeServiceCategories = [
       {
         from: 0,
         to: 100,
-        unitPrice: new Intl.NumberFormat("en-US", {
-          maximumFractionDigits: 2,
-        }).format(1000),
+        unitPrice: 1000,
       },
       {
         from: 101,
         to: 200,
-        unitPrice: new Intl.NumberFormat("en-US", {
-          maximumFractionDigits: 2,
-        }).format(2000),
+        unitPrice: 2000,
       },
     ],
   },
@@ -79,16 +71,12 @@ const fakeServiceCategories = [
       {
         from: 0,
         to: 100,
-        unitPrice: new Intl.NumberFormat("en-US", {
-          maximumFractionDigits: 2,
-        }).format(1000),
+        unitPrice: 1000,
       },
       {
         from: 101,
         to: 200,
-        unitPrice: new Intl.NumberFormat("en-US", {
-          maximumFractionDigits: 2,
-        }).format(2000),
+        unitPrice: 2000,
       },
     ],
   },

@@ -8,6 +8,7 @@ import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
 import { IState } from "../../../../data/types";
 import Summary from "./Summary";
+import { printsMoney } from "../../../../utils/numberHelpers";
 
 interface IProps {
   closeSlideOut?: () => any;
@@ -45,7 +46,6 @@ const useStyles = makeStyles((theme: Theme) =>
 const Details = (props: IProps) => {
   const dispatch = useDispatch();
   const classes = useStyles();
-
   return (
     <div>
       {props.loading ? (
@@ -102,13 +102,14 @@ const Details = (props: IProps) => {
                   </Typography>
                 </Grid>
               </Grid>
-              {props.data.rates.map((item: any) => (
+              {props.data.rates.map((item: any, index: number) => (
                 <Grid
                   item
                   spacing={2}
                   container
                   direction="row"
                   alignItems="center"
+                  key={index}
                 >
                   <Grid item xs={5}>
                     <Typography variant="subtitle2" className={classes.title}>
@@ -123,7 +124,7 @@ const Details = (props: IProps) => {
                       variant="subtitle2"
                       className={`${classes.title} ${classes.unitPrice}`}
                     >
-                      {item.unitPrice}
+                      {printsMoney(Number(item.unitPrice))}
                     </Typography>
                   </Grid>
                 </Grid>

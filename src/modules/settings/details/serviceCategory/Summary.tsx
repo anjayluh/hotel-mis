@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Grid } from "@material-ui/core";
 import DetailView, { IRec } from "../../../../components/DetailView";
-import { printMoney } from "../../../../utils/numberHelpers";
+import { printsMoney } from "../../../../utils/numberHelpers";
 
 interface IProps {
   data?: any;

@@ -76,17 +76,13 @@ const ServiceCategoryForm = (props: IProps) => {
     rates: [
       {
         from: 0,
-        to: 100,
-        unitPrice: new Intl.NumberFormat("en-US", {
-          maximumFractionDigits: 2,
-        }).format(1000),
+        to: 0,
+        unitPrice: 0,
       },
       {
         from: 101,
-        to: 200,
-        unitPrice: new Intl.NumberFormat("en-US", {
-          maximumFractionDigits: 2,
-        }).format(2000),
+        to: 0,
+        unitPrice: 0,
       },
     ],
   });
@@ -144,11 +140,9 @@ const ServiceCategoryForm = (props: IProps) => {
       rates: [
         ...data.rates,
         {
-          from: 101,
-          to: 200,
-          unitPrice: new Intl.NumberFormat("en-US", {
-            maximumFractionDigits: 2,
-          }).format(2000),
+          from: 0,
+          to: 0,
+          unitPrice: 0,
         },
       ],
     });
