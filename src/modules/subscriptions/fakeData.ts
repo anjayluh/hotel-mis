@@ -2,7 +2,7 @@ import * as faker from "faker";
 import {ActionStatus, IAction, ITask, IWorkflow, TaskStatus, WorkflowStatus, WorkflowSubStatus, ISubscription, SubscriptionStatus} from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
-import {printMoney} from "../../utils/numberHelpers";
+import {printsMoney} from "../../utils/numberHelpers";
 import { format, compareAsc } from 'date-fns'
 
 const uuid = require('uuid/v4');

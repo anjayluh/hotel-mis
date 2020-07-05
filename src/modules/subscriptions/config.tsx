@@ -2,7 +2,7 @@ import { XHeadCell } from "../../components/table/XTableHead";
 import { printDate } from "../../utils/dateHelpers";
 import React from "react";
 import { format, compareAsc } from "date-fns";
-import { printMoney } from "../../utils/numberHelpers";
+import { printsMoney } from "../../utils/numberHelpers";
 import { renderSubscriptionStatus } from "./widgets";
 
 export const SubscriptionColumns: XHeadCell[] = [
@@ -61,7 +61,7 @@ export const SubscriptionColumns: XHeadCell[] = [
   {
     name: "monthlyCap",
     label: "Monthly Cap",
-    render: (value, rec) => printMoney(value),
+    render: (value, rec) => printsMoney(value),
     cellProps: {
       style: {
         width: 80,

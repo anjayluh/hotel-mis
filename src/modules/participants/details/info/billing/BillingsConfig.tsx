@@ -1,7 +1,7 @@
 import { XHeadCell } from "../../../../../components/table/XTableHead";
 import ParticipantLink from "../../../../../components/links/ParticipantLink";
 import { printDate } from "../../../../../utils/dateHelpers";
-import { printMoney } from "../../../../../utils/numberHelpers";
+import { printsMoney } from "../../../../../utils/numberHelpers";
 import React from "react";
 
 export const columns: XHeadCell[] = [
@@ -30,7 +30,7 @@ export const columns: XHeadCell[] = [
     name: "consumptionAmount",
     label: "Consumption",
     numeric: true,
-    render: (value, rec) => (value === 0 ? value : printMoney(value)),
+    render: (value, rec) => (value === 0 ? value : printsMoney(value)),
     cellProps: {
       style: {
         width: 200,
@@ -54,7 +54,7 @@ export const columns: XHeadCell[] = [
     name: "amountDue",
     label: "Bill amount",
     numeric: true,
-    render: (value, rec) => (value === 0 ? value : printMoney(value)),
+    render: (value, rec) => (value === 0 ? value : printsMoney(value)),
     cellProps: {
       style: {
         width: 150,

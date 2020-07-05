@@ -3,7 +3,7 @@ import ParticipantLink from "../../components/links/ParticipantLink";
 import { printDate } from "../../utils/dateHelpers";
 import React from "react";
 import { format, compareAsc } from "date-fns";
-import { printMoney } from "../../utils/numberHelpers";
+import { printsMoney } from "../../utils/numberHelpers";
 
 export const columns: XHeadCell[] = [
   {
@@ -38,7 +38,7 @@ export const columns: XHeadCell[] = [
   {
     name: "consumptionAmount",
     label: "Consumption",
-    render: (value, rec) => (value === 0 ? value : printMoney(value)),
+    render: (value, rec) => (value === 0 ? value : printsMoney(value)),
     numeric: true,
     cellProps: {
       style: {
@@ -64,7 +64,7 @@ export const columns: XHeadCell[] = [
     name: "lastBillAmountDue",
     label: "Bill amount",
     numeric: true,
-    render: (value, rec) => printMoney(value),
+    render: (value, rec) => printsMoney(value),
     cellProps: {
       style: {
         width: 200,

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Grid } from "@material-ui/core";
 import DetailView, { IRec } from "../../../../../../components/DetailView";
 import { printDateTime } from "../../../../../../utils/dateHelpers";
-import { printMoney } from "../../../../../../utils/numberHelpers";
+import { printsMoney } from "../../../../../../utils/numberHelpers";
 import { formatPaymentType } from "../../../../../../utils/BOUSpecificHelpers";
 import { IPayment } from "../../../../types";
 
@@ -22,7 +22,7 @@ const Summary = ({ data }: IProps) => {
     },
     {
       label: "Amount",
-      value: data.amount ? printMoney(data.amount) : "-",
+      value: data.amount ? printsMoney(data.amount) : "-",
     },
     {
       label: "Date of Entry",
