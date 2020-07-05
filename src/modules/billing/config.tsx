@@ -49,18 +49,6 @@ export const columns: XHeadCell[] = [
     },
   },
   {
-    name: "rate",
-    label: "Rate",
-    numeric: true,
-    cellProps: {
-      style: {
-        width: 200,
-        whiteSpace: "nowrap",
-        textAlign: "right",
-      },
-    },
-  },
-  {
     name: "lastBillAmountDue",
     label: "Bill amount",
     numeric: true,

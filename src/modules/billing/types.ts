@@ -4,6 +4,7 @@ export interface IBillCycle {
   billingCycleId: string;
   cycleName: string;
   startDateTime: Date;
+  endDateTime: Date;
   billGeneratedOn: Date;
   status?: Date;
   billCount?: number;

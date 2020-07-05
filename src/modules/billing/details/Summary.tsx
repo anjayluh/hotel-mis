@@ -69,8 +69,26 @@ const Summary = ({ data }: IProps) => {
   const { currentCycle }: IBillingState = useSelector(
     (state: IState) => state.billing
   );
+  const billData: any[] = useSelector((state: IState) => state.billing.data);
   const [lastBillingCycle, setLastBillingCycle]: any = useState({});
   const [loading, setLoading]: any = useState(true);
+
+  function compareDates(value1: Date, value2: Date) {
+    let hours1 = Date.parse(
+      new Date(
+        new Date(value1).getFullYear(),
+        new Date(value1).getMonth()
+      ).toDateString()
+    );
+    let hours2 = Date.parse(
+      new Date(
+        new Date(value2).getFullYear(),
+        new Date(value2).getMonth()
+      ).toDateString()
+    );
+    return hours1 > hours2;
+  }
+
   function createFields(cycle: IBillCycle): IRec[] {
     return [
       {
@@ -118,9 +136,6 @@ const Summary = ({ data }: IProps) => {
       }
     );
   }
-  function submit() {
-    generateBill ? generateBills() : emailBills();
-  }
   function getCurrentCycleStatus(cycleId: string) {
     get(
       remoteRoutes.billingCycle + `/generate-bills/${cycleId}/status`,
@@ -138,6 +153,7 @@ const Summary = ({ data }: IProps) => {
     );
   }
   function generateBillingCycle(value: any) {
+    // if (selectedDate.setHours(0, 0, 0, 0) >= selectedDate)
     post(
       remoteRoutes.billingCycle,
       value,
@@ -181,12 +197,28 @@ const Summary = ({ data }: IProps) => {
           setLoading(false);
           cycle && getCurrentCycleStatus(cycle.id);
         } else {
-          // if (new Date(value).getMonth() + 1 === new Date().getMonth() + 1) {
-          generateBillingCycle({
-            month: new Date(value).getMonth() + 1,
-            year: parseInt(year),
-          });
-          // }
+          // Compare if current month year is greater that last cycle end month and yeare.log(
+          if (compareDates(value, lastBillingCycle.endDateTime)) {
+            // Generate new billing cycle
+            generateBillingCycle({
+              month: new Date(value).getMonth() + 1,
+              year: parseInt(year),
+            });
+          } else {
+            dispatch({
+              type: BillingsConstants.BillingsFetchCurrentCycle,
+              payload: null,
+            });
+            dispatch({
+              type: BillingsConstants.BillingsFetchAll,
+              payload: [],
+            });
+            dispatch({
+              type: BillingsConstants.BillingsGenerateBill,
+              payload: true,
+            });
+            setLoading(false);
+          }
         }
       },
       () => {
@@ -207,7 +239,37 @@ const Summary = ({ data }: IProps) => {
   };
 
   useEffect(() => {
-    getBillingCycle(new Date());
+    // Get billing cycle for today
+    let from = printYearDateTime(
+      new Date(new Date().getFullYear(), new Date().getMonth(), 1)
+    );
+    let to = printYearDateTime(
+      new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
+    );
+    get(
+      remoteRoutes.billingCycle + `?DateRange.From=${from}&DateRange.To=${to}`,
+      (data) => {
+        let [month, year] = printMonthYear(new Date()).split(",");
+        let date = month.substring(0, 3).concat(year);
+        let cycle = data.filter((item: any) => {
+          return item.cycleName === date;
+        })[0];
+        if (cycle) {
+          dispatch({
+            type: BillingsConstants.BillingsFetchCurrentCycle,
+            payload: cycle,
+          });
+          setLoading(false);
+          cycle && getCurrentCycleStatus(cycle.id);
+        }
+      },
+      () => {
+        enqueueSnackbar("Operation failed", {
+          variant: "error",
+        });
+        setLoading(false);
+      }
+    );
     // Get latest billing cycle
     search(
       remoteRoutes.billingCycle,
@@ -244,6 +306,25 @@ const Summary = ({ data }: IProps) => {
     }
   }, [lastBillingCycle.id, dispatch]);
 
+  const enableGenerateBills = () => {
+    if (
+      billData.length === 0 &&
+      currentCycle &&
+      compareDates(currentCycle.endDateTime, lastBillingCycle.endDateTime)
+    )
+      return true;
+    if (!currentCycle) return true;
+    return false;
+  };
+  const enableEmailBills = () => {
+    if (
+      billData.length > 0 &&
+      currentCycle &&
+      currentCycle.billingCycleId === lastBillingCycle.billingCycleId
+    )
+      return false;
+    return true;
+  };
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -294,17 +375,26 @@ const Summary = ({ data }: IProps) => {
           <Grid item xs={12} style={{ marginBottom: 11 }}>
             {!loading && (
               <Box display="flex" flexDirection="row">
-                {
+                {generateBill && (
                   <Button
-                    variant={!generateBill ? "outlined" : "contained"}
+                    variant="contained"
                     color="primary"
-                    onClick={submit}
+                    onClick={generateBills}
+                    disabled={enableGenerateBills()}
                   >
-                    {!generateBill
-                      ? "Email bills to participants"
-                      : "Generate bills"}
+                    Generate bills
                   </Button>
-                }
+                )}
+                {!generateBill && (
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={emailBills}
+                    disabled={enableEmailBills()}
+                  >
+                    Email bills to participants
+                  </Button>
+                )}
               </Box>
             )}
           </Grid>
@@ -344,14 +434,6 @@ export function getTaskColor(task: any): any {
   } else {
     return errorColor;
   }
-  // switch (task.status) {
-  //     case WorkflowNinStatus.Successful:
-  //         return successColor
-  //     case WorkflowNinStatus.Failed:
-  //         return errorColor
-  //     case WorkflowNinStatus.Pending:
-  //         return pendingColor
-  // }
 }
 
 export default Summary;
