@@ -64,9 +64,10 @@ interface IProps {
   title: string;
   children: any;
   handleCancel: () => any;
-  handleDelete: (item?: any) => any;
+  handleDelete: (...item: any) => any;
   itemId?: string;
   loading?: boolean;
+  deleteText?: string;
 }
 const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
@@ -80,13 +81,14 @@ export default function AlertDialogSlide({
   title,
   itemId,
   loading,
+  deleteText,
 }: IProps) {
   const classes = useStyles();
   const onClose = () => {
     handleCancel();
   };
   const onDelete = () => {
-    handleDelete(itemId);
+    handleDelete(itemId );
   };
 
   return (
@@ -132,7 +134,7 @@ export default function AlertDialogSlide({
             {loading && (
               <CircularProgress className={classes.progress} size={12} />
             )}
-            Delete
+            {deleteText ? deleteText : "Delete"}
           </Button>
         </DialogActions>
       </Dialog>
