@@ -1,28 +1,16 @@
-import React, { useEffect, Fragment, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import { ITask, IWorkflow, TaskStatus, ActionStatus } from "../types";
 import DetailView, { IRec } from "../../../components/DetailView";
 import {
   printDateTime,
   printYearDateTime,
-  printDate,
   printMonthYear,
 } from "../../../utils/dateHelpers";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import LabelIcon from "@material-ui/icons/Label";
-import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-import {
-  errorColor,
-  successColor,
-  warningColor,
-  pendingColor,
-} from "../../../theme/custom-colors";
+import { errorColor, successColor } from "../../../theme/custom-colors";
 import Button from "@material-ui/core/Button";
 import PDateInput from "../../../components/plain-inputs/PDateInput";
 import { Box } from "@material-ui/core";
@@ -35,8 +23,6 @@ import { IState } from "../../../data/types";
 import { IBillCycle } from "../../../modules/billing/types";
 import { get, post, search } from "../../../utils/ajax";
 import { remoteRoutes } from "../../../data/constants";
-import Toast from "../../../utils/Toast";
-import { date } from "faker";
 import { useSnackbar } from "notistack";
 import Loading from "../../../components/Loading";
 
@@ -278,6 +264,11 @@ const Summary = ({ data }: IProps) => {
             payload: cycle,
           });
           cycle && getCurrentCycleStatus(cycle.id);
+        } else {
+          dispatch({
+            type: BillingsConstants.BillingsFetchCurrentCycle,
+            payload: null,
+          });
         }
         setLoading(false);
       },
@@ -328,6 +319,7 @@ const Summary = ({ data }: IProps) => {
     if (
       billData.length === 0 &&
       currentCycle &&
+      currentCycle.endDateTime &&
       compareDates(currentCycle.endDateTime, lastBillingCycle.endDateTime)
     )
       return true;
@@ -342,6 +334,14 @@ const Summary = ({ data }: IProps) => {
     )
       return false;
     return true;
+  };
+  let emptyFields = {
+    billingCycleId: "",
+    cycleName: "",
+    startDateTime: null,
+    endDateTime: null,
+    billGeneratedOn: null,
+    status: null,
   };
   return (
     <Grid container spacing={3}>
@@ -384,9 +384,9 @@ const Summary = ({ data }: IProps) => {
               <Loading />
             ) : (
               <div>
-                {currentCycle && (
-                  <DetailView data={createFields(currentCycle)} />
-                )}
+                <DetailView
+                  data={createFields(currentCycle ? currentCycle : emptyFields)}
+                />
               </div>
             )}
           </Grid>

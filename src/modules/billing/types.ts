@@ -3,10 +3,10 @@ import { BaseModel } from "../../data/types";
 export interface IBillCycle {
   billingCycleId: string;
   cycleName: string;
-  startDateTime: Date;
-  endDateTime: Date;
-  billGeneratedOn: Date;
-  status?: Date;
+  startDateTime: Date | null;
+  endDateTime: Date | null;
+  billGeneratedOn: Date | null;
+  status?: Date | null;
   billCount?: number;
   subscriptionCount?: number;
 }
