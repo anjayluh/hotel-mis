@@ -1,28 +1,16 @@
-import React, { useEffect, Fragment, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import { ITask, IWorkflow, TaskStatus, ActionStatus } from "../types";
 import DetailView, { IRec } from "../../../components/DetailView";
 import {
   printDateTime,
   printYearDateTime,
-  printDate,
   printMonthYear,
 } from "../../../utils/dateHelpers";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import LabelIcon from "@material-ui/icons/Label";
-import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-import {
-  errorColor,
-  successColor,
-  warningColor,
-  pendingColor,
-} from "../../../theme/custom-colors";
+import { errorColor, successColor } from "../../../theme/custom-colors";
 import Button from "@material-ui/core/Button";
 import PDateInput from "../../../components/plain-inputs/PDateInput";
 import { Box } from "@material-ui/core";
@@ -35,8 +23,6 @@ import { IState } from "../../../data/types";
 import { IBillCycle } from "../../../modules/billing/types";
 import { get, post, search } from "../../../utils/ajax";
 import { remoteRoutes } from "../../../data/constants";
-import Toast from "../../../utils/Toast";
-import { date } from "faker";
 import { useSnackbar } from "notistack";
 import Loading from "../../../components/Loading";
 
@@ -66,16 +52,42 @@ const Summary = ({ data }: IProps) => {
   });
 
   const { generateBill } = useSelector((state: IState) => state.billing);
-  /* const [billingCycle, setBillingCycle]: any = useState({
-    status: "",
-    startDate: "",
-    endDate: "",
-  }); */
   const { currentCycle }: IBillingState = useSelector(
     (state: IState) => state.billing
   );
+  const billData: any[] = useSelector((state: IState) => state.billing.data);
   const [lastBillingCycle, setLastBillingCycle]: any = useState({});
   const [loading, setLoading]: any = useState(true);
+
+  function compareDates(value1: Date, value2: Date) {
+    let hours1 = Date.parse(
+      new Date(
+        new Date(value1).getFullYear(),
+        new Date(value1).getMonth()
+      ).toDateString()
+    );
+    let hours2 = Date.parse(
+      new Date(
+        new Date(value2).getFullYear(),
+        new Date(value2).getMonth()
+      ).toDateString()
+    );
+    return hours1 > hours2;
+  }
+  const isValidCycleEndDate = (value: Date) => {
+    let today = new Date();
+    let lastDayOfMonth = new Date(
+      today.getFullYear(),
+      today.getMonth() + 1,
+      0
+    ).setHours(23, 59, 59, 999);
+    let selectedCycleEndDate = new Date(
+      value.getFullYear(),
+      value.getMonth() + 1,
+      0
+    ).setHours(23, 59, 59, 999);
+    return selectedCycleEndDate > lastDayOfMonth;
+  };
   function createFields(cycle: IBillCycle): IRec[] {
     return [
       {
@@ -84,21 +96,32 @@ const Summary = ({ data }: IProps) => {
       },
       {
         label: "Started On",
-        value: cycle.startDate ? printDateTime(cycle.startDate) : "-",
+        value: cycle.startDateTime ? printDateTime(cycle.startDateTime) : "-",
       },
       {
         label: "Bill Generated On",
-        value: cycle.generatedOn ? printDateTime(cycle.generatedOn) : "-",
+        value: cycle.billGeneratedOn
+          ? printDateTime(cycle.billGeneratedOn)
+          : "-",
       },
     ];
   }
   function emailBills() {
-    // onFilter(values);
+    post(
+      remoteRoutes.billingCycle + `/email-bills`,
+      { billingCycleId: currentCycle && currentCycle.billingCycleId },
+      (resp) => {},
+      () => {
+        enqueueSnackbar("Operation failed", {
+          variant: "error",
+        });
+      }
+    );
   }
   function generateBills() {
     post(
       remoteRoutes.billingCycle + `/generate-bills`,
-      { billingCycleId: currentCycle && currentCycle.id },
+      { billingCycleId: currentCycle && currentCycle.billingCycleId },
       (resp) => {
         dispatch({
           type: BillingsConstants.BillingsFetchCurrentCycle,
@@ -112,9 +135,6 @@ const Summary = ({ data }: IProps) => {
       }
     );
   }
-  function submit() {
-    generateBill ? generateBills() : emailBills();
-  }
   function getCurrentCycleStatus(cycleId: string) {
     get(
       remoteRoutes.billingCycle + `/generate-bills/${cycleId}/status`,
@@ -123,15 +143,18 @@ const Summary = ({ data }: IProps) => {
           type: BillingsConstants.BillingsFetchCurrentCycleStatus,
           payload: data,
         });
+        setLoading(false);
       },
       () => {
         enqueueSnackbar("Operation failed", {
           variant: "error",
         });
+        setLoading(false);
       }
     );
   }
   function generateBillingCycle(value: any) {
+    // if (selectedDate.setHours(0, 0, 0, 0) >= selectedDate)
     post(
       remoteRoutes.billingCycle,
       value,
@@ -163,7 +186,7 @@ const Summary = ({ data }: IProps) => {
       remoteRoutes.billingCycle + `?DateRange.From=${from}&DateRange.To=${to}`,
       (data) => {
         let [month, year] = printMonthYear(value).split(",");
-        let date = month.substring(0, 3).toLowerCase().concat(year);
+        let date = month.substring(0, 3).concat(year);
         let cycle = data.filter((item: any) => {
           return item.cycleName === date;
         })[0];
@@ -172,13 +195,34 @@ const Summary = ({ data }: IProps) => {
             type: BillingsConstants.BillingsFetchCurrentCycle,
             payload: cycle,
           });
-          setLoading(false);
           cycle && getCurrentCycleStatus(cycle.id);
         } else {
-          generateBillingCycle({
-            month: new Date(value).getMonth() + 1,
-            year: parseInt(year),
-          });
+          // Compare if current month year is greater that last cycle end month and year
+          // Compare if projected end date of cycle is greater than last hour of today
+          if (
+            compareDates(value, lastBillingCycle.endDateTime) &&
+            isValidCycleEndDate(value)
+          ) {
+            // Generate new billing cycle
+            generateBillingCycle({
+              month: new Date(value).getMonth() + 1,
+              year: parseInt(year),
+            });
+          } else {
+            dispatch({
+              type: BillingsConstants.BillingsFetchCurrentCycle,
+              payload: null,
+            });
+            dispatch({
+              type: BillingsConstants.BillingsFetchAll,
+              payload: [],
+            });
+            dispatch({
+              type: BillingsConstants.BillingsGenerateBill,
+              payload: true,
+            });
+            setLoading(false);
+          }
         }
       },
       () => {
@@ -199,7 +243,42 @@ const Summary = ({ data }: IProps) => {
   };
 
   useEffect(() => {
-    getBillingCycle(new Date());
+    // Get billing cycle for today
+    let from = printYearDateTime(
+      new Date(new Date().getFullYear(), new Date().getMonth(), 1)
+    );
+    let to = printYearDateTime(
+      new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
+    );
+    get(
+      remoteRoutes.billingCycle + `?DateRange.From=${from}&DateRange.To=${to}`,
+      (data) => {
+        let [month, year] = printMonthYear(new Date()).split(",");
+        let date = month.substring(0, 3).concat(year);
+        let cycle = data.filter((item: any) => {
+          return item.cycleName === date;
+        })[0];
+        if (cycle) {
+          dispatch({
+            type: BillingsConstants.BillingsFetchCurrentCycle,
+            payload: cycle,
+          });
+          cycle && getCurrentCycleStatus(cycle.id);
+        } else {
+          dispatch({
+            type: BillingsConstants.BillingsFetchCurrentCycle,
+            payload: null,
+          });
+        }
+        setLoading(false);
+      },
+      () => {
+        enqueueSnackbar("Operation failed", {
+          variant: "error",
+        });
+        setLoading(false);
+      }
+    );
     // Get latest billing cycle
     search(
       remoteRoutes.billingCycle,
@@ -213,8 +292,57 @@ const Summary = ({ data }: IProps) => {
         });
       }
     );
-  }, []);
+    if (lastBillingCycle.id) {
+      get(
+        remoteRoutes.billingCycle +
+          `/generate-bills/${lastBillingCycle.id}/status`,
+        (data) => {
+          setLastBillingCycle({
+            ...lastBillingCycle,
+            billingCycleId: data.billingCycleId,
+            status: data.status,
+            billGeneratedOn: data.dateCreated,
+            billCount: data.billCount,
+            subscriptionCount: data.subscriptionCount,
+          });
+        },
+        () => {
+          enqueueSnackbar("Operation failed", {
+            variant: "error",
+          });
+        }
+      );
+    }
+  }, [lastBillingCycle.id, dispatch]);
 
+  const enableGenerateBills = () => {
+    if (
+      billData.length === 0 &&
+      currentCycle &&
+      currentCycle.endDateTime &&
+      compareDates(currentCycle.endDateTime, lastBillingCycle.endDateTime)
+    )
+      return true;
+    if (!currentCycle) return true;
+    return false;
+  };
+  const enableEmailBills = () => {
+    if (
+      billData.length > 0 &&
+      currentCycle &&
+      currentCycle.billingCycleId === lastBillingCycle.billingCycleId
+    )
+      return false;
+    return true;
+  };
+  let emptyFields = {
+    billingCycleId: "",
+    cycleName: "",
+    startDateTime: null,
+    endDateTime: null,
+    billGeneratedOn: null,
+    status: null,
+  };
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -256,26 +384,35 @@ const Summary = ({ data }: IProps) => {
               <Loading />
             ) : (
               <div>
-                {currentCycle && (
-                  <DetailView data={createFields(currentCycle)} />
-                )}
+                <DetailView
+                  data={createFields(currentCycle ? currentCycle : emptyFields)}
+                />
               </div>
             )}
           </Grid>
           <Grid item xs={12} style={{ marginBottom: 11 }}>
             {!loading && (
               <Box display="flex" flexDirection="row">
-                {
+                {generateBill && (
                   <Button
-                    variant={!generateBill ? "outlined" : "contained"}
+                    variant="contained"
                     color="primary"
-                    onClick={submit}
+                    onClick={generateBills}
+                    disabled={enableGenerateBills()}
                   >
-                    {!generateBill
-                      ? "Email bills to participants"
-                      : "Generate bills"}
+                    Generate bills
                   </Button>
-                }
+                )}
+                {!generateBill && (
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={emailBills}
+                    disabled={enableEmailBills()}
+                  >
+                    Email bills to participants
+                  </Button>
+                )}
               </Box>
             )}
           </Grid>
@@ -287,7 +424,8 @@ const Summary = ({ data }: IProps) => {
             <Box display="flex" pb={1}>
               <Box flexGrow={1}>
                 <Typography color={"textSecondary"} variant="h5">
-                  Last Billing Cycle: May 2020
+                  Last Billing Cycle:{" "}
+                  {printMonthYear(lastBillingCycle.startDateTime)}
                 </Typography>
               </Box>
             </Box>
@@ -314,14 +452,6 @@ export function getTaskColor(task: any): any {
   } else {
     return errorColor;
   }
-  // switch (task.status) {
-  //     case WorkflowNinStatus.Successful:
-  //         return successColor
-  //     case WorkflowNinStatus.Failed:
-  //         return errorColor
-  //     case WorkflowNinStatus.Pending:
-  //         return pendingColor
-  // }
 }
 
 export default Summary;

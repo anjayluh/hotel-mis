@@ -112,6 +112,7 @@ export const remoteRoutes = {
   ninVerificationRequests: gatewayURL + "/niv/api/request/search",
   ninVerification: NinVerificationURL + "/api/national-id/verify",
   billingCycle: gatewayURL + "/billing/api/billing-cycles",
+  serviceCategory: gatewayURL + "/service-category",
   authServer: authURL,
   gatewayUpload: gatewayURL + "/files",
   login: authURL + "/api/test/login",

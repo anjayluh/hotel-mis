@@ -27,6 +27,7 @@ import { IState } from "../../data/types";
 import Details from "./details/Details";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
+import { useSnackbar } from "notistack";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,18 +75,18 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#428BCA",
       textTransform: "capitalize",
       fontStyle: "italic",
-      fontSize: "12px",
-      lineHeight: "0.5",
-      marginBottom: "-5px",
-      marginLeft: "8px",
-      marginTop: "-6px",
+      fontSize: 12,
+      lineHeight: 0.5,
+      marginBottom: -5,
+      marginLeft: 8,
+      marginTop: -6,
       fontWeight: "normal",
     },
     addIcon: {
-      marginLeft: "-5px",
-      marginRight: "-10px",
+      marginLeft: -5,
+      marginRight: -10,
       height: "0.7em",
-      fontSize: "13px",
+      fontSize: 13,
     },
   })
 );
@@ -93,6 +94,7 @@ const useStyles = makeStyles((theme: Theme) =>
 type Anchor = "top" | "left" | "bottom" | "right";
 
 const NinVerifications = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const classes = useStyles();
   const [open, setOpen] = useState(true);
@@ -135,7 +137,9 @@ const NinVerifications = () => {
       },
       undefined,
       () => {
-        console.log("failed to access");
+        enqueueSnackbar("Operation failed", {
+          variant: "error",
+        });
         dispatch({
           type: verificationRequestConstants.RequestsFetchLoading,
           payload: false,

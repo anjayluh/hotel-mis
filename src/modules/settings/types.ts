@@ -3,6 +3,19 @@ import * as faker from "faker";
 import {enumToArray, getRandomStr} from "../../utils/stringHelpers";
 import {organisationNames} from "../billing/fakeData";
 
+export interface IRate {
+  id?: string;
+  name?: string;
+  from?: number;
+  to?: number;
+  unitPrice?: number;
+}
+export interface IServiceCategory {
+  id?: string;
+  name?: string;
+  rates?: IRate[];
+}
+
 export interface IWorkflowInclude {
     caseData?: boolean
     tasks?: boolean

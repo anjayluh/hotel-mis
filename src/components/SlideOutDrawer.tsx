@@ -2,20 +2,19 @@ import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: "25px",
-      width: "400px",
-      marginTop: "64px",
+      padding: 25,
+      width: 400,
+      marginTop: 64,
       [theme.breakpoints.down("sm")]: {
         width: "100%",
       },
     },
     title: {
-      marginLeft: "8px",
+      marginLeft: 8,
     },
   })
 );

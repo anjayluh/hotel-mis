@@ -1,7 +1,7 @@
 import { XHeadCell } from "../../../../../components/table/XTableHead";
 import ParticipantLink from "../../../../../components/links/ParticipantLink";
 import { printDate } from "../../../../../utils/dateHelpers";
-import { printFormattedMoney } from "../../../../../utils/numberHelpers";
+import { printsMoney } from "../../../../../utils/numberHelpers";
 import React from "react";
 
 export const columns: XHeadCell[] = [
@@ -11,33 +11,33 @@ export const columns: XHeadCell[] = [
     render: (value, rec) => <span>{printDate(value)}</span>,
     cellProps: {
       style: {
-        width: 200
-      }
-    }
+        width: 200,
+      },
+    },
   },
   {
     name: "billNumber",
     label: "Bill Number",
-    render: (value, rec) => value === null ? 'null' : value,
+    render: (value, rec) => (value === null ? "null" : value),
     cellProps: {
       style: {
         width: 60,
-        paddingLeft: 80
-      }
-    }
+        paddingLeft: 80,
+      },
+    },
   },
   {
     name: "consumptionAmount",
     label: "Consumption",
     numeric: true,
-    render: (value, rec) => value === 0 ? value : printFormattedMoney(value),
+    render: (value, rec) => (value === 0 ? value : printsMoney(value)),
     cellProps: {
       style: {
         width: 200,
         textAlign: "right",
-        paddingRight: 80
-      }
-    }
+        paddingRight: 80,
+      },
+    },
   },
   {
     name: "unitPrice",
@@ -46,20 +46,20 @@ export const columns: XHeadCell[] = [
     cellProps: {
       style: {
         width: 200,
-        paddingRight: 80
-      }
-    }
+        paddingRight: 80,
+      },
+    },
   },
   {
     name: "amountDue",
     label: "Bill amount",
     numeric: true,
-    render: (value, rec) => value === 0 ? value : printFormattedMoney(value),
+    render: (value, rec) => (value === 0 ? value : printsMoney(value)),
     cellProps: {
       style: {
         width: 150,
-        paddingRight: 40
-      }
-    }
-  }
+        paddingRight: 40,
+      },
+    },
+  },
 ];

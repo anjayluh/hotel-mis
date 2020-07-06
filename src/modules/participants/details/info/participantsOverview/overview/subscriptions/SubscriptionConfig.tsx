@@ -1,6 +1,6 @@
 import { XHeadCell } from "../../../../../../../components/table/XTableHead";
 import { printDate } from "../../../../../../../utils/dateHelpers";
-import { printFormattedMoney } from "../../../../../../../utils/numberHelpers";
+import { printsMoney } from "../../../../../../../utils/numberHelpers";
 import React from "react";
 import { renderSubscriptionStatus } from "../../../../info/widgets";
 import { XToggleButton } from "../../../../info/XToggleButton";
@@ -60,7 +60,7 @@ export const columns: XHeadCell[] = [
     name: "monthlyCap",
     label: "Monthly Cap",
     numeric: true,
-    render: (value, rec) => <span>{printFormattedMoney(value)}</span>,
+    render: (value, rec) => <span>{printsMoney(value)}</span>,
     cellProps: {
       style: {
         width: 500,
@@ -73,7 +73,9 @@ export const columns: XHeadCell[] = [
     name: "action",
     label: "",
     numeric: true,
-    render: (_, rec) => <XToggleButton value={rec.subscriptionStatus} record={rec}/>,
+    render: (_, rec) => (
+      <XToggleButton value={rec.subscriptionStatus} record={rec} />
+    ),
     cellProps: {
       style: {
         paddingRight: 14,

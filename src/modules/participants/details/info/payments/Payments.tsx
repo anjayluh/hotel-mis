@@ -17,7 +17,7 @@ import { remoteRoutes } from "../../../../../data/constants";
 import Details from "./Details/Details";
 import SlideOutDrawer from "../../../../../components/SlideOutDrawer";
 import PaymentForm from "./forms/PaymentForm";
-import {useSnackbar} from "notistack";
+import { useSnackbar } from "notistack";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,18 +53,18 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#428BCA",
       textTransform: "capitalize",
       fontStyle: "italic",
-      fontSize: "12px",
-      lineHeight: "0.5",
-      marginBottom: "-5px",
-      marginLeft: "8px",
-      marginTop: "-6px",
+      fontSize: 12,
+      lineHeight: 0.5,
+      marginBottom: -5,
+      marginLeft: 8,
+      marginTop: -6,
       fontWeight: "normal",
     },
     addIcon: {
-      marginLeft: "-5px",
-      marginRight: "-10px",
+      marginLeft: -5,
+      marginRight: -10,
       height: "0.7em",
-      fontSize: "13px",
+      fontSize: 13,
     },
     helperText: {
       marginLeft: 15,
@@ -80,7 +80,7 @@ interface IProps {
   subscriptionId: string | undefined;
 }
 const Payments = (props: IProps) => {
-  const {enqueueSnackbar} = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const { selected } = useSelector((state: IState) => state.participants);
   const loading = useSelector(
@@ -115,8 +115,8 @@ const Payments = (props: IProps) => {
             payload: false,
           });
           // Toast.error("Operation failed");
-          enqueueSnackbar('Operation failed', {
-            variant: 'error',
+          enqueueSnackbar("Operation failed", {
+            variant: "error",
           });
         }
       );

@@ -47,10 +47,10 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#428BCA",
       textTransform: "capitalize",
       fontStyle: "italic",
-      fontSize: "12px",
-      lineHeight: "0.75",
-      marginBottom: "-5px",
-      marginLeft: "5px",
+      fontSize: 12,
+      lineHeight: 0.75,
+      marginBottom: -5,
+      marginLeft: 5,
       fontWeight: "normal",
     },
     helperText: {
@@ -78,7 +78,7 @@ const Billings = () => {
       });
       search(
         remoteRoutes.billing,
-        { BillingCycleIds: currentCycle.id },
+        { BillingCycleIds: currentCycle.billingCycleId },
         (resp) => {
           dispatch({
             type: BillingsConstants.BillingsFetchAll,
@@ -122,7 +122,6 @@ const Billings = () => {
   function closeCreateDialog() {
     setCreateDialog(false);
   }
-
   return (
     <Layout>
       <Grid container spacing={2}>

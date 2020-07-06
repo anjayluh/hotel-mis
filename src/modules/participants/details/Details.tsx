@@ -17,7 +17,7 @@ import AccountStatement from "./info/accountStatement/AccountStatement";
 import { participantsConstants } from "../../../data/redux/participants/reducer";
 import { remoteRoutes } from "../../../data/constants";
 import { get } from "../../../utils/ajax";
-import {useSnackbar} from "notistack";
+import { useSnackbar } from "notistack";
 
 interface IProps extends RouteComponentProps {}
 
@@ -54,17 +54,17 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#428BCA",
       textTransform: "capitalize",
       fontStyle: "italic",
-      fontSize: "12px",
-      lineHeight: "0.75",
-      marginBottom: "-5px",
-      marginLeft: "5px",
+      fontSize: 12,
+      lineHeight: 0.75,
+      marginBottom: -5,
+      marginLeft: 5,
       fontWeight: "normal",
     },
   })
 );
 
 const Details = (props: IProps) => {
-  const {enqueueSnackbar} = useSnackbar()
+  const { enqueueSnackbar } = useSnackbar();
   const participantId = getRouteParam(props, "participantId");
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -107,8 +107,8 @@ const Details = (props: IProps) => {
         },
         () => {
           // Toast.error("Operation failed");
-          enqueueSnackbar('Operation failed', {
-            variant: 'error',
+          enqueueSnackbar("Operation failed", {
+            variant: "error",
           });
         }
       );
