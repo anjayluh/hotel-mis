@@ -71,7 +71,7 @@ export const XToggleButton = ({ value, record }: IProps) => {
   );
   const [deactivate, setDeactivateSubscription] = useState(false);
   const [deactivateLoading, setdeactivateLoading] = useState(false)
-  const deactivateText = "Deactivating will make this subscription inactive";
+  const deactivateText = "Deactivating the subscription means this participant will not be able to perform NIN verification until the subscription is activated again";
   const url = remoteRoutes.subscriptions + `/${record.id}`;
 
   function handleCancel() {

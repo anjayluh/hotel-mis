@@ -135,11 +135,12 @@ const NinVerifications = () => {
           payload: [...resp.requests],
         });
       },
-      undefined,
       () => {
         enqueueSnackbar("Operation failed", {
           variant: "error",
         });
+      },
+      () => {
         dispatch({
           type: verificationRequestConstants.RequestsFetchLoading,
           payload: false,
