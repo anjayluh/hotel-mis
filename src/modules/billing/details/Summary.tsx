@@ -88,7 +88,20 @@ const Summary = ({ data }: IProps) => {
     );
     return hours1 > hours2;
   }
-
+  const isValidCycleEndDate = (value: Date) => {
+    let today = new Date();
+    let lastDayOfMonth = new Date(
+      today.getFullYear(),
+      today.getMonth() + 1,
+      0
+    ).setHours(23, 59, 59, 999);
+    let selectedCycleEndDate = new Date(
+      value.getFullYear(),
+      value.getMonth() + 1,
+      0
+    ).setHours(23, 59, 59, 999);
+    return selectedCycleEndDate > lastDayOfMonth;
+  };
   function createFields(cycle: IBillCycle): IRec[] {
     return [
       {
@@ -144,11 +157,13 @@ const Summary = ({ data }: IProps) => {
           type: BillingsConstants.BillingsFetchCurrentCycleStatus,
           payload: data,
         });
+        setLoading(false);
       },
       () => {
         enqueueSnackbar("Operation failed", {
           variant: "error",
         });
+        setLoading(false);
       }
     );
   }
@@ -194,11 +209,14 @@ const Summary = ({ data }: IProps) => {
             type: BillingsConstants.BillingsFetchCurrentCycle,
             payload: cycle,
           });
-          setLoading(false);
           cycle && getCurrentCycleStatus(cycle.id);
         } else {
-          // Compare if current month year is greater that last cycle end month and yeare.log(
-          if (compareDates(value, lastBillingCycle.endDateTime)) {
+          // Compare if current month year is greater that last cycle end month and year
+          // Compare if projected end date of cycle is greater than last hour of today
+          if (
+            compareDates(value, lastBillingCycle.endDateTime) &&
+            isValidCycleEndDate(value)
+          ) {
             // Generate new billing cycle
             generateBillingCycle({
               month: new Date(value).getMonth() + 1,
@@ -259,9 +277,9 @@ const Summary = ({ data }: IProps) => {
             type: BillingsConstants.BillingsFetchCurrentCycle,
             payload: cycle,
           });
-          setLoading(false);
           cycle && getCurrentCycleStatus(cycle.id);
         }
+        setLoading(false);
       },
       () => {
         enqueueSnackbar("Operation failed", {

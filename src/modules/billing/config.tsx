@@ -7,9 +7,9 @@ import { printsMoney } from "../../utils/numberHelpers";
 
 export const columns: XHeadCell[] = [
   {
-    name: "name",
-    label: "Participant",
-    render: (value, rec) => <ParticipantLink id={rec.id} name={rec.name} />,
+    name: "accountNumber",
+    label: "Account Number",
+    // render: (value, rec) => <ParticipantLink id={rec.id} name={rec.name} />,
     cellProps: {
       style: { width: 300 },
     },
@@ -52,7 +52,7 @@ export const columns: XHeadCell[] = [
     name: "lastBillAmountDue",
     label: "Bill amount",
     numeric: true,
-    render: (value, rec) => printsMoney(value),
+    render: (value, rec) => (value === 0 ? value : printsMoney(value)),
     cellProps: {
       style: {
         width: 200,
