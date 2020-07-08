@@ -86,6 +86,9 @@ const Subscriptions = ({ participantId }: IProps) => {
   );
 
   useEffect(() => {
+    if(selected && selected.subscriptions) {
+      setLoading(false);
+    }
     search(
       remoteRoutes.subscriptions,
       { companyIds: participantId },
