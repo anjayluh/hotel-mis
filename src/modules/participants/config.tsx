@@ -5,9 +5,10 @@ import React from "react";
 import { format, compareAsc } from 'date-fns'
 
 export const columns: XHeadCell[] = [
+
     {
         name: 'company.name', label: 'Participant',
-        render: (value, rec) => <ParticipantLink id={rec.id} name={value} />
+        render: (value, rec) => <ParticipantLink id={rec.id} name={value}  />
     },
 
     {
