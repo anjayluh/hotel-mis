@@ -282,6 +282,17 @@ const Summary = ({ data }: IProps) => {
           });
           cycle && getCurrentCycleStatus(cycle.id);
         } else {
+          // Set error message in case selected cycle is older that last cycle
+          lastBillingCycle &&
+            lastBillingCycle.endDateTime &&
+            !compareDates(new Date(), lastBillingCycle.endDateTime) &&
+            setCycleErrorMessage(
+              "Cannot create a new cycle older than the latest cycle"
+            );
+          !isValidCycleEndDate(new Date()) &&
+            setCycleErrorMessage(
+              "Cannot create a new cycle that ends in the future"
+            );
           dispatch({
             type: BillingsConstants.BillingsFetchCurrentCycle,
             payload: null,
@@ -318,7 +329,6 @@ const Summary = ({ data }: IProps) => {
         remoteRoutes.billingCycle +
           `/generate-bills/${lastBillingCycle && lastBillingCycle.id}/status`,
         (data) => {
-          console.log(data, "data");
           dispatch({
             type: BillingsConstants.BillingsFetchLastCycleStatus,
             payload: data,
