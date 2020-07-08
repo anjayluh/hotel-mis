@@ -36,6 +36,12 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: 0,
       padding: theme.spacing(2),
     },
+    helperText: {
+      marginLeft: 15,
+      marginTop: 2,
+      fontStyle: "italic",
+      fontSize: 11,
+    },
   })
 );
 
@@ -50,14 +56,17 @@ const Summary = ({ data }: IProps) => {
     to: null,
     billNumber: "",
   });
-
   const { generateBill } = useSelector((state: IState) => state.billing);
   const { currentCycle }: IBillingState = useSelector(
     (state: IState) => state.billing
   );
   const billData: any[] = useSelector((state: IState) => state.billing.data);
-  const [lastBillingCycle, setLastBillingCycle]: any = useState({});
+  const { lastBillingCycle }: IBillingState = useSelector(
+    (state: IState) => state.billing
+  );
   const [loading, setLoading]: any = useState(true);
+  const [cycleErrorMessage, setCycleErrorMessage]: any = useState("");
+  const { emailErrorMessage } = useSelector((state: IState) => state.billing);
 
   function compareDates(value1: Date, value2: Date) {
     let hours1 = Date.parse(
@@ -76,17 +85,12 @@ const Summary = ({ data }: IProps) => {
   }
   const isValidCycleEndDate = (value: Date) => {
     let today = new Date();
-    let lastDayOfMonth = new Date(
-      today.getFullYear(),
-      today.getMonth() + 1,
-      0
-    ).setHours(23, 59, 59, 999);
-    let selectedCycleEndDate = new Date(
-      value.getFullYear(),
-      value.getMonth() + 1,
-      0
-    ).setHours(23, 59, 59, 999);
-    return selectedCycleEndDate > lastDayOfMonth;
+    if (
+      today.getMonth() === value.getMonth() &&
+      today.getFullYear() === value.getFullYear()
+    )
+      return false;
+    return true;
   };
   function createFields(cycle: IBillCycle): IRec[] {
     return [
@@ -109,7 +113,7 @@ const Summary = ({ data }: IProps) => {
   function emailBills() {
     post(
       remoteRoutes.billingCycle + `/email-bills`,
-      { billingCycleId: currentCycle && currentCycle.billingCycleId },
+      { id: currentCycle && currentCycle.id },
       (resp) => {},
       () => {
         enqueueSnackbar("Operation failed", {
@@ -121,7 +125,7 @@ const Summary = ({ data }: IProps) => {
   function generateBills() {
     post(
       remoteRoutes.billingCycle + `/generate-bills`,
-      { billingCycleId: currentCycle && currentCycle.billingCycleId },
+      { billingCycleId: currentCycle && currentCycle.id },
       (resp) => {
         dispatch({
           type: BillingsConstants.BillingsFetchCurrentCycle,
@@ -200,6 +204,8 @@ const Summary = ({ data }: IProps) => {
           // Compare if current month year is greater that last cycle end month and year
           // Compare if projected end date of cycle is greater than last hour of today
           if (
+            lastBillingCycle &&
+            lastBillingCycle.endDateTime &&
             compareDates(value, lastBillingCycle.endDateTime) &&
             isValidCycleEndDate(value)
           ) {
@@ -209,6 +215,17 @@ const Summary = ({ data }: IProps) => {
               year: parseInt(year),
             });
           } else {
+            // Set error message in case selected cycle is older that last cycle
+            lastBillingCycle &&
+              lastBillingCycle.endDateTime &&
+              !compareDates(value, lastBillingCycle.endDateTime) &&
+              setCycleErrorMessage(
+                "Cannot create a new cycle older than the latest cycle"
+              );
+            !isValidCycleEndDate(value) &&
+              setCycleErrorMessage(
+                "Cannot create a new cycle that ends in the future"
+              );
             dispatch({
               type: BillingsConstants.BillingsFetchCurrentCycle,
               payload: null,
@@ -284,7 +301,10 @@ const Summary = ({ data }: IProps) => {
       remoteRoutes.billingCycle,
       { PageNumber: 1, PageSize: 10 },
       (resp) => {
-        setLastBillingCycle(resp[0]);
+        dispatch({
+          type: BillingsConstants.BillingsFetchLastCycle,
+          payload: resp[0],
+        });
       },
       () => {
         enqueueSnackbar("Operation failed", {
@@ -292,18 +312,16 @@ const Summary = ({ data }: IProps) => {
         });
       }
     );
-    if (lastBillingCycle.id) {
+
+    if (lastBillingCycle && lastBillingCycle.id) {
       get(
         remoteRoutes.billingCycle +
-          `/generate-bills/${lastBillingCycle.id}/status`,
+          `/generate-bills/${lastBillingCycle && lastBillingCycle.id}/status`,
         (data) => {
-          setLastBillingCycle({
-            ...lastBillingCycle,
-            billingCycleId: data.billingCycleId,
-            status: data.status,
-            billGeneratedOn: data.dateCreated,
-            billCount: data.billCount,
-            subscriptionCount: data.subscriptionCount,
+          console.log(data, "data");
+          dispatch({
+            type: BillingsConstants.BillingsFetchLastCycleStatus,
+            payload: data,
           });
         },
         () => {
@@ -313,30 +331,34 @@ const Summary = ({ data }: IProps) => {
         }
       );
     }
-  }, [lastBillingCycle.id, dispatch]);
+  }, [lastBillingCycle && lastBillingCycle.id, dispatch]);
 
-  const enableGenerateBills = () => {
+  const disableGenerateBills = () => {
     if (
       billData.length === 0 &&
       currentCycle &&
       currentCycle.endDateTime &&
-      compareDates(currentCycle.endDateTime, lastBillingCycle.endDateTime)
+      lastBillingCycle &&
+      lastBillingCycle.endDateTime &&
+      lastBillingCycle &&
+      compareDates(lastBillingCycle.endDateTime, currentCycle.endDateTime) // In case currentCycle is older than last billing cycle
     )
       return true;
     if (!currentCycle) return true;
     return false;
   };
-  const enableEmailBills = () => {
+  const disableEmailBills = () => {
     if (
       billData.length > 0 &&
       currentCycle &&
-      currentCycle.billingCycleId === lastBillingCycle.billingCycleId
+      lastBillingCycle &&
+      currentCycle.id === lastBillingCycle.id
     )
       return false;
     return true;
   };
   let emptyFields = {
-    billingCycleId: "",
+    id: "",
     cycleName: "",
     startDateTime: null,
     endDateTime: null,
@@ -398,20 +420,32 @@ const Summary = ({ data }: IProps) => {
                     variant="contained"
                     color="primary"
                     onClick={generateBills}
-                    disabled={enableGenerateBills()}
+                    disabled={disableGenerateBills()}
                   >
                     Generate bills
                   </Button>
                 )}
+                {generateBill &&
+                  disableGenerateBills() &&
+                  cycleErrorMessage !== "" && (
+                    <Typography variant="body2" className={classes.helperText}>
+                      * {cycleErrorMessage}
+                    </Typography>
+                  )}
                 {!generateBill && (
                   <Button
                     variant="outlined"
                     color="primary"
                     onClick={emailBills}
-                    disabled={enableEmailBills()}
+                    disabled={disableEmailBills()}
                   >
                     Email bills to participants
                   </Button>
+                )}
+                {!generateBill && disableEmailBills() && emailErrorMessage && (
+                  <Typography variant="body2" className={classes.helperText}>
+                    * {emailErrorMessage}
+                  </Typography>
                 )}
               </Box>
             )}
@@ -425,7 +459,8 @@ const Summary = ({ data }: IProps) => {
               <Box flexGrow={1}>
                 <Typography color={"textSecondary"} variant="h5">
                   Last Billing Cycle:{" "}
-                  {printMonthYear(lastBillingCycle.startDateTime)}
+                  {lastBillingCycle &&
+                    printMonthYear(lastBillingCycle.startDateTime)}
                 </Typography>
               </Box>
             </Box>
@@ -437,7 +472,9 @@ const Summary = ({ data }: IProps) => {
           </Grid>
           <Grid item xs={12}>
             <div>
-              <DetailView data={createFields(lastBillingCycle)} />
+              {lastBillingCycle && (
+                <DetailView data={createFields(lastBillingCycle)} />
+              )}
             </div>
           </Grid>
         </Paper>

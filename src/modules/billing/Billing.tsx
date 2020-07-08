@@ -25,6 +25,7 @@ import { IState } from "../../data/types";
 import { columns } from "./config";
 import { fakeBill } from "./fakeData";
 import { printDateTime } from "../../utils/dateHelpers";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,21 +65,24 @@ const headCells: XHeadCell[] = [...columns];
 const Billings = () => {
   const dispatch = useDispatch();
   const [createDialog, setCreateDialog] = useState(false);
-  const { data, loading, currentCycle }: IBillingState = useSelector(
-    (state: IState) => state.billing
-  );
+  const {
+    data,
+    loading,
+    currentCycle,
+    lastBillingCycle,
+  }: IBillingState = useSelector((state: IState) => state.billing);
   const [filter, setFilter] = useState<IWorkflowFilter>({});
   const classes = useStyles();
   const { generateBill } = useSelector((state: IState) => state.billing);
   useEffect(() => {
-    if (currentCycle) {
+    if (currentCycle && currentCycle.id) {
       dispatch({
         type: BillingsConstants.BillingsFetchLoading,
         payload: true,
       });
       search(
         remoteRoutes.billing,
-        { BillingCycleIds: currentCycle.billingCycleId },
+        { BillingCycleIds: currentCycle.id },
         (resp) => {
           dispatch({
             type: BillingsConstants.BillingsFetchAll,
@@ -93,6 +97,17 @@ const Billings = () => {
               type: BillingsConstants.BillingsGenerateBill,
               payload: false,
             });
+            if (
+              currentCycle &&
+              lastBillingCycle &&
+              currentCycle.id !== lastBillingCycle.id
+            ) {
+              dispatch({
+                type: BillingsConstants.emailErrorMessage,
+                payload:
+                  "Cannot email participants for a cycle older than the latest cycle",
+              });
+            }
           } else {
             dispatch({
               type: BillingsConstants.BillingsGenerateBill,
@@ -156,9 +171,9 @@ const Billings = () => {
                 {/* {loading && <Loading />} */}
                 <div className={classes.helperText}>
                   {generateBill && (
-                    <Typography variant={"body2"}>
+                    <Alert severity="info">
                       No Bills have been generated for the selected cycle yet
-                    </Typography>
+                    </Alert>
                   )}
                 </div>
               </Grid>
@@ -170,9 +185,7 @@ const Billings = () => {
         title="New Person"
         open={createDialog}
         onClose={closeCreateDialog}
-      >
-        {/* <NewPersonForm data={{}} done={closeCreateDialog}/> */}
-      </EditDialog>
+      ></EditDialog>
     </Layout>
   );
 };

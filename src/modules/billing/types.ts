@@ -1,7 +1,7 @@
 import { BaseModel } from "../../data/types";
 
 export interface IBillCycle {
-  billingCycleId: string;
+  id: string;
   cycleName: string;
   startDateTime: Date | null;
   endDateTime: Date | null;

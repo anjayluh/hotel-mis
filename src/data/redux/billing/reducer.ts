@@ -6,6 +6,9 @@ export const BillingsConstants = {
   BillingsGenerateBill: "BillingsGenerateBill",
   BillingsFetchCurrentCycle: "BillingsFetchCurrentCycle",
   BillingsFetchCurrentCycleStatus: "BillingsFetchCurrentCycleStatus",
+  BillingsFetchLastCycle: "BillingsFetchLastCycle",
+  BillingsFetchLastCycleStatus: "BillingsFetchLastCycleStatus",
+  emailErrorMessage: "emailErrorMessage"
 };
 
 export interface IBillingState {
@@ -13,6 +16,8 @@ export interface IBillingState {
   data: IBill[];
   generateBill: boolean;
   currentCycle: IBillCycle | null;
+  lastBillingCycle: IBillCycle | null;
+  emailErrorMessage: string | null
 }
 
 const initialState: IBillingState = {
@@ -20,6 +25,8 @@ const initialState: IBillingState = {
   data: [],
   generateBill: true,
   currentCycle: null,
+  lastBillingCycle: null,
+  emailErrorMessage: null
 };
 
 export default function reducer(state = initialState, action: any) {
@@ -53,6 +60,29 @@ export default function reducer(state = initialState, action: any) {
         },
       };
     }
+      
+    case BillingsConstants.BillingsFetchLastCycle: {
+      return { ...state, lastBillingCycle: action.payload };
+    }
+      
+      case BillingsConstants.BillingsFetchLastCycleStatus: {
+      return {
+        ...state,
+        lastBillingCycle: {
+          ...state.lastBillingCycle,
+          id: action.payload.billingCycleId,
+          status: action.payload.status,
+          billGeneratedOn: action.payload.dateCreated,
+          billCount: action.payload.billCount,
+          subscriptionCount: action.payload.subscriptionCount,
+        },
+      };
+    }
+      
+      case BillingsConstants.emailErrorMessage: {
+      return { ...state, emailErrorMessage: action.payload };
+    }
+
 
     default: {
       return state;
