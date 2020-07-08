@@ -14,7 +14,6 @@ import { successColor } from "../../../theme/custom-colors";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
 import { fakeRequestDetails } from "../fakeData";
-import { verificationRequestConstants } from "../../../data/redux/ninVerification/reducer";
 import { IState } from "../../../data/types";
 
 interface IProps {
@@ -68,20 +67,14 @@ const useStyles = makeStyles((theme: Theme) =>
 const Details = (props: IProps) => {
   const dispatch: Dispatch<any> = useDispatch();
   const classes = useStyles();
-  const requestData = useSelector(
-    (state: IState) => state.verificationRequests.requestDetails
-  );
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     let mounted = true;
     if (mounted) {
       setLoading(true);
-      if (requestData) {
-          setLoading(false);
-        }
 
     }
-  }, [requestData]);
+  }, );
 
   function handleClose() {
     if (props.closeSlideOut) {
@@ -90,38 +83,9 @@ const Details = (props: IProps) => {
   }
   return (
     <div>
-      {loading ? (
         <div className={classes.root}>
-          <Grid container spacing={1}>
-            <Grid item xs={12}>
-              <Box>
-                <Loading loaderClass={classes.loading} />
-              </Box>
-            </Grid>
-          </Grid>
+
         </div>
-      ) : (
-        <div className={classes.root}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Box display="flex" py={1}>
-                <Box flexBasis={100} mr={1}>
-                  <Typography variant="h5" >
-                    Request ID:
-                  </Typography>
-                </Box>
-                  <Box>
-                      <Typography variant="h5">
-                          {requestData ? requestData.id : "loading"}
-                      </Typography>
-                  </Box>
-              </Box>
-              <Divider />
-              <Box pt={1}>{requestData && <Summary data={requestData} />}</Box>
-            </Grid>
-          </Grid>
-        </div>
-      )}
     </div>
   );
 };
