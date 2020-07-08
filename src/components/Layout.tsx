@@ -183,22 +183,6 @@ const Layout: React.FC<IProps> = (props: any) => {
       <List>
         <ListItem
           button
-          onClick={onClick(localRoutes.dashboard)}
-          selected={isSelected(localRoutes.dashboard)}
-        >
-          <ListItemIcon>
-            <Dashboard className={getCls(localRoutes.dashboard)} />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={getCls(localRoutes.dashboard)}>
-                Dashboard
-              </Typography>
-            }
-          />
-        </ListItem>
-        <ListItem
-          button
           onClick={onClick(localRoutes.ninVerification)}
           selected={isSelected(localRoutes.ninVerification)}
         >
@@ -213,70 +197,7 @@ const Layout: React.FC<IProps> = (props: any) => {
             }
           />
         </ListItem>
-        <ListItem
-          button
-          onClick={onClick(localRoutes.participants)}
-          selected={isSelected(localRoutes.participants)}
-        >
-          <ListItemIcon>
-            <PeopleIcon className={getCls(localRoutes.participants)} />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={getCls(localRoutes.participants)}>
-                Participants
-              </Typography>
-            }
-          />
-        </ListItem>
-        <ListItem
-          button
-          onClick={onClick(localRoutes.billing)}
-          selected={isSelected(localRoutes.billing)}
-        >
-          <ListItemIcon>
-            <ReceiptIcon className={getCls(localRoutes.billing)} />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={getCls(localRoutes.billing)}>
-                Billing
-              </Typography>
-            }
-          />
-        </ListItem>
-        {/*<ListItem
-          button
-          onClick={onClick(localRoutes.subscriptions)}
-          selected={isSelected(localRoutes.subscriptions)}
-        >
-          <ListItemIcon>
-            <BookmarkIcon className={getCls(localRoutes.subscriptions)} />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={getCls(localRoutes.subscriptions)}>
-                Subscriptions
-              </Typography>
-            }
-          />
-        </ListItem> */}
-        <ListItem
-          button
-          onClick={onClick(localRoutes.reports)}
-          selected={isSelected(localRoutes.reports)}
-        >
-          <ListItemIcon>
-            <AssignmentIcon className={getCls(localRoutes.reports)} />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={getCls(localRoutes.reports)}>
-                Reports
-              </Typography>
-            }
-          />
-        </ListItem>
+
         <ListItem
           button
           onClick={onClick(localRoutes.users)}
@@ -305,22 +226,6 @@ const Layout: React.FC<IProps> = (props: any) => {
             primary={
               <Typography className={getCls(localRoutes.settings)}>
                 Settings
-              </Typography>
-            }
-          />
-        </ListItem>
-        <ListItem
-          button
-          onClick={onClick(localRoutes.developerPortal)}
-          selected={isSelected(localRoutes.developerPortal)}
-        >
-          <ListItemIcon>
-            <CodeIcon className={getCls(localRoutes.developerPortal)} />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={getCls(localRoutes.developerPortal)}>
-                Developer Portal
               </Typography>
             }
           />

@@ -1,15 +1,7 @@
 import {XHeadCell} from "../../components/table/XTableHead";
-import ApplicationLink from "../../components/links/ApplicationLink";
 import {printDate, printDateTime} from "../../utils/dateHelpers";
-import ContactLink from "../../components/links/ContactLink";
-import {getInitials, trimString} from "../../utils/stringHelpers";
 import React from "react";
 import {renderNinStatus, renderSubStatus} from "./widgets";
-import {toTitleCase} from "../contacts/types";
-import {hasValue} from "../../components/inputs/inputHelpers";
-import XLink from "../../components/links/XLink";
-import UserLink from "../../components/links/UserLink";
-import {getStatus} from "./fakeData";
 
 export const wfInitialSort = 'applicationDate';
 export const ninVerificationHeadCells: XHeadCell[] = [

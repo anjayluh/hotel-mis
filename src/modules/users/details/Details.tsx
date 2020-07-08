@@ -1,20 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getRouteParam } from "../../../utils/routHelpers";
-import Loading from "../../../components/Loading";
 import { createStyles, Grid, makeStyles, Theme } from "@material-ui/core";
-
-import { IRequestDetails } from "../types";
-import Typography from "@material-ui/core/Typography";
-import Summary from "./Summary";
-import { put, search } from "../../../utils/ajax";
-import { remoteRoutes } from "../../../data/constants";
 import { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { successColor } from "../../../theme/custom-colors";
-import Box from "@material-ui/core/Box";
-import Divider from "@material-ui/core/Divider";
-import { fakeRequestDetails } from "../fakeData";
-import { IState } from "../../../data/types";
 
 interface IProps {
   closeSlideOut?: () => any;

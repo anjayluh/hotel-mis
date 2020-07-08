@@ -1,7 +1,4 @@
 import {BaseModel} from "../../data/types";
-import * as faker from "faker";
-import {enumToArray, getRandomStr} from "../../utils/stringHelpers";
-import {organisationNames} from "../billing/fakeData";
 
 export interface IWorkflowInclude {
     caseData?: boolean

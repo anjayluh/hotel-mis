@@ -4,7 +4,6 @@ import {createStyles, makeStyles, Theme, useTheme} from "@material-ui/core";
 import XTable from "./table/XTable";
 import {XHeadCell} from "./table/XTableHead";
 import Grid from '@material-ui/core/Grid';
-import Filter from "../modules/contacts/list/Filter";
 import {localRoutes} from "../data/constants";
 import Loading from "./Loading";
 import EditDialog from "./EditDialog";
@@ -82,7 +81,7 @@ const DataListEditor = ({data, loading,showFilter,onFilter,onCloseFilter,toMobil
                 }
             </List>
             <EditDialog open={showFilter} onClose={onCloseFilter} title="Contact Filter">
-                <Filter onFilter={onFilter} loading={loading}/>
+
             </EditDialog>
         </>
     }
@@ -98,7 +97,7 @@ const DataListEditor = ({data, loading,showFilter,onFilter,onCloseFilter,toMobil
             </Grid>
             <Grid item xs={3} style={{display: showFilter ? "block" : "none"}}>
                 <Paper className={classes.filterPaper} elevation={0}>
-                    <Filter onFilter={onFilter} loading={loading}/>
+
                 </Paper>
             </Grid>
         </Grid>

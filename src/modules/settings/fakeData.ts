@@ -13,9 +13,7 @@ import {
 } from "./types";
 import {enumToArray} from "../../utils/stringHelpers";
 import {createArray} from "../../utils/arrayHelpers";
-// import {format} from "date-fns";
 import {getRandomStr} from "../../utils/stringHelpers";
-import {organisationNames} from "../billing/fakeData";
 
 const uuid = require('uuid/v4');
 
@@ -131,7 +129,7 @@ export const fakeRequestDetails =():IRequestDetails => {
         dateOfBirth:new Date(faker.date.past(18)),
         referenceNumber: faker.finance.account(7),
         initiator: faker.name.findName(),
-        participant: faker.random.arrayElement(organisationNames),
+        participant: 'Participant A',
         requestStatus: [
             {
                 order: 1,

@@ -1,9 +1,5 @@
 import {ICoreState} from "./redux/coreReducer";
-import {ICrmState} from "./redux/contacts/reducer";
-import {IParticipantsState} from "./redux/participants/reducer";
-import {IBillingState} from "./redux/billing/reducer";
 import {ISettingsState} from "./redux/settings/reducer";
-import {ISubscriptionState} from "./redux/subscription/redux";
 import {IVerificationRequestState} from "./redux/ninVerification/reducer";
 import {IWorkflowState} from "./redux/workflows/reducer";
 import {IUserState} from "./redux/users/reducer";
@@ -31,15 +27,10 @@ export interface ILoginResponse {
 
 export interface IState {
     core: ICoreState
-    participants: IParticipantsState
-    billing: IBillingState
     settings: ISettingsState
     verificationRequests:IVerificationRequestState
-    subscriptions: ISubscriptionState
     workflows: IWorkflowState
-    crm: ICrmState
     users: IUserState
-    contacts: any
 }
 
 

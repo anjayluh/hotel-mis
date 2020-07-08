@@ -1,6 +1,4 @@
 import {IVerificationRequest} from "../../../modules/ninVerification/types";
-import {IBill} from "../../../modules/billing/types";
-import {BillingsConstants} from "../billing/reducer";
 import {IRequestDetails} from "../../../modules/ninVerification/types";
 
 export const verificationRequestConstants = {
