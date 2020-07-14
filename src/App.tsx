@@ -6,6 +6,7 @@ import Login from "./modules/login/LoginSimple";
 import Splash from "./modules/login/Splash";
 import {useSelector} from 'react-redux'
 import {ICoreState} from "./data/redux/coreReducer";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 
 const App: React.FC = () => {
@@ -19,7 +20,7 @@ const App: React.FC = () => {
             <ToastContainer/>
             <>
                 {user ?
-                    <ContentSwitch/> :
+                  <ErrorBoundary><ContentSwitch/></ErrorBoundary> :
                     <Switch>
                         <Route exact component={Login}/>
                     </Switch>

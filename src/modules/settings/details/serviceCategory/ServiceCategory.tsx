@@ -11,6 +11,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import ExpansionCard from "../../../../components/ExpansionCard";
 import Category from "./Category";
 import Loading from "../../../../components/Loading";
+import ErrorBoundary from "../../../../components/ErrorBoundary/ErrorBoundary";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -120,7 +121,9 @@ const ServiceCategory = () => {
       {loading ? (
         <Loading />
       ) : (
-        <Category serviceCategories={serviceCategories} />
+        <ErrorBoundary>
+          <Category serviceCategories={serviceCategories} />
+        </ErrorBoundary>
       )}
     </ExpansionCard>
   );

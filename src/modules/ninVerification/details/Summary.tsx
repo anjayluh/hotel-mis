@@ -24,6 +24,7 @@ import {
   warningColor,
   pendingColor,
 } from "../../../theme/custom-colors";
+import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
 
 interface IProps {
   data: IRequestDetails;
@@ -75,7 +76,9 @@ const Summary = ({ data }: IProps) => {
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <div>
-          <DetailView data={fields} />
+          <ErrorBoundary>
+            <DetailView data={fields} />
+          </ErrorBoundary>
         </div>
       </Grid>
       <Grid item xs={12}>

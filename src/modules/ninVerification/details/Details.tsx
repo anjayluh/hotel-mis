@@ -9,6 +9,7 @@ import { successColor } from "../../../theme/custom-colors";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
 import { IState } from "../../../data/types";
+import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
 
 interface IProps {
   closeSlideOut?: () => any;
@@ -104,7 +105,7 @@ const Details = (props: IProps) => {
                 </Box>
               </Box>
               <Divider />
-              <Box pt={1}>{requestData && <Summary data={requestData} />}</Box>
+              <Box pt={1}>{requestData && <ErrorBoundary><Summary data={requestData} /></ErrorBoundary>}</Box>
             </Grid>
           </Grid>
         </div>

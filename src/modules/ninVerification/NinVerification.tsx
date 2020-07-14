@@ -28,6 +28,8 @@ import Details from "./details/Details";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import { useSnackbar } from "notistack";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
+import snackbarMessages from "../../data/snackbarMessages";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -136,7 +138,7 @@ const NinVerifications = () => {
         });
       },
       () => {
-        enqueueSnackbar("Operation failed", {
+        enqueueSnackbar(snackbarMessages.default.fail, {
           variant: "error",
         });
       },
@@ -205,17 +207,19 @@ const NinVerifications = () => {
               <Loading />
             ) : (
               <Grid item xs={12}>
-                <XTable
-                  loading={loadingNew}
-                  headCells={ninVerificationHeadCells}
-                  data={data}
-                  initialRowsPerPage={10}
-                  usePagination={true}
-                  initialSortBy={wfInitialSort}
-                  initialOrder="desc"
-                  handleSelection={handleToggleDrawer}
-                  hoverClass={classes.rowHover}
-                />
+                <ErrorBoundary>
+                  <XTable
+                    loading={loadingNew}
+                    headCells={ninVerificationHeadCells}
+                    data={data}
+                    initialRowsPerPage={10}
+                    usePagination={true}
+                    initialSortBy={wfInitialSort}
+                    initialOrder="desc"
+                    handleSelection={handleToggleDrawer}
+                    hoverClass={classes.rowHover}
+                  />
+                </ErrorBoundary>
               </Grid>
             )}
           </Box>
@@ -223,7 +227,9 @@ const NinVerifications = () => {
         <Grid item xs={3} style={{ display: open ? "block" : "none" }}>
           <Box pt={6}>
             <Paper className={classes.filterPaper} elevation={0}>
-              <Filter onFilter={handleFilter} loading={loading} />
+              <ErrorBoundary>
+                <Filter onFilter={handleFilter} loading={loading} />
+              </ErrorBoundary>
             </Paper>
           </Box>
         </Grid>
@@ -236,7 +242,9 @@ const NinVerifications = () => {
       >
         {viewDetails ? (
           <div>
-            <Details closeSlideOut={handleToggleDrawer}></Details>
+            <ErrorBoundary>
+              <Details closeSlideOut={handleToggleDrawer}></Details>
+            </ErrorBoundary>
             <Grid item xs={12} className={classes.close}>
               <Button
                 className={classes.closeButton}
@@ -248,9 +256,11 @@ const NinVerifications = () => {
             </Grid>
           </div>
         ) : (
-          <NinVerificationForm
-            closeSlideOut={handleToggleDrawer}
-          ></NinVerificationForm>
+          <ErrorBoundary>
+            <NinVerificationForm
+              closeSlideOut={handleToggleDrawer}
+            ></NinVerificationForm>
+          </ErrorBoundary>
         )}
       </SlideOutDrawer>
     </Navigation>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import DetailView, { IRec } from "../../../../components/DetailView";
+import ErrorBoundary from "../../../../components/ErrorBoundary/ErrorBoundary";
 
 interface IProps {
   data?: any;
@@ -18,7 +19,9 @@ const Summary = ({ data }: IProps) => {
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <div>
-          <DetailView data={fields} />
+          <ErrorBoundary>
+            <DetailView data={fields} />
+          </ErrorBoundary>
         </div>
       </Grid>
     </Grid>

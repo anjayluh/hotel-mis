@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import ExpansionCard from "../../../../components/ExpansionCard";
 import Widget from "../../widgets";
+import ErrorBoundary from "../../../../components/ErrorBoundary/ErrorBoundary";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,12 +30,14 @@ type Anchor = "top" | "left" | "bottom" | "right";
 const ServiceCategory = () => {
   const classes = useStyles();
   return (
-    <ExpansionCard
-      title={"Participant Type"}
-      children={
-        "Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget maximus est, id dignissim quam."
-      }
-    />
+    <ErrorBoundary>
+      <ExpansionCard
+        title={"Participant Type"}
+        children={
+          "Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget maximus est, id dignissim quam."
+        }
+      />
+    </ErrorBoundary>
   );
 };
 

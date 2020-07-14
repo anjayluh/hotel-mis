@@ -10,6 +10,7 @@ import ServiceCategoryForm from "../forms/ServiceCategoryForm";
 import Details from "./Details";
 import Loading from "../../../../components/Loading";
 import Button from "@material-ui/core/Button";
+import ErrorBoundary from "../../../../components/ErrorBoundary/ErrorBoundary";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -98,12 +99,14 @@ const Category = ({ serviceCategories }: IProps) => {
     <Grid container>
       {serviceCategories.map((item, index) => (
         <Box pr={1} mt={0} key={index}>
-          <Widget
-            label={item.name}
-            editIcon={<EditIcon className={classes.icon} />}
-            handleIconClick={viewDetails}
-            values={item}
-          />
+          <ErrorBoundary>
+            <Widget
+              label={item.name}
+              editIcon={<EditIcon className={classes.icon} />}
+              handleIconClick={viewDetails}
+              values={item}
+            />
+          </ErrorBoundary>
         </Box>
       ))}
       <Box pl={1} className={classes.add}>
@@ -117,15 +120,19 @@ const Category = ({ serviceCategories }: IProps) => {
       >
         {detailsLoading && <Loading />}
         {!detailsLoading && !details && (
-          <ServiceCategoryForm closeSlideOut={handleToggleDrawer} />
+          <ErrorBoundary>
+            <ServiceCategoryForm closeSlideOut={handleToggleDrawer} />
+          </ErrorBoundary>
         )}
         {!detailsLoading && details && (
           <div>
-            <Details
-              data={selectedItem}
-              closeSlideOut={handleToggleDrawer}
-              loading={detailsLoading}
-            ></Details>
+            <ErrorBoundary>
+              <Details
+                data={selectedItem}
+                closeSlideOut={handleToggleDrawer}
+                loading={detailsLoading}
+              ></Details>
+            </ErrorBoundary>
             <Grid item xs={12}>
               <Box p={1} mt={16}>
                 <Grid container spacing={1}>

@@ -15,6 +15,8 @@ import { post } from "../../../utils/ajax";
 import Toast from "../../../utils/Toast";
 import { verificationRequestConstants } from "../../../data/redux/ninVerification/reducer";
 import {useSnackbar} from "notistack";
+import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
+import snackbarMessages from "../../../data/snackbarMessages";
 
 const schema = yup.object().shape({
   name: reqString,
@@ -67,7 +69,7 @@ const ParticipantForm = (props: IProps) => {
           payload: toSave
         });
         // Toast.info("Operation successful");
-        enqueueSnackbar('Operation successful', {
+        enqueueSnackbar(snackbarMessages.NinVerification.new, {
           variant: 'success',
         });
         actions.resetForm();
@@ -76,7 +78,7 @@ const ParticipantForm = (props: IProps) => {
       },
       () => {
         // Toast.error("Operation failed");
-        enqueueSnackbar('Operation failed', {
+        enqueueSnackbar(snackbarMessages.default.fail, {
           variant: 'error',
         });
         // actions.setSubmitting(false);
@@ -93,50 +95,52 @@ const ParticipantForm = (props: IProps) => {
   }
 
   return (
-    <XFormSimple
-      onSubmit={handleSubmit}
-      schema={schema}
-      initialValues={data}
-      onCancel={handleClose}
-    >
-      <Grid spacing={1} container direction="column">
-        <Grid item xs={12}>
-          <XTextInput
-            name="name"
-            label="Name"
-            type="text"
-            variant="outlined"
-            size="small"
-          />
+    <ErrorBoundary>
+      <XFormSimple
+        onSubmit={handleSubmit}
+        schema={schema}
+        initialValues={data}
+        onCancel={handleClose}
+      >
+        <Grid spacing={1} container direction="column">
+          <Grid item xs={12}>
+            <XTextInput
+              name="name"
+              label="Name"
+              type="text"
+              variant="outlined"
+              size="small"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <XTextInput
+              name="nin"
+              label="NIN"
+              type="text"
+              variant="outlined"
+              size="small"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <XDateInput
+              name="dateOfBirth"
+              label="Date of Birth"
+              inputVariant="outlined"
+              size="small"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <XTextInput
+              name="cardNumber"
+              label="Card Number"
+              type="text"
+              variant="outlined"
+              size="small"
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <XTextInput
-            name="nin"
-            label="NIN"
-            type="text"
-            variant="outlined"
-            size="small"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <XDateInput
-            name="dateOfBirth"
-            label="Date of Birth"
-            inputVariant="outlined"
-            size="small"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <XTextInput
-            name="cardNumber"
-            label="Card Number"
-            type="text"
-            variant="outlined"
-            size="small"
-          />
-        </Grid>
-      </Grid>
-    </XFormSimple>
+      </XFormSimple>
+    </ErrorBoundary>
   );
 };
 

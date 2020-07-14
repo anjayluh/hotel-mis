@@ -15,6 +15,8 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
+import ErrorBoundary from "../../../../components/ErrorBoundary/ErrorBoundary";
+import snackbarMessages from "../../../../data/snackbarMessages";
 const schema = yup.object().shape({
   name: reqString,
 });
@@ -113,7 +115,7 @@ const ServiceCategoryForm = (props: IProps) => {
         });
         if (props.done) props.done();
         // Toast.info("Operation successful");
-        enqueueSnackbar("Operation successful", {
+        enqueueSnackbar(snackbarMessages.serviceCategories.new, {
           variant: "success",
         });
         actions.resetForm();
@@ -124,7 +126,7 @@ const ServiceCategoryForm = (props: IProps) => {
           type: settingsConstants.serviceCategoriesAddServiceCategory,
           payload: toSave,
         });
-        enqueueSnackbar("Operation successful");
+        enqueueSnackbar(snackbarMessages.default.fail);
         actions.resetForm();
         handleClose();
       }
@@ -148,94 +150,96 @@ const ServiceCategoryForm = (props: IProps) => {
     });
   }
   return (
-    <XFormSimple
-      onSubmit={handleSubmit}
-      schema={schema}
-      initialValues={data}
-      onCancel={handleClose}
-    >
-      <Grid spacing={1} container direction="column">
-        <Grid item xs={12}>
-          <XTextInput
-            name="name"
-            label="Name"
-            type="text"
-            variant="outlined"
-            size="small"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6" className={classes.title}>
-            Rates
-          </Typography>
-          <Divider />
-        </Grid>
-        <Grid item spacing={2} container direction="row" alignItems="center">
-          <Grid item xs={4} style={{ paddingBottom: 0 }}>
+    <ErrorBoundary>
+      <XFormSimple
+        onSubmit={handleSubmit}
+        schema={schema}
+        initialValues={data}
+        onCancel={handleClose}
+      >
+        <Grid spacing={1} container direction="column">
+          <Grid item xs={12}>
+            <XTextInput
+              name="name"
+              label="Name"
+              type="text"
+              variant="outlined"
+              size="small"
+            />
+          </Grid>
+          <Grid item xs={12}>
             <Typography variant="h6" className={classes.title}>
-              FROM
+              Rates
             </Typography>
+            <Divider />
           </Grid>
-          <Grid item xs={3} style={{ paddingBottom: 0 }}>
-            <Typography variant="h6">TO</Typography>
-          </Grid>
-          <Grid item xs={5} style={{ paddingBottom: 0 }}>
-            <Typography
-              variant="h6"
-              className={`${classes.title} ${classes.unitPrice}`}
-            >
-              UNIT PRICE
-            </Typography>
-          </Grid>
-        </Grid>
-        {data.rates.map((item, index) => (
-          <Grid
-            item
-            spacing={2}
-            container
-            direction="row"
-            alignItems="center"
-            key={index}
-          >
-            <Grid item xs={4} className={classes.input}>
-              <Typography variant="body2" className={classes.title}>
-                {item.from}
+          <Grid item spacing={2} container direction="row" alignItems="center">
+            <Grid item xs={4} style={{ paddingBottom: 0 }}>
+              <Typography variant="h6" className={classes.title}>
+                FROM
               </Typography>
             </Grid>
-            <Grid item xs={3} className={classes.input}>
-              <XTextInput
-                name={`rates[${index}].to`}
-                type="text"
-                variant="outlined"
-                size="small"
-              />
+            <Grid item xs={3} style={{ paddingBottom: 0 }}>
+              <Typography variant="h6">TO</Typography>
             </Grid>
-            <Grid
-              item
-              xs={5}
-              className={`${classes.unitPriceContainer} ${classes.input}`}
-            >
-              <XTextInput
-                name={`rates[${index}].unitPrice`}
-                type="text"
-                variant="outlined"
-                size="small"
-              />
+            <Grid item xs={5} style={{ paddingBottom: 0 }}>
+              <Typography
+                variant="h6"
+                className={`${classes.title} ${classes.unitPrice}`}
+              >
+                UNIT PRICE
+              </Typography>
             </Grid>
           </Grid>
-        ))}
-        <Grid item xs={12} className={classes.unitPrice}>
-          <Button
-            className={classes.addNewButton}
-            startIcon={<AddIcon className={classes.addIcon} />}
-            variant="text"
-            onClick={handleNew}
-          >
-            Add New
-          </Button>
+          {data.rates.map((item, index) => (
+            <Grid
+              item
+              spacing={2}
+              container
+              direction="row"
+              alignItems="center"
+              key={index}
+            >
+              <Grid item xs={4} className={classes.input}>
+                <Typography variant="body2" className={classes.title}>
+                  {item.from}
+                </Typography>
+              </Grid>
+              <Grid item xs={3} className={classes.input}>
+                <XTextInput
+                  name={`rates[${index}].to`}
+                  type="text"
+                  variant="outlined"
+                  size="small"
+                />
+              </Grid>
+              <Grid
+                item
+                xs={5}
+                className={`${classes.unitPriceContainer} ${classes.input}`}
+              >
+                <XTextInput
+                  name={`rates[${index}].unitPrice`}
+                  type="text"
+                  variant="outlined"
+                  size="small"
+                />
+              </Grid>
+            </Grid>
+          ))}
+          <Grid item xs={12} className={classes.unitPrice}>
+            <Button
+              className={classes.addNewButton}
+              startIcon={<AddIcon className={classes.addIcon} />}
+              variant="text"
+              onClick={handleNew}
+            >
+              Add New
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
-    </XFormSimple>
+      </XFormSimple>
+    </ErrorBoundary>
   );
 };
 

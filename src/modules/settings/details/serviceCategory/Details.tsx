@@ -9,6 +9,7 @@ import Divider from "@material-ui/core/Divider";
 import { IState } from "../../../../data/types";
 import Summary from "./Summary";
 import { printsMoney } from "../../../../utils/numberHelpers";
+import ErrorBoundary from "../../../../components/ErrorBoundary/ErrorBoundary";
 
 interface IProps {
   closeSlideOut?: () => any;
@@ -70,7 +71,7 @@ const Details = (props: IProps) => {
               </Box>
               <Divider />
               <Box pt={1} mb={3}>
-                <Summary />
+                <ErrorBoundary><Summary /></ErrorBoundary>
               </Box>
               <Grid item xs={12} style={{ marginBottom: 13 }}>
                 <Typography variant="h6" className={classes.title}>

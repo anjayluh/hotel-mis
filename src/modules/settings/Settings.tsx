@@ -12,6 +12,7 @@ import ParticipantType from "./details/participantType/ParticipantType";
 import PaymentType from "./details/paymentType/PaymentType";
 import ContactPersonRole from "./details/contactPersonRole/ContactPersonRole";
 import ServiceCategory from "./details/serviceCategory/ServiceCategory";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,11 +52,11 @@ const Settings = () => {
               </Grid>
             </Box>
             <Grid item xs={12}>
-              <AccountSettings />
-              <ParticipantType />
-              <PaymentType />
-              <ContactPersonRole />
-              <ServiceCategory />
+              <ErrorBoundary><AccountSettings /></ErrorBoundary>
+              <ErrorBoundary><ParticipantType /></ErrorBoundary>
+              <ErrorBoundary><PaymentType /></ErrorBoundary>
+              <ErrorBoundary><ContactPersonRole /></ErrorBoundary>
+              <ErrorBoundary><ServiceCategory /></ErrorBoundary>
             </Grid>
           </Box>
         </Grid>
