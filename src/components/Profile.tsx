@@ -14,8 +14,6 @@ import HiddenJs from "@material-ui/core/Hidden/HiddenJs";
 import { getInitials } from "../utils/stringHelpers";
 import { handleLogout } from "../data/redux/coreActions";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Slide from "@material-ui/core/Slide";
-import { TransitionProps } from "@material-ui/core/transitions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Grid } from "@material-ui/core";
@@ -42,9 +40,6 @@ export const BarView = (props: any) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const menuOpen = Boolean(anchorEl);
-  const Transition = React.forwardRef<unknown, TransitionProps>(
-    (props, ref) => <Slide direction="up" ref={ref} {...props} />
-  );
   function createFields(user: any): IRec[] {
     return [
       {
@@ -126,7 +121,6 @@ export const BarView = (props: any) => {
       <Dialog
         fullWidth={true}
         open={dialogOpen}
-        TransitionComponent={Transition}
         keepMounted
         onClose={closeDialog}
         aria-labelledby="alert-dialog-slide-title"
