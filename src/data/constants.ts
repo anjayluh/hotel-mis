@@ -1,5 +1,5 @@
-export const AUTH_TOKEN_KEY = "__demo__dfcu__token";
-export const AUTH_USER_KEY = "__demo__dfcu__user";
+export const AUTH_TOKEN_KEY = "__bou__backoffice__token";
+export const AUTH_USER_KEY = "__bou__backoffice__user";
 
 export const systemRoles = {
   contacts: {
@@ -20,7 +20,7 @@ export const localRoutes = {
   callback: "/callback",
   pending: "/pending",
   ninVerification: "/ninVerification",
-  participantsDetails: "/participants/:participantId/:currentView",
+  participantsDetails: "/participants/:participantId/:subSection",
   participants: "/participants",
   billing: "/billing",
   subscriptions: "/subscriptions",
@@ -42,9 +42,6 @@ const servers: any = {
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
-    // Kyc: "https://kyc-connector-staging.onboarding.dfcugroup.com",
-    // Notification: "https://emata-poc-smsservice-test.laboremus.no",
-    // Payments: "https://emata-poc-payments-test.laboremus.no",
   },
   test: {
     Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
@@ -52,9 +49,6 @@ const servers: any = {
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
-    // Kyc: "https://dfcu-customeronboarding-kycconnector-test.laboremus.no",
-    // Notification: "https://notificationservice-test.laboremus.no",
-    // Log: "https://dfcu-customeronboarding-logging-test.laboremus.no",
   },
   sit: {
     Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
@@ -62,32 +56,14 @@ const servers: any = {
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
-    // Kyc: "https://kyc-connector-test.onboarding.dfcugroup.com",
-    // Notification: "https://notification-test.onboarding.dfcugroup.com",
-    // Accounts: "https://finacle-connector-test.onboarding.dfcugroup.com",
-    // Log: "https://logging-test.onboarding.dfcugroup.com",
   },
   uat: {
-    Auth: "https://authentication-staging.onboarding.dfcugroup.com",
-    Crm: "https://crm-staging.onboarding.dfcugroup.com",
-    Case: "https://casehandling-staging.onboarding.dfcugroup.com",
     Nin: "https://bou-niv-api-staging.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-staging.laboremus.no",
-    // Kyc: "https://kyc-connector-staging.onboarding.dfcugroup.com",
-    // Notification: "https://notification-staging.onboarding.dfcugroup.com",
-    // Accounts: "https://finacle-connector-staging.onboarding.dfcugroup.com",
-    // Log: "https://logging-staging.onboarding.dfcugroup.com",
   },
   production: {
-    Auth: "https://authentication.onboarding.dfcugroup.com",
-    Crm: "https://crm.onboarding.dfcugroup.com",
-    Case: "https://casehandling.onboarding.dfcugroup.com",
     Nin: "https://bou-niv-api.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
-    // Kyc: "https://kyc-connector.onboarding.dfcugroup.com",
-    // Notification: "https://notification.onboarding.dfcugroup.com",
-    // Accounts: "https://finacle-connector.onboarding.dfcugroup.com",
-    // Log: "https://logging.onboarding.dfcugroup.com",
   },
 };
 
