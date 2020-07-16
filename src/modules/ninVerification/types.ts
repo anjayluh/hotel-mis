@@ -132,7 +132,11 @@ export enum WorkflowStatus {
     Error = 'Error',
     Closed = 'Closed'
 }
+export enum WorkflowValidityStatus {
+    Valid = 'Valid',
+    Invalid = 'Invalid'
 
+}
 export enum WorkflowNinStatus {
     Pending = 'Pending',
     Error = 'Error',

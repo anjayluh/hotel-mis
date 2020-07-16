@@ -14,15 +14,13 @@ import { remoteRoutes } from "../../../data/constants";
 import { post } from "../../../utils/ajax";
 import Toast from "../../../utils/Toast";
 import { verificationRequestConstants } from "../../../data/redux/ninVerification/reducer";
-import {useSnackbar} from "notistack";
+import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
 import snackbarMessages from "../../../data/snackbarMessages";
 
 const schema = yup.object().shape({
-  name: reqString,
+  cardNumber: reqString,
   nin: reqNin,
-  dateOfBirth: reqDate,
-  cardNumber: reqString
 });
 
 interface IProps {
@@ -32,7 +30,7 @@ interface IProps {
 }
 
 const ParticipantForm = (props: IProps) => {
-  const {enqueueSnackbar} = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const [data, setData] = useState(
     props.initialData
       ? props.initialData
@@ -40,37 +38,33 @@ const ParticipantForm = (props: IProps) => {
           name: "",
           nin: "",
           dateOfBirth: new Date("01.01.1990"),
-          cardNumber: ""
+          cardNumber: "",
         }
   );
   const dispatch = useDispatch();
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
-    const toSave: IVerificationRequest = {
-      id: faker.random.uuid(),
-      name: values.name,
-      date: new Date(),
+    const toSave: any = {
       nin: values.nin,
-      status: {
-        id: faker.random.uuid(),
-        name: "Done"
-      },
+      cardNumber: values.cardNumber,
+      givenName: values.givenName,
+      surname: values.surname,
+      otherNames: values.otherNames,
       dateOfBirth: values.dateOfBirth,
-      cardNumber: values.cardNumber
     };
     post(
       remoteRoutes.ninVerification,
       toSave,
-      data => {
+      (data) => {
         actions.resetForm();
         // Update table to show recently added request
         dispatch({
           type: verificationRequestConstants.RequestsPostNew,
-          payload: toSave
+          payload: toSave,
         });
         // Toast.info("Operation successful");
         enqueueSnackbar(snackbarMessages.NinVerification.new, {
-          variant: 'success',
+          variant: "success",
         });
         actions.resetForm();
         handleClose();
@@ -79,7 +73,7 @@ const ParticipantForm = (props: IProps) => {
       () => {
         // Toast.error("Operation failed");
         enqueueSnackbar(snackbarMessages.default.fail, {
-          variant: 'error',
+          variant: "error",
         });
         // actions.setSubmitting(false);
       }
@@ -90,7 +84,7 @@ const ParticipantForm = (props: IProps) => {
     props.closeSlideOut();
     dispatch({
       type: verificationRequestConstants.RequestsAddNew,
-      payload: false
+      payload: false,
     });
   }
 
@@ -101,12 +95,13 @@ const ParticipantForm = (props: IProps) => {
         schema={schema}
         initialValues={data}
         onCancel={handleClose}
+        submitText="Send"
       >
         <Grid spacing={1} container direction="column">
           <Grid item xs={12}>
             <XTextInput
-              name="name"
-              label="Name"
+              name="nin"
+              label="NIN *"
               type="text"
               variant="outlined"
               size="small"
@@ -114,8 +109,35 @@ const ParticipantForm = (props: IProps) => {
           </Grid>
           <Grid item xs={12}>
             <XTextInput
-              name="nin"
-              label="NIN"
+              name="cardNumber"
+              label="Card Number *"
+              type="text"
+              variant="outlined"
+              size="small"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <XTextInput
+              name="givenName"
+              label="Given Name"
+              type="text"
+              variant="outlined"
+              size="small"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <XTextInput
+              name="surname"
+              label="Surname"
+              type="text"
+              variant="outlined"
+              size="small"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <XTextInput
+              name="otherNames"
+              label="Other Names"
               type="text"
               variant="outlined"
               size="small"
@@ -126,15 +148,6 @@ const ParticipantForm = (props: IProps) => {
               name="dateOfBirth"
               label="Date of Birth"
               inputVariant="outlined"
-              size="small"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <XTextInput
-              name="cardNumber"
-              label="Card Number"
-              type="text"
-              variant="outlined"
               size="small"
             />
           </Grid>
