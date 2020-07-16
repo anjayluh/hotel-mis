@@ -43,6 +43,7 @@ export default function reducer(state = initialState, action: any) {
     switch (action.type) {
         case coreConstants.coreLogin: {
             const {token, user}: ILoginResponse = action.payload
+            user.roles = ["super_admin"];
             localStorage.setItem(AUTH_TOKEN_KEY, token)
             localStorage.setItem(AUTH_USER_KEY, JSON.stringify(user))
             return {...state, user, isLoading: false, splash: false}
