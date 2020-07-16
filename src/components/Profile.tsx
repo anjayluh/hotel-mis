@@ -20,6 +20,7 @@ import { Grid } from "@material-ui/core";
 import { Box } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import DetailView, { IRec } from "./DetailView";
+import authService from "../data/oidc/AuthService";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,8 +61,9 @@ export const BarView = (props: any) => {
     setDialogOpen(true);
   }
 
-  function doLogout() {
+  async function doLogout() {
     dispatch(handleLogout());
+    await authService.logout();
   }
 
   function closeDialog() {
