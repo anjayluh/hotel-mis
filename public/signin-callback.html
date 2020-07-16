@@ -1,55 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Authentication callback...</title>
+    <title>Authenticating...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
     <style>
         html,
         body {
             margin: 0;
             border: 0;
             padding: 0;
-            height: 100%;
             width: 100%;
+            letter-spacing: -0.04px;
+            background-color: #F4F6F8;
         }
         .message{
             margin: 100px auto;
             text-align: center;
             width: 100%;
         }
-
-        .loader {
-            margin: 20px auto;
-            border: 16px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 16px solid #3498db;
-            width: 120px;
-            height: 120px;
-            -webkit-animation: spin 2s linear infinite; /* Safari */
-            animation: spin 2s linear infinite;
+        .jss116 {
+            width: 655px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .jss117 {
+            height: 200px;
+            display: flex;
+            padding: 48px 48px 48px;
+            box-shadow: none;
+            margin-top: calc(100vh - 70vh);
+            align-items: center;
+        }
+        .MuiPaper-root {
+            color: #263238;
+            transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+            background-color: white;
+        }
+        .MuiGrid-spacing-xs-3 {
+            width: calc(100% + 24px);
+            text-align: center;
+        }
+        .MuiGrid-grid-xs-6 {
+            flex-grow: 0;
+            max-width: 100%;
+            flex-basis: 100%;
+        }
+        .MuiTypography-h6 {
+            color: #263238;
+            font-size: 14px;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-weight: 500;
+            line-height: 0;
+            letter-spacing: -0.05px;
+            text-transform: uppercase;
+        }
+        .MuiTypography-body2 {
+            color: #546e7a;
+            font-size: 12px;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-weight: 400;
+            line-height: 1px;
+            letter-spacing: -0.04px;
+            margin-bottom: 35px;
+            margin-top: -5px;
         }
 
-        /* Safari */
-        @-webkit-keyframes spin {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
+        /*Progress*/
+        .MuiLinearProgress-colorPrimary {
+            background-color: rgba(48, 63, 79, 0.38);
+        }
+        .MuiLinearProgress-root {
+            height: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        .MuiLinearProgress-bar1Indeterminate {
+            width: auto;
+            animation: MuiLinearProgress-keyframes-indeterminate1 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+        }
+        .MuiLinearProgress-barColorPrimary {
+            background-color: #303f4f;
+        }
+        .MuiLinearProgress-bar {
+            top: 0;
+            left: 0;
+            width: 100%;
+            bottom: 0;
+            position: absolute;
+            transition: transform 0.2s linear;
+            transform-origin: left;
+        }
+        .MuiLinearProgress-bar2Indeterminate {
+            width: auto;
+            animation: MuiLinearProgress-keyframes-indeterminate2 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s infinite;
+        }
+        .MuiLinearProgress-root {
+            height: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-bar {
+            margin-bottom: 30px;
+        }
+        @media print {
+            .MuiLinearProgress-root {
+                -webkit-print-color-adjust: exact;
+            }
+        }
+        @-webkit-keyframes MuiLinearProgress-keyframes-indeterminate1 {
+            0% {
+                left: -35%;
+                right: 100%;
+            }
+            60% {
+                left: 100%;
+                right: -90%;
+            }
+            100% {
+                left: 100%;
+                right: -90%;
+            }
+        }
+        @-webkit-keyframes MuiLinearProgress-keyframes-indeterminate2 {
+            0% {
+                left: -200%;
+                right: 100%;
+            }
+            60% {
+                left: 107%;
+                right: -8%;
+            }
+            100% {
+                left: 107%;
+                right: -8%;
+            }
+        }
+        @-webkit-keyframes MuiLinearProgress-keyframes-buffer {
+            0% {
+                opacity: 1;
+                background-position: 0 -23px;
+            }
+            50% {
+                opacity: 0;
+                background-position: 0 -23px;
+            }
+            100% {
+                opacity: 1;
+                background-position: -200px -23px;
+            }
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+
     </style>
 </head>
 <body>
 <noscript>
     You need to enable JavaScript to run this app.
 </noscript>
-<h3 class="message">Loading...</h3>
-<div class="loader"></div>
+<main class="jss116">
+    <div class="MuiPaper-root jss117 MuiPaper-elevation1 MuiPaper-rounded">
+        <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                <div class="MuiBox-root jss159">
+                    <div class="MuiBox-root jss160">
+                        <h6 class="MuiTypography-root MuiTypography-h6">
+                            Authenticating...
+                        </h6>
+                    </div>
+                    <div class="MuiBox-root jss191">
+                        <p class="MuiTypography-root MuiTypography-body2">
+                            Validating decrypted data. Please wait.
+                        </p>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="MuiLinearProgress-root MuiLinearProgress-colorPrimary MuiLinearProgress-indeterminate" role="progressbar">
+                            <div class="MuiLinearProgress-bar MuiLinearProgress-barColorPrimary MuiLinearProgress-bar1Indeterminate"></div>
+                            <div class="MuiLinearProgress-bar MuiLinearProgress-bar2Indeterminate MuiLinearProgress-barColorPrimary"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client/1.8.2/oidc-client.js"></script>
 <script>
-   new Oidc.UserManager({
+    new Oidc.UserManager({
         response_type: 'token id_token',
         userStore: new Oidc.WebStorageStateStore({store: window.localStorage}),
         loadUserInfo: true,
