@@ -4,7 +4,6 @@ import createStyles from "@material-ui/core/styles/createStyles";
 export const useLoginStyles = makeStyles((theme: Theme) =>
   createStyles({
     main: {
-      // height: '100vh',
       width: 'auto',
       display: 'block', // Fix IE 11 issue.
       marginLeft: theme.spacing(3),
@@ -17,10 +16,7 @@ export const useLoginStyles = makeStyles((theme: Theme) =>
       },
     },
     paper: {
-      // marginTop: theme.spacing(16),
-      // marginTop: 206,
-      // marginTop: 'calc(100vh * 0.155)',
-      marginTop: 'calc(100vh - 84.51vh)',
+      marginTop: 'calc(100vh - 70vh)',
       display: 'flex',
       alignItems: 'center',
       padding: `${theme.spacing(6)}px ${theme.spacing(6)}px ${theme.spacing(6)}px`,
@@ -40,8 +36,9 @@ export const useLoginStyles = makeStyles((theme: Theme) =>
       height: 50
     },
     coatOfArms: {
-      width: 112,
-      height: 120
+      width: 100,
+      height: 'auto',
+      marginBottom: 15
     }
   }),
 );
