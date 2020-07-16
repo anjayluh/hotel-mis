@@ -37,8 +37,8 @@ class AuthService {
         return this.userManager.signinSilent();
     }
 
-    public logout(): Promise<void> {
-        return this.userManager.signoutRedirect();
+    public async logout(): Promise<void> {
+        return await this.userManager.signoutRedirect();
     }
 }
 
