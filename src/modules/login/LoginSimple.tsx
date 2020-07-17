@@ -9,64 +9,76 @@ import authService from "../../data/oidc/AuthService";
 import {useLoginStyles} from "./loginStyles";
 import coatOfArms from "../../assets/Coat_of_arms_of_Uganda.svg";
 import Divider from "@material-ui/core/Divider";
+import {ICoreState} from "../../data/redux/coreReducer";
+import {useSelector} from "react-redux";
 
 function Login() {
-    const classes = useLoginStyles();
-    const [loading,setLoading]=useState(false)
-    return (
-      <main className={classes.main}>
-        <CssBaseline/>
-        <Paper className={classes.paper}>
-          <Grid container spacing={3}>
-            <Grid item xs={5} style={{ marginTop: "auto",  marginBottom: "auto", paddingRight: 45 }}>
-              <Box display="flex" justifyContent="center" >
-                <img src={coatOfArms} alt={ "Coat of arms of Uganda" } className={classes.coatOfArms}/>
-              </Box>
-            </Grid>
-            <Grid item xs={1} style={{ padding: 0 }}>
-              <Divider orientation={'vertical'}/>
-            </Grid>
-            <Grid item xs={6} style={{ padding: 0, paddingRight: 13 }}>
-              <Box pb={1}>
-                <Box flexGrow={1} mb={2} pt={1}>
-                  <Typography  variant="h6">
-                    NATIONAL IDS VERIFICATION AND VALIDATION SYSTEM
-                  </Typography>
-                </Box>
-                <Box flexGrow={1}>
-                  <Typography variant={"body2"} style={{ paddingRight: 16 }}>
-                    Authentication of current and prospective customer information against records maintained by NIRA
-                  </Typography>
-                </Box>
-                <Box flexGrow={1} pb={1}>
-                  <form className={classes.form}>
-                    <Button
-                      onClick={(event)=> {
-                        event.preventDefault();
-                        setLoading(true)
-                        authService.login().finally(()=>{
-                          setLoading(false)
-                        })
-                      }}
-                      disabled={loading}
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      color="secondary"
-                      size={"large"}
-                      className={classes.submit}
-                    >
-                      Authenticate
-                    </Button>
-                  </form>
-                </Box>
-              </Box>
-            </Grid>
+  const classes = useLoginStyles();
+  const [loading,setLoading]=useState(false)
+  const authState: ICoreState = useSelector((state: any) => state.core)
+  const {isLoading, user} = authState
+  const authenticateUser = (event:React.ChangeEvent<any>) => {
+    event.preventDefault();
+    setLoading(true)
 
+    authService.login().finally(() => {
+      // setLoading(false)
+      if(user) {
+        setLoading(false)
+      }
+
+    })
+  }
+
+
+  return (
+    <main className={classes.main}>
+      <CssBaseline/>
+      <Paper className={classes.paper}>
+        <Grid container spacing={3}>
+          <Grid item xs={5} style={{ marginTop: "auto",  marginBottom: "auto", paddingRight: 45 }}>
+            <Box display="flex" justifyContent="center" >
+              <img src={coatOfArms} alt={ "Coat of arms of Uganda" } className={classes.coatOfArms}/>
+            </Box>
           </Grid>
-        </Paper>
-      </main>
-    );
+          <Grid item xs={1} style={{ padding: 0 }}>
+            <Divider orientation={'vertical'}/>
+          </Grid>
+          <Grid item xs={6} style={{ padding: 0, paddingRight: 13 }}>
+            <Box pb={1}>
+              <Box flexGrow={1} mb={2} pt={1}>
+                <Typography  variant="h6">
+                  NATIONAL IDS VERIFICATION AND VALIDATION SYSTEM
+                </Typography>
+              </Box>
+              <Box flexGrow={1}>
+                <Typography variant={"body2"} style={{ paddingRight: 16 }}>
+                  Authentication of current and prospective customer information against records maintained by NIRA
+                </Typography>
+              </Box>
+              <Box flexGrow={1} pb={1}>
+                <form className={classes.form}>
+                  <Button
+                    onClick={authenticateUser}
+                    disabled={loading}
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="secondary"
+                    size={"large"}
+                    className={classes.submit}
+                  >
+                    {loading ? 'Authenticating...': 'Authenticate'}
+                  </Button>
+                </form>
+              </Box>
+            </Box>
+          </Grid>
+
+        </Grid>
+      </Paper>
+    </main>
+  );
 }
 
 export default Login
