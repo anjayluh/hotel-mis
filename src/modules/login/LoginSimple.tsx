@@ -21,13 +21,16 @@ function Login() {
     event.preventDefault();
     setLoading(true)
 
-    authService.login().finally(() => {
-      // setLoading(false)
-      if(user) {
+    authService.login()
+      .then(function(json) {
+        if(user) {
+          setLoading(false)
+          }
+      })
+      .catch(function(error) {
         setLoading(false)
-      }
+      })
 
-    })
   }
 
 
