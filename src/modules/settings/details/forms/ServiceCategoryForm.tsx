@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: -5,
       marginTop: -6,
       fontWeight: "normal",
+      padding: "6px 15px",
     },
     addIcon: {
       marginLeft: -5,
