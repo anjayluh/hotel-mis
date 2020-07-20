@@ -5,7 +5,7 @@ export default snackbarMessages = {
     'fail': 'Operation failed'
   },
   'Login': {
-    'NetworkError': 'No internet connection, retry',
+    'NetworkError': 'No internet connection',
   },
   'participant': {
     'new': 'New participant has been created',
