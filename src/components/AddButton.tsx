@@ -38,7 +38,7 @@ const AddButton = (props: IProps) => {
       variant="text"
       onClick={props.onClick}
     >
-      New Request
+      {props.text}
     </Button>
   );
 };
