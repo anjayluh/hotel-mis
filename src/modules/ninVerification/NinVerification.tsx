@@ -26,9 +26,9 @@ import SlideOutDrawer from "../../components/SlideOutDrawer";
 import { IState } from "../../data/types";
 import Details from "./details/Details";
 import Button from "@material-ui/core/Button";
-import AddIcon from "@material-ui/icons/Add";
 import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
+import AddButton from "../../components/AddButton";
 import snackbarMessages from "../../data/snackbarMessages";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -72,24 +72,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
     pageHeading: {
       display: "flex",
-    },
-    addNewButton: {
-      color: "#428BCA",
-      textTransform: "capitalize",
-      fontStyle: "italic",
-      fontSize: 12,
-      lineHeight: 0.5,
-      marginBottom: -5,
-      marginLeft: 8,
-      marginTop: -6,
-      fontWeight: "normal",
-      padding: "6px 15px",
-    },
-    addIcon: {
-      marginLeft: -5,
-      marginRight: -10,
-      height: "0.7em",
-      fontSize: 13,
     },
   })
 );
@@ -193,14 +175,7 @@ const NinVerifications = () => {
                   <Typography variant="h4">
                     NIN Verification Requests
                   </Typography>
-                  <Button
-                    className={classes.addNewButton}
-                    startIcon={<AddIcon className={classes.addIcon} />}
-                    variant="text"
-                    onClick={addNewRequest}
-                  >
-                    New Request
-                  </Button>
+                  <AddButton text={"New request"} onClick={addNewRequest} />
                 </Grid>
               </Grid>
             </Box>

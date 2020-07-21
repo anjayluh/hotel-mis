@@ -17,6 +17,8 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import ErrorBoundary from "../../../../components/ErrorBoundary/ErrorBoundary";
 import snackbarMessages from "../../../../data/snackbarMessages";
+import AddButton from "../../../../components/AddButton";
+
 const schema = yup.object().shape({
   name: reqString,
 });
@@ -46,23 +48,6 @@ const useStyles = makeStyles((theme: Theme) =>
       "& input": {
         textAlign: "right",
       },
-    },
-    addNewButton: {
-      color: "#428BCA",
-      textTransform: "capitalize",
-      fontStyle: "italic",
-      fontSize: 12,
-      lineHeight: 0.5,
-      marginBottom: -5,
-      marginTop: -6,
-      fontWeight: "normal",
-      padding: "6px 15px",
-    },
-    addIcon: {
-      marginLeft: -5,
-      marginRight: -10,
-      height: "0.7em",
-      fontSize: 13,
     },
   })
 );
@@ -229,14 +214,7 @@ const ServiceCategoryForm = (props: IProps) => {
             </Grid>
           ))}
           <Grid item xs={12} className={classes.unitPrice}>
-            <Button
-              className={classes.addNewButton}
-              startIcon={<AddIcon className={classes.addIcon} />}
-              variant="text"
-              onClick={handleNew}
-            >
-              Add New
-            </Button>
+            <AddButton text={"Add New"} onClick={handleNew} />
           </Grid>
         </Grid>
       </XFormSimple>
