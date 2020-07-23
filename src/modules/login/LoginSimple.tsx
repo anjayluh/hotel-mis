@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import authService from "../../data/oidc/AuthService";
 import {useLoginStyles} from "./loginStyles";
-import coatOfArms from "../../assets/Coat_of_arms_of_Uganda.svg";
+import coatOfArms from "../../assets/Coat_of_arms_of_Uganda.gif";
 import Divider from "@material-ui/core/Divider";
 import {ICoreState} from "../../data/redux/coreReducer";
 import {useSelector} from "react-redux";
