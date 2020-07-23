@@ -11,8 +11,12 @@ import coatOfArms from "../../assets/Coat_of_arms_of_Uganda.svg";
 import Divider from "@material-ui/core/Divider";
 import {ICoreState} from "../../data/redux/coreReducer";
 import {useSelector} from "react-redux";
+import { useSnackbar } from 'notistack';
+import snackbarMessages from "../../data/snackbarMessages";
+
 
 function Login() {
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useLoginStyles();
   const [loading,setLoading]=useState(false)
   const authState: ICoreState = useSelector((state: any) => state.core)
@@ -21,13 +25,19 @@ function Login() {
     event.preventDefault();
     setLoading(true)
 
-    authService.login().finally(() => {
-      // setLoading(false)
-      if(user) {
+    authService.login()
+      .then((json) => {
+        if(user) {
+          setLoading(false)
+        }
+      })
+      .catch((error) => {
+        if(error.message === 'Network Error') {
+          enqueueSnackbar(snackbarMessages.Login.NetworkError, {variant: 'error'})
+        }
         setLoading(false)
-      }
+      })
 
-    })
   }
 
 
