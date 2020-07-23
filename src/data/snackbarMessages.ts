@@ -24,7 +24,7 @@ export default snackbarMessages = {
     'new': 'A new payment has been added'
   },
   'Billing': {
-    'emailBills':'Bills will be emailed to participants shortly'
+    'emailBills': 'Bills will be emailed to participants shortly'
   },
   'serviceCategories': {
     'new': 'A new service category has been added',
