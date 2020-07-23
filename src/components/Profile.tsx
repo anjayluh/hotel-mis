@@ -128,7 +128,10 @@ export const BarView = (props: any) => {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">
+        <DialogTitle
+          id="alert-dialog-slide-title"
+          style={{ padding: "25px 24px" }}
+        >
           <Grid container direction="row">
             <Grid item xs={1}>
               <ListItemAvatar>

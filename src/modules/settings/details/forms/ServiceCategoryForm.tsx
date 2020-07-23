@@ -17,6 +17,8 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import ErrorBoundary from "../../../../components/ErrorBoundary/ErrorBoundary";
 import snackbarMessages from "../../../../data/snackbarMessages";
+import AddButton from "../../../../components/AddButton";
+
 const schema = yup.object().shape({
   name: reqString,
 });
@@ -46,22 +48,6 @@ const useStyles = makeStyles((theme: Theme) =>
       "& input": {
         textAlign: "right",
       },
-    },
-    addNewButton: {
-      color: "#428BCA",
-      textTransform: "capitalize",
-      fontStyle: "italic",
-      fontSize: 12,
-      lineHeight: 0.5,
-      marginBottom: -5,
-      marginTop: -6,
-      fontWeight: "normal",
-    },
-    addIcon: {
-      marginLeft: -5,
-      marginRight: -10,
-      height: "0.7em",
-      fontSize: 13,
     },
   })
 );
@@ -150,6 +136,7 @@ const ServiceCategoryForm = (props: IProps) => {
     });
   }
   return (
+<<<<<<< HEAD
     <ErrorBoundary>
       <XFormSimple
         onSubmit={handleSubmit}
@@ -170,6 +157,66 @@ const ServiceCategoryForm = (props: IProps) => {
           <Grid item xs={12}>
             <Typography variant="h6" className={classes.title}>
               Rates
+||||||| merged common ancestors
+    <XFormSimple
+      onSubmit={handleSubmit}
+      schema={schema}
+      initialValues={data}
+      onCancel={handleClose}
+    >
+      <Grid spacing={1} container direction="column">
+        <Grid item xs={12}>
+          <XTextInput
+            name="name"
+            label="Name"
+            type="text"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h6" className={classes.title}>
+            Rates
+          </Typography>
+          <Divider />
+        </Grid>
+        <Grid item spacing={2} container direction="row" alignItems="center">
+          <Grid item xs={4} style={{ paddingBottom: 0 }}>
+            <Typography variant="h6" className={classes.title}>
+              FROM
+            </Typography>
+          </Grid>
+          <Grid item xs={3} style={{ paddingBottom: 0 }}>
+            <Typography variant="h6">TO</Typography>
+          </Grid>
+          <Grid item xs={5} style={{ paddingBottom: 0 }}>
+            <Typography
+              variant="h6"
+              className={`${classes.title} ${classes.unitPrice}`}
+            >
+              UNIT PRICE
+=======
+    <ErrorBoundary>
+      <XFormSimple
+        onSubmit={handleSubmit}
+        schema={schema}
+        initialValues={data}
+        onCancel={handleClose}
+      >
+        <Grid spacing={1} container direction="column">
+          <Grid item xs={12}>
+            <XTextInput
+              name="name"
+              label="Name"
+              type="text"
+              variant="outlined"
+              size="small"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6" className={classes.title}>
+              Rates
+>>>>>>> 688aeeee9e82adbc0895dcefc199457f0e545b5c
             </Typography>
             <Divider />
           </Grid>
@@ -179,6 +226,7 @@ const ServiceCategoryForm = (props: IProps) => {
                 FROM
               </Typography>
             </Grid>
+<<<<<<< HEAD
             <Grid item xs={3} style={{ paddingBottom: 0 }}>
               <Typography variant="h6">TO</Typography>
             </Grid>
@@ -189,9 +237,35 @@ const ServiceCategoryForm = (props: IProps) => {
               >
                 UNIT PRICE
               </Typography>
+||||||| merged common ancestors
+            <Grid item xs={3} className={classes.input}>
+              <XTextInput
+                name={`rates[${index}].to`}
+                type="text"
+                variant="outlined"
+                size="small"
+              />
+=======
+            <Grid item xs={3} style={{ paddingBottom: 0 }}>
+              <Typography variant="h6">TO</Typography>
+>>>>>>> 688aeeee9e82adbc0895dcefc199457f0e545b5c
+            </Grid>
+<<<<<<< HEAD
+          </Grid>
+          {data.rates.map((item, index) => (
+||||||| merged common ancestors
+=======
+            <Grid item xs={5} style={{ paddingBottom: 0 }}>
+              <Typography
+                variant="h6"
+                className={`${classes.title} ${classes.unitPrice}`}
+              >
+                UNIT PRICE
+              </Typography>
             </Grid>
           </Grid>
           {data.rates.map((item, index) => (
+>>>>>>> 688aeeee9e82adbc0895dcefc199457f0e545b5c
             <Grid
               item
               spacing={2}
@@ -226,6 +300,7 @@ const ServiceCategoryForm = (props: IProps) => {
                 />
               </Grid>
             </Grid>
+<<<<<<< HEAD
           ))}
           <Grid item xs={12} className={classes.unitPrice}>
             <Button
@@ -236,6 +311,12 @@ const ServiceCategoryForm = (props: IProps) => {
             >
               Add New
             </Button>
+||||||| merged common ancestors
+=======
+          ))}
+          <Grid item xs={12} className={classes.unitPrice}>
+            <AddButton text={"Add New"} onClick={handleNew} />
+>>>>>>> 688aeeee9e82adbc0895dcefc199457f0e545b5c
           </Grid>
         </Grid>
       </XFormSimple>
