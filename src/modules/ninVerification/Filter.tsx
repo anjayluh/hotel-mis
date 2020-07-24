@@ -84,18 +84,6 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            name="participant"
-            value={data["participant"]}
-            onChange={handleChange}
-            label="Participant"
-            type="text"
-            variant="outlined"
-            size="small"
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
             name="Status"
             value={data["Status"]}
             onChange={handleChange}
@@ -138,7 +126,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
             inputVariant="outlined"
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <PSelectInput
             name="Initiator"
             value={data["Initiator"]}
@@ -149,7 +137,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
             color="secondary"
             options={toOptions(initiators)}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <Box display="flex" flexDirection="row">
             <Button
