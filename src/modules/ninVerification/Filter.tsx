@@ -56,6 +56,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
   // }
 
   const initiators = ["Angella", "Evie", "TimK"];
+  const statuses = ["Failed", "Successful"];
 
   return (
     <form>
@@ -83,15 +84,15 @@ const Filter = ({ onFilter, loading }: IProps) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <PSelectInput
             name="Status"
             value={data["Status"]}
             onChange={handleChange}
             label="Status"
-            type="text"
             variant="outlined"
             size="small"
-            fullWidth
+            color="secondary"
+            options={toOptions(statuses)}
           />
         </Grid>
         <Grid item xs={12}>
