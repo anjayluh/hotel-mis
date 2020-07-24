@@ -22,6 +22,8 @@ export interface IUser {
     email: string
     fullName: string
     roles: string[]
+    participantId: string,
+
 }
 
 export interface ILoginResponse {
