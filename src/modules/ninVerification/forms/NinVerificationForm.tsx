@@ -2,7 +2,12 @@ import React from "react";
 import { useState } from "react";
 import * as yup from "yup";
 import * as faker from "faker";
-import { reqString, reqDate, reqNin } from "../../../data/validations";
+import {
+  reqString,
+  reqDate,
+  reqNin,
+  reqCardNumber,
+} from "../../../data/validations";
 import { FormikActions } from "formik";
 import Grid from "@material-ui/core/Grid";
 import XFormSimple from "../../../components/forms/XFormSimple";
@@ -19,8 +24,10 @@ import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
 import snackbarMessages from "../../../data/snackbarMessages";
 
 const schema = yup.object().shape({
-  cardNumber: reqString,
+  name: reqString,
   nin: reqNin,
+  dateOfBirth: reqDate,
+  cardNumber: reqCardNumber,
 });
 
 interface IProps {
@@ -45,12 +52,16 @@ const ParticipantForm = (props: IProps) => {
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
     const toSave: any = {
+      id: faker.random.uuid(),
+      name: values.name,
+      date: new Date(),
       nin: values.nin,
-      cardNumber: values.cardNumber,
-      givenName: values.givenName,
-      surname: values.surname,
-      otherNames: values.otherNames,
+      status: {
+        id: faker.random.uuid(),
+        name: "Done",
+      },
       dateOfBirth: values.dateOfBirth,
+      cardNumber: values.cardNumber,
     };
     post(
       remoteRoutes.ninVerification,
@@ -95,49 +106,21 @@ const ParticipantForm = (props: IProps) => {
         schema={schema}
         initialValues={data}
         onCancel={handleClose}
-        submitText="Send"
       >
         <Grid spacing={1} container direction="column">
           <Grid item xs={12}>
             <XTextInput
+              name="name"
+              label="Name"
+              type="text"
+              variant="outlined"
+              size="small"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <XTextInput
               name="nin"
-              label="NIN *"
-              type="text"
-              variant="outlined"
-              size="small"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <XTextInput
-              name="cardNumber"
-              label="Card Number *"
-              type="text"
-              variant="outlined"
-              size="small"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <XTextInput
-              name="givenName"
-              label="Given Name"
-              type="text"
-              variant="outlined"
-              size="small"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <XTextInput
-              name="surname"
-              label="Surname"
-              type="text"
-              variant="outlined"
-              size="small"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <XTextInput
-              name="otherNames"
-              label="Other Names"
+              label="NIN"
               type="text"
               variant="outlined"
               size="small"
@@ -148,6 +131,15 @@ const ParticipantForm = (props: IProps) => {
               name="dateOfBirth"
               label="Date of Birth"
               inputVariant="outlined"
+              size="small"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <XTextInput
+              name="cardNumber"
+              label="Card Number"
+              type="text"
+              variant="outlined"
               size="small"
             />
           </Grid>
