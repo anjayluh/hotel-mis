@@ -1,5 +1,6 @@
 import { XHeadCell } from "../../components/table/XTableHead";
 import { printDateTime } from "../../utils/dateHelpers";
+import { getLastCharacters } from "../../utils/stringHelpers";
 import React from "react";
 import {
   renderNinStatus,
@@ -33,8 +34,20 @@ export const ninVerificationHeadCells: XHeadCell[] = [
     cellProps: { style: { width: 150 } },
   },
   {
+    name: "nin",
+    label: "NIN",
+    render: (value, rec) => <span>{getLastCharacters(value, 4)}</span>,
+    cellProps: {
+      style: {
+        width: 40,
+        whiteSpace: "nowrap",
+      },
+    },
+  },
+  {
     name: "cardNumber",
     label: "Card Number",
+    render: (value, rec) => <span>{getLastCharacters(value, 4)}</span>,
     cellProps: {
       style: {
         width: 40,

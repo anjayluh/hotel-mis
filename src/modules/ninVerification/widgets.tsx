@@ -31,6 +31,10 @@ export const renderValidityStatus = (value: WorkflowValidityStatus) => {
       color = errorColor;
       label = value;
       break;
+    case WorkflowValidityStatus.emptyString:
+      color = errorColor;
+      label = "Invalid";
+      break;
   }
 
   return (
@@ -48,7 +52,7 @@ export const renderValidityStatus = (value: WorkflowValidityStatus) => {
           />
         </Box>
       )}
-      {value === "Invalid" && (
+      {label === "Invalid" && (
         <Box>
           <RemoveCircle
             fontSize="small"
