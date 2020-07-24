@@ -17,13 +17,13 @@ interface IProps {
 
 const Filter = ({ onFilter, loading }: IProps) => {
   const [data, setData] = useState({
-    nin: "",
+    Nin: "",
     participant: "",
-    status: "",
-    requestId: "",
-    from: null,
-    to: null,
-    initiator: "",
+    Status: "",
+    RequestId: "",
+    "Date.From": null,
+    "Date.To": null,
+    Initiator: "",
   });
 
   function submitForm(values: any) {
@@ -72,8 +72,8 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            name="nin"
-            value={data["nin"]}
+            name="Nin"
+            value={data["Nin"]}
             onChange={handleChange}
             label="NIN"
             type="text"
@@ -84,7 +84,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            name="Participant"
+            name="participant"
             value={data["participant"]}
             onChange={handleChange}
             label="Participant"
@@ -96,8 +96,8 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            name="status"
-            value={data["status"]}
+            name="Status"
+            value={data["Status"]}
             onChange={handleChange}
             label="Status"
             type="text"
@@ -108,8 +108,8 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            name="requestId"
-            value={data["requestId"]}
+            name="RequestId"
+            value={data["RequestId"]}
             onChange={handleChange}
             label="Request ID"
             type="text"
@@ -120,8 +120,8 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <PDateInput
-            name="from"
-            value={data["from"] || null}
+            name="Date.From"
+            value={data["Date.From"] || null}
             onChange={handleValueChange("from")}
             label="From"
             variant="inline"
@@ -130,8 +130,8 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <PDateInput
-            name="to"
-            value={data["to"] || null}
+            name="Date.To"
+            value={data["Date.To"] || null}
             onChange={handleValueChange("to")}
             label="To"
             variant="inline"
@@ -140,8 +140,8 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <PSelectInput
-            name="initiator"
-            value={data["initiator"]}
+            name="Initiator"
+            value={data["Initiator"]}
             onChange={handleChange}
             label="Initiator"
             variant="outlined"

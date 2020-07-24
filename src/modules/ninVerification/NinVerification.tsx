@@ -98,11 +98,7 @@ const NinVerifications = () => {
   });
   const [viewDetails, setViewDetails] = useState<any | null>(null);
   const [anchor, setAnchor] = useState<Anchor>("right");
-  const [filter, setFilter] = useState<IWorkflowFilter>({
-    workflowTypes: workflowTypes,
-    showNew: false,
-    showAssigned: true,
-  });
+  const [filter, setFilter] = useState<any>({});
 
   useEffect(() => {
     dispatch({
@@ -112,7 +108,7 @@ const NinVerifications = () => {
 
     search(
       remoteRoutes.ninVerificationRequests,
-      "filter",
+      filter,
       (resp) => {
         setRowsPerPage(resp.pagination);
         dispatch({
@@ -161,8 +157,8 @@ const NinVerifications = () => {
     setAnchor("right");
   }
 
-  function handleFilter(f: IWorkflowFilter) {
-    setFilter({ ...filter, ...f });
+  function handleFilter(values: any) {
+    setFilter({ ...filter, ...values });
   }
   return (
     <Navigation>

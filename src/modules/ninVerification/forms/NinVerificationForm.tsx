@@ -2,7 +2,12 @@ import React from "react";
 import { useState } from "react";
 import * as yup from "yup";
 import * as faker from "faker";
-import { reqString, reqDate, reqNin } from "../../../data/validations";
+import {
+  reqString,
+  reqDate,
+  reqNin,
+  reqCardNumber,
+} from "../../../data/validations";
 import { FormikActions } from "formik";
 import Grid from "@material-ui/core/Grid";
 import XFormSimple from "../../../components/forms/XFormSimple";
@@ -14,7 +19,7 @@ import { remoteRoutes } from "../../../data/constants";
 import { post } from "../../../utils/ajax";
 import Toast from "../../../utils/Toast";
 import { verificationRequestConstants } from "../../../data/redux/ninVerification/reducer";
-import {useSnackbar} from "notistack";
+import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
 import snackbarMessages from "../../../data/snackbarMessages";
 
@@ -22,7 +27,7 @@ const schema = yup.object().shape({
   name: reqString,
   nin: reqNin,
   dateOfBirth: reqDate,
-  cardNumber: reqString
+  cardNumber: reqCardNumber,
 });
 
 interface IProps {
@@ -32,7 +37,7 @@ interface IProps {
 }
 
 const ParticipantForm = (props: IProps) => {
-  const {enqueueSnackbar} = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const [data, setData] = useState(
     props.initialData
       ? props.initialData
@@ -40,37 +45,37 @@ const ParticipantForm = (props: IProps) => {
           name: "",
           nin: "",
           dateOfBirth: new Date("01.01.1990"),
-          cardNumber: ""
+          cardNumber: "",
         }
   );
   const dispatch = useDispatch();
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
-    const toSave: IVerificationRequest = {
+    const toSave: any = {
       id: faker.random.uuid(),
       name: values.name,
       date: new Date(),
       nin: values.nin,
       status: {
         id: faker.random.uuid(),
-        name: "Done"
+        name: "Done",
       },
       dateOfBirth: values.dateOfBirth,
-      cardNumber: values.cardNumber
+      cardNumber: values.cardNumber,
     };
     post(
       remoteRoutes.ninVerification,
       toSave,
-      data => {
+      (data) => {
         actions.resetForm();
         // Update table to show recently added request
         dispatch({
           type: verificationRequestConstants.RequestsPostNew,
-          payload: toSave
+          payload: toSave,
         });
         // Toast.info("Operation successful");
         enqueueSnackbar(snackbarMessages.NinVerification.new, {
-          variant: 'success',
+          variant: "success",
         });
         actions.resetForm();
         handleClose();
@@ -79,7 +84,7 @@ const ParticipantForm = (props: IProps) => {
       () => {
         // Toast.error("Operation failed");
         enqueueSnackbar(snackbarMessages.default.fail, {
-          variant: 'error',
+          variant: "error",
         });
         // actions.setSubmitting(false);
       }
@@ -90,7 +95,7 @@ const ParticipantForm = (props: IProps) => {
     props.closeSlideOut();
     dispatch({
       type: verificationRequestConstants.RequestsAddNew,
-      payload: false
+      payload: false,
     });
   }
 

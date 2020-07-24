@@ -13,27 +13,28 @@ interface IProps {
   debug?: boolean;
   children?: React.ReactNode;
   initialValues?: any;
+  submitText?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     closeButton: {
       padding: "4px 30px",
-      backgroundColor: "rgba(38, 50, 56, 0.04)"
+      backgroundColor: "rgba(38, 50, 56, 0.04)",
     },
     cancel: {
       position: "fixed",
-      bottom: "15px"
+      bottom: "15px",
     },
     submit: {
       position: "fixed",
       bottom: "15px",
       right: "28px",
-      marginLeft: "auto"
+      marginLeft: "auto",
     },
     submitButton: {
-      padding: "4px 30px"
-    }
+      padding: "4px 30px",
+    },
   })
 );
 
@@ -101,7 +102,7 @@ const XFormSimple = (props: IProps) => {
                         disabled={isSubmitting}
                         size="small"
                       >
-                        Save
+                        {props.submitText ? props.submitText : "Save"}
                       </Button>
                     </Grid>
                   </Grid>
