@@ -1,5 +1,10 @@
 import {hasNoValue} from "../components/inputs/inputHelpers";
 
+export const getLastCharacters = (val: string, len: number) => {
+  let value = val.substr(val.length - len);
+  return `...${value}`;
+}
+
 export const getInitials = (fullName = '') => {
     try {
         if (!fullName)
