@@ -12,7 +12,8 @@ import Grid from "@material-ui/core/Grid";
 import XFormSimple from "../../../components/forms/XFormSimple";
 import XTextInput from "../../../components/inputs/XTextInput";
 import XDateInput from "../../../components/inputs/XDateInput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { IState } from "../../../data/types";
 import { remoteRoutes } from "../../../data/constants";
 import { post } from "../../../utils/ajax";
 import { verificationRequestConstants } from "../../../data/redux/ninVerification/reducer";
@@ -46,7 +47,7 @@ const ParticipantForm = (props: IProps) => {
         }
   );
   const dispatch = useDispatch();
-
+  const userProfile = useSelector((state: IState) => state.core.user);
   function handleSubmit(values: any, actions: FormikActions<any>) {
     const toSave: any = {
       surname: values.surname,
@@ -55,7 +56,7 @@ const ParticipantForm = (props: IProps) => {
       dateOfBirth: values.dateOfBirth,
       nin: values.nin,
       cardNumber: values.cardNumber,
-      participantId: "",
+      participantId: userProfile.participantId,
     };
     post(
       remoteRoutes.ninVerification,
