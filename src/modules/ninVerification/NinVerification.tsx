@@ -5,16 +5,11 @@ import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import XTable from "../../components/table/XTable";
 import Grid from "@material-ui/core/Grid";
-import { IWorkflowFilter } from "./types";
 import Filter from "./Filter";
 import Typography from "@material-ui/core/Typography";
 import { search } from "../../utils/ajax";
 import { remoteRoutes } from "../../data/constants";
-import {
-  wfInitialSort,
-  ninVerificationHeadCells,
-  workflowTypes,
-} from "./config";
+import { wfInitialSort, ninVerificationHeadCells } from "./config";
 import Box from "@material-ui/core/Box";
 import {
   verificationRequestConstants,

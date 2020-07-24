@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import * as yup from "yup";
-import * as faker from "faker";
 import {
   reqString,
   reqDate,
@@ -14,19 +13,15 @@ import XFormSimple from "../../../components/forms/XFormSimple";
 import XTextInput from "../../../components/inputs/XTextInput";
 import XDateInput from "../../../components/inputs/XDateInput";
 import { useDispatch } from "react-redux";
-import { IVerificationRequest } from "../types";
 import { remoteRoutes } from "../../../data/constants";
 import { post } from "../../../utils/ajax";
-import Toast from "../../../utils/Toast";
 import { verificationRequestConstants } from "../../../data/redux/ninVerification/reducer";
 import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
 import snackbarMessages from "../../../data/snackbarMessages";
 
 const schema = yup.object().shape({
-  name: reqString,
   nin: reqNin,
-  dateOfBirth: reqDate,
   cardNumber: reqCardNumber,
 });
 
@@ -42,26 +37,25 @@ const ParticipantForm = (props: IProps) => {
     props.initialData
       ? props.initialData
       : {
-          name: "",
           nin: "",
-          dateOfBirth: new Date("01.01.1990"),
           cardNumber: "",
+          givenName: "",
+          surname: "",
+          otherNames: "",
+          dateOfBirth: new Date("01.01.1990"),
         }
   );
   const dispatch = useDispatch();
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
     const toSave: any = {
-      id: faker.random.uuid(),
-      name: values.name,
-      date: new Date(),
-      nin: values.nin,
-      status: {
-        id: faker.random.uuid(),
-        name: "Done",
-      },
+      surname: values.surname,
+      givenNames: values.givenNames,
+      otherNames: values.otherNames,
       dateOfBirth: values.dateOfBirth,
+      nin: values.nin,
       cardNumber: values.cardNumber,
+      participantId: "",
     };
     post(
       remoteRoutes.ninVerification,
@@ -107,42 +101,58 @@ const ParticipantForm = (props: IProps) => {
         initialValues={data}
         onCancel={handleClose}
       >
-        <Grid spacing={1} container direction="column">
-          <Grid item xs={12}>
-            <XTextInput
-              name="name"
-              label="Name"
-              type="text"
-              variant="outlined"
-              size="small"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <XTextInput
-              name="nin"
-              label="NIN"
-              type="text"
-              variant="outlined"
-              size="small"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <XDateInput
-              name="dateOfBirth"
-              label="Date of Birth"
-              inputVariant="outlined"
-              size="small"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <XTextInput
-              name="cardNumber"
-              label="Card Number"
-              type="text"
-              variant="outlined"
-              size="small"
-            />
-          </Grid>
+        <Grid item xs={12}>
+          <XTextInput
+            name="nin"
+            label="NIN *"
+            type="text"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <XTextInput
+            name="cardNumber"
+            label="Card Number *"
+            type="text"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <XTextInput
+            name="givenName"
+            label="Given Name"
+            type="text"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <XTextInput
+            name="surname"
+            label="Surname"
+            type="text"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <XTextInput
+            name="otherNames"
+            label="Other Names"
+            type="text"
+            variant="outlined"
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <XDateInput
+            name="dateOfBirth"
+            label="Date of Birth"
+            inputVariant="outlined"
+            size="small"
+          />
         </Grid>
       </XFormSimple>
     </ErrorBoundary>

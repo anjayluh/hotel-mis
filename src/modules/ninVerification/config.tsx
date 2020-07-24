@@ -8,6 +8,12 @@ import {
 } from "./widgets";
 
 export const wfInitialSort = "applicationDate";
+function printFullName(record: any) {
+  let surname = record.surname ? record.surname : "";
+  let givenName = record.givenNames ? record.givenNames : "";
+  let otherNames = record.otherNames ? record.otherNames : "";
+  return surname + " " + givenName + " " + otherNames;
+}
 export const ninVerificationHeadCells: XHeadCell[] = [
   {
     name: "submittedAt",
@@ -23,9 +29,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
   {
     name: "surname",
     label: "Name",
-    render: (value, rec) => (
-      <span>{rec.surname + " " + rec.givenNames + " " + rec.otherNames}</span>
-    ),
+    render: (value, rec) => <span>{printFullName(rec)}</span>,
     cellProps: { style: { width: 150 } },
   },
   {

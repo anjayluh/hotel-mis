@@ -17,7 +17,7 @@ interface IProps {
 
 const Filter = ({ onFilter, loading }: IProps) => {
   const [data, setData] = useState({
-    Nin: "",
+    CardNumber: "",
     participant: "",
     Status: "",
     RequestId: "",
@@ -72,10 +72,10 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            name="Nin"
-            value={data["Nin"]}
+            name="CardNumber"
+            value={data["CardNumber"]}
             onChange={handleChange}
-            label="NIN"
+            label="Card Number"
             type="text"
             variant="outlined"
             size="small"
