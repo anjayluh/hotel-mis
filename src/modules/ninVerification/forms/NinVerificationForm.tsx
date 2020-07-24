@@ -51,7 +51,7 @@ const ParticipantForm = (props: IProps) => {
   function handleSubmit(values: any, actions: FormikActions<any>) {
     const toSave: any = {
       surname: values.surname,
-      givenNames: values.givenNames,
+      givenNames: values.givenName,
       otherNames: values.otherNames,
       dateOfBirth: values.dateOfBirth,
       nin: values.nin,
@@ -66,7 +66,7 @@ const ParticipantForm = (props: IProps) => {
         // Update table to show recently added request
         dispatch({
           type: verificationRequestConstants.RequestsPostNew,
-          payload: toSave,
+          payload: data,
         });
         // Toast.info("Operation successful");
         enqueueSnackbar(snackbarMessages.NinVerification.new, {
