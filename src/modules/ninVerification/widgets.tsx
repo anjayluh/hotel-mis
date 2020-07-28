@@ -31,6 +31,10 @@ export const renderValidityStatus = (value: WorkflowValidityStatus) => {
       color = errorColor;
       label = value;
       break;
+    case WorkflowValidityStatus.NotValid:
+      color = errorColor;
+      label = "Invalid";
+      break;
     case WorkflowValidityStatus.emptyString:
       color = errorColor;
       label = "Invalid";
