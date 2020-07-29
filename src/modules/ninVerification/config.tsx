@@ -72,7 +72,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
   },
   {
     name: "resultJson.matchingStatus",
-    label: "Response",
+    label: "Match Status",
     render: (_, rec) => renderResponseStatus(rec.resultJson.matchingStatus),
     cellProps: {
       style: {
