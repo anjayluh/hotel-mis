@@ -120,6 +120,8 @@ export interface IRequestDetails {
     initiator: string,
     participant: string,
     surname?: string
+    givenNames?: string
+    otherNames?: string
     status?: string
     receivedFromNira?:string
     receivedAt?: string

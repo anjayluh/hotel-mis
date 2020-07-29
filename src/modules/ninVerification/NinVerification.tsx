@@ -163,9 +163,7 @@ const NinVerifications = () => {
             <Box pb={2}>
               <Grid container>
                 <Grid item sm={12} className={classes.pageHeading}>
-                  <Typography variant="h4">
-                    NIN Verification Requests
-                  </Typography>
+                  <Typography variant="h4">ID Verification Requests</Typography>
                   <AddButton text={"New request"} onClick={addNewRequest} />
                 </Grid>
               </Grid>
@@ -205,7 +203,7 @@ const NinVerifications = () => {
         handleToggleDrawer={handleToggleDrawer}
         open={turnOnSlideOut}
         anchor={anchor}
-        title={viewDetails ? null : "New NIN Verification Request"}
+        title={viewDetails ? null : "New ID Verification Request"}
       >
         {viewDetails ? (
           <div>

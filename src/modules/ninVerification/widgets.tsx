@@ -106,6 +106,7 @@ export const renderResponseStatus = (value: boolean) => {
         marginBottom: 2,
         border: `1px solid ${color}`,
         textTransform: "uppercase",
+        fontSize: "0.65rem",
       }}
     />
   );
@@ -139,6 +140,7 @@ export const renderNinStatus = (value: WorkflowNinStatus) => {
         backgroundColor: color,
         marginBottom: 2,
         textTransform: "uppercase",
+        fontSize: "0.65rem",
       }}
     />
   );
