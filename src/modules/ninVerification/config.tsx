@@ -52,7 +52,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
   {
     name: "cardNumber",
     label: "Card Number",
-    render: (value, rec) => <span>{getAsterikCharacters(value, 0, 5, 3)}</span>,
+    render: (value, rec) => <span>{getAsterikCharacters(value, 0, 5, 5)}</span>,
     cellProps: {
       style: {
         width: 40,
