@@ -1,6 +1,9 @@
 import { XHeadCell } from "../../components/table/XTableHead";
 import { printDateTime } from "../../utils/dateHelpers";
-import { getLastCharacters } from "../../utils/stringHelpers";
+import {
+  getLastCharacters,
+  getAsterikCharacters,
+} from "../../utils/stringHelpers";
 import React from "react";
 import {
   renderNinStatus,
@@ -36,7 +39,9 @@ export const ninVerificationHeadCells: XHeadCell[] = [
   {
     name: "nin",
     label: "NIN",
-    render: (value, rec) => <span>{getLastCharacters(value, 4)}</span>,
+    render: (value, rec) => (
+      <span>{getAsterikCharacters(value, 2, 10, 8)}</span>
+    ),
     cellProps: {
       style: {
         width: 40,
@@ -47,7 +52,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
   {
     name: "cardNumber",
     label: "Card Number",
-    render: (value, rec) => <span>{getLastCharacters(value, 4)}</span>,
+    render: (value, rec) => <span>{getAsterikCharacters(value, 0, 5, 3)}</span>,
     cellProps: {
       style: {
         width: 40,
