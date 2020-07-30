@@ -17,6 +17,7 @@ interface IProps {
 
 const Filter = ({ onFilter, loading }: IProps) => {
   const [data, setData] = useState({
+    nin: "",
     cardNumber: "",
     participant: "",
     status: "",
@@ -28,6 +29,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
 
   function submitForm(values: any) {
     let toSave = {
+      Nin: values.nin,
       CardNumber: values.cardNumber,
       participant: values.participant,
       Status: values.status,
@@ -65,7 +67,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
   // }
 
   const initiators = ["Angella", "Evie", "TimK"];
-  const statuses = ["Failed", "Successful"];
+  const statuses = ["Pending", "Successful", "Failed", "Rejected"];
 
   return (
     <form>
@@ -79,6 +81,18 @@ const Filter = ({ onFilter, loading }: IProps) => {
             </Box>
           </Box>
           <Divider />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            name="nin"
+            value={data["nin"]}
+            onChange={handleChange}
+            label="NIN"
+            type="text"
+            variant="outlined"
+            size="small"
+            fullWidth
+          />
         </Grid>
         <Grid item xs={12}>
           <TextField
@@ -97,7 +111,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
             name="status"
             value={data["status"]}
             onChange={handleChange}
-            label="Status"
+            label="Request Status"
             variant="outlined"
             size="small"
             color="secondary"
