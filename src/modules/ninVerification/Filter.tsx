@@ -21,19 +21,34 @@ const Filter = ({ onFilter, loading }: IProps) => {
     nin: "",
     cardNumber: "",
     participant: "",
-    status: "",
+    requestStatus: "",
+    matchingStatus: "",
     referenceNumber: "",
     from: null,
     to: null,
     initiator: "",
   });
-
+  function getMatchingStatus(value: string) {
+    let matchingStatus = null;
+    switch (value) {
+      case "Match":
+        matchingStatus = true;
+        break;
+      case "Mismatch":
+        matchingStatus = false;
+        break;
+      default:
+        matchingStatus = null;
+    }
+    return matchingStatus;
+  }
   function submitForm(values: any) {
     let toSave = {
       Nin: values.nin,
       CardNumber: values.cardNumber,
       participant: values.participant,
-      Status: values.status === "All" ? "" : values.status,
+      Status: values.requestStatus === "All" ? "" : values.requestStatus,
+      matchingStatus: getMatchingStatus(values.matchingStatus),
       referenceNumber: values.referenceNumber,
       "Date.From": values.from,
       "Date.To": values.to,
@@ -58,7 +73,8 @@ const Filter = ({ onFilter, loading }: IProps) => {
       nin: "",
       cardNumber: "",
       participant: "",
-      status: "",
+      requestStatus: "",
+      matchingStatus: "",
       referenceNumber: "",
       from: null,
       to: null,
@@ -86,6 +102,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
 
   const initiators = ["Angella", "Evie", "TimK"];
   const statuses = ["All", "Pending", "Successful", "Failed", "Rejected"];
+  const matchingStatuses = ["All", "Match", "Mismatch"];
 
   return (
     <form>
@@ -126,14 +143,26 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <PSelectInput
-            name="status"
-            value={data["status"]}
+            name="requestStatus"
+            value={data["requestStatus"]}
             onChange={handleChange}
             label="Request Status"
             variant="outlined"
             size="small"
             color="secondary"
             options={toOptions(statuses)}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <PSelectInput
+            name="matchingStatus"
+            value={data["matchingStatus"]}
+            onChange={handleChange}
+            label="Matching Status"
+            variant="outlined"
+            size="small"
+            color="secondary"
+            options={toOptions(matchingStatuses)}
           />
         </Grid>
         <Grid item xs={12}>
