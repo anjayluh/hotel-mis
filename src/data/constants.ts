@@ -25,7 +25,7 @@ export const localRoutes = {
   billing: "/billing",
   subscriptions: "/subscriptions",
   reports: "/reports",
-  developerPortal: "/developer-portal",
+  devPortal: "/developer-portal",
   applicationsDetails: "/applications/:caseId",
   dashboard: "/dashboard",
   contacts: "/contacts",
@@ -41,13 +41,14 @@ const servers: any = {
     Crm: "https://crmservice-test.laboremus.no",
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
+    devPortal: "https://bou-niv-api-test.laboremus.no",
   },
   test: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Crm: "https://bou-niv-crmservice-test.test001.laboremus.no",
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
-    developerPortal: "https://bou-niv-api-test.laboremus.no",
+    devPortal: "https://bou-niv-api-test.laboremus.no",
   },
   sit: {
     Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
@@ -55,13 +56,13 @@ const servers: any = {
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
-    developerPortal: "https://bou-niv-api-test.laboremus.no",
+    devPortal: "https://bou-niv-api-test.laboremus.no",
   },
   uat: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-staging.test001.laboremus.no",
-    developerPortal: "https://bou-niv-api-test.laboremus.no",
+    devPortal: "https://bou-niv-api-test.laboremus.no",
   },
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
@@ -76,6 +77,7 @@ const authURL = env.Auth;
 const crmURL = env.Crm;
 const caseHandlingURL = env.Case;
 const gatewayURL = env.Gateway;
+const devPortal = env.devPortal
 const kycURL = env.Kyc;
 const notificationURL = env.Notification;
 
@@ -114,4 +116,5 @@ export const remoteRoutes = {
   samplePdf: caseHandlingURL + "/sample.pdf",
   gatewayMetadata: gatewayURL + "/niv/api/request",
   users: authURL + "/api/user",
+  devPortal: devPortal,
 };

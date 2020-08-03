@@ -28,7 +28,7 @@ import {
   useTheme,
 } from "@material-ui/core/styles";
 import { withRouter, RouteComponentProps } from "react-router";
-import { localRoutes } from "../data/constants";
+import { localRoutes, remoteRoutes } from "../data/constants";
 import grey from "@material-ui/core/colors/grey";
 import { BarView } from "./Profile";
 import logo from "../assets/download.png";
@@ -230,6 +230,25 @@ const Layout: React.FC<IProps> = (props: any) => {
             }
           />
         </ListItem>
+        <a href={remoteRoutes.devPortal} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none'}} >
+          <ListItem
+            button
+            selected={isSelected(localRoutes.devPortal)}
+          >
+            <ListItemIcon>
+              <CodeIcon className={getCls(localRoutes.devPortal)} />
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                
+                <Typography className={getCls(localRoutes.devPortal)}>
+                  Developer Portal
+                </Typography>
+                
+              }
+            />
+          </ListItem>
+        </a>
       </List>
     </div>
   );
