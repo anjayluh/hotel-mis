@@ -11,7 +11,7 @@ const Summary = ({ data }: IProps) => {
   const fields: IRec[] = [
     {
       label: "Service",
-      value: "NIN Verification",
+      value: "ID Verification",
     },
   ];
 
