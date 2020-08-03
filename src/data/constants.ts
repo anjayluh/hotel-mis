@@ -25,7 +25,7 @@ export const localRoutes = {
   billing: "/billing",
   subscriptions: "/subscriptions",
   reports: "/reports",
-  developerPortal: "/developer-portal",
+  devPortal: "/developer-portal",
   applicationsDetails: "/applications/:caseId",
   dashboard: "/dashboard",
   contacts: "/contacts",
@@ -77,6 +77,7 @@ const authURL = env.Auth;
 const crmURL = env.Crm;
 const caseHandlingURL = env.Case;
 const gatewayURL = env.Gateway;
+const devPortal = env.devPortal
 const kycURL = env.Kyc;
 const notificationURL = env.Notification;
 
@@ -115,4 +116,5 @@ export const remoteRoutes = {
   samplePdf: caseHandlingURL + "/sample.pdf",
   gatewayMetadata: gatewayURL + "/niv/api/request",
   users: authURL + "/api/user",
+  devPortal: devPortal,
 };
