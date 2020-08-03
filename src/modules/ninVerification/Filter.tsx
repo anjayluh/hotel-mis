@@ -32,7 +32,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
       Nin: values.nin,
       CardNumber: values.cardNumber,
       participant: values.participant,
-      Status: values.status !== "All" ? values.status : "",
+      Status: values.status === "All" ? "" : values.status,
       RequestId: values.requestId,
       "Date.From": values.from,
       "Date.To": values.to,
