@@ -32,7 +32,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
       Nin: values.nin,
       CardNumber: values.cardNumber,
       participant: values.participant,
-      Status: values.status,
+      Status: values.status !== "All" ? values.status : "",
       RequestId: values.requestId,
       "Date.From": values.from,
       "Date.To": values.to,
@@ -67,7 +67,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
   // }
 
   const initiators = ["Angella", "Evie", "TimK"];
-  const statuses = ["Pending", "Successful", "Failed", "Rejected"];
+  const statuses = ["All", "Pending", "Successful", "Failed", "Rejected"];
 
   return (
     <form>
