@@ -4,6 +4,7 @@ import { localRoutes } from "../data/constants";
 import Settings from "./settings/Settings";
 import NinVerification from "./ninVerification/NinVerification";
 import Users from "./users/Users";
+import DeveloperPortal from './developerPortal/DeveloperPortal'
 import Layout from "../components/Layout";
 import { useDispatch } from "react-redux";
 
@@ -20,6 +21,7 @@ const ContentSwitch = () => {
       <Route path={localRoutes.ninVerification} component={NinVerification} />
       <Route path={localRoutes.users} component={Users} />
       <Route path={localRoutes.settings} component={Settings} />
+      <Route path={localRoutes.developerPortal} component={DeveloperPortal} />
       <Route component={NoMatch} />
     </Switch>
   );
