@@ -22,8 +22,8 @@ const ResetButton = (props: IProps) => {
     <Button
       className={classes.resetButton}
       variant="text"
+      size="small"
       onClick={props.onClick}
-      color="secondary"
     >
       {props.text}
     </Button>
