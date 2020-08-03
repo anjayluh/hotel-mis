@@ -9,6 +9,7 @@ import PSelectInput from "../../components/plain-inputs/PSelectInput";
 import PDateInput from "../../components/plain-inputs/PDateInput";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import ResetButton from "../../components/ResetButton";
 
 interface IProps {
   onFilter: (data: any) => any;
@@ -50,6 +51,21 @@ const Filter = ({ onFilter, loading }: IProps) => {
   }
   function handleSubmit() {
     submitForm(data);
+  }
+
+  function resetForm() {
+    const resetData = {
+      nin: "",
+      cardNumber: "",
+      participant: "",
+      status: "",
+      requestId: "",
+      from: null,
+      to: null,
+      initiator: "",
+    }
+    setData(resetData)
+    submitForm(resetData)
   }
   const handleValueChange = (name: string) => (value: any) => {
     if (name === "from" || name === "to") {
@@ -166,14 +182,20 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid> */}
         <Grid item xs={12}>
           <Box display="flex" flexDirection="row">
+            <Box mr={'auto'}>
             <Button
               disabled={loading}
               variant="contained"
-              color="secondary"
+              color="primary"
               onClick={handleSubmit}
+              size="small"
             >
               Apply Filter
             </Button>
+            </Box>
+            <Box>
+            <ResetButton text={"Reset"} onClick={resetForm}/>
+            </Box>
           </Box>
         </Grid>
       </Grid>
