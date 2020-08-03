@@ -120,6 +120,8 @@ export interface IRequestDetails {
     initiator: string,
     participant: string,
     surname?: string
+    givenNames?: string
+    otherNames?: string
     status?: string
     receivedFromNira?:string
     receivedAt?: string
@@ -132,7 +134,13 @@ export enum WorkflowStatus {
     Error = 'Error',
     Closed = 'Closed'
 }
+export enum WorkflowValidityStatus {
+    Valid = 'Valid',
+    Invalid = "Invalid",
+    NotValid = "Not valid",
+    emptyString = ''
 
+}
 export enum WorkflowNinStatus {
     Pending = 'Pending',
     Error = 'Error',

@@ -46,11 +46,19 @@ const Summary = ({ data }: IProps) => {
     },
     {
       label: "Initiator",
-      value: data.initiator,
+      value: data.initiator ? data.initiator : "-",
     },
     {
-      label: "Name",
-      value: data.surname,
+      label: "Surname",
+      value: data.surname ? data.surname : "-",
+    },
+    {
+      label: "Given Names",
+      value: data.givenNames ? data.givenNames : "-",
+    },
+    {
+      label: "Other Names",
+      value: data.otherNames ? data.otherNames : "-",
     },
   ];
   const requestStatus = [

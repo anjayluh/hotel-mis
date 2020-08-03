@@ -16,3 +16,4 @@ export const reqNin = yup.string().matches(inRegExp, 'Must be a valid NIN').requ
 const phoneRegExp = /^(\+256|0)\d{9}$/;
 export const phoneNumber = yup.string().matches(phoneRegExp, 'Must be a valid phone number')
 export const reqPhoneNumber = yup.string().matches(phoneRegExp, 'Must be a valid phone number').required('Phone number is required').notOneOf(invalidInputs, reqMsg)
+export const reqCardNumber = yup.string().required('Card number is required').test('len', 'Card Number must be 9 characters', val => val.length === 9).notOneOf(invalidInputs, reqMsg)

@@ -18,6 +18,7 @@ interface IProps {
 const Filter = ({ onFilter, loading }: IProps) => {
   const [data, setData] = useState({
     nin: "",
+    cardNumber: "",
     participant: "",
     status: "",
     requestId: "",
@@ -27,7 +28,17 @@ const Filter = ({ onFilter, loading }: IProps) => {
   });
 
   function submitForm(values: any) {
-    onFilter(values);
+    let toSave = {
+      Nin: values.nin,
+      CardNumber: values.cardNumber,
+      participant: values.participant,
+      Status: values.status !== "All" ? values.status : "",
+      RequestId: values.requestId,
+      "Date.From": values.from,
+      "Date.To": values.to,
+      Initiator: values.initiator,
+    };
+    onFilter(toSave);
   }
 
   function handleChange(event: React.ChangeEvent<any>) {
@@ -37,7 +48,9 @@ const Filter = ({ onFilter, loading }: IProps) => {
     setData(newData);
     submitForm(newData);
   }
-
+  function handleSubmit() {
+    submitForm(data);
+  }
   const handleValueChange = (name: string) => (value: any) => {
     if (name === "from" || name === "to") {
       value = value ? value.toISOString() : value;
@@ -56,6 +69,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
   // }
 
   const initiators = ["Angella", "Evie", "TimK"];
+  const statuses = ["All", "Pending", "Successful", "Failed", "Rejected"];
 
   return (
     <form>
@@ -84,10 +98,10 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            name="Participant"
-            value={data["participant"]}
+            name="cardNumber"
+            value={data["cardNumber"]}
             onChange={handleChange}
-            label="Participant"
+            label="Card Number"
             type="text"
             variant="outlined"
             size="small"
@@ -95,15 +109,15 @@ const Filter = ({ onFilter, loading }: IProps) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <PSelectInput
             name="status"
             value={data["status"]}
             onChange={handleChange}
-            label="Status"
-            type="text"
+            label="Request Status"
             variant="outlined"
             size="small"
-            fullWidth
+            color="secondary"
+            options={toOptions(statuses)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -138,10 +152,10 @@ const Filter = ({ onFilter, loading }: IProps) => {
             inputVariant="outlined"
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <PSelectInput
-            name="initiator"
-            value={data["initiator"]}
+            name="Initiator"
+            value={data["Initiator"]}
             onChange={handleChange}
             label="Initiator"
             variant="outlined"
@@ -149,14 +163,14 @@ const Filter = ({ onFilter, loading }: IProps) => {
             color="secondary"
             options={toOptions(initiators)}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <Box display="flex" flexDirection="row">
             <Button
               disabled={loading}
               variant="contained"
               color="secondary"
-              onClick={submitForm}
+              onClick={handleSubmit}
             >
               Apply Filter
             </Button>

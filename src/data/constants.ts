@@ -40,16 +40,12 @@ const servers: any = {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Crm: "https://crmservice-test.laboremus.no",
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
-    Nin: "https://bou-niv-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
   },
   test: {
-    // Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
-    // Crm: "https://crmservice-test.laboremus.no",
     Crm: "https://bou-niv-crmservice-test.test001.laboremus.no",
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
-    Nin: "https://bou-niv-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
     developerPortal: "https://bou-niv-api-test.laboremus.no",
   },
@@ -64,14 +60,10 @@ const servers: any = {
   uat: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
-    // Nin: "https://bou-niv-api-staging.laboremus.no",
-    Nin: "https://bou-niv-api-staging.test001.laboremus.no",
-    // Gateway: "https://bou-niv-gatewayservice-staging.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-staging.test001.laboremus.no",
     developerPortal: "https://bou-niv-api-test.laboremus.no",
   },
   production: {
-    Nin: "https://bou-niv-api.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
   },
 };
@@ -83,7 +75,6 @@ const env = servers[environment];
 const authURL = env.Auth;
 const crmURL = env.Crm;
 const caseHandlingURL = env.Case;
-const NinVerificationURL = env.Nin;
 const gatewayURL = env.Gateway;
 const kycURL = env.Kyc;
 const notificationURL = env.Notification;
@@ -94,8 +85,9 @@ export const remoteRoutes = {
   participants: gatewayURL + "/crm/api/contact",
   participantsContactPersons: gatewayURL + "/crm/api/v3.0/contact",
   billing: gatewayURL + "/billing/api/bills",
+  ninVerificationId: gatewayURL + "/niv/api/request",
   ninVerificationRequests: gatewayURL + "/niv/api/request/search",
-  ninVerification: NinVerificationURL + "/api/national-id/verify",
+  ninVerification: gatewayURL + "/niv/api/national-id/verify",
   billingCycle: gatewayURL + "/billing/api/billing-cycles",
   serviceCategory: gatewayURL + "/service-category",
   authServer: authURL,

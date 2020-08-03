@@ -5,16 +5,11 @@ import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import XTable from "../../components/table/XTable";
 import Grid from "@material-ui/core/Grid";
-import { IWorkflowFilter } from "./types";
 import Filter from "./Filter";
 import Typography from "@material-ui/core/Typography";
 import { search } from "../../utils/ajax";
 import { remoteRoutes } from "../../data/constants";
-import {
-  wfInitialSort,
-  ninVerificationHeadCells,
-  workflowTypes,
-} from "./config";
+import { wfInitialSort, ninVerificationHeadCells } from "./config";
 import Box from "@material-ui/core/Box";
 import {
   verificationRequestConstants,
@@ -98,11 +93,7 @@ const NinVerifications = () => {
   });
   const [viewDetails, setViewDetails] = useState<any | null>(null);
   const [anchor, setAnchor] = useState<Anchor>("right");
-  const [filter, setFilter] = useState<IWorkflowFilter>({
-    workflowTypes: workflowTypes,
-    showNew: false,
-    showAssigned: true,
-  });
+  const [filter, setFilter] = useState<any>({});
 
   useEffect(() => {
     dispatch({
@@ -112,7 +103,7 @@ const NinVerifications = () => {
 
     search(
       remoteRoutes.ninVerificationRequests,
-      "filter",
+      filter,
       (resp) => {
         setRowsPerPage(resp.pagination);
         dispatch({
@@ -160,9 +151,19 @@ const NinVerifications = () => {
     });
     setAnchor("right");
   }
-
-  function handleFilter(f: IWorkflowFilter) {
-    setFilter({ ...filter, ...f });
+  function handleClose() {
+    dispatch({
+      type: verificationRequestConstants.RequestsAddNew,
+      payload: !turnOnSlideOut,
+    });
+    setViewDetails(null);
+    dispatch({
+      type: verificationRequestConstants.RequestsAddNew,
+      payload: false,
+    });
+  }
+  function handleFilter(values: any) {
+    setFilter({ ...filter, ...values });
   }
   return (
     <Navigation>
@@ -172,9 +173,7 @@ const NinVerifications = () => {
             <Box pb={2}>
               <Grid container>
                 <Grid item sm={12} className={classes.pageHeading}>
-                  <Typography variant="h4">
-                    NIN Verification Requests
-                  </Typography>
+                  <Typography variant="h4">ID Verification Requests</Typography>
                   <AddButton text={"New request"} onClick={addNewRequest} />
                 </Grid>
               </Grid>
@@ -190,7 +189,7 @@ const NinVerifications = () => {
                     data={data}
                     initialRowsPerPage={10}
                     usePagination={true}
-                    initialSortBy={wfInitialSort}
+                    initialSortBy={"createdAt"}
                     initialOrder="desc"
                     handleSelection={handleToggleDrawer}
                     hoverClass={classes.rowHover}
@@ -214,7 +213,7 @@ const NinVerifications = () => {
         handleToggleDrawer={handleToggleDrawer}
         open={turnOnSlideOut}
         anchor={anchor}
-        title={viewDetails ? null : "New NIN Verification Request"}
+        title={viewDetails ? null : "New ID Verification Request"}
       >
         {viewDetails ? (
           <div>
@@ -224,7 +223,7 @@ const NinVerifications = () => {
             <Grid item xs={12} className={classes.close}>
               <Button
                 className={classes.closeButton}
-                onClick={handleToggleDrawer}
+                onClick={handleClose}
                 size="small"
               >
                 Close
