@@ -230,6 +230,22 @@ const Layout: React.FC<IProps> = (props: any) => {
             }
           />
         </ListItem>
+        <ListItem
+          button
+          onClick={onClick(localRoutes.developerPortal)}
+          selected={isSelected(localRoutes.developerPortal)}
+        >
+          <ListItemIcon>
+            <CodeIcon className={getCls(localRoutes.developerPortal)} />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <Typography className={getCls(localRoutes.developerPortal)}>
+                Developer Portal
+              </Typography>
+            }
+          />
+        </ListItem>
       </List>
     </div>
   );
