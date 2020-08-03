@@ -141,7 +141,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
             name="referenceNumber"
             value={data["referenceNumber"]}
             onChange={handleChange}
-            label="Re. Number"
+            label="Ref. Number"
             type="text"
             variant="outlined"
             size="small"
