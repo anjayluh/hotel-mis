@@ -17,7 +17,7 @@ function printFullName(record: any) {
 }
 export const ninVerificationHeadCells: XHeadCell[] = [
   {
-    name: "submittedAt",
+    name: "receivedAt",
     label: "Date",
     render: (value, rec) => <span>{printDateTime(value)}</span>,
     cellProps: {

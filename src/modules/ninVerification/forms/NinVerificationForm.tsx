@@ -15,7 +15,7 @@ import XDateInput from "../../../components/inputs/XDateInput";
 import { useDispatch, useSelector } from "react-redux";
 import { IState } from "../../../data/types";
 import { remoteRoutes } from "../../../data/constants";
-import { post } from "../../../utils/ajax";
+import { get, post } from "../../../utils/ajax";
 import { verificationRequestConstants } from "../../../data/redux/ninVerification/reducer";
 import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
@@ -62,19 +62,21 @@ const ParticipantForm = (props: IProps) => {
       remoteRoutes.ninVerification,
       toSave,
       (data) => {
-        actions.resetForm();
-        // Update table to show recently added request
-        dispatch({
-          type: verificationRequestConstants.RequestsPostNew,
-          payload: data,
+        get(remoteRoutes.ninVerificationId + `/${data.requestId}`, (resp) => {
+          actions.resetForm();
+          // Update table to show recently added request
+          dispatch({
+            type: verificationRequestConstants.RequestsPostNew,
+            payload: resp,
+          });
+          // Toast.info("Operation successful");
+          enqueueSnackbar(snackbarMessages.NinVerification.new, {
+            variant: "success",
+          });
+          actions.resetForm();
+          handleClose();
+          if (props.done) props.done();
         });
-        // Toast.info("Operation successful");
-        enqueueSnackbar(snackbarMessages.NinVerification.new, {
-          variant: "success",
-        });
-        actions.resetForm();
-        handleClose();
-        if (props.done) props.done();
       },
       () => {
         // Toast.error("Operation failed");

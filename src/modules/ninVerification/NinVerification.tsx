@@ -151,7 +151,17 @@ const NinVerifications = () => {
     });
     setAnchor("right");
   }
-
+  function handleClose() {
+    dispatch({
+      type: verificationRequestConstants.RequestsAddNew,
+      payload: !turnOnSlideOut,
+    });
+    setViewDetails(null);
+    dispatch({
+      type: verificationRequestConstants.RequestsAddNew,
+      payload: false,
+    });
+  }
   function handleFilter(values: any) {
     setFilter({ ...filter, ...values });
   }
@@ -179,7 +189,7 @@ const NinVerifications = () => {
                     data={data}
                     initialRowsPerPage={10}
                     usePagination={true}
-                    initialSortBy={wfInitialSort}
+                    initialSortBy={"createdAt"}
                     initialOrder="desc"
                     handleSelection={handleToggleDrawer}
                     hoverClass={classes.rowHover}
@@ -213,7 +223,7 @@ const NinVerifications = () => {
             <Grid item xs={12} className={classes.close}>
               <Button
                 className={classes.closeButton}
-                onClick={handleToggleDrawer}
+                onClick={handleClose}
                 size="small"
               >
                 Close
