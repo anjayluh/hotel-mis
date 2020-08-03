@@ -22,7 +22,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
     cardNumber: "",
     participant: "",
     status: "",
-    requestId: "",
+    referenceNumber: "",
     from: null,
     to: null,
     initiator: "",
@@ -34,7 +34,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
       CardNumber: values.cardNumber,
       participant: values.participant,
       Status: values.status === "All" ? "" : values.status,
-      RequestId: values.requestId,
+      referenceNumber: values.referenceNumber,
       "Date.From": values.from,
       "Date.To": values.to,
       Initiator: values.initiator,
@@ -59,13 +59,13 @@ const Filter = ({ onFilter, loading }: IProps) => {
       cardNumber: "",
       participant: "",
       status: "",
-      requestId: "",
+      referenceNumber: "",
       from: null,
       to: null,
       initiator: "",
-    }
-    setData(resetData)
-    submitForm(resetData)
+    };
+    setData(resetData);
+    submitForm(resetData);
   }
   const handleValueChange = (name: string) => (value: any) => {
     if (name === "from" || name === "to") {
@@ -138,10 +138,10 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            name="requestId"
-            value={data["requestId"]}
+            name="referenceNumber"
+            value={data["referenceNumber"]}
             onChange={handleChange}
-            label="Request ID"
+            label="Re. Number"
             type="text"
             variant="outlined"
             size="small"
@@ -182,19 +182,19 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid> */}
         <Grid item xs={12}>
           <Box display="flex" flexDirection="row">
-            <Box mr={'auto'}>
-            <Button
-              disabled={loading}
-              variant="contained"
-              color="primary"
-              onClick={handleSubmit}
-              size="small"
-            >
-              Apply Filter
-            </Button>
+            <Box mr={"auto"}>
+              <Button
+                disabled={loading}
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+                size="small"
+              >
+                Apply Filter
+              </Button>
             </Box>
             <Box>
-            <ResetButton text={"Reset"} onClick={resetForm}/>
+              <ResetButton text={"Reset"} onClick={resetForm} />
             </Box>
           </Box>
         </Grid>
