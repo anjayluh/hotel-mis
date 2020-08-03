@@ -48,7 +48,9 @@ const Filter = ({ onFilter, loading }: IProps) => {
     setData(newData);
     submitForm(newData);
   }
-
+  function handleSubmit() {
+    submitForm(data);
+  }
   const handleValueChange = (name: string) => (value: any) => {
     if (name === "from" || name === "to") {
       value = value ? value.toISOString() : value;
@@ -168,7 +170,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
               disabled={loading}
               variant="contained"
               color="secondary"
-              onClick={submitForm}
+              onClick={handleSubmit}
             >
               Apply Filter
             </Button>
