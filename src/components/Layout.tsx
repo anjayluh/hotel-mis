@@ -208,7 +208,7 @@ const Layout: React.FC<IProps> = (props: any) => {
           <ListItemText
             primary={
               <Typography className={getCls(localRoutes.ninVerification)}>
-                NIN Verification
+                ID Verification
               </Typography>
             }
           />
