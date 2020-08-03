@@ -24,6 +24,62 @@ import snackbarMessages from "../../../data/snackbarMessages";
 const schema = yup.object().shape({
   nin: reqNin,
   cardNumber: reqCardNumber,
+  givenName: yup
+    .string()
+    .test(
+      "oneOfRequired",
+      "Include atleast surname, other names  or date of birth",
+      function (item) {
+        return (
+          this.parent.givenName ||
+          this.parent.surname ||
+          this.parent.otherNames ||
+          this.parent.dateOfBirth
+        );
+      }
+    ),
+  surname: yup
+    .string()
+    .test(
+      "oneOfRequired",
+      "Include atleast given name, other names  or date of birth",
+      function (item) {
+        return (
+          this.parent.givenName ||
+          this.parent.surname ||
+          this.parent.otherNames ||
+          this.parent.dateOfBirth
+        );
+      }
+    ),
+  otherNames: yup
+    .string()
+    .test(
+      "oneOfRequired",
+      "Include atleast given name, surname  or date of birth",
+      function (item) {
+        return (
+          this.parent.givenName ||
+          this.parent.surname ||
+          this.parent.otherNames ||
+          this.parent.dateOfBirth
+        );
+      }
+    ),
+  dateOfBirth: yup
+    .string()
+    .test(
+      "oneOfRequired",
+      "Include atleast given name, surname or other names",
+      function (item) {
+        return (
+          this.parent.givenName ||
+          this.parent.surname ||
+          this.parent.otherNames ||
+          this.parent.dateOfBirth
+        );
+      }
+    ),
 });
 
 interface IProps {
@@ -32,7 +88,7 @@ interface IProps {
   initialData?: any;
 }
 
-const ParticipantForm = (props: IProps) => {
+const NinVerificationForm = (props: IProps) => {
   const { enqueueSnackbar } = useSnackbar();
   const [data, setData] = useState(
     props.initialData
@@ -162,4 +218,4 @@ const ParticipantForm = (props: IProps) => {
   );
 };
 
-export default ParticipantForm;
+export default NinVerificationForm;
