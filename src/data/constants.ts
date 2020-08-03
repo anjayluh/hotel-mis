@@ -47,6 +47,7 @@ const servers: any = {
     Crm: "https://bou-niv-crmservice-test.test001.laboremus.no",
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
+    developerPortal: "https://bou-niv-api-test.laboremus.no",
   },
   sit: {
     Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
@@ -54,11 +55,13 @@ const servers: any = {
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
+    developerPortal: "https://bou-niv-api-test.laboremus.no",
   },
   uat: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-staging.test001.laboremus.no",
+    developerPortal: "https://bou-niv-api-test.laboremus.no",
   },
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
