@@ -230,7 +230,7 @@ const Layout: React.FC<IProps> = (props: any) => {
             }
           />
         </ListItem>
-        <ListItem
+        {/* <ListItem
           button
           onClick={onClick(localRoutes.developerPortal)}
           selected={isSelected(localRoutes.developerPortal)}
@@ -245,7 +245,7 @@ const Layout: React.FC<IProps> = (props: any) => {
               </Typography>
             }
           />
-        </ListItem>
+        </ListItem> */}
       </List>
     </div>
   );
