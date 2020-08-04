@@ -11,7 +11,6 @@ import { getSorting, Order, stableSort } from "./helpers";
 import XToolbar from "./XToolbar";
 import { useTableStyles } from "./tableStyles";
 import XTableHead, { XHeadCell } from "./XTableHead";
-import { useTheme } from "@material-ui/core";
 import Loading from "../Loading";
 import { parseXpath } from "../../utils/jsonHelpers";
 
@@ -33,6 +32,8 @@ interface XTableProps {
   hoverClass?: any;
   mouseEnter?: (id: any) => any;
   mouseLeave?: (id: any) => any;
+  headerClasses?: any;
+  backgroundColorStyle?: string;
 }
 
 export default function XTable(props: XTableProps) {
@@ -47,6 +48,8 @@ export default function XTable(props: XTableProps) {
     initialRowsPerPage = 10,
     headerSize = "medium",
     bodySize = "medium",
+    headerClasses,
+    backgroundColorStyle,
   } = props;
   const classes = useTableStyles();
   const [order, setOrder] = React.useState<Order>(initialOrder);
@@ -155,7 +158,7 @@ export default function XTable(props: XTableProps) {
             <XTableHead
               headerSize={headerSize}
               headCells={headCells}
-              classes={classes}
+              classes={headerClasses ? headerClasses : classes}
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
@@ -188,7 +191,11 @@ export default function XTable(props: XTableProps) {
                         key={row.id}
                         selected={isItemSelected}
                         style={{
-                          backgroundColor: isEven(index) ? "white" : grey[50],
+                          backgroundColor: backgroundColorStyle
+                            ? backgroundColorStyle
+                            : isEven(index)
+                            ? "white"
+                            : grey[50],
                         }}
                         className={hoverClass}
                         onMouseEnter={handleMouseEnter}
