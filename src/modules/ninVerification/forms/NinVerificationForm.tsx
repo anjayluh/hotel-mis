@@ -68,6 +68,7 @@ const schema = yup.object().shape({
     ),
   dateOfBirth: yup
     .string()
+    .nullable()
     .test(
       "oneOfRequired",
       "Include atleast given name, surname or other names",

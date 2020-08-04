@@ -19,7 +19,7 @@ export const redux = {
 export const localRoutes = {
   callback: "/callback",
   pending: "/pending",
-  ninVerification: "/ninVerification",
+  ninVerification: "/verification",
   participantsDetails: "/participants/:participantId/:subSection",
   participants: "/participants",
   billing: "/billing",

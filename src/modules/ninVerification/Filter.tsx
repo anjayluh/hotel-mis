@@ -21,22 +21,36 @@ const Filter = ({ onFilter, loading }: IProps) => {
     nin: "",
     cardNumber: "",
     participant: "",
-    status: "",
-    requestId: "",
+    requestStatus: "",
+    matchingStatus: "",
+    referenceNumber: "",
     from: null,
     to: null,
     initiator: "",
   });
-
   const [resetButton, setResetButton] = useState(false)
-
+  function getMatchingStatus(value: string) {
+    let matchingStatus = null;
+    switch (value) {
+      case "Match":
+        matchingStatus = true;
+        break;
+      case "Mismatch":
+        matchingStatus = false;
+        break;
+      default:
+        matchingStatus = null;
+    }
+    return matchingStatus;
+  }
   function submitForm(values: any) {
     let toSave = {
       Nin: values.nin,
       CardNumber: values.cardNumber,
       participant: values.participant,
-      Status: values.status === "All" ? "" : values.status,
-      RequestId: values.requestId,
+      Status: values.requestStatus === "All" ? "" : values.requestStatus,
+      matchingStatus: getMatchingStatus(values.matchingStatus),
+      referenceNumber: values.referenceNumber,
       "Date.From": values.from,
       "Date.To": values.to,
       Initiator: values.initiator,
@@ -61,8 +75,9 @@ const Filter = ({ onFilter, loading }: IProps) => {
       nin: "",
       cardNumber: "",
       participant: "",
-      status: "",
-      requestId: "",
+      requestStatus: "",
+      matchingStatus: "",
+      referenceNumber: "",
       from: null,
       to: null,
       initiator: "",
@@ -91,6 +106,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
 
   const initiators = ["Angella", "Evie", "TimK"];
   const statuses = ["All", "Pending", "Successful", "Failed", "Rejected"];
+  const matchingStatuses = ["All", "Match", "Mismatch"];
 
   return (
     <form>
@@ -131,8 +147,8 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <PSelectInput
-            name="status"
-            value={data["status"]}
+            name="requestStatus"
+            value={data["requestStatus"]}
             onChange={handleChange}
             label="Request Status"
             variant="outlined"
@@ -142,11 +158,23 @@ const Filter = ({ onFilter, loading }: IProps) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
-            name="requestId"
-            value={data["requestId"]}
+          <PSelectInput
+            name="matchingStatus"
+            value={data["matchingStatus"]}
             onChange={handleChange}
-            label="Request ID"
+            label="Matching Status"
+            variant="outlined"
+            size="small"
+            color="secondary"
+            options={toOptions(matchingStatuses)}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            name="referenceNumber"
+            value={data["referenceNumber"]}
+            onChange={handleChange}
+            label="Ref. Number"
             type="text"
             variant="outlined"
             size="small"
@@ -187,16 +215,16 @@ const Filter = ({ onFilter, loading }: IProps) => {
         </Grid> */}
         <Grid item xs={12}>
           <Box display="flex" flexDirection="row">
-            <Box mr={'auto'}>
-            <Button
-              disabled={loading}
-              variant="contained"
-              color="primary"
-              onClick={handleSubmit}
-              size="small"
-            >
-              Apply Filter
-            </Button>
+            <Box mr={"auto"}>
+              <Button
+                disabled={loading}
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+                size="small"
+              >
+                Apply Filter
+              </Button>
             </Box>
             <Box>
             {resetButton && <ResetButton text={"Reset"} onClick={resetForm}/>}

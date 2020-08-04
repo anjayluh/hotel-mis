@@ -38,7 +38,7 @@ const Summary = ({ data }: IProps) => {
     },
     {
       label: "Date of Birth",
-      value: printDate(data.dateOfBirth),
+      value: data.dateOfBirth ? printDate(data.dateOfBirth) : "-",
     },
     {
       label: "Card Number",
