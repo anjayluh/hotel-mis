@@ -28,6 +28,8 @@ const Filter = ({ onFilter, loading }: IProps) => {
     initiator: "",
   });
 
+  const [resetButton, setResetButton] = useState(false)
+
   function submitForm(values: any) {
     let toSave = {
       Nin: values.nin,
@@ -48,6 +50,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
     const newData = { ...data, [name]: value };
     setData(newData);
     submitForm(newData);
+    setResetButton(true)
   }
   function handleSubmit() {
     submitForm(data);
@@ -66,6 +69,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
     }
     setData(resetData)
     submitForm(resetData)
+    setResetButton(false)
   }
   const handleValueChange = (name: string) => (value: any) => {
     if (name === "from" || name === "to") {
@@ -75,6 +79,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
     setData(newData);
     submitForm(newData);
   };
+  
 
   // const handleComboValueChange = (name: string) => (value: any) => {
   //
@@ -194,7 +199,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
             </Button>
             </Box>
             <Box>
-            <ResetButton text={"Reset"} onClick={resetForm}/>
+            {resetButton && <ResetButton text={"Reset"} onClick={resetForm}/>}
             </Box>
           </Box>
         </Grid>
