@@ -62,9 +62,10 @@ const Filter = ({ onFilter, loading }: IProps) => {
     const name = event.target.name;
     const value = event.target.value;
     const newData = { ...data, [name]: value };
+    setResetButton(true)
     setData(newData);
     submitForm(newData);
-    setResetButton(true)
+    
   }
   function handleSubmit() {
     submitForm(data);
@@ -91,6 +92,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
       value = value ? value.toISOString() : value;
     }
     const newData = { ...data, [name]: value };
+    setResetButton(true)
     setData(newData);
     submitForm(newData);
   };
