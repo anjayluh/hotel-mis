@@ -45,9 +45,7 @@ const servers: any = {
     devPortal: "https://bou-niv-api-test.laboremus.no",
   },
   test: {
-    // Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
-    // Crm: "https://crmservice-test.laboremus.no",
     Crm: "https://bou-niv-crmservice-test.test001.laboremus.no",
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
@@ -63,7 +61,7 @@ const servers: any = {
     devPortal: "https://bou-niv-api-test.laboremus.no",
   },
   uat: {
-    Auth: "https://bou-auth-api-test.test001.laboremus.no",
+    Auth: "https://bou-auth-api-staging.test001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
     // Nin: "https://bou-niv-api-staging.laboremus.no",
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
@@ -86,7 +84,7 @@ const crmURL = env.Crm;
 const caseHandlingURL = env.Case;
 const NinVerificationURL = env.Nin;
 const gatewayURL = env.Gateway;
-const devPortal = env.devPortal
+const devPortal = env.devPortal;
 const kycURL = env.Kyc;
 const notificationURL = env.Notification;
 
