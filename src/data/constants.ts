@@ -59,7 +59,7 @@ const servers: any = {
     devPortal: "https://bou-niv-api-test.laboremus.no",
   },
   uat: {
-    Auth: "https://bou-auth-api-staging.test001.laboremus.no",
+    Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-staging.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.laboremus.no",
