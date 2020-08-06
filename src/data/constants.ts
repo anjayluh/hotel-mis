@@ -58,7 +58,7 @@ const servers: any = {
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.laboremus.no",
   },
-  uat: {
+  staging: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-staging.test001.laboremus.no",
