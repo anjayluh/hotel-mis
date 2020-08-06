@@ -12,7 +12,9 @@ export const printMoney = (money: number) => {
         <Typography variant="caption">UGX</Typography>
       </span>
     ) : (
-      ""
+      <span>
+        {money} {money >= 0 && <Typography variant="caption">UGX</Typography>}
+      </span>
     );
   } catch (e) {
     return "";
@@ -25,7 +27,8 @@ export const printsMoney = (money: number) => {
       <span>
         {new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(
           money
-        )}
+        )}{" "}
+        <Typography variant="caption">UGX</Typography>
       </span>
     ) : (
       ""
