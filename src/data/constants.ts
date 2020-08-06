@@ -67,7 +67,7 @@ const servers: any = {
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
     // Gateway: "https://bou-niv-gatewayservice-staging.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-staging.test001.laboremus.no",
-    devPortal: "https://bou-niv-api-test.laboremus.no",
+    devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
   },
   production: {
     Nin: "https://bou-niv-api.laboremus.no",
