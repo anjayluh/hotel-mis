@@ -9,7 +9,7 @@ export default snackbarMessages = {
   },
   'participant': {
     'new': 'New participant has been created',
-    'updated': 'Participant information has been updated'
+    'updated': 'Participant information has been updated',
   },
   'contact': {
     'new': 'A new Contact has been added to the participant',
@@ -18,6 +18,8 @@ export default snackbarMessages = {
   },
   'subscription': {
     'new': 'New subscription has been added',
+    'activated': 'Subscription has been activated',
+    'deactivate': 'Subscription has been deactivated'
   },
   'payment': {
     'new': 'A new payment has been added'
