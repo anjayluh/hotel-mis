@@ -39,16 +39,18 @@ const servers: any = {
   dev: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Crm: "https://crmservice-test.laboremus.no",
+    Nin: "https://bou-niv-api-test.test001.laboremus.no",
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
-    devPortal: "https://bou-niv-api-test.laboremus.no",
+    devPortal: "https://bou-niv-api-test.test001.laboremus.no",
   },
   test: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Crm: "https://bou-niv-crmservice-test.test001.laboremus.no",
+    Nin: "https://bou-niv-api-test.test001.laboremus.no",
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
-    devPortal: "https://bou-niv-api-test.laboremus.no",
+    devPortal: "https://bou-niv-api-test.test001.laboremus.no",
   },
   sit: {
     Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
@@ -56,13 +58,14 @@ const servers: any = {
     Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
-    devPortal: "https://bou-niv-api-test.laboremus.no",
+    devPortal: "https://bou-niv-api-test.test001.laboremus.no",
   },
   staging: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
+    Nin: "https://bou-niv-api-staging.test001.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-staging.test001.laboremus.no",
-    devPortal: "https://bou-niv-api-test.laboremus.no",
+    devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
   },
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
@@ -78,6 +81,7 @@ const crmURL = env.Crm;
 const caseHandlingURL = env.Case;
 const gatewayURL = env.Gateway;
 const devPortal = env.devPortal;
+const NinVerificationURL = env.Nin;
 const kycURL = env.Kyc;
 const notificationURL = env.Notification;
 
@@ -87,9 +91,9 @@ export const remoteRoutes = {
   participants: gatewayURL + "/crm/api/contact",
   participantsContactPersons: gatewayURL + "/crm/api/v3.0/contact",
   billing: gatewayURL + "/billing/api/bills",
-  ninVerificationId: gatewayURL + "/niv/api/request",
-  ninVerificationRequests: gatewayURL + "/niv/api/request/search",
-  ninVerification: gatewayURL + "/niv/api/national-id/verify",
+  ninVerificationId: NinVerificationURL + "/api/request",
+  ninVerificationRequests: NinVerificationURL + "/api/request/search",
+  ninVerification: NinVerificationURL + "/api/national-id/verify",
   billingCycle: gatewayURL + "/billing/api/billing-cycles",
   serviceCategory: gatewayURL + "/service-category",
   authServer: authURL,
