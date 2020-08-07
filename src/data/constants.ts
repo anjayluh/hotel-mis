@@ -94,7 +94,7 @@ export const remoteRoutes = {
   participants: gatewayURL + "/crm/api/contact",
   participantsContactPersons: gatewayURL + "/crm/api/v3.0/contact",
   billing: gatewayURL + "/billing/api/bills",
-  ninVerificationRequests: gatewayURL + "/niv/api/request/search",
+  ninVerificationRequests: NinVerificationURL + "/niv/api/request/search",
   ninVerification: NinVerificationURL + "/api/national-id/verify",
   billingCycle: gatewayURL + "/billing/api/billing-cycles",
   serviceCategory: gatewayURL + "/service-category",
