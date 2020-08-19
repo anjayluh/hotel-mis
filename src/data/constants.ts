@@ -60,6 +60,14 @@ const servers: any = {
     Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
   },
+  prideUat: {
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Crm: "https://bou-niv-crmservice-staging.proxy001.laboremus.no",
+    Nin: "https://niv-api-uat.pridemicrofinance.co.ug",
+    Gateway: "https://bou-niv-gatewayservice-staging.proxy001.laboremus.no",
+    devPortal: "https://niv-api-uat.pridemicrofinance.co.ug"
+
+  },
   staging: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
