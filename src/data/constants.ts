@@ -38,41 +38,27 @@ export const localRoutes = {
 const servers: any = {
   dev: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
-    Crm: "https://crmservice-test.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
-    Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
-    Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
   },
   test: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
-    Crm: "https://bou-niv-crmservice-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
-    Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
-    Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
   },
   sit: {
     Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
-    Crm: "https://crmservice-test.laboremus.no",
-    Case: "https://bou-niv-workflow-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
-    Gateway: "https://bou-niv-gatewayservice-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
   },
   prideUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
-    Crm: "https://bou-niv-crmservice-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.pridemicrofinance.co.ug",
-    Gateway: "https://bou-niv-gatewayservice-staging.proxy001.laboremus.no",
     devPortal: "https://niv-api-uat.pridemicrofinance.co.ug"
-
   },
   staging: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
-    Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
-    Gateway: "https://bou-niv-gatewayservice-staging.test001.laboremus.no",
     devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
   },
   production: {
