@@ -94,7 +94,7 @@ const ServiceCategory = () => {
       type: settingsConstants.settingsFetchLoading,
       payload: fakeServiceCategories,
     });
-    get(
+    /* get(
       "",
       (resp) => {
         dispatch({
@@ -113,7 +113,7 @@ const ServiceCategory = () => {
           payload: false,
         });
       }
-    );
+    ); */
   }, [dispatch]);
 
   return (
