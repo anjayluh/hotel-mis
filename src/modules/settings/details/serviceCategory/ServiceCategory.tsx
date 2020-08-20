@@ -95,7 +95,7 @@ const ServiceCategory = () => {
       payload: fakeServiceCategories,
     });
     get(
-      remoteRoutes.serviceCategory,
+      "",
       (resp) => {
         dispatch({
           type: settingsConstants.serviceCategoriesFetchAll,

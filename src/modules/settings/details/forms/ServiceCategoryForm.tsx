@@ -76,7 +76,7 @@ const ServiceCategoryForm = (props: IProps) => {
   });
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
-  const baseUrl = remoteRoutes.billing.split("bills")[0];
+  const baseUrl = "";
   const paymentsUrl = baseUrl + "payments";
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
