@@ -53,8 +53,8 @@ const servers: any = {
   },
   prideUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
-    Nin: "https://niv-api-uat.pridemicrofinance.co.ug",
-    devPortal: "https://niv-api-uat.pridemicrofinance.co.ug",
+    Nin: "https://niv-api-uat.pride.co.ug",
+    devPortal: "https://niv-api-uat.pride.co.ug",
   },
   staging: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
