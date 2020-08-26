@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import * as yup from "yup";
-import { reqString, reqNumber } from "../../../../data/validations";
+import { reqString } from "../../../../data/validations";
 import { FormikActions } from "formik";
 import Grid from "@material-ui/core/Grid";
 import XFormSimple from "../../../../components/forms/XFormSimple";
 import XTextInput from "../../../../components/inputs/XTextInput";
 import { useDispatch } from "react-redux";
-import { remoteRoutes } from "../../../../data/constants";
 import { post } from "../../../../utils/ajax";
 import { settingsConstants } from "../../../../data/redux/settings/reducer";
 import { useSnackbar } from "notistack";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import Button from "@material-ui/core/Button";
-import AddIcon from "@material-ui/icons/Add";
 import ErrorBoundary from "../../../../components/ErrorBoundary/ErrorBoundary";
 import snackbarMessages from "../../../../data/snackbarMessages";
 import AddButton from "../../../../components/AddButton";
@@ -76,7 +73,7 @@ const ServiceCategoryForm = (props: IProps) => {
   });
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
-  const baseUrl = remoteRoutes.billing.split("bills")[0];
+  const baseUrl = "";
   const paymentsUrl = baseUrl + "payments";
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
