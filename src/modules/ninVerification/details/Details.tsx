@@ -76,6 +76,10 @@ const Details = (props: IProps) => {
     }
   }, [requestData]);
 
+  const thirdName = requestData && requestData.otherNames ? requestData.otherNames : '';
+  const fullName = requestData ? ` ${requestData.surname} ${requestData.givenNames} ${thirdName}`: '';
+  
+
   function handleClose() {
     if (props.closeSlideOut) {
       props.closeSlideOut();
@@ -100,7 +104,7 @@ const Details = (props: IProps) => {
               <Box display="flex" flexDirection="column" py={1}>
                 <Box flexGrow={1} pt={1}>
                   <Typography variant="h5">
-                    Ref. Number: {requestData ? requestData.referenceNumber : "loading"}
+                    Name of Id holder: {fullName}
                   </Typography>
                 </Box>
               </Box>
