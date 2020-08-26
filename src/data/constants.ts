@@ -1,3 +1,5 @@
+import { FIs } from "./financialInsititutions";
+
 export const AUTH_TOKEN_KEY = "__bou__backoffice__token";
 export const AUTH_USER_KEY = "__bou__backoffice__user";
 
@@ -64,12 +66,28 @@ const servers: any = {
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
   },
+  fallBack: {
+    Auth: "https://bou-auth-api-test.test001.laboremus.no",
+    Nin: "https://bou-niv-api-test.test001.laboremus.no",
+    devPortal: "https://bou-niv-api-test.test001.laboremus.no",
+  },
 };
 
 const evVar = process.env.REACT_APP_ENV || "dev";
 const environment = evVar.trim();
 console.log(`############# Env : ${environment} ###############`);
-const env = servers[environment];
+const FI = process.env.REACT_APP_FI || 'fallBack';
+const prodEnv = FI.trim();
+console.log(prodEnv);
+console.log(FIs[prodEnv]);
+
+let env = servers.fallBack;
+if (environment === 'production') {
+  env = FIs[prodEnv]
+} else {
+  env = servers[environment];
+}
+
 const authURL = env.Auth;
 const crmURL = env.Crm;
 const caseHandlingURL = env.Case;
