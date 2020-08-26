@@ -90,7 +90,7 @@ const XFormSimple = (props: IProps) => {
                           disabled={isSubmitting}
                           size="small"
                         >
-                         {props.closeText ? props.closeText : "Close"}
+                          {props.closeText ? props.closeText : "Close"}
                         </Button>
                       </Grid>
                     )}
