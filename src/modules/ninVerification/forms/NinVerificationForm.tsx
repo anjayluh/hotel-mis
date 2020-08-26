@@ -1,12 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import * as yup from "yup";
-import {
-  reqString,
-  reqDate,
-  reqNin,
-  reqCardNumber,
-} from "../../../data/validations";
+import { reqNin, reqCardNumber } from "../../../data/validations";
 import { FormikActions } from "formik";
 import Grid from "@material-ui/core/Grid";
 import XFormSimple from "../../../components/forms/XFormSimple";
@@ -19,6 +14,7 @@ import { get, post } from "../../../utils/ajax";
 import { verificationRequestConstants } from "../../../data/redux/ninVerification/reducer";
 import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
+import { printYearMonthDayDate } from "../../../utils/dateHelpers";
 import snackbarMessages from "../../../data/snackbarMessages";
 
 const schema = yup.object().shape({
@@ -110,7 +106,7 @@ const NinVerificationForm = (props: IProps) => {
       surname: values.surname,
       givenNames: values.givenName,
       otherNames: values.otherNames,
-      dateOfBirth: values.dateOfBirth,
+      dateOfBirth: printYearMonthDayDate(values.dateOfBirth),
       nin: values.nin,
       cardNumber: values.cardNumber,
       participantId: userProfile.participantId,

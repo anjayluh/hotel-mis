@@ -6,6 +6,7 @@ export const standardDateTimeFormat = "dd-MM-yyyy HH:mm";
 export const standardDateFormat = "dd-MM-yyyy";
 export const monthYearFormat = "MMMM, yyyy";
 export const yearDateTime = "yyyy-MM-dd'T'HH:mm:ss";
+export const yearMonthDayDate = "yyyy-MM-dd";
 export const printDateTime = (value: any): string => {
   if (typeof value === "string") {
     return printDateTime(strToDate(value));
@@ -97,5 +98,13 @@ export const printYearDateTime = (value: any): string => {
     return printMonthYear(strToDate(value));
   }
   if (isValid(value)) return format(value, yearDateTime);
+  else return "";
+};
+
+export const printYearMonthDayDate = (value: any): string => {
+  if (typeof value === "string") {
+    return printMonthYear(strToDate(value));
+  }
+  if (isValid(value)) return format(value, yearMonthDayDate);
   else return "";
 };
