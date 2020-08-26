@@ -156,6 +156,8 @@ const NinVerificationForm = (props: IProps) => {
         schema={schema}
         initialValues={data}
         onCancel={handleClose}
+        submitText={"Submit"}
+        closeText = {"Cancel"}
       >
         <Grid item xs={12}>
           <XTextInput

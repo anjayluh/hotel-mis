@@ -14,6 +14,7 @@ interface IProps {
   children?: React.ReactNode;
   initialValues?: any;
   submitText?: string;
+  closeText?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -89,7 +90,7 @@ const XFormSimple = (props: IProps) => {
                           disabled={isSubmitting}
                           size="small"
                         >
-                          Close
+                         {props.closeText ? props.closeText : "Close"}
                         </Button>
                       </Grid>
                     )}
