@@ -44,8 +44,8 @@ const Filter = ({ onFilter, loading }: IProps) => {
   }
   function submitForm(values: any) {
     let toSave = {
-      Nin: values.nin,
-      CardNumber: values.cardNumber,
+      Nin: values.nin.trim(),
+      CardNumber: values.cardNumber.trim(),
       participant: values.participant,
       Status: values.requestStatus === "All" ? "" : values.requestStatus,
       matchingStatus: getMatchingStatus(values.matchingStatus),
@@ -57,12 +57,12 @@ const Filter = ({ onFilter, loading }: IProps) => {
   }
 
   function handleChange(event: React.ChangeEvent<any>) {
-    const name = event.target.name;
-    const value = event.target.value;
+    const name = event.target.name.trim();
+    const value = event.target.value.trim();
     const newData = { ...data, [name]: value };
     setResetButton(true)
     setData(newData);
-    submitForm(newData);
+    // submitForm(newData);
     
   }
   function handleSubmit() {
@@ -91,7 +91,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
     const newData = { ...data, [name]: value };
     setResetButton(true)
     setData(newData);
-    submitForm(newData);
+    // submitForm(newData);
   };
   
 
