@@ -57,15 +57,15 @@ function Login() {
           <Grid item xs={6} style={{ padding: 0, paddingRight: 13 }}>
             <Box pb={1}>
               <Box flexGrow={1} mb={2} pt={1}>
-                <Typography  variant="h6">
-                  NATIONAL IDS VERIFICATION AND VALIDATION SYSTEM
+              <Typography  variant="h6" align={"center"}>
+                  NATIONAL ID VERIFICATION SYSTEM
                 </Typography>
               </Box>
-              <Box flexGrow={1}>
+              {/* <Box flexGrow={1}>
                 <Typography variant={"body2"} style={{ paddingRight: 16 }}>
                   Authentication of current and prospective customer information against records maintained by NIRA
                 </Typography>
-              </Box>
+              </Box> */}
               <Box flexGrow={1} pb={1}>
                 <form className={classes.form}>
                   <Button
@@ -78,7 +78,7 @@ function Login() {
                     size={"large"}
                     className={classes.submit}
                   >
-                    {loading ? 'Authenticating...': 'Authenticate'}
+                    {loading ? 'Authenticating...': 'Sign In'}
                   </Button>
                 </form>
               </Box>
