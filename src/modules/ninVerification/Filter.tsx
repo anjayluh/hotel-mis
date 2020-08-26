@@ -43,11 +43,12 @@ const Filter = ({ onFilter, loading }: IProps) => {
     return matchingStatus;
   }
   function submitForm(values: any) {
+    const statusRequest = values.requestStatus === "Completed" ? "Successful" : values.requestStatus
     let toSave = {
       Nin: values.nin.trim(),
       CardNumber: values.cardNumber.trim(),
       participant: values.participant,
-      Status: values.requestStatus === "All" ? "" : values.requestStatus,
+      Status: values.requestStatus === "All" ? "" : statusRequest,
       matchingStatus: getMatchingStatus(values.matchingStatus),
       "Date.From": values.from,
       "Date.To": values.to,
@@ -104,7 +105,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
   // }
 
   const initiators = ["Angella", "Evie", "TimK"];
-  const statuses = ["All", "Pending", "Successful", "Failed", "Rejected"];
+  const statuses = ["All", "Pending", "Completed", "Failed", "Rejected"];
   const matchingStatuses = ["All", "Successful", "Failed"];
 
   return (
