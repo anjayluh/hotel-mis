@@ -23,7 +23,6 @@ const Filter = ({ onFilter, loading }: IProps) => {
     participant: "",
     requestStatus: "",
     matchingStatus: "",
-    referenceNumber: "",
     from: null,
     to: null,
     initiator: "",
@@ -50,7 +49,6 @@ const Filter = ({ onFilter, loading }: IProps) => {
       participant: values.participant,
       Status: values.requestStatus === "All" ? "" : values.requestStatus,
       matchingStatus: getMatchingStatus(values.matchingStatus),
-      referenceNumber: values.referenceNumber,
       "Date.From": values.from,
       "Date.To": values.to,
       Initiator: values.initiator,
@@ -78,7 +76,6 @@ const Filter = ({ onFilter, loading }: IProps) => {
       participant: "",
       requestStatus: "",
       matchingStatus: "",
-      referenceNumber: "",
       from: null,
       to: null,
       initiator: "",
@@ -169,18 +166,6 @@ const Filter = ({ onFilter, loading }: IProps) => {
             size="small"
             color="secondary"
             options={toOptions(matchingStatuses)}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            name="referenceNumber"
-            value={data["referenceNumber"]}
-            onChange={handleChange}
-            label="Ref. Number"
-            type="text"
-            variant="outlined"
-            size="small"
-            fullWidth
           />
         </Grid>
         <Grid item xs={12}>
