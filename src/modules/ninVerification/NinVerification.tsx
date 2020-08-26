@@ -174,7 +174,7 @@ const NinVerifications = () => {
               <Grid container>
                 <Grid item sm={12} className={classes.pageHeading}>
                   <Typography variant="h4">ID Verification Requests</Typography>
-                  <AddButton text={"New request"} onClick={addNewRequest} />
+                  {/* <AddButton text={"New request"} onClick={addNewRequest} /> */}
                 </Grid>
               </Grid>
             </Box>
