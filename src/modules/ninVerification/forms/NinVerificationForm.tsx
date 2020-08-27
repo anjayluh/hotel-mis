@@ -96,7 +96,7 @@ const NinVerificationForm = (props: IProps) => {
           givenName: "",
           surname: "",
           otherNames: "",
-          dateOfBirth: new Date("01.01.1990"),
+          dateOfBirth: null,
         }
   );
   const dispatch = useDispatch();

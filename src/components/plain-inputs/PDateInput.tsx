@@ -34,7 +34,7 @@ export default function PDateInput({
   const [open, setOpen] = useState(false);
   function handleChange(e: any): any {
     onChange(e);
-    setOpen(false);
+    // setOpen(false);
   }
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -51,9 +51,6 @@ export default function PDateInput({
         onChange={handleChange}
         autoComplete="off"
         color="secondary"
-        open={open}
-        onClose={() => setOpen(false)}
-        onClick={() => setOpen(true)}
         KeyboardButtonProps={{
           "aria-label": ariaLabel ? ariaLabel : "change date",
         }}

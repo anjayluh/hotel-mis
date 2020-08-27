@@ -86,9 +86,9 @@ const Filter = ({ onFilter, loading }: IProps) => {
     setResetButton(false)
   }
   const handleValueChange = (name: string) => (value: any) => {
-    if (name === "from" || name === "to") {
-      value = value ? value.toISOString() : value;
-    }
+    // if (name === "from" || name === "to") {
+    //   value = value ? value.toISOString() : value;
+    // }
     const newData = { ...data, [name]: value };
     setResetButton(true)
     setData(newData);

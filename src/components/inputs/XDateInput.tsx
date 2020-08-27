@@ -80,12 +80,9 @@ const Component = ({ field, form,  ...other }: FieldProps, {disableFuture}:IProp
           value={field.value || null}
           helperText={showError && error}
           error={Boolean(showError)}
-          onClose={() => setOpen(false)}
           onChange={handleChange}
           onTouchEnd={handleTouch}
           onBlur={handleTouch}
-          open={open}
-          onClick={() => setOpen(true)}
           PopoverProps={{
             anchorOrigin: { horizontal: "left", vertical: "bottom" },
             transformOrigin: { horizontal: "left", vertical: "top" },
