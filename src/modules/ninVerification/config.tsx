@@ -60,7 +60,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
   {
     name: "status",
     label: "Request Status",
-    render: (_, rec) => renderNinStatus(rec.status),
+    render: (_, rec) => renderNinStatus(rec.status ==="Successful" ? "Completed": rec.status),
     cellProps: {
       style: {
         width: 40,

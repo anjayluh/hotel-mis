@@ -76,7 +76,7 @@ const Summary = ({ data }: IProps) => {
     },
     {
       task: "Billing Updated",
-      date: null,
+      date: data.billingUpdated,
     },
   ];
 

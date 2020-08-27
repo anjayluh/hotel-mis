@@ -126,6 +126,7 @@ export interface IRequestDetails {
     receivedFromNira?:string
     receivedAt?: string
     submittedAt?: string
+    billingUpdated?: any
     requestStatus: IRequestDetailsStatus[]
 }
 
