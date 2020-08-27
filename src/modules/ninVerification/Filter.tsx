@@ -10,6 +10,7 @@ import PDateInput from "../../components/plain-inputs/PDateInput";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ResetButton from "../../components/ResetButton";
+import { date } from "faker";
 
 interface IProps {
   onFilter: (data: any) => any;
@@ -50,8 +51,8 @@ const Filter = ({ onFilter, loading }: IProps) => {
       participant: values.participant,
       Status: values.requestStatus === "All" ? "" : statusRequest,
       matchingStatus: getMatchingStatus(values.matchingStatus),
-      "Date.From": values.from,
-      "Date.To": values.to,
+      "Date.From": values.from = values.from && new Date(values.from).toISOString(),
+      "Date.To": values.to = values.to && new Date(values.to).toISOString(),
       Initiator: values.initiator,
     };
     onFilter(toSave);
