@@ -31,10 +31,10 @@ const Filter = ({ onFilter, loading }: IProps) => {
   function getMatchingStatus(value: string) {
     let matchingStatus = null;
     switch (value) {
-      case "Successful":
+      case "Match":
         matchingStatus = true;
         break;
-      case "Failed":
+      case "Mismatch":
         matchingStatus = false;
         break;
       default:
@@ -106,7 +106,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
 
   const initiators = ["Angella", "Evie", "TimK"];
   const statuses = ["All", "Pending", "Completed", "Failed", "Rejected"];
-  const matchingStatuses = ["All", "Successful", "Failed"];
+  const matchingStatuses = ["All", "Match", "Mismatch"];
 
   return (
     <form>
