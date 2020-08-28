@@ -10,6 +10,7 @@ import PDateInput from "../../components/plain-inputs/PDateInput";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ResetButton from "../../components/ResetButton";
+import { date } from "faker";
 
 interface IProps {
   onFilter: (data: any) => any;
@@ -23,7 +24,6 @@ const Filter = ({ onFilter, loading }: IProps) => {
     participant: "",
     requestStatus: "",
     matchingStatus: "",
-    referenceNumber: "",
     from: null,
     to: null,
     initiator: "",
@@ -44,27 +44,27 @@ const Filter = ({ onFilter, loading }: IProps) => {
     return matchingStatus;
   }
   function submitForm(values: any) {
+    const statusRequest = values.requestStatus === "Completed" ? "Successful" : values.requestStatus
     let toSave = {
-      Nin: values.nin,
-      CardNumber: values.cardNumber,
+      Nin: values.nin.trim(),
+      CardNumber: values.cardNumber.trim(),
       participant: values.participant,
-      Status: values.requestStatus === "All" ? "" : values.requestStatus,
+      Status: values.requestStatus === "All" ? "" : statusRequest,
       matchingStatus: getMatchingStatus(values.matchingStatus),
-      referenceNumber: values.referenceNumber,
-      "Date.From": values.from,
-      "Date.To": values.to,
+      "Date.From": values.from = values.from && new Date(values.from).toISOString(),
+      "Date.To": values.to = values.to && new Date(values.to).toISOString(),
       Initiator: values.initiator,
     };
     onFilter(toSave);
   }
 
   function handleChange(event: React.ChangeEvent<any>) {
-    const name = event.target.name;
-    const value = event.target.value;
+    const name = event.target.name.trim();
+    const value = event.target.value.trim();
     const newData = { ...data, [name]: value };
     setResetButton(true)
     setData(newData);
-    submitForm(newData);
+    // submitForm(newData);
     
   }
   function handleSubmit() {
@@ -78,7 +78,6 @@ const Filter = ({ onFilter, loading }: IProps) => {
       participant: "",
       requestStatus: "",
       matchingStatus: "",
-      referenceNumber: "",
       from: null,
       to: null,
       initiator: "",
@@ -88,13 +87,13 @@ const Filter = ({ onFilter, loading }: IProps) => {
     setResetButton(false)
   }
   const handleValueChange = (name: string) => (value: any) => {
-    if (name === "from" || name === "to") {
-      value = value ? value.toISOString() : value;
-    }
+    // if (name === "from" || name === "to") {
+    //   value = value ? value.toISOString() : value;
+    // }
     const newData = { ...data, [name]: value };
     setResetButton(true)
     setData(newData);
-    submitForm(newData);
+    // submitForm(newData);
   };
   
 
@@ -107,7 +106,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
   // }
 
   const initiators = ["Angella", "Evie", "TimK"];
-  const statuses = ["All", "Pending", "Successful", "Failed", "Rejected"];
+  const statuses = ["All", "Pending", "Completed", "Failed", "Rejected"];
   const matchingStatuses = ["All", "Match", "Mismatch"];
 
   return (
@@ -169,18 +168,6 @@ const Filter = ({ onFilter, loading }: IProps) => {
             size="small"
             color="secondary"
             options={toOptions(matchingStatuses)}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            name="referenceNumber"
-            value={data["referenceNumber"]}
-            onChange={handleChange}
-            label="Ref. Number"
-            type="text"
-            variant="outlined"
-            size="small"
-            fullWidth
           />
         </Grid>
         <Grid item xs={12}>

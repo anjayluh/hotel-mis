@@ -96,7 +96,7 @@ const NinVerificationForm = (props: IProps) => {
           givenName: "",
           surname: "",
           otherNames: "",
-          dateOfBirth: new Date("01.01.1990"),
+          dateOfBirth: null,
         }
   );
   const dispatch = useDispatch();
@@ -156,6 +156,8 @@ const NinVerificationForm = (props: IProps) => {
         schema={schema}
         initialValues={data}
         onCancel={handleClose}
+        submitText={"Submit"}
+        closeText = {"Cancel"}
       >
         <Grid item xs={12}>
           <XTextInput
