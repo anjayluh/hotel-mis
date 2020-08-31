@@ -65,6 +65,7 @@
         "build-staging": "set REACT_APP_ENV=staging && react-scripts build",
         "build-production": "set REACT_APP_ENV=production && react-scripts build",
         "build-pride-uat": "set REACT_APP_ENV=prideUat && react-scripts build",
+        "build-exim-uat": "set REACT_APP_ENV=eximUat && react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "deploy": "msdeploy --verb sync --allowUntrusted true --source contentPath=%npm_package_config_sourcePath% --dest contentPath=%npm_package_config_destPath%,wmsvc=%npm_package_config_ComputerName%,UserName=%npm_package_config_UserName%,Password=%npm_package_config_Password%,includeAcls=False",

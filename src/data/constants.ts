@@ -56,6 +56,11 @@ const servers: any = {
     Nin: "https://niv-api-uat.pride.co.ug",
     devPortal: "https://niv-api-uat.pride.co.ug",
   },
+  eximUat: {
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Nin: "https://niv-api-uat.eximbank-ug.com",
+    devPortal: "https://niv-api-uat.eximbank-ug.com",
+  },
   staging: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
