@@ -16,6 +16,7 @@ import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
 import { printYearMonthDayDate } from "../../../utils/dateHelpers";
 import snackbarMessages from "../../../data/snackbarMessages";
+import { Typography } from "@material-ui/core";
 
 const schema = yup.object().shape({
   nin: reqNin,
@@ -211,6 +212,7 @@ const NinVerificationForm = (props: IProps) => {
             inputVariant="outlined"
             size="small"
           />
+          <Typography variant="body2" style={{paddingLeft: 15 }}>Date format: day.month.year</Typography>
         </Grid>
       </XFormSimple>
     </ErrorBoundary>
