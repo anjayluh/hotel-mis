@@ -90,4 +90,5 @@ export const remoteRoutes = {
   resetPass: authURL + "/reset",
   users: authURL + "/api/user",
   devPortal: devPortal,
+  niraNotification: NinVerificationURL + "/health",
 };

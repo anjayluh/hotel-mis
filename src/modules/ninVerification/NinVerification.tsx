@@ -196,27 +196,8 @@ const NinVerifications = () => {
               <Grid item sm={3} className={classes.pageHeading}>
                 <Typography variant="h4">ID Verification Requests</Typography>
               </Grid>
-              <Grid item sm={9} className={classes.pageHeading}>
-                {/* <Typography variant="h4">ID Verification Requests</Typography> */}
-                <Box display="flex" ml={"auto"}>
-                  <Box p={0.5} className={classes.niraApiOffline}>
-                    <PriorityHighOutlinedIcon/>
-                  </Box>
-                  <Box display="flex" p={0.5} className={classes.niraApiOfflineInfo}>
-                    <Typography color="inherit" style={{paddingRight: 15, lineHeight: 2}}>
-                      The NIRA API is currently offline
-                    </Typography>
-                    <Typography color="inherit" style={{lineHeight: 2.5 }} variant="body2">
-                      Last checked {printDateTime(new Date())}
-                    </Typography>
-                  </Box>
-                  <Box p={0.5} className={classes.niraApiOffline}>
-                    <RefreshOutlinedIcon/>
-                  </Box>
-                </Box>
-                </Grid>
-              </Grid>
-            </Box>
+            </Grid>
+          </Box>
         </Grid>
         <Grid item xs={9}>
           <Box p={1} className={classes.root}>

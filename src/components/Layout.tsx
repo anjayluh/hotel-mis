@@ -36,6 +36,7 @@ import { Typography } from "@material-ui/core";
 import { themeBackground } from "../theme/custom-colors";
 import Paper from "@material-ui/core/Paper";
 import { verificationRequestConstants } from "../data/redux/ninVerification/reducer";
+import NiraApiNotification from "../modules/ninVerification/NiraApiNatification";
 
 const drawerWidth = 240;
 
@@ -130,6 +131,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 interface IProps extends RouteComponentProps {
   hideRequestButton?: boolean;
+  showNiraNotification?: boolean;
 }
 const Layout: React.FC<IProps> = (props: any) => {
   const classes = useStyles();
@@ -274,7 +276,9 @@ const Layout: React.FC<IProps> = (props: any) => {
               New Request
             </Button>
           )}
-
+          {!props.showNiraNotification && (
+            <NiraApiNotification/>
+          )}
           <BarView textClass={classes.menuSelected} />
         </Toolbar>
       </AppBar>
