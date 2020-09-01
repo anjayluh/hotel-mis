@@ -40,31 +40,37 @@ const servers: any = {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
+    clientId: "laboremus-backoffice:portal"
   },
   test: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
+    clientId: "laboremus-backoffice:portal"
   },
   sit: {
     Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
+    clientId: "laboremus-backoffice:portal"
   },
   prideUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.pride.co.ug",
     devPortal: "https://niv-api-uat.pride.co.ug",
+    clientId: "laboremus-backoffice:portal"
   },
   eximUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.eximbank-ug.com",
     devPortal: "https://niv-api-uat.eximbank-ug.com",
+    clientId: "laboremus-backoffice:portal"
   },
   staging: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
     devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
+    clientId: "laboremus-backoffice:portal"
   },
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
@@ -74,7 +80,7 @@ const servers: any = {
 const evVar = process.env.REACT_APP_ENV || "dev";
 const environment = evVar.trim();
 console.log(`############# Env : ${environment} ###############`);
-const env = servers[environment];
+export const env = servers[environment];
 const authURL = env.Auth;
 const devPortal = env.devPortal;
 const NinVerificationURL = env.Nin;
@@ -90,5 +96,4 @@ export const remoteRoutes = {
   resetPass: authURL + "/reset",
   users: authURL + "/api/user",
   devPortal: devPortal,
-  niraNotification: NinVerificationURL + "/health",
 };
