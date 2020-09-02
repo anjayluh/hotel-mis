@@ -58,22 +58,23 @@ const servers: any = {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.pride.co.ug",
     devPortal: "https://niv-api-uat.pride.co.ug",
-    clientId: "laboremus-backoffice:portal"
+    clientId: "bou:backoffice"
   },
   eximUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.eximbank-ug.com",
     devPortal: "https://niv-api-uat.eximbank-ug.com",
-    clientId: "laboremus-backoffice:portal"
+    clientId: "bou:backoffice"
   },
   staging: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
     devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
-    clientId: "laboremus-backoffice:portal"
+    clientId: "bou:backoffice"
   },
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
+    clientId: "bou:backoffice"
   },
 };
 
