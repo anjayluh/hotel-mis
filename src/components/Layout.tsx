@@ -36,7 +36,7 @@ import { Typography } from "@material-ui/core";
 import { themeBackground } from "../theme/custom-colors";
 import Paper from "@material-ui/core/Paper";
 import { verificationRequestConstants } from "../data/redux/ninVerification/reducer";
-import NiraApiNotification from "../modules/ninVerification/NiraApiNatification";
+import NiraApiNotification from "../modules/ninVerification/NiraApiNotification";
 
 const drawerWidth = 240;
 
