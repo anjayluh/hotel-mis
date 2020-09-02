@@ -89,6 +89,7 @@ export const remoteRoutes = {
   ninVerificationId: NinVerificationURL + "/api/request",
   ninVerificationRequests: NinVerificationURL + "/api/request/search",
   ninVerification: NinVerificationURL + "/api/national-id/verify",
+  niraNotification: NinVerificationURL + "/health",
   authServer: authURL,
   login: authURL + "/api/test/login",
   profile: authURL + "/api/test/profile",
