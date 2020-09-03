@@ -68,7 +68,9 @@ const servers: any = {
     // Gateway: "https://bou-niv-gatewayservice-staging.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice-staging.test001.laboremus.no",
     devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
+    clientId: "bou:backoffice"
   },
+  
   production: {
     Nin: "https://bou-niv-api.laboremus.no",
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
@@ -123,4 +125,5 @@ export const remoteRoutes = {
   gatewayMetadata: gatewayURL + "/niv/api/request",
   users: authURL + "/api/user",
   devPortal: devPortal,
+  niraNotification: NinVerificationURL + "/health",
 };
