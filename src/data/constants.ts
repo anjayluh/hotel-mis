@@ -61,7 +61,8 @@ const servers: any = {
     devPortal: "https://bou-niv-api-test.laboremus.no",
   },
   staging: {
-    Auth: "https://bou-auth-api-test.test001.laboremus.no",
+    // Auth: "https://bou-auth-api-test.test001.laboremus.no",
+    Auth: "http://bou-auth-api-staging.proxy001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
     // Nin: "https://bou-niv-api-staging.laboremus.no",
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
