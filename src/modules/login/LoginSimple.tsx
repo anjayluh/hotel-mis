@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import authService from "../../data/oidc/AuthService";
 import {useLoginStyles} from "./loginStyles";
-import coatOfArms from "../../assets/Coat_of_arms_of_Uganda.png";
+import bouLogo from "../../assets/bou_logo.svg";
 import Divider from "@material-ui/core/Divider";
 import {ICoreState} from "../../data/redux/coreReducer";
 import {useSelector} from "react-redux";
@@ -48,7 +48,7 @@ function Login() {
         <Grid container spacing={3}>
           <Grid item xs={5} style={{ marginTop: "auto",  marginBottom: "auto", paddingRight: 45 }}>
             <Box display="flex" justifyContent="center" >
-              <img src={coatOfArms} alt={ "Coat of arms of Uganda" } className={classes.coatOfArms}/>
+              <img src={bouLogo} alt={ "Bank of Uganda" } className={classes.bouLogo}/>
             </Box>
           </Grid>
           <Grid item xs={1} style={{ padding: 0 }}>

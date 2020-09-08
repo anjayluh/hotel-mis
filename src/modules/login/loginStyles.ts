@@ -35,10 +35,10 @@ export const useLoginStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(3),
       height: 50
     },
-    coatOfArms: {
-      width: 100,
+    bouLogo: {
+      width: 130,
       height: 'auto',
-      marginBottom: 15
+      marginBottom: 10
     }
   }),
 );
