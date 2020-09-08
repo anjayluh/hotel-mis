@@ -42,29 +42,45 @@ const servers: any = {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
+    clientId: "laboremus-backoffice:portal"
   },
   test: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
+    clientId: "laboremus-backoffice:portal"
   },
   sit: {
     Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
+    clientId: "laboremus-backoffice:portal"
   },
   prideUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.pride.co.ug",
     devPortal: "https://niv-api-uat.pride.co.ug",
+    clientId: "bou:backoffice"
+  },
+  eximUat: {
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Nin: "https://niv-api-uat.eximbank-ug.com",
+    devPortal: "https://niv-api-uat.eximbank-ug.com",
+    clientId: "bou:backoffice"
   },
   staging: {
-    Auth: "https://bou-auth-api-test.test001.laboremus.no",
+    // Auth: "https://bou-auth-api-test.test001.laboremus.no",
+    Auth: "http://bou-auth-api-staging.proxy001.laboremus.no",
+    Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
+    // Nin: "https://bou-niv-api-staging.laboremus.no",
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
     devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
+    clientId: "bou:backoffice"
   },
+  
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
+    clientId: "bou:backoffice"
   },
   fallBack: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
@@ -76,17 +92,7 @@ const servers: any = {
 const evVar = process.env.REACT_APP_ENV || "dev";
 const environment = evVar.trim();
 console.log(`############# Env : ${environment} ###############`);
-const FI = process.env.REACT_APP_FI || 'fallBack';
-const prodEnv = FI.trim();
-console.log(prodEnv);
-console.log(FIs[prodEnv]);
-
-let env = servers.fallBack;
-if (environment === 'production') {
-  env = FIs[prodEnv]
-} else {
-  env = servers[environment];
-}
+export const env = servers[environment];
 
 const authURL = env.Auth;
 const devPortal = env.devPortal;
@@ -96,6 +102,7 @@ export const remoteRoutes = {
   ninVerificationId: NinVerificationURL + "/api/request",
   ninVerificationRequests: NinVerificationURL + "/api/request/search",
   ninVerification: NinVerificationURL + "/api/national-id/verify",
+  niraNotification: NinVerificationURL + "/health",
   authServer: authURL,
   login: authURL + "/api/test/login",
   profile: authURL + "/api/test/profile",

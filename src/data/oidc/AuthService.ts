@@ -1,18 +1,16 @@
 import {Log, User, UserManager, WebStorageStateStore} from 'oidc-client';
-
-import {remoteRoutes} from "../constants";
-
+import { env, remoteRoutes } from "../constants";
 class AuthService {
     public userManager: UserManager;
     private clientRoot=`${window.location.protocol}//${window.location.hostname}${window.location.port ? `:${window.location.port}` : ''}`
     constructor() {
         const clientRoot = this.clientRoot
         const settings = {
-            client_id: 'bou:backoffice',
+            client_id: env.clientId,
             redirect_uri: `${clientRoot}/signin-callback.html`,
             post_logout_redirect_uri: clientRoot,
             response_type: 'token id_token',
-            scope: 'openid profile offline_access roles Crm CaseHandling KycConnector Gateway',
+            scope: 'openid profile roles offline_access laboremus_BNVS_API',
             authority: remoteRoutes.authServer,
             silent_redirect_uri: `${clientRoot}/silent_renew.html`,
             automaticSilentRenew: true,

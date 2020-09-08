@@ -11,6 +11,8 @@ import { search } from "../../utils/ajax";
 import { remoteRoutes } from "../../data/constants";
 import { wfInitialSort, ninVerificationHeadCells } from "./config";
 import Box from "@material-ui/core/Box";
+import PriorityHighOutlinedIcon from '@material-ui/icons/PriorityHighOutlined';
+import RefreshOutlinedIcon from '@material-ui/icons/RefreshOutlined';
 import {
   verificationRequestConstants,
   IVerificationRequestState,
@@ -25,6 +27,7 @@ import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import AddButton from "../../components/AddButton";
 import snackbarMessages from "../../data/snackbarMessages";
+import {printDateTime} from "../../utils/dateHelpers"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,6 +70,25 @@ const useStyles = makeStyles((theme: Theme) =>
 
     pageHeading: {
       display: "flex",
+    },
+    
+    niraApiOffline: {
+      border: "5px solid red",
+      color: "red"
+    },
+    niraApiOfflineInfo: {
+      borderTop: "5px solid red",
+      borderBottom: "5px solid red",
+      color: "red"
+    },
+    niraApiOnline: {
+      border: "5px solid green",
+      color: "green"
+    },
+    niraApiOnlineInfo: {
+      borderTop: "5px solid green",
+      borderBottom: "5px solid green",
+      color: "green"
     },
   })
 );
@@ -168,16 +190,17 @@ const NinVerifications = () => {
   return (
     <Navigation>
       <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Box pb={2}>
+            <Grid container>
+              <Grid item sm={3} className={classes.pageHeading}>
+                <Typography variant="h4">ID Verification Requests</Typography>
+              </Grid>
+            </Grid>
+          </Box>
+        </Grid>
         <Grid item xs={9}>
           <Box p={1} className={classes.root}>
-            <Box pb={2}>
-              <Grid container>
-                <Grid item sm={12} className={classes.pageHeading}>
-                  <Typography variant="h4">ID Verification Requests</Typography>
-                  {/* <AddButton text={"New request"} onClick={addNewRequest} /> */}
-                </Grid>
-              </Grid>
-            </Box>
             {loading ? (
               <Loading />
             ) : (
@@ -200,7 +223,7 @@ const NinVerifications = () => {
           </Box>
         </Grid>
         <Grid item xs={3} style={{ display: open ? "block" : "none" }}>
-          <Box pt={6}>
+          <Box pt={1}>
             <Paper className={classes.filterPaper} elevation={0}>
               <ErrorBoundary>
                 <Filter onFilter={handleFilter} loading={loading} />
