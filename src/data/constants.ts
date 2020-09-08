@@ -40,44 +40,45 @@ const servers: any = {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
-    clientId: "laboremus-backoffice:portal",
+    clientId: "laboremus-backoffice:portal"
   },
   test: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
-    clientId: "laboremus-backoffice:portal",
+    clientId: "laboremus-backoffice:portal"
   },
   sit: {
     Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
-    clientId: "laboremus-backoffice:portal",
+    clientId: "laboremus-backoffice:portal"
   },
   prideUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.pride.co.ug",
     devPortal: "https://niv-api-uat.pride.co.ug",
-    clientId: "bou:backoffice",
+    clientId: "bou:backoffice"
   },
   eximUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.eximbank-ug.com",
     devPortal: "https://niv-api-uat.eximbank-ug.com",
-    clientId: "bou:backoffice",
+    clientId: "bou:backoffice"
   },
   staging: {
-    Auth: "https://bou-auth-api-test.test001.laboremus.no",
+    // Auth: "https://bou-auth-api-test.test001.laboremus.no",
+    Auth: "http://bou-auth-api-staging.proxy001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
     // Nin: "https://bou-niv-api-staging.laboremus.no",
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
     devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
-    clientId: "bou:backoffice",
+    clientId: "bou:backoffice"
   },
-
+  
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
-    clientId: "bou:backoffice",
+    clientId: "bou:backoffice"
   },
 };
 
