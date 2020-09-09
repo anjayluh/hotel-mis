@@ -42,48 +42,56 @@ const servers: any = {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
-    clientId: "laboremus-backoffice:portal"
+    clientId: "laboremus-backoffice:portal",
+    envScope: "openid profile roles offline_access laboremus_BNVS_API"
   },
   test: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
-    clientId: "laboremus-backoffice:portal"
+    clientId: "laboremus-backoffice:portal",
+    envScope: "openid profile roles offline_access laboremus_BNVS_API"
   },
   sit: {
     Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
-    clientId: "laboremus-backoffice:portal"
+    clientId: "laboremus-backoffice:portal",
+    envScope: "backoffice:portal"
   },
   prideUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.pride.co.ug",
     devPortal: "https://niv-api-uat.pride.co.ug",
-    clientId: "bou:backoffice"
+    clientId: "bou:backoffice",
+    envScope: "backoffice:portal"
   },
   eximUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.eximbank-ug.com",
     devPortal: "https://niv-api-uat.eximbank-ug.com",
-    clientId: "bou:backoffice"
+    clientId: "bou:backoffice",
+    envScope: "backoffice:portal"
   },
   staging: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
     devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
-    clientId: "bou:backoffice"
+    clientId: "bou:backoffice",
+    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
   },
   
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
-    clientId: "bou:backoffice"
+    clientId: "bou:backoffice",
+    envScope: "backoffice:portal"
   },
   fallBack: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
+    envScope: "backoffice:portal"
   },
 };
 

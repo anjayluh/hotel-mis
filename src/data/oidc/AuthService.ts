@@ -10,7 +10,7 @@ class AuthService {
             redirect_uri: `${clientRoot}/signin-callback.html`,
             post_logout_redirect_uri: clientRoot,
             response_type: 'token id_token',
-            scope: 'openid profile roles offline_access NationalIdVerification',
+            scope: env.envScope,
             authority: remoteRoutes.authServer,
             silent_redirect_uri: `${clientRoot}/silent_renew.html`,
             automaticSilentRenew: true,
