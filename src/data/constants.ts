@@ -78,7 +78,7 @@ const servers: any = {
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
     devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
-    clientId: "bou:backoffice",
+    clientId: "backoffice:portal",
     envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
   },
   
