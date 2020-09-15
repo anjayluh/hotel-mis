@@ -73,6 +73,13 @@ const servers: any = {
     clientId: "bou:backoffice",
     envScope: "backoffice:portal"
   },
+  stanbicUat: {
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Nin: "https://niv-api-uat.stanbic.com",
+    devPortal: "https://niv-api-uat.stanbic.com",
+    clientId: "bou:backoffice",
+    envScope: "backoffice:portal"
+  },
   staging: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
