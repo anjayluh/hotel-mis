@@ -75,8 +75,8 @@ const servers: any = {
   },
   stanbicUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
-    Nin: "https://niv-api-uat.ug.sbicdirectory.com",
-    devPortal: "https://niv-portal-uat.ug.sbicdirectory.com",
+    Nin: "https://nivapiuat.ug.sbicdirectory.com",
+    devPortal: "https://nivportaluat.ug.sbicdirectory.com",
     clientId: "bou:backoffice",
     envScope: "backoffice:portal"
   },
