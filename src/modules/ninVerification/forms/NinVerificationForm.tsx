@@ -116,7 +116,7 @@ const NinVerificationForm = (props: IProps) => {
       remoteRoutes.ninVerification,
       toSave,
       (data) => {
-        get(remoteRoutes.ninVerificationId + `/${data.iid}`, (resp) => {
+        get(remoteRoutes.ninVerificationId + `/${data.id}`, (resp) => {
           actions.resetForm();
           // Update table to show recently added request
           dispatch({
