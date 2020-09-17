@@ -32,6 +32,9 @@ export default snackbarMessages = {
     'new': 'A new service category has been added',
     'updated': 'service category information has been updated',
   },
+  'NiraApiNotification': {
+    'offline': 'We can not reach the NIRA services at the moment. Please refresh.',
+  },
   'NinVerification': {
     'new': 'New verification request has been made',
   },

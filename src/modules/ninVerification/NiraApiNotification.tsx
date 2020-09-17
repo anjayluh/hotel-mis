@@ -7,6 +7,8 @@ import {printDateTime} from "../../utils/dateHelpers";
 import { white } from '../../theme/custom-colors';
 import { get } from "../../utils/ajax";
 import { remoteRoutes } from '../../data/constants';
+import { useSnackbar } from "notistack";
+import snackbarMessages from "../../data/snackbarMessages";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,6 +41,7 @@ interface IProps {
 }
 
 const NiraApiNotification = () => {
+    const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const [healthStatus, sethealthStatus] = useState('');
   const [loading, setLoading] = useState(false)
@@ -54,7 +57,11 @@ const NiraApiNotification = () => {
         const status = res.entries.externalServiceReport.data.nira.status;
         sethealthStatus(status)
       },
-      undefined,
+        () => {
+            enqueueSnackbar(snackbarMessages.NiraApiNotification.offline, {
+                variant: "error",
+            });
+        },
       () => setLoading(false)
     );
     
