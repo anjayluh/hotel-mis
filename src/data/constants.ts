@@ -80,6 +80,27 @@ const servers: any = {
     clientId: "bou:backoffice",
     envScope: "backoffice:portal"
   },
+  housingUat: {
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Nin: "https://niv-api-uat.housingfinance.com",
+    devPortal: "https://niv-portal-uat.housingfinance.com",
+    clientId: "bou:backoffice",
+    envScope: "backoffice:portal"
+  },
+  fincaUat: {
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Nin: "https://niv-api-uat.finca.com",
+    devPortal: "https://niv-portal-uat.finca.com",
+    clientId: "bou:backoffice",
+    envScope: "backoffice:portal"
+  },
+  ecoUat: {
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Nin: "https://niv-portal-uat.ecobank.com",
+    devPortal: " https://niv-portal-uat.ecobank.com",
+    clientId: "bou:backoffice",
+    envScope: "backoffice:portal"
+  },
   staging: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
