@@ -116,28 +116,30 @@ const NinVerificationForm = (props: IProps) => {
       remoteRoutes.ninVerification,
       toSave,
       (data) => {
-        get(remoteRoutes.ninVerificationId + `/${data.id}`, (resp) => {
+        get(remoteRoutes.ninVerificationId + `/${data.iid}`, (resp) => {
           actions.resetForm();
           // Update table to show recently added request
           dispatch({
             type: verificationRequestConstants.RequestsPostNew,
             payload: resp,
           });
-          // Toast.info("Operation successful");
           enqueueSnackbar(snackbarMessages.NinVerification.new, {
             variant: "success",
           });
           actions.resetForm();
           handleClose();
           if (props.done) props.done();
-        });
+        },
+            () => {
+                enqueueSnackbar(snackbarMessages.default.fail, {
+                    variant: "error",
+                });
+            });
       },
       () => {
-        // Toast.error("Operation failed");
         enqueueSnackbar(snackbarMessages.default.fail, {
           variant: "error",
         });
-        // actions.setSubmitting(false);
       }
     );
   }
