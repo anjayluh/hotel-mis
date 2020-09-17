@@ -52,6 +52,14 @@ const servers: any = {
     clientId: "laboremus-backoffice:portal",
     envScope: "openid profile roles offline_access laboremus_BNVS_API"
   },
+  staging: {
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
+    Nin: "https://bou-niv-api-staging.test001.laboremus.no",
+    devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
+    clientId: "backoffice:portal",
+    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+  },
   sit: {
     Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
@@ -63,31 +71,24 @@ const servers: any = {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.pride.co.ug",
     devPortal: "https://niv-api-uat.pride.co.ug",
-    clientId: "bou:backoffice",
-    envScope: "backoffice:portal"
+    clientId: "backoffice:portal",
+    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
   },
   eximUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.eximbank-ug.com",
     devPortal: "https://niv-api-uat.eximbank-ug.com",
-    clientId: "bou:backoffice",
-    envScope: "backoffice:portal"
+    clientId: "backoffice:portal",
+    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
   },
   stanbicUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://nivapiuat.ug.sbicdirectory.com",
     devPortal: "https://nivportaluat.ug.sbicdirectory.com",
-    clientId: "bou:backoffice",
-    envScope: "backoffice:portal"
-  },
-  staging: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
-    Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
-    Nin: "https://bou-niv-api-staging.test001.laboremus.no",
-    devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
     clientId: "backoffice:portal",
     envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
   },
+
   
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
