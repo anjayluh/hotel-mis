@@ -190,17 +190,15 @@ const NinVerifications = () => {
   return (
     <Navigation>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Box p={1}>
-            <Grid container>
-              <Grid item sm={3} className={classes.pageHeading}>
-                <Typography variant="h4">ID Verification Requests</Typography>
-              </Grid>
-            </Grid>
-          </Box>
-        </Grid>
         <Grid item xs={9}>
           <Box p={1} className={classes.root}>
+            <Box pb={2}>
+              <Grid container>
+                <Grid item sm={12} className={classes.pageHeading}>
+                  <Typography variant="h4">ID Verification Requests</Typography>
+                </Grid>
+              </Grid>
+            </Box>
             {loading ? (
               <Loading />
             ) : (
@@ -223,7 +221,7 @@ const NinVerifications = () => {
           </Box>
         </Grid>
         <Grid item xs={3} style={{ display: open ? "block" : "none" }}>
-          <Box pt={1}>
+          <Box pt={6}>
             <Paper className={classes.filterPaper} elevation={0}>
               <ErrorBoundary>
                 <Filter onFilter={handleFilter} loading={loading} />

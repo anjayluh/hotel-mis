@@ -1,7 +1,6 @@
 import * as React from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core";
-import Navigation from "../../components/Layout";
-import { Grid, Box, Typography } from "@material-ui/core";
+import { createStyles, makeStyles, Theme, Grid, Box, Typography } from "@material-ui/core";
+import Layout from "../../components/Layout";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -11,31 +10,26 @@ const useStyles = makeStyles((theme: Theme) =>
     pageHeading: {
       display: "flex",
     },
-    heading: {
-      fontSize: theme.typography.pxToRem(15),
-      flexBasis: "33.33%",
-      flexShrink: 0,
-    },
-  
   })
 );
 const Users = () => {
   const classes = useStyles();
-  return (
-  <Navigation>
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-          <Box p={1}>
-            <Grid container>
-              <Grid item sm={3} className={classes.pageHeading}>
-                <Typography variant="h4">Users</Typography>
-              </Grid>
-            </Grid>
-          </Box>
+    return (
+      <Layout>
+        <Grid container spacing={2}>
+          <Grid item xs={3}>
+            <Box p={1} className={classes.root}>
+              <Box pb={2}>
+                <Grid container>
+                  <Grid item sm={12} className={classes.pageHeading}>
+                    <Typography variant="h4">Users</Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Box>
+          </Grid>
         </Grid>
-        </Grid>
-  </Navigation>
-)
-  }
+      </Layout>
+)}
 
 export default Users

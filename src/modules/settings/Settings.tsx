@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Navigation from "../../components/Layout";
+import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import ExpansionCard from "../../components/ExpansionCard";
 import AccountSettings from "./details/accountSettings/AccountSettings";
 import ParticipantType from "./details/participantType/ParticipantType";
 import PaymentType from "./details/paymentType/PaymentType";
@@ -40,32 +43,20 @@ const Settings = () => {
     <Navigation>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-            <Box p={1}>
+          <Box p={1} className={classes.root}>
+            <Box pb={2}>
               <Grid container>
-                <Grid item sm={3} className={classes.pageHeading}>
+                <Grid item sm={12} className={classes.pageHeading}>
                   <Typography variant="h4">Settings</Typography>
                 </Grid>
               </Grid>
             </Box>
-        </Grid>
-        <Grid item xs={12}>
-          <Box p={1} className={classes.root}>
             <Grid item xs={12}>
-              <ErrorBoundary>
-                <AccountSettings />
-              </ErrorBoundary>
-              <ErrorBoundary>
-                <ParticipantType />
-              </ErrorBoundary>
-              <ErrorBoundary>
-                <PaymentType />
-              </ErrorBoundary>
-              <ErrorBoundary>
-                <ContactPersonRole />
-              </ErrorBoundary>
-              <ErrorBoundary>
-                <ServiceCategory />
-              </ErrorBoundary>
+              <ErrorBoundary><AccountSettings /></ErrorBoundary>
+              <ErrorBoundary><ParticipantType /></ErrorBoundary>
+              <ErrorBoundary><PaymentType /></ErrorBoundary>
+              <ErrorBoundary><ContactPersonRole /></ErrorBoundary>
+              <ErrorBoundary><ServiceCategory /></ErrorBoundary>
             </Grid>
           </Box>
         </Grid>
