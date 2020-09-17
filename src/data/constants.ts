@@ -84,7 +84,7 @@ const servers: any = {
   stanbicUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://nivapiuat.ug.sbicdirectory.com",
-    devPortal: "https://nivportaluat.ug.sbicdirectory.com",
+    devPortal: "https://nivapiuat.ug.sbicdirectory.com",
     clientId: "backoffice:portal",
     envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
   },
