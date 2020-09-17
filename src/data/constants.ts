@@ -88,8 +88,27 @@ const servers: any = {
     clientId: "backoffice:portal",
     envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
   },
-
-  
+  housingUat: {
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Nin: "https://niv-api-uat.housingfinance.com",
+    devPortal: "https://niv-portal-uat.housingfinance.com",
+    clientId: "backoffice:portal",
+    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+  },
+  fincaUat: {
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Nin: "https://niv-api-uat.finca.com",
+    devPortal: "https://niv-portal-uat.finca.com",
+    clientId: "backoffice:portal",
+    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+  },
+  ecoUat: {
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Nin: "https://niv-portal-uat.ecobank.com",
+    devPortal: " https://niv-portal-uat.ecobank.com",
+    clientId: "backoffice:portal",
+    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+  },
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
     clientId: "bou:backoffice",
