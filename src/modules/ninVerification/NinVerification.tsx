@@ -191,7 +191,7 @@ const NinVerifications = () => {
     <Navigation>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Box pb={2}>
+          <Box p={1}>
             <Grid container>
               <Grid item sm={3} className={classes.pageHeading}>
                 <Typography variant="h4">ID Verification Requests</Typography>

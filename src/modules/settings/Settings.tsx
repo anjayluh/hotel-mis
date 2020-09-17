@@ -40,14 +40,16 @@ const Settings = () => {
     <Navigation>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Box p={1} className={classes.root}>
-            <Box pb={2}>
+            <Box p={1}>
               <Grid container>
-                <Grid item sm={12} className={classes.pageHeading}>
+                <Grid item sm={3} className={classes.pageHeading}>
                   <Typography variant="h4">Settings</Typography>
                 </Grid>
               </Grid>
             </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Box p={1} className={classes.root}>
             <Grid item xs={12}>
               <ErrorBoundary>
                 <AccountSettings />
