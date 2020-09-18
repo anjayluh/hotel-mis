@@ -51,6 +51,7 @@ const Component = ({ field, form,  ...other }: FieldProps, {disableFuture}:IProp
           format={dateFormat}
           name={field.name}
           value={field.value || null}
+          placeholder={dateFormat}
           helperText={showError && error}
           error={Boolean(showError)}
           onClose={handleTouch}
@@ -78,6 +79,7 @@ const Component = ({ field, form,  ...other }: FieldProps, {disableFuture}:IProp
           autoOk
           name={field.name}
           value={field.value || null}
+          placeholder={dateFormat}
           helperText={showError && error}
           error={Boolean(showError)}
           onChange={handleChange}

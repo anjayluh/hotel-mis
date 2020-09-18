@@ -47,6 +47,7 @@ export default function PDateInput({
         format={format ? format : dateFormat}
         id="date-picker-inline"
         label={label}
+        placeholder={format ? format : dateFormat}
         value={value}
         onChange={handleChange}
         autoComplete="off"

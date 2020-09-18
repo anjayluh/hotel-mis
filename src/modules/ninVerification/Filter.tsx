@@ -190,7 +190,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
             inputVariant="outlined"
           />
           <Typography variant="body2" style={{paddingLeft: 15, paddingTop: 10}}>
-            Date format: day.month.year
+            Date format: 18.09.2020
           </Typography>
         </Grid>
         {/* <Grid item xs={12}>
