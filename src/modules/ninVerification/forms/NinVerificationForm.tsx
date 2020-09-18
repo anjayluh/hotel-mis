@@ -106,7 +106,6 @@ const NinVerificationForm = (props: IProps) => {
     const toSave: any = {
       surname: values.surname,
       givenNames: values.givenName,
-      otherNames: values.otherNames,
       dateOfBirth: printYearMonthDayDate(values.dateOfBirth),
       nin: values.nin,
       cardNumber: values.cardNumber,
@@ -182,15 +181,6 @@ const NinVerificationForm = (props: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <XTextInput
-            name="givenName"
-            label="Given Name"
-            type="text"
-            variant="outlined"
-            size="small"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <XTextInput
             name="surname"
             label="Surname"
             type="text"
@@ -200,8 +190,8 @@ const NinVerificationForm = (props: IProps) => {
         </Grid>
         <Grid item xs={12}>
           <XTextInput
-            name="otherNames"
-            label="Other Names"
+            name="givenName"
+            label="Given Name"
             type="text"
             variant="outlined"
             size="small"
