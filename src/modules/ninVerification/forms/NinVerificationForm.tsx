@@ -204,7 +204,7 @@ const NinVerificationForm = (props: IProps) => {
             inputVariant="outlined"
             size="small"
           />
-          <Typography variant="body2" style={{paddingLeft: 15 }}>Date format: day.month.year</Typography>
+          <Typography variant="body2" style={{paddingLeft: 15 }}>Date format: 18.09.2020</Typography>
         </Grid>
       </XFormSimple>
     </ErrorBoundary>

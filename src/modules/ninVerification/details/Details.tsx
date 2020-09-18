@@ -79,7 +79,7 @@ const Details = (props: IProps) => {
     function contactFullName() {
         const thirdName = requestData && requestData.otherNames ? requestData.otherNames : '';
         let fullName = requestData ? ` ${requestData.surname} ${requestData.givenNames} ${thirdName}`: '';
-        if (fullName === "   ") fullName = '*Name unspecified';
+        if (fullName === "   ") fullName = 'Name not provided';
         return fullName;
     }
 

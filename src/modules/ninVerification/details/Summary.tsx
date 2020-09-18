@@ -33,6 +33,10 @@ interface IProps {
 const Summary = ({ data }: IProps) => {
   const fields: IRec[] = [
     {
+      label: "Reference Id",
+      value: data.id,
+    },
+    {
       label: "NIN",
       value: data.nin,
     },
@@ -45,7 +49,7 @@ const Summary = ({ data }: IProps) => {
       value: data.cardNumber,
     },
     {
-      label: "Initiator",
+      label: "User",
       value: data.initiator ? data.initiator : "-",
     },
     {
