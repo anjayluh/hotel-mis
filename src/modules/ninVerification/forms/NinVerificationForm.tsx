@@ -25,12 +25,11 @@ const schema = yup.object().shape({
     .string()
     .test(
       "oneOfRequired",
-      "Include atleast surname, other names  or date of birth",
+      "Include atleast surname or date of birth",
       function (item) {
         return (
           this.parent.givenName ||
           this.parent.surname ||
-          this.parent.otherNames ||
           this.parent.dateOfBirth
         );
       }
@@ -39,12 +38,11 @@ const schema = yup.object().shape({
     .string()
     .test(
       "oneOfRequired",
-      "Include atleast given name, other names  or date of birth",
+      "Include atleast given name, or date of birth",
       function (item) {
         return (
           this.parent.givenName ||
           this.parent.surname ||
-          this.parent.otherNames ||
           this.parent.dateOfBirth
         );
       }
@@ -58,7 +56,6 @@ const schema = yup.object().shape({
         return (
           this.parent.givenName ||
           this.parent.surname ||
-          this.parent.otherNames ||
           this.parent.dateOfBirth
         );
       }
@@ -68,12 +65,11 @@ const schema = yup.object().shape({
     .nullable()
     .test(
       "oneOfRequired",
-      "Include atleast given name, surname or other names",
+      "Include atleast given name or surname",
       function (item) {
         return (
           this.parent.givenName ||
           this.parent.surname ||
-          this.parent.otherNames ||
           this.parent.dateOfBirth
         );
       }
@@ -96,7 +92,6 @@ const NinVerificationForm = (props: IProps) => {
           cardNumber: "",
           givenName: "",
           surname: "",
-          otherNames: "",
           dateOfBirth: null,
         }
   );
@@ -109,7 +104,6 @@ const NinVerificationForm = (props: IProps) => {
       dateOfBirth: printYearMonthDayDate(values.dateOfBirth),
       nin: values.nin,
       cardNumber: values.cardNumber,
-      participantId: userProfile.participantId,
     };
     post(
       remoteRoutes.ninVerification,
