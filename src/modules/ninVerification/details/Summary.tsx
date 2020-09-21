@@ -60,10 +60,6 @@ const Summary = ({ data }: IProps) => {
       label: "Given Names",
       value: data.givenNames ? data.givenNames : "-",
     },
-    {
-      label: "Other Names",
-      value: data.otherNames ? data.otherNames : "-",
-    },
   ];
   const requestStatus = [
     {
