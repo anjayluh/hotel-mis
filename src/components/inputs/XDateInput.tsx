@@ -44,30 +44,6 @@ const Component = ({ field, form,  ...other }: FieldProps, {disableFuture}:IProp
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      {isSmall ? (
-        <DatePicker
-          fullWidth
-          margin="normal"
-          format={dateFormat}
-          name={field.name}
-          value={field.value || null}
-          placeholder={dateFormat}
-          helperText={showError && error}
-          error={Boolean(showError)}
-          onClose={handleTouch}
-          onChange={handleChange}
-          onTouchEnd={handleTouch}
-          onBlur={handleTouch}
-          autoOk
-          variant="inline"
-          PopoverProps={{
-            anchorOrigin: { horizontal: "left", vertical: "bottom" },
-            transformOrigin: { horizontal: "left", vertical: "top" },
-          }}
-          disableFuture={disableFuture}
-          {...other}
-        />
-      ) : (
         <KeyboardDatePicker
           variant="inline"
           fullWidth
@@ -92,7 +68,6 @@ const Component = ({ field, form,  ...other }: FieldProps, {disableFuture}:IProp
           disableFuture={disableFuture}
           {...other}
         />
-      )}
     </MuiPickersUtilsProvider>
   );
 };
