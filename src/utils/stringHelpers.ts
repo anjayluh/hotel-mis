@@ -1,19 +1,3 @@
-import { hasNoValue } from "../components/inputs/inputHelpers";
-
-export const getLastCharacters = (val: string, len: number) => {
-  let value = val.substr(val.length - len);
-  return `...${value}`;
-};
-
-export const getAsterikCharacters = (
-  val: string,
-  start: number,
-  stop: number,
-  length: number
-) => {
-  let repeated = "*".repeat(length);
-  return val.replace(val.substring(start, stop), repeated);
-};
 export const getInitials = (fullName = "") => {
   try {
     if (!fullName) return "";

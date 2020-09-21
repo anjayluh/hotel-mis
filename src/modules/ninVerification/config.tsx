@@ -1,6 +1,5 @@
 import { XHeadCell } from "../../components/table/XTableHead";
 import { printDateTime } from "../../utils/dateHelpers";
-import { getAsterikCharacters } from "../../utils/stringHelpers";
 import React from "react";
 import {
   renderNinStatus,
