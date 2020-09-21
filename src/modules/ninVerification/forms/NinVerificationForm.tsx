@@ -14,7 +14,7 @@ import { get, post } from "../../../utils/ajax";
 import { verificationRequestConstants } from "../../../data/redux/ninVerification/reducer";
 import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
-import { printYearMonthDayDate } from "../../../utils/dateHelpers";
+import { printYearMonthDayDate, printDate } from "../../../utils/dateHelpers";
 import snackbarMessages from "../../../data/snackbarMessages";
 import { Typography } from "@material-ui/core";
 
@@ -198,7 +198,7 @@ const NinVerificationForm = (props: IProps) => {
             inputVariant="outlined"
             size="small"
           />
-          <Typography variant="body2" style={{paddingLeft: 15 }}>Date format: 18.09.2020</Typography>
+          <Typography variant="body2" style={{paddingLeft: 15 }}>Date format: day.month.year e.g {printDate(Date.now())}</Typography>
         </Grid>
       </XFormSimple>
     </ErrorBoundary>

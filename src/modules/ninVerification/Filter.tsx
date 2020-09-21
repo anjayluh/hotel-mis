@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ResetButton from "../../components/ResetButton";
 import { date } from "faker";
+import { printDate } from "../../utils/dateHelpers";
 
 interface IProps {
   onFilter: (data: any) => any;
@@ -190,7 +191,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
             inputVariant="outlined"
           />
           <Typography variant="body2" style={{paddingLeft: 15, paddingTop: 10}}>
-            Date format: 18.09.2020
+          Date format: day.month.year e.g {printDate(Date.now())}
           </Typography>
         </Grid>
         {/* <Grid item xs={12}>
