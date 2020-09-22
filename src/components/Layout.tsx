@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -35,6 +35,7 @@ import logo from "../assets/download.png";
 import { Typography } from "@material-ui/core";
 import { themeBackground } from "../theme/custom-colors";
 import Paper from "@material-ui/core/Paper";
+import { GlobalHotKeys} from "react-hotkeys";
 import { verificationRequestConstants } from "../data/redux/ninVerification/reducer";
 import NiraApiNotification from "../modules/ninVerification/NiraApiNotification";
 
@@ -133,12 +134,13 @@ interface IProps extends RouteComponentProps {
   hideRequestButton?: boolean;
   showNiraNotification?: boolean;
 }
+
 const Layout: React.FC<IProps> = (props: any) => {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
   }
@@ -170,13 +172,19 @@ const Layout: React.FC<IProps> = (props: any) => {
   };
 
   function addNewRequest() {
-    props.history.push(localRoutes.ninVerification);
-    dispatch({
-      type: verificationRequestConstants.RequestsAddNew,
-      payload: true,
-    });
+      props.history.push(localRoutes.ninVerification);
+      dispatch({
+        type: verificationRequestConstants.RequestsAddNew,
+        payload: true,
+      });
   }
-
+  // keymaps and handlers for keyboardshortcuts
+  const keyMap = {
+    NEW_REQUEST: "alt+n"
+  }
+  const handlers = {
+    NEW_REQUEST: addNewRequest
+  }
   const drawer = (
     <div style={{ backgroundColor: themeBackground, color: "white" }}>
       <div className={classes.toolbar}>
@@ -275,10 +283,15 @@ const Layout: React.FC<IProps> = (props: any) => {
             <img src={logo} alt="logo" className={classes.logo} />
           </div>
           {!props.hideRequestButton && (
-            <Button variant="contained" color="primary" onClick={addNewRequest}>
-              New Request
-            </Button>
-          )}
+            <div>
+              <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
+              <Button variant="contained" color="primary" onClick={addNewRequest}>
+                New Request
+              </Button>
+            </div>
+          ) 
+          }
+          
           {!props.showNiraNotification && (
             <NiraApiNotification/>
           )}
