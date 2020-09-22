@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ResetButton from "../../components/ResetButton";
 import { date } from "faker";
-import { printDate } from "../../utils/dateHelpers";
+import { printDate, dateFormat } from "../../utils/dateHelpers";
 
 interface IProps {
   onFilter: (data: any) => any;
@@ -191,21 +191,9 @@ const Filter = ({ onFilter, loading }: IProps) => {
             inputVariant="outlined"
           />
           <Typography variant="body2" style={{paddingLeft: 15, paddingTop: 10}}>
-          Date format: day.month.year e.g {printDate(Date.now())}
+            Date format: {dateFormat} ({printDate(Date.now())})
           </Typography>
         </Grid>
-        {/* <Grid item xs={12}>
-          <PSelectInput
-            name="Initiator"
-            value={data["Initiator"]}
-            onChange={handleChange}
-            label="Initiator"
-            variant="outlined"
-            size="small"
-            color="secondary"
-            options={toOptions(initiators)}
-          />
-        </Grid> */}
         <Grid item xs={12}>
           <Box display="flex" flexDirection="row">
             <Box mr={"auto"}>

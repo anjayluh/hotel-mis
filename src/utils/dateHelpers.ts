@@ -1,6 +1,6 @@
 import { format, isValid, parseISO } from "date-fns";
 
-export const dateFormat = "dd.MM.yyyy";
+export const dateFormat = "dd.mm.yyyy";
 export const dateTimeFormat = "dd.MM.yyyy HH:mm";
 export const standardDateTimeFormat = "dd-MM-yyyy HH:mm";
 export const standardDateFormat = "dd-MM-yyyy";
