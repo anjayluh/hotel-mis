@@ -144,6 +144,9 @@ const Layout: React.FC<IProps> = (props: any) => {
   }
 
   const onClick = (path: string) => () => {
+    if(path === localRoutes.ninVerification) {
+      addNewRequest()
+    }
     const { history, onClose } = props;
     history.push(path);
     if (onClose) onClose();

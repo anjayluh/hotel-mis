@@ -118,6 +118,7 @@ const NinVerifications = () => {
   const [filter, setFilter] = useState<any>({});
 
   useEffect(() => {
+    addNewRequest()
     dispatch({
       type: verificationRequestConstants.RequestsFetchLoading,
       payload: true,
