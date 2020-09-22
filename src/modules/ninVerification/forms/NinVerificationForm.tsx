@@ -161,6 +161,7 @@ const NinVerificationForm = (props: IProps) => {
             label="NIN *"
             type="text"
             variant="outlined"
+            autoFocus
             size="small"
           />
         </Grid>
