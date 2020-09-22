@@ -55,7 +55,7 @@ const Component = ({ field, form,  ...other }: FieldProps, {disableFuture}:IProp
           autoOk
           name={field.name}
           value={field.value || null}
-          placeholder={dateFormat}
+          placeholder={'dd.mm.yyyy'}
           helperText={showError && error}
           error={Boolean(showError)}
           onChange={handleChange}

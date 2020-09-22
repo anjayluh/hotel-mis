@@ -191,7 +191,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
             inputVariant="outlined"
           />
           <Typography variant="body2" style={{paddingLeft: 15, paddingTop: 10}}>
-            Date format: {dateFormat} ({printDate(Date.now())})
+            Date format: dd.mm.yyyy ({printDate(Date.now())})
           </Typography>
         </Grid>
         <Grid item xs={12}>
