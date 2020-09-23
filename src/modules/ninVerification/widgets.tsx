@@ -3,18 +3,53 @@ import {
   WorkflowStatus,
   WorkflowNinStatus,
   WorkflowValidityStatus,
+  WorkflowNinValidityStatus,
 } from "./types";
 import {
   errorColor,
   successColor,
   warningColor,
   pendingColor,
+  iconColor,
+  black,
+  warning
 } from "../../theme/custom-colors";
 import { Chip, Typography } from "@material-ui/core";
 import { Box } from "@material-ui/core";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import RemoveCircle from "@material-ui/icons/RemoveCircle";
 
+export const renderNinValidityStatus = (value: WorkflowNinValidityStatus) => {
+  let color = successColor;
+  switch (value) {
+    case WorkflowNinValidityStatus.NinValid:
+      color = warning.main;
+      break;
+    case WorkflowNinValidityStatus.NinInvalid:
+      color = warning.main;
+      break;
+    case WorkflowNinValidityStatus.Deceased:
+      color = black;
+      break;
+  }
+
+  return (
+    <Chip
+      color="primary"
+      variant="default"
+      size="small"
+      label={value}
+      style={{
+        padding: 0,
+        height: 18,
+        backgroundColor: color,
+        marginBottom: 2,
+        textTransform: "uppercase",
+        fontSize: "0.65rem",
+      }}
+    />
+  );
+};
 export const renderValidityStatus = (value: WorkflowValidityStatus) => {
   let color = successColor;
   let label = "";

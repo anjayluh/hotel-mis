@@ -142,6 +142,11 @@ export enum WorkflowValidityStatus {
     emptyString = ''
 
 }
+export enum WorkflowNinValidityStatus {
+    NinValid = 'Nin Valid',
+    Deceased = 'Deceased',
+    NinInvalid = 'Nin Invalid',
+}
 export enum WorkflowNinStatus {
     Pending = 'Pending',
     Error = 'Error',

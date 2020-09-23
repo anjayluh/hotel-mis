@@ -5,7 +5,9 @@ import {
   renderNinStatus,
   renderResponseStatus,
   renderValidityStatus,
+  renderNinValidityStatus,
 } from "./widgets";
+import { WorkflowValidityStatus, WorkflowNinValidityStatus } from "./types";
 
 export const wfInitialSort = "applicationDate";
 function printFullName(record: any) {
@@ -60,6 +62,16 @@ export const ninVerificationHeadCells: XHeadCell[] = [
     name: "status",
     label: "Request Status",
     render: (_, rec) => renderNinStatus(rec.requestStatus),
+    cellProps: {
+      style: {
+        width: 40,
+      },
+    },
+  },
+  {
+    name: "status",
+    label: "Nin validity",
+    render: (_, rec) => renderNinValidityStatus(WorkflowNinValidityStatus.NinInvalid),
     cellProps: {
       style: {
         width: 40,
