@@ -12,6 +12,7 @@ import trash from "../assets/trash.svg";
 import { Grid } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
@@ -68,6 +69,12 @@ interface IProps {
   itemId?: string;
   loading?: boolean;
   deleteText?: string;
+  icon?: any;
+  buttonClass?: any;
+  trashClass?: any;
+  trashContainerClass?: any;
+
+  cancelButton: boolean;
 }
 const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
@@ -82,6 +89,11 @@ export default function AlertDialogSlide({
   itemId,
   loading,
   deleteText,
+  icon,
+  buttonClass,
+  cancelButton,
+  trashClass,
+  trashContainerClass,
 }: IProps) {
   const classes = useStyles();
   const onClose = () => {
@@ -108,8 +120,8 @@ export default function AlertDialogSlide({
         <DialogContent>
           <Grid container wrap={"nowrap"} spacing={2}>
             <Grid item>
-              <div className={classes.trashContainer}>
-                <img src={trash} alt="trash icon" className={classes.trash} />
+              <div className={trashContainerClass ? trashContainerClass : classes.trashContainer}>
+                <img src={icon ? icon : trash} alt="trash icon" className={trashClass ? trashClass : classes.trash} />
               </div>
             </Grid>
             <Grid item xs>
@@ -123,12 +135,17 @@ export default function AlertDialogSlide({
           </Grid>
         </DialogContent>
         <DialogActions className={classes.actions}>
-          <Button onClick={onClose} className={classes.cancel}>
+          {
+            cancelButton &&
+            <Button onClick={onClose} className={classes.cancel}>
             Cancel
           </Button>
+          }
+          
           <Button
             onClick={onDelete}
-            className={classes.delete}
+            className={buttonClass ? buttonClass: classes.delete}
+            variant="contained"
             color={"primary"}
           >
             {loading && (
