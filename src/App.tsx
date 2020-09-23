@@ -6,7 +6,8 @@ import Login from "./modules/login/LoginSimple";
 import Splash from "./modules/login/Splash";
 import {useSelector} from 'react-redux'
 import {ICoreState} from "./data/redux/coreReducer";
-import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+import IdleTimerWrapper from './components/IdleTimerWrapper';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 
 const App: React.FC = () => {
@@ -19,8 +20,12 @@ const App: React.FC = () => {
         return <Router>
             <ToastContainer/>
             <>
-                {user ?
-                  <ErrorBoundary><ContentSwitch/></ErrorBoundary> :
+            {user ?
+                    <React.Fragment>
+                        <IdleTimerWrapper/>
+                        <ErrorBoundary><ContentSwitch/></ErrorBoundary>
+                    </React.Fragment> 
+                    :
                     <Switch>
                         <Route exact component={Login}/>
                     </Switch>
