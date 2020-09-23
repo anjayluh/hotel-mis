@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     continueButton: {
-      color: "#FAD6E2",
+      color: "white",
       backgroundColor: '#065fd4',
       padding: "3px 29px",
       "&:hover": {
