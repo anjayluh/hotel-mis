@@ -282,9 +282,10 @@ const Layout: React.FC<IProps> = (props: any) => {
           <div className={classes.logoHolder}>
             <img src={logo} alt="logo" className={classes.logo} />
           </div>
+          {/* keyboard shortcut to open new request form */}
+          <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
           {!props.hideRequestButton && (
             <div>
-              <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
               <Button variant="contained" color="primary" onClick={addNewRequest}>
                 New Request
               </Button>
