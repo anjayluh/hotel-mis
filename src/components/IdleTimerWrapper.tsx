@@ -42,7 +42,6 @@ const IdleTimerWrapper = () => {
   const sessionTimeoutRef: any = useRef(null)
   const onIdle = () => {
     setPopUp(true)
-    console.log('User is idle')
     sessionTimeoutRef.current = setTimeout(doLogout, 10000)
     
   }
