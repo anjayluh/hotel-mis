@@ -69,9 +69,9 @@ export const ninVerificationHeadCells: XHeadCell[] = [
     },
   },
   {
-    name: "status",
+    name: "ninStatus",
     label: "Nin validity",
-    render: (_, rec) => renderNinValidityStatus(WorkflowNinValidityStatus.NinInvalid),
+    render: (_, rec) => renderNinValidityStatus(rec.resultJson.ninStatus),
     cellProps: {
       style: {
         width: 40,

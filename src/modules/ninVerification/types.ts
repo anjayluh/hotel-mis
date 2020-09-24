@@ -143,8 +143,8 @@ export enum WorkflowValidityStatus {
 
 }
 export enum WorkflowNinValidityStatus {
-    NinValid = 'Nin Valid',
-    Deceased = 'Deceased',
+    Ok = 'Ok',
+    deceased = 'deceased',
     NinInvalid = 'Nin Invalid',
 }
 export enum WorkflowNinStatus {
@@ -152,6 +152,7 @@ export enum WorkflowNinStatus {
     Error = 'Error',
     Verified = 'Verified',
     Successful = 'Successful',
+    Completed = 'Completed',
     Failed = 'Failed',
     Rejected = 'Rejected'
 
