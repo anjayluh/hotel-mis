@@ -29,7 +29,7 @@ export const renderNinValidityStatus = (value: WorkflowNinValidityStatus) => {
       color = skyBlue;
       break;
     case WorkflowNinValidityStatus.deceased:
-      label="deceased"
+      label=value
       color = black;
       break;
     case WorkflowNinValidityStatus.NinInvalid:
@@ -166,7 +166,7 @@ export const renderNinStatus = (value: WorkflowNinStatus) => {
       color = errorColor;
       break;
     case WorkflowNinStatus.Pending:
-      color = iconColor;
+      color = warningColor;
       break;
   }
 
