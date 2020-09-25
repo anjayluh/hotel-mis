@@ -99,8 +99,8 @@ const NinVerificationForm = (props: IProps) => {
   const userProfile = useSelector((state: IState) => state.core.user);
   function handleSubmit(values: any, actions: FormikActions<any>) {
     const toSave: any = {
-      surname: values.surname,
-      givenNames: values.givenName,
+      surname: values.surname.toUpperCase(),
+      givenNames: values.givenName.toUpperCase(),
       dateOfBirth: printYearMonthDayDate(values.dateOfBirth),
       nin: values.nin,
       cardNumber: values.cardNumber,
@@ -179,6 +179,7 @@ const NinVerificationForm = (props: IProps) => {
             name="surname"
             label="Surname"
             type="text"
+            inputProps={{style: {textTransform: 'uppercase'}}}
             variant="outlined"
             size="small"
           />
@@ -188,6 +189,7 @@ const NinVerificationForm = (props: IProps) => {
             name="givenName"
             label="Given Name"
             type="text"
+            inputProps={{style: {textTransform: 'uppercase'}}}
             variant="outlined"
             size="small"
           />
