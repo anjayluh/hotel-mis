@@ -11,7 +11,6 @@ export const warningColor = amber[800]
 export const errorColor = red[500]
 export const iconColor = colors.blueGrey[600]
 export const linkColor = "#428bca"
-// export const pendingColor = '#303f4f'
 export const pendingColor = '#065fd4'
 export const white = '#FFFFFF';
 export const black = '#000000';
