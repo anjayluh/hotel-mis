@@ -12,7 +12,8 @@ import {
   pendingColor,
   iconColor,
   black,
-  warning
+  warning,
+  skyBlue
 } from "../../theme/custom-colors";
 import { Chip, Typography } from "@material-ui/core";
 import { Box } from "@material-ui/core";
@@ -21,15 +22,22 @@ import RemoveCircle from "@material-ui/icons/RemoveCircle";
 
 export const renderNinValidityStatus = (value: WorkflowNinValidityStatus) => {
   let color = successColor;
+  let label = "";
   switch (value) {
-    case WorkflowNinValidityStatus.NinValid:
-      color = warning.main;
+    case WorkflowNinValidityStatus.Ok:
+      label="Nin Valid"
+      color = skyBlue;
+      break;
+    case WorkflowNinValidityStatus.deceased:
+      label=value
+      color = black;
       break;
     case WorkflowNinValidityStatus.NinInvalid:
       color = warning.main;
       break;
-    case WorkflowNinValidityStatus.Deceased:
-      color = black;
+    default:
+      label="Nin Invalid"
+      color = warning.main;
       break;
   }
 
@@ -38,7 +46,7 @@ export const renderNinValidityStatus = (value: WorkflowNinValidityStatus) => {
       color="primary"
       variant="default"
       size="small"
-      label={value}
+      label={label}
       style={{
         padding: 0,
         height: 18,
@@ -148,6 +156,9 @@ export const renderNinStatus = (value: WorkflowNinStatus) => {
     case WorkflowNinStatus.Successful:
       color = successColor;
       break;
+      case WorkflowNinStatus.Completed:
+        color = successColor;
+        break;
     case WorkflowNinStatus.Rejected:
       color = warningColor;
       break;
@@ -155,7 +166,7 @@ export const renderNinStatus = (value: WorkflowNinStatus) => {
       color = errorColor;
       break;
     case WorkflowNinStatus.Pending:
-      color = pendingColor;
+      color = warningColor;
       break;
   }
 
