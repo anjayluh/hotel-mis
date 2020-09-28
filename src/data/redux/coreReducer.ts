@@ -41,8 +41,6 @@ export default function reducer(state = initialState, action: any) {
   switch (action.type) {
     case coreConstants.coreLogin: {
       const { token, user }: ILoginResponse = action.payload;
-      user.roles = ["super_admin"]; //Temporarily set user role to super_admin. Check data/constants to view available resource groups
-      user.participantId = "52417998-6537-4955-4158-08d83930c11f";
       localStorage.setItem(AUTH_TOKEN_KEY, token);
       localStorage.setItem(AUTH_USER_KEY, JSON.stringify(user));
       return { ...state, user, isLoading: false, splash: false };
