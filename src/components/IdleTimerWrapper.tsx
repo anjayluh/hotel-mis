@@ -35,38 +35,47 @@ const IdleTimerWrapper = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [popUpOpen, setPopUp] = useState(false)
-  const [timeRemaining, setTimeRemaining] = useState(10000/1000)
+  const InitialtimeToLogout = 10;//time in seconds
+  const [timeRemaining, setTimeRemaining] = useState(InitialtimeToLogout)
   const deactivateText =
     "For security reasons, your connection timesout after you've been inactive for a while. Click continue to stay signed in.";
-  const timeToLogout = 10000;
-  const idleTime = 1000 * 60 * 5;
-  const idleTimerRef = useRef(null)
-  const sessionTimeoutRef: any = useRef(null)
+  
+  const idleTime = 1000 * 5;
+  const idleTimerRef = useRef(null);
+  const sessionTimeoutRef: any = useRef(null);
+  const setTimeRef: any = useRef();
+  
   const onIdle = () => {
     setPopUp(true)
     countDown()
-    sessionTimeoutRef.current = setTimeout(doLogout, timeToLogout)
-    
   }
   function handleCancel() {
     setPopUp(false);
   }
+  
   function handleContinue() {
     setPopUp(false);
     clearTimeout(sessionTimeoutRef.current)
-    setTimeRemaining(10000/1000)
+    // reset cout down time
+    setTimeRemaining(InitialtimeToLogout)
+    clearInterval(setTimeRef.current);
   }
   async function doLogout() {
     dispatch(handleLogout());
     await authService.logout();
-    clearTimeout(sessionTimeoutRef.current)
+    clearInterval(setTimeRef.current)
   }
 
   const countDown = () => {
-    let timeToCountDown = 10000/1000
-    setInterval(function() {
+    let timeToCountDown = 10
+    setTimeRef.current  = setInterval(function() {
       timeToCountDown -= 1;
       setTimeRemaining(timeToCountDown)
+      if(timeToCountDown === 0) {
+        // reset cout down time
+        setTimeRemaining(InitialtimeToLogout)
+        doLogout()
+      }
       }, 1000);
   }
   return (
