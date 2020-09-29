@@ -78,7 +78,7 @@ export const BarView = (props: any) => {
     setAnchorEl(null);
   }
   const formattedRole = (role: string) => {
-    return role.replace("_", " ");
+    return (role ? role.replace("_", " ").toLowerCase(): "");
   };
   return (
     <div className={classes.marginLeftAuto}>
@@ -153,7 +153,7 @@ export const BarView = (props: any) => {
                   component="div"
                   style={{ textTransform: "capitalize" }}
                 >
-                  {formattedRole(userProfile.roles[0])}
+                  {formattedRole(userProfile.role)}
                 </Typography>
               </Grid>
             </Grid>
