@@ -17,6 +17,7 @@ import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
 import { printYearMonthDayDate, printDate, dateFormat } from "../../../utils/dateHelpers";
 import snackbarMessages from "../../../data/snackbarMessages";
 import { Typography } from "@material-ui/core";
+import { kMaxLength } from "buffer";
 
 const schema = yup.object().shape({
   nin: reqNin,
@@ -95,6 +96,8 @@ const NinVerificationForm = (props: IProps) => {
           dateOfBirth: null,
         }
   );
+  const [cardNumberMessage, setCardNumberMessage] = useState('')
+  const [keyStrokes, setKeyStrokes] = useState(0)
   const dispatch = useDispatch();
   const userProfile = useSelector((state: IState) => state.core.user);
   function handleSubmit(values: any, actions: FormikActions<any>) {
@@ -144,7 +147,22 @@ const NinVerificationForm = (props: IProps) => {
       payload: false,
     });
   }
+  
+  function detectLimit(event: React.ChangeEvent<any>) {
+    const name = event.target.name.trim();
+    const value = event.target.value.trim();
+    const newData = { ...data, [name]: value };
+    setData(newData);
+    
+  }
 
+  function detectKeyStrokes() {
+    let keyClicks = keyStrokes + 1
+    setKeyStrokes(keyClicks)
+    if(data.cardNumber.length === 9 && keyStrokes > 9) {
+      setCardNumberMessage(" Card Number must be only 9 characters")
+    }
+  }
   return (
     <ErrorBoundary>
       <XFormSimple
@@ -171,8 +189,14 @@ const NinVerificationForm = (props: IProps) => {
             label="Card Number *"
             type="text"
             variant="outlined"
+            inputProps={{ maxLength: 9 }}
+            onChange={detectLimit}
+            onKeyDown={detectKeyStrokes}
             size="small"
           />
+          {!!cardNumberMessage && (
+            <Typography variant="body2" style={{paddingLeft: 15 }}>Card Number must be only 9 characters</Typography>
+          )}
         </Grid>
         <Grid item xs={12}>
           <XTextInput
@@ -193,6 +217,7 @@ const NinVerificationForm = (props: IProps) => {
             variant="outlined"
             size="small"
           />
+          
         </Grid>
         <Grid item xs={12}>
           <XDateInput
