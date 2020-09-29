@@ -41,7 +41,7 @@ const IdleTimerWrapper = () => {
   const deactivateText =
     "For security reasons, your connection timesout after you've been inactive for a while. Click continue to stay signed in.";
   
-  const idleTime = 1000 * 5;
+  const idleTime = 1000 * 60 * 5;
   const idleTimerRef = useRef(null);
   const sessionTimeoutRef: any = useRef(null);
   const setTimeRef: any = useRef();
