@@ -6,6 +6,7 @@ import TimeoutIcon from '../assets/timeout.png'
 import {handleLogout} from '../data/redux/coreActions'
 import authService from '../data/oidc/AuthService';
 import { useDispatch } from 'react-redux';
+import { verificationRequestConstants } from '../data/redux/ninVerification/reducer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,8 +47,13 @@ const IdleTimerWrapper = () => {
   const setTimeRef: any = useRef();
   
   const onIdle = () => {
+    dispatch({
+      type: verificationRequestConstants.RequestsAddNew,
+      payload: false,
+    });
     setPopUp(true)
     countDown()
+
   }
   function handleCancel() {
     setPopUp(false);
