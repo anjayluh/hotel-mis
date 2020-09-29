@@ -71,7 +71,8 @@ export const ninVerificationHeadCells: XHeadCell[] = [
   {
     name: "ninStatus",
     label: "Nin validity",
-    render: (_, rec) => renderNinValidityStatus(rec.resultJson.ninStatus),
+    render: (_, rec) => (rec.resultJson.ninStatus == null ? 
+      "" : renderNinValidityStatus(rec.resultJson.ninStatus)),
     cellProps: {
       style: {
         width: 40,
@@ -92,7 +93,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
   {
     name: "resultJson.cardStatus",
     label: "Card Validity",
-    render: (_, rec) => renderValidityStatus(rec.resultJson.cardStatus),
+    render: (_, rec) => (rec.resultJson.cardStatus == null ? " " : renderValidityStatus(rec.resultJson.cardStatus)),
     cellProps: {
       style: {
         width: 40,
