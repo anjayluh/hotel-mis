@@ -73,7 +73,7 @@ interface IProps {
   buttonClass?: any;
   trashClass?: any;
   trashContainerClass?: any;
-
+  disableBackdropClick?: boolean;
   cancelButton: boolean;
 }
 const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) => (
@@ -94,6 +94,7 @@ export default function AlertDialogSlide({
   cancelButton,
   trashClass,
   trashContainerClass,
+  disableBackdropClick,
 }: IProps) {
   const classes = useStyles();
   const onClose = () => {
@@ -113,6 +114,7 @@ export default function AlertDialogSlide({
         onClose={onClose}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
+        disableBackdropClick={disableBackdropClick}
       >
         <DialogTitle id="alert-dialog-slide-title" className={classes.title}>
           {title}
