@@ -25,6 +25,7 @@ import {
   pendingColor,
 } from "../../../theme/custom-colors";
 import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
+import NinResponseErrorMsg from "../NinResponseErrorMsg";
 
 interface IProps {
   data: IRequestDetails;
@@ -34,7 +35,7 @@ const Summary = ({ data }: IProps) => {
   const fields: IRec[] = [
     {
       label: "Reference Id",
-      value: data.id,
+      value: <span style={{fontSize:"12px"}}>{data.id}</span>,
     },
     {
       label: "NIN",
@@ -84,6 +85,13 @@ const Summary = ({ data }: IProps) => {
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <div>
+          {data.resultJson.error && 
+          (data.resultJson.error.code === "320" ? 
+            <ErrorBoundary>
+              <NinResponseErrorMsg message ={data.resultJson.error.message}/>
+            </ErrorBoundary>
+          : ''
+          )}
           <ErrorBoundary>
             <DetailView data={fields} />
           </ErrorBoundary>

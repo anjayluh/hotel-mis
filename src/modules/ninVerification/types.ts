@@ -110,6 +110,7 @@ export interface IRequestDetailsStatus {
     date?: Date | null
 }
 export interface IRequestDetails {
+    resultJson?: any;
     id?: any,
     requestId: any,
     requestDate?: Date,
