@@ -148,9 +148,10 @@ const NinVerificationForm = (props: IProps) => {
     });
   }
   
-  function detectLimit(event: React.ChangeEvent<any>) {
+  function handleChange(event: React.ChangeEvent<any>) {
     const name = event.target.name.trim();
-    const value = event.target.value.trim();
+    let value = event.target.value.trim();
+    if(name === 'nin') value = value.toUpperCase();
     const newData = { ...data, [name]: value };
     setData(newData);
     
@@ -179,6 +180,7 @@ const NinVerificationForm = (props: IProps) => {
             label="NIN *"
             type="text"
             variant="outlined"
+            onChange={handleChange}
             autoFocus
             size="small"
           />
@@ -190,7 +192,7 @@ const NinVerificationForm = (props: IProps) => {
             type="text"
             variant="outlined"
             inputProps={{ maxLength: 9 }}
-            onChange={detectLimit}
+            onChange={handleChange}
             onKeyDown={detectKeyStrokes}
             size="small"
           />
@@ -205,6 +207,7 @@ const NinVerificationForm = (props: IProps) => {
             type="text"
             inputProps={{style: {textTransform: 'uppercase'}}}
             variant="outlined"
+            onChange={handleChange}
             size="small"
           />
         </Grid>
@@ -215,6 +218,7 @@ const NinVerificationForm = (props: IProps) => {
             type="text"
             inputProps={{style: {textTransform: 'uppercase'}}}
             variant="outlined"
+            onChange={handleChange}
             size="small"
           />
           
