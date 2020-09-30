@@ -5,8 +5,9 @@ import DeleteDialog from '../components/DeleteDialog'
 import TimeoutIcon from '../assets/timeout.png'
 import {handleLogout} from '../data/redux/coreActions'
 import authService from '../data/oidc/AuthService';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { verificationRequestConstants } from '../data/redux/ninVerification/reducer';
+import { IState } from '../data/types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,6 +41,7 @@ const IdleTimerWrapper = () => {
   const [timeRemaining, setTimeRemaining] = useState(InitialtimeToLogout)
   const deactivateText =
     "For security reasons, your connection timesout after you've been inactive for a while. Click continue to stay signed in.";
+    const isFormOpen = useSelector((state: IState) => state.verificationRequests.turnOnSlideOut);
   
   const idleTime = 1000 * 60 * 5;
   const idleTimerRef = useRef(null);
@@ -47,10 +49,13 @@ const IdleTimerWrapper = () => {
   const setTimeRef: any = useRef();
   
   const onIdle = () => {
-    dispatch({
-      type: verificationRequestConstants.RequestsAddNew,
-      payload: false,
-    });
+    if(isFormOpen) {
+      dispatch({
+        type: verificationRequestConstants.RequestsAddNew,
+        payload: false,
+      });
+    }
+    
     setPopUp(true)
     countDown()
 
@@ -103,7 +108,7 @@ const IdleTimerWrapper = () => {
           cancelButton={false}
           trashClass={classes.trash}
           trashContainerClass={classes.trashContainerClass}
-          disableBackdropClick={true}
+          onBackdropClick={handleContinue}
         ></DeleteDialog>
     </div>
   )
