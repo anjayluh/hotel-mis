@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, makeStyles, Theme, createStyles } from "@material-ui/core";
+import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import ArrowForwardIos from "@material-ui/icons/ArrowForwardIos";
 import KeyboardArrowUp from "@material-ui/icons/KeyboardArrowUp";
@@ -12,8 +12,7 @@ import { useSnackbar } from "notistack";
 import snackbarMessages from "../../data/snackbarMessages";
 import { Chip } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
-import { Flex } from "../../components/widgets";
-
+import IconButton from "@material-ui/core/IconButton";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
@@ -22,13 +21,13 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
-      padding: "8px 13px 17px 13p",
+      padding: "0px 0px 17px 0px",
       boxShadow: "none",
       position: "relative",
       bottom: -18,
       width: 192,
       height: 125,
-      borderRadius: 8,
+      borderRadius: 20,
     },
     chip: {
       position: "relative",
@@ -59,15 +58,11 @@ const useStyles = makeStyles((theme: Theme) =>
       color: white,
       fontSize: 12,
     },
-    refreshContainer: {
+    iconButton: {
       marginRight: 20,
+      backgroundColor: "#19222c",
       width: 28,
       height: 28,
-      borderRadius: "50%",
-      backgroundColor: "#19222c",
-    },
-    svg: {
-      marginTop: 2,
     },
   })
 );
@@ -126,9 +121,16 @@ const NiraApiNotification = () => {
               Last checked: {printDateTime(new Date())}
             </Typography>
           </span>
-          <span className={classes.refreshContainer}>
-            <RefreshOutlinedIcon className={classes.svg} />
-          </span>
+          <IconButton
+            aria-label="refresh"
+            className={classes.iconButton}
+            disabled={loading}
+            onClick={getHealthStatus}
+          >
+            <RefreshOutlinedIcon
+              style={{ color: loading ? "rgb(189 189 189)" : white }}
+            />
+          </IconButton>
         </Paper>
       )}
       <Chip
