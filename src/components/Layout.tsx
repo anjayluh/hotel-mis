@@ -35,7 +35,7 @@ import logo from "../assets/download.png";
 import { Typography } from "@material-ui/core";
 import { themeBackground } from "../theme/custom-colors";
 import Paper from "@material-ui/core/Paper";
-import { GlobalHotKeys} from "react-hotkeys";
+import { GlobalHotKeys } from "react-hotkeys";
 import { verificationRequestConstants } from "../data/redux/ninVerification/reducer";
 import NiraApiNotification from "../modules/ninVerification/NiraApiNotification";
 
@@ -43,6 +43,11 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    bottom: {
+      position: "absolute",
+      bottom: 38,
+      left: 23,
+    },
     root: {
       display: "flex",
       height: "100%",
@@ -132,7 +137,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 interface IProps extends RouteComponentProps {
   hideRequestButton?: boolean;
-  showNiraNotification?: boolean;
+  hideNiraNotification?: boolean;
 }
 
 const Layout: React.FC<IProps> = (props: any) => {
@@ -140,14 +145,14 @@ const Layout: React.FC<IProps> = (props: any) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  
+
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
   }
 
   const onClick = (path: string) => () => {
-    if(path === localRoutes.ninVerification) {
-      addNewRequest()
+    if (path === localRoutes.ninVerification) {
+      addNewRequest();
     }
     const { history, onClose } = props;
     history.push(path);
@@ -172,19 +177,19 @@ const Layout: React.FC<IProps> = (props: any) => {
   };
 
   function addNewRequest() {
-      props.history.push(localRoutes.ninVerification);
-      dispatch({
-        type: verificationRequestConstants.RequestsAddNew,
-        payload: true,
-      });
+    props.history.push(localRoutes.ninVerification);
+    dispatch({
+      type: verificationRequestConstants.RequestsAddNew,
+      payload: true,
+    });
   }
   // keymaps and handlers for keyboardshortcuts
   const keyMap = {
-    NEW_REQUEST: "alt+n"
-  }
+    NEW_REQUEST: "alt+n",
+  };
   const handlers = {
-    NEW_REQUEST: addNewRequest
-  }
+    NEW_REQUEST: addNewRequest,
+  };
   const drawer = (
     <div style={{ backgroundColor: themeBackground, color: "white" }}>
       <div className={classes.toolbar}>
@@ -243,26 +248,30 @@ const Layout: React.FC<IProps> = (props: any) => {
             }
           />
         </ListItem>
-        <a href={remoteRoutes.devPortal} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none'}} >
-          <ListItem
-            button
-            selected={isSelected(localRoutes.devPortal)}
-          >
+        <a
+          href={remoteRoutes.devPortal}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none" }}
+        >
+          <ListItem button selected={isSelected(localRoutes.devPortal)}>
             <ListItemIcon>
               <CodeIcon className={getCls(localRoutes.devPortal)} />
             </ListItemIcon>
             <ListItemText
               primary={
-                
                 <Typography className={getCls(localRoutes.devPortal)}>
                   Developer Portal
                 </Typography>
-                
               }
             />
           </ListItem>
         </a>
       </List>
+
+      <div className={classes.bottom}>
+        {!props.showNiraNotification && <NiraApiNotification />}
+      </div>
     </div>
   );
 
@@ -286,15 +295,14 @@ const Layout: React.FC<IProps> = (props: any) => {
           <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
           {!props.hideRequestButton && (
             <div>
-              <Button variant="contained" color="primary" onClick={addNewRequest}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={addNewRequest}
+              >
                 New Request
               </Button>
             </div>
-          ) 
-          }
-          
-          {!props.showNiraNotification && (
-            <NiraApiNotification/>
           )}
           <BarView textClass={classes.menuSelected} />
         </Toolbar>

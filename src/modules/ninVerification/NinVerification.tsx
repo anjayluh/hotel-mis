@@ -9,10 +9,8 @@ import Filter from "./Filter";
 import Typography from "@material-ui/core/Typography";
 import { search } from "../../utils/ajax";
 import { remoteRoutes } from "../../data/constants";
-import { wfInitialSort, ninVerificationHeadCells } from "./config";
+import { ninVerificationHeadCells } from "./config";
 import Box from "@material-ui/core/Box";
-import PriorityHighOutlinedIcon from '@material-ui/icons/PriorityHighOutlined';
-import RefreshOutlinedIcon from '@material-ui/icons/RefreshOutlined';
 import {
   verificationRequestConstants,
   IVerificationRequestState,
@@ -25,9 +23,7 @@ import Details from "./details/Details";
 import Button from "@material-ui/core/Button";
 import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
-import AddButton from "../../components/AddButton";
 import snackbarMessages from "../../data/snackbarMessages";
-import {printDateTime} from "../../utils/dateHelpers"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,28 +63,30 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: "4px 30px",
       backgroundColor: "rgba(38, 50, 56, 0.04)",
     },
-
     pageHeading: {
       display: "flex",
     },
-    
     niraApiOffline: {
       border: "5px solid red",
-      color: "red"
+      color: "red",
     },
     niraApiOfflineInfo: {
       borderTop: "5px solid red",
       borderBottom: "5px solid red",
-      color: "red"
+      color: "red",
     },
     niraApiOnline: {
       border: "5px solid green",
-      color: "green"
+      color: "green",
     },
     niraApiOnlineInfo: {
       borderTop: "5px solid green",
       borderBottom: "5px solid green",
-      color: "green"
+      color: "green",
+    },
+    exportPaper: {
+      borderRadius: 0,
+      padding: "20px 16px",
     },
   })
 );
@@ -101,6 +99,9 @@ const NinVerifications = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
   const [loadingNew, setLoadingNew] = useState(false);
+  const [exportLoading, setExportLoading] = useState(false);
+  const [isExport, setIsExport] = useState(true);
+  const [downloadLoading, setDownloadLoading] = useState(false);
   const {
     data,
     loading,
@@ -118,7 +119,7 @@ const NinVerifications = () => {
   const [filter, setFilter] = useState<any>({});
 
   useEffect(() => {
-    addNewRequest()
+    addNewRequest();
     dispatch({
       type: verificationRequestConstants.RequestsFetchLoading,
       payload: true,
@@ -188,6 +189,14 @@ const NinVerifications = () => {
   function handleFilter(values: any) {
     setFilter({ ...filter, ...values });
   }
+  function initiateExport(values: any) {
+    setExportLoading(true);
+    setIsExport(true);
+  }
+  function download(values: any) {
+    setExportLoading(false);
+    setDownloadLoading(true);
+  }
   return (
     <Navigation>
       <Grid container spacing={2}>
@@ -226,6 +235,40 @@ const NinVerifications = () => {
             <Paper className={classes.filterPaper} elevation={0}>
               <ErrorBoundary>
                 <Filter onFilter={handleFilter} loading={loading} />
+              </ErrorBoundary>
+            </Paper>
+          </Box>
+          <Box pt={3}>
+            <Paper className={classes.exportPaper} elevation={0}>
+              <ErrorBoundary>
+                {isExport && (
+                  <Button
+                    disabled={exportLoading}
+                    variant="outlined"
+                    color="primary"
+                    onClick={initiateExport}
+                    size="small"
+                    style={{ width: 267 }}
+                  >
+                    {exportLoading
+                      ? "Processing data for export ..."
+                      : "Export data to excel"}
+                  </Button>
+                )}
+                {!isExport && (
+                  <Button
+                    disabled={downloadLoading}
+                    variant="outlined"
+                    color="primary"
+                    onClick={download}
+                    size="small"
+                    style={{ width: 267 }}
+                  >
+                    {downloadLoading
+                      ? "Downloading excel ..."
+                      : "Download excel"}
+                  </Button>
+                )}
               </ErrorBoundary>
             </Paper>
           </Box>
