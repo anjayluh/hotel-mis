@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: 20,
       justifyContent: "left",
       paddingLeft: 23,
+      boxShadow: "#25313d 0px 2px 0px 0px",
     },
     online: {
       color: white,
