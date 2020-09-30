@@ -287,12 +287,18 @@ const NinVerifications = () => {
               setExportLoading(false);
               setIsExport(false);
               setRequestId(res.id);
-            }
-            if (res.error !== null) {
-              enqueueSnackbar(res.error, {
-                variant: "error",
-              });
-              setExportLoading(false);
+            } else {
+              //If not complete, show error message or response status
+              if (res.error !== null) {
+                enqueueSnackbar(res.error, {
+                  variant: "error",
+                });
+                setExportLoading(false);
+              } else {
+                enqueueSnackbar(res.error, {
+                  variant: "error",
+                });
+              }
             }
           },
           (error) => {
