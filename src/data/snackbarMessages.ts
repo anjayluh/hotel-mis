@@ -34,6 +34,7 @@ export default snackbarMessages = {
   },
   'NiraApiNotification': {
     'offline': 'We can not reach the NIRA services at the moment. Please refresh.',
+    'online': 'We can reach the NIRA services at the moment.',
   },
   'NinVerification': {
     'new': 'New verification request has been made',
