@@ -25,7 +25,7 @@ import {
   pendingColor,
 } from "../../../theme/custom-colors";
 import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
-import NinNotFound from "./NinNotFound";
+import NinResponseErrorMsg from "../NinResponseErrorMsg";
 
 interface IProps {
   data: IRequestDetails;
@@ -87,7 +87,9 @@ const Summary = ({ data }: IProps) => {
         <div>
           {data.resultJson.error && 
           (data.resultJson.error.code === "320" ? 
-            <NinNotFound message ={data.resultJson.error.message}/>
+            <ErrorBoundary>
+              <NinResponseErrorMsg message ={data.resultJson.error.message}/>
+            </ErrorBoundary>
           : ''
           )}
           <ErrorBoundary>

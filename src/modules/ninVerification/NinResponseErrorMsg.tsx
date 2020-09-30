@@ -17,11 +17,11 @@ interface IProps {
   message?: any
 }
 
-const NinNotFound = ({message}: IProps) => {
+const NinResponseErrorMsg = ({message}: IProps) => {
   const classes = useStyles();
   return (
     <Box display="flex"  className={classes.errorMessage}>
-      <Typography color="inherit" style={{padding: 20}}>
+      <Typography variant='body1' color="inherit" style={{padding: 20}}>
         {message}
       </Typography>
     </Box>
@@ -29,4 +29,4 @@ const NinNotFound = ({message}: IProps) => {
 }
 
 
-export default NinNotFound;
+export default NinResponseErrorMsg;
