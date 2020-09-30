@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: "0px 0px 17px 0px",
       boxShadow: "none",
       position: "relative",
-      bottom: -18,
+      bottom: -25,
       width: 192,
-      height: 125,
+      height: 130,
       borderRadius: 20,
     },
     chip: {
