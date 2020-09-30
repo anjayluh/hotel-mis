@@ -5,7 +5,9 @@ import DeleteDialog from '../components/DeleteDialog'
 import TimeoutIcon from '../assets/timeout.png'
 import {handleLogout} from '../data/redux/coreActions'
 import authService from '../data/oidc/AuthService';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { verificationRequestConstants } from '../data/redux/ninVerification/reducer';
+import { IState } from '../data/types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
       "&:hover": {
         backgroundColor: '#065fd4',
       },
-      width: 125,
+      width: 180,
     },
     trashContainerClass: {
       textAlign: "center",
@@ -35,33 +37,63 @@ const IdleTimerWrapper = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [popUpOpen, setPopUp] = useState(false)
+  const InitialtimeToLogout = 10;//time in seconds
+  const [timeRemaining, setTimeRemaining] = useState(InitialtimeToLogout)
   const deactivateText =
     "For security reasons, your connection timesout after you've been inactive for a while. Click continue to stay signed in.";
-
-  const idleTimerRef = useRef(null)
-  const sessionTimeoutRef: any = useRef(null)
+    const isFormOpen = useSelector((state: IState) => state.verificationRequests.turnOnSlideOut);
+  
+  const idleTime = 1000 * 60 * 5;
+  const idleTimerRef = useRef(null);
+  const sessionTimeoutRef: any = useRef(null);
+  const setTimeRef: any = useRef();
+  
   const onIdle = () => {
-    setPopUp(true)
-    sessionTimeoutRef.current = setTimeout(doLogout, 10000)
+    if(isFormOpen) {
+      dispatch({
+        type: verificationRequestConstants.RequestsAddNew,
+        payload: false,
+      });
+    }
     
+    setPopUp(true)
+    countDown()
+
   }
   function handleCancel() {
     setPopUp(false);
   }
+  
   function handleContinue() {
     setPopUp(false);
     clearTimeout(sessionTimeoutRef.current)
+    // reset cout down time
+    setTimeRemaining(InitialtimeToLogout)
+    clearInterval(setTimeRef.current);
   }
   async function doLogout() {
     dispatch(handleLogout());
     await authService.logout();
-    clearTimeout(sessionTimeoutRef.current)
+    clearInterval(setTimeRef.current)
+  }
+
+  const countDown = () => {
+    let timeToCountDown = 10
+    setTimeRef.current  = setInterval(function() {
+      timeToCountDown -= 1;
+      setTimeRemaining(timeToCountDown)
+      if(timeToCountDown === 0) {
+        // reset cout down time
+        setTimeRemaining(InitialtimeToLogout)
+        doLogout()
+      }
+      }, 1000);
   }
   return (
     <div>
       <IdleTimer 
       ref={idleTimerRef}
-      timeout={300*1000}
+      timeout={idleTime}
       onIdle={onIdle}
       ></IdleTimer>
       <DeleteDialog
@@ -71,11 +103,12 @@ const IdleTimerWrapper = () => {
           handleCancel={handleCancel}
           handleDelete={handleContinue}
           icon={TimeoutIcon}
-          deleteText={"Continue"}
+          deleteText={`Continue (${timeRemaining})`}
           buttonClass={classes.continueButton}
           cancelButton={false}
           trashClass={classes.trash}
           trashContainerClass={classes.trashContainerClass}
+          onBackdropClick={handleContinue}
         ></DeleteDialog>
     </div>
   )
