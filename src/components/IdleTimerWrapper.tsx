@@ -103,7 +103,6 @@ const IdleTimerWrapper = () => {
           cancelButton={false}
           trashClass={classes.trash}
           trashContainerClass={classes.trashContainerClass}
-          disableBackdropClick={true}
         ></DeleteDialog>
     </div>
   )
