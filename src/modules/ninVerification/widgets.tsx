@@ -13,7 +13,8 @@ import {
   iconColor,
   black,
   warning,
-  skyBlue
+  skyBlue,
+  greyPendingColor
 } from "../../theme/custom-colors";
 import { Chip, Typography } from "@material-ui/core";
 import { Box } from "@material-ui/core";
@@ -166,7 +167,7 @@ export const renderNinStatus = (value: WorkflowNinStatus) => {
       color = errorColor;
       break;
     case WorkflowNinStatus.Pending:
-      color = warningColor;
+      color = greyPendingColor;
       break;
   }
 
