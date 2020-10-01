@@ -24,6 +24,7 @@ import Button from "@material-ui/core/Button";
 import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import snackbarMessages from "../../data/snackbarMessages";
+import { isEmpty } from "lodash";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -134,7 +135,10 @@ const NinVerifications = () => {
   const [requestId, setRequestId] = useState<string>("Processing");
 
   useEffect(() => {
-    addNewRequest();
+    if(isEmpty(filter)) {
+      addNewRequest();
+    }
+    
     dispatch({
       type: verificationRequestConstants.RequestsFetchLoading,
       payload: true,
