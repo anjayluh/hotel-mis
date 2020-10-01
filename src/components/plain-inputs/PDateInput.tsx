@@ -50,6 +50,7 @@ export default function PDateInput({
         placeholder={'dd.mm.yyyy'}
         value={value}
         onChange={handleChange}
+        autoOk
         autoComplete="off"
         color="secondary"
         KeyboardButtonProps={{
