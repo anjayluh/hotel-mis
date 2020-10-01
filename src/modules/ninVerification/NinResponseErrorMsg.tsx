@@ -9,7 +9,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: "red",
       color:"white",
       fontSize: "12px",
-      borderRadius:"10px"
+      borderRadius:"5px",
+      marginTop:"8px",
+      marginBottom: "11px"
     },
   })
 );
@@ -21,7 +23,7 @@ const NinResponseErrorMsg = ({message}: IProps) => {
   const classes = useStyles();
   return (
     <Box display="flex"  className={classes.errorMessage}>
-      <Typography variant='body1' color="inherit" style={{padding: 20}}>
+      <Typography variant='body2' color="inherit" style={{padding: 22, fontWeight:500}}>
         {message}
       </Typography>
     </Box>
