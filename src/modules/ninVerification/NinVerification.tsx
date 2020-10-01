@@ -7,7 +7,7 @@ import XTable from "../../components/table/XTable";
 import Grid from "@material-ui/core/Grid";
 import Filter from "./Filter";
 import Typography from "@material-ui/core/Typography";
-import { search, get, post } from "../../utils/ajax";
+import { search, get, post, downLoad } from "../../utils/ajax";
 import { remoteRoutes } from "../../data/constants";
 import { ninVerificationHeadCells } from "./config";
 import Box from "@material-ui/core/Box";
@@ -314,17 +314,23 @@ const NinVerifications = () => {
     clearInterval(interval);
   }
   function download() {
-    /* setDownloadLoading(true); //Turn on button loader
-    const fileUrl = remoteRoutes.niraExport + requestId + "/download";
-    const link = document.createElement("a");
-    link.setAttribute("download", "download");
-    link.href = fileUrl;
-    link.click();
-    setIsExport(true); */
-    /* get(
+    downLoad(
       remoteRoutes.niraExport + requestId + "/download",
       (res) => {
         console.log(res, "res.body");
+        console.log(requestId);
+        const data = new Blob([res], {type: 'octet/stream'});
+        const csvURL = window.URL.createObjectURL(data);
+        const fileName = `Report-${requestId}.zip`;
+        let tempLink = document.createElement('a');
+
+        tempLink.href = csvURL;
+        tempLink.setAttribute('download', fileName);
+        tempLink.click();
+
+        enqueueSnackbar('Report Downloaded successfully', {
+          variant: "success",
+        });
       },
       (error) => {
         enqueueSnackbar(error.response.body.title, {
@@ -335,9 +341,9 @@ const NinVerifications = () => {
       () => {
         setDownloadLoading(false);
       }
-    ); 
+    );
     setDownloadLoading(true);
-    setIsExport(true);//At the end, show export button*/
+    setIsExport(true); //At the end, show export button
   }
   return (
     <Navigation>
