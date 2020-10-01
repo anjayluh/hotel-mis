@@ -43,7 +43,7 @@ const servers: any = {
     Nin: "https://bou-niv-api-test.test001.laboremus.no",
     devPortal: "https://bou-niv-api-test.test001.laboremus.no",
     clientId: "laboremus-backoffice:portal",
-    envScope: "openid profile roles offline_access laboremus_BNVS_API"
+    envScope: "openid profile roles offline_access laboremus_BNVS_API",
   },
   test: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
@@ -136,6 +136,7 @@ export const remoteRoutes = {
   ninVerificationRequests: NinVerificationURL + "/api/request/search",
   ninVerification: NinVerificationURL + "/api/national-id/verify",
   niraNotification: NinVerificationURL + "/health",
+  niraExport: NinVerificationURL + "/api/exports/",
   authServer: authURL,
   login: authURL + "/api/test/login",
   profile: authURL + "/api/test/profile",

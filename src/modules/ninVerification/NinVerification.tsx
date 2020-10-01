@@ -7,7 +7,7 @@ import XTable from "../../components/table/XTable";
 import Grid from "@material-ui/core/Grid";
 import Filter from "./Filter";
 import Typography from "@material-ui/core/Typography";
-import { search } from "../../utils/ajax";
+import { search, get, post } from "../../utils/ajax";
 import { remoteRoutes } from "../../data/constants";
 import { ninVerificationHeadCells } from "./config";
 import Box from "@material-ui/core/Box";
@@ -88,6 +88,14 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: 0,
       padding: "20px 16px",
     },
+    information: {
+      color: "#546e7a",
+      fontSize: 12,
+      fontWeight: 400,
+      paddingLeft: 15,
+      paddingTop: 10,
+      letterSpacing: -0.04,
+    },
   })
 );
 
@@ -100,8 +108,12 @@ const NinVerifications = () => {
   const [open, setOpen] = useState(true);
   const [loadingNew, setLoadingNew] = useState(false);
   const [exportLoading, setExportLoading] = useState(false);
-  const [isExport, setIsExport] = useState(true);
+  const [isExport, setIsExport] = useState(true); //Saving filter items for export since the page upload on filter change
   const [downloadLoading, setDownloadLoading] = useState(false);
+  const [
+    showExportInformationMessage,
+    setShowExportInformationMessage,
+  ] = useState(false);
   const {
     data,
     loading,
@@ -117,6 +129,9 @@ const NinVerifications = () => {
   const [viewDetails, setViewDetails] = useState<any | null>(null);
   const [anchor, setAnchor] = useState<Anchor>("right");
   const [filter, setFilter] = useState<any>({});
+  const [exportValues, setExportValues] = useState<any>({});
+  const [requestStatus, setRequestStatus] = useState<string>("Processing");
+  const [requestId, setRequestId] = useState<string>("Processing");
 
   useEffect(() => {
     addNewRequest();
@@ -186,16 +201,143 @@ const NinVerifications = () => {
       payload: false,
     });
   }
+
+  function updateExport(values: any) {
+    setExportValues({ ...filter, ...values });
+  }
   function handleFilter(values: any) {
     setFilter({ ...filter, ...values });
   }
-  function initiateExport(values: any) {
-    setExportLoading(true);
-    setIsExport(true);
+  function initiateExport() {
+    if (exportValues.from && exportValues.to) {
+      setShowExportInformationMessage(false);
+      setExportLoading(true);
+      let toSave = {
+        dateRange: {
+          from: exportValues.from,
+          to: exportValues.to,
+        },
+        nin: exportValues.nin,
+        cardNumber: exportValues.cardNumber,
+        requestStatus:
+          exportValues.requestStatus !== ""
+            ? [exportValues.requestStatus]
+            : null,
+        ninValidity: exportValues.ninValidity ? exportValues.ninValidity : null,
+        matchingStatus: exportValues.matchingStatus,
+      };
+      post(
+        remoteRoutes.niraExport,
+        toSave,
+        (data) => {
+          setRequestStatus(data.status);
+          if (requestStatus.toLowerCase() === "processing") {
+            checkStatus(data.id);
+          }
+          if (data.error !== null) {
+            enqueueSnackbar(data.error, {
+              variant: "error",
+            });
+          }
+        },
+        (error) => {
+          enqueueSnackbar(error.response.body.title, {
+            variant: "error",
+          });
+        }
+      );
+    } else setShowExportInformationMessage(true); //Turns on warning message if no date values selected
   }
-  function download(values: any) {
-    setExportLoading(false);
+  function checkStatus(id: string) {
+    //Initial request
+    get(
+      remoteRoutes.niraExport + `${id}/status`,
+      (res) => {
+        setRequestStatus(res.status);
+        if (res.status.toLowerCase() === "complete") {
+          setExportLoading(false);
+          setIsExport(false);
+          setRequestId(res.id);
+        }
+        if (res.error !== null) {
+          enqueueSnackbar(res.error, {
+            variant: "error",
+          });
+          setExportLoading(false);
+        }
+      },
+      (error) => {
+        enqueueSnackbar(error.response.body.title, {
+          variant: "error",
+        });
+        setExportLoading(false);
+      },
+      () => {
+        setExportLoading(false);
+      }
+    );
+    //If status is still Processing, retry every 10 seconds
+    const interval = setInterval(function () {
+      if (requestStatus.toLowerCase() === "processing") {
+        get(
+          remoteRoutes.niraExport + `${id}/status`,
+          (res) => {
+            setRequestStatus(res.status);
+            if (res.status.toLowerCase() === "complete") {
+              setExportLoading(false);
+              setIsExport(false);
+              setRequestId(res.id);
+            } else {
+              //If not complete, show error message or response status
+              if (res.error !== null) {
+                enqueueSnackbar(res.error, {
+                  variant: "error",
+                });
+                setExportLoading(false);
+              } else {
+                enqueueSnackbar(res.error, {
+                  variant: "error",
+                });
+              }
+            }
+          },
+          (error) => {
+            enqueueSnackbar(error.response.body.title, {
+              variant: "error",
+            });
+            setExportLoading(false);
+          }
+        );
+      }
+    }, 10000);
+
+    clearInterval(interval);
+  }
+  function download() {
+    /* setDownloadLoading(true); //Turn on button loader
+    const fileUrl = remoteRoutes.niraExport + requestId + "/download";
+    const link = document.createElement("a");
+    link.setAttribute("download", "download");
+    link.href = fileUrl;
+    link.click();
+    setIsExport(true); */
+    /* get(
+      remoteRoutes.niraExport + requestId + "/download",
+      (res) => {
+        console.log(res, "res.body");
+      },
+      (error) => {
+        enqueueSnackbar(error.response.body.title, {
+          variant: "error",
+        });
+        setDownloadLoading(false);
+      },
+      () => {
+        setDownloadLoading(false);
+      }
+    ); 
     setDownloadLoading(true);
+    setIsExport(true);//At the end, show export button*/
   }
   return (
     <Navigation>
@@ -234,7 +376,11 @@ const NinVerifications = () => {
           <Box pt={6}>
             <Paper className={classes.filterPaper} elevation={0}>
               <ErrorBoundary>
-                <Filter onFilter={handleFilter} loading={loading} />
+                <Filter
+                  onFilter={handleFilter}
+                  loading={loading}
+                  onFilterChange={updateExport}
+                />
               </ErrorBoundary>
             </Paper>
           </Box>
@@ -268,6 +414,11 @@ const NinVerifications = () => {
                       ? "Downloading excel ..."
                       : "Download excel"}
                   </Button>
+                )}
+                {isExport && showExportInformationMessage && (
+                  <Typography variant="body2" className={classes.information}>
+                    Please select start and end date in the filter
+                  </Typography>
                 )}
               </ErrorBoundary>
             </Paper>
