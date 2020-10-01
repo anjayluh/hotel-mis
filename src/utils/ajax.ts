@@ -1,3 +1,4 @@
+//import binaryParser from "superagent-binary-parser";
 import * as superagent from 'superagent'
 import Toast from './Toast'
 import {AUTH_TOKEN_KEY} from "../data/constants";
@@ -142,7 +143,6 @@ export const del = (url: string, callBack: CallbackFunction, errorCallBack?: Err
         .timeout(timeout)
         .end(handleResponse(callBack, errorCallBack, endCallBack))
 }
-
 
 export const downLoad = (url: string, callBack: CallbackFunction, errorCallBack?: ErrorCallback, endCallBack?: EndCallback) => {
     superagent.get(url)
