@@ -10,15 +10,15 @@ import PDateInput from "../../components/plain-inputs/PDateInput";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ResetButton from "../../components/ResetButton";
-import { date } from "faker";
-import { printDate, dateFormat } from "../../utils/dateHelpers";
+import { printDate } from "../../utils/dateHelpers";
 
 interface IProps {
   onFilter: (data: any) => any;
   loading: boolean;
+  onFilterChange?: (data: any) => any; //For components that need to access filter information before the button is clicked
 }
 
-const Filter = ({ onFilter, loading }: IProps) => {
+const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
   const [data, setData] = useState({
     nin: "",
     cardNumber: "",
@@ -29,7 +29,7 @@ const Filter = ({ onFilter, loading }: IProps) => {
     to: null,
     initiator: "",
   });
-  const [resetButton, setResetButton] = useState(false)
+  const [resetButton, setResetButton] = useState(false);
   function getMatchingStatus(value: string) {
     let matchingStatus = null;
     switch (value) {
@@ -45,14 +45,18 @@ const Filter = ({ onFilter, loading }: IProps) => {
     return matchingStatus;
   }
   function submitForm(values: any) {
-    const statusRequest = values.requestStatus === "Completed" ? "Successful" : values.requestStatus
+    const statusRequest =
+      values.requestStatus === "Completed"
+        ? "Successful"
+        : values.requestStatus;
     let toSave = {
       Nin: values.nin.trim(),
       CardNumber: values.cardNumber.trim(),
       participant: values.participant,
       Status: values.requestStatus === "All" ? "" : statusRequest,
       matchingStatus: getMatchingStatus(values.matchingStatus),
-      "Date.From": values.from = values.from && new Date(values.from).toISOString(),
+      "Date.From": values.from =
+        values.from && new Date(values.from).toISOString(),
       "Date.To": values.to = values.to && new Date(values.to).toISOString(),
       Initiator: values.initiator,
     };
@@ -63,10 +67,10 @@ const Filter = ({ onFilter, loading }: IProps) => {
     const name = event.target.name.trim();
     const value = event.target.value.trim();
     const newData = { ...data, [name]: value };
-    setResetButton(true)
+    setResetButton(true);
     setData(newData);
+    onFilterChange && onFilterChange(newData); // For components that need to access filter information before the button is clicked
     // submitForm(newData);
-    
   }
   function handleSubmit() {
     submitForm(data);
@@ -82,21 +86,21 @@ const Filter = ({ onFilter, loading }: IProps) => {
       from: null,
       to: null,
       initiator: "",
-    }
-    setData(resetData)
-    submitForm(resetData)
-    setResetButton(false)
+    };
+    setData(resetData);
+    submitForm(resetData);
+    setResetButton(false);
   }
   const handleValueChange = (name: string) => (value: any) => {
     // if (name === "from" || name === "to") {
     //   value = value ? value.toISOString() : value;
     // }
     const newData = { ...data, [name]: value };
-    setResetButton(true)
+    setResetButton(true);
     setData(newData);
+    onFilterChange && onFilterChange(newData); // For components that need to access filter information before the button is clicked
     // submitForm(newData);
   };
-  
 
   // const handleComboValueChange = (name: string) => (value: any) => {
   //
@@ -190,7 +194,10 @@ const Filter = ({ onFilter, loading }: IProps) => {
             variant="inline"
             inputVariant="outlined"
           />
-          <Typography variant="body2" style={{paddingLeft: 15, paddingTop: 10}}>
+          <Typography
+            variant="body2"
+            style={{ paddingLeft: 15, paddingTop: 10 }}
+          >
             Date format: dd.mm.yyyy ({printDate(Date.now())})
           </Typography>
         </Grid>
@@ -208,7 +215,9 @@ const Filter = ({ onFilter, loading }: IProps) => {
               </Button>
             </Box>
             <Box>
-            {resetButton && <ResetButton text={"Reset"} onClick={resetForm}/>}
+              {resetButton && (
+                <ResetButton text={"Reset"} onClick={resetForm} />
+              )}
             </Box>
           </Box>
         </Grid>
