@@ -3,6 +3,7 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import ArrowForwardIos from "@material-ui/icons/ArrowForwardIos";
 import KeyboardArrowUp from "@material-ui/icons/KeyboardArrowUp";
+import Tooltip from "@material-ui/core/Tooltip";
 import RefreshOutlinedIcon from "@material-ui/icons/RefreshOutlined";
 import { printDateTime } from "../../utils/dateHelpers";
 import { white } from "../../theme/custom-colors";
@@ -13,6 +14,8 @@ import snackbarMessages from "../../data/snackbarMessages";
 import { Chip } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
+import Grow from "@material-ui/core/Grow";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
@@ -44,8 +47,16 @@ const useStyles = makeStyles((theme: Theme) =>
     online: {
       color: white,
     },
-    icon: {
+    iconUp: {
       marginLeft: 18,
+    },
+    iconRight: {
+      marginLeft: 18,
+      "-webkit-transform": "rotate(90deg)",
+      "-moz-transform": "rotate(90deg)",
+      "-o-transform": "rotate(90deg)",
+      "-ms-transform": "rotate(90deg)",
+      transform: "rotate(90deg)",
     },
     description: {
       color: white,
@@ -60,6 +71,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: 12,
     },
     iconButton: {
+      bottom: -22,
       marginRight: 20,
       backgroundColor: "#19222c",
       width: 28,
@@ -77,6 +89,7 @@ const NiraApiNotification = () => {
   const [healthStatus, sethealthStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPaper, setShowPaper] = useState(false);
+  const [refresh, setRefresh] = useState<boolean>(false);
   useEffect(() => {
     getHealthStatus();
   }, []);
@@ -88,6 +101,12 @@ const NiraApiNotification = () => {
       (res) => {
         const status = res.entries.externalServiceReport.data.nira.status;
         sethealthStatus(status);
+        if (refresh) {
+          enqueueSnackbar(snackbarMessages.NiraApiNotification.online, {
+            variant: healthStatus === "Healthy" ? "success" : "error",
+          });
+        }
+        setRefresh(true);
       },
       () => {
         enqueueSnackbar(snackbarMessages.NiraApiNotification.offline, {
@@ -103,36 +122,43 @@ const NiraApiNotification = () => {
   return (
     <span>
       {showPaper && (
-        <Paper className={classes.paper}>
-          <span className={classes.information}>
-            <Typography
-              style={{ lineHeight: 1.3 }}
-              className={classes.description}
-            >
-              {healthStatus === "Healthy"
-                ? "NIRA services can be reached"
-                : "NIRA services cannot be reached"}
-            </Typography>
-            <Typography
-              className={classes.date}
-              color="inherit"
-              style={{ lineHeight: 1.3 }}
-              variant="body2"
-            >
-              Last checked: {printDateTime(new Date())}
-            </Typography>
-          </span>
-          <IconButton
-            aria-label="refresh"
-            className={classes.iconButton}
-            disabled={loading}
-            onClick={getHealthStatus}
-          >
-            <RefreshOutlinedIcon
-              style={{ color: loading ? "rgb(189 189 189)" : white }}
-            />
-          </IconButton>
-        </Paper>
+        <Grow in={showPaper}>
+          <Paper className={classes.paper}>
+            <span className={classes.information}>
+              <Typography
+                style={{ lineHeight: 1.3 }}
+                className={classes.description}
+              >
+                {healthStatus === "Healthy"
+                  ? "NIRA services can be reached"
+                  : "NIRA services cannot be reached"}
+              </Typography>
+              <Typography
+                className={classes.date}
+                color="inherit"
+                style={{ lineHeight: 1.3 }}
+                variant="body2"
+              >
+                <span style={{ textTransform: "uppercase", color: "#9e9e9e" }}>
+                  Last checked
+                </span>{" "}
+                {printDateTime(new Date())}
+              </Typography>
+            </span>
+            <Tooltip title="Check again" aria-label="Check again">
+              <IconButton
+                aria-label="refresh"
+                className={classes.iconButton}
+                disabled={loading}
+                onClick={getHealthStatus}
+              >
+                <RefreshOutlinedIcon
+                  style={{ color: loading ? "rgb(189 189 189)" : white }}
+                />
+              </IconButton>
+            </Tooltip>
+          </Paper>
+        </Grow>
       )}
       <Chip
         color="primary"
@@ -142,19 +168,14 @@ const NiraApiNotification = () => {
           healthStatus === "Healthy" ? "NIRA is online" : "NIRA is offline"
         }
         onDelete={showInformation}
+        onClick={showInformation}
+        clickable={true}
         deleteIcon={
-          showPaper ? (
-            <KeyboardArrowUp
-              className={classes.icon}
-              onClick={showInformation}
-              style={{ width: 22, height: 22 }}
-            />
-          ) : (
-            <ArrowForwardIos
-              className={classes.icon}
-              onClick={showInformation}
-            />
-          )
+          <KeyboardArrowUp
+            className={showPaper ? classes.iconUp : classes.iconRight}
+            onClick={showInformation}
+            style={{ width: 22, height: 22 }}
+          />
         }
         className={classes.chip}
         style={{
