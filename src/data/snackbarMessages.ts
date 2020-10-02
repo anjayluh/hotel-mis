@@ -7,6 +7,7 @@ export default snackbarMessages = {
   },
   'Login': {
     'NetworkError': 'No internet connection',
+    'inValidAccount': 'Invalid user account',
   },
   'participant': {
     'new': 'New participant has been created',

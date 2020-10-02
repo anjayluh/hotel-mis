@@ -97,6 +97,8 @@ const NinVerificationForm = (props: IProps) => {
         }
   );
   const [cardNumberMessage, setCardNumberMessage] = useState('')
+  const [validationMessage, setValidationMessage] = useState({
+    cardNumberMessage: '', ninMessage: ''})
   const [keyStrokes, setKeyStrokes] = useState(0)
   const dispatch = useDispatch();
   const userProfile = useSelector((state: IState) => state.core.user);
@@ -157,12 +159,22 @@ const NinVerificationForm = (props: IProps) => {
     
   }
 
-  function detectKeyStrokes() {
+  function detectKeyStrokes(event: React.ChangeEvent<any>) {
     let keyClicks = keyStrokes + 1
     setKeyStrokes(keyClicks)
-    if(data.cardNumber.length === 9 && keyStrokes > 9) {
-      setCardNumberMessage(" Card Number must be only 9 characters")
+    const name = event.target.name.trim();
+    let value = event.target.value.trim();
+    if(name === "cardNumber") {
+      if(value.length === 9 && keyStrokes >= 1) {
+        setValidationMessage({...validationMessage, cardNumberMessage: 'Card Number must be only 9 characters'})
+      }
     }
+    else if (name === "nin") {
+      if(value.length === 14 && keyStrokes >= 1) {
+        setValidationMessage({...validationMessage, ninMessage: 'NIN must be only 14 characters'})
+      }
+    }
+    
   }
   return (
     <ErrorBoundary>
@@ -181,9 +193,14 @@ const NinVerificationForm = (props: IProps) => {
             type="text"
             variant="outlined"
             onChange={handleChange}
+            inputProps={{ maxLength: 14 }}
+            onKeyDown={detectKeyStrokes}
             autoFocus
             size="small"
           />
+          {!!validationMessage.ninMessage && (
+            <Typography variant="body2" style={{paddingLeft: 15 }}>NIN must be only 14 characters</Typography>
+          )}
         </Grid>
         <Grid item xs={12}>
           <XTextInput
@@ -196,7 +213,7 @@ const NinVerificationForm = (props: IProps) => {
             onKeyDown={detectKeyStrokes}
             size="small"
           />
-          {!!cardNumberMessage && (
+          {!!validationMessage.cardNumberMessage && (
             <Typography variant="body2" style={{paddingLeft: 15 }}>Card Number must be only 9 characters</Typography>
           )}
         </Grid>
