@@ -35,7 +35,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
     cellProps: { style: { width: 150 } },
   },
   {
-    name: "nin",
+    name: "maskedNin",
     label: "NIN",
     render: (value, rec) => (
       <span>{value}</span>
@@ -48,7 +48,7 @@ export const ninVerificationHeadCells: XHeadCell[] = [
     },
   },
   {
-    name: "cardNumber",
+    name: "maskedCardNumber",
     label: "Card Number",
     render: (value, rec) => <span>{value}</span>,
     cellProps: {
