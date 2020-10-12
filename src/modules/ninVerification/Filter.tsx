@@ -90,6 +90,8 @@ const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
     setData(resetData);
     submitForm(resetData);
     setResetButton(false);
+    // Reset data to fetch report
+    onFilterChange && onFilterChange(resetData)
   }
   const handleValueChange = (name: string) => (value: any) => {
     // if (name === "from" || name === "to") {

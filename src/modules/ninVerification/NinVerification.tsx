@@ -132,7 +132,7 @@ const NinVerifications = () => {
   const [filter, setFilter] = useState<any>({});
   const [exportValues, setExportValues] = useState<any>({});
   const [requestStatus, setRequestStatus] = useState<string>("Processing");
-  const [requestId, setRequestId] = useState<string>("Processing");
+  // const [requestId, setRequestId] = useState<string>("");
 
   useEffect(() => {
     if(isEmpty(filter)) {
@@ -230,13 +230,17 @@ const NinVerifications = () => {
         ninValidity: exportValues.ninValidity ? exportValues.ninValidity : null,
         matchingStatus: exportValues.matchingStatus,
       };
+      
       post(
         remoteRoutes.niraExport,
         toSave,
         (data) => {
-          setRequestStatus(data.status);
+          setRequestStatus(requestStatus);
           if (requestStatus.toLowerCase() === "processing") {
             checkStatus(data.id);
+          } else if(requestStatus.toLowerCase() === "complete") {
+              download(data.id)
+              setExportLoading(false);
           }
           if (data.error !== null) {
             enqueueSnackbar(data.error, {
@@ -252,8 +256,8 @@ const NinVerifications = () => {
       );
     } else setShowExportInformationMessage(true); //Turns on warning message if no date values selected
   }
-  function checkStatus(id: string) {
-    //Initial request
+
+  function getFileStatus(id: string) {
     get(
       remoteRoutes.niraExport + `${id}/status`,
       (res) => {
@@ -261,7 +265,8 @@ const NinVerifications = () => {
         if (res.status.toLowerCase() === "complete") {
           setExportLoading(false);
           setIsExport(false);
-          setRequestId(res.id);
+          // setRequestId(res.id);
+          download(res.id)
         }
         if (res.error !== null) {
           enqueueSnackbar(res.error, {
@@ -280,49 +285,24 @@ const NinVerifications = () => {
         setExportLoading(false);
       }
     );
+  }
+
+  function checkStatus(id: string) {
+    //Initial request
+    getFileStatus(id);
     //If status is still Processing, retry every 10 seconds
     const interval = setInterval(function () {
       if (requestStatus.toLowerCase() === "processing") {
-        get(
-          remoteRoutes.niraExport + `${id}/status`,
-          (res) => {
-            setRequestStatus(res.status);
-            if (res.status.toLowerCase() === "complete") {
-              setExportLoading(false);
-              setIsExport(false);
-              setRequestId(res.id);
-            } else {
-              //If not complete, show error message or response status
-              if (res.error !== null) {
-                enqueueSnackbar(res.error, {
-                  variant: "error",
-                });
-                setExportLoading(false);
-              } else {
-                enqueueSnackbar(res.error, {
-                  variant: "error",
-                });
-              }
-            }
-          },
-          (error) => {
-            enqueueSnackbar(error.response.body.title, {
-              variant: "error",
-            });
-            setExportLoading(false);
-          }
-        );
+        getFileStatus(id);
       }
     }, 10000);
 
     clearInterval(interval);
   }
-  function download() {
+  function download(requestId: string) {
     downLoad(
       remoteRoutes.niraExport + requestId + "/download",
       (res) => {
-        console.log(res, "res.body");
-        console.log(requestId);
         const data = new Blob([res], {type: 'octet/stream'});
         const csvURL = window.URL.createObjectURL(data);
         const fileName = `Report-${requestId}.zip`;
@@ -397,7 +377,6 @@ const NinVerifications = () => {
           <Box pt={3}>
             <Paper className={classes.exportPaper} elevation={0}>
               <ErrorBoundary>
-                {isExport && (
                   <Button
                     disabled={exportLoading}
                     variant="outlined"
@@ -410,8 +389,21 @@ const NinVerifications = () => {
                       ? "Processing data for export ..."
                       : "Export data to excel"}
                   </Button>
-                )}
-                {!isExport && (
+                {/* {isExport && (
+                  <Button
+                    disabled={exportLoading}
+                    variant="outlined"
+                    color="primary"
+                    onClick={initiateExport}
+                    size="small"
+                    style={{ width: 267 }}
+                  >
+                    {exportLoading
+                      ? "Processing data for export ..."
+                      : "Export data to excel"}
+                  </Button>
+                )} */}
+                {/* {!isExport && (
                   <Button
                     disabled={downloadLoading}
                     variant="outlined"
@@ -424,7 +416,7 @@ const NinVerifications = () => {
                       ? "Downloading excel ..."
                       : "Download excel"}
                   </Button>
-                )}
+                )} */}
                 {isExport && showExportInformationMessage && (
                   <Typography variant="body2" className={classes.information}>
                     Please select start and end date in the filter
