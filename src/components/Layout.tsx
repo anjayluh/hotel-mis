@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
@@ -35,9 +35,13 @@ import logo from "../assets/download.png";
 import { Typography } from "@material-ui/core";
 import { themeBackground } from "../theme/custom-colors";
 import Paper from "@material-ui/core/Paper";
-import { GlobalHotKeys } from "react-hotkeys";
+import { GlobalHotKeys, configure } from "react-hotkeys";
 import { verificationRequestConstants } from "../data/redux/ninVerification/reducer";
 import NiraApiNotification from "../modules/ninVerification/NiraApiNotification";
+import { IState } from "../data/types";
+
+// Allows hotkeys to work even when items are in focus
+configure({ignoreTags:[]});
 
 const drawerWidth = 240;
 
@@ -145,6 +149,8 @@ const Layout: React.FC<IProps> = (props: any) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const isFormOpen = useSelector((state: IState) => state.verificationRequests.turnOnSlideOut);
+
 
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
@@ -183,12 +189,22 @@ const Layout: React.FC<IProps> = (props: any) => {
       payload: true,
     });
   }
+
+  function closeSlideOutForm() {
+    dispatch({
+      type: verificationRequestConstants.RequestsAddNew,
+      payload: false,
+    });
+  }
   // keymaps and handlers for keyboardshortcuts
   const keyMap = {
     NEW_REQUEST: "alt+n",
   };
-  const handlers = {
+  const handleOpen = {
     NEW_REQUEST: addNewRequest,
+  };
+  const handleClose = {
+    NEW_REQUEST: closeSlideOutForm,
   };
   const drawer = (
     <div style={{ backgroundColor: themeBackground, color: "white" }}>
@@ -277,6 +293,8 @@ const Layout: React.FC<IProps> = (props: any) => {
 
   return (
     <div className={classes.root}>
+      {/* keyboard shortcut to open new request form */}
+      <GlobalHotKeys keyMap={keyMap} handlers={isFormOpen ? handleClose : handleOpen} allowChanges  />
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar} color="default">
         <Toolbar>
@@ -291,8 +309,7 @@ const Layout: React.FC<IProps> = (props: any) => {
           <div className={classes.logoHolder}>
             <img src={logo} alt="logo" className={classes.logo} />
           </div>
-          {/* keyboard shortcut to open new request form */}
-          <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
+          
           {!props.hideRequestButton && (
             <div>
               <Button
