@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     
     errorMessage: {
-      backgroundColor: "red",
+      backgroundColor: "#d32f2f",
       color:"white",
       fontSize: "12px",
       borderRadius:"5px",
