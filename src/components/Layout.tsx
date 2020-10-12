@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     bottom: {
       position: "absolute",
-      bottom: 38,
+      bottom: 28,
       left: 23,
     },
     root: {
