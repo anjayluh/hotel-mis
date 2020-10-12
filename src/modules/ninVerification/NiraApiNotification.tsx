@@ -139,7 +139,7 @@ const NiraApiNotification = () => {
                 style={{ lineHeight: 1.3 }}
                 variant="body2"
               >
-                <span style={{ textTransform: "uppercase", color: "#9e9e9e" }}>
+                <span style={{ textTransform: "uppercase", color: "#9e9e9e", fontSize:"10px"}}>
                   Last checked
                 </span>{" "}
                 {printDateTime(new Date())}
