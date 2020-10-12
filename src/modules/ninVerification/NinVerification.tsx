@@ -221,14 +221,14 @@ const NinVerifications = () => {
           from: exportValues.from,
           to: exportValues.to,
         },
-        nin: exportValues.nin,
-        cardNumber: exportValues.cardNumber,
+        nin: exportValues.nin ? exportValues.nin : null,
+        cardNumber: exportValues.cardNumber ? exportValues.cardNumber : null,
         requestStatus:
           exportValues.requestStatus !== ""
             ? [exportValues.requestStatus]
             : null,
         ninValidity: exportValues.ninValidity ? exportValues.ninValidity : null,
-        matchingStatus: exportValues.matchingStatus,
+        matchingStatus: exportValues.matchingStatus ? exportValues.matchingStatus : null,
       };
       
       post(
@@ -382,8 +382,7 @@ const NinVerifications = () => {
                     variant="outlined"
                     color="primary"
                     onClick={initiateExport}
-                    size="small"
-                    style={{ width: 267 }}
+                    style={{ width: '100%' }}
                   >
                     {exportLoading
                       ? "Processing data for export ..."
