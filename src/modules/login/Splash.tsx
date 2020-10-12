@@ -16,16 +16,20 @@ export default function Splash() {
     authService
       .getUser()
       .then((user: User | null) => {
-        if (user && user.profile.role && !user.expired) {
-          dispatch(
-            handleLogin({ user: user.profile, token: user.access_token })
-          );
+        if (user && !user.expired) {
+          if(user.profile.role) {
+            dispatch(
+              handleLogin({ user: user.profile, token: user.access_token })
+            );
+          } else {
+            enqueueSnackbar(snackbarMessages.Login.inValidAccount, {
+              variant: 'error',
+            });
+            setTimeout(() => dispatch(handleLogout()), 1000 * 5)
+          }
           
         } else {
-          enqueueSnackbar(snackbarMessages.Login.inValidAccount, {
-            variant: 'error',
-          });
-          setTimeout(() => dispatch(handleLogout()), 1000 * 5)
+          dispatch(handleLogout());
         }
       })
       .catch((error) => {
