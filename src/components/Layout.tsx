@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawer: {
       backgroundColor: themeBackground,
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up("md")]: {
         width: drawerWidth,
         flexShrink: 0,
       },
@@ -57,13 +57,16 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: drawerWidth,
       backgroundColor: themeBackground,
       zIndex: theme.zIndex.drawer + 1,
+      [theme.breakpoints.down(670)]: {
+        width: 670,
+      },
     },
     title: {
       flexGrow: 1,
     },
     menuButton: {
       color: grey[50],
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up("md")]: {
         display: "none",
       },
     },
@@ -340,7 +343,7 @@ const Layout: React.FC<IProps> = (props: any) => {
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
+        <Hidden mdUp implementation="css">
           <Drawer
             variant="temporary"
             anchor={theme.direction === "rtl" ? "right" : "left"}
@@ -356,7 +359,7 @@ const Layout: React.FC<IProps> = (props: any) => {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden xsDown implementation="css">
+        <Hidden smDown implementation="css">
           <Drawer
             classes={{
               paper: classes.drawerPaper,
