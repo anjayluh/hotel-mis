@@ -109,6 +109,7 @@ const NinVerifications = () => {
   const [open, setOpen] = useState(true);
   const [loadingNew, setLoadingNew] = useState(false);
   const [exportLoading, setExportLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [isExport, setIsExport] = useState(true); //Saving filter items for export since the page upload on filter change
   const [downloadLoading, setDownloadLoading] = useState(false);
   const [
@@ -208,6 +209,8 @@ const NinVerifications = () => {
 
   function updateExport(values: any) {
     setExportValues({ ...filter, ...values });
+    setExportLoading(false)
+    setIsError(false)
   }
   function handleFilter(values: any) {
     setFilter({ ...filter, ...values });
@@ -243,15 +246,25 @@ const NinVerifications = () => {
               setExportLoading(false);
           }
           if (data.error !== null) {
+            console.log(data.error, 'errror')
             enqueueSnackbar(data.error, {
               variant: "error",
             });
           }
         },
         (error) => {
-          enqueueSnackbar(error.response.body.title, {
-            variant: "error",
-          });
+          if(error.response.body.errors["DateRange.To"]) {
+            setIsError(true)
+            setExportLoading(false)
+            enqueueSnackbar(error.response.body.errors["DateRange.To"], {
+              variant: "error",
+            });
+          } else {
+            enqueueSnackbar(error.response.body.title, {
+              variant: "error",
+            });
+          }
+          
         }
       );
     } else setShowExportInformationMessage(true); //Turns on warning message if no date values selected
@@ -378,7 +391,7 @@ const NinVerifications = () => {
             <Paper className={classes.exportPaper} elevation={0}>
               <ErrorBoundary>
                   <Button
-                    disabled={exportLoading}
+                    disabled={isError ? isError : exportLoading}
                     variant="outlined"
                     color="primary"
                     onClick={initiateExport}
