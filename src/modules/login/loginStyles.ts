@@ -4,13 +4,13 @@ import createStyles from "@material-ui/core/styles/createStyles";
 export const useLoginStyles = makeStyles((theme: Theme) =>
   createStyles({
     main: {
-      width: 'auto',
+      width: 670,
       display: 'block', // Fix IE 11 issue.
       marginLeft: theme.spacing(3),
       marginRight: theme.spacing(3),
       overflow: 'auto',
       [theme.breakpoints.up(400 + theme.spacing(3 * 2),)]: {
-        width: 655,
+        width: 670,
         marginLeft: 'auto',
         marginRight: 'auto',
       },
