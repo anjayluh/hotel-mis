@@ -105,14 +105,21 @@ const servers: any = {
   ecoUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-portal-uat.ecobank.com",
-    devPortal: " https://niv-portal-uat.ecobank.com",
+    devPortal: "https://niv-portal-uat.ecobank.com",
     clientId: "backoffice:portal",
     envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
   },
   dfcuUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://niv-api-uat.dfcugroup.com",
-    devPortal: " https://niv-portal-uat.dfcugroup.com",
+    devPortal: "https://niv-portal-uat.dfcugroup.com",
+    clientId: "backoffice:portal",
+    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+  },
+  yakoUat: {
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Nin: "https://niv-api-uat.yako.com",
+    devPortal: "https://niv-portal-uat.yako.com",
     clientId: "backoffice:portal",
     envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
   },
