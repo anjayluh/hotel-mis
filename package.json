@@ -75,6 +75,7 @@
     "build-eco-uat": "set REACT_APP_ENV=ecoUat && react-scripts build",
     "build-dfcu-uat": "set REACT_APP_ENV=dfcuUat && react-scripts build",
     "build-yako-uat": "set REACT_APP_ENV=yakoUat && react-scripts build",
+    "build-bou-uat": "set REACT_APP_ENV=bouUat && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "msdeploy --verb sync --allowUntrusted true --source contentPath=%npm_package_config_sourcePath% --dest contentPath=%npm_package_config_destPath%,wmsvc=%npm_package_config_ComputerName%,UserName=%npm_package_config_UserName%,Password=%npm_package_config_Password%,includeAcls=False",
