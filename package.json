@@ -88,7 +88,12 @@
     "UserName": "",
     "Password": "",
     "sourcePath": "",
-    "destPath": ""
+    "destPath": "",
+    "packagePath": "",
+    "paramName": "\"IIS Web Application Name\"",
+    "paramKind": "ProviderPath",
+    "paramScope": "ContentPath",
+    "paramValue": "Default"
   },
   "eslintConfig": {
     "extends": "react-app"
