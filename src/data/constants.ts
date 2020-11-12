@@ -71,15 +71,15 @@ const servers: any = {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://capitalbank-niv-api-test.test001.laboremus.no",
     devPortal: "https://capitalbank-niv-api-test.test001.laboremus.no",
-    clientId: "laboremus-backoffice:portal",
-    envScope: "openid profile roles offline_access laboremus_BNVS_API"
+    clientId: "capitalbank-backoffice:portal",
+    envScope: "openid profile roles offline_access capitalbank_BNVS_API"
   },
   stateTest: {
     Auth: "https://bou-auth-api-test.test001.laboremus.no",
     Nin: "https://statebank-niv-api-test.test001.laboremus.no",
     devPortal: "https://statebank-niv-api-test.test001.laboremus.no",
-    clientId: "laboremus-backoffice:portal",
-    envScope: "openid profile roles offline_access laboremus_BNVS_API"
+    clientId: "statebank-backoffice:portal",
+    envScope: "openid profile roles offline_access statebank_BNVS_API"
   },
   prideUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
