@@ -138,11 +138,11 @@ const servers: any = {
     envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
   },
   bouUat: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Auth: "https://auth-api-test.bou.or.ug",
     Nin: "https://niv-api-test.bou.or.ug",
     devPortal: "https://niv-portal-test.bou.or.ug",
     clientId: "backoffice:portal",
-    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+    envScope: "openid profile roles offline_access bou_BNVS_API"
   },
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
