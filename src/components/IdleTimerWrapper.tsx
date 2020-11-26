@@ -41,7 +41,7 @@ const IdleTimerWrapper = () => {
   const [timeRemaining, setTimeRemaining] = useState(InitialtimeToLogout)
   const deactivateText =
     "For security reasons, your connection timesout after you've been inactive for a while. Click continue to stay signed in.";
-    const isFormOpen = useSelector((state: IState) => state.verificationRequests.turnOnSlideOut);
+    const isFormOpen = useSelector((state: IState) => state.verificationRequests.addNew);
   
   const idleTime = 1000 * 60 * 5;
   const idleTimerRef = useRef(null);
@@ -52,6 +52,10 @@ const IdleTimerWrapper = () => {
     if(isFormOpen) {
       dispatch({
         type: verificationRequestConstants.RequestsAddNew,
+        payload: false,
+      });
+      dispatch({
+        type: verificationRequestConstants.TurnOnSlideout,
         payload: false,
       });
     }

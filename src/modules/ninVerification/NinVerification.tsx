@@ -120,6 +120,7 @@ const NinVerifications = () => {
     data,
     loading,
     turnOnSlideOut,
+    addNew,
   }: IVerificationRequestState = useSelector(
     (state: IState) => state.verificationRequests
   );
@@ -174,6 +175,10 @@ const NinVerifications = () => {
       type: verificationRequestConstants.RequestsAddNew,
       payload: true,
     });
+    dispatch({
+      type: verificationRequestConstants.TurnOnSlideout,
+      payload: true,
+    });
   }
 
   function handleToggleDrawer(id?: any) {
@@ -186,19 +191,23 @@ const NinVerifications = () => {
         type: verificationRequestConstants.RequestDetails,
         payload: requestDetails[0],
       });
+      dispatch({
+        type: verificationRequestConstants.TurnOnSlideout,
+        payload: true,
+      });
     } else {
       setViewDetails(null);
+      dispatch({
+        type: verificationRequestConstants.TurnOnSlideout,
+        payload: false,
+      });
     }
-    dispatch({
-      type: verificationRequestConstants.RequestsAddNew,
-      payload: !turnOnSlideOut,
-    });
     setAnchor("right");
   }
   function handleClose() {
     dispatch({
-      type: verificationRequestConstants.RequestsAddNew,
-      payload: !turnOnSlideOut,
+      type: verificationRequestConstants.TurnOnSlideout,
+      payload: false,
     });
     setViewDetails(null);
     dispatch({
@@ -246,7 +255,6 @@ const NinVerifications = () => {
               setExportLoading(false);
           }
           if (data.error !== null) {
-            console.log(data.error, 'errror')
             enqueueSnackbar(data.error, {
               variant: "error",
             });
@@ -460,7 +468,7 @@ const NinVerifications = () => {
               </Button>
             </Grid>
           </div>
-        ) : (
+        ) : addNew && (
           <ErrorBoundary>
             <NinVerificationForm
               closeSlideOut={handleToggleDrawer}

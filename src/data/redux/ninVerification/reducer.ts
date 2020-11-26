@@ -7,6 +7,7 @@ export const verificationRequestConstants = {
     RequestDetails: "RequestDetails",
     RequestsAddNew: "RequestsAddNew",
     RequestsPostNew: "RequestsPostNew",
+    TurnOnSlideout:"TurnOnSlideout",
 
 }
 
@@ -15,13 +16,15 @@ export interface IVerificationRequestState {
     data: IVerificationRequest[]
     requestDetails?:IRequestDetails
     turnOnSlideOut: boolean
+    addNew:boolean
 }
 
 const initialState: IVerificationRequestState = {
     loading: false,
     data: [],
     requestDetails: undefined,
-    turnOnSlideOut: false
+    turnOnSlideOut: false,
+    addNew: false
 
 }
 
@@ -41,6 +44,9 @@ export default function reducer(state = initialState, action: any) {
         }
 
         case verificationRequestConstants.RequestsAddNew: {
+            return {...state, addNew: action.payload}
+        }
+        case verificationRequestConstants.TurnOnSlideout: {
             return {...state, turnOnSlideOut: action.payload}
         }
 

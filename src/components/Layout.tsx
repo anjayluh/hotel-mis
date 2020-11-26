@@ -152,7 +152,7 @@ const Layout: React.FC<IProps> = (props: any) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const isFormOpen = useSelector((state: IState) => state.verificationRequests.turnOnSlideOut);
+  const isFormOpen = useSelector((state: IState) => state.verificationRequests.addNew);
 
 
   function handleDrawerToggle() {
@@ -191,11 +191,19 @@ const Layout: React.FC<IProps> = (props: any) => {
       type: verificationRequestConstants.RequestsAddNew,
       payload: true,
     });
+    dispatch({
+      type: verificationRequestConstants.TurnOnSlideout,
+      payload: true,
+    });
   }
 
   function closeSlideOutForm() {
     dispatch({
       type: verificationRequestConstants.RequestsAddNew,
+      payload: false,
+    });
+    dispatch({
+      type: verificationRequestConstants.TurnOnSlideout,
       payload: false,
     });
   }

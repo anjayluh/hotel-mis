@@ -148,6 +148,10 @@ const NinVerificationForm = (props: IProps) => {
       type: verificationRequestConstants.RequestsAddNew,
       payload: false,
     });
+    dispatch({
+      type: verificationRequestConstants.TurnOnSlideout,
+      payload: false,
+    });
   }
   
   function handleChange(event: React.ChangeEvent<any>) {
