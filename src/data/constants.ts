@@ -75,7 +75,7 @@ const servers: any = {
     envScope: "openid profile roles offline_access capitalbank_BNVS_API"
   },
   capitalStaging: {
-    Auth: "https://bou-auth-api-staging.test001.laboremus.no",
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://capitalbank-niv-api-staging.test001.laboremus.no",
     devPortal: "https://capitalbank-niv-api-test.test001.laboremus.no",
     clientId: "capitalbank-backoffice:portal",
@@ -89,7 +89,7 @@ const servers: any = {
     envScope: "openid profile roles offline_access statebank_BNVS_API"
   },
   stateStaging: {
-    Auth: "https://bou-auth-api-staging.test001.laboremus.no",
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Nin: "https://statebank-niv-api-staging.test001.laboremus.no",
     devPortal: "https://statebank-niv-api-test.test001.laboremus.no",
     clientId: "statebank-backoffice:portal",
