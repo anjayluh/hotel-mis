@@ -40,4 +40,7 @@ export default snackbarMessages = {
   'NinVerification': {
     'new': 'New verification request has been made',
   },
+  'NiraCredentials': {
+    'new': 'Nira Credentials have been updated'
+  }
 }
