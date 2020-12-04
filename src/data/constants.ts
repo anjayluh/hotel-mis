@@ -53,12 +53,12 @@ const servers: any = {
     envScope: "openid profile roles offline_access laboremus_BNVS_API"
   },
   staging: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
-    Crm: "https://bou-niv-crmservice-staging.test001.laboremus.no",
+    Auth: "https://auth-api-test.bou.or.ug",
+    Crm: "https://crm-api-test.bou.or.ug",
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
     devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
-    clientId: "backoffice:portal",
-    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+    clientId: "laboremus-backoffice:portal",
+    envScope: "openid profile roles offline_access laboremus_BNVS_API"
   },
   sit: {
     Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
