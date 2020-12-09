@@ -15,6 +15,10 @@ interface IProps {
   initialValues?: any;
   submitText?: string;
   closeText?: string;
+  customSubmit?: any;
+  customSubmitClass?: any;
+  boxWraper?: any;
+  submitButtonGrid?: any;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -62,11 +66,11 @@ const XFormSimple = (props: IProps) => {
         render={({ submitForm, isSubmitting, values, errors, touched }) => (
           <Form>
             <Grid container spacing={1}>
-              <Grid item xs={12}>
+              <Grid item xs={12} className={props.submitButtonGrid ? props.submitButtonGrid : undefined}>
                 <Box p={1}>{props.children}</Box>
               </Grid>
-              <Grid item xs={12}>
-                <Box p={1} mt={16}>
+              <Grid item xs={12} className={props.submitButtonGrid ? props.submitButtonGrid : undefined}>
+                <Box p={1} mt={16} className={props.boxWraper ? props.boxWraper : undefined}>
                   <Grid container spacing={1}>
                     {props.onDelete && (
                       <Grid item>
@@ -94,9 +98,10 @@ const XFormSimple = (props: IProps) => {
                         </Button>
                       </Grid>
                     )}
-                    <Grid item className={classes.submit}>
+
+                    <Grid item className={props.customSubmit ? props.customSubmit : classes.submit}>
                       <Button
-                        className={classes.submitButton}
+                        className={props.customSubmitClass ? props.customSubmitClass : classes.submitButton}
                         variant="contained"
                         color="primary"
                         onClick={submitForm}

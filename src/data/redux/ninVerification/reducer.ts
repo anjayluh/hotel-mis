@@ -1,4 +1,4 @@
-import {IVerificationRequest} from "../../../modules/ninVerification/types";
+import {INiraCredentials, IVerificationRequest} from "../../../modules/ninVerification/types";
 import {IRequestDetails} from "../../../modules/ninVerification/types";
 
 export const verificationRequestConstants = {
@@ -8,6 +8,7 @@ export const verificationRequestConstants = {
     RequestsAddNew: "RequestsAddNew",
     RequestsPostNew: "RequestsPostNew",
     TurnOnSlideout:"TurnOnSlideout",
+    RequestPostNiraCredentials: "RequestPostNiraCredentials",
 
 }
 
@@ -15,6 +16,7 @@ export interface IVerificationRequestState {
     loading: boolean
     data: IVerificationRequest[]
     requestDetails?:IRequestDetails
+    niraCredentials?: INiraCredentials
     turnOnSlideOut: boolean
     addNew:boolean
 }
@@ -23,6 +25,7 @@ const initialState: IVerificationRequestState = {
     loading: false,
     data: [],
     requestDetails: undefined,
+    niraCredentials: undefined,
     turnOnSlideOut: false,
     addNew: false
 
@@ -53,6 +56,9 @@ export default function reducer(state = initialState, action: any) {
         case verificationRequestConstants.RequestsPostNew: {
             const newNinVerificationRequest: IVerificationRequest = action.payload
             return {...state, data: [newNinVerificationRequest, ...state.data]}
+        }
+        case verificationRequestConstants.RequestPostNiraCredentials: {
+            return {...state, niraCredentials: action.payload}
         }
 
         default: {

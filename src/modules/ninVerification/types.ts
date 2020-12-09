@@ -1,4 +1,4 @@
-import {BaseModel} from "../../data/types";
+import { BaseModel } from "../../data/types";
 
 export interface IWorkflowInclude {
     caseData?: boolean
@@ -20,8 +20,8 @@ export interface IWorkflowFilter {
     showAssigned?: boolean
     statuses?: string[]
     status?: string
-    from?: Date|null
-    to?: Date|null
+    from?: Date | null
+    to?: Date | null
     subStatuses?: string[]
     workflowTypes?: string[]
     include?: IWorkflowInclude
@@ -34,7 +34,7 @@ export interface IAction extends BaseModel {
     service: string,
     endPoint: string,
     template?: string,
-    errorTemplate?: string|null,
+    errorTemplate?: string | null,
     title: string
     description: string
     roles: string[]
@@ -105,7 +105,7 @@ export interface IVerificationRequest {
 }
 export interface IRequestDetailsStatus {
     order: number,
-    task:string,
+    task: string,
     status: string,
     date?: Date | null
 }
@@ -124,11 +124,18 @@ export interface IRequestDetails {
     givenNames?: string
     otherNames?: string
     status?: string
-    receivedFromNira?:string
+    receivedFromNira?: string
     receivedAt?: string
     submittedAt?: string
     billingUpdated?: any
     requestStatus: IRequestDetailsStatus[]
+}
+
+export interface INiraCredentials {
+    createdOn: string
+    expiresOn: null | string
+    id: string
+    username: string
 }
 
 export enum WorkflowStatus {
@@ -160,11 +167,11 @@ export enum WorkflowNinStatus {
 }
 
 export enum WorkflowRequestStatus {
-    RequestReceived='Request Received',
-    AuthenticationSuccessful='Authentication Successful',
-    RequestSubmitted='Request submitted to NIRA',
-    ResultReceived='Result Received',
-    ResponseReturned='Response Returned'
+    RequestReceived = 'Request Received',
+    AuthenticationSuccessful = 'Authentication Successful',
+    RequestSubmitted = 'Request submitted to NIRA',
+    ResultReceived = 'Result Received',
+    ResponseReturned = 'Response Returned'
 }
 
 export enum WorkflowSubStatus {
@@ -239,14 +246,14 @@ export interface IManualDecision {
 
 export const canRunAction = (actionName: string, taskName: string, workflow: IWorkflow) => {
     const taskIndex = workflow.tasks.findIndex(it => it.name === taskName)
-    const taskReady = (taskIndex ===0 || workflow.tasks[taskIndex-1].status === TaskStatus.Done)
-    if(!taskReady){
+    const taskReady = (taskIndex === 0 || workflow.tasks[taskIndex - 1].status === TaskStatus.Done)
+    if (!taskReady) {
         // Some tasks before this action are not yet complete
         return false;
     }
     const task = workflow.tasks[taskIndex]
     const actionIndex = task.actions.findIndex(it => it.name === actionName)
-    return (actionIndex ===0 || task.actions[actionIndex-1].status=== ActionStatus.Done)
+    return (actionIndex === 0 || task.actions[actionIndex - 1].status === ActionStatus.Done)
 
 }
 
