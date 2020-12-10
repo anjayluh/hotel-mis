@@ -181,9 +181,9 @@ const devPortal = env.devPortal;
 const NinVerificationURL = env.Nin;
 
 export const remoteRoutes = {
-  ninVerificationId: NinVerificationURL + "/api/request",
-  ninVerificationRequests: NinVerificationURL + "/api/request/search",
-  ninVerification: NinVerificationURL + "/api/national-id/verify",
+  ninVerificationId: NinVerificationURL + "/api/requests",
+  ninVerificationRequests: NinVerificationURL + "/api/requests",
+  ninVerification: NinVerificationURL + "/api/requests",
   niraNotification: NinVerificationURL + "/health",
   niraExport: NinVerificationURL + "/api/exports/",
   niraCredentials: NinVerificationURL + "/api/credentials",
