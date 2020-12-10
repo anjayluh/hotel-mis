@@ -111,10 +111,10 @@ const NinVerificationForm = (props: IProps) => {
       cardNumber: values.cardNumber,
     };
     post(
-      remoteRoutes.ninVerification,
+      remoteRoutes.ninRequests,
       toSave,
       (data) => {
-        get(remoteRoutes.ninVerificationId + `/${data.id}`, (resp) => {
+        get(remoteRoutes.ninRequests + `/${data.id}`, (resp) => {
           actions.resetForm();
           // Update table to show recently added request
           dispatch({

@@ -147,7 +147,7 @@ const NinVerifications = () => {
     });
 
     search(
-      remoteRoutes.ninVerificationRequests,
+      remoteRoutes.ninRequests,
       filter,
       (resp) => {
         setRowsPerPage(resp.pagination);
