@@ -134,24 +134,7 @@ const NiraPasswordDetails = () => {
         enqueueSnackbar(snackbarMessages.NiraCredentials.new, {
           variant: "success",
         });
-        console.log(resp, 'nin credentials')
-        // get(remoteRoutes.ninVerificationId + `/${data.id}`, (resp) => {
-        //   // actions.resetForm();
-        //   // Update table to show recently added request
-        //   dispatch({
-        //     type: verificationRequestConstants.RequestsPostNew,
-        //     payload: resp,
-        //   });
-        //   enqueueSnackbar(snackbarMessages.NinVerification.new, {
-        //     variant: "success",
-        //   });
-        //   // if (props.done) props.done();
-        // },
-        //   () => {
-        //     enqueueSnackbar(snackbarMessages.default.fail, {
-        //       variant: "error",
-        //     });
-        //   });
+        
       },
       () => {
         enqueueSnackbar(snackbarMessages.default.fail, {
@@ -178,13 +161,13 @@ const NiraPasswordDetails = () => {
         <ErrorBoundary>
           <Box display="flex">
             <Box className={classes.detailsItem}>
-              <Typography variant='body2'>{`Status: ${ActiveStatus}`}</Typography>
+              <Typography variant='body2'>{`Status: `}<span style={{fontWeight:'bold'}}>{`${ActiveStatus}`}</span></Typography>
             </Box>
             <Box className={classes.detailsItem}>
-              <Typography variant='body2'>{`Last Updated: ${printDate(niraCredentials && niraCredentials.createdOn)}`}</Typography>
+              <Typography variant='body2'>{`Last Updated: `}<span style={{fontWeight:'bold'}}>{`${printDate(niraCredentials && niraCredentials.createdOn)}`}</span></Typography>
             </Box>
             <Box className={classes.detailsItem}>
-              <Typography variant='body2'>{`Last Updated by: ${userProfile.name && userProfile.name}`}</Typography>
+              <Typography variant='body2'>{`Last Updated by: `}<span style={{fontWeight:'bold'}}>{`${userProfile.name && userProfile.name}`}</span></Typography>
             </Box>
             <Box className={classes.detailsItem}>
               <Typography variant='body2'>{`Expires in ${expireDay} days`}</Typography>
