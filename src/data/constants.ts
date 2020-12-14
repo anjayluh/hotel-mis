@@ -121,7 +121,7 @@ const servers: any = {
     Nin: "https://niv-api-uat.housingfinance.com",
     devPortal: "https://niv-api-uat.housingfinance.com",
     clientId: "housing-backoffice:portal",
-    envScope: "openid profile roles offline_access laboremus_BNVS_API"
+    envScope: "openid profile roles offline_access housing_BNVS_API"
   },
   fincaUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
