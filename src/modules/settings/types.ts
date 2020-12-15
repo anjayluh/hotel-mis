@@ -12,7 +12,12 @@ export interface IServiceCategory {
   name?: string;
   rates?: IRate[];
 }
-
+export interface INiraCredentials {
+    createdOn: string
+    expiresOn: null | string
+    id: string
+    username: string
+}
 export interface IWorkflowInclude {
     caseData?: boolean
     tasks?: boolean
