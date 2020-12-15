@@ -117,11 +117,11 @@ const servers: any = {
     envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
   },
   housingUat: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Auth: "https://auth-api-test.bou.or.ug",
     Nin: "https://niv-api-uat.housingfinance.com",
-    devPortal: "https://niv-portal-uat.housingfinance.com",
-    clientId: "backoffice:portal",
-    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+    devPortal: "https://niv-api-uat.housingfinance.com",
+    clientId: "housing-backoffice:portal",
+    envScope: "openid profile roles offline_access housing_BNVS_API"
   },
   fincaUat: {
     Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
