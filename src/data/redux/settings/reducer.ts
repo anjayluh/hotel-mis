@@ -1,24 +1,21 @@
 import {
-  IServiceCategory, INiraCredentials,
+  IServiceCategory,
 } from "../../../modules/settings/types";
 
 export const settingsConstants = {
   serviceCategoriesFetchAll: "serviceCategoriesFetchAll",
   settingsFetchLoading: "settingsFetchLoading",
   serviceCategoriesAddServiceCategory: "serviceCategoriesAddServiceCategory",
-  RequestPostNiraCredentials: "RequestPostNiraCredentials",
   };
 
 export interface ISettingsState {
   serviceCategories: IServiceCategory[];
   loading: boolean
-  niraCredentials?: INiraCredentials
 }
 
 const initialState: ISettingsState = {
   serviceCategories: [],
-  loading: false,
-  niraCredentials: undefined,
+  loading: false
 };
 
 export default function reducer(state = initialState, action: any) {
@@ -34,9 +31,6 @@ export default function reducer(state = initialState, action: any) {
         ...state,
         serviceCategories: [...state.serviceCategories, action.payload]
       };
-    }
-    case settingsConstants.RequestPostNiraCredentials: {
-      return {...state, niraCredentials: action.payload}
     }
     default: {
       return state;

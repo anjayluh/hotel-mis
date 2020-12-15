@@ -15,7 +15,6 @@ import NinVerifications from "../../../ninVerification/NinVerification";
 import { date } from "faker";
 import XFormSimple from "../../../../components/forms/XFormSimple";
 import * as yup from "yup";
-import { settingsConstants } from "../../../../data/redux/settings/reducer";
 
 export const schema = yup.object().shape(
   {
@@ -81,7 +80,7 @@ const NiraPasswordDetails = () => {
   const classes = useStyles();
   const userProfile = useSelector((state: IState) => state.core.user);
   const niraCredentials = useSelector(
-    (state: IState) => state.settings.niraCredentials
+    (state: IState) => state.verificationRequests.niraCredentials
   );
   const [data, setData] = useState({
     username: "",
@@ -98,7 +97,7 @@ const NiraPasswordDetails = () => {
       (resp) => {
         console.log(resp)
         dispatch({
-          type: settingsConstants.RequestPostNiraCredentials,
+          type: verificationRequestConstants.RequestPostNiraCredentials,
           payload: resp,
         });
       },
