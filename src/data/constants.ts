@@ -110,11 +110,11 @@ const servers: any = {
     envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
   },
   stanbicUat: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Auth: "https://auth-api-test.bou.or.ug",
     Nin: "https://nivapiuat.ug.sbicdirectory.com",
     devPortal: "https://nivapiuat.ug.sbicdirectory.com",
-    clientId: "backoffice:portal",
-    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+    clientId: "stanbic-backoffice:portal",
+    envScope: "openid profile roles offline_access stanbic_BNVS_API"
   },
   housingUat: {
     Auth: "https://auth-api-test.bou.or.ug",
