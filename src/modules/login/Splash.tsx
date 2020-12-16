@@ -8,6 +8,7 @@ import authService from "../../data/oidc/AuthService";
 import { User } from "oidc-client";
 import {useSnackbar} from "notistack";
 import snackbarMessages from "../../data/snackbarMessages";
+import { availableRoles } from "../../data/constants";
 
 export default function Splash() {
   const {enqueueSnackbar} = useSnackbar();
@@ -17,7 +18,7 @@ export default function Splash() {
       .getUser()
       .then((user: User | null) => {
         if (user && !user.expired) {
-          if(user.profile.role) {
+          if(user.profile.role && availableRoles.includes(user.profile.role.toLowerCase())) {
             dispatch(
               handleLogin({ user: user.profile, token: user.access_token })
             );
