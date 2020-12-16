@@ -36,3 +36,13 @@ const checkRoleArray =(role: string[], resource:string) => {
     }
     return false;
 }
+
+export const checkRoleAvailability = (role: IRole, availableRoles: string[]) => {
+    let resourceExists = false
+    if(Array.isArray(role)) {
+        resourceExists = role.some((role: any) => availableRoles.includes(role.toLowerCase()))
+    } else {
+        resourceExists = availableRoles.includes(`${role}`.toLowerCase())
+    }
+    return resourceExists
+} 

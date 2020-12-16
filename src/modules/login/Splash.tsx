@@ -9,6 +9,7 @@ import { User } from "oidc-client";
 import {useSnackbar} from "notistack";
 import snackbarMessages from "../../data/snackbarMessages";
 import { availableRoles } from "../../data/constants";
+import { checkRoleAvailability } from "../../utils/BOUSpecificHelpers";
 
 export default function Splash() {
   const {enqueueSnackbar} = useSnackbar();
@@ -18,7 +19,7 @@ export default function Splash() {
       .getUser()
       .then((user: User | null) => {
         if (user && !user.expired) {
-          if(user.profile.role && availableRoles.includes(user.profile.role.toLowerCase())) {
+          if(user.profile.role && checkRoleAvailability(user.profile.role, availableRoles)) {
             dispatch(
               handleLogin({ user: user.profile, token: user.access_token })
             );
