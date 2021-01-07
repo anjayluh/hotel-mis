@@ -126,15 +126,16 @@ const NinVerifications = () => {
   );
   const [rowsPerPage, setRowsPerPage] = useState({
     page: 1,
-    itemsPerPage: 5,
-    totalItems: 10,
+    itemsPerPage: 0,
+    totalItems: 0,
   });
   const [viewDetails, setViewDetails] = useState<any | null>(null);
   const [anchor, setAnchor] = useState<Anchor>("right");
   const [filter, setFilter] = useState<any>({});
   const [exportValues, setExportValues] = useState<any>({});
   const [requestStatus, setRequestStatus] = useState<string>("Processing");
-  // const [requestId, setRequestId] = useState<string>("");
+  const [randomString, setRandomString] = useState<string>("");
+  const [requestId, setRequestId] = useState<string>("");
 
   useEffect(() => {
     if(isEmpty(filter)) {
@@ -216,6 +217,38 @@ const NinVerifications = () => {
     });
   }
 
+  useEffect(() => {
+    get(
+      remoteRoutes.niraExport + `${requestId}/status`,
+      (res) => {
+        console.log(res.status, 'real status')
+        setRequestStatus(res.status);
+        console.log(requestStatus, 'alleged status')
+        if (res.status.toLowerCase() === "complete") {
+          setExportLoading(false);
+          setIsExport(false);
+          // setRandomString('books')
+          // setRequestId(res.id);
+          download(res.id)
+        }
+        if (res.error !== null) {
+          enqueueSnackbar(res.error, {
+            variant: "error",
+          });
+          setExportLoading(false);
+        }
+      },
+      (error) => {
+        enqueueSnackbar(error.response.body.title, {
+          variant: "error",
+        });
+        setExportLoading(false);
+      },
+      () => {
+        setExportLoading(false);
+      }
+    );
+  }, [requestId])
   function updateExport(values: any) {
     setExportValues({ ...filter, ...values });
     setExportLoading(false)
@@ -247,13 +280,19 @@ const NinVerifications = () => {
         remoteRoutes.niraExport,
         toSave,
         (data) => {
-          setRequestStatus(requestStatus);
-          if (requestStatus.toLowerCase() === "processing") {
-            checkStatus(data.id);
-          } else if(requestStatus.toLowerCase() === "complete") {
-              download(data.id)
-              setExportLoading(false);
+          // setRequestStatus(requestStatus);
+          if (data.id) {
+            setRequestId(data.id)
+            setExportLoading(true);
           }
+          // if (requestStatus.toLowerCase() === "processing") {
+          //   setExportLoading(true);
+          //   checkStatus(data.id);
+          // } 
+          // else if(requestStatus.toLowerCase() === "complete") {
+          //     download(data.id)
+          //     setExportLoading(false);
+          // }
           if (data.error !== null) {
             enqueueSnackbar(data.error, {
               variant: "error",
@@ -277,15 +316,19 @@ const NinVerifications = () => {
       );
     } else setShowExportInformationMessage(true); //Turns on warning message if no date values selected
   }
+  
 
   function getFileStatus(id: string) {
     get(
       remoteRoutes.niraExport + `${id}/status`,
       (res) => {
+        console.log(res.status, 'real status')
         setRequestStatus(res.status);
+        console.log(requestStatus, 'alleged status')
         if (res.status.toLowerCase() === "complete") {
           setExportLoading(false);
           setIsExport(false);
+          setRandomString('books')
           // setRequestId(res.id);
           download(res.id)
         }
@@ -309,18 +352,23 @@ const NinVerifications = () => {
   }
 
   function checkStatus(id: string) {
+    console.log(requestStatus)
     //Initial request
     getFileStatus(id);
     //If status is still Processing, retry every 10 seconds
     const interval = setInterval(function () {
+      console.log(requestStatus.toLowerCase(), 'processing')
       if (requestStatus.toLowerCase() === "processing") {
         getFileStatus(id);
+      } else {
+        clearInterval(interval)
       }
     }, 10000);
-
-    clearInterval(interval);
+    // clearInterval(interval)
+    
   }
   function download(requestId: string) {
+    console.log(rowsPerPage, 'random string')
     downLoad(
       remoteRoutes.niraExport + requestId + "/download",
       (res) => {
