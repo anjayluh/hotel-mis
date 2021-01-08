@@ -77,8 +77,9 @@ export const BarView = (props: any) => {
   function handleCloseMenu() {
     setAnchorEl(null);
   }
-  const formattedRole = (role: string) => {
-    return (role ? role.replace("_", " ").toLowerCase(): "");
+  const formattedRole = (role: string | string[]) => {
+    const roleString = Array.isArray(role) ? role.join(", ") : `${role}`;
+    return (roleString ? roleString.replace(/_/g, " ").toLowerCase(): "");
   };
   return (
     <div className={classes.marginLeftAuto}>

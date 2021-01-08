@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -39,6 +39,7 @@ import { GlobalHotKeys, configure } from "react-hotkeys";
 import { verificationRequestConstants } from "../data/redux/ninVerification/reducer";
 import NiraApiNotification from "../modules/ninVerification/NiraApiNotification";
 import { IState } from "../data/types";
+import { checkUserRole } from "../utils/BOUSpecificHelpers";
 
 // Allows hotkeys to work even when items are in focus
 configure({ignoreTags:[]});
@@ -151,9 +152,12 @@ const Layout: React.FC<IProps> = (props: any) => {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
+  const userProfile = useSelector((state: IState) => state.core.user);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isFormOpen = useSelector((state: IState) => state.verificationRequests.addNew);
-
+  const [userRole, setUserRole]: any = useState(
+    userProfile && userProfile.role
+  );
 
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
@@ -226,6 +230,7 @@ const Layout: React.FC<IProps> = (props: any) => {
       </div>
       <Divider />
       <List>
+      {checkUserRole(userRole,"IdVerification") && (
         <ListItem
           button
           onClick={onClick(localRoutes.ninVerification)}
@@ -242,7 +247,8 @@ const Layout: React.FC<IProps> = (props: any) => {
             }
           />
         </ListItem>
-
+      )}
+      {checkUserRole(userRole,"users") && (
         <ListItem
           button
           onClick={onClick(localRoutes.users)}
@@ -259,6 +265,8 @@ const Layout: React.FC<IProps> = (props: any) => {
             }
           />
         </ListItem>
+      )}
+      {checkUserRole(userRole,"settings") && (  
         <ListItem
           button
           onClick={onClick(localRoutes.settings)}
@@ -275,6 +283,7 @@ const Layout: React.FC<IProps> = (props: any) => {
             }
           />
         </ListItem>
+      )}  
         <a
           href={remoteRoutes.devPortal}
           target="_blank"
