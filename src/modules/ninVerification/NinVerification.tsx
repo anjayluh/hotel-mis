@@ -25,6 +25,9 @@ import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 import snackbarMessages from "../../data/snackbarMessages";
 import { isEmpty } from "lodash";
+import { async } from "validate.js";
+import { AnyMxRecord } from "dns";
+import { idCategories } from "../../data/comboCategories";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -133,15 +136,15 @@ const NinVerifications = () => {
   const [anchor, setAnchor] = useState<Anchor>("right");
   const [filter, setFilter] = useState<any>({});
   const [exportValues, setExportValues] = useState<any>({});
-  const [requestStatus, setRequestStatus] = useState<string>("Processing");
+  const [requestStatus, setRequestStatus] = useState<string>("processing");
   const [randomString, setRandomString] = useState<string>("");
   const [requestId, setRequestId] = useState<string>("");
 
   useEffect(() => {
-    if(isEmpty(filter)) {
+    if (isEmpty(filter)) {
       addNewRequest();
     }
-    
+
     dispatch({
       type: verificationRequestConstants.RequestsFetchLoading,
       payload: true,
@@ -217,38 +220,6 @@ const NinVerifications = () => {
     });
   }
 
-  useEffect(() => {
-    get(
-      remoteRoutes.niraExport + `${requestId}/status`,
-      (res) => {
-        console.log(res.status, 'real status')
-        setRequestStatus(res.status);
-        console.log(requestStatus, 'alleged status')
-        if (res.status.toLowerCase() === "complete") {
-          setExportLoading(false);
-          setIsExport(false);
-          // setRandomString('books')
-          // setRequestId(res.id);
-          download(res.id)
-        }
-        if (res.error !== null) {
-          enqueueSnackbar(res.error, {
-            variant: "error",
-          });
-          setExportLoading(false);
-        }
-      },
-      (error) => {
-        enqueueSnackbar(error.response.body.title, {
-          variant: "error",
-        });
-        setExportLoading(false);
-      },
-      () => {
-        setExportLoading(false);
-      }
-    );
-  }, [requestId])
   function updateExport(values: any) {
     setExportValues({ ...filter, ...values });
     setExportLoading(false)
@@ -257,7 +228,7 @@ const NinVerifications = () => {
   function handleFilter(values: any) {
     setFilter({ ...filter, ...values });
   }
-  function initiateExport() {
+  const initiateExport = () => {
     if (exportValues.from && exportValues.to) {
       setShowExportInformationMessage(false);
       setExportLoading(true);
@@ -275,32 +246,35 @@ const NinVerifications = () => {
         ninValidity: exportValues.ninValidity ? exportValues.ninValidity : null,
         matchingStatus: exportValues.matchingStatus ? exportValues.matchingStatus : null,
       };
-      
+
+      const getStatus = (resp: any, id: any) => {
+        if (resp === "processing") {
+          checkStatus(id, getStatus);
+        }
+        else if (resp === "complete") {
+          download(id)
+        }
+
+      }
       post(
         remoteRoutes.niraExport,
         toSave,
-        (data) => {
-          // setRequestStatus(requestStatus);
+        async (data) => {
+          // setRequestStatus(data.status.toLowerCase());
           if (data.id) {
             setRequestId(data.id)
             setExportLoading(true);
           }
-          // if (requestStatus.toLowerCase() === "processing") {
-          //   setExportLoading(true);
-          //   checkStatus(data.id);
-          // } 
-          // else if(requestStatus.toLowerCase() === "complete") {
-          //     download(data.id)
-          //     setExportLoading(false);
-          // }
           if (data.error !== null) {
             enqueueSnackbar(data.error, {
               variant: "error",
             });
           }
+          await checkStatus(data.id, getStatus)
+
         },
         (error) => {
-          if(error.response.body.errors["DateRange.To"]) {
+          if (error.response.body.errors["DateRange.To"]) {
             setIsError(true)
             setExportLoading(false)
             enqueueSnackbar(error.response.body.errors["DateRange.To"], {
@@ -311,68 +285,34 @@ const NinVerifications = () => {
               variant: "error",
             });
           }
-          
+
         }
       );
     } else setShowExportInformationMessage(true); //Turns on warning message if no date values selected
   }
-  
 
-  function getFileStatus(id: string) {
+  const checkStatus = (id: string, callback: any) => {
     get(
       remoteRoutes.niraExport + `${id}/status`,
       (res) => {
-        console.log(res.status, 'real status')
-        setRequestStatus(res.status);
-        console.log(requestStatus, 'alleged status')
-        if (res.status.toLowerCase() === "complete") {
-          setExportLoading(false);
-          setIsExport(false);
-          setRandomString('books')
-          // setRequestId(res.id);
-          download(res.id)
-        }
-        if (res.error !== null) {
-          enqueueSnackbar(res.error, {
-            variant: "error",
-          });
-          setExportLoading(false);
-        }
+        callback(res.status.toLowerCase(), id)
       },
       (error) => {
-        enqueueSnackbar(error.response.body.title, {
+        enqueueSnackbar(error.response && error.response.body.title, {
           variant: "error",
         });
         setExportLoading(false);
       },
-      () => {
-        setExportLoading(false);
-      }
+      () => undefined
     );
+
   }
 
-  function checkStatus(id: string) {
-    console.log(requestStatus)
-    //Initial request
-    getFileStatus(id);
-    //If status is still Processing, retry every 10 seconds
-    const interval = setInterval(function () {
-      console.log(requestStatus.toLowerCase(), 'processing')
-      if (requestStatus.toLowerCase() === "processing") {
-        getFileStatus(id);
-      } else {
-        clearInterval(interval)
-      }
-    }, 10000);
-    // clearInterval(interval)
-    
-  }
   function download(requestId: string) {
-    console.log(rowsPerPage, 'random string')
     downLoad(
       remoteRoutes.niraExport + requestId + "/download",
       (res) => {
-        const data = new Blob([res], {type: 'octet/stream'});
+        const data = new Blob([res], { type: 'octet/stream' });
         const csvURL = window.URL.createObjectURL(data);
         const fileName = `Report-${requestId}.zip`;
         let tempLink = document.createElement('a');
@@ -380,7 +320,7 @@ const NinVerifications = () => {
         tempLink.href = csvURL;
         tempLink.setAttribute('download', fileName);
         tempLink.click();
-
+        setExportLoading(false);
         enqueueSnackbar('Report Downloaded successfully', {
           variant: "success",
         });
@@ -413,22 +353,22 @@ const NinVerifications = () => {
             {loading ? (
               <Loading />
             ) : (
-              <Grid item xs={12}>
-                <ErrorBoundary>
-                  <XTable
-                    loading={loadingNew}
-                    headCells={ninVerificationHeadCells}
-                    data={data}
-                    initialRowsPerPage={10}
-                    usePagination={true}
-                    initialSortBy={"createdAt"}
-                    initialOrder="desc"
-                    handleSelection={handleToggleDrawer}
-                    hoverClass={classes.rowHover}
-                  />
-                </ErrorBoundary>
-              </Grid>
-            )}
+                <Grid item xs={12}>
+                  <ErrorBoundary>
+                    <XTable
+                      loading={loadingNew}
+                      headCells={ninVerificationHeadCells}
+                      data={data}
+                      initialRowsPerPage={10}
+                      usePagination={true}
+                      initialSortBy={"createdAt"}
+                      initialOrder="desc"
+                      handleSelection={handleToggleDrawer}
+                      hoverClass={classes.rowHover}
+                    />
+                  </ErrorBoundary>
+                </Grid>
+              )}
           </Box>
         </Grid>
         <Grid item xs={3} style={{ display: open ? "block" : "none" }}>
@@ -446,17 +386,17 @@ const NinVerifications = () => {
           <Box pt={3}>
             <Paper className={classes.exportPaper} elevation={0}>
               <ErrorBoundary>
-                  <Button
-                    disabled={isError ? isError : exportLoading}
-                    variant="outlined"
-                    color="primary"
-                    onClick={initiateExport}
-                    style={{ width: '100%' }}
-                  >
-                    {exportLoading
-                      ? "Processing data for export ..."
-                      : "Export data to excel"}
-                  </Button>
+                <Button
+                  disabled={isError ? isError : exportLoading}
+                  variant="outlined"
+                  color="primary"
+                  onClick={initiateExport}
+                  style={{ width: '100%' }}
+                >
+                  {exportLoading
+                    ? "Processing data for export ..."
+                    : "Export data to excel"}
+                </Button>
                 {/* {isExport && (
                   <Button
                     disabled={exportLoading}
