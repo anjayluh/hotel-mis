@@ -11,7 +11,13 @@ export const systemRoles = {
     teams: "contacts_teams",
   },
 };
-
+export const availableRoles = [
+  "participant_super_user", "nin_verifier"
+]
+export const resourceGroups:{[roleName:string]:string[]}  = {
+  participant_super_user: ["IdVerification", "users", "settings"],
+  nin_verifier: ["IdVerification"],
+};
 export const redux = {
   doLogin: "DO_LOGIN",
   doLogout: "DO_LOGOUT",
