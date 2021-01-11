@@ -11,7 +11,13 @@ export const systemRoles = {
     teams: "contacts_teams",
   },
 };
-
+export const availableRoles = [
+  "participant_super_user", "nin_verifier"
+]
+export const resourceGroups:{[roleName:string]:string[]}  = {
+  participant_super_user: ["IdVerification", "users", "settings"],
+  nin_verifier: ["IdVerification"],
+};
 export const redux = {
   doLogin: "DO_LOGIN",
   doLogout: "DO_LOGOUT",
@@ -96,18 +102,18 @@ const servers: any = {
     envScope: "openid profile roles offline_access statebank_BNVS_API"
   },
   prideUat: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Auth: "https://auth-api-test.bou.or.ug",
     Nin: "https://niv-api-uat.pride.co.ug",
     devPortal: "https://niv-api-uat.pride.co.ug",
-    clientId: "backoffice:portal",
-    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+    clientId: "pride-backoffice:portal",
+    envScope: "openid profile roles offline_access pride_BNVS_API"
   },
   eximUat: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Auth: "https://auth-api-test.bou.or.ug",
     Nin: "https://niv-api-uat.eximbank-ug.com",
     devPortal: "https://niv-api-uat.eximbank-ug.com",
-    clientId: "backoffice:portal",
-    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+    clientId: "exim-backoffice:portal",
+    envScope: "openid profile roles offline_access exim_BNVS_API"
   },
   stanbicUat: {
     Auth: "https://auth-api-test.bou.or.ug",
@@ -124,32 +130,32 @@ const servers: any = {
     envScope: "openid profile roles offline_access housingfinance_BNVS_API"
   },
   fincaUat: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Auth: "https://auth-api-test.bou.or.ug",
     Nin: "https://niv-api-uat.finca.com",
     devPortal: "https://niv-portal-uat.finca.com",
-    clientId: "backoffice:portal",
-    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+    clientId: "finca-backoffice:portal",
+    envScope: "openid profile roles offline_access finca_BNVS_API"
   },
   ecoUat: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Auth: "https://auth-api-test.bou.or.ug",
     Nin: "https://niv-portal-uat.ecobank.com",
     devPortal: "https://niv-portal-uat.ecobank.com",
-    clientId: "backoffice:portal",
-    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+    clientId: "eco-backoffice:portal",
+    envScope: "openid profile roles offline_access eco_BNVS_API"
   },
   dfcuUat: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Auth: "https://auth-api-test.bou.or.ug",
     Nin: "https://niv-api-uat.dfcugroup.com",
     devPortal: "https://niv-portal-uat.dfcugroup.com",
-    clientId: "backoffice:portal",
-    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+    clientId: "dfcu-backoffice:portal",
+    envScope: "openid profile roles offline_access dfcu_BNVS_API"
   },
   yakoUat: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
+    Auth: "https://auth-api-test.bou.or.ug",
     Nin: "https://niv-api-uat.yako.com",
     devPortal: "https://niv-portal-uat.yako.com",
-    clientId: "backoffice:portal",
-    envScope: "openid profile roles offline_access NationalIdVerification Gateway Crm BillingService IdentityServerApi"
+    clientId: "yako-backoffice:portal",
+    envScope: "openid profile roles offline_access yako_BNVS_API"
   },
   bouUat: {
     Auth: "https://auth-api-test.bou.or.ug",

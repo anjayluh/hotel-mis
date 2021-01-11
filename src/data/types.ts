@@ -17,6 +17,7 @@ export interface IUser {
   email: string;
   fullName: string;
   roles: string[];
+  role: string | string[];
   participantId: string;
 }
 
