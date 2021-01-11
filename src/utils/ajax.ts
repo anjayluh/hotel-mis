@@ -18,13 +18,7 @@ export const handleError = (err: any = {}, res: superagent.Response) => {
     const defaultMessage = "Invalid request, please contact admin";
     if ((res && res.forbidden) || (res && res.unauthorized)) {
         Toast.error("Authentication Error")
-        // enqueueSnackbar("Authentication Error", {
-        //     variant: 'error',
-        // });
-
-        // authService.login().then(()=>{
-        //
-        // })
+        
     } else if (res && res.badRequest) {
         const {message, errors} = res.body
         let msg = message||'' + '\n'
@@ -35,19 +29,13 @@ export const handleError = (err: any = {}, res: superagent.Response) => {
             }
         }
         Toast.error(msg || defaultMessage)
-        // enqueueSnackbar(msg || defaultMessage, {
-        //     variant: 'error',
-        // });
+        
     } else if ((res && res.clientError) || (res && res.notAcceptable) || (res && res.error)) {
         Toast.error(defaultMessage)
-        // enqueueSnackbar(defaultMessage, {
-        //     variant: 'error',
-        // });
+        
     } else if (res && res.body && res.body.message) {
         Toast.error(res.body.message)
-        // enqueueSnackbar(res.body.message, {
-        //     variant: 'error',
-        // });
+        
     } else {
         const message = err.message || 'Unknown error, contact admin'
         const finalMessage = message.indexOf("offline") !== -1
@@ -69,7 +57,8 @@ export const isAuthError = (err: any = {}, res: superagent.Response) => {
     return (res && res.forbidden) || (res && res.unauthorized)
 }
 
-export const handleResponse = (callBack: CallbackFunction, errorCallBack?: ErrorCallback, endCallBack?: EndCallback) => (err: any, res: superagent.Response) => {
+export const handleResponse = (callBack: CallbackFunction, errorCallBack?: ErrorCallback, endCallBack?: EndCallback) => (
+    err: any, res: superagent.Response) => {
     try {
         if (err || !res.ok) {
             if (errorCallBack) {

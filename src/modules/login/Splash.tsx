@@ -8,7 +8,7 @@ import authService from "../../data/oidc/AuthService";
 import { User } from "oidc-client";
 import {useSnackbar} from "notistack";
 import snackbarMessages from "../../data/snackbarMessages";
-import { availableRoles } from "../../data/constants";
+import { availableRoles, AUTH_TOKEN_KEY, AUTH_USER_KEY } from "../../data/constants";
 import { checkRoleAvailability } from "../../utils/BOUSpecificHelpers";
 
 export default function Splash() {
@@ -28,6 +28,10 @@ export default function Splash() {
               variant: 'error',
             });
             setTimeout(() => dispatch(handleLogout()), 1000 * 5)
+            localStorage.removeItem(AUTH_TOKEN_KEY);
+            localStorage.removeItem(AUTH_USER_KEY);
+            // localStorage.clear()
+            
           }
           
         } else {
