@@ -97,7 +97,6 @@ const ServiceCategoryForm = (props: IProps) => {
           payload: toSave,
         });
         if (props.done) props.done();
-        // Toast.info("Operation successful");
         enqueueSnackbar(snackbarMessages.serviceCategories.new, {
           variant: "success",
         });

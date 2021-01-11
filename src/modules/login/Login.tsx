@@ -12,7 +12,6 @@ import {handleLogin} from "../../data/redux/coreActions";
 import * as yup from "yup";
 import {post} from "../../utils/ajax";
 import {remoteRoutes} from "../../data/constants";
-import Toast from "../../utils/Toast";
 import XTextInput from "../../components/inputs/XTextInput";
 import {useLoginStyles} from "./loginStyles";
 import {Dispatch} from "redux";
@@ -27,7 +26,6 @@ function Login() {
         post(remoteRoutes.login, data, resp => {
             dispatch(handleLogin(resp))
         }, () => {
-            // Toast.error("Invalid username/password")
           enqueueSnackbar("Invalid username/password", {
             variant: 'error',
           });
