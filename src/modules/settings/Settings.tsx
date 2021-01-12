@@ -9,7 +9,6 @@ import Box from "@material-ui/core/Box";
 import ExpansionCard from "../../components/ExpansionCard";
 import AccountSettings from "./details/accountSettings/AccountSettings";
 import ParticipantType from "./details/participantType/ParticipantType";
-import PaymentType from "./details/paymentType/PaymentType";
 import ContactPersonRole from "./details/contactPersonRole/ContactPersonRole";
 import ServiceCategory from "./details/serviceCategory/ServiceCategory";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
@@ -53,12 +52,11 @@ const Settings = () => {
               </Grid>
             </Box>
             <Grid item xs={12}>
-              <ErrorBoundary><AccountSettings /></ErrorBoundary>
+              {/* <ErrorBoundary><AccountSettings /></ErrorBoundary> */}
               <ErrorBoundary><NiraPasswordStatus /></ErrorBoundary>
-              <ErrorBoundary><ParticipantType /></ErrorBoundary>
-              <ErrorBoundary><PaymentType /></ErrorBoundary>
+              {/* <ErrorBoundary><ParticipantType /></ErrorBoundary>
               <ErrorBoundary><ContactPersonRole /></ErrorBoundary>
-              <ErrorBoundary><ServiceCategory /></ErrorBoundary>
+              <ErrorBoundary><ServiceCategory /></ErrorBoundary> */}
             </Grid>
           </Box>
         </Grid>
