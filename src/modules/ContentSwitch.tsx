@@ -28,9 +28,9 @@ const ContentSwitch = () => {
       {checkUserRole(userRole,"IdVerification") && (
         <Route path={localRoutes.ninVerification} component={NinVerification} />
       )}
-      {checkUserRole(userRole,"users") && (
+      {/* {checkUserRole(userRole,"users") && (
         <Route path={localRoutes.users} component={Users} />
-      )}
+      )} */}
       {checkUserRole(userRole,"settings") && (
         <Route path={localRoutes.settings} component={Settings} />
       )}

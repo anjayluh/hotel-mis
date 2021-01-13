@@ -248,7 +248,7 @@ const Layout: React.FC<IProps> = (props: any) => {
           />
         </ListItem>
       )}
-      {checkUserRole(userRole,"users") && (
+      {/* {checkUserRole(userRole,"users") && (
         <ListItem
           button
           onClick={onClick(localRoutes.users)}
@@ -265,7 +265,7 @@ const Layout: React.FC<IProps> = (props: any) => {
             }
           />
         </ListItem>
-      )}
+      )} */}
       {checkUserRole(userRole,"settings") && (  
         <ListItem
           button
