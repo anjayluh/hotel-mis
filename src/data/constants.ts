@@ -59,7 +59,7 @@ const servers: any = {
     envScope: "openid profile roles offline_access laboremus_BNVS_API"
   },
   staging: {
-    Auth: "https://auth-api-test.bou.or.ug",
+    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
     Crm: "https://crm-api-test.bou.or.ug",
     Nin: "https://bou-niv-api-staging.test001.laboremus.no",
     devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
