@@ -2,13 +2,7 @@ import React, { Fragment } from "react";
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import {
-  ITask,
-  IWorkflow,
-  TaskStatus,
   IRequestDetails,
-  IRequestDetailsStatus,
-  WorkflowNinStatus,
-  ActionStatus,
 } from "../types";
 import DetailView, { IRec } from "../../../components/DetailView";
 import { printDateTime, printDate } from "../../../utils/dateHelpers";
@@ -21,8 +15,6 @@ import Divider from "@material-ui/core/Divider";
 import {
   errorColor,
   successColor,
-  warningColor,
-  pendingColor,
 } from "../../../theme/custom-colors";
 import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
 import NinResponseErrorMsg from "../NinResponseErrorMsg";
@@ -75,10 +67,10 @@ const Summary = ({ data }: IProps) => {
       task: "Verification Completed",
       date: data.receivedFromNira,
     },
-    {
-      task: "Billing Updated",
-      date: data.billingUpdated,
-    },
+    // {
+    //   task: "Billing Updated",
+    //   date: data.billingUpdated,
+    // },
   ];
 
   return (
