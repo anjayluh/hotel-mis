@@ -144,7 +144,7 @@ const servers: any = {
     envScope: "openid profile roles offline_access eco_BNVS_API"
   },
   dfcuUat: {
-    Auth: "https://auth-api-test.bou.or.ug",
+    Auth: "https://niv-auth-api-uat.dfcugroup.com",
     Nin: "https://niv-api-uat.dfcugroup.com",
     devPortal: "https://niv-portal-uat.dfcugroup.com",
     clientId: "dfcu-backoffice:portal",
