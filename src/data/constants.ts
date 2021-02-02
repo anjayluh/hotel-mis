@@ -132,7 +132,7 @@ const servers: any = {
   fincaUat: {
     Auth: "https://auth-api-test.bou.or.ug",
     Nin: "https://niv-api-uat.finca.com",
-    devPortal: "https://niv-portal-uat.finca.com",
+    devPortal: "https://niv-api-uat.finca.com",
     clientId: "finca-backoffice:portal",
     envScope: "openid profile roles offline_access finca_BNVS_API"
   },
@@ -146,21 +146,21 @@ const servers: any = {
   dfcuUat: {
     Auth: "https://niv-auth-api-uat.dfcugroup.com",
     Nin: "https://niv-api-uat.dfcugroup.com",
-    devPortal: "https://niv-portal-uat.dfcugroup.com",
+    devPortal: "https://niv-api-uat.dfcugroup.com",
     clientId: "dfcu-backoffice:portal",
     envScope: "openid profile roles offline_access dfcu_BNVS_API"
   },
   yakoUat: {
     Auth: "https://auth-api-test.bou.or.ug",
     Nin: "https://niv-api-uat.yako.com",
-    devPortal: "https://niv-portal-uat.yako.com",
+    devPortal: "https://niv-api-uat.yako.com",
     clientId: "yako-backoffice:portal",
     envScope: "openid profile roles offline_access yako_BNVS_API"
   },
   bouUat: {
     Auth: "https://auth-api-test.bou.or.ug",
     Nin: "https://niv-api-test.bou.or.ug",
-    devPortal: "https://niv-portal-test.bou.or.ug",
+    devPortal: "https://niv-api-test.bou.or.ug",
     clientId: "backoffice:portal",
     envScope: "openid profile roles offline_access bou_BNVS_API"
   },
