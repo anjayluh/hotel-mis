@@ -14,6 +14,12 @@ import { checkRoleAvailability } from "../../utils/BOUSpecificHelpers";
 export default function Splash() {
   const {enqueueSnackbar} = useSnackbar();
   const dispatch = useDispatch();
+
+  async function doLogout() {
+    dispatch(handleLogout());
+    await authService.logout();
+  }
+
   useEffect(() => {
     authService
       .getUser()
@@ -27,11 +33,7 @@ export default function Splash() {
             enqueueSnackbar(snackbarMessages.Login.inValidAccount, {
               variant: 'error',
             });
-            setTimeout(() => dispatch(handleLogout()), 1000 * 5)
-            localStorage.removeItem(AUTH_TOKEN_KEY);
-            localStorage.removeItem(AUTH_USER_KEY);
-            // localStorage.clear()
-            
+            setTimeout(() => dispatch(doLogout()), 1000 * 5)
           }
           
         } else {
