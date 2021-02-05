@@ -164,6 +164,20 @@ const servers: any = {
     clientId: "backoffice:portal",
     envScope: "openid profile roles offline_access bou_BNVS_API"
   },
+  equityUat: {
+    Auth: "https://niv-auth-api-uat.equitybank.co.ug",
+    Nin: "https://niv-api-uat.equitybank.co.ug",
+    devPortal: "https://niv-api-uat.equitybank.co.ug",
+    clientId: "equity-backoffice:portal",
+    envScope: "openid profile roles offline_access equity_BNVS_API"
+  },
+  ecobankUat: {
+    Auth: "https://niv-auth-api-uat.ecobank.com",
+    Nin: "https://niv-api-uat.ecobank.com",
+    devPortal: "https://niv-api-uat.ecobank.com",
+    clientId: "ecobank-backoffice:portal",
+    envScope: "openid profile roles offline_access ecobank_BNVS_API"
+  },
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
     clientId: "bou:backoffice",
