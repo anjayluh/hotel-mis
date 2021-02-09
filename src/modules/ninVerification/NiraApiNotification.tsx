@@ -87,15 +87,15 @@ const NiraApiNotification = () => {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const [healthStatus, sethealthStatus] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [showPaper, setShowPaper] = useState(false);
   const [refresh, setRefresh] = useState<boolean>(false);
   useEffect(() => {
+    setLoading(true);
     getHealthStatus();
   }, []);
 
   function getHealthStatus() {
-    setLoading(true);
     get(
       remoteRoutes.niraNotification,
       (res) => {
@@ -165,7 +165,7 @@ const NiraApiNotification = () => {
         variant="default"
         size="small"
         label={
-          healthStatus === "Healthy" ? "NIRA is online" : "NIRA is offline"
+          loading ? 'Connecting...': (healthStatus === "Healthy" ? "NIRA is online" : "NIRA is offline")
         }
         onDelete={showInformation}
         onClick={showInformation}
@@ -179,7 +179,7 @@ const NiraApiNotification = () => {
         }
         className={classes.chip}
         style={{
-          backgroundColor: healthStatus === "Healthy" ? "#43a047" : "#d33030",
+          backgroundColor: loading ? "#6D6E71" : (healthStatus === "Healthy" ? "#43a047" : "#d33030"),
         }}
       />
     </span>
