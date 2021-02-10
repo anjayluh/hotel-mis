@@ -37,7 +37,7 @@ const IdleTimerWrapper = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [popUpOpen, setPopUp] = useState(false)
-  const InitialtimeToLogout = 10;//time in seconds
+  const InitialtimeToLogout = 2*10;//time in seconds
   const [timeRemaining, setTimeRemaining] = useState(InitialtimeToLogout)
   const deactivateText =
     "For security reasons, your connection timesout after you've been inactive for a while. Click continue to stay signed in.";
@@ -82,7 +82,7 @@ const IdleTimerWrapper = () => {
   }
 
   const countDown = () => {
-    let timeToCountDown = 10
+    let timeToCountDown = 2*10 
     setTimeRef.current  = setInterval(function() {
       timeToCountDown -= 1;
       setTimeRemaining(timeToCountDown)
