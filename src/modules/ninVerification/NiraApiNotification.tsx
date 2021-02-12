@@ -179,7 +179,7 @@ const NiraApiNotification = () => {
         }
         className={classes.chip}
         style={{
-          backgroundColor: loading ? "#6D6E71" : (healthStatus === "Healthy" ? "#43a047" : "#d33030"),
+          backgroundColor: loading ? "rgb(35 46 58)" : (healthStatus === "Healthy" ? "#43a047" : "#d33030"),
         }}
       />
     </span>
