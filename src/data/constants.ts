@@ -15,8 +15,8 @@ export const availableRoles = [
   "participant_super_user", "nin_verifier"
 ]
 export const resourceGroups:{[roleName:string]:string[]}  = {
-  participant_super_user: ["IdVerification", "users", "settings"],
-  nin_verifier: ["IdVerification"],
+  participant_super_user: ["IdVerification", "users", "settings", "help"],
+  nin_verifier: ["IdVerification", "help"],
 };
 export const redux = {
   doLogin: "DO_LOGIN",
@@ -41,6 +41,7 @@ export const localRoutes = {
   settings: "/settings",
   users: "/users",
   usersDetails: "/users/:userId",
+  help: "/help",
 };
 
 const servers: any = {

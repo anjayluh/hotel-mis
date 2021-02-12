@@ -11,6 +11,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import Collapse from '@material-ui/core/Collapse';
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import ReceiptIcon from "@material-ui/icons/Receipt";
@@ -19,6 +20,7 @@ import BookmarkIcon from "@material-ui/icons/Bookmark";
 import CodeIcon from "@material-ui/icons/Code";
 import PeopleIcon from "@material-ui/icons/People";
 import SettingsIcon from "@material-ui/icons/Settings";
+import HelpIcon from "@material-ui/icons/Help";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import {
@@ -40,6 +42,9 @@ import { verificationRequestConstants } from "../data/redux/ninVerification/redu
 import NiraApiNotification from "../modules/ninVerification/NiraApiNotification";
 import { IState } from "../data/types";
 import { checkUserRole } from "../utils/BOUSpecificHelpers";
+import Help from "../modules/help/Help";
+import HelpMenu from "../modules/help/HelpMenu";
+import { ExpandLess, ExpandMore } from "@material-ui/icons";
 
 // Allows hotkeys to work even when items are in focus
 configure({ignoreTags:[]});
@@ -158,6 +163,7 @@ const Layout: React.FC<IProps> = (props: any) => {
   const [userRole, setUserRole]: any = useState(
     userProfile && userProfile.role
   );
+  const [open, setOpen] = React.useState(false);
 
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
@@ -188,6 +194,11 @@ const Layout: React.FC<IProps> = (props: any) => {
     } = props;
     return pathMatches(path, pathStr);
   };
+
+  const handleHelp = () => {
+    onClick(localRoutes.help)
+    setOpen(!open);
+  }
 
   function addNewRequest() {
     props.history.push(localRoutes.ninVerification);
@@ -229,7 +240,7 @@ const Layout: React.FC<IProps> = (props: any) => {
         </div>
       </div>
       <Divider />
-      <List>
+      <List> 
       {checkUserRole(userRole,"IdVerification") && (
         <ListItem
           button
@@ -284,6 +295,26 @@ const Layout: React.FC<IProps> = (props: any) => {
           />
         </ListItem>
       )}  
+      {checkUserRole(userRole,"help") && (  
+        <ListItem
+          button
+          onClick={handleHelp}
+          selected={isSelected(localRoutes.help)}
+        >
+          <ListItemIcon>
+            <HelpIcon className={getCls(localRoutes.help)} />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <Typography className={getCls(localRoutes.help)}>
+                Help
+              </Typography>
+            }
+          />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+      )} 
+      <HelpMenu open={open} />
         <a
           href={remoteRoutes.devPortal}
           target="_blank"
@@ -303,6 +334,7 @@ const Layout: React.FC<IProps> = (props: any) => {
             />
           </ListItem>
         </a>
+        
       </List>
 
       <div className={classes.bottom}>
