@@ -113,7 +113,7 @@ const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
   // }
 
   const initiators = ["Angella", "Evie", "TimK"];
-  const statuses = ["All", "Pending", "Completed", "Failed", "Rejected"];
+  const statuses = ["All", "Pending", "Completed", "Failed"];
   const matchingStatuses = ["All", "Match", "Mismatch"];
 
   return (
