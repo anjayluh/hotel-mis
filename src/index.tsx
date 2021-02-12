@@ -9,7 +9,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import theme from "./theme";
-import './assets/fonts/style.css'
+import './assets/fonts/font.css'
 
 ReactDOM.render(
     <Provider store={store}>
