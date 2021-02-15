@@ -137,11 +137,11 @@ const servers: any = {
     envScope: "openid profile roles offline_access finca_BNVS_API"
   },
   ecoUat: {
-    Auth: "https://auth-api-test.bou.or.ug",
-    Nin: "https://niv-portal-uat.ecobank.com",
-    devPortal: "https://niv-portal-uat.ecobank.com",
-    clientId: "eco-backoffice:portal",
-    envScope: "openid profile roles offline_access eco_BNVS_API"
+    Auth: "https://niv-auth-api-uat.ecobank.com",
+    Nin: "https://niv-api-uat.ecobank.com",
+    devPortal: "https://niv-api-uat.ecobank.com",
+    clientId: "ecobank-backoffice:portal",
+    envScope: "openid profile roles offline_access ecobank_BNVS_API"
   },
   dfcuUat: {
     Auth: "https://niv-auth-api-uat.dfcugroup.com",
@@ -170,13 +170,6 @@ const servers: any = {
     devPortal: "https://niv-api-uat.equitybank.co.ug",
     clientId: "equity-backoffice:portal",
     envScope: "openid profile roles offline_access equity_BNVS_API"
-  },
-  ecobankUat: {
-    Auth: "https://niv-auth-api-uat.ecobank.com",
-    Nin: "https://niv-api-uat.ecobank.com",
-    devPortal: "https://niv-api-uat.ecobank.com",
-    clientId: "ecobank-backoffice:portal",
-    envScope: "openid profile roles offline_access ecobank_BNVS_API"
   },
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
