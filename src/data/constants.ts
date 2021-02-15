@@ -116,9 +116,9 @@ const servers: any = {
     envScope: "openid profile roles offline_access exim_BNVS_API"
   },
   stanbicUat: {
-    Auth: "https://auth-api-test.bou.or.ug",
-    Nin: "https://nivapiuat.ug.sbicdirectory.com",
-    devPortal: "https://nivapiuat.ug.sbicdirectory.com",
+    Auth: "https://niv-auth-api-uat.stanbic.com",
+    Nin: "https://niv-api-uat.stanbic.com",
+    devPortal: "https://niv-api-uat.stanbic.com",
     clientId: "stanbic-backoffice:portal",
     envScope: "openid profile roles offline_access stanbic_BNVS_API"
   },
