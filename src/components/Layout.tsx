@@ -47,16 +47,19 @@ import HelpMenu from "../modules/help/HelpMenu";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 
 // Allows hotkeys to work even when items are in focus
-configure({ignoreTags:[]});
+configure({ ignoreTags: [] });
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     bottom: {
-      position: "absolute",
-      bottom: 28,
-      left: 23,
+      // position: "absolute",
+      // bottom: 28,
+      // left: 23,
+      margin: '0 24px',
+      marginTop: '215px',
+      marginBottom: '30px',
     },
     root: {
       display: "flex",
@@ -195,9 +198,11 @@ const Layout: React.FC<IProps> = (props: any) => {
     return pathMatches(path, pathStr);
   };
 
-  const handleHelp = () => {
-    onClick(localRoutes.help)
+  const handleHelp = async () => {
+    await onClick(localRoutes.help)
+    props.history.push(localRoutes.help)
     setOpen(!open);
+
   }
 
   function addNewRequest() {
@@ -240,26 +245,26 @@ const Layout: React.FC<IProps> = (props: any) => {
         </div>
       </div>
       <Divider />
-      <List> 
-      {checkUserRole(userRole,"IdVerification") && (
-        <ListItem
-          button
-          onClick={onClick(localRoutes.ninVerification)}
-          selected={isSelected(localRoutes.ninVerification)}
-        >
-          <ListItemIcon>
-            <VerifiedUserIcon className={getCls(localRoutes.ninVerification)} />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={getCls(localRoutes.ninVerification)}>
-                ID Verification
+      <List>
+        {checkUserRole(userRole, "IdVerification") && (
+          <ListItem
+            button
+            onClick={onClick(localRoutes.ninVerification)}
+            selected={isSelected(localRoutes.ninVerification)}
+          >
+            <ListItemIcon>
+              <VerifiedUserIcon className={getCls(localRoutes.ninVerification)} />
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                <Typography className={getCls(localRoutes.ninVerification)}>
+                  ID Verification
               </Typography>
-            }
-          />
-        </ListItem>
-      )}
-      {/* {checkUserRole(userRole,"users") && (
+              }
+            />
+          </ListItem>
+        )}
+        {/* {checkUserRole(userRole,"users") && (
         <ListItem
           button
           onClick={onClick(localRoutes.users)}
@@ -277,44 +282,44 @@ const Layout: React.FC<IProps> = (props: any) => {
           />
         </ListItem>
       )} */}
-      {checkUserRole(userRole,"settings") && (  
-        <ListItem
-          button
-          onClick={onClick(localRoutes.settings)}
-          selected={isSelected(localRoutes.settings)}
-        >
-          <ListItemIcon>
-            <SettingsIcon className={getCls(localRoutes.settings)} />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={getCls(localRoutes.settings)}>
-                Settings
+        {checkUserRole(userRole, "settings") && (
+          <ListItem
+            button
+            onClick={onClick(localRoutes.settings)}
+            selected={isSelected(localRoutes.settings)}
+          >
+            <ListItemIcon>
+              <SettingsIcon className={getCls(localRoutes.settings)} />
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                <Typography className={getCls(localRoutes.settings)}>
+                  Settings
               </Typography>
-            }
-          />
-        </ListItem>
-      )}  
-      {checkUserRole(userRole,"help") && (  
-        <ListItem
-          button
-          onClick={handleHelp}
-          selected={isSelected(localRoutes.help)}
-        >
-          <ListItemIcon>
-            <HelpIcon className={getCls(localRoutes.help)} />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={getCls(localRoutes.help)}>
-                Help
+              }
+            />
+          </ListItem>
+        )}
+        {checkUserRole(userRole, "help") && (
+          <ListItem
+            button
+            onClick={onClick(localRoutes.help)}
+            selected={isSelected(localRoutes.help)}
+          >
+            <ListItemIcon>
+              <HelpIcon className={getCls(localRoutes.help)} />
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                <Typography className={getCls(localRoutes.help)}>
+                  Help
               </Typography>
-            }
-          />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-      )} 
-      <HelpMenu open={open} />
+              }
+            />
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+        )}
+        <HelpMenu open={isSelected(localRoutes.help)} />
         <a
           href={remoteRoutes.devPortal}
           target="_blank"
@@ -334,7 +339,7 @@ const Layout: React.FC<IProps> = (props: any) => {
             />
           </ListItem>
         </a>
-        
+
       </List>
 
       <div className={classes.bottom}>
@@ -346,7 +351,7 @@ const Layout: React.FC<IProps> = (props: any) => {
   return (
     <div className={classes.root}>
       {/* keyboard shortcut to open new request form */}
-      <GlobalHotKeys keyMap={keyMap} handlers={isFormOpen ? handleClose : handleOpen} allowChanges  />
+      <GlobalHotKeys keyMap={keyMap} handlers={isFormOpen ? handleClose : handleOpen} allowChanges />
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar} color="default">
         <Toolbar>
@@ -361,7 +366,7 @@ const Layout: React.FC<IProps> = (props: any) => {
           <div className={classes.logoHolder}>
             <img src={logo} alt="logo" className={classes.logo} />
           </div>
-          
+
           {!props.hideRequestButton && (
             <div>
               <Button

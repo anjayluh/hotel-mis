@@ -95,7 +95,6 @@ const NiraPasswordDetails = () => {
     get(
       remoteRoutes.niraCurrentCredentials,
       (resp) => {
-        console.log(resp)
         dispatch({
           type: verificationRequestConstants.RequestPostNiraCredentials,
           payload: resp,
@@ -120,7 +119,6 @@ const NiraPasswordDetails = () => {
   }
 
   function handleSubmit() {
-    console.log(niraCredentials && niraCredentials, 'credentials')
     post(
       remoteRoutes.niraCredentials,
       data,
@@ -134,7 +132,7 @@ const NiraPasswordDetails = () => {
         enqueueSnackbar(snackbarMessages.NiraCredentials.new, {
           variant: "success",
         });
-        
+
       },
       () => {
         enqueueSnackbar(snackbarMessages.default.fail, {
@@ -154,20 +152,20 @@ const NiraPasswordDetails = () => {
   const oneDay = (1000 * 60 * 60 * 24)
   const expireDay = Math.round(Math.abs((Date.parse(dateToExpire) - Date.parse(`${new Date()}`)) / oneDay));
   const ActiveStatus = Date.parse(`${new Date()}`) > Date.parse(dateToExpire) ? 'INACTIVE' : 'ACTIVE'
-  console.log(expireDay, 'dayssss')
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} className={classes.detailsWrapper}>
         <ErrorBoundary>
           <Box display="flex">
             <Box className={classes.detailsItem}>
-              <Typography variant='body2'>{`Status: `}<span style={{fontWeight:'bold'}}>{`${ActiveStatus}`}</span></Typography>
+              <Typography variant='body2'>{`Status: `}<span style={{ fontWeight: 'bold' }}>{`${ActiveStatus}`}</span></Typography>
             </Box>
             <Box className={classes.detailsItem}>
-              <Typography variant='body2'>{`Last Updated: `}<span style={{fontWeight:'bold'}}>{`${printDate(niraCredentials && niraCredentials.createdOn)}`}</span></Typography>
+              <Typography variant='body2'>{`Last Updated: `}<span style={{ fontWeight: 'bold' }}>{`${printDate(niraCredentials && niraCredentials.createdOn)}`}</span></Typography>
             </Box>
             <Box className={classes.detailsItem}>
-              <Typography variant='body2'>{`Last Updated by: `}<span style={{fontWeight:'bold'}}>{`${userProfile.name && userProfile.name}`}</span></Typography>
+              <Typography variant='body2'>{`Last Updated by: `}<span style={{ fontWeight: 'bold' }}>{`${userProfile.name && userProfile.name}`}</span></Typography>
             </Box>
             <Box className={classes.detailsItem}>
               <Typography variant='body2'>{`Expires in ${expireDay} days`}</Typography>
