@@ -54,12 +54,9 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     bottom: {
-      // position: "absolute",
-      // bottom: 28,
-      // left: 23,
-      margin: '0 24px',
-      marginTop: '215px',
-      marginBottom: '30px',
+      position: "absolute",
+      bottom: 28,
+      left: 23,
     },
     root: {
       display: "flex",
@@ -175,6 +172,9 @@ const Layout: React.FC<IProps> = (props: any) => {
   const onClick = (path: string) => () => {
     if (path === localRoutes.ninVerification) {
       addNewRequest();
+    }
+    if (path === localRoutes.help) {
+      setOpen(!open)
     }
     const { history, onClose } = props;
     history.push(path);
@@ -296,30 +296,30 @@ const Layout: React.FC<IProps> = (props: any) => {
                 <Typography className={getCls(localRoutes.settings)}>
                   Settings
               </Typography>
-              }
-            />
-          </ListItem>
-        )}
-        {checkUserRole(userRole, "help") && (
-          <ListItem
-            button
-            onClick={onClick(localRoutes.help)}
-            selected={isSelected(localRoutes.help)}
-          >
-            <ListItemIcon>
-              <HelpIcon className={getCls(localRoutes.help)} />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography className={getCls(localRoutes.help)}>
-                  Help
+            }
+          />
+        </ListItem>
+      )}  
+      {checkUserRole(userRole,"help") && (  
+        <ListItem
+          button
+          onClick={onClick(localRoutes.help)}
+          selected={isSelected(localRoutes.help)}
+        >
+          <ListItemIcon>
+            <HelpIcon className={getCls(localRoutes.help)} />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <Typography className={getCls(localRoutes.help)}>
+                Help
               </Typography>
               }
             />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
         )}
-        <HelpMenu open={isSelected(localRoutes.help)} />
+        <HelpMenu open={open} />
         <a
           href={remoteRoutes.devPortal}
           target="_blank"
