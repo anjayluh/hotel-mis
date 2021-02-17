@@ -102,7 +102,7 @@ const servers: any = {
     envScope: "openid profile roles offline_access statebank_BNVS_API"
   },
   prideUat: {
-    Auth: "https://auth-api-test.bou.or.ug",
+    Auth: "https://niv-auth-api-uat.pride.co.ug",
     Nin: "https://niv-api-uat.pride.co.ug",
     devPortal: "https://niv-api-uat.pride.co.ug",
     clientId: "pride-backoffice:portal",
@@ -123,7 +123,7 @@ const servers: any = {
     envScope: "openid profile roles offline_access stanbic_BNVS_API"
   },
   housingUat: {
-    Auth: "https://auth-api-test.bou.or.ug",
+    Auth: "https://niv-auth-api-uat.housingfinance.com",
     Nin: "https://niv-api-uat.housingfinance.com",
     devPortal: "https://niv-api-uat.housingfinance.com",
     clientId: "housingfinance-backoffice:portal",
