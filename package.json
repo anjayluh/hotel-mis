@@ -76,7 +76,6 @@
     "build-dfcu-uat": "set REACT_APP_ENV=dfcuUat && react-scripts build",
     "build-yako-uat": "set REACT_APP_ENV=yakoUat && react-scripts build",
     "build-equity-uat": "set REACT_APP_ENV=equityUat && react-scripts build",
-    "build-ecobank-uat": "set REACT_APP_ENV=ecobankUat && react-scripts build",
     "build-bou-uat": "set REACT_APP_ENV=bouUat && react-scripts build",
     "build-capital-test": "set REACT_APP_ENV=capitalTest && react-scripts build",
     "build-capital-staging": "set REACT_APP_ENV=capitalStaging && react-scripts build",
