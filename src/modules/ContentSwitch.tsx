@@ -8,6 +8,7 @@ import Layout from "../components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { checkUserRole } from "../utils/BOUSpecificHelpers";
 import { IState } from "../data/types";
+import Help from "./help/Help";
 
 const ContentSwitch = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ const ContentSwitch = () => {
       )} */}
       {checkUserRole(userRole,"settings") && (
         <Route path={localRoutes.settings} component={Settings} />
+      )}
+      {checkUserRole(userRole,"help") && (
+        <Route path={localRoutes.help} component={Help} />
       )}
         <Route component={NoMatch} />
       
