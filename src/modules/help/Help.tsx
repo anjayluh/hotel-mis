@@ -1,10 +1,10 @@
 import * as React from "react";
-import { createStyles, makeStyles, Theme, Grid, Box, Typography, Paper, Card, CardActionArea, CardMedia, CardContent } from "@material-ui/core";
+import { createStyles, makeStyles, Theme, Grid, Box, Typography, Paper, Card, CardActionArea, CardMedia, CardContent, ListItemIcon } from "@material-ui/core";
 import Layout from "../../components/Layout";
 import { List } from "@material-ui/core";
 import { ListItem } from "@material-ui/core";
 import { ListItemText } from "@material-ui/core";
-import placeholderImg from '../../assets/bou_logo.svg'
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,10 +82,13 @@ const Help = () => {
                   </Box>
                 </Grid>
                 <Grid item sm={12}>
-                  <Box>
+                  <Box py={2}>
                     <Typography variant="h5">Login</Typography>
                     <List>
                         <ListItem className={classes.listItem}>
+                        {/* <ListItemIcon>
+                          <FiberManualRecordIcon fontSize="small" />
+                        </ListItemIcon> */}
                           <ListItemText primary={
                             <Typography>
                               On the welcome page, click sign in.
@@ -140,14 +143,14 @@ const Help = () => {
                 </Typography>
                 <Grid container>
                   <Grid item>
-                    <Box>
+                    <Box py={1}>
                       <Typography variant="h6">
                         Add user
                       </Typography>
                       <List>
                       <ListItem className={classes.listItem}>
                         <ListItemText primary={
-                          <Typography>•	Click the “Add User” button to create a new user in the system. </Typography>
+                          <Typography>Click the “Add User” button to create a new user in the system. </Typography>
                         }/>
                       </ListItem>
                       <ListItem className={classes.listItem}>
