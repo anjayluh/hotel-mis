@@ -130,7 +130,7 @@ const servers: any = {
     envScope: "openid profile roles offline_access housingfinance_BNVS_API"
   },
   fincaUat: {
-    Auth: "https://auth-api-test.bou.or.ug",
+    Auth: "https://niv-auth-api-uat.finca.com",
     Nin: "https://niv-api-uat.finca.com",
     devPortal: "https://niv-api-uat.finca.com",
     clientId: "finca-backoffice:portal",
@@ -151,7 +151,7 @@ const servers: any = {
     envScope: "openid profile roles offline_access dfcu_BNVS_API"
   },
   yakoUat: {
-    Auth: "https://auth-api-test.bou.or.ug",
+    Auth: "https://niv-auth-api-uat.yako.com",
     Nin: "https://niv-api-uat.yako.com",
     devPortal: "https://niv-api-uat.yako.com",
     clientId: "yako-backoffice:portal",
