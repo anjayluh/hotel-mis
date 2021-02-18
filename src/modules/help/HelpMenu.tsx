@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
           webkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)'
         },
         '&::-webkit-scrollbar-thumb': {
-          backgroundColor: 'rgba(0,0,0,.1)',
+          backgroundColor: grey[600],
           outline: '1px solid slategrey'
         },
         backgroundColor: themeBackground,
