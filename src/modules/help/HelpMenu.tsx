@@ -18,10 +18,17 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
     },
     subTitle: {
-        // paddingLeft: 73,
+        '&:hover': {
+            cursor: 'auto',
+          },
     },
     subTitleText: {
         color: grey[50],
+        fontSize: 12,
+    },
+    subHeading: {
+        fontSize: 'inherit',
+        color: 'inherit'
     },
     subText: {
         color: grey[500],
@@ -154,21 +161,21 @@ const HelpMenu = ({open}: IProps) => {
         <List component="div" disablePadding className={classes.helpItem}>
           <ListItem button  onClick={() => (setOpenUser(!openUser))} className={classes.subTitle}>
             <ListItemText 
-                primary={<Typography color='inherit'>USER MANAGEMENT</Typography>} 
+                primary={<Typography className={classes.subHeading}>USER MANAGEMENT</Typography>} 
                 className={classes.subTitleText} 
             />
           </ListItem>
           <UserManagement openUser={openUser} />
           <ListItem button onClick={() => (setOpenPortal(!openPortal))} className={classes.subTitle}>
             <ListItemText
-                primary={<Typography color='inherit'>FI PORTAL</Typography>} 
+                primary={<Typography className={classes.subHeading}>FI PORTAL</Typography>} 
                 className={classes.subTitleText}
              />
           </ListItem>
           <FiPortal openPortal={openPortal}/>
           <ListItem button onClick={() => (setOpenMobile(!openMobile))} className={classes.subTitle}>
             <ListItemText
-                primary={<Typography color='inherit'>MOBILE</Typography>} 
+                primary={<Typography className={classes.subHeading}>MOBILE</Typography>} 
                 className={classes.subTitleText}
              />
           </ListItem>

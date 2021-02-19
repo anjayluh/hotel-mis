@@ -5,6 +5,7 @@ import { List } from "@material-ui/core";
 import { ListItem } from "@material-ui/core";
 import { ListItemText } from "@material-ui/core";
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import typography from "../../theme/typography";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,7 +22,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     imageWrapper: {
       "& img":{
-        width: '500px'
+        width: '500px',
+        maxWidth: '100%',
       }
 
     },
@@ -106,10 +108,9 @@ const Help = () => {
                     <Box mb={2} display="flex" className={classes.imageWrapper}>
                       <Card className={classes.root}>
                         <CardActionArea>
-                            <Box display="flex">
+                        <Box display="flex">
                               <Box pr={1}>
                                 <CardMedia
-                                  
                                   image={"http://via.placeholder.com/640x360"}
                                   component="img"
                                   title="Login"
@@ -125,6 +126,10 @@ const Help = () => {
                                 />
                               </Box>
                             </Box>
+                            <Grid container>
+                              <Grid item sm={12} lg={6}></Grid>
+                              <Grid item></Grid>
+                            </Grid>
                             
                             <CardContent style={{padding: 8}}>
                               <Typography variant="body2" color="textSecondary" component="p">
@@ -929,6 +934,357 @@ const Help = () => {
                     </Box>
                     </Box>
                   </Grid>
+              </Grid>
+              <Grid container item>
+                <Grid item xs={12} >
+                  <Box py={1}>
+                    <Typography variant="h4">
+                    MOBILE APPLICATION
+                    </Typography>
+                    <Typography variant="h4">
+                      Introduction to the mobile app
+                    </Typography>
+                  </Box>
+                </Grid> 
+                <Grid item xs={12} >
+                  <Box py={1}>
+                    <Typography variant="h5">
+                    Application overview
+                    </Typography>
+                  <Box>
+                    <Typography>
+                      This NIVS mobile application will enable its users to automatically capture national ID card information
+                      by scanning the barcode at the back of an original (NIRA-issued) national ID.
+                    </Typography>
+                    <Typography>
+                      Once these details are scanned and captured by the mobile application, 
+                      the user will be able to compare those details stored in the barcode on the backside against those displayed on the front of the national ID card.
+                    </Typography>
+                    <Typography>
+                      The mobile application can work with an external fingerprint scanner (scanner specifications described later in this document) 
+                      to capture the fingerprint of the cardholder and match that with the fingerprint stored on the barcode.
+                    </Typography>
+                    <Typography>
+                      The technology can also be embedded in other existing applications, such as on-boarding systems. Please contact Laboremus for further information.
+                      This document describes how to use the mobile application to carry out the above operations.
+                    </Typography>
+                  </Box>
+                    </Box>
+                </Grid>
+                <Grid item>
+                  <Box py={1}>
+                    <Typography variant="h5">
+                      Application overview
+                    </Typography>
+                      <Box>
+                        <Typography variant="h5">
+                        System Requirements
+                        </Typography>
+                        <Typography>
+                        The application will run on the following hardware specifications.
+                        </Typography>
+                        <List>
+                          <ListItem className={classes.listItem}>
+                            <ListItemText primary={
+                              <Typography>
+                                Preferred fingerprint scanner – 
+                              </Typography>
+                            }
+                            secondary={
+                              <Box>
+                                <Typography>Manufacturer: Evolute Systems Pvt. Ltd</Typography>
+                                <Typography>Model: IDENTI5</Typography>
+                                <Typography>STQ certified</Typography>
+                                <Typography>ISO SC37 19794/2/4</Typography>
+                                <Typography>Bluetooth version 2.1/4.0 with EDR</Typography>
+                              </Box>
+                            }/>
+                          </ListItem>
+                          <ListItem>
+                            <ListItemText primary={
+                              <Typography>
+                                Bluetooth version 2.1/4.0 with EDR
+                              </Typography>
+                            }/>
+                          </ListItem>
+                        </List>
+                      </Box>
+                      <Box>
+                        <Typography variant="h5">
+                          Software Requirements
+                        </Typography>
+                        <Typography>
+                        The application will run normally on an Android enabled mobile phone with the following specifications
+                        </Typography>
+                        <List>
+                          <ListItem className={classes.listItem}>
+                            <ListItemText primary={
+                              <Typography>Android version 5.1 or higher </Typography>
+                            }/>
+                          </ListItem>
+                        </List>
+                      </Box>
+                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box py={1}>
+                    <Typography variant="h4">
+                      APP INSTALLATION 
+                    </Typography>
+                    <Typography variant="h5">
+                      Downloading the mobile application
+                    </Typography>
+                    <Typography>
+                      The application can be downloaded from the Google Play Store and installed onto a compatible Android mobile phone. 
+                      To install the application, follow the instructions below.
+                    </Typography>
+                    <Box>
+                      <Typography style={{fontWeight:'bold'}}>
+                      * In the testing phase of the project, the mobile app will be available to a select few for testing. 
+                      Make sure you are among the selected testers before carrying on with this user manual.
+                      </Typography>
+                      <List>
+                        <ListItem className={classes.listItem}>
+                          <ListItemText>
+                            On your mobile phone, open the Google Play Store
+                          </ListItemText>
+                        </ListItem>
+                        <ListItem className={classes.listItem}>
+                          <ListItemText>
+                          Enter the text “Uganda National ID Verifier” and tap search to find the application in the Google Play Store
+                          </ListItemText>
+                        </ListItem>
+                        <ListItem className={classes.listItem}>
+                          <ListItemText>
+                            Select the application with the name that matches the above text exactly.
+                          </ListItemText>
+                        </ListItem>
+                        <ListItem className={classes.listItem}>
+                          <ListItemText>
+                            Select the “Install” option to begin the application installation.
+                          </ListItemText>
+                        </ListItem>
+                        <ListItem className={classes.listItem}>
+                          <ListItemText>
+                          Once the installation of the mobile application is complete, you will be notified about this by your mobile phone.
+                          </ListItemText>
+                        </ListItem>
+                      </List>
+                    </Box>
+                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box py={1}>
+                    <Typography variant="h4">
+                      ACCESS AND LOGIN 
+                    </Typography>
+                    <Typography variant="h5">
+                      Signing in
+                    </Typography>
+                    <Typography>
+                      You will need an internet connection to download the application and authenticate it for the first time. 
+                      After creating the PIN, the application will then be able to work offline.
+                    </Typography>
+                    <Box py={0.5}>
+                      <Typography>
+                        To launch the app, tap the application icon on the home screen of your Android device. 
+                      </Typography>
+                      <Box py={0.5}>
+                        <Typography>
+                        The first time you sign in to the app, you will be required to use the username and password given to you by your systems administrator. 
+                        You will then be required to create a PIN for subsequent login attempts. Follow the process described below to accomplish this.
+                        </Typography>
+                      </Box>
+                      <List>
+                        <ListItem className={classes.listItem}>
+                          <ListItemText primary={
+                            <Typography>
+                              Tap the “Log in” button and then enter your username and password.
+                            </Typography>
+                            
+                          }
+                          secondary={
+                            <Box>
+                              mobile login screen images =========
+                            </Box>
+                          }/>
+                        
+                        </ListItem>
+                        <ListItem className={classes.listItem}>
+                          <ListItemText primary={
+                            <Typography>
+                              To create a PIN, enter the same 5-digit PIN in both fields shown below and tap the “LOGIN” button
+                            </Typography>
+                          }
+                          secondary={
+                            <Box>
+                              mobile pin login screen images =========
+                            </Box>
+                          }/>
+                          
+                        </ListItem>
+                      </List>
+                      <Typography>
+                        On the subsequent sign in from the same Android device, 
+                        you will only be required to use the PIN to log in to the mobile application as shown in the screenshot above.
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box py={1}>
+                      <Typography variant="h5">
+                        Application brief
+                      </Typography>
+                      <Typography>
+                      After successful login to the mobile application for the first time, 
+                      you will see the following screens that give a brief about the functionality of the application.
+                      </Typography>
+                      <Box>
+                        ========image======
+                      </Box>
+                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box py={1}>
+                      <Typography variant="h5">
+                        Forgot PIN
+                      </Typography>
+                      <Typography>
+                      In case you have forgotten your PIN, you will follow the below instructions.
+                      </Typography>
+                      <List>
+                        <ListItem className={classes.listItem}>
+                          <ListItemText primary={
+                            <Typography>
+                              Click Reset PIN
+                            </Typography>
+                          }/>
+                        </ListItem>
+                        <ListItem className={classes.listItem}>
+                          <ListItemText primary={
+                            <Typography>
+                              Enter username and password (given to you by the system administrator)
+                            </Typography>
+                          }/>
+                        </ListItem>
+                        <ListItem className={classes.listItem}>
+                          <ListItemText primary={
+                            <Typography>
+                              Set new PIN
+                            </Typography>
+                          }/>
+                        </ListItem>
+                      </List>
+                      <Box>
+                        <Typography>
+                        Note: To reset the PIN you will need an Internet connection. Once the PIN has been reset, the app can again work offline.
+                        </Typography>
+                      </Box>
+                      <Box>
+                      <figure style={{marginLeft: 0, marginRight: 0}} className={classes.imageWrapper}>
+                        <img
+                        src="http://via.placeholder.com/640x360"
+                        alt="The beautiful MDN logo."/>
+                        <figcaption>Figure 27: Mobile app return user login screen</figcaption>
+                      </figure>
+                        {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      </Box>
+                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box py={1}>
+                    <Typography variant="h5">
+                    Failed sign in attempts
+                    </Typography>
+                    <Typography>
+                      Should you try to sign in with a wrong PIN 10 consecutive times, 
+                      you will be locked out of the application and asked to try to log in later. 
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box py={1}>
+                    <Typography variant="h5">
+                      Signing out 
+                    </Typography>
+                    <Typography>
+                      To sign out of the application, press the “Menu” button in the top right corner of the app and tap on the Logout link.
+                    </Typography>
+                    <Box>
+                      <figure style={{marginLeft: 0, marginRight: 0}} className={classes.imageWrapper}>
+                        <img
+                        src="http://via.placeholder.com/640x360"
+                        alt="The beautiful MDN logo."/>
+                        <figcaption>Figure 28: Logout link</figcaption>
+                      </figure>
+                        {/* <img src='http://via.placeholder.com/640x360'/> */}
+                    </Box>
+                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box py={1}>
+                    <Typography variant="h5">
+                      SCANNING A NATIONAL ID 
+                    </Typography>
+                    <Typography>
+                    To scan the details of a national ID, follow the instructions and illustrations below.
+                    </Typography>
+                    <Box px={2}>
+                      <Typography>
+                        Ensure that you are in a well-lit environment.
+                      </Typography>
+                      <Typography>
+                        Place ID backside up on a flat surface
+                      </Typography>
+                    </Box>
+                    <Typography>
+                    Note: On the first time you connect, you will have to allow the app access to your camera.
+                    </Typography>
+                    <Box px={2}>
+                      <Typography>
+                        With the mobile app on the “Scan ID screen”, tap the “Scan ID” button
+                      </Typography>
+                      <Typography>
+                        Hold the phone steady as the camera scans the barcode on the national ID.
+                      </Typography>
+                      <Typography>
+                        The mobile app will automatically scan the national ID and transition to the next screen when it is successful.
+                      </Typography>
+                      <Box display="flex">
+                      
+                        <figure style={{marginLeft: 0}} className={classes.imageWrapper}>
+                            <img
+                            src="http://via.placeholder.com/1200"
+                            alt="The beautiful MDN logo."/>
+                            <figcaption>Figure 29: Scan ID screen </figcaption>
+                        </figure>
+                        {/* <img src='http://via.placeholder.com/640x360'/> */}
+                        <figure style={{marginLeft: 0, marginRight: 0}} className={classes.imageWrapper}>
+                          <img
+                          src="http://via.placeholder.com/1200"
+                          alt="The beautiful MDN logo."/>
+                          <figcaption>Figure 30:Barcode ID backside</figcaption>
+                        </figure>
+                        {/* <img src='http://via.placeholder.com/1200'/> */}
+                    
+                      </Box>
+                      <Typography>
+                        Confirm ID card details and either finish or proceed to Verify the fingerprint.
+                      </Typography>
+                      <figure style={{marginLeft: 0, marginRight: 0}} className={classes.imageWrapper}>
+                        <img
+                        src="http://via.placeholder.com/640x360"
+                        alt="The beautiful MDN logo."/>
+                        <figcaption>Figure 31:Scanned results screen</figcaption>
+                      </figure>
+                    </Box>
+                    <Typography>
+                      Note: The app will only scan an original copy of the national ID.
+                    </Typography>
+                    
+                  </Box>
+                </Grid>
               </Grid>
             </Paper>
             </Box>
