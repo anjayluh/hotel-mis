@@ -75,7 +75,7 @@ const Help = () => {
               </Box>
               <Grid container item>
                 <Grid item xs={12} >
-                  <Box py={2}>
+                  <Box py={2} id="userIntroduction">
                     <Typography variant="h4">
                       AUTHENTICATION AND USER MANAGEMENT
                   </Typography>
@@ -145,7 +145,7 @@ const Help = () => {
                   </Box>
                 </Grid>
                 <Grid item sm={12}>
-                  <Typography variant="h5">Home page</Typography>
+                  <Typography variant="h5" id="userManageUsers">Home page</Typography>
                   <Typography>
                     The home page has a table of users created on the system. The buttons on the page are as explained below.
                   </Typography>
@@ -341,7 +341,7 @@ const Help = () => {
                     <Typography variant="h4">
                       FI PORTAL
                       </Typography>
-                    <Typography variant="h4">
+                    <Typography variant="h4" id="fiPortalIntro">
                       INTRODUCTION
                       </Typography>
                   </Box>
@@ -437,7 +437,7 @@ const Help = () => {
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
-                    <Typography variant="h4">
+                    <Typography variant="h4" id="fiAccessLogin">
                       ACCESS AND LOGIN
                   </Typography>
                     <Typography>
@@ -690,22 +690,22 @@ const Help = () => {
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
-                    <Typography variant="h4">
+                    <Typography variant="h4" id="fiMainPage">
                       HOME PAGE
                   </Typography>
                     <Box>
                       <Typography>
                         Once you have successfully logged in, the page below will be displayed.
                     </Typography>
-                    <Box>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 15: Home page fields</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
-                    </Box>
+                      <Box>
+                        <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
+                          <img
+                            src="http://via.placeholder.com/640x360"
+                            alt="The beautiful MDN logo." />
+                          <figcaption>Figure 15: Home page fields</figcaption>
+                        </figure>
+                        {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      </Box>
                     </Box>
                   </Box>
                 </Grid>
@@ -1017,7 +1017,7 @@ const Help = () => {
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
-                    <Typography variant="h4">
+                    <Typography variant="h4" id="fiSettings">
                       SETTINGS
                     </Typography>
                     <Typography>
@@ -1029,7 +1029,7 @@ const Help = () => {
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
-                    <Typography variant="h4">
+                    <Typography variant="h4" id="fiApiDocs">
                       DEVELOPER PORTAL AND API DOCUMENTATION
                     </Typography>
                     <Box>
@@ -1046,15 +1046,15 @@ const Help = () => {
                       </Typography>
                     </Box>
                     <Box>
-                    <Box>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 20: Developer portal</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
-                    </Box>
+                      <Box>
+                        <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
+                          <img
+                            src="http://via.placeholder.com/640x360"
+                            alt="The beautiful MDN logo." />
+                          <figcaption>Figure 20: Developer portal</figcaption>
+                        </figure>
+                        {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      </Box>
                       <Typography>
                         Note: The application will be activated in a new window or on a new browser card.
                         If the message about blocking pop-up windows appears, click on the message, and allow the pop-up window to open.
@@ -1066,7 +1066,7 @@ const Help = () => {
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={1}>
-                    <Typography variant="h4">
+                    <Typography variant="h4" id="mobileIntroduction">
                       MOBILE APPLICATION
                     </Typography>
                     <Typography variant="h4">
@@ -1156,7 +1156,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h4">
+                    <Typography variant="h4" id="mobileApiInstallation">
                       APP INSTALLATION
                     </Typography>
                     <Typography variant="h5">
@@ -1203,7 +1203,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h4">
+                    <Typography variant="h4" id="mobileAccessLogin">
                       ACCESS AND LOGIN
                     </Typography>
                     <Typography variant="h5">
@@ -1298,24 +1298,24 @@ const Help = () => {
                       After successful login to the mobile application for the first time,
                       you will see the following screens that give a brief about the functionality of the application.
                       </Typography>
-                      <Box display="flex">
+                    <Box display="flex">
 
-                        <figure style={{ marginLeft: 0 }} className={classes.imageWrapper}>
-                          <img
-                            src="http://via.placeholder.com/1200"
-                            alt="The beautiful MDN logo." />
-                          <figcaption>Figure 26:Scan ID summary screen </figcaption>
-                        </figure>
-                        {/* <img src='http://via.placeholder.com/640x360'/> */}
-                        <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                          <img
-                            src="http://via.placeholder.com/1200"
-                            alt="The beautiful MDN logo." />
-                          <figcaption>Figure 25: Match fingerprint summary screen </figcaption>
-                        </figure>
-                        {/* <img src='http://via.placeholder.com/1200'/> */}
+                      <figure style={{ marginLeft: 0 }} className={classes.imageWrapper}>
+                        <img
+                          src="http://via.placeholder.com/1200"
+                          alt="The beautiful MDN logo." />
+                        <figcaption>Figure 26:Scan ID summary screen </figcaption>
+                      </figure>
+                      {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
+                        <img
+                          src="http://via.placeholder.com/1200"
+                          alt="The beautiful MDN logo." />
+                        <figcaption>Figure 25: Match fingerprint summary screen </figcaption>
+                      </figure>
+                      {/* <img src='http://via.placeholder.com/1200'/> */}
 
-                        </Box>
+                    </Box>
                   </Box>
                 </Grid>
                 <Grid item>
@@ -1397,7 +1397,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" id="mobileScanning">
                       SCANNING A NATIONAL ID
                     </Typography>
                     <Typography>
@@ -1549,7 +1549,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" id="mobileFingerprint">
                       Scanning fingerprint
                     </Typography>
                     <Typography>
@@ -1639,7 +1639,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" id="mobileScanHistory">
                       SCAN HISTORY
                     </Typography>
                     <Typography>
@@ -1671,7 +1671,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" id="mobileBasicTroubleshooting">
                       BASIC TROUBLESHOOTING
                     </Typography>
                     <List>
