@@ -506,7 +506,7 @@ const Help = () => {
               </Grid>
               <Grid container item>
                 <Grid item xs={12} >
-                  <Box py={2}>
+                  <Box pb={2}>
                     <Typography  variant="h3"  className={classes.subHeading} id="fiAccessLogin">
                       Access & Login
                   </Typography>
@@ -1223,7 +1223,7 @@ const Help = () => {
                   </Box>
                 </Grid>
                 <Grid item xs={12} >
-                  <Box py={1}>
+                  <Box>
                     <Typography variant="h4" className={classes.subHeadingMargin}>
                       Application overview
                     </Typography>
@@ -1309,7 +1309,7 @@ const Help = () => {
                   </Box>
                 </Grid>
                 <Grid item>
-                  <Box py={1}>
+                  <Box>
                     <Typography  variant="h3"  className={classes.subHeading} id="mobileApiInstallation">
                       App Installation
                     </Typography>
