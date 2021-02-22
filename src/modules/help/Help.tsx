@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
     pageHeading: {
       display: "flex",
     },
+    subHeading: {
+      marginBottom: 15,
+    },
     imageWrapper: {
       "& img": {
         width: '500px',
@@ -69,16 +72,16 @@ const Help = () => {
               <Box pb={2}>
                 <Grid container>
                   <Grid item sm={12} className={classes.pageHeading}>
-                    <Typography variant="h4">Help</Typography>
+                    <Typography variant="h2">Bank of Uganda National Identity Verification System Manual</Typography>
                   </Grid>
                 </Grid>
               </Box>
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2} id="userIntroduction">
-                    <Typography variant="h4">
-                      AUTHENTICATION AND USER MANAGEMENT
-                  </Typography>
+                    <Typography variant="h3"  className={classes.subHeading}>
+                      Authentication and User Management
+                    </Typography>
                     <Typography>
                       This service will be used by the system administrator to create and manage the users for their institution.
                       The system administrator will be provided with credentials
@@ -145,7 +148,12 @@ const Help = () => {
                   </Box>
                 </Grid>
                 <Grid item sm={12}>
-                  <Typography variant="h5" id="userManageUsers">Home page</Typography>
+                  <Box>
+                    <Typography variant="h3"  id="userManageUsers" className={classes.subHeading}>
+                        Manage Users
+                      </Typography>
+                    <Typography variant="h4" >Home page</Typography>
+                  </Box>
                   <Typography>
                     The home page has a table of users created on the system. The buttons on the page are as explained below.
                   </Typography>
@@ -161,7 +169,7 @@ const Help = () => {
                   <Grid container>
                     <Grid item>
                       <Box py={1}>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                           Add user
                       </Typography>
                         <List>
@@ -206,7 +214,7 @@ const Help = () => {
 
                         <Grid item>
                           <Box>
-                            <Typography variant="h6">
+                            <Typography variant="h5">
                               Edit User details
                             </Typography>
                             <List>
@@ -255,9 +263,9 @@ const Help = () => {
                         </Grid>
                         <Grid item>
                           <Box>
-                            <Typography variant="h6">
+                            <Typography variant="h5">
                               Deactivate User
-                      </Typography>
+                            </Typography>
                             <List>
                               <ListItem className={classes.listItem}>
                                 <ListItemText primary={
@@ -338,11 +346,11 @@ const Help = () => {
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
-                    <Typography variant="h4">
-                      FI PORTAL
+                    <Typography  variant="h3"  className={classes.subHeading}>
+                      FI Portal
                       </Typography>
-                    <Typography variant="h4" id="fiPortalIntro">
-                      INTRODUCTION
+                    <Typography  variant="h3"  className={classes.subHeading} id="fiPortalIntro">
+                      Introduction
                       </Typography>
                   </Box>
                 </Grid>
@@ -437,8 +445,8 @@ const Help = () => {
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
-                    <Typography variant="h4" id="fiAccessLogin">
-                      ACCESS AND LOGIN
+                    <Typography  variant="h3"  className={classes.subHeading} id="fiAccessLogin">
+                      Access & Login
                   </Typography>
                     <Typography>
                       Access to BNIV Portal is provided via your web browser.
@@ -690,8 +698,8 @@ const Help = () => {
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
-                    <Typography variant="h4" id="fiMainPage">
-                      HOME PAGE
+                    <Typography  variant="h3"  className={classes.subHeading} id="fiMainPage">
+                      Main Page
                   </Typography>
                     <Box>
                       <Typography>
@@ -711,7 +719,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h4">
                       ID verification page
                     </Typography>
                     <Typography>
@@ -730,7 +738,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h6">To make a request</Typography>
+                    <Typography variant="h5">To make a request</Typography>
                     <List>
                       <ListItem className={classes.listItem}>
                         <ListItemText primary={
@@ -762,7 +770,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h6">Verification Requests Table </Typography>
+                    <Typography variant="h5">Verification Requests Table </Typography>
                     <Box>
                       <Typography>
                         The home page shows a table of previous requests made by your institution, with the most recent appearing on top.
@@ -776,7 +784,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h6">Request details</Typography>
+                    <Typography variant="h5">Request details</Typography>
                     <List>
                       <ListItem className={classes.listItem}>
                         <ListItemText primary={
@@ -1017,8 +1025,8 @@ const Help = () => {
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
-                    <Typography variant="h4" id="fiSettings">
-                      SETTINGS
+                    <Typography  variant="h3"  className={classes.subHeading} id="fiSettings">
+                      Settings
                     </Typography>
                     <Typography>
                       Note: Module is under development.
@@ -1029,8 +1037,8 @@ const Help = () => {
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
-                    <Typography variant="h4" id="fiApiDocs">
-                      DEVELOPER PORTAL AND API DOCUMENTATION
+                    <Typography  variant="h3"  className={classes.subHeading} id="fiApiDocs">
+                      Developer Portal and API documentation
                     </Typography>
                     <Box>
                       <Typography>
@@ -1066,17 +1074,17 @@ const Help = () => {
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={1}>
-                    <Typography variant="h4" id="mobileIntroduction">
-                      MOBILE APPLICATION
+                    <Typography  variant="h3"  className={classes.subHeading} id="mobileIntroduction">
+                      Mobile Application
                     </Typography>
-                    <Typography variant="h4">
+                    <Typography  variant="h3"  className={classes.subHeading}>
                       Introduction to the mobile app
                     </Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={12} >
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h4">
                       Application overview
                     </Typography>
                     <Box>
@@ -1101,13 +1109,13 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
-                      Application overview
+                    <Typography variant="h4">
+                      System Requirements
                     </Typography>
                     <Box>
                       <Typography variant="h5">
-                        System Requirements
-                        </Typography>
+                      Hardware Requirements
+                      </Typography>
                       <Typography>
                         The application will run on the following hardware specifications.
                         </Typography>
@@ -1156,8 +1164,8 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h4" id="mobileApiInstallation">
-                      APP INSTALLATION
+                    <Typography  variant="h3"  className={classes.subHeading} id="mobileApiInstallation">
+                      App Installation
                     </Typography>
                     <Typography variant="h5">
                       Downloading the mobile application
@@ -1203,8 +1211,8 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h4" id="mobileAccessLogin">
-                      ACCESS AND LOGIN
+                    <Typography  variant="h3"  className={classes.subHeading} id="mobileAccessLogin">
+                      Access & Login
                     </Typography>
                     <Typography variant="h5">
                       Signing in
@@ -1397,8 +1405,8 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5" id="mobileScanning">
-                      SCANNING A NATIONAL ID
+                    <Typography  variant="h3"  className={classes.subHeading} id="mobileScanning">
+                      Scanning a National ID
                     </Typography>
                     <Typography>
                       To scan the details of a national ID, follow the instructions and illustrations below.
@@ -1459,8 +1467,8 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
-                      FINGERPRINT VERIFICATION
+                    <Typography  variant="h3"  className={classes.subHeading}>
+                      Finger Print Verification
                     </Typography>
                     <Typography>
                       Connecting scanning device to the phone
@@ -1639,8 +1647,8 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5" id="mobileScanHistory">
-                      SCAN HISTORY
+                    <Typography  variant="h3"  className={classes.subHeading} id="mobileScanHistory">
+                      Scan History
                     </Typography>
                     <Typography>
                       To view a list of previously scanned ID cards, tap the scan history link in the drop-down menu
@@ -1671,8 +1679,8 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5" id="mobileBasicTroubleshooting">
-                      BASIC TROUBLESHOOTING
+                    <Typography  variant="h3"  className={classes.subHeading} id="mobileBasicTroubleshooting">
+                      Basic Troubleshooting
                     </Typography>
                     <List>
                       <ListItem className={classes.listItem}>
