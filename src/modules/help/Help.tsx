@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import { List } from "@material-ui/core";
 import { ListItem } from "@material-ui/core";
 import { ListItemText } from "@material-ui/core";
+import listBullet from "../../assets/list-black-circle.svg"
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import typography from "../../theme/typography";
 
@@ -21,7 +22,11 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
     },
     subHeading: {
-      marginBottom: 15,
+      marginTop: 15,
+      marginBottom: 10,
+    },
+    subHeadingMargin: {
+      marginBottom: 8,
     },
     imageWrapper: {
       "& img": {
@@ -37,9 +42,21 @@ const useStyles = makeStyles((theme: Theme) =>
     loginPage: {
       maxWidth: "100%",
     },
+    listPadding:{
+      paddingBottom: 0,
+      paddingTop: 0
+    },
     listItem: {
       paddingTop: 0,
       paddingBottom: 0,
+    },
+    listBulletWrapper: {
+      minWidth: 23,
+      alignSelf: 'self-start',
+      paddingTop: 11,
+    },
+    listBullet: {
+      width: 6,
     },
     statusDescription: {
       backgroundColor: '#303f4f',
@@ -78,7 +95,7 @@ const Help = () => {
               </Box>
               <Grid container item>
                 <Grid item xs={12} >
-                  <Box py={2} id="userIntroduction">
+                  <Box id="userIntroduction">
                     <Typography variant="h3"  className={classes.subHeading}>
                       Authentication and User Management
                     </Typography>
@@ -90,13 +107,13 @@ const Help = () => {
                   </Box>
                 </Grid>
                 <Grid item sm={12}>
-                  <Box py={2}>
-                    <Typography variant="h5">Login</Typography>
-                    <List>
+                  <Box>
+                    <Typography variant="h5" className={classes.subHeading}>Login</Typography>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
-                        {/* <ListItemIcon>
-                          <FiberManualRecordIcon fontSize="small" />
-                        </ListItemIcon> */}
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             On the welcome page, click sign in.
@@ -104,6 +121,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             Then enter your username and password as provided by Laboremus on the next page.
@@ -152,7 +172,7 @@ const Help = () => {
                     <Typography variant="h3"  id="userManageUsers" className={classes.subHeading}>
                         Manage Users
                       </Typography>
-                    <Typography variant="h4" >Home page</Typography>
+                    <Typography variant="h4" className={classes.subHeadingMargin} >Home page</Typography>
                   </Box>
                   <Typography>
                     The home page has a table of users created on the system. The buttons on the page are as explained below.
@@ -169,31 +189,46 @@ const Help = () => {
                   <Grid container>
                     <Grid item>
                       <Box py={1}>
-                        <Typography variant="h5">
+                        <Typography variant="h5" className={classes.subHeadingMargin} >
                           Add user
                       </Typography>
-                        <List>
+                        <List className={classes.listPadding}>
                           <ListItem className={classes.listItem}>
+                          <ListItemIcon className={classes.listBulletWrapper}>
+                            <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                          </ListItemIcon>
                             <ListItemText primary={
                               <Typography>Click the “Add User” button to create a new user in the system. </Typography>
                             } />
                           </ListItem>
                           <ListItem className={classes.listItem}>
+                            <ListItemIcon className={classes.listBulletWrapper}>
+                              <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                            </ListItemIcon>
                             <ListItemText primary={
                               <Typography>Add the user details in the form that slides out as in figure below and select a role for the user.</Typography>
                             } />
                           </ListItem>
                           <ListItem className={classes.listItem}>
+                            <ListItemIcon className={classes.listBulletWrapper}>
+                              <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                            </ListItemIcon>
                             <ListItemText primary={
                               <Typography>Click save</Typography>
                             } />
                           </ListItem>
                           <ListItem className={classes.listItem}>
+                            <ListItemIcon className={classes.listBulletWrapper}>
+                              <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                            </ListItemIcon>
                             <ListItemText primary={
                               <Typography>The user is listed by ID, full name, email address and role.</Typography>
                             } />
                           </ListItem>
                           <ListItem className={classes.listItem}>
+                            <ListItemIcon className={classes.listBulletWrapper}>
+                              <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                            </ListItemIcon>
                             <ListItemText primary={
                               <Typography>
                                 The systems admin will then send the user their details by email and should advise them to change their
@@ -202,7 +237,7 @@ const Help = () => {
                             } />
                           </ListItem>
                         </List>
-                        <Box>
+                        <Box  pb={1}>
                           <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
                             <img
                               src="http://via.placeholder.com/640x360"
@@ -214,11 +249,14 @@ const Help = () => {
 
                         <Grid item>
                           <Box>
-                            <Typography variant="h5">
+                            <Typography variant="h5" className={classes.subHeadingMargin} >
                               Edit User details
                             </Typography>
-                            <List>
+                            <List className={classes.listPadding}>
                               <ListItem className={classes.listItem}>
+                                <ListItemIcon className={classes.listBulletWrapper}>
+                                  <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                                </ListItemIcon>
                                 <ListItemText primary={
                                   <Typography>
                                     Click on the view icon at the far-right end of the line with the user you want to edit, shown in Figure 4;
@@ -227,30 +265,39 @@ const Help = () => {
                                 } />
                               </ListItem>
                               <ListItem className={classes.listItem}>
+                                <ListItemIcon className={classes.listBulletWrapper}>
+                                  <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                                </ListItemIcon>
                                 <ListItemText primary={
                                   <Typography>
                                     Click on “edit” in the bottom right corner as shown in B
-                          </Typography>
+                                  </Typography>
                                 } />
                               </ListItem>
                               <ListItem className={classes.listItem}>
+                                <ListItemIcon className={classes.listBulletWrapper}>
+                                  <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                                </ListItemIcon>
                                 <ListItemText primary={
                                   <Typography>
                                     Enter changes to the user details as shown in form C.
                                     You are required to input your current password of the user at this stage,
                                     otherwise you will not be able to save the changes.
-                          </Typography>
+                                  </Typography>
                                 } />
                               </ListItem>
                               <ListItem className={classes.listItem}>
+                                <ListItemIcon className={classes.listBulletWrapper}>
+                                  <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                                </ListItemIcon>
                                 <ListItemText primary={
                                   <Typography>
-                                    •	Click save in the bottom right corner.
-                            </Typography>
+                                    Click save in the bottom right corner.
+                                  </Typography>
                                 } />
                               </ListItem>
                             </List>
-                            <Box>
+                            <Box pb={1}>
                               <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
                                 <img
                                   src="http://via.placeholder.com/640x360"
@@ -263,10 +310,10 @@ const Help = () => {
                         </Grid>
                         <Grid item>
                           <Box>
-                            <Typography variant="h5">
+                            <Typography variant="h5" className={classes.subHeadingMargin} >
                               Deactivate User
                             </Typography>
-                            <List>
+                            <List className={classes.listPadding}>
                               <ListItem className={classes.listItem}>
                                 <ListItemText primary={
                                   <Typography>
@@ -280,20 +327,23 @@ const Help = () => {
                         </Grid>
                         <Grid item>
                           <Box>
-                            <Typography>
+                            <Typography style={{fontWeight: 'bold'}}>
                               Note: A user is automatically activated on creation of their account.
-                        </Typography>
+                            </Typography>
                           </Box>
                         </Grid>
                       </Box>
                     </Grid>
                     <Grid item>
-                      <Box>
-                        <Typography variant="h5">
+                      <Box  pt={1}>
+                        <Typography variant="h5" className={classes.subHeadingMargin} >
                           Sign out
                       </Typography>
-                        <List>
+                        <List className={classes.listPadding}>
                           <ListItem className={classes.listItem}>
+                            <ListItemIcon className={classes.listBulletWrapper}>
+                              <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                            </ListItemIcon>
                             <ListItemText primary={
                               <Typography>
                                 Click on the sign out button as shown in Figure 2.
@@ -301,6 +351,9 @@ const Help = () => {
                             } />
                           </ListItem>
                           <ListItem className={classes.listItem}>
+                            <ListItemIcon className={classes.listBulletWrapper}>
+                              <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                            </ListItemIcon>
                             <ListItemText primary={
                               <Typography>
                                 You will be logged out of the system and redirected to the welcome page.
@@ -311,12 +364,15 @@ const Help = () => {
                       </Box>
                     </Grid>
                     <Grid item>
-                      <Box>
-                        <Typography variant="h5">
+                      <Box  pt={1}>
+                        <Typography variant="h5" className={classes.subHeadingMargin} >
                           Search for user
                     </Typography>
-                        <List>
+                        <List className={classes.listPadding}>
                           <ListItem className={classes.listItem}>
+                            <ListItemIcon className={classes.listBulletWrapper}>
+                              <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                            </ListItemIcon>
                             <ListItemText primary={
                               <Typography>
                                 Users will be searched by email address. Write the email address in the search field as indicated in Figure 2.
@@ -324,6 +380,9 @@ const Help = () => {
                             } />
                           </ListItem>
                           <ListItem className={classes.listItem}>
+                            <ListItemIcon className={classes.listBulletWrapper}>
+                              <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                            </ListItemIcon>
                             <ListItemText primary={
                               <Typography>
                                 Press enter button on your keyboard.
@@ -331,6 +390,9 @@ const Help = () => {
                             } />
                           </ListItem>
                           <ListItem className={classes.listItem}>
+                            <ListItemIcon className={classes.listBulletWrapper}>
+                              <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                            </ListItemIcon>
                             <ListItemText primary={
                               <Typography>
                                 To return to the table with all users, delete the email address from the search field and press enter.
@@ -345,7 +407,7 @@ const Help = () => {
               </Grid>
               <Grid container item>
                 <Grid item xs={12} >
-                  <Box py={2}>
+                  <Box>
                     <Typography  variant="h3"  className={classes.subHeading}>
                       FI Portal
                       </Typography>
@@ -356,7 +418,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Purpose of the document
                     </Typography>
                     <Typography component="div">
@@ -368,7 +430,7 @@ const Help = () => {
                         The manual is designed to show you how to carry out user management, use the BNIV portal and the mobile app.
                       </Typography>
                       <Typography>
-                        If you find any difficulties in using the system, do not hesitate to contact us at support_lug@labormus.no.
+                        If you find any difficulties in using the system, do not hesitate to contact us at <a href="mailto:support_lug@labormus.no">support_lug@labormus.no</a>.
                         You will also be able to contact the Laboremus support desk for up to 3hrs a month regarding the functionality of the system.
                       </Typography>
                     </Typography>
@@ -376,7 +438,7 @@ const Help = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       System overview
                     </Typography>
                     <Typography component="div">
@@ -397,7 +459,7 @@ const Help = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <Box py={1}>
-                    <Typography variant="h5" >Intended audience</Typography>
+                    <Typography variant="h5" className={classes.subHeadingMargin} >Intended audience</Typography>
                     <Typography>
                       Users that want to perform manual verification.
                     </Typography>
@@ -406,7 +468,7 @@ const Help = () => {
                 <Grid item xs={12}>
                   <Box py={1}>
                     <Typography variant="h5" >Software requirements</Typography>
-                    <List>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
                         <ListItemText primary={
                           <Typography variant="h6">Web browser</Typography>
@@ -423,7 +485,7 @@ const Help = () => {
                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h5" >Hardware requirements</Typography>
-                    <List>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
                         <ListItemText primary={
                           <Typography variant="h6">Hardware</Typography>
@@ -457,12 +519,15 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box>
-                    <Typography variant="h5">User log in</Typography>
+                    <Typography variant="h5" className={classes.subHeadingMargin}>User log in</Typography>
                     <Typography>
                       When you access the portal, you will see the welcome page as below.
                     </Typography>
-                    <List>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>Click the sign-in button.</Typography>
                         }
@@ -479,6 +544,9 @@ const Help = () => {
                           } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography component="div">
                             <Typography>Enter username and password and click sign in. </Typography>
@@ -518,8 +586,11 @@ const Help = () => {
                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h5">Logout</Typography>
-                    <List>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography component="div">
                             <Typography>
@@ -538,6 +609,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography component="div">
                             <Typography>
@@ -556,6 +630,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             On successful logout, you will be directed to the welcome page.
@@ -564,7 +641,7 @@ const Help = () => {
                       </ListItem>
                     </List>
                     <Box>
-                      <Typography>
+                      <Typography style={{fontWeight: 'bold'}}>
                         Note: You will be automatically logged out after 10 minutes of inactivity.
                       </Typography>
                     </Box>
@@ -573,8 +650,11 @@ const Help = () => {
                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h5">Forgot password</Typography>
-                    <List>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography component="div">
                             <Typography>
@@ -593,6 +673,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography component="div">
                             <Typography>
@@ -611,6 +694,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography component="div">
                             <Typography>
@@ -629,6 +715,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography component="div">
                             <Typography>
@@ -647,6 +736,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography component="div">
                             <Typography>
@@ -665,6 +757,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography component="div">
                             <Typography>
@@ -683,6 +778,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography component="div">
                             <Typography>
@@ -719,7 +817,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h4">
+                    <Typography variant="h4" className={classes.subHeadingMargin}>
                       ID verification page
                     </Typography>
                     <Typography>
@@ -739,8 +837,11 @@ const Help = () => {
                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h5">To make a request</Typography>
-                    <List>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             Enter the NIN, Card number as mandatory fields.
@@ -750,6 +851,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             Click submit
@@ -770,7 +874,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">Verification Requests Table </Typography>
+                    <Typography variant="h5" className={classes.subHeadingMargin}>Verification Requests Table </Typography>
                     <Box>
                       <Typography>
                         The home page shows a table of previous requests made by your institution, with the most recent appearing on top.
@@ -784,9 +888,12 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">Request details</Typography>
-                    <List>
+                    <Typography variant="h5" className={classes.subHeadingMargin}>Request details</Typography>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             Click on a request from the list to see details of this request
@@ -794,6 +901,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             A slide-out will appear with the details which also show the full NIN and card number, the date of birth,
@@ -815,27 +925,39 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Interpretation of result from NIRA
                     </Typography>
                     <Typography>The responses from NIRA are organized into four categories:</Typography>
-                    <List>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>Request Status</Typography>
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>NIN Response</Typography>
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>Match Status </Typography>
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>Card Status</Typography>
                         } />
@@ -945,12 +1067,15 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Search in Previous Requests
                     </Typography>
                     <Typography>You will be able to search for a specific request entry in the database</Typography>
-                    <List>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             Enter the details for the given request in the search field on the right-hand side of the home page.
@@ -958,6 +1083,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             Click Apply filter.
@@ -978,30 +1106,42 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Export previous requests
                     </Typography>
                     <Typography>
                       You can download the previous request for analysis. This also works while offline.
                       The file with the request will be in CSV format and stored as a zip file and can be opened using Microsoft Excel.
                     </Typography>
-                    <List>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>Go to the search ribbon</Typography>
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>Filter out the data according to desired criteria</Typography>
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>Select start and end dates</Typography>
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>Click “Export data to excel”.</Typography>
                         } />
@@ -1028,7 +1168,7 @@ const Help = () => {
                     <Typography  variant="h3"  className={classes.subHeading} id="fiSettings">
                       Settings
                     </Typography>
-                    <Typography>
+                    <Typography style={{fontWeight: 'bold'}}>
                       Note: Module is under development.
                       </Typography>
                   </Box>
@@ -1063,7 +1203,7 @@ const Help = () => {
                         </figure>
                         {/* <img src='http://via.placeholder.com/640x360'/> */}
                       </Box>
-                      <Typography>
+                      <Typography style={{fontWeight: 'bold'}}>
                         Note: The application will be activated in a new window or on a new browser card.
                         If the message about blocking pop-up windows appears, click on the message, and allow the pop-up window to open.
                       </Typography>
@@ -1084,7 +1224,7 @@ const Help = () => {
                 </Grid>
                 <Grid item xs={12} >
                   <Box py={1}>
-                    <Typography variant="h4">
+                    <Typography variant="h4" className={classes.subHeadingMargin}>
                       Application overview
                     </Typography>
                     <Box>
@@ -1109,18 +1249,21 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h4">
+                    <Typography variant="h4" className={classes.subHeadingMargin}>
                       System Requirements
                     </Typography>
                     <Box>
-                      <Typography variant="h5">
+                      <Typography variant="h5" className={classes.subHeadingMargin}>
                       Hardware Requirements
                       </Typography>
                       <Typography>
                         The application will run on the following hardware specifications.
                         </Typography>
-                      <List>
+                      <List className={classes.listPadding}>
                         <ListItem className={classes.listItem}>
+                          <ListItemIcon className={classes.listBulletWrapper}>
+                            <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                          </ListItemIcon>
                           <ListItemText primary={
                             <Typography>
                               Preferred fingerprint scanner –
@@ -1128,8 +1271,8 @@ const Help = () => {
                           }
                             secondary={
                               <Box>
-                                <Typography>Manufacturer: Evolute Systems Pvt. Ltd</Typography>
-                                <Typography>Model: IDENTI5</Typography>
+                                <Typography>Manufacturer: <span style={{fontWeight: 'bold'}}>Evolute Systems Pvt. Ltd</span></Typography>
+                                <Typography>Model: <span style={{fontWeight: 'bold'}}>=IDENTI5</span></Typography>
                                 <Typography>STQ certified</Typography>
                                 <Typography>ISO SC37 19794/2/4</Typography>
                                 <Typography>Bluetooth version 2.1/4.0 with EDR</Typography>
@@ -1137,22 +1280,25 @@ const Help = () => {
                             } />
                         </ListItem>
                         <ListItem>
+                          <ListItemIcon className={classes.listBulletWrapper}>
+                            <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                          </ListItemIcon>
                           <ListItemText primary={
                             <Typography>
-                              Bluetooth version 2.1/4.0 with EDR
+                              An android enabled mobile phone.  
                               </Typography>
                           } />
                         </ListItem>
                       </List>
                     </Box>
                     <Box>
-                      <Typography variant="h5">
+                      <Typography variant="h5" className={classes.subHeadingMargin}>
                         Software Requirements
                         </Typography>
                       <Typography>
                         The application will run normally on an Android enabled mobile phone with the following specifications
                         </Typography>
-                      <List>
+                      <List className={classes.listPadding}>
                         <ListItem className={classes.listItem}>
                           <ListItemText primary={
                             <Typography>Android version 5.1 or higher </Typography>
@@ -1167,7 +1313,7 @@ const Help = () => {
                     <Typography  variant="h3"  className={classes.subHeading} id="mobileApiInstallation">
                       App Installation
                     </Typography>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Downloading the mobile application
                     </Typography>
                     <Typography>
@@ -1179,28 +1325,43 @@ const Help = () => {
                         * In the testing phase of the project, the mobile app will be available to a select few for testing.
                         Make sure you are among the selected testers before carrying on with this user manual.
                       </Typography>
-                      <List>
+                      <List className={classes.listPadding}>
                         <ListItem className={classes.listItem}>
+                          <ListItemIcon className={classes.listBulletWrapper}>
+                            <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                          </ListItemIcon>
                           <ListItemText>
                             On your mobile phone, open the Google Play Store
                           </ListItemText>
                         </ListItem>
                         <ListItem className={classes.listItem}>
+                          <ListItemIcon className={classes.listBulletWrapper}>
+                            <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                          </ListItemIcon>
                           <ListItemText>
                             Enter the text “Uganda National ID Verifier” and tap search to find the application in the Google Play Store
                           </ListItemText>
                         </ListItem>
                         <ListItem className={classes.listItem}>
+                          <ListItemIcon className={classes.listBulletWrapper}>
+                            <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                          </ListItemIcon>
                           <ListItemText>
                             Select the application with the name that matches the above text exactly.
                           </ListItemText>
                         </ListItem>
                         <ListItem className={classes.listItem}>
+                          <ListItemIcon className={classes.listBulletWrapper}>
+                            <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                          </ListItemIcon>
                           <ListItemText>
                             Select the “Install” option to begin the application installation.
                           </ListItemText>
                         </ListItem>
                         <ListItem className={classes.listItem}>
+                          <ListItemIcon className={classes.listBulletWrapper}>
+                            <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                          </ListItemIcon>
                           <ListItemText>
                             Once the installation of the mobile application is complete, you will be notified about this by your mobile phone.
                           </ListItemText>
@@ -1214,7 +1375,7 @@ const Help = () => {
                     <Typography  variant="h3"  className={classes.subHeading} id="mobileAccessLogin">
                       Access & Login
                     </Typography>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Signing in
                     </Typography>
                     <Typography>
@@ -1231,8 +1392,11 @@ const Help = () => {
                           You will then be required to create a PIN for subsequent login attempts. Follow the process described below to accomplish this.
                         </Typography>
                       </Box>
-                      <List>
+                      <List className={classes.listPadding}>
                         <ListItem className={classes.listItem}>
+                          <ListItemIcon className={classes.listBulletWrapper}>
+                            <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                          </ListItemIcon>
                           <ListItemText primary={
                             <Typography>
                               Tap the “Log in” button and then enter your username and password.
@@ -1262,6 +1426,9 @@ const Help = () => {
 
                         </ListItem>
                         <ListItem className={classes.listItem}>
+                          <ListItemIcon className={classes.listBulletWrapper}>
+                            <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                          </ListItemIcon>
                           <ListItemText primary={
                             <Typography>
                               To create a PIN, enter the same 5-digit PIN in both fields shown below and tap the “LOGIN” button
@@ -1299,7 +1466,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Application brief
                       </Typography>
                     <Typography>
@@ -1328,14 +1495,17 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Forgot PIN
                       </Typography>
                     <Typography>
                       In case you have forgotten your PIN, you will follow the below instructions.
                       </Typography>
-                    <List>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             Click Reset PIN
@@ -1343,6 +1513,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             Enter username and password (given to you by the system administrator)
@@ -1350,6 +1523,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             Set new PIN
@@ -1358,7 +1534,7 @@ const Help = () => {
                       </ListItem>
                     </List>
                     <Box>
-                      <Typography>
+                      <Typography style={{fontWeight: 'bold'}}>
                         Note: To reset the PIN you will need an Internet connection. Once the PIN has been reset, the app can again work offline.
                         </Typography>
                     </Box>
@@ -1375,7 +1551,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Failed sign in attempts
                     </Typography>
                     <Typography>
@@ -1386,7 +1562,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Signing out
                     </Typography>
                     <Typography>
@@ -1411,70 +1587,127 @@ const Help = () => {
                     <Typography>
                       To scan the details of a national ID, follow the instructions and illustrations below.
                     </Typography>
-                    <Box px={2}>
-                      <Typography>
-                        Ensure that you are in a well-lit environment.
-                      </Typography>
-                      <Typography>
-                        Place ID backside up on a flat surface
-                      </Typography>
-                    </Box>
-                    <Typography>
-                      Note: On the first time you connect, you will have to allow the app access to your camera.
-                    </Typography>
-                    <Box px={2}>
-                      <Typography>
-                        With the mobile app on the “Scan ID screen”, tap the “Scan ID” button
-                      </Typography>
-                      <Typography>
-                        Hold the phone steady as the camera scans the barcode on the national ID.
-                      </Typography>
-                      <Typography>
-                        The mobile app will automatically scan the national ID and transition to the next screen when it is successful.
-                      </Typography>
-                      <Box display="flex">
+                    <List className={classes.listPadding}>
+                      <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
+                        <ListItemText primary={
+                          <Typography>
+                            Ensure that you are in a well-lit environment.
+                          </Typography>
+                        }/>
+                      </ListItem>
+                      <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
+                        <ListItemText primary={
+                          <Typography>
+                             Place ID backside up on a flat surface.
+                          </Typography>
+                        }/>
+                      </ListItem>
+                      <ListItem className={classes.listItem} disableGutters={true}>
+                        <ListItemText primary={
+                          <Typography style={{fontWeight: 'bold'}}>
+                              Note: On the first time you connect, you will have to allow the app access to your camera.
+                          </Typography>
+                        }/>
+                      </ListItem>
+                      <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
+                        <ListItemText primary={
+                          <Typography>
+                            With the mobile app on the “Scan ID screen”, tap the “Scan ID” button.
+                          </Typography>
+                        }/>
+                      </ListItem>
+                      <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
+                        <ListItemText primary={
+                          <Typography>
+                             Hold the phone steady as the camera scans the barcode on the national ID.
+                          </Typography>
+                        }/>
+                      </ListItem>
+                      <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
+                        <ListItemText primary={
+                          <Typography>
+                             The mobile app will automatically scan the national ID and transition to the next screen when it is successful.
+                          </Typography>
+                        }/>
+                      </ListItem>
+                      <ListItem className={classes.listItem}>
+                        <ListItemText primary={
+                          <Box display="flex">
 
-                        <figure style={{ marginLeft: 0 }} className={classes.imageWrapper}>
-                          <img
-                            src="http://via.placeholder.com/1200"
-                            alt="The beautiful MDN logo." />
-                          <figcaption>Figure 29: Scan ID screen </figcaption>
-                        </figure>
-                        {/* <img src='http://via.placeholder.com/640x360'/> */}
-                        <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                          <img
-                            src="http://via.placeholder.com/1200"
-                            alt="The beautiful MDN logo." />
-                          <figcaption>Figure 30:Barcode ID backside</figcaption>
-                        </figure>
-                        {/* <img src='http://via.placeholder.com/1200'/> */}
-
-                      </Box>
-                      <Typography>
-                        Confirm ID card details and either finish or proceed to Verify the fingerprint.
-                      </Typography>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 31:Scanned results screen</figcaption>
-                      </figure>
-                    </Box>
-                    <Typography>
+                          <figure style={{ marginLeft: 0 }} className={classes.imageWrapper}>
+                            <img
+                              src="http://via.placeholder.com/1200"
+                              alt="The beautiful MDN logo." />
+                            <figcaption>Figure 29: Scan ID screen </figcaption>
+                          </figure>
+                          {/* <img src='http://via.placeholder.com/640x360'/> */}
+                          <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
+                            <img
+                              src="http://via.placeholder.com/1200"
+                              alt="The beautiful MDN logo." />
+                            <figcaption>Figure 30:Barcode ID backside</figcaption>
+                          </figure>
+                          {/* <img src='http://via.placeholder.com/1200'/> */}
+  
+                        </Box>
+                        }/>
+                      </ListItem>
+                      <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
+                        <ListItemText primary={
+                          <Typography>
+                             Confirm ID card details and either finish or proceed to Verify the fingerprint.
+                          </Typography>
+                        }/>
+                      </ListItem>
+                      <ListItem className={classes.listItem}>
+                        <ListItemText primary={
+                          <Box px={2}>
+                          <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
+                            <img
+                              src="http://via.placeholder.com/640x360"
+                              alt="The beautiful MDN logo." />
+                            <figcaption>Figure 31:Scanned results screen</figcaption>
+                          </figure>
+                        </Box>
+                        }/>
+                      </ListItem>
+                    </List>
+                    <Typography style={{fontWeight: 'bold'}}>
                       Note: The app will only scan an original copy of the national ID.
                     </Typography>
                   </Box>
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography  variant="h3"  className={classes.subHeading}>
-                      Finger Print Verification
+                    <Typography  variant="h3" id="mobileFingerprint"  className={classes.subHeading}>
+                      Fingerprint Verification
                     </Typography>
                     <Typography>
                       Connecting scanning device to the phone
                     </Typography>
-                    <List>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText
                           primary={
                             <Typography>
@@ -1484,6 +1717,9 @@ const Help = () => {
                         />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText
                           primary={
                             <Typography>
@@ -1493,6 +1729,9 @@ const Help = () => {
                         />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText
                           primary={
                             <Typography>
@@ -1503,6 +1742,9 @@ const Help = () => {
                         />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText
                           primary={
                             <Typography>
@@ -1512,6 +1754,9 @@ const Help = () => {
                         />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText
                           primary={
                             <Typography>
@@ -1521,6 +1766,9 @@ const Help = () => {
                         />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText
                           primary={
                             <Typography>
@@ -1557,7 +1805,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5" id="mobileFingerprint">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Scanning fingerprint
                     </Typography>
                     <Typography>
@@ -1637,7 +1885,7 @@ const Help = () => {
                           alt="The beautiful MDN logo." />
                         <figcaption>Figure 37: Failed match notification screen</figcaption>
                       </figure>
-                      <Typography>
+                      <Typography style={{fontWeight: 'bold'}}>
                         Note: some fingerprints stored by NIRA are of insufficient quality or the file was corrupted.
                         Therefore, the cardholder might still be the true holder of the card, even with a mismatch.
                         In these cases, proceed to other means to verify the identity of the cardholder.
@@ -1655,7 +1903,7 @@ const Help = () => {
                       and a list of cards with their NIN and fingerprint statuses will be displayed.
                       You can also search in the list by pressing the search icon on the top left.
                     </Typography>
-                    <Typography>
+                    <Typography style={{fontWeight: 'bold'}}>
                       Note: All data will be lost once you uninstall the app from your phone.
                     </Typography>
                     <Box display="flex">
@@ -1682,15 +1930,21 @@ const Help = () => {
                     <Typography  variant="h3"  className={classes.subHeading} id="mobileBasicTroubleshooting">
                       Basic Troubleshooting
                     </Typography>
-                    <List>
+                    <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
-                            Turn on Bluetooth on your phone and ensure it is paired with the fingerprint scanner to user the Mobile App
+                            Turn on Bluetooth on your phone and ensure it is paired with the fingerprint scanner to user the Mobile App.
                           </Typography>
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             Check that the fingerprint scanner is charged in case of failure to switch on.
@@ -1698,6 +1952,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             For the Portal, always check that the browser is up to date.
@@ -1706,6 +1963,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             When using the Portal, check that you have a working internet connection.
@@ -1713,6 +1973,9 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
                             Check that NIRA is online from the notification at the bottom left corner of the portal.
@@ -1720,10 +1983,12 @@ const Help = () => {
                         } />
                       </ListItem>
                       <ListItem className={classes.listItem}>
+                        <ListItemIcon className={classes.listBulletWrapper}>
+                          <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
+                        </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
-                            For how to use insomnia to test the API please refer to
-                            <a href="https://apis.support.brightcove.com/general/use-insomnia-api-requests.html">
+                            For how to use insomnia to test the API please refer to <a href="https://apis.support.brightcove.com/general/use-insomnia-api-requests.html">
                               https://apis.support.brightcove.com/general/use-insomnia-api-requests.html
                             </a>
                           </Typography>
