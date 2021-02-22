@@ -5,6 +5,7 @@ import { List } from "@material-ui/core";
 import { ListItem } from "@material-ui/core";
 import { ListItemText } from "@material-ui/core";
 import listBullet from "../../assets/list-black-circle.svg"
+import PopUp from "../../components/PopUP"
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import typography from "../../theme/typography";
 
@@ -132,38 +133,12 @@ const Help = () => {
                       </ListItem>
                     </List>
                     <Box mb={2} display="flex" className={classes.imageWrapper}>
-                      <Card className={classes.root}>
-                        <CardActionArea>
-                          <Box display="flex">
-                            <Box pr={1}>
-                              <CardMedia
-                                image={"http://via.placeholder.com/640x360"}
-                                component="img"
-                                title="Login"
-                                className={classes.loginPage}
-                              />
-                            </Box>
-                            <Box pl={1}>
-                              <CardMedia
-                                image={"http://via.placeholder.com/640x360"}
-                                component="img"
-                                title="Auth service login"
-                                className={classes.loginPage}
-                              />
-                            </Box>
-                          </Box>
-                          <Grid container>
-                            <Grid item sm={12} lg={6}></Grid>
-                            <Grid item></Grid>
-                          </Grid>
-
-                          <CardContent style={{ padding: 8 }}>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                              Figure 1:Log into the user management system
-                              </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Card>
+                      <Box pr={1}>
+                        <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 2: Auth service home page"}} />
+                      </Box>
+                      <Box pl={1}>
+                        <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 2: Auth service home page"}} />
+                      </Box>
                     </Box>
                   </Box>
                 </Grid>
@@ -178,13 +153,7 @@ const Help = () => {
                     The home page has a table of users created on the system. The buttons on the page are as explained below.
                   </Typography>
                   <Box>
-                    <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                      <img
-                        src="http://via.placeholder.com/640x360"
-                        alt="The beautiful MDN logo." />
-                      <figcaption>Figure 2: Auth service home page</figcaption>
-                    </figure>
-                    {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 2: Auth service home page"}} />
                   </Box>
                   <Grid container>
                     <Grid item>
@@ -238,12 +207,13 @@ const Help = () => {
                           </ListItem>
                         </List>
                         <Box  pb={1}>
-                          <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
+                          {/* <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
                             <img
                               src="http://via.placeholder.com/640x360"
                               alt="The beautiful MDN logo." />
                             <figcaption>Figure 3: Add users slide out</figcaption>
-                          </figure>
+                          </figure> */}
+                          <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 3: Add users slide out"}} />
                           {/* <img src='http://via.placeholder.com/640x360'/> */}
                         </Box>
 
@@ -298,12 +268,13 @@ const Help = () => {
                               </ListItem>
                             </List>
                             <Box pb={1}>
-                              <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
+                              {/* <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
                                 <img
                                   src="http://via.placeholder.com/640x360"
                                   alt="The beautiful MDN logo." />
                                 <figcaption>Figure 4:Edit user details screens.</figcaption>
-                              </figure>
+                              </figure> */}
+                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 4:Edit user details screens."}} />
                               {/* <img src='http://via.placeholder.com/640x360'/> */}
                             </Box>
                           </Box>
@@ -533,13 +504,7 @@ const Help = () => {
                         }
                           secondary={
                             <Box>
-                              <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                                <img
-                                  src="http://via.placeholder.com/640x360"
-                                  alt="The beautiful MDN logo." />
-                                <figcaption>Figure 5: Welcome screen</figcaption>
-                              </figure>
-                              {/* <img src='http://via.placeholder.com/640x360'/> */}
+                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 5: Welcome screen"}} />
                             </Box>
                           } />
                       </ListItem>
@@ -555,13 +520,7 @@ const Help = () => {
                         }
                           secondary={
                             <Box>
-                              <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                                <img
-                                  src="http://via.placeholder.com/640x360"
-                                  alt="The beautiful MDN logo." />
-                                <figcaption>Figure 6: Login screen</figcaption>
-                              </figure>
-                              {/* <img src='http://via.placeholder.com/640x360'/> */}
+                             <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 6: Login screen"}} />
                             </Box>
                           } />
 
@@ -572,13 +531,7 @@ const Help = () => {
                         On signing in you will be taken to the home page where you can start verifying customers' identity information.
                       </Typography>
                       <Box>
-                        <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                          <img
-                            src="http://via.placeholder.com/640x360"
-                            alt="The beautiful MDN logo." />
-                          <figcaption>Figure 6: Login screenFigure 7: Home page</figcaption>
-                        </figure>
-                        {/* <img src='http://via.placeholder.com/640x360'/> */}
+                        <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 7: Home page"}} />
                       </Box>
                     </Typography>
                   </Box>
@@ -597,13 +550,7 @@ const Help = () => {
                               In the top right corner, click the user profile icon.
                             </Typography>
                             <Box>
-                              <figure style={{ marginLeft: 0, marginRight: 0 }}>
-                                <img
-                                  src="http://via.placeholder.com/400x100"
-                                  alt="The beautiful MDN logo." />
-                                <figcaption></figcaption>
-                              </figure>
-                              {/* <img src='http://via.placeholder.com/640x360'/> */}
+                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":""}} />
                             </Box>
                           </Typography>
                         } />
@@ -618,13 +565,7 @@ const Help = () => {
                               Select the Logout option.
                             </Typography>
                             <Box>
-                              <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                                <img
-                                  src="http://via.placeholder.com/640x360"
-                                  alt="The beautiful MDN logo." />
-                                <figcaption>Figure 8:Log out</figcaption>
-                              </figure>
-                              {/* <img src='http://via.placeholder.com/640x360'/> */}
+                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 8:Log out"}} />
                             </Box>
                           </Typography>
                         } />
@@ -661,13 +602,7 @@ const Help = () => {
                               To reset your password in case of a forgotten password, click the “forgot password?” link on the login page.
                             </Typography>
                             <Box>
-                              <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                                <img
-                                  src="http://via.placeholder.com/640x360"
-                                  alt="The beautiful MDN logo." />
-                                <figcaption>Figure 9: Forgot password</figcaption>
-                              </figure>
-                              {/* <img src='http://via.placeholder.com/640x360'/> */}
+                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 9: Forgot password"}} />
                             </Box>
                           </Typography>
                         } />
@@ -682,13 +617,7 @@ const Help = () => {
                               Enter the email address associated with your account and click submit.
                             </Typography>
                             <Box>
-                              <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                                <img
-                                  src="http://via.placeholder.com/640x360"
-                                  alt="The beautiful MDN logo." />
-                                <figcaption>Figure 10: Forgot password II</figcaption>
-                              </figure>
-                              {/* <img src='http://via.placeholder.com/640x360'/> */}
+                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 10: Forgot password II"}} />
                             </Box>
                           </Typography>
                         } />
@@ -703,13 +632,7 @@ const Help = () => {
                               A confirmation message for an email having been sent to your inbox will be displayed.
                             </Typography>
                             <Box>
-                              <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                                <img
-                                  src="http://via.placeholder.com/640x360"
-                                  alt="The beautiful MDN logo." />
-                                <figcaption>Figure 11: An email confirmation message</figcaption>
-                              </figure>
-                              {/* <img src='http://via.placeholder.com/640x360'/> */}
+                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 11: An email confirmation message"}} />
                             </Box>
                           </Typography>
                         } />
@@ -724,13 +647,7 @@ const Help = () => {
                               Go to the associated email address and click on the reset password” link.
                             </Typography>
                             <Box>
-                              <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                                <img
-                                  src="http://via.placeholder.com/640x360"
-                                  alt="The beautiful MDN logo." />
-                                <figcaption>Figure 12: Link in the email to reset password</figcaption>
-                              </figure>
-                              {/* <img src='http://via.placeholder.com/640x360'/> */}
+                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 12: Link in the email to reset password"}} />
                             </Box>
                           </Typography>
                         } />
@@ -745,13 +662,7 @@ const Help = () => {
                               Insert your email address and new password, then click reset.
                             </Typography>
                             <Box>
-                              <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                                <img
-                                  src="http://via.placeholder.com/640x360"
-                                  alt="The beautiful MDN logo." />
-                                <figcaption>Figure 13: Insert new password screen</figcaption>
-                              </figure>
-                              {/* <img src='http://via.placeholder.com/640x360'/> */}
+                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 13: Insert new password screen"}} />
                             </Box>
                           </Typography>
                         } />
@@ -766,13 +677,7 @@ const Help = () => {
                               You will receive a confirmation message that your password has been successfully reset.
                             </Typography>
                             <Box>
-                              <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                                <img
-                                  src="http://via.placeholder.com/640x360"
-                                  alt="The beautiful MDN logo." />
-                                <figcaption>Figure 14: Reset successful screen</figcaption>
-                              </figure>
-                              {/* <img src='http://via.placeholder.com/640x360'/> */}
+                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 14: Reset successful screen"}} />
                             </Box>
                           </Typography>
                         } />
@@ -804,13 +709,7 @@ const Help = () => {
                         Once you have successfully logged in, the page below will be displayed.
                     </Typography>
                       <Box>
-                        <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                          <img
-                            src="http://via.placeholder.com/640x360"
-                            alt="The beautiful MDN logo." />
-                          <figcaption>Figure 15: Home page fields</figcaption>
-                        </figure>
-                        {/* <img src='http://via.placeholder.com/640x360'/> */}
+                        <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 15: Home page fields"}} />
                       </Box>
                     </Box>
                   </Box>
@@ -824,13 +723,7 @@ const Help = () => {
                       The ID verification page is the portal’s home page. It appears with a New request form already open.
                     </Typography>
                     <Box>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 16: New request form</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 16: New request form"}} />
                     </Box>
                   </Box>
                 </Grid>
@@ -913,13 +806,7 @@ const Help = () => {
                       </ListItem>
                     </List>
                     <Box>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 17: Request details screen</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 17: Request details screenm"}} />
                     </Box>
                   </Box>
                 </Grid>
@@ -1094,13 +981,7 @@ const Help = () => {
                       </ListItem>
                     </List>
                     <Box>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 18: Search previous requests</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 18: Search previous requests"}} />
                     </Box>
                   </Box>
                 </Grid>
@@ -1151,13 +1032,7 @@ const Help = () => {
                       On completion, a notification will be shown and the file will be downloaded.
                     </Typography>
                     <Box>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 19: Export previous requests</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 19: Export previous requests"}} />
                     </Box>
                   </Box>
                 </Grid>
@@ -1195,13 +1070,7 @@ const Help = () => {
                     </Box>
                     <Box>
                       <Box>
-                        <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                          <img
-                            src="http://via.placeholder.com/640x360"
-                            alt="The beautiful MDN logo." />
-                          <figcaption>Figure 20: Developer portal</figcaption>
-                        </figure>
-                        {/* <img src='http://via.placeholder.com/640x360'/> */}
+                        <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 20: Developer portal"}} />
                       </Box>
                       <Typography style={{fontWeight: 'bold'}}>
                         Note: The application will be activated in a new window or on a new browser card.
@@ -1405,22 +1274,9 @@ const Help = () => {
                           }
                             secondary={
                               <Box display="flex">
-
-                                <figure style={{ marginLeft: 0 }} className={classes.imageWrapper}>
-                                  <img
-                                    src="http://via.placeholder.com/1200"
-                                    alt="The beautiful MDN logo." />
-                                  <figcaption>Figure 22:Mobile app landing page </figcaption>
-                                </figure>
-                                {/* <img src='http://via.placeholder.com/640x360'/> */}
-                                <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                                  <img
-                                    src="http://via.placeholder.com/1200"
-                                    alt="The beautiful MDN logo." />
-                                  <figcaption>Figure 21: Mobile app login page</figcaption>
-                                </figure>
-                                {/* <img src='http://via.placeholder.com/1200'/> */}
-
+                                <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 22:Mobile app landing page"}} />
+                                
+                                <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 21: Mobile app login page"}} />
                               </Box>
                             } />
 
@@ -1437,20 +1293,9 @@ const Help = () => {
                             secondary={
                               <Box display="flex">
 
-                                <figure style={{ marginLeft: 0 }} className={classes.imageWrapper}>
-                                  <img
-                                    src="http://via.placeholder.com/1200"
-                                    alt="The beautiful MDN logo." />
-                                  <figcaption>Figure 23: Subsequent PIN login page</figcaption>
-                                </figure>
-                                {/* <img src='http://via.placeholder.com/640x360'/> */}
-                                <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                                  <img
-                                    src="http://via.placeholder.com/1200"
-                                    alt="The beautiful MDN logo." />
-                                  <figcaption>Figure 24: PIN setup page</figcaption>
-                                </figure>
-                                {/* <img src='http://via.placeholder.com/1200'/> */}
+                                <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 23: Subsequent PIN login page"}} />
+                                
+                                <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 24: PIN setup page"}} />
 
                               </Box>
                             } />
@@ -1474,21 +1319,9 @@ const Help = () => {
                       you will see the following screens that give a brief about the functionality of the application.
                       </Typography>
                     <Box display="flex">
-
-                      <figure style={{ marginLeft: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/1200"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 26:Scan ID summary screen </figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/1200"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 25: Match fingerprint summary screen </figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/1200'/> */}
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 26:Scan ID summary screen"}} />
+                      
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 25: Match fingerprint summary screen"}} />
 
                     </Box>
                   </Box>
@@ -1539,13 +1372,7 @@ const Help = () => {
                         </Typography>
                     </Box>
                     <Box>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 27: Mobile app return user login screen</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 27: Mobile app return user login screen"}} />
                     </Box>
                   </Box>
                 </Grid>
@@ -1569,13 +1396,7 @@ const Help = () => {
                       To sign out of the application, press the “Menu” button in the top right corner of the app and tap on the Logout link.
                     </Typography>
                     <Box>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 28: Logout link</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 28: Logout link"}} />
                     </Box>
                   </Box>
                 </Grid>
@@ -1648,21 +1469,9 @@ const Help = () => {
                       <ListItem className={classes.listItem}>
                         <ListItemText primary={
                           <Box display="flex">
-
-                          <figure style={{ marginLeft: 0 }} className={classes.imageWrapper}>
-                            <img
-                              src="http://via.placeholder.com/1200"
-                              alt="The beautiful MDN logo." />
-                            <figcaption>Figure 29: Scan ID screen </figcaption>
-                          </figure>
-                          {/* <img src='http://via.placeholder.com/640x360'/> */}
-                          <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                            <img
-                              src="http://via.placeholder.com/1200"
-                              alt="The beautiful MDN logo." />
-                            <figcaption>Figure 30:Barcode ID backside</figcaption>
-                          </figure>
-                          {/* <img src='http://via.placeholder.com/1200'/> */}
+                            <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 29: Scan ID screen"}} />
+                          
+                          <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 30:Barcode ID backside"}} />
   
                         </Box>
                         }/>
@@ -1680,12 +1489,7 @@ const Help = () => {
                       <ListItem className={classes.listItem}>
                         <ListItemText primary={
                           <Box px={2}>
-                          <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                            <img
-                              src="http://via.placeholder.com/640x360"
-                              alt="The beautiful MDN logo." />
-                            <figcaption>Figure 31:Scanned results screen</figcaption>
-                          </figure>
+                          <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 31:Scanned results screen"}} />
                         </Box>
                         }/>
                       </ListItem>
@@ -1779,13 +1583,7 @@ const Help = () => {
                       </ListItem>
                     </List>
                     <Box>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 32: Bluetooth device listing</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 32: Bluetooth device listing"}} />
                     </Box>
                     <Typography>
                       When you return to match a fingerprint after the initial connection,
@@ -1793,13 +1591,7 @@ const Help = () => {
                       instead you will only be prompted to pair to the device as the device will be stored in the phone list.
                     </Typography>
                     <Box>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 33: Request to pair on subsequent connection notification</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 33: Request to pair on subsequent connection notification"}} />
                     </Box>
                   </Box>
                 </Grid>
@@ -1816,13 +1608,7 @@ const Help = () => {
                       <Typography>
                         Return to the application and click on “Scan fingerprint”.
                       </Typography>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 34:Scan fingerprint instruction page</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
+                        <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 34:Scan fingerprint instruction page"}} />
                     </Box>
                   </Box>
                 </Grid>
@@ -1837,13 +1623,7 @@ const Help = () => {
                       For example, if it says” Right Thumb”, ask the cardholder to place the right thumb on the scanner.
                     </Typography>
                     <Box>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 35: Finger as indicated on the ID</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 35: Finger as indicated on the ID"}} />
                     </Box>
                   </Box>
                 </Grid>
@@ -1858,33 +1638,18 @@ const Help = () => {
                       These results will also be shown in the scan summary under the “Biometrics” section.
                     </Typography>
                     <Box display="flex">
-                      <figure style={{ marginLeft: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/1200"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 36: Fingerprint matched notification screens</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/1200"
-                          alt="The beautiful MDN logo." />
-
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/1200'/> */}
-
+                      
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 36: Fingerprint matched notification screens"}} />
+                      
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":""}} />
                     </Box>
                     <Box>
                       <Typography>
                         If the card holder’s fingerprint does not match the one stored on the ID card barcode,
                         the pop-up and scans summary display it as failed/no match as shown below.
                       </Typography>
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/640x360"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 37: Failed match notification screen</figcaption>
-                      </figure>
+                      
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 37: Failed match notification screen"}} />
                       <Typography style={{fontWeight: 'bold'}}>
                         Note: some fingerprints stored by NIRA are of insufficient quality or the file was corrupted.
                         Therefore, the cardholder might still be the true holder of the card, even with a mismatch.
@@ -1907,20 +1672,10 @@ const Help = () => {
                       Note: All data will be lost once you uninstall the app from your phone.
                     </Typography>
                     <Box display="flex">
-                      <figure style={{ marginLeft: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/1200"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 39: Scanned history link</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/640x360'/> */}
-                      <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                        <img
-                          src="http://via.placeholder.com/1200"
-                          alt="The beautiful MDN logo." />
-                        <figcaption>Figure 38: Scan history display screen</figcaption>
-                      </figure>
-                      {/* <img src='http://via.placeholder.com/1200'/> */}
+                      
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 39: Scanned history link"}} />
+                      
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 38: Scan history display screen"}} />
 
                     </Box>
                   </Box>
