@@ -110,7 +110,7 @@ const servers: any = {
     envScope: "openid profile roles offline_access pride_BNVS_API"
   },
   eximUat: {
-    Auth: "https://auth-api-test.bou.or.ug",
+    Auth: "https://auth-api-uat.eximbank-ug.com",
     Nin: "https://niv-api-uat.eximbank-ug.com",
     devPortal: "https://niv-api-uat.eximbank-ug.com",
     clientId: "exim-backoffice:portal",
