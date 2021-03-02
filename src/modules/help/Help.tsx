@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     pageHeading: {
       display: "flex",
+      textAlign: 'center',
+      margin: '0 150px',
     },
     subHeading: {
       marginTop: 15,
@@ -90,7 +92,7 @@ const Help = () => {
               <Box pb={2}>
                 <Grid container>
                   <Grid item sm={12} className={classes.pageHeading}>
-                    <Typography variant="h2">Bank of Uganda National Identity Verification System Manual</Typography>
+                    <Typography variant="h3">Bank of Uganda National Identity Verification System Manual</Typography>
                   </Grid>
                 </Grid>
               </Box>
@@ -378,11 +380,11 @@ const Help = () => {
               </Grid>
               <Grid container item>
                 <Grid item xs={12} >
-                  <Box>
-                    <Typography  variant="h3"  className={classes.subHeading}>
+                  <Box pt={1}>
+                    <Typography  variant="h3"  className={classes.subHeading} id="fiPortalIntro">
                       FI Portal
                       </Typography>
-                    <Typography  variant="h3"  className={classes.subHeading} id="fiPortalIntro">
+                    <Typography  variant="h4" >
                       Introduction
                       </Typography>
                   </Box>
@@ -477,7 +479,7 @@ const Help = () => {
               </Grid>
               <Grid container item>
                 <Grid item xs={12} >
-                  <Box pb={2}>
+                  <Box py={2}>
                     <Typography  variant="h3"  className={classes.subHeading} id="fiAccessLogin">
                       Access & Login
                   </Typography>
@@ -1086,7 +1088,7 @@ const Help = () => {
                     <Typography  variant="h3"  className={classes.subHeading} id="mobileIntroduction">
                       Mobile Application
                     </Typography>
-                    <Typography  variant="h3"  className={classes.subHeading}>
+                    <Typography  variant="h4"  className={classes.subHeading}>
                       Introduction to the mobile app
                     </Typography>
                   </Box>
@@ -1614,7 +1616,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Capture fingerprint
                     </Typography>
                     <Typography>
@@ -1629,7 +1631,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Matching fingerprints
                     </Typography>
                     <Typography>
@@ -1790,7 +1792,7 @@ const Help = () => {
                 </Grid>
                 <Grid item>
                   <Box py={1}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" className={classes.subHeadingMargin}>
                       Abbreviations
                     </Typography>
                     <TableContainer component={Paper}>
