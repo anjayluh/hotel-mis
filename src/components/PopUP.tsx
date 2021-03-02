@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
         }
   
       },
+      figcaption: {
+        textTransform: 'capitalize',
+      }
   }),
 );
 
@@ -55,7 +58,7 @@ export default function PopUP({popUpContent}: IPopUp) {
             <img
             src={popUpContent.image}
             alt="The beautiful MDN logo." />
-            <figcaption>{popUpContent.caption}</figcaption>
+            <figcaption className={classes.figcaption}>{popUpContent.caption}</figcaption>
         </figure>
       </Button>
       <Popover
@@ -77,7 +80,7 @@ export default function PopUP({popUpContent}: IPopUp) {
             <img
             src={popUpContent.image}
             alt="The beautiful MDN logo." />
-            <figcaption>{popUpContent.caption}</figcaption>
+            <figcaption className={classes.figcaption}>{popUpContent.caption}</figcaption>
         </figure>
         </Box>
       </Popover>
