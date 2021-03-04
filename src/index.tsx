@@ -4,6 +4,7 @@ import {Provider} from 'react-redux'
 import { SnackbarProvider} from 'notistack';
 import {ThemeProvider,} from '@material-ui/styles';
 import 'react-toastify/dist/ReactToastify.css';
+import WebSocketProvider from './modules/ninVerification/webSockets/WebSocket'
 import store from "./data/redux/store";
 import './index.css';
 import App from './App';
@@ -15,7 +16,9 @@ ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider theme={theme}>
           <SnackbarProvider maxSnack={3}>
-            <App/>
+            <WebSocketProvider>
+              <App/>
+            </WebSocketProvider>
           </SnackbarProvider>
         </ThemeProvider>
     </Provider>, document.getElementById('root'));

@@ -200,6 +200,7 @@ export const remoteRoutes = {
   niraExport: NinVerificationURL + "/api/exports/",
   niraCredentials: NinVerificationURL + "/api/credentials",
   niraCurrentCredentials: NinVerificationURL + "/api/credentials/current",
+  webSockets: NinVerificationURL + "/hubs/requesthub",
   authServer: authURL,
   login: authURL + "/api/test/login",
   profile: authURL + "/api/test/profile",
@@ -207,4 +208,5 @@ export const remoteRoutes = {
   resetPass: authURL + "/reset",
   users: authURL + "/api/user",
   devPortal: devPortal,
+   
 };

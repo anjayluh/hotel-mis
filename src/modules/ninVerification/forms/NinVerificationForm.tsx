@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useState } from "react";
 import * as yup from "yup";
 import { reqNin, reqCardNumber } from "../../../data/validations";
@@ -8,6 +8,8 @@ import XFormSimple from "../../../components/forms/XFormSimple";
 import XTextInput from "../../../components/inputs/XTextInput";
 import XDateInput from "../../../components/inputs/XDateInput";
 import { useDispatch, useSelector } from "react-redux";
+import { HubConnectionBuilder } from '@microsoft/signalr';
+import {WebSocketContext} from '../webSockets/WebSocket';
 import { IState } from "../../../data/types";
 import { remoteRoutes } from "../../../data/constants";
 import { get, post } from "../../../utils/ajax";
@@ -84,6 +86,9 @@ interface IProps {
 }
 
 const NinVerificationForm = (props: IProps) => {
+ 
+  const webSocket: any = useContext(WebSocketContext)
+
   const { enqueueSnackbar } = useSnackbar();
   const [data, setData] = useState(
     props.initialData
@@ -102,6 +107,7 @@ const NinVerificationForm = (props: IProps) => {
   const [keyStrokes, setKeyStrokes] = useState(0)
   const dispatch = useDispatch();
   const userProfile = useSelector((state: IState) => state.core.user);
+
   function handleSubmit(values: any, actions: FormikActions<any>) {
     const toSave: any = {
       surname: values.surname.toUpperCase(),
@@ -114,25 +120,17 @@ const NinVerificationForm = (props: IProps) => {
       remoteRoutes.ninRequests,
       toSave,
       (data) => {
-        get(remoteRoutes.ninRequests + `/${data.id}`, (resp) => {
-          actions.resetForm();
-          // Update table to show recently added request
-          dispatch({
-            type: verificationRequestConstants.RequestsPostNew,
-            payload: resp,
-          });
-          enqueueSnackbar(snackbarMessages.NinVerification.new, {
-            variant: "success",
-          });
-          actions.resetForm();
-          handleClose();
-          if (props.done) props.done();
-        },
-            () => {
-                enqueueSnackbar(snackbarMessages.default.fail, {
-                    variant: "error",
-                });
-            });
+        actions.resetForm();
+        // Invoke websocket to fetch requests and Update table to show recently added request
+        webSocket.getRequests();
+       
+        enqueueSnackbar(snackbarMessages.NinVerification.new, {
+          variant: "success",
+        });
+        actions.resetForm();
+        handleClose();
+        if (props.done) props.done();
+        
       },
       () => {
         enqueueSnackbar(snackbarMessages.default.fail, {
