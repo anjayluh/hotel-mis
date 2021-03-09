@@ -1791,7 +1791,7 @@ const Help = () => {
                   </Box>
                 </Grid>
                 <Grid item>
-                  <Box py={1}>
+                  <Box py={1.5}>
                     <Typography variant="h5" className={classes.subHeadingMargin}>
                       Abbreviations
                     </Typography>
