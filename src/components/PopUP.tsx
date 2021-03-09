@@ -34,9 +34,10 @@ interface IPopUp{
     // initialContent: any,
     // expandableContent: any
     popUpContent: any
+    imageWrapper?: string
 }
 
-export default function PopUP({popUpContent}: IPopUp) {
+export default function PopUP({popUpContent, imageWrapper}: IPopUp) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
@@ -54,7 +55,7 @@ export default function PopUP({popUpContent}: IPopUp) {
   return (
     <div>
       <Button aria-describedby={id} onClick={handleClick}>
-        <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
+        <figure style={{ marginLeft: 0, marginRight: 0 }} className={imageWrapper ? imageWrapper : classes.imageWrapper }>
             <img
             src={popUpContent.image}
             alt="The beautiful MDN logo." />

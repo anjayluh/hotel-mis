@@ -380,7 +380,7 @@ const Help = () => {
               </Grid>
               <Grid container item>
                 <Grid item xs={12} >
-                  <Box pt={1}>
+                  <Box pt={2}>
                     <Typography  variant="h3"  className={classes.subHeading} id="fiPortalIntro">
                       FI Portal
                       </Typography>
@@ -551,7 +551,7 @@ const Help = () => {
                             <Typography>
                               In the top right corner, click the user profile icon.
                             </Typography>
-                            <Box>
+                            <Box style={{width: "200px"}}>
                               <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":""}} />
                             </Box>
                           </Typography>
@@ -808,7 +808,7 @@ const Help = () => {
                       </ListItem>
                     </List>
                     <Box>
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 17: Request details screenm"}} />
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 17: Request details screen"}} />
                     </Box>
                   </Box>
                 </Grid>
