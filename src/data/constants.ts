@@ -172,6 +172,13 @@ const servers: any = {
     clientId: "equity-backoffice:portal",
     envScope: "openid profile roles offline_access equity_BNVS_API"
   },
+  stanchartUat: {
+    Auth: "https://niv-auth-api-uat.ugwpatsyb03.gdc.standardchartered.com",
+    Nin: "https://niv-api-uat.ugwpatsyb03.gdc.standardchartered.com",
+    devPortal: "https://niv-api-uat.ugwpatsyb03.gdc.standardchartered.com",
+    clientId: "stanchart-backoffice:portal",
+    envScope: "openid profile roles offline_access stanchart_BNVS_API"
+  },
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
     clientId: "bou:backoffice",
