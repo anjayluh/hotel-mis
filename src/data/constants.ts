@@ -166,9 +166,9 @@ const servers: any = {
     envScope: "openid profile roles offline_access bou_BNVS_API"
   },
   equityUat: {
-    Auth: "https://niv-auth-api-uat.equitybank.co.ug",
-    Nin: "https://niv-api-uat.equitybank.co.ug",
-    devPortal: "https://niv-api-uat.equitybank.co.ug",
+    Auth: "https://niv-auth-api-uat.ug.ebsafrica.com",
+    Nin: "https://niv-api-uat.ug.ebsafrica.com",
+    devPortal: "https://niv-api-uat.ug.ebsafrica.com",
     clientId: "equity-backoffice:portal",
     envScope: "openid profile roles offline_access equity_BNVS_API"
   },
