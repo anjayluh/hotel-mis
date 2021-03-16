@@ -147,6 +147,7 @@ export enum WorkflowValidityStatus {
     Valid = 'Valid',
     Invalid = "Invalid",
     NotValid = "Not valid",
+    InActive = "Not Active",
     emptyString = ''
 
 }

@@ -224,7 +224,6 @@ const NinVerifications = () => {
 
   function updateExport(values: any) {
     setExportValues({ ...filter, ...values });
-    console.log(filter,values,  'fffffffffffffffffffffffffffffffiiiiiiiiiiiiiiiiilllllllllllllllllter')
     setExportLoading(false)
     setIsError(false)
     if (values.form !== null && values.to !== null) {

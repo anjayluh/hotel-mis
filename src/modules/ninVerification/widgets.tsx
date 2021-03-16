@@ -75,6 +75,10 @@ export const renderValidityStatus = (value: WorkflowValidityStatus) => {
       color = errorColor;
       label = "Invalid";
       break;
+    case WorkflowValidityStatus.InActive:
+      color = greyPendingColor;
+      label = "InActive";
+      break;
     case WorkflowValidityStatus.emptyString:
       color = errorColor;
       label = "Invalid";
@@ -97,6 +101,19 @@ export const renderValidityStatus = (value: WorkflowValidityStatus) => {
         </Box>
       )}
       {label === "Invalid" && (
+        <Box>
+          <RemoveCircle
+            fontSize="small"
+            style={{
+              color: color,
+              marginTop: 4.4,
+              marginRight: 2,
+              fontSize: 16,
+            }}
+          />
+        </Box>
+      )}
+       {label === "InActive" && (
         <Box>
           <RemoveCircle
             fontSize="small"
