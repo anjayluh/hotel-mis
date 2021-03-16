@@ -40,24 +40,18 @@ export default ({ children }: IProps) => {
         
     }
 
-    const receiveRequests = () => {
-        connection.on('ReceiveNinRequests', (resp: any) => {
-            dispatch({
-                type: verificationRequestConstants.RequestsFetchAll,
-                payload: [...resp.requests],
-              });
-        });
-    }
 
     async function start() {
         try {
             await connection.start();
             if(connection && connection.state === HubConnectionState.Connected) {
                 console.log('Connected!');
-                receiveRequests()
-                setInterval(() => {
-                    receiveRequests()
-                }, 5000)
+                connection.on('ReceiveNinRequests', (resp: any) => {
+                    dispatch({
+                        type: verificationRequestConstants.RequestsFetchAll,
+                        payload: [...resp.requests],
+                      });
+                });
 
             }
             
@@ -70,10 +64,6 @@ export default ({ children }: IProps) => {
             
         }
 
-        webSocket = {
-            connection,
-            getRequests
-        }
         
     }
     webSocket = {
