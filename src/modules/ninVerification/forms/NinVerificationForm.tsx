@@ -28,7 +28,7 @@ const schema = yup.object().shape({
     .string()
     .test(
       "oneOfRequired",
-      "Include atleast given name or date of birth",
+      "Include at least Given Name or Date of Birth",
       function (item) {
         return (
           this.parent.givenName ||
@@ -41,7 +41,7 @@ const schema = yup.object().shape({
     .string()
     .test(
       "oneOfRequired",
-      "Include atleast surname, or date of birth",
+      "Include at least Surname, or Date of Birth",
       function (item) {
         return (
           this.parent.givenName ||
@@ -54,7 +54,7 @@ const schema = yup.object().shape({
     .string()
     .test(
       "oneOfRequired",
-      "Include atleast given name, surname  or date of birth",
+      "Include at least Given Name, Surname  or Date of Birth",
       function (item) {
         return (
           this.parent.givenName ||
@@ -68,7 +68,7 @@ const schema = yup.object().shape({
     .nullable()
     .test(
       "oneOfRequired",
-      "Include atleast given name or surname",
+      "Include at least Given Name or Surname",
       function (item) {
         return (
           this.parent.givenName ||
