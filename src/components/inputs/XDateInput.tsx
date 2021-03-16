@@ -20,9 +20,10 @@ interface IProps {
   inputVariant?: "outlined" | "filled" | "standard";
   size?: "small" | "medium";
   disableFuture?: boolean;
+  onChange: (date: Date | null) => any;
 }
 
-const Component = ({ field, form,  ...other }: FieldProps, {disableFuture}:IProps) => {
+const Component = ({ field, form,  ...other }: FieldProps, {disableFuture, onChange}:IProps) => {
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -37,9 +38,13 @@ const Component = ({ field, form,  ...other }: FieldProps, {disableFuture}:IProp
     return form.setFieldTouched(field.name, true, true);
   }
 
-  function handleChange(date: any) {
-    setOpen(false);
-    return form.setFieldValue(field.name, date, true);
+  // function handleChange(date: any) {
+  //   setOpen(false);
+  //   return form.setFieldValue(field.name, date, true);
+  // }
+  function handleChange(e: any): any {
+    onChange(e);
+    // setOpen(false);
   }
 
   return (

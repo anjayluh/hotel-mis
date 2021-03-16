@@ -28,6 +28,7 @@ import { isEmpty } from "lodash";
 import { async } from "validate.js";
 import { AnyMxRecord } from "dns";
 import { idCategories } from "../../data/comboCategories";
+import { ConsoleLogger } from "@microsoft/signalr/dist/esm/Utils";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -93,7 +94,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: "20px 16px",
     },
     information: {
-      color: "#546e7a",
+      color: "#e53935",
       fontSize: 12,
       fontWeight: 400,
       paddingLeft: 15,
@@ -145,6 +146,7 @@ const NinVerifications = () => {
       addNewRequest();
     }
 
+    console.log(exportValues.from, 'exportValues.fromexportValues.from')
     dispatch({
       type: verificationRequestConstants.RequestsFetchLoading,
       payload: true,
@@ -224,6 +226,10 @@ const NinVerifications = () => {
     setExportValues({ ...filter, ...values });
     setExportLoading(false)
     setIsError(false)
+    if (values.form !== null && values.to !== null) {
+      setShowExportInformationMessage(false)
+    }
+    
   }
   function handleFilter(values: any) {
     setFilter({ ...filter, ...values });
@@ -397,39 +403,12 @@ const NinVerifications = () => {
                     ? "Processing data for export ..."
                     : "Export data to excel"}
                 </Button>
-                {/* {isExport && (
-                  <Button
-                    disabled={exportLoading}
-                    variant="outlined"
-                    color="primary"
-                    onClick={initiateExport}
-                    size="small"
-                    style={{ width: 267 }}
-                  >
-                    {exportLoading
-                      ? "Processing data for export ..."
-                      : "Export data to excel"}
-                  </Button>
-                )} */}
-                {/* {!isExport && (
-                  <Button
-                    disabled={downloadLoading}
-                    variant="outlined"
-                    color="primary"
-                    onClick={download}
-                    size="small"
-                    style={{ width: 267 }}
-                  >
-                    {downloadLoading
-                      ? "Downloading excel ..."
-                      : "Download excel"}
-                  </Button>
-                )} */}
-                {isExport && showExportInformationMessage && (
+                
+                {isExport && showExportInformationMessage ? (
                   <Typography variant="body2" className={classes.information}>
                     Please select start and end date in the filter
                   </Typography>
-                )}
+                ): ''}
               </ErrorBoundary>
             </Paper>
           </Box>
