@@ -40,23 +40,27 @@ export default ({ children }: IProps) => {
         
     }
 
+    const receiveRequests = () => {
+        connection.on('ReceiveNinRequests', (resp: any) => {
+            dispatch({
+                type: verificationRequestConstants.RequestsFetchAll,
+                payload: [...resp.requests],
+              });
+        });
+    }
+
     async function start() {
         try {
             await connection.start();
             if(connection && connection.state === HubConnectionState.Connected) {
                 console.log('Connected!');
+                receiveRequests()
                 setInterval(() => {
-                    connection.on('ReceiveNinRequests', (resp: any) => {
-
-                        console.log(resp, 'response resp')
-                        dispatch({
-                            type: verificationRequestConstants.RequestsFetchAll,
-                            payload: [...resp.requests],
-                          });
-                    });
-                }, 1000)
+                    receiveRequests()
+                }, 5000)
 
             }
+            
             console.log("SignalR Connected.");
         } catch (err) {
             if( connection && connection.state === HubConnectionState.Disconnected){
