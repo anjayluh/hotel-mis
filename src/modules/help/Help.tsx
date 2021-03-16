@@ -1759,7 +1759,10 @@ const Help = () => {
                         </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
-                            For how to use insomnia to test the API please refer to <a href="https://apis.support.brightcove.com/general/use-insomnia-api-requests.html">
+                            For how to use insomnia to test the API please refer to 
+                            <a href="https://apis.support.brightcove.com/general/use-insomnia-api-requests.html"
+                              rel="noopener noreferrer" target="_blank"
+                            >
                               https://apis.support.brightcove.com/general/use-insomnia-api-requests.html
                             </a>
                           </Typography>
