@@ -161,6 +161,11 @@ const NinVerificationForm = (props: IProps) => {
     
   }
 
+  const handleValueChange = (name: string) => (value: any) => {
+    const newData = { ...data, [name]: value };
+    setData(newData);
+  };
+
   function detectKeyStrokes(event: React.ChangeEvent<any>) {
     let keyClicks = keyStrokes + 1
     setKeyStrokes(keyClicks)
@@ -247,6 +252,7 @@ const NinVerificationForm = (props: IProps) => {
             name="dateOfBirth"
             label="Date of Birth"
             inputVariant="outlined"
+            onChange={handleValueChange('dateOfBirth')}
             size="small"
           />
           <Typography variant="body2" style={{paddingLeft: 15 }}>Date format: dd.mm.yyyy ({printDate(Date.now())})</Typography>

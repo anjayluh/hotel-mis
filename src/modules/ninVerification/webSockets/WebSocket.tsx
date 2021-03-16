@@ -54,7 +54,7 @@ export default ({ children }: IProps) => {
                             payload: [...resp.requests],
                           });
                     });
-                }, 5000)
+                }, 1000)
 
             }
             console.log("SignalR Connected.");
