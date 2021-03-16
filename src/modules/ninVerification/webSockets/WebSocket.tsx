@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { HubConnectionBuilder, IHttpConnectionOptions } from '@microsoft/signalr';
+import { HubConnectionBuilder, IHttpConnectionOptions, HubConnectionState } from '@microsoft/signalr';
 import { verificationRequestConstants } from '../../../data/redux/ninVerification/reducer';
 import {remoteRoutes} from '../../../data/constants'
 import { IState } from '../../../data/types'
@@ -39,26 +39,46 @@ export default ({ children }: IProps) => {
           }
         
     }
-    
-    if (connection) {
-        connection.start()
-            .then((result: any) => {
+
+    async function start() {
+        try {
+            await connection.start();
+            if(connection && connection.state === HubConnectionState.Connected) {
                 console.log('Connected!');
+                setInterval(() => {
+                    connection.on('ReceiveNinRequests', (resp: any) => {
 
-                connection.on('ReceiveNinRequests', (resp: any) => {
-                    dispatch({
-                        type: verificationRequestConstants.RequestsFetchAll,
-                        payload: [...resp.requests],
-                      });
-                });
-            })
-            .catch((e: any) => console.log('Connection failed: ', e));
+                        console.log(resp, 'response resp')
+                        dispatch({
+                            type: verificationRequestConstants.RequestsFetchAll,
+                            payload: [...resp.requests],
+                          });
+                    });
+                }, 5000)
 
-            webSocket = {
-                connection,
-                getRequests
             }
+            console.log("SignalR Connected.");
+        } catch (err) {
+            if( connection && connection.state === HubConnectionState.Disconnected){
+                console.log(err);
+                setTimeout(() => start(), 5000);
+            }
+            
+        }
+
+        webSocket = {
+            connection,
+            getRequests
+        }
+        
     }
+    webSocket = {
+        connection,
+        getRequests
+    }
+    start();
+    connection && connection.onclose(start);
+    
 
     return (
         <WebSocketContext.Provider value={webSocket}>
