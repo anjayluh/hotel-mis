@@ -443,9 +443,11 @@ const Help = () => {
                     <Typography variant="h5" >Software requirements</Typography>
                     <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
-                        <ListItemText primary={
-                          <Typography variant="h6">Web browser</Typography>
-                        }
+                        <ListItemText 
+                          disableTypography={true}
+                          primary={
+                            <Typography variant="h6">Web browser</Typography>
+                          }
                           secondary={
                             <Typography>
                               The recommended browser is Google Chrome Browser's latest version.
@@ -460,9 +462,11 @@ const Help = () => {
                     <Typography variant="h5" >Hardware requirements</Typography>
                     <List className={classes.listPadding}>
                       <ListItem className={classes.listItem}>
-                        <ListItemText primary={
-                          <Typography variant="h6">Hardware</Typography>
-                        }
+                        <ListItemText 
+                          disableTypography={true}
+                          primary={
+                            <Typography variant="h6">Hardware</Typography>
+                          }
                           secondary={
                             <Typography component="div">
                               <Typography>
@@ -501,7 +505,9 @@ const Help = () => {
                         <ListItemIcon className={classes.listBulletWrapper}>
                           <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
                         </ListItemIcon>
-                        <ListItemText primary={
+                        <ListItemText 
+                        disableTypography={true}
+                        primary={
                           <Typography>Click the sign-in button.</Typography>
                         }
                           secondary={
@@ -514,12 +520,14 @@ const Help = () => {
                         <ListItemIcon className={classes.listBulletWrapper}>
                           <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
                         </ListItemIcon>
-                        <ListItemText primary={
-                          <Typography component="div">
-                            <Typography>Enter username and password and click sign in. </Typography>
-                            <Typography>(The username and password are given to you by the systems administrator.)</Typography>
-                          </Typography>
-                        }
+                        <ListItemText 
+                          disableTypography={true}
+                          primary={
+                            <Typography component="div">
+                              <Typography>Enter username and password and click sign in. </Typography>
+                              <Typography>(The username and password are given to you by the systems administrator.)</Typography>
+                            </Typography>
+                          }
                           secondary={
                             <Box>
                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 6: Login screen"}} />
@@ -1135,11 +1143,13 @@ const Help = () => {
                           <ListItemIcon className={classes.listBulletWrapper}>
                             <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
                           </ListItemIcon>
-                          <ListItemText primary={
-                            <Typography>
-                              Preferred fingerprint scanner –
-                              </Typography>
-                          }
+                          <ListItemText 
+                            disableTypography={true}
+                            primary={
+                              <Typography>
+                                Preferred fingerprint scanner –
+                                </Typography>
+                            }
                             secondary={
                               <Box>
                                 <Typography>Manufacturer: <span style={{fontWeight: 'bold'}}>Evolute Systems Pvt. Ltd</span></Typography>
@@ -1268,12 +1278,14 @@ const Help = () => {
                           <ListItemIcon className={classes.listBulletWrapper}>
                             <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
                           </ListItemIcon>
-                          <ListItemText primary={
-                            <Typography>
-                              Tap the “Log in” button and then enter your username and password.
-                            </Typography>
+                          <ListItemText 
+                            disableTypography={true}
+                            primary={
+                              <Typography>
+                                Tap the “Log in” button and then enter your username and password.
+                              </Typography>
 
-                          }
+                            }
                             secondary={
                               <Box display="flex">
                                 <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 22:Mobile app landing page"}} />
@@ -1287,11 +1299,13 @@ const Help = () => {
                           <ListItemIcon className={classes.listBulletWrapper}>
                             <img src={listBullet} className={classes.listBullet} alt="list-bullet" />
                           </ListItemIcon>
-                          <ListItemText primary={
-                            <Typography>
-                              To create a PIN, enter the same 5-digit PIN in both fields shown below and tap the “LOGIN” button
-                            </Typography>
-                          }
+                          <ListItemText 
+                            disableTypography={true}
+                            primary={
+                              <Typography>
+                                To create a PIN, enter the same 5-digit PIN in both fields shown below and tap the “LOGIN” button
+                              </Typography>
+                            }
                             secondary={
                               <Box display="flex">
 
@@ -1745,7 +1759,10 @@ const Help = () => {
                         </ListItemIcon>
                         <ListItemText primary={
                           <Typography>
-                            For how to use insomnia to test the API please refer to <a href="https://apis.support.brightcove.com/general/use-insomnia-api-requests.html">
+                            For how to use insomnia to test the API please refer to 
+                            <a href="https://apis.support.brightcove.com/general/use-insomnia-api-requests.html"
+                              rel="noopener noreferrer" target="_blank"
+                            >
                               https://apis.support.brightcove.com/general/use-insomnia-api-requests.html
                             </a>
                           </Typography>

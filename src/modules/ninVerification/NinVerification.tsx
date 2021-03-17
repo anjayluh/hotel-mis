@@ -146,7 +146,6 @@ const NinVerifications = () => {
       addNewRequest();
     }
 
-    console.log(exportValues.from, 'exportValues.fromexportValues.from')
     dispatch({
       type: verificationRequestConstants.RequestsFetchLoading,
       payload: true,
@@ -238,6 +237,7 @@ const NinVerifications = () => {
     if (exportValues.from && exportValues.to) {
       setShowExportInformationMessage(false);
       setExportLoading(true);
+      
       let toSave = {
         dateRange: {
           from: exportValues.from,

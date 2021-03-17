@@ -45,15 +45,11 @@ const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
     return matchingStatus;
   }
   function submitForm(values: any) {
-    const statusRequest =
-      values.requestStatus === "Completed"
-        ? "Successful"
-        : values.requestStatus;
     let toSave = {
       Nin: values.nin.trim(),
       CardNumber: values.cardNumber.trim(),
       participant: values.participant,
-      Status: values.requestStatus === "All" ? "" : statusRequest,
+      Status: values.requestStatus === "All" ? "" : values.requestStatus,
       matchingStatus: getMatchingStatus(values.matchingStatus),
       "Date.From": values.from =
         values.from && new Date(values.from).toISOString(),
