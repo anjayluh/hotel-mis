@@ -59,7 +59,11 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
     },
     helpWrapper: {
-      margin: '0 auto'
+      margin: '0 auto',
+      [theme.breakpoints.down("sm")]: {
+        width: "100%",
+      },
+      
     },
     pageHeading: {
       display: "flex",
@@ -79,6 +83,9 @@ const useStyles = makeStyles((theme: Theme) =>
         maxWidth: '100%',
       }
 
+    },
+    imageStyles: {
+      width: 400,
     },
     filterPaper: {
       borderRadius: 0,
@@ -128,7 +135,7 @@ const Help = () => {
   return (
     <Layout>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={10} md={8} lg={7} className={classes.helpWrapper}>
+        <Grid container item xs={12} sm={10} md={8} lg={7} className={classes.helpWrapper}>
           <Box p={2} className={classes.root}>
             <Paper className={classes.filterPaper} elevation={0}>
               <Box pb={2}>
@@ -139,7 +146,7 @@ const Help = () => {
                 </Grid>
               </Box>
               <Grid container item>
-                <Grid item xs={12} >
+                <Grid item xs={12} sm={10} md={8} lg={7} >
                   <Box id="userIntroduction">
                     <Typography variant="h3"  className={classes.subHeading}>
                       Authentication and User Management
@@ -314,7 +321,7 @@ const Help = () => {
                               </Box>
                               <Box pl={1} >
                                 <PopUp popUpContent={{"image":editUserForm, "caption":"", "alt":"Edit user form image"}}
-                                  transformOrigin={{"vertical": "top","horizontal": "center",}}
+                                  transformOrigin={{"vertical": "top","horizontal": "center",}} imageStyles={classes.imageStyles}
                                  />
                               </Box>
                             </Box>
@@ -1324,10 +1331,13 @@ const Help = () => {
                             }
                             secondary={
                               <Box display="flex">
-                                <PopUp popUpContent={{"image":mobileLandingPage, "caption":"Figure 22:Mobile app landing page", "alt":"Mobile landing page"}} />
+                                <PopUp popUpContent={{"image":mobileLandingPage, "caption":"Figure 22:Mobile app landing page", "alt":"Mobile landing page"}}
+                                  imageStyles={classes.imageStyles}
+                                 />
                                 
                                 <PopUp popUpContent={{"image":mobileLoginPage, "caption":"Figure 21: Mobile app login page", "alt":"Mobile Login Page"}} 
                                   transformOrigin={{"vertical": "top","horizontal": "center",}}
+                                  imageStyles={classes.imageStyles}
                                 />
                               </Box>
                             } />
@@ -1346,8 +1356,12 @@ const Help = () => {
                             }
                             secondary={
                               <Box display="flex">
-                                <PopUp popUpContent={{"image":pinSetUp, "caption":"Figure 23: PIN setup page", "alt":"Pin Set Up"}} />
-                                <PopUp popUpContent={{"image":pinLogin, "caption":"Figure 24: Subsequent PIN login page", "alt":"Pin Login"}} />
+                                <PopUp popUpContent={{"image":pinSetUp, "caption":"Figure 23: PIN setup page", "alt":"Pin Set Up"}}
+                                  imageStyles={classes.imageStyles}
+                                 />
+                                <PopUp popUpContent={{"image":pinLogin, "caption":"Figure 24: Subsequent PIN login page", "alt":"Pin Login"}}
+                                  imageStyles={classes.imageStyles} 
+                                />
                               </Box>
                             } />
 
@@ -1370,10 +1384,13 @@ const Help = () => {
                       you will see the following screens that give a brief about the functionality of the application.
                       </Typography>
                     <Box display="flex">
-                      <PopUp popUpContent={{"image":IdSummary, "caption":"Figure 26:Scan ID summary screen", "alt":"ID summary"}} />
+                      <PopUp popUpContent={{"image":IdSummary, "caption":"Figure 26:Scan ID summary screen", "alt":"ID summary"}}
+                        imageStyles={classes.imageStyles}
+                       />
                       
                       <PopUp popUpContent={{"image":matchFingerPrint, "caption":"Figure 25: Match fingerprint summary screen", "alt":"Match Finger Print"}}
                         transformOrigin={{"vertical": "top","horizontal": "center",}}
+                        imageStyles={classes.imageStyles}
                       />
 
                     </Box>
@@ -1425,7 +1442,9 @@ const Help = () => {
                         </Typography>
                     </Box>
                     <Box>
-                      <PopUp popUpContent={{"image":pinLogin, "caption":"Figure 27: Mobile app return user login screen", "alt":"Reset Pin"}} />
+                      <PopUp popUpContent={{"image":pinLogin, "caption":"Figure 27: Mobile app return user login screen", "alt":"Reset Pin"}}
+                        imageStyles={classes.imageStyles} 
+                      />
                     </Box>
                   </Box>
                 </Grid>
@@ -1449,7 +1468,9 @@ const Help = () => {
                       To sign out of the application, press the “Menu” button in the top right corner of the app and tap on the Logout link.
                     </Typography>
                     <Box>
-                      <PopUp popUpContent={{"image":mobileLogout, "caption":"Figure 28: Logout link", "alt":"Logout Link"}} />
+                      <PopUp popUpContent={{"image":mobileLogout, "caption":"Figure 28: Logout link", "alt":"Logout Link"}}
+                        imageStyles={classes.imageStyles} 
+                      />
                     </Box>
                   </Box>
                 </Grid>
@@ -1522,10 +1543,13 @@ const Help = () => {
                       <ListItem className={classes.listItem}>
                         <ListItemText primary={
                           <Box display="flex">
-                            <PopUp popUpContent={{"image":scanID, "caption":"Figure 29: Scan ID screen", "alt":"Scan ID"}} />
+                            <PopUp popUpContent={{"image":scanID, "caption":"Figure 29: Scan ID screen", "alt":"Scan ID"}}
+                              imageStyles={classes.imageStyles} 
+                            />
                           
                           <PopUp popUpContent={{"image":barcodeID, "caption":"Figure 30:Barcode ID backside", "alt":"ID barcode"}}
-                          transformOrigin={{"vertical": "top","horizontal": "center",}}
+                            transformOrigin={{"vertical": "top","horizontal": "center",}}
+                            imageStyles={classes.imageStyles}
                           />
   
                         </Box>
@@ -1544,7 +1568,9 @@ const Help = () => {
                       <ListItem className={classes.listItem}>
                         <ListItemText primary={
                           <Box px={2}>
-                          <PopUp popUpContent={{"image":cardDetails, "caption":"Figure 31:Scanned results screen","alt":"Card details"}} />
+                          <PopUp popUpContent={{"image":cardDetails, "caption":"Figure 31:Scanned results screen","alt":"Card details"}}
+                            imageStyles={classes.imageStyles} 
+                          />
                         </Box>
                         }/>
                       </ListItem>
@@ -1638,7 +1664,9 @@ const Help = () => {
                       </ListItem>
                     </List>
                     <Box>
-                      <PopUp popUpContent={{"image":deviceListings, "caption":"Figure 32: Bluetooth device listing", "alt":"Device Listings"}} />
+                      <PopUp popUpContent={{"image":deviceListings, "caption":"Figure 32: Bluetooth device listing", "alt":"Device Listings"}}
+                        imageStyles={classes.imageStyles} 
+                      />
                     </Box>
                     <Typography>
                       When you return to match a fingerprint after the initial connection,
@@ -1646,7 +1674,9 @@ const Help = () => {
                       instead you will only be prompted to pair to the device as the device will be stored in the phone list.
                     </Typography>
                     <Box>
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 33: Request to pair on subsequent connection notification"}} />
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 33: Request to pair on subsequent connection notification"}}
+                        imageStyles={classes.imageStyles} 
+                      />
                     </Box>
                   </Box>
                 </Grid>
@@ -1663,7 +1693,9 @@ const Help = () => {
                       <Typography>
                         Return to the application and click on “Scan fingerprint”.
                       </Typography>
-                        <PopUp popUpContent={{"image":scanFingerPrint, "caption":"Figure 34:Scan fingerprint instruction page", "alt":"Scan Finger Print"}} />
+                        <PopUp popUpContent={{"image":scanFingerPrint, "caption":"Figure 34:Scan fingerprint instruction page", "alt":"Scan Finger Print"}}
+                          imageStyles={classes.imageStyles} 
+                        />
                     </Box>
                   </Box>
                 </Grid>
@@ -1678,7 +1710,9 @@ const Help = () => {
                       For example, if it says” Right Thumb”, ask the cardholder to place the right thumb on the scanner.
                     </Typography>
                     <Box>
-                      <PopUp popUpContent={{"image":captureFingerPrint, "caption":"Figure 35: Finger as indicated on the ID", "alt":"Finger Print as on ID"}} />
+                      <PopUp popUpContent={{"image":captureFingerPrint, "caption":"Figure 35: Finger as indicated on the ID", "alt":"Finger Print as on ID"}}
+                        imageStyles={classes.imageStyles} 
+                      />
                     </Box>
                   </Box>
                 </Grid>
@@ -1694,10 +1728,13 @@ const Help = () => {
                     </Typography>
                     <Box display="flex" className={classes.imageWrapper}>
                       
-                      <PopUp popUpContent={{"image":fingerPrintMatches, "caption":"Figure 36: Fingerprint matched notification screens", "alt":"Finger Print Matches"}} />
+                      <PopUp popUpContent={{"image":fingerPrintMatches, "caption":"Figure 36: Fingerprint matched notification screens", "alt":"Finger Print Matches"}}
+                        imageStyles={classes.imageStyles} 
+                      />
                       
                       <PopUp popUpContent={{"image":verificationResults, "caption":"", "alt":"Verification Results"}} 
                         transformOrigin={{"vertical": "top","horizontal": "center",}}
+                        imageStyles={classes.imageStyles}
                       />
                     </Box>
                     <Box>

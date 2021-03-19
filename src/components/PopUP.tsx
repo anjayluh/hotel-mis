@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
     },
     popOverContent: {
-        width: '100%',
+        // width: '100%',
         "& img": {
             width: '700px',
             maxWidth: '100%',
@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme: Theme) =>
           maxWidth: '100%',
         }
   
+      },
+
+      imageStyles: {
+        width: "700px"
       },
       figcaption: {
         textTransform: 'capitalize',
@@ -38,10 +42,11 @@ interface IPopUp{
     imageWrapper?: string
     anchorOrigin?: any
     transformOrigin?: any
+    imageStyles?: any
 
 }
 
-export default function PopUP({popUpContent, imageWrapper, anchorOrigin, transformOrigin}: IPopUp) {
+export default function PopUP({popUpContent, imageWrapper, anchorOrigin, transformOrigin, imageStyles}: IPopUp) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
@@ -87,11 +92,13 @@ export default function PopUP({popUpContent, imageWrapper, anchorOrigin, transfo
         style={{height: "700px"}}
       >
         <Box className={classes.popOverContent}>
-        <figure style={{ marginLeft: 0, marginRight: 0, width: "700px"}}>
+        <figure style={{ marginLeft: 0, marginRight: 0}} className={imageStyles ? imageStyles: classes.imageStyles}>
             <img
             src={popUpContent.image}
-            alt={popUpContent.alt} />
-            <figcaption className={classes.figcaption}>{popUpContent.caption}</figcaption>
+            alt={popUpContent.alt}
+            // style={{height:"700px", width:"100%"}}
+             />
+            <figcaption className={classes.figcaption} style={{textAlign:"center"}}>{popUpContent.caption}</figcaption>
         </figure>
         </Box>
       </Popover>
