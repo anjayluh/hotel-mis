@@ -69,6 +69,9 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       textAlign: 'center',
       margin: '0 150px',
+      [theme.breakpoints.down("lg")]: {
+        margin: '0 50px',
+      },
     },
     subHeading: {
       marginTop: 15,
@@ -83,6 +86,12 @@ const useStyles = makeStyles((theme: Theme) =>
         maxWidth: '100%',
       }
 
+    },
+    insomniaLink: {
+      display:'inline-block',
+      [theme.breakpoints.down("sm")]: {
+        maxWidth: '200px'
+      },
     },
     imageStyles: {
       width: 400,
@@ -126,7 +135,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: 'inherit',
     },
     table: {
-      minWidth: 650,
+      minWidth: 200,
     },
   })
 );
@@ -527,6 +536,7 @@ const Help = () => {
                   </Box>
                 </Grid>
               </Grid>
+              
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
@@ -751,6 +761,7 @@ const Help = () => {
                   </Box>
                 </Grid>
               </Grid>
+              
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
@@ -1090,6 +1101,7 @@ const Help = () => {
                   </Box>
                 </Grid>
               </Grid>
+              
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
@@ -1102,6 +1114,7 @@ const Help = () => {
                   </Box>
                 </Grid>
               </Grid>
+              
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
@@ -1133,6 +1146,7 @@ const Help = () => {
                   </Box>
                 </Grid>
               </Grid>
+              
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={1}>
@@ -1144,6 +1158,7 @@ const Help = () => {
                     </Typography>
                   </Box>
                 </Grid>
+                
                 <Grid item xs={12} >
                   <Box>
                     <Typography variant="h4" className={classes.subHeadingMargin}>
@@ -1169,6 +1184,7 @@ const Help = () => {
                     </Box>
                   </Box>
                 </Grid>
+                
                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h4" className={classes.subHeadingMargin}>
@@ -1294,7 +1310,7 @@ const Help = () => {
                     </Box>
                   </Box>
                 </Grid>
-                <Grid item>
+                 <Grid item>
                   <Box py={1}>
                     <Typography  variant="h3"  className={classes.subHeading} id="mobileAccessLogin">
                       Access & Login
@@ -1374,7 +1390,7 @@ const Help = () => {
                     </Box>
                   </Box>
                 </Grid>
-                <Grid item>
+               <Grid item>
                   <Box py={1}>
                     <Typography variant="h5" className={classes.subHeadingMargin}>
                       Application brief
@@ -1680,7 +1696,7 @@ const Help = () => {
                     </Box>
                   </Box>
                 </Grid>
-                <Grid item>
+                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h5" className={classes.subHeadingMargin}>
                       Scanning fingerprint
@@ -1699,7 +1715,7 @@ const Help = () => {
                     </Box>
                   </Box>
                 </Grid>
-                <Grid item>
+                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h5" className={classes.subHeadingMargin}>
                       Capture fingerprint
@@ -1716,7 +1732,7 @@ const Help = () => {
                     </Box>
                   </Box>
                 </Grid>
-                <Grid item>
+                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h5" className={classes.subHeadingMargin}>
                       Matching fingerprints
@@ -1840,17 +1856,19 @@ const Help = () => {
                         <ListItemText primary={
                           <Typography>
                             For how to use insomnia to test the API please refer to 
-                            <a href="https://apis.support.brightcove.com/general/use-insomnia-api-requests.html"
+                            
+                              <a href="https://apis.support.brightcove.com/general/use-insomnia-api-requests.html"
                               rel="noopener noreferrer" target="_blank"
                             >
-                              https://apis.support.brightcove.com/general/use-insomnia-api-requests.html
+                              <span  className={classes.insomniaLink}>https://apis.support.brightcove.com/general/use-insomnia-api-requests.html</span>
                             </a>
                           </Typography>
                         } />
                       </ListItem>
                     </List>
                   </Box>
-                </Grid>
+                </Grid> 
+                
                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h5">Glossary</Typography>
@@ -1887,6 +1905,7 @@ const Help = () => {
                     </Grid>
                   </Box>
                 </Grid>
+                
                 <Grid item>
                   <Box py={1.5}>
                     <Typography variant="h5" className={classes.subHeadingMargin}>
@@ -1926,7 +1945,7 @@ const Help = () => {
                       </Table>
                     </TableContainer>
                   </Box>
-                </Grid>
+                </Grid> 
               </Grid>
             </Paper>
           </Box>
