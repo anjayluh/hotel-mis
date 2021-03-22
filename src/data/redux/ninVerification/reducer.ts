@@ -55,6 +55,7 @@ export default function reducer(state = initialState, action: any) {
 
         case verificationRequestConstants.RequestsPostNew: {
             const newNinVerificationRequest: IVerificationRequest = action.payload
+            console.log(action.payload, 'uuuuuuuuuu')
             return {...state, data: [newNinVerificationRequest, ...state.data]}
         }
         case verificationRequestConstants.RequestPostNiraCredentials: {

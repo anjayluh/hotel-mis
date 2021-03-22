@@ -34,9 +34,10 @@ export default ({ children }: IProps) => {
       }, []);
 
     const getRequests = async () => {
-        if(connection.connectionStarted) {
-            await connection.invoke("getNinRequests");
-          }
+        start();
+        // if(connection.connectionStarted) {
+        //     await connection.invoke("getNinRequests");
+        //   }
         
     }
 
@@ -46,10 +47,11 @@ export default ({ children }: IProps) => {
             await connection.start();
             if(connection && connection.state === HubConnectionState.Connected) {
                 console.log('Connected!');
-                connection.on('ReceiveNinRequests', (resp: any) => {
+                connection.on('ReceiveNinRequest', (resp: any) => {
+                    console.log(resp, 'resssssssssssssssppppppppppppppppp')
                     dispatch({
-                        type: verificationRequestConstants.RequestsFetchAll,
-                        payload: [...resp.requests],
+                        type: verificationRequestConstants.RequestsPostNew,
+                        payload: [...resp],
                       });
                 });
 
