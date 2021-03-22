@@ -3,7 +3,7 @@ import { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { toOptions } from "../../components/inputs/inputHelpers";
-import { Box } from "@material-ui/core";
+import { Box, createStyles, makeStyles, Theme } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import PSelectInput from "../../components/plain-inputs/PSelectInput";
 import PDateInput from "../../components/plain-inputs/PDateInput";
@@ -12,6 +12,21 @@ import Divider from "@material-ui/core/Divider";
 import ResetButton from "../../components/ResetButton";
 import { printDate } from "../../utils/dateHelpers";
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    
+    information: {
+      color: "#e53935",
+      fontSize: 12,
+      fontWeight: 400,
+      paddingLeft: 15,
+      paddingTop: 10,
+      letterSpacing: -0.04,
+    },
+  })
+);
+
+
 interface IProps {
   onFilter: (data: any) => any;
   loading: boolean;
@@ -19,6 +34,8 @@ interface IProps {
 }
 
 const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
+  const classes = useStyles();
+  const[showDateRangeError, setShowDateRangeError] = useState(false);
   const [data, setData] = useState({
     nin: "",
     cardNumber: "",
@@ -57,6 +74,7 @@ const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
       Initiator: values.initiator,
     };
     onFilter(toSave);
+    
   }
 
   function handleChange(event: React.ChangeEvent<any>) {
@@ -86,14 +104,22 @@ const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
     setData(resetData);
     submitForm(resetData);
     setResetButton(false);
+    setShowDateRangeError(false)
     // Reset data to fetch report
     onFilterChange && onFilterChange(resetData)
   }
   const handleValueChange = (name: string) => (value: any) => {
-    // if (name === "from" || name === "to") {
-    //   value = value ? value.toISOString() : value;
-    // }
+    if (name === "from" || name === "to") {
+      // value = value ? value.toISOString() : value;
+      setShowDateRangeError(false)
+    }
     const newData = { ...data, [name]: value };
+    //Check if start date is less than end date
+    if((newData.from !== null) && (newData.to !== null)) {
+      if((!!newData.from && newData.from) >= (!!newData.to && newData.to)) {
+        setShowDateRangeError(true)
+      }
+    }
     setResetButton(true);
     setData(newData);
     onFilterChange && onFilterChange(newData); // For components that need to access filter information before the button is clicked
@@ -192,12 +218,17 @@ const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
           >
             Date format: dd.mm.yyyy ({printDate(Date.now())})
           </Typography>
+          {showDateRangeError ? (
+                  <Typography variant="body2" className={classes.information}>
+                    The "From" date should be less than the "To" date.
+                  </Typography>
+                ): ''}
         </Grid>
         <Grid item xs={12}>
           <Box display="flex" flexDirection="row">
             <Box mr={"auto"}>
               <Button
-                disabled={loading}
+                disabled={loading || showDateRangeError}
                 variant="contained"
                 color="primary"
                 onClick={handleSubmit}
