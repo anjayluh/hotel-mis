@@ -87,6 +87,13 @@ const useStyles = makeStyles((theme: Theme) =>
       }
 
     },
+    imageWrap: {
+      "& img": {
+        width: '300px',
+        maxWidth: '100%',
+      }
+
+    },
     insomniaLink: {
       display:'inline-block',
       [theme.breakpoints.down("sm")]: {
@@ -1459,7 +1466,7 @@ const Help = () => {
                     </Box>
                     <Box>
                       <PopUp popUpContent={{"image":pinLogin, "caption":"Figure 27: Mobile app return user login screen", "alt":"Reset Pin"}}
-                        imageStyles={classes.imageStyles} 
+                        imageStyles={classes.imageStyles} imageWrapper={classes.imageWrap}
                       />
                     </Box>
                   </Box>
@@ -1485,7 +1492,7 @@ const Help = () => {
                     </Typography>
                     <Box>
                       <PopUp popUpContent={{"image":mobileLogout, "caption":"Figure 28: Logout link", "alt":"Logout Link"}}
-                        imageStyles={classes.imageStyles} 
+                        imageStyles={classes.imageStyles} imageWrapper={classes.imageWrap}
                       />
                     </Box>
                   </Box>
@@ -1585,7 +1592,7 @@ const Help = () => {
                         <ListItemText primary={
                           <Box px={2}>
                           <PopUp popUpContent={{"image":cardDetails, "caption":"Figure 31:Scanned results screen","alt":"Card details"}}
-                            imageStyles={classes.imageStyles} 
+                            imageStyles={classes.imageStyles} imageWrapper={classes.imageWrap}
                           />
                         </Box>
                         }/>
@@ -1681,7 +1688,7 @@ const Help = () => {
                     </List>
                     <Box>
                       <PopUp popUpContent={{"image":deviceListings, "caption":"Figure 32: Bluetooth device listing", "alt":"Device Listings"}}
-                        imageStyles={classes.imageStyles} 
+                        imageStyles={classes.imageStyles} imageWrapper={classes.imageWrap}
                       />
                     </Box>
                     <Typography>
@@ -1689,11 +1696,11 @@ const Help = () => {
                       you will not be required to scan for the device as it will be already paired,
                       instead you will only be prompted to pair to the device as the device will be stored in the phone list.
                     </Typography>
-                    <Box>
+                    {/* <Box>
                       <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 33: Request to pair on subsequent connection notification"}}
                         imageStyles={classes.imageStyles} 
                       />
-                    </Box>
+                    </Box> */}
                   </Box>
                 </Grid>
                  <Grid item>
@@ -1710,7 +1717,7 @@ const Help = () => {
                         Return to the application and click on “Scan fingerprint”.
                       </Typography>
                         <PopUp popUpContent={{"image":scanFingerPrint, "caption":"Figure 34:Scan fingerprint instruction page", "alt":"Scan Finger Print"}}
-                          imageStyles={classes.imageStyles} 
+                          imageStyles={classes.imageStyles} imageWrapper={classes.imageWrap}
                         />
                     </Box>
                   </Box>
@@ -1727,7 +1734,7 @@ const Help = () => {
                     </Typography>
                     <Box>
                       <PopUp popUpContent={{"image":captureFingerPrint, "caption":"Figure 35: Finger as indicated on the ID", "alt":"Finger Print as on ID"}}
-                        imageStyles={classes.imageStyles} 
+                        imageStyles={classes.imageStyles} imageWrapper={classes.imageWrap}
                       />
                     </Box>
                   </Box>
@@ -1759,7 +1766,9 @@ const Help = () => {
                         the pop-up and scans summary display it as failed/no match as shown below.
                       </Typography>
                       
-                      <PopUp popUpContent={{"image":failedMatch, "caption":"Figure 37: Failed match notification screen", "alt":"Faile finger print match"}} />
+                      <PopUp popUpContent={{"image":failedMatch, "caption":"Figure 37: Failed match notification screen", "alt":"Faile finger print match"}}
+                        imageWrapper={classes.imageWrap}
+                       />
                       <Typography style={{fontWeight: 'bold'}}>
                         Note: some fingerprints stored by NIRA are of insufficient quality or the file was corrupted.
                         Therefore, the cardholder might still be the true holder of the card, even with a mismatch.
