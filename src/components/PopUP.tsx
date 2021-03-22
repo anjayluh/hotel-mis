@@ -5,15 +5,16 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Box } from '@material-ui/core';
 
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     typography: {
       padding: theme.spacing(2),
     },
     popOverContent: {
-        width: '100%',
+        // width: '100%',
         "& img": {
-            width: '100%',
+            width: '700px',
             maxWidth: '100%',
           }
     },
@@ -23,6 +24,10 @@ const useStyles = makeStyles((theme: Theme) =>
           maxWidth: '100%',
         }
   
+      },
+
+      imageStyles: {
+        width: "700px"
       },
       figcaption: {
         textTransform: 'capitalize',
@@ -35,9 +40,13 @@ interface IPopUp{
     // expandableContent: any
     popUpContent: any
     imageWrapper?: string
+    anchorOrigin?: any
+    transformOrigin?: any
+    imageStyles?: any
+
 }
 
-export default function PopUP({popUpContent, imageWrapper}: IPopUp) {
+export default function PopUP({popUpContent, imageWrapper, anchorOrigin, transformOrigin, imageStyles}: IPopUp) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
@@ -58,7 +67,7 @@ export default function PopUP({popUpContent, imageWrapper}: IPopUp) {
         <figure style={{ marginLeft: 0, marginRight: 0 }} className={imageWrapper ? imageWrapper : classes.imageWrapper }>
             <img
             src={popUpContent.image}
-            alt="The beautiful MDN logo." />
+            alt={popUpContent.alt} />
             <figcaption className={classes.figcaption}>{popUpContent.caption}</figcaption>
         </figure>
       </Button>
@@ -67,21 +76,29 @@ export default function PopUP({popUpContent, imageWrapper}: IPopUp) {
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
+        anchorOrigin={
+          anchorOrigin ? anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'left',
+          }
+        }
+        transformOrigin={
+          transformOrigin ? transformOrigin : {
+            vertical: 'top',
+            horizontal: 'left',
+          }
+        }
+
+        style={{height: "700px"}}
       >
         <Box className={classes.popOverContent}>
-        <figure style={{ marginLeft: 0, marginRight: 0 }}>
+        <figure style={{ marginLeft: 0, marginRight: 0}} className={imageStyles ? imageStyles: classes.imageStyles}>
             <img
             src={popUpContent.image}
-            alt="The beautiful MDN logo." />
-            <figcaption className={classes.figcaption}>{popUpContent.caption}</figcaption>
+            alt={popUpContent.alt}
+            // style={{height:"700px", width:"100%"}}
+             />
+            <figcaption className={classes.figcaption} style={{textAlign:"center"}}>{popUpContent.caption}</figcaption>
         </figure>
         </Box>
       </Popover>

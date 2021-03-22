@@ -8,6 +8,48 @@ import listBullet from "../../assets/list-black-circle.svg"
 import PopUp from "../../components/PopUP"
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import typography from "../../theme/typography";
+import authUILogin from "../../assets/helpImages/1.png";
+import authServiceLoginUI from "../../assets/helpImages/2.png";
+import authServiceHome from "../../assets/helpImages/3.png";
+import addUser from "../../assets/helpImages/4.png";
+import editUser from "../../assets/helpImages/5.png";
+import editUserDetails from "../../assets/helpImages/6.png";
+import editUserForm from "../../assets/helpImages/7.png";
+import portalLogin from "../../assets/helpImages/8.png";
+import authServiceLoginPortal from "../../assets/helpImages/9.png";
+import portalHomePage from "../../assets/helpImages/10.png";
+import portalLogout from "../../assets/helpImages/11.png";
+import forgotPassword from "../../assets/helpImages/12.png";
+import forgotPasswordForm from "../../assets/helpImages/13.png";
+import forgotPasswordConfirmation from "../../assets/helpImages/14.png";
+import resetPassword from "../../assets/helpImages/15.png";
+import newPasswordForm from "../../assets/helpImages/16.png";
+import resetPasswordConfirmation from "../../assets/helpImages/17.png";
+import portalHomePageDetails from "../../assets/helpImages/18.png";
+import requestForm from "../../assets/helpImages/19.png";
+import requestDetails from "../../assets/helpImages/20.png";
+import filterBlock from "../../assets/helpImages/21.png";
+import exportDownlaod from "../../assets/helpImages/22.png";
+import developerPortal from "../../assets/helpImages/23.png";
+import mobileLandingPage from "../../assets/mobileHelpImages/1.jpg"
+import mobileLoginPage from "../../assets/mobileHelpImages/2.jpg"
+import pinSetUp from "../../assets/mobileHelpImages/3.jpg"
+import pinLogin from "../../assets/mobileHelpImages/4.jpg"
+import IdSummary from "../../assets/mobileHelpImages/5.jpg"
+import matchFingerPrint from "../../assets/mobileHelpImages/6.jpg"
+import mobileLogout from "../../assets/mobileHelpImages/7.jpg"
+import scanID from "../../assets/mobileHelpImages/8.jpg"
+import barcodeID from "../../assets/mobileHelpImages/9.jpg"
+import cardDetails from "../../assets/mobileHelpImages/10.jpg"
+import deviceListings from "../../assets/mobileHelpImages/11.jpg"
+import scanFingerPrint from "../../assets/mobileHelpImages/12.jpg"
+import captureFingerPrint from "../../assets/mobileHelpImages/13.jpg"
+import fingerPrintMatches from "../../assets/mobileHelpImages/14.jpg"
+import verificationResults from "../../assets/mobileHelpImages/15.jpg"
+import failedMatch from "../../assets/mobileHelpImages/16.jpg"
+import scanHistory from "../../assets/mobileHelpImages/17.jpg"
+
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,12 +59,19 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
     },
     helpWrapper: {
-      margin: '0 auto'
+      margin: '0 auto',
+      [theme.breakpoints.down("sm")]: {
+        width: "100%",
+      },
+      
     },
     pageHeading: {
       display: "flex",
       textAlign: 'center',
       margin: '0 150px',
+      [theme.breakpoints.down("lg")]: {
+        margin: '0 50px',
+      },
     },
     subHeading: {
       marginTop: 15,
@@ -37,6 +86,22 @@ const useStyles = makeStyles((theme: Theme) =>
         maxWidth: '100%',
       }
 
+    },
+    imageWrap: {
+      "& img": {
+        width: '300px',
+        maxWidth: '100%',
+      }
+
+    },
+    insomniaLink: {
+      display:'inline-block',
+      [theme.breakpoints.down("sm")]: {
+        maxWidth: '200px'
+      },
+    },
+    imageStyles: {
+      width: 400,
     },
     filterPaper: {
       borderRadius: 0,
@@ -77,7 +142,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: 'inherit',
     },
     table: {
-      minWidth: 650,
+      minWidth: 200,
     },
   })
 );
@@ -86,7 +151,7 @@ const Help = () => {
   return (
     <Layout>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={10} md={8} lg={7} className={classes.helpWrapper}>
+        <Grid container item xs={12} sm={10} md={8} lg={7} className={classes.helpWrapper}>
           <Box p={2} className={classes.root}>
             <Paper className={classes.filterPaper} elevation={0}>
               <Box pb={2}>
@@ -97,7 +162,7 @@ const Help = () => {
                 </Grid>
               </Box>
               <Grid container item>
-                <Grid item xs={12} >
+                <Grid item xs={12} sm={10} md={8} lg={7} >
                   <Box id="userIntroduction">
                     <Typography variant="h3"  className={classes.subHeading}>
                       Authentication and User Management
@@ -136,10 +201,11 @@ const Help = () => {
                     </List>
                     <Box mb={2} display="flex" className={classes.imageWrapper}>
                       <Box pr={1}>
-                        <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 2: Auth service home page"}} />
+                        <PopUp popUpContent={{"image":authUILogin, "caption":"Figure 1:Log into the user management system", "alt": "authentication and authorization login image"}} />
                       </Box>
                       <Box pl={1}>
-                        <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 2: Auth service home page"}} />
+                        <PopUp popUpContent={{"image":authServiceLoginUI, "caption":"", "alt": "auth service login image"}} 
+                          transformOrigin={{"vertical": "top","horizontal": "center",}} />
                       </Box>
                     </Box>
                   </Box>
@@ -155,7 +221,7 @@ const Help = () => {
                     The home page has a table of users created on the system. The buttons on the page are as explained below.
                   </Typography>
                   <Box>
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 2: Auth service home page"}} />
+                      <PopUp popUpContent={{"image":authServiceHome, "caption":"Figure 2: Auth service home page", "alt": "Auth service home page image"}} />
                   </Box>
                   <Grid container>
                     <Grid item>
@@ -209,14 +275,7 @@ const Help = () => {
                           </ListItem>
                         </List>
                         <Box  pb={1}>
-                          {/* <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                            <img
-                              src="http://via.placeholder.com/640x360"
-                              alt="The beautiful MDN logo." />
-                            <figcaption>Figure 3: Add users slide out</figcaption>
-                          </figure> */}
-                          <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 3: Add users slide out"}} />
-                          {/* <img src='http://via.placeholder.com/640x360'/> */}
+                          <PopUp popUpContent={{"image":addUser, "caption":"Figure 3: Add users slide out", "alt": "Add user image"}} />
                         </Box>
 
                         <Grid item>
@@ -265,19 +324,22 @@ const Help = () => {
                                 <ListItemText primary={
                                   <Typography>
                                     Click save in the bottom right corner.
-                                  </Typography>
+                                  </Typography> 
                                 } />
                               </ListItem>
                             </List>
                             <Box pb={1}>
-                              {/* <figure style={{ marginLeft: 0, marginRight: 0 }} className={classes.imageWrapper}>
-                                <img
-                                  src="http://via.placeholder.com/640x360"
-                                  alt="The beautiful MDN logo." />
-                                <figcaption>Figure 4:Edit user details screens.</figcaption>
-                              </figure> */}
-                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 4:Edit user details screens."}} />
-                              {/* <img src='http://via.placeholder.com/640x360'/> */}
+                              <PopUp popUpContent={{"image":editUser, "caption":"Figure 4:Edit user details screens.", "alt":"Edit user icon image"}} />
+                            </Box>
+                            <Box mb={2} display="flex" className={classes.imageWrapper}>
+                              <Box pr={1}>
+                                <PopUp popUpContent={{"image":editUserDetails, "caption":"Figure 4:Edit user details screens.", "alt":"Edit user image"}} />
+                              </Box>
+                              <Box pl={1} >
+                                <PopUp popUpContent={{"image":editUserForm, "caption":"", "alt":"Edit user form image"}}
+                                  transformOrigin={{"vertical": "top","horizontal": "center",}} imageStyles={classes.imageStyles}
+                                 />
+                              </Box>
                             </Box>
                           </Box>
                         </Grid>
@@ -481,6 +543,7 @@ const Help = () => {
                   </Box>
                 </Grid>
               </Grid>
+              
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
@@ -512,7 +575,7 @@ const Help = () => {
                         }
                           secondary={
                             <Box>
-                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 5: Welcome screen"}} />
+                              <PopUp popUpContent={{"image":portalLogin, "caption":"Figure 5: Welcome screen", "alt":"sign in image"}} />
                             </Box>
                           } />
                       </ListItem>
@@ -530,7 +593,7 @@ const Help = () => {
                           }
                           secondary={
                             <Box>
-                             <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 6: Login screen"}} />
+                             <PopUp popUpContent={{"image":authServiceLoginPortal, "caption":"Figure 6: Login screen", "alt":"Auth service login image"}} />
                             </Box>
                           } />
 
@@ -541,7 +604,7 @@ const Help = () => {
                         On signing in you will be taken to the home page where you can start verifying customers' identity information.
                       </Typography>
                       <Box>
-                        <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 7: Home page"}} />
+                        <PopUp popUpContent={{"image":portalHomePage, "caption":"Figure 7: Home page", "alt":"Portal home page image"}} />
                       </Box>
                     </Typography>
                   </Box>
@@ -559,9 +622,6 @@ const Help = () => {
                             <Typography>
                               In the top right corner, click the user profile icon.
                             </Typography>
-                            <Box style={{width: "200px"}}>
-                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":""}} />
-                            </Box>
                           </Typography>
                         } />
                       </ListItem>
@@ -575,7 +635,7 @@ const Help = () => {
                               Select the Logout option.
                             </Typography>
                             <Box>
-                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 8:Log out"}} />
+                              <PopUp popUpContent={{"image":portalLogout, "caption":"Figure 8:Log out", "alt":"Portal logout image"}} />
                             </Box>
                           </Typography>
                         } />
@@ -612,7 +672,7 @@ const Help = () => {
                               To reset your password in case of a forgotten password, click the “forgot password?” link on the login page.
                             </Typography>
                             <Box>
-                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 9: Forgot password"}} />
+                              <PopUp popUpContent={{"image":forgotPassword, "caption":"Figure 9: Forgot password", "alt": "Forgot password image"}} />
                             </Box>
                           </Typography>
                         } />
@@ -627,7 +687,7 @@ const Help = () => {
                               Enter the email address associated with your account and click submit.
                             </Typography>
                             <Box>
-                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 10: Forgot password II"}} />
+                              <PopUp popUpContent={{"image":forgotPasswordForm, "caption":"Figure 10: Forgot password II", "alt":"Forgot password form image"}} />
                             </Box>
                           </Typography>
                         } />
@@ -642,7 +702,7 @@ const Help = () => {
                               A confirmation message for an email having been sent to your inbox will be displayed.
                             </Typography>
                             <Box>
-                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 11: An email confirmation message"}} />
+                              <PopUp popUpContent={{"image":forgotPasswordConfirmation, "caption":"Figure 11: An email confirmation message", "alt":"Forgot password confirmation"}} />
                             </Box>
                           </Typography>
                         } />
@@ -657,7 +717,7 @@ const Help = () => {
                               Go to the associated email address and click on the reset password” link.
                             </Typography>
                             <Box>
-                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 12: Link in the email to reset password"}} />
+                              <PopUp popUpContent={{"image":resetPassword, "caption":"Figure 12: Link in the email to reset password", "alt":"Reset Password"}} />
                             </Box>
                           </Typography>
                         } />
@@ -672,7 +732,7 @@ const Help = () => {
                               Insert your email address and new password, then click reset.
                             </Typography>
                             <Box>
-                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 13: Insert new password screen"}} />
+                              <PopUp popUpContent={{"image":newPasswordForm, "caption":"Figure 13: Insert new password screen", "alt":"New Password Form"}} />
                             </Box>
                           </Typography>
                         } />
@@ -687,7 +747,7 @@ const Help = () => {
                               You will receive a confirmation message that your password has been successfully reset.
                             </Typography>
                             <Box>
-                              <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 14: Reset successful screen"}} />
+                              <PopUp popUpContent={{"image":resetPasswordConfirmation, "caption":"Figure 14: Reset successful screen", "alt":"Reset Password Confirmation"}} />
                             </Box>
                           </Typography>
                         } />
@@ -708,6 +768,7 @@ const Help = () => {
                   </Box>
                 </Grid>
               </Grid>
+              
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
@@ -719,7 +780,7 @@ const Help = () => {
                         Once you have successfully logged in, the page below will be displayed.
                     </Typography>
                       <Box>
-                        <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 15: Home page fields"}} />
+                        <PopUp popUpContent={{"image":portalHomePageDetails, "caption":"Figure 15: Home page fields", "alt":"Portal Home page sections"}} />
                       </Box>
                     </Box>
                   </Box>
@@ -733,7 +794,7 @@ const Help = () => {
                       The ID verification page is the portal’s home page. It appears with a New request form already open.
                     </Typography>
                     <Box>
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 16: New request form"}} />
+                      <PopUp popUpContent={{"image":requestForm, "caption":"Figure 16: New request form", "alt":"New Request Form"}} />
                     </Box>
                   </Box>
                 </Grid>
@@ -816,7 +877,7 @@ const Help = () => {
                       </ListItem>
                     </List>
                     <Box>
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 17: Request details screen"}} />
+                      <PopUp popUpContent={{"image":requestDetails, "caption":"Figure 17: Request details screen", "alt":"Request Details"}} />
                     </Box>
                   </Box>
                 </Grid>
@@ -991,7 +1052,7 @@ const Help = () => {
                       </ListItem>
                     </List>
                     <Box>
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 18: Search previous requests"}} />
+                      <PopUp popUpContent={{"image":filterBlock, "caption":"Figure 18: Search previous requests", "alt":"Filter Block"}} />
                     </Box>
                   </Box>
                 </Grid>
@@ -1042,11 +1103,12 @@ const Help = () => {
                       On completion, a notification will be shown and the file will be downloaded.
                     </Typography>
                     <Box>
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 19: Export previous requests"}} />
+                      <PopUp popUpContent={{"image":exportDownlaod, "caption":"Figure 19: Export previous requests", "alt":"Export Download Confirmation"}} />
                     </Box>
                   </Box>
                 </Grid>
               </Grid>
+              
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
@@ -1059,6 +1121,7 @@ const Help = () => {
                   </Box>
                 </Grid>
               </Grid>
+              
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={2}>
@@ -1080,7 +1143,7 @@ const Help = () => {
                     </Box>
                     <Box>
                       <Box>
-                        <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 20: Developer portal"}} />
+                        <PopUp popUpContent={{"image":developerPortal, "caption":"Figure 20: Developer portal", "alt":"Developer Portal"}} />
                       </Box>
                       <Typography style={{fontWeight: 'bold'}}>
                         Note: The application will be activated in a new window or on a new browser card.
@@ -1090,6 +1153,7 @@ const Help = () => {
                   </Box>
                 </Grid>
               </Grid>
+              
               <Grid container item>
                 <Grid item xs={12} >
                   <Box py={1}>
@@ -1101,6 +1165,7 @@ const Help = () => {
                     </Typography>
                   </Box>
                 </Grid>
+                
                 <Grid item xs={12} >
                   <Box>
                     <Typography variant="h4" className={classes.subHeadingMargin}>
@@ -1126,6 +1191,7 @@ const Help = () => {
                     </Box>
                   </Box>
                 </Grid>
+                
                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h4" className={classes.subHeadingMargin}>
@@ -1251,7 +1317,7 @@ const Help = () => {
                     </Box>
                   </Box>
                 </Grid>
-                <Grid item>
+                 <Grid item>
                   <Box py={1}>
                     <Typography  variant="h3"  className={classes.subHeading} id="mobileAccessLogin">
                       Access & Login
@@ -1288,9 +1354,14 @@ const Help = () => {
                             }
                             secondary={
                               <Box display="flex">
-                                <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 22:Mobile app landing page"}} />
+                                <PopUp popUpContent={{"image":mobileLandingPage, "caption":"Figure 22:Mobile app landing page", "alt":"Mobile landing page"}}
+                                  imageStyles={classes.imageStyles}
+                                 />
                                 
-                                <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 21: Mobile app login page"}} />
+                                <PopUp popUpContent={{"image":mobileLoginPage, "caption":"Figure 21: Mobile app login page", "alt":"Mobile Login Page"}} 
+                                  transformOrigin={{"vertical": "top","horizontal": "center",}}
+                                  imageStyles={classes.imageStyles}
+                                />
                               </Box>
                             } />
 
@@ -1308,11 +1379,12 @@ const Help = () => {
                             }
                             secondary={
                               <Box display="flex">
-
-                                <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 23: Subsequent PIN login page"}} />
-                                
-                                <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 24: PIN setup page"}} />
-
+                                <PopUp popUpContent={{"image":pinSetUp, "caption":"Figure 23: PIN setup page", "alt":"Pin Set Up"}}
+                                  imageStyles={classes.imageStyles}
+                                 />
+                                <PopUp popUpContent={{"image":pinLogin, "caption":"Figure 24: Subsequent PIN login page", "alt":"Pin Login"}}
+                                  imageStyles={classes.imageStyles} 
+                                />
                               </Box>
                             } />
 
@@ -1325,7 +1397,7 @@ const Help = () => {
                     </Box>
                   </Box>
                 </Grid>
-                <Grid item>
+               <Grid item>
                   <Box py={1}>
                     <Typography variant="h5" className={classes.subHeadingMargin}>
                       Application brief
@@ -1335,9 +1407,14 @@ const Help = () => {
                       you will see the following screens that give a brief about the functionality of the application.
                       </Typography>
                     <Box display="flex">
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 26:Scan ID summary screen"}} />
+                      <PopUp popUpContent={{"image":IdSummary, "caption":"Figure 26:Scan ID summary screen", "alt":"ID summary"}}
+                        imageStyles={classes.imageStyles}
+                       />
                       
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 25: Match fingerprint summary screen"}} />
+                      <PopUp popUpContent={{"image":matchFingerPrint, "caption":"Figure 25: Match fingerprint summary screen", "alt":"Match Finger Print"}}
+                        transformOrigin={{"vertical": "top","horizontal": "center",}}
+                        imageStyles={classes.imageStyles}
+                      />
 
                     </Box>
                   </Box>
@@ -1388,7 +1465,9 @@ const Help = () => {
                         </Typography>
                     </Box>
                     <Box>
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 27: Mobile app return user login screen"}} />
+                      <PopUp popUpContent={{"image":pinLogin, "caption":"Figure 27: Mobile app return user login screen", "alt":"Reset Pin"}}
+                        imageStyles={classes.imageStyles} imageWrapper={classes.imageWrap}
+                      />
                     </Box>
                   </Box>
                 </Grid>
@@ -1412,7 +1491,9 @@ const Help = () => {
                       To sign out of the application, press the “Menu” button in the top right corner of the app and tap on the Logout link.
                     </Typography>
                     <Box>
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 28: Logout link"}} />
+                      <PopUp popUpContent={{"image":mobileLogout, "caption":"Figure 28: Logout link", "alt":"Logout Link"}}
+                        imageStyles={classes.imageStyles} imageWrapper={classes.imageWrap}
+                      />
                     </Box>
                   </Box>
                 </Grid>
@@ -1485,9 +1566,14 @@ const Help = () => {
                       <ListItem className={classes.listItem}>
                         <ListItemText primary={
                           <Box display="flex">
-                            <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 29: Scan ID screen"}} />
+                            <PopUp popUpContent={{"image":scanID, "caption":"Figure 29: Scan ID screen", "alt":"Scan ID"}}
+                              imageStyles={classes.imageStyles} 
+                            />
                           
-                          <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 30:Barcode ID backside"}} />
+                          <PopUp popUpContent={{"image":barcodeID, "caption":"Figure 30:Barcode ID backside", "alt":"ID barcode"}}
+                            transformOrigin={{"vertical": "top","horizontal": "center",}}
+                            imageStyles={classes.imageStyles}
+                          />
   
                         </Box>
                         }/>
@@ -1505,7 +1591,9 @@ const Help = () => {
                       <ListItem className={classes.listItem}>
                         <ListItemText primary={
                           <Box px={2}>
-                          <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 31:Scanned results screen"}} />
+                          <PopUp popUpContent={{"image":cardDetails, "caption":"Figure 31:Scanned results screen","alt":"Card details"}}
+                            imageStyles={classes.imageStyles} imageWrapper={classes.imageWrap}
+                          />
                         </Box>
                         }/>
                       </ListItem>
@@ -1599,19 +1687,23 @@ const Help = () => {
                       </ListItem>
                     </List>
                     <Box>
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 32: Bluetooth device listing"}} />
+                      <PopUp popUpContent={{"image":deviceListings, "caption":"Figure 32: Bluetooth device listing", "alt":"Device Listings"}}
+                        imageStyles={classes.imageStyles} imageWrapper={classes.imageWrap}
+                      />
                     </Box>
                     <Typography>
                       When you return to match a fingerprint after the initial connection,
                       you will not be required to scan for the device as it will be already paired,
                       instead you will only be prompted to pair to the device as the device will be stored in the phone list.
                     </Typography>
-                    <Box>
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 33: Request to pair on subsequent connection notification"}} />
-                    </Box>
+                    {/* <Box>
+                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 33: Request to pair on subsequent connection notification"}}
+                        imageStyles={classes.imageStyles} 
+                      />
+                    </Box> */}
                   </Box>
                 </Grid>
-                <Grid item>
+                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h5" className={classes.subHeadingMargin}>
                       Scanning fingerprint
@@ -1624,11 +1716,13 @@ const Help = () => {
                       <Typography>
                         Return to the application and click on “Scan fingerprint”.
                       </Typography>
-                        <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 34:Scan fingerprint instruction page"}} />
+                        <PopUp popUpContent={{"image":scanFingerPrint, "caption":"Figure 34:Scan fingerprint instruction page", "alt":"Scan Finger Print"}}
+                          imageStyles={classes.imageStyles} imageWrapper={classes.imageWrap}
+                        />
                     </Box>
                   </Box>
                 </Grid>
-                <Grid item>
+                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h5" className={classes.subHeadingMargin}>
                       Capture fingerprint
@@ -1639,11 +1733,13 @@ const Help = () => {
                       For example, if it says” Right Thumb”, ask the cardholder to place the right thumb on the scanner.
                     </Typography>
                     <Box>
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 35: Finger as indicated on the ID"}} />
+                      <PopUp popUpContent={{"image":captureFingerPrint, "caption":"Figure 35: Finger as indicated on the ID", "alt":"Finger Print as on ID"}}
+                        imageStyles={classes.imageStyles} imageWrapper={classes.imageWrap}
+                      />
                     </Box>
                   </Box>
                 </Grid>
-                <Grid item>
+                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h5" className={classes.subHeadingMargin}>
                       Matching fingerprints
@@ -1653,11 +1749,16 @@ const Help = () => {
                       the mobile app will display a pop-up shown below indicating that the fingerprint matches.
                       These results will also be shown in the scan summary under the “Biometrics” section.
                     </Typography>
-                    <Box display="flex">
+                    <Box display="flex" className={classes.imageWrapper}>
                       
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 36: Fingerprint matched notification screens"}} />
+                      <PopUp popUpContent={{"image":fingerPrintMatches, "caption":"Figure 36: Fingerprint matched notification screens", "alt":"Finger Print Matches"}}
+                        imageStyles={classes.imageStyles} 
+                      />
                       
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":""}} />
+                      <PopUp popUpContent={{"image":verificationResults, "caption":"", "alt":"Verification Results"}} 
+                        transformOrigin={{"vertical": "top","horizontal": "center",}}
+                        imageStyles={classes.imageStyles}
+                      />
                     </Box>
                     <Box>
                       <Typography>
@@ -1665,7 +1766,9 @@ const Help = () => {
                         the pop-up and scans summary display it as failed/no match as shown below.
                       </Typography>
                       
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 37: Failed match notification screen"}} />
+                      <PopUp popUpContent={{"image":failedMatch, "caption":"Figure 37: Failed match notification screen", "alt":"Faile finger print match"}}
+                        imageWrapper={classes.imageWrap}
+                       />
                       <Typography style={{fontWeight: 'bold'}}>
                         Note: some fingerprints stored by NIRA are of insufficient quality or the file was corrupted.
                         Therefore, the cardholder might still be the true holder of the card, even with a mismatch.
@@ -1689,9 +1792,11 @@ const Help = () => {
                     </Typography>
                     <Box display="flex">
                       
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 39: Scanned history link"}} />
+                      <PopUp popUpContent={{"image":mobileLogout, "caption":"Figure 39: Scanned history link", "alt":"Scan history link"}} />
                       
-                      <PopUp popUpContent={{"image":"http://via.placeholder.com/640x360", "caption":"Figure 38: Scan history display screen"}} />
+                      <PopUp popUpContent={{"image":scanHistory, "caption":"Figure 38: Scan history display screen", "alt":"Scan history"}}
+                        transformOrigin={{"vertical": "top","horizontal": "center",}}
+                       />
 
                     </Box>
                   </Box>
@@ -1760,17 +1865,19 @@ const Help = () => {
                         <ListItemText primary={
                           <Typography>
                             For how to use insomnia to test the API please refer to 
-                            <a href="https://apis.support.brightcove.com/general/use-insomnia-api-requests.html"
+                            
+                              <a href="https://apis.support.brightcove.com/general/use-insomnia-api-requests.html"
                               rel="noopener noreferrer" target="_blank"
                             >
-                              https://apis.support.brightcove.com/general/use-insomnia-api-requests.html
+                              <span  className={classes.insomniaLink}>https://apis.support.brightcove.com/general/use-insomnia-api-requests.html</span>
                             </a>
                           </Typography>
                         } />
                       </ListItem>
                     </List>
                   </Box>
-                </Grid>
+                </Grid> 
+                
                 <Grid item>
                   <Box py={1}>
                     <Typography variant="h5">Glossary</Typography>
@@ -1807,6 +1914,7 @@ const Help = () => {
                     </Grid>
                   </Box>
                 </Grid>
+                
                 <Grid item>
                   <Box py={1.5}>
                     <Typography variant="h5" className={classes.subHeadingMargin}>
@@ -1846,7 +1954,7 @@ const Help = () => {
                       </Table>
                     </TableContainer>
                   </Box>
-                </Grid>
+                </Grid> 
               </Grid>
             </Paper>
           </Box>
