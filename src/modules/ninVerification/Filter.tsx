@@ -100,14 +100,6 @@ const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
     // submitForm(newData);
   };
 
-  // const handleComboValueChange = (name: string) => (value: any) => {
-  //
-  //     const newData = {...data, [name]: value}
-  //     const newFilterData = {...data, [name]: value?value.id:null}
-  //     setData(newData)
-  //     submitForm(newFilterData)
-  // }
-
   const initiators = ["Angella", "Evie", "TimK"];
   const statuses = ["All", "Pending", "Completed", "Failed"];
   const matchingStatuses = ["All", "Match", "Mismatch"];
@@ -181,6 +173,7 @@ const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
             label="From"
             variant="inline"
             inputVariant="outlined"
+            disableFuture={true}
           />
         </Grid>
         <Grid item xs={12}>
@@ -191,6 +184,7 @@ const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
             label="To"
             variant="inline"
             inputVariant="outlined"
+            disableFuture={true}
           />
           <Typography
             variant="body2"
