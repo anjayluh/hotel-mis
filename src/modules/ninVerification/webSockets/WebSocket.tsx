@@ -42,17 +42,17 @@ export default ({ children }: IProps) => {
     }
 
 
-    async function start() {
+    const start = async () => {
         try {
             await connection.start();
             if(connection && connection.state === HubConnectionState.Connected) {
+                
                 console.log('Connected!');
-                connection.on('ReceiveNinRequest', (resp: any) => {
-                    console.log(resp, 'resssssssssssssssppppppppppppppppp')
-                    dispatch({
+                connection.on('ReceiveNinRequest', async (resp: any) => {
+                    await dispatch({
                         type: verificationRequestConstants.RequestsPostNew,
-                        payload: [...resp],
-                      });
+                        payload: {...resp},
+                    });
                 });
 
             }
