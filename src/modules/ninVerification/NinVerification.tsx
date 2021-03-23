@@ -226,6 +226,9 @@ const NinVerifications = () => {
     setExportLoading(false)
     setIsError(false)
     if (values.form !== null && values.to !== null) {
+      if((!!values.from && values.from) >= (!!values.to && values.to)) {
+        setIsError(true)
+      }
       setShowExportInformationMessage(false)
     }
     
@@ -281,8 +284,7 @@ const NinVerifications = () => {
         },
         (error) => {
           if (error.response.body.errors["DateRange.To"]) {
-            setIsError(true)
-            setExportLoading(false)
+            
             enqueueSnackbar(error.response.body.errors["DateRange.To"], {
               variant: "error",
             });
@@ -291,6 +293,8 @@ const NinVerifications = () => {
               variant: "error",
             });
           }
+          setIsError(true)
+          setExportLoading(false)
 
         }
       );
