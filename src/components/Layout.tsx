@@ -375,7 +375,7 @@ const Layout: React.FC<IProps> = (props: any) => {
                 color="primary"
                 onClick={addNewRequest}
               >
-                New Request
+                Verify ID
               </Button>
             </div>
           )}
