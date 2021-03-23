@@ -179,6 +179,27 @@ const servers: any = {
     clientId: "stanchart-backoffice:portal",
     envScope: "openid profile roles offline_access stanchart_BNVS_API"
   },
+  gtbankUat: {
+    Auth: "https://niv-auth-api-uat.inhousetest1.gtbank1.ug",
+    Nin: "https://niv-api-uat.inhousetest1.gtbank1.ug",
+    devPortal: "https://niv-api-uat.inhousetest1.gtbank1.ug",
+    clientId: "gtbank-backoffice:portal",
+    envScope: "openid profile roles offline_access gtbank_BNVS_API"
+  },
+  opportunityUat: {
+    Auth: "https://niv-auth-api-uat.opportunityug.com",
+    Nin: "https://niv-api-uat.opportunityug.com",
+    devPortal: "https://niv-api-uat.opportunityug.com",
+    clientId: "opportunity-backoffice:portal",
+    envScope: "openid profile roles offline_access opportunity_BNVS_API"
+  },
+  ugafodeUat: {
+    Auth: "https://niv-auth-api-uat.ugafodemfl.co.ug",
+    Nin: "https://niv-api-uat.ugafodemfl.co.ug",
+    devPortal: "https://niv-api-uat.ugafodemfl.co.ug",
+    clientId: "ugafode-backoffice:portal",
+    envScope: "openid profile roles offline_access ugafode_BNVS_API"
+  },
   production: {
     Gateway: "https://bou-niv-gatewayservice.laboremus.no",
     clientId: "bou:backoffice",
