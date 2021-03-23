@@ -254,6 +254,7 @@ const NinVerificationForm = (props: IProps) => {
             inputVariant="outlined"
             onChange={handleValueChange('dateOfBirth')}
             size="small"
+            disableFuture={true}
           />
           <Typography variant="body2" style={{paddingLeft: 15 }}>Date format: dd.mm.yyyy ({printDate(Date.now())})</Typography>
         </Grid>
