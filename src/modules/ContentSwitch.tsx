@@ -35,9 +35,9 @@ const ContentSwitch = () => {
       {checkUserRole(userRole,"settings") && (
         <Route path={localRoutes.settings} component={Settings} />
       )}
-      {checkUserRole(userRole,"help") && (
-        <Route path={localRoutes.help} component={Help} />
-      )}
+      {/* {checkUserRole(userRole,"help") && (
+        <Route path={localRoutes.help} component={Help}  />
+      )} */}
         <Route component={NoMatch} />
       
     </Switch>

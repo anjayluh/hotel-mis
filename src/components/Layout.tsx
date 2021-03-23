@@ -305,6 +305,7 @@ const Layout: React.FC<IProps> = (props: any) => {
           button
           onClick={onClick(localRoutes.help)}
           selected={isSelected(localRoutes.help)}
+          style={{display: "none"}}
         >
           <ListItemIcon>
             <HelpIcon className={getCls(localRoutes.help)} />
