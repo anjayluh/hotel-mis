@@ -184,7 +184,7 @@ const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
             name="matchingStatus"
             value={data["matchingStatus"]}
             onChange={handleChange}
-            label="Matching Status"
+            label="Match Status"
             variant="outlined"
             size="small"
             color="secondary"
