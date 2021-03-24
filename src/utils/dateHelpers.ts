@@ -3,6 +3,7 @@ import { format, isValid, parseISO } from "date-fns";
 export const dateFormat = "dd.MM.yyyy";
 export const dateTimeFormat = "dd.MM.yyyy HH:mm";
 export const standardDateTimeFormat = "dd-MM-yyyy HH:mm";
+export const standardDateTimeFormatSeconds = "dd-MM-yyyy-HH:mm:ss";
 export const standardDateFormat = "dd-MM-yyyy";
 export const monthYearFormat = "MMMM, yyyy";
 export const yearDateTime = "yyyy-MM-dd'T'HH:mm:ss";
@@ -76,6 +77,14 @@ export const printStdDatetime = (value: any): string => {
     return printDate(strToDate(value));
   }
   if (isValid(value)) return format(value, standardDateTimeFormat);
+  else return "";
+};
+
+export const printStdDatetimeSeconds = (value: any): string => {
+  if (typeof value === "string") {
+    return printDate(strToDate(value));
+  }
+  if (isValid(value)) return format(value, standardDateTimeFormatSeconds);
   else return "";
 };
 
