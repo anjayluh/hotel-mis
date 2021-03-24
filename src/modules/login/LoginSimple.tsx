@@ -23,7 +23,7 @@ function Login() {
   const {isLoading, user} = authState
   const authenticateUser = (event:React.ChangeEvent<any>) => {
     // Setitem to monitor opening of slideout
-    localStorage.setItem('addNew','Add New Request')
+    localStorage.setItem('isFormOpen', 'true')
     
     event.preventDefault();
     setLoading(true)

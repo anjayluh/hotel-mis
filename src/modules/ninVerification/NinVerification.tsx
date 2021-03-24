@@ -142,10 +142,10 @@ const NinVerifications = () => {
   const [requestId, setRequestId] = useState<string>("");
 
   useEffect(() => {
-    const addNewPersist = localStorage.getItem('addNew')
-    if (addNewPersist) {
+    const addNewPersist = localStorage.getItem('isFormOpen')
+    if (addNewPersist && JSON.parse(addNewPersist)) {
       addNewRequest();
-      localStorage.removeItem('addNew')
+      localStorage.removeItem('isFormOpen')
       
     }
     
