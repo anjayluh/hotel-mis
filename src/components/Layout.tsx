@@ -170,9 +170,6 @@ const Layout: React.FC<IProps> = (props: any) => {
   }
 
   const onClick = (path: string) => () => {
-    if (path === localRoutes.ninVerification) {
-      addNewRequest();
-    }
     if (path === localRoutes.help) {
       setOpen(!open)
     }
