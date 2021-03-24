@@ -220,7 +220,7 @@ const Filter = ({ onFilter, loading, onFilterChange }: IProps) => {
           </Typography>
           {showDateRangeError ? (
                   <Typography variant="body2" className={classes.information}>
-                    The "From" date should be less than the "To" date.
+                    "From" date should be ealier than the "To" date
                   </Typography>
                 ): ''}
         </Grid>
