@@ -29,6 +29,7 @@ import { async } from "validate.js";
 import { AnyMxRecord } from "dns";
 import { idCategories } from "../../data/comboCategories";
 import { ConsoleLogger } from "@microsoft/signalr/dist/esm/Utils";
+import { printStdDatetimeSeconds } from "../../utils/dateHelpers";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -337,7 +338,7 @@ const NinVerifications = () => {
       (res) => {
         const data = new Blob([res], { type: 'octet/stream' });
         const csvURL = window.URL.createObjectURL(data);
-        const fileName = `Report-${requestId}.zip`;
+        const fileName = `${printStdDatetimeSeconds(new Date())}-ID_Verification_Requests_Export.zip`;
         let tempLink = document.createElement('a');
 
         tempLink.href = csvURL;
