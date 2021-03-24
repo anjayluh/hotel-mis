@@ -243,7 +243,17 @@ const NinVerifications = () => {
     if (exportValues.from && exportValues.to) {
       setShowExportInformationMessage(false);
       setExportLoading(true);
-      
+
+      let matchStatus = null
+      if(exportValues.matchingStatus=== "Match") {
+          matchStatus = true
+      } 
+      else if(exportValues.matchingStatus === "Mismatch") {
+        matchStatus = false
+      } else {
+        matchStatus = null
+      }
+
       let toSave = {
         dateRange: {
           from: exportValues.from,
@@ -256,7 +266,7 @@ const NinVerifications = () => {
             ? [exportValues.requestStatus]
             : null,
         ninValidity: exportValues.ninValidity ? exportValues.ninValidity : null,
-        matchingStatus: exportValues.matchingStatus ? exportValues.matchingStatus : null,
+        matchingStatus: matchStatus
       };
 
       const getStatus = (resp: any, id: any) => {
