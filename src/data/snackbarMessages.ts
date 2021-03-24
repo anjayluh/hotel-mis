@@ -6,7 +6,7 @@ export default snackbarMessages = {
     'fail': 'Operation failed'
   },
   'Login': {
-    'NetworkError': 'No internet connection',
+    'NetworkError': 'Connection error. Contact Systems Administrator',
     'inValidAccount': 'User authentication failed. Invalid account. Please contact the systems administrator',
   },
   'participant': {
