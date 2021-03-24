@@ -142,10 +142,13 @@ const NinVerifications = () => {
   const [requestId, setRequestId] = useState<string>("");
 
   useEffect(() => {
-    if (isEmpty(filter)) {
+    const addNewPersist = localStorage.getItem('addNew')
+    if (addNewPersist) {
       addNewRequest();
+      localStorage.removeItem('addNew')
+      
     }
-
+    
     dispatch({
       type: verificationRequestConstants.RequestsFetchLoading,
       payload: true,
