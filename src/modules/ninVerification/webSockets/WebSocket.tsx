@@ -34,7 +34,7 @@ export default ({ children }: IProps) => {
       }, []);
 
     const getRequests = async () => {
-        start();
+        userProfile.user && start();
         // if(connection.connectionStarted) {
         //     await connection.invoke("getNinRequests");
         //   }
@@ -68,12 +68,16 @@ export default ({ children }: IProps) => {
 
         
     }
+
+    if(userProfile.user ===  null) {
+        connection && connection.connection.stopConnection()
+    }
     webSocket = {
         connection,
         getRequests
     }
-    start();
-    connection && connection.onclose(start);
+    userProfile.user && start();
+    connection && connection.onclose(userProfile.user && start);
     
 
     return (
