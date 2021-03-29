@@ -30,6 +30,7 @@ interface XTableProps {
   bodySize?: Size;
   loading?: boolean;
   hoverClass?: any;
+  emptyTableMessage?: string;
   mouseEnter?: (id: any) => any;
   mouseLeave?: (id: any) => any;
   headerClasses?: any;
@@ -225,11 +226,13 @@ export default function XTable(props: XTableProps) {
                       </TableRow>
                     );
                   })}
-                {/* {emptyRows > 0 && (
-                  <TableRow style={{ height: 49 * emptyRows }}>
-                    <TableCell colSpan={headCells.length} />
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 150 }}>
+                    <TableCell colSpan={headCells.length} style={{textAlign: 'center'}}>
+                      {props.emptyTableMessage}
+                    </TableCell>
                   </TableRow>
-                )} */}
+                )}
               </TableBody>
             )}
           </Table>
