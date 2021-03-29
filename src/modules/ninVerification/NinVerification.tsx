@@ -374,13 +374,11 @@ const NinVerifications = () => {
                 </Grid>
               </Grid>
             </Box>
-            {loading ? (
-              <Loading />
-            ) : (
                 <Grid item xs={12}>
                   <ErrorBoundary>
                     <XTable
-                      loading={loadingNew}
+                      loading={loading}
+                      emptyTableMessage={"No ID Verification Requests found"}
                       headCells={ninVerificationHeadCells}
                       data={data}
                       initialRowsPerPage={10}
@@ -392,7 +390,6 @@ const NinVerifications = () => {
                     />
                   </ErrorBoundary>
                 </Grid>
-              )}
           </Box>
         </Grid>
         <Grid item xs={3} style={{ display: open ? "block" : "none" }}>
