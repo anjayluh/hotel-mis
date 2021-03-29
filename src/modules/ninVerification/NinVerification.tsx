@@ -378,7 +378,7 @@ const NinVerifications = () => {
                   <ErrorBoundary>
                     <XTable
                       loading={loading}
-                      emptyTableMessage={"No ID Verification Requests found"}
+                      emptyTableMessage={"No results found"}
                       headCells={ninVerificationHeadCells}
                       data={data}
                       initialRowsPerPage={10}
