@@ -1,4 +1,4 @@
-import {makeStyles, Theme} from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core";
 import createStyles from "@material-ui/core/styles/createStyles";
 
 export const useLoginStyles = makeStyles((theme: Theme) =>
@@ -35,7 +35,7 @@ export const useLoginStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(3),
       height: 50
     },
-    bouLogo: {
+    logo: {
       width: 130,
       height: 'auto',
       marginBottom: 10

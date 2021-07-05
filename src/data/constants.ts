@@ -14,8 +14,8 @@ export const systemRoles = {
 export const availableRoles = [
   "participant_super_user", "nin_verifier"
 ]
-export const resourceGroups:{[roleName:string]:string[]}  = {
-  participant_super_user: ["IdVerification", "users", "settings", "help"],
+export const resourceGroups: { [roleName: string]: string[] } = {
+  normal: ["IdVerification", "users", "settings", "help"],
   nin_verifier: ["IdVerification", "help"],
 };
 export const redux = {
@@ -25,6 +25,7 @@ export const redux = {
 };
 
 export const localRoutes = {
+  home: "/",
   callback: "/callback",
   pending: "/pending",
   ninVerification: "/verification",
@@ -236,5 +237,5 @@ export const remoteRoutes = {
   resetPass: authURL + "/reset",
   users: authURL + "/api/user",
   devPortal: devPortal,
-   
+
 };

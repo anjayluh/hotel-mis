@@ -1,6 +1,5 @@
 import { ICoreState } from "./redux/coreReducer";
 import { ISettingsState } from "./redux/settings/reducer";
-import { IVerificationRequestState } from "./redux/ninVerification/reducer";
 import { IUserState } from "./redux/users/reducer";
 
 export interface BaseModel {
@@ -29,7 +28,6 @@ export interface ILoginResponse {
 export interface IState {
   core: ICoreState;
   settings: ISettingsState;
-  verificationRequests: IVerificationRequestState;
   users: IUserState;
 }
 

@@ -62,9 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Details = (props: IProps) => {
   const dispatch: Dispatch<any> = useDispatch();
   const classes = useStyles();
-  const requestData = useSelector(
-    (state: IState) => state.verificationRequests.requestDetails
-  );
+  const [requestData, setRequestData]: any = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     let mounted = true;
@@ -76,12 +74,12 @@ const Details = (props: IProps) => {
     }
   }, [requestData]);
 
-    function contactFullName() {
-        const thirdName = requestData && requestData.otherNames ? requestData.otherNames : '';
-        let fullName = requestData ? ` ${requestData.surname} ${requestData.givenNames} ${thirdName}`: '';
-        if (fullName === "   ") fullName = 'Name not provided';
-        return fullName;
-    }
+  function contactFullName() {
+    const thirdName = requestData && requestData.otherNames ? requestData.otherNames : '';
+    let fullName = requestData ? ` ${requestData.surname} ${requestData.givenNames} ${thirdName}` : '';
+    if (fullName === "   ") fullName = 'Name not provided';
+    return fullName;
+  }
 
   function handleClose() {
     if (props.closeSlideOut) {
@@ -107,7 +105,7 @@ const Details = (props: IProps) => {
               <Box display="flex" flexDirection="column" py={1}>
                 <Box flexGrow={1} pt={1}>
                   <Typography variant="h5">
-                      {contactFullName()}
+                    {contactFullName()}
                   </Typography>
                 </Box>
               </Box>

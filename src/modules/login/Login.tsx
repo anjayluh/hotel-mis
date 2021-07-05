@@ -1,45 +1,36 @@
 import React from 'react';
-import {Button} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import {Form, Formik, FormikActions} from 'formik';
-import {useDispatch} from 'react-redux'
-import {handleLogin} from "../../data/redux/coreActions";
+import { Form, Formik, FormikActions } from 'formik';
+import { useDispatch } from 'react-redux'
+import { handleLogin } from "../../data/redux/coreActions";
 
 import * as yup from "yup";
-import {post} from "../../utils/ajax";
-import {remoteRoutes} from "../../data/constants";
 import XTextInput from "../../components/inputs/XTextInput";
-import {useLoginStyles} from "./loginStyles";
-import {Dispatch} from "redux";
-import {useSnackbar} from "notistack";
+import { useLoginStyles } from "./loginStyles";
+import { Dispatch } from "redux";
+import { useSnackbar } from "notistack";
 
 
 function Login() {
-    const {enqueueSnackbar} = useSnackbar();
+    const { enqueueSnackbar } = useSnackbar();
     const classes = useLoginStyles();
     const dispatch: Dispatch<any> = useDispatch();
     const onSubmit = (data: any, actions: FormikActions<any>) => {
-        post(remoteRoutes.login, data, resp => {
-            dispatch(handleLogin(resp))
-        }, () => {
-          enqueueSnackbar("Invalid username/password", {
-            variant: 'error',
-          });
-        }, () => {
-            actions.setSubmitting(false)
-        })
+        dispatch(handleLogin(true));
+        enqueueSnackbar("Successfully logged in user")
     }
 
     return (
         <main className={classes.main}>
-            <CssBaseline/>
+            <CssBaseline />
             <Paper className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockIcon/>
+                    <LockIcon />
                 </Avatar>
                 <Typography component="h1">
                     Sign in

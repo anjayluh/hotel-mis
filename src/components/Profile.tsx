@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export const BarView = (props: any) => {
   const classes = useStyles();
-  const userProfile = useSelector((state: IState) => state.core.user);
+  const [userProfile, setUserProfile]: any = useState({ name: "Peter Ocheng", role: "admin" });
   const dispatch = useDispatch();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -79,7 +79,7 @@ export const BarView = (props: any) => {
   }
   const formattedRole = (role: string | string[]) => {
     const roleString = Array.isArray(role) ? role.join(", ") : `${role}`;
-    return (roleString ? roleString.replace(/_/g, " ").toLowerCase(): "");
+    return (roleString ? roleString.replace(/_/g, " ").toLowerCase() : "");
   };
   return (
     <div className={classes.marginLeftAuto}>

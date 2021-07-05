@@ -1,21 +1,22 @@
-import {colors} from '@material-ui/core';
+import { colors } from '@material-ui/core';
 
 const white = '#FFFFFF';
 const black = '#000000';
-const themeBlue = '#303f4f';
+const themeCyan = '#2DA3F2';
+const themeBlue = '#12203F';
 
-const palette={
+const palette = {
     primary: {
-        contrastText: white,
-        dark: colors.teal[900],
-        main: colors.teal[500],
-        light: colors.teal[100]
-    },
-    secondary: {
         contrastText: white,
         dark: colors.blue[900],
         main: themeBlue,
-        light: colors.blue['A400']
+        light: colors.blue[100]
+    },
+    secondary: {
+        contrastText: white,
+        dark: colors.cyan[900],
+        main: themeCyan,
+        light: colors.cyan['A400']
     },
     error: {
         contrastText: white,
@@ -30,7 +31,7 @@ const palette={
     },
     background: {
         default: '#F4F6F8',
-        paper:' white'
+        paper: ' white'
     },
     divider: colors.grey[200]
 };

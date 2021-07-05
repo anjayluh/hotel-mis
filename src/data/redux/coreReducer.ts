@@ -3,7 +3,7 @@ import { ILoginResponse, GatewayMetadata } from "../types";
 
 export interface ICoreState {
   splash: boolean;
-  user: any | null;
+  isLoggedIn: boolean;
   isLoading: boolean;
   documents: any;
   metadata: GatewayMetadata;
@@ -11,7 +11,7 @@ export interface ICoreState {
 
 const initialState: ICoreState = {
   splash: true,
-  user: null,
+  isLoggedIn: true,
   isLoading: true,
   documents: {},
   metadata: {
@@ -40,10 +40,8 @@ export const coreConstants = {
 export default function reducer(state = initialState, action: any) {
   switch (action.type) {
     case coreConstants.coreLogin: {
-      const { token, user }: ILoginResponse = action.payload;
-      localStorage.setItem(AUTH_TOKEN_KEY, token);
-      localStorage.setItem(AUTH_USER_KEY, JSON.stringify(user));
-      return { ...state, user, isLoading: false, splash: false };
+      const isLoggedIn: boolean = action.payload;
+      return { ...state, isLoggedIn, isLoading: false, splash: false };
     }
 
     case coreConstants.coreCreateDocument: {

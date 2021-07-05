@@ -1,5 +1,6 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, Route, Switch } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
@@ -11,18 +12,13 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from '@material-ui/core/Collapse';
-import AssignmentIcon from "@material-ui/icons/Assignment";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
-import ReceiptIcon from "@material-ui/icons/Receipt";
-import Dashboard from "@material-ui/icons/Dashboard";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
 import CodeIcon from "@material-ui/icons/Code";
-import PeopleIcon from "@material-ui/icons/People";
 import SettingsIcon from "@material-ui/icons/Settings";
 import HelpIcon from "@material-ui/icons/Help";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
+import Box from "@material-ui/core/Box";
 import {
   createStyles,
   makeStyles,
@@ -38,13 +34,11 @@ import { Typography } from "@material-ui/core";
 import { themeBackground } from "../theme/custom-colors";
 import Paper from "@material-ui/core/Paper";
 import { GlobalHotKeys, configure } from "react-hotkeys";
-import { verificationRequestConstants } from "../data/redux/ninVerification/reducer";
-import NiraApiNotification from "../modules/ninVerification/NiraApiNotification";
 import { IState } from "../data/types";
 import { checkUserRole } from "../utils/BOUSpecificHelpers";
-import Help from "../modules/help/Help";
-import HelpMenu from "../modules/help/HelpMenu";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
+import typography from "../theme/typography";
+import Home from "../modules/home/Home";
 
 // Allows hotkeys to work even when items are in focus
 configure({ ignoreTags: [] });
@@ -72,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     appBar: {
       marginLeft: drawerWidth,
-      backgroundColor: themeBackground,
+      backgroundColor: "#FFFFF",
       zIndex: theme.zIndex.drawer + 1,
       [theme.breakpoints.down(670)]: {
         width: 670,
@@ -82,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     menuButton: {
-      color: grey[50],
+      color: "#12203",
       [theme.breakpoints.up("md")]: {
         display: "none",
       },
@@ -119,14 +113,15 @@ const useStyles = makeStyles((theme: Theme) =>
         height: 25,
         width: "auto",
       },
-      height: 30,
+      height: 59,
       width: "auto",
+      marginTop: 2
     },
     menu: {
       color: grey[500],
     },
     menuSelected: {
-      color: grey[50],
+      color: "#12203",
     },
     drawerOpen: {
       width: drawerWidth,
@@ -146,28 +141,34 @@ const useStyles = makeStyles((theme: Theme) =>
         width: theme.spacing(9) + 1,
       },
     },
+    navLink: {
+      fontStyle: "normal",
+      fontWeight: 300,
+      fontSize: 18,
+      color: "#cc9933",
+      textDecoration: "none",
+    }
   })
 );
 interface IProps extends RouteComponentProps {
-  hideRequestButton?: boolean;
-  hideNiraNotification?: boolean;
 }
 
 const Layout: React.FC<IProps> = (props: any) => {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
-  const userProfile = useSelector((state: IState) => state.core.user);
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const isFormOpen = useSelector((state: IState) => state.verificationRequests.addNew);
-  const [userRole, setUserRole]: any = useState(
-    userProfile && userProfile.role
-  );
+  const userProfile: any = useState({ name: "Peter Ocheng", role: "admin" });
+  const [userRole, setUserRole]: any = useState("admin");
   const [open, setOpen] = React.useState(false);
-
-  function handleDrawerToggle() {
-    setMobileOpen(!mobileOpen);
-  }
+  const [navItems, setNavItems]: any[] = useState([
+    { name: "LOCATION", url: "/location", component: Home },
+    { name: "ROOMS", url: "/rooms", component: Home },
+    { name: "OFFERS", url: "/offers", component: Home },
+    { name: "MEETINGS", url: "/meetings", component: Home },
+    { name: "WEDDINGS", url: "/weddings", component: Home },
+    { name: "FOOD", url: "/food", component: Home },
+    { name: "GALLERY", url: "/GALLERY", component: Home },
+  ]);
 
   const onClick = (path: string) => () => {
     if (path === localRoutes.help) {
@@ -195,34 +196,14 @@ const Layout: React.FC<IProps> = (props: any) => {
     return pathMatches(path, pathStr);
   };
 
-  const handleHelp = async () => {
-    await onClick(localRoutes.help)
-    props.history.push(localRoutes.help)
-    setOpen(!open);
-
-  }
-
   function addNewRequest() {
     props.history.push(localRoutes.ninVerification);
-    dispatch({
-      type: verificationRequestConstants.RequestsAddNew,
-      payload: true,
-    });
-    dispatch({
-      type: verificationRequestConstants.TurnOnSlideout,
-      payload: true,
-    });
+    console.log("request added")
   }
 
   function closeSlideOutForm() {
-    dispatch({
-      type: verificationRequestConstants.RequestsAddNew,
-      payload: false,
-    });
-    dispatch({
-      type: verificationRequestConstants.TurnOnSlideout,
-      payload: false,
-    });
+    console.log("slideout closed")
+
   }
   // keymaps and handlers for keyboardshortcuts
   const keyMap = {
@@ -243,81 +224,6 @@ const Layout: React.FC<IProps> = (props: any) => {
       </div>
       <Divider />
       <List>
-        {checkUserRole(userRole, "IdVerification") && (
-          <ListItem
-            button
-            onClick={onClick(localRoutes.ninVerification)}
-            selected={isSelected(localRoutes.ninVerification)}
-          >
-            <ListItemIcon>
-              <VerifiedUserIcon className={getCls(localRoutes.ninVerification)} />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography className={getCls(localRoutes.ninVerification)}>
-                  ID Verification
-              </Typography>
-              }
-            />
-          </ListItem>
-        )}
-        {/* {checkUserRole(userRole,"users") && (
-        <ListItem
-          button
-          onClick={onClick(localRoutes.users)}
-          selected={isSelected(localRoutes.users)}
-        >
-          <ListItemIcon>
-            <PeopleIcon className={getCls(localRoutes.users)} />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={getCls(localRoutes.users)}>
-                Users
-              </Typography>
-            }
-          />
-        </ListItem>
-      )} */}
-        {checkUserRole(userRole, "settings") && (
-          <ListItem
-            button
-            onClick={onClick(localRoutes.settings)}
-            selected={isSelected(localRoutes.settings)}
-          >
-            <ListItemIcon>
-              <SettingsIcon className={getCls(localRoutes.settings)} />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography className={getCls(localRoutes.settings)}>
-                  Settings
-              </Typography>
-            }
-          />
-        </ListItem>
-      )}  
-      {checkUserRole(userRole,"help") && (  
-        <ListItem
-          button
-          onClick={onClick(localRoutes.help)}
-          selected={isSelected(localRoutes.help)}
-          style={{display: "none"}}
-        >
-          <ListItemIcon>
-            <HelpIcon className={getCls(localRoutes.help)} />
-          </ListItemIcon>
-          <ListItemText
-            primary={
-              <Typography className={getCls(localRoutes.help)}>
-                Help
-              </Typography>
-              }
-            />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-        )}
-        <HelpMenu open={open} />
         <a
           href={remoteRoutes.devPortal}
           target="_blank"
@@ -340,75 +246,32 @@ const Layout: React.FC<IProps> = (props: any) => {
 
       </List>
 
-      <div className={classes.bottom}>
-        {!props.showNiraNotification && <NiraApiNotification />}
-      </div>
     </div>
   );
 
   return (
     <div className={classes.root}>
       {/* keyboard shortcut to open new request form */}
-      <GlobalHotKeys keyMap={keyMap} handlers={isFormOpen ? handleClose : handleOpen} allowChanges />
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar} color="default">
-        <Toolbar>
-          <IconButton
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <div className={classes.logoHolder}>
-            <img src={logo} alt="logo" className={classes.logo} />
-          </div>
+      <AppBar position="fixed" className={classes.appBar} color="default" elevation={0}>
+        <Toolbar className={classes.toolbar}>
+          <Typography className={classes.logoHolder}>
+            Hotel de Luna
+          </Typography>
+          <Divider />
+          {navItems.map((item: any, index: number) => (
+            <Box px={1} key={item.name}>
+              <Link to={item.url} className={classes.navLink}>
+                {item.name}
+              </Link>
+              <Divider />
+            </Box>
+          ))}
 
-          {!props.hideRequestButton && (
-            <div>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={addNewRequest}
-              >
-                New Request
-              </Button>
-            </div>
-          )}
           <BarView textClass={classes.menuSelected} />
+
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden mdUp implementation="css">
-          <Drawer
-            variant="temporary"
-            anchor={theme.direction === "rtl" ? "right" : "left"}
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden smDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open={false}
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-      </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Paper className={classes.body}>{props.children}</Paper>

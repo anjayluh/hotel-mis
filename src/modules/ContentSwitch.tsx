@@ -2,44 +2,30 @@ import React, { useEffect, useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import { localRoutes } from "../data/constants";
 import Settings from "./settings/Settings";
-import NinVerification from "./ninVerification/NinVerification";
-import Users from "./users/Users";
+import Home from "./home/Home";
 import Layout from "../components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { checkUserRole } from "../utils/BOUSpecificHelpers";
 import { IState } from "../data/types";
-import Help from "./help/Help";
+import { profile } from "console";
+
+
 
 const ContentSwitch = () => {
   const dispatch = useDispatch();
-  const userProfile = useSelector((state: IState) => state.core.user);
+  const userProfile: any = useState({ name: "Peter Ocheng", role: "Admin" });
   const [userRole, setUserRole]: any = useState(
     userProfile && userProfile.role,
   );
   useEffect(() => {
-    /* search(remoteRoutes.gatewayMetadata, {}, (resp) => {
-      dispatch(loadMetadata(resp));
-    }); */
   }, [dispatch]);
   return (
     <Switch>
-      {checkUserRole(userRole,"IdVerification") && (
-        <Route exact={true} path="/" component={NinVerification} />
-      )}
-      {checkUserRole(userRole,"IdVerification") && (
-        <Route path={localRoutes.ninVerification} component={NinVerification} />
-      )}
-      {/* {checkUserRole(userRole,"users") && (
-        <Route path={localRoutes.users} component={Users} />
-      )} */}
-      {checkUserRole(userRole,"settings") && (
+      {checkUserRole(userRole, "settings") && (
         <Route path={localRoutes.settings} component={Settings} />
       )}
-      {/* {checkUserRole(userRole,"help") && (
-        <Route path={localRoutes.help} component={Help}  />
-      )} */}
-        <Route component={NoMatch} />
-      
+      <Route path={localRoutes.home} component={Home} />
+      <Route component={NoMatch} />
     </Switch>
   );
 };

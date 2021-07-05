@@ -8,12 +8,10 @@ import XFormSimple from "../../../components/forms/XFormSimple";
 import XTextInput from "../../../components/inputs/XTextInput";
 import XDateInput from "../../../components/inputs/XDateInput";
 import { useDispatch, useSelector } from "react-redux";
-import { HubConnectionBuilder } from '@microsoft/signalr';
-import {WebSocketContext} from '../webSockets/WebSocket';
+import { WebSocketContext } from '../webSockets/WebSocket';
 import { IState } from "../../../data/types";
 import { remoteRoutes } from "../../../data/constants";
 import { get, post } from "../../../utils/ajax";
-import { verificationRequestConstants } from "../../../data/redux/ninVerification/reducer";
 import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
 import { printYearMonthDayDate, printDate, dateFormat } from "../../../utils/dateHelpers";
@@ -86,7 +84,7 @@ interface IProps {
 }
 
 const NinVerificationForm = (props: IProps) => {
- 
+
   const webSocket: any = useContext(WebSocketContext)
 
   const { enqueueSnackbar } = useSnackbar();
@@ -94,19 +92,20 @@ const NinVerificationForm = (props: IProps) => {
     props.initialData
       ? props.initialData
       : {
-          nin: "",
-          cardNumber: "",
-          givenName: "",
-          surname: "",
-          dateOfBirth: null,
-        }
+        nin: "",
+        cardNumber: "",
+        givenName: "",
+        surname: "",
+        dateOfBirth: null,
+      }
   );
   const [cardNumberMessage, setCardNumberMessage] = useState('')
   const [validationMessage, setValidationMessage] = useState({
-    cardNumberMessage: '', ninMessage: ''})
+    cardNumberMessage: '', ninMessage: ''
+  })
   const [keyStrokes, setKeyStrokes] = useState(0)
   const dispatch = useDispatch();
-  const userProfile = useSelector((state: IState) => state.core.user);
+  const userProfile: any = useState({ name: "Peter Ocheng", role: "admin" });
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
     const toSave: any = {
@@ -123,14 +122,14 @@ const NinVerificationForm = (props: IProps) => {
         actions.resetForm();
         // Invoke websocket to fetch requests and Update table to show recently added request
         webSocket.getRequests();
-       
+
         enqueueSnackbar(snackbarMessages.NinVerification.new, {
           variant: "success",
         });
         actions.resetForm();
         handleClose();
         if (props.done) props.done();
-        
+
       },
       () => {
         enqueueSnackbar(snackbarMessages.default.fail, {
@@ -142,23 +141,16 @@ const NinVerificationForm = (props: IProps) => {
 
   function handleClose() {
     props.closeSlideOut();
-    dispatch({
-      type: verificationRequestConstants.RequestsAddNew,
-      payload: false,
-    });
-    dispatch({
-      type: verificationRequestConstants.TurnOnSlideout,
-      payload: false,
-    });
+    console.log("closing slideout")
   }
-  
+
   function handleChange(event: React.ChangeEvent<any>) {
     const name = event.target.name.trim();
     let value = event.target.value.trim();
-    if(name === 'nin') value = value.toUpperCase();
+    if (name === 'nin') value = value.toUpperCase();
     const newData = { ...data, [name]: value };
     setData(newData);
-    
+
   }
 
   const handleValueChange = (name: string) => (value: any) => {
@@ -171,17 +163,17 @@ const NinVerificationForm = (props: IProps) => {
     setKeyStrokes(keyClicks)
     const name = event.target.name.trim();
     let value = event.target.value.trim();
-    if(name === "cardNumber") {
-      if(value.length === 9 && keyStrokes >= 1) {
-        setValidationMessage({...validationMessage, cardNumberMessage: 'Card Number must be only 9 characters'})
+    if (name === "cardNumber") {
+      if (value.length === 9 && keyStrokes >= 1) {
+        setValidationMessage({ ...validationMessage, cardNumberMessage: 'Card Number must be only 9 characters' })
       }
     }
     else if (name === "nin") {
-      if(value.length === 14 && keyStrokes >= 1) {
-        setValidationMessage({...validationMessage, ninMessage: 'NIN must be only 14 characters'})
+      if (value.length === 14 && keyStrokes >= 1) {
+        setValidationMessage({ ...validationMessage, ninMessage: 'NIN must be only 14 characters' })
       }
     }
-    
+
   }
   return (
     <ErrorBoundary>
@@ -191,7 +183,7 @@ const NinVerificationForm = (props: IProps) => {
         initialValues={data}
         onCancel={handleClose}
         submitText={"Submit"}
-        closeText = {"Cancel"}
+        closeText={"Cancel"}
       >
         <Grid item xs={12}>
           <XTextInput
@@ -206,7 +198,7 @@ const NinVerificationForm = (props: IProps) => {
             size="small"
           />
           {!!validationMessage.ninMessage && (
-            <Typography variant="body2" style={{paddingLeft: 15 }}>NIN must be only 14 characters</Typography>
+            <Typography variant="body2" style={{ paddingLeft: 15 }}>NIN must be only 14 characters</Typography>
           )}
         </Grid>
         <Grid item xs={12}>
@@ -221,7 +213,7 @@ const NinVerificationForm = (props: IProps) => {
             size="small"
           />
           {!!validationMessage.cardNumberMessage && (
-            <Typography variant="body2" style={{paddingLeft: 15 }}>Card Number must be only 9 characters</Typography>
+            <Typography variant="body2" style={{ paddingLeft: 15 }}>Card Number must be only 9 characters</Typography>
           )}
         </Grid>
         <Grid item xs={12}>
@@ -229,7 +221,7 @@ const NinVerificationForm = (props: IProps) => {
             name="surname"
             label="Surname"
             type="text"
-            inputProps={{style: {textTransform: 'uppercase'}}}
+            inputProps={{ style: { textTransform: 'uppercase' } }}
             variant="outlined"
             onChange={handleChange}
             size="small"
@@ -240,12 +232,12 @@ const NinVerificationForm = (props: IProps) => {
             name="givenName"
             label="Given Name"
             type="text"
-            inputProps={{style: {textTransform: 'uppercase'}}}
+            inputProps={{ style: { textTransform: 'uppercase' } }}
             variant="outlined"
             onChange={handleChange}
             size="small"
           />
-          
+
         </Grid>
         <Grid item xs={12}>
           <XDateInput
@@ -256,7 +248,7 @@ const NinVerificationForm = (props: IProps) => {
             size="small"
             disableFuture={true}
           />
-          <Typography variant="body2" style={{paddingLeft: 15 }}>Date format: dd.mm.yyyy ({printDate(Date.now())})</Typography>
+          <Typography variant="body2" style={{ paddingLeft: 15 }}>Date format: dd.mm.yyyy ({printDate(Date.now())})</Typography>
         </Grid>
       </XFormSimple>
     </ErrorBoundary>

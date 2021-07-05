@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Box, Typography, makeStyles, createStyles, Theme, Button, TextField } from "@material-ui/core";
-import DetailView, { IRec } from "../../../../components/DetailView";
 import ErrorBoundary from "../../../../components/ErrorBoundary/ErrorBoundary";
-import { printDateTime, printDate } from "../../../../utils/dateHelpers";
+import { printDate } from "../../../../utils/dateHelpers";
 import XTextInput from "../../../../components/inputs/XTextInput";
-import { remoteRoutes } from "../../../../data/constants";
-import { get, post, search } from "../../../../utils/ajax";
-import { verificationRequestConstants } from "../../../../data/redux/ninVerification/reducer";
 import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "react-redux";
-import snackbarMessages from "../../../../data/snackbarMessages";
-import { IState } from "../../../../data/types";
-import NinVerifications from "../../../ninVerification/NinVerification";
-import { date } from "faker";
 import XFormSimple from "../../../../components/forms/XFormSimple";
 import * as yup from "yup";
 
@@ -78,38 +70,16 @@ const NiraPasswordDetails = () => {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const classes = useStyles();
-  const userProfile = useSelector((state: IState) => state.core.user);
-  const niraCredentials = useSelector(
-    (state: IState) => state.verificationRequests.niraCredentials
-  );
+  const userProfile: any = useState({ name: "Peter Ocheng", role: "admin" });
+
   const [data, setData] = useState({
     username: "",
     password: "",
   });
 
   useEffect(() => {
-    getCurrentNiraCredentials()
   }, []);
 
-  function getCurrentNiraCredentials() {
-    get(
-      remoteRoutes.niraCurrentCredentials,
-      (resp) => {
-        dispatch({
-          type: verificationRequestConstants.RequestPostNiraCredentials,
-          payload: resp,
-        });
-      },
-      () => {
-        enqueueSnackbar(snackbarMessages.default.fail, {
-          variant: "error",
-        });
-      },
-      () => {
-
-      }
-    );
-  }
   function handleChange(event: React.ChangeEvent<any>) {
     const name = event.target.name.trim();
     let value = event.target.value.trim();
@@ -119,36 +89,9 @@ const NiraPasswordDetails = () => {
   }
 
   function handleSubmit() {
-    post(
-      remoteRoutes.niraCredentials,
-      data,
-      (resp) => {
-
-        getCurrentNiraCredentials()
-        // dispatch({
-        //   type: verificationRequestConstants.RequestPostNiraCredentials,
-        //   payload: resp,
-        // });
-        enqueueSnackbar(snackbarMessages.NiraCredentials.new, {
-          variant: "success",
-        });
-
-      },
-      () => {
-        enqueueSnackbar(snackbarMessages.default.fail, {
-          variant: "error",
-        });
-      },
-      () => {
-        const newData = {
-          "username": "",
-          "password": ""
-        }
-        setData(newData)
-      }
-    );
+    console.log('submited')
   }
-  const dateToExpire: string = `${niraCredentials && niraCredentials.expiresOn}`
+  const dateToExpire: string = `today`
   const oneDay = (1000 * 60 * 60 * 24)
   const expireDay = Math.round(Math.abs((Date.parse(dateToExpire) - Date.parse(`${new Date()}`)) / oneDay));
   const ActiveStatus = Date.parse(`${new Date()}`) > Date.parse(dateToExpire) ? 'INACTIVE' : 'ACTIVE'
@@ -162,7 +105,7 @@ const NiraPasswordDetails = () => {
               <Typography variant='body2'>{`Status: `}<span style={{ fontWeight: 'bold' }}>{`${ActiveStatus}`}</span></Typography>
             </Box>
             <Box className={classes.detailsItem}>
-              <Typography variant='body2'>{`Last Updated: `}<span style={{ fontWeight: 'bold' }}>{`${printDate(niraCredentials && niraCredentials.createdOn)}`}</span></Typography>
+              <Typography variant='body2'>{`Last Updated: `}<span style={{ fontWeight: 'bold' }}>{`${printDate(new Date())}`}</span></Typography>
             </Box>
             <Box className={classes.detailsItem}>
               <Typography variant='body2'>{`Last Updated by: `}<span style={{ fontWeight: 'bold' }}>{`${userProfile.name && userProfile.name}`}</span></Typography>
@@ -213,17 +156,6 @@ const NiraPasswordDetails = () => {
                     className={classes.inputField}
                   />
                 </Grid>
-                {/* <Grid item style={{ marginRight: 6 }}>
-                  <Button
-                    // disabled={loading}
-                    variant="contained"
-                    color="primary"
-                    className={classes.updateCredentials}
-                    onClick={handleSubmit}
-                  >
-                    Update Credentials
-                        </Button>
-                </Grid> */}
               </Grid>
             </Grid>
           </Grid>
