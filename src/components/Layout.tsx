@@ -39,6 +39,7 @@ import { checkUserRole } from "../utils/BOUSpecificHelpers";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import typography from "../theme/typography";
 import Home from "../modules/home/Home";
+import Grid from "@material-ui/core/Grid";
 
 // Allows hotkeys to work even when items are in focus
 configure({ ignoreTags: [] });
@@ -161,6 +162,7 @@ const Layout: React.FC<IProps> = (props: any) => {
   const [userRole, setUserRole]: any = useState("admin");
   const [open, setOpen] = React.useState(false);
   const [navItems, setNavItems]: any[] = useState([
+    { name: "HOME", url: "/", component: Home },
     { name: "LOCATION", url: "/location", component: Home },
     { name: "ROOMS", url: "/rooms", component: Home },
     { name: "OFFERS", url: "/offers", component: Home },
@@ -259,15 +261,16 @@ const Layout: React.FC<IProps> = (props: any) => {
             Hotel de Luna
           </Typography>
           <Divider />
-          {navItems.map((item: any, index: number) => (
-            <Box px={1} key={item.name}>
-              <Link to={item.url} className={classes.navLink}>
-                {item.name}
-              </Link>
-              <Divider />
-            </Box>
-          ))}
-
+          <Grid container justify="flex-end">
+            {navItems.map((item: any, index: number) => (
+              <Box px={1} key={item.name}>
+                <Link to={item.url} className={classes.navLink}>
+                  {item.name}
+                </Link>
+                <Divider />
+              </Box>
+            ))}
+          </Grid>
           <BarView textClass={classes.menuSelected} />
 
         </Toolbar>
