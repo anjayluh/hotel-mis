@@ -4,19 +4,6 @@ import { Link, Route, Switch } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
-import CodeIcon from "@material-ui/icons/Code";
-import SettingsIcon from "@material-ui/icons/Settings";
-import HelpIcon from "@material-ui/icons/Help";
-import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
 import {
@@ -26,18 +13,11 @@ import {
   useTheme,
 } from "@material-ui/core/styles";
 import { withRouter, RouteComponentProps } from "react-router";
-import { localRoutes, remoteRoutes } from "../data/constants";
 import grey from "@material-ui/core/colors/grey";
-import { BarView } from "./Profile";
-import logo from "../assets/download.png";
 import { Typography } from "@material-ui/core";
 import { themeBackground } from "../theme/custom-colors";
 import Paper from "@material-ui/core/Paper";
 import { GlobalHotKeys, configure } from "react-hotkeys";
-import { IState } from "../data/types";
-import { checkUserRole } from "../utils/BOUSpecificHelpers";
-import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import typography from "../theme/typography";
 import Home from "../modules/home/Home";
 import Grid from "@material-ui/core/Grid";
 
@@ -107,7 +87,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     logoHolder: {
       flexGrow: 1,
-      maxWidth: "13.5rem",
+      maxWidth: "15rem",
+      whiteSpace: "nowrap",
     },
     logo: {
       [theme.breakpoints.only("xs")]: {
@@ -172,84 +153,6 @@ const Layout: React.FC<IProps> = (props: any) => {
     { name: "GALLERY", url: "/GALLERY", component: Home },
   ]);
 
-  const onClick = (path: string) => () => {
-    if (path === localRoutes.help) {
-      setOpen(!open)
-    }
-    const { history, onClose } = props;
-    history.push(path);
-    if (onClose) onClose();
-  };
-
-  const pathMatches = (path: string, str: string) => path.indexOf(str) > -1;
-
-  const getCls = (pathStr: string): string => {
-    const {
-      match: { path },
-    } = props;
-
-    return pathMatches(path, pathStr) ? classes.menuSelected : classes.menu;
-  };
-
-  const isSelected = (pathStr: string): boolean => {
-    const {
-      match: { path },
-    } = props;
-    return pathMatches(path, pathStr);
-  };
-
-  function addNewRequest() {
-    props.history.push(localRoutes.ninVerification);
-    console.log("request added")
-  }
-
-  function closeSlideOutForm() {
-    console.log("slideout closed")
-
-  }
-  // keymaps and handlers for keyboardshortcuts
-  const keyMap = {
-    NEW_REQUEST: "alt+n",
-  };
-  const handleOpen = {
-    NEW_REQUEST: addNewRequest,
-  };
-  const handleClose = {
-    NEW_REQUEST: closeSlideOutForm,
-  };
-  const drawer = (
-    <div style={{ backgroundColor: themeBackground, color: "white" }}>
-      <div className={classes.toolbar}>
-        <div className={classes.logoHolder}>
-          <img src={logo} alt="logo" className={classes.logo} />
-        </div>
-      </div>
-      <Divider />
-      <List>
-        <a
-          href={remoteRoutes.devPortal}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ textDecoration: "none" }}
-        >
-          <ListItem button selected={isSelected(localRoutes.devPortal)}>
-            <ListItemIcon>
-              <CodeIcon className={getCls(localRoutes.devPortal)} />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography className={getCls(localRoutes.devPortal)}>
-                  Developer Portal
-                </Typography>
-              }
-            />
-          </ListItem>
-        </a>
-
-      </List>
-
-    </div>
-  );
 
   return (
     <div className={classes.root}>
@@ -257,13 +160,12 @@ const Layout: React.FC<IProps> = (props: any) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar} color="default" elevation={0}>
         <Toolbar className={classes.toolbar}>
-          <Typography className={classes.logoHolder}>
+          <Typography className={classes.logoHolder} variant="h4">
             Hotel de Luna
           </Typography>
-          <Divider />
           <Grid container justify="flex-end">
             {navItems.map((item: any, index: number) => (
-              <Box px={1} key={item.name}>
+              <Box px={1} key={index}>
                 <Link to={item.url} className={classes.navLink}>
                   {item.name}
                 </Link>
