@@ -103,7 +103,7 @@ export default function AlertDialogSlide({
     handleCancel();
   };
   const onDelete = () => {
-    handleDelete(itemId );
+    handleDelete(itemId);
   };
 
   return (
@@ -143,13 +143,13 @@ export default function AlertDialogSlide({
           {
             cancelButton &&
             <Button onClick={onClose} className={classes.cancel}>
-            Cancel
-          </Button>
+              Cancel
+            </Button>
           }
-          
+
           <Button
             onClick={onDelete}
-            className={buttonClass ? buttonClass: classes.delete}
+            className={buttonClass ? buttonClass : classes.delete}
             variant="contained"
             color={"primary"}
           >

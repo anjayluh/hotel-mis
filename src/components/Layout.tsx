@@ -271,7 +271,7 @@ const Layout: React.FC<IProps> = (props: any) => {
               </Box>
             ))}
           </Grid>
-          <BarView textClass={classes.menuSelected} />
+          {/* <BarView textClass={classes.menuSelected} /> */}
 
         </Toolbar>
       </AppBar>

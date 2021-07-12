@@ -38,6 +38,10 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: "1.1rem",
       color: "#282828"
     },
+    collections: {
+      width: 450,
+      height: 450
+    }
   })
 );
 
@@ -93,15 +97,22 @@ const Home = () => {
                   <Typography align="center" variant="h2">
                     HIGHLIGHTS
                   </Typography>
-                  <Grid container alignItems="center" justify="center">
-                    <Grid item sm={12} lg={6}>
+                  <Grid container justify="center">
+                    <Grid item sm={12} lg={6} justify="center">
                       <Box my={2}>
-                        <img src="https://archerhotel.com/images/tiles/171.jpg?040621" alt="room" />
+                        <img src="https://archerhotel.com/images/tiles/171.jpg?040621" alt="room" className={classes.collections} />
+                        <Typography align="center" variant="h2">
+                          SECOND BAR + RESTAURANT
+                        </Typography>
+
+                        <Typography align="center" variant="body1" className={classes.paragraph}>
+                          Enjoy a true farm-to-table experience at chef David Bull’s new American restaurant at Archer Hotel Austin.
+                        </Typography>
                       </Box>
                     </Grid>
                     <Grid item sm={12} lg={6}>
                       <Box my={2}>
-                        <img src="https://archerhotel.com/images/tiles/171.jpg?040621" alt="room" />
+                        <img src="https://archerhotel.com/images/tiles/663.jpg?040621" alt="room" />
                       </Box>
                     </Grid>
                   </Grid>

@@ -1,5 +1,5 @@
 {
-  "name": "bou-backoffice",
+  "name": "hotel-mis",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -28,7 +28,6 @@
     "@types/yup": "^0.26.29",
     "clsx": "^1.0.4",
     "date-fns": "^2.9.0",
-    "express": "^4.17.1",
     "faker": "^4.1.0",
     "formik": "^1.5.8",
     "formik-material-ui": "0.0.22",
@@ -56,7 +55,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "superagent": "^5.2.1",
-    "typescript": "^3.8.0",
+    "typescript": "3.6.2",
     "uuid": "^3.4.0",
     "validate.js": "^0.13.1",
     "yup": "^0.27.0"
