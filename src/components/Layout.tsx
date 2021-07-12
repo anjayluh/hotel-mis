@@ -20,8 +20,8 @@ import Paper from "@material-ui/core/Paper";
 import { GlobalHotKeys, configure } from "react-hotkeys";
 import Home from "../modules/home/Home";
 import Grid from "@material-ui/core/Grid";
+import AddButton from "./AddButton"
 
-// Allows hotkeys to work even when items are in focus
 configure({ ignoreTags: [] });
 
 const drawerWidth = 240;
@@ -152,7 +152,9 @@ const Layout: React.FC<IProps> = (props: any) => {
     { name: "FOOD", url: "/food", component: Home },
     { name: "GALLERY", url: "/GALLERY", component: Home },
   ]);
-
+  function book() {
+    console.log("Coming soon")
+  }
 
   return (
     <div className={classes.root}>
@@ -172,6 +174,9 @@ const Layout: React.FC<IProps> = (props: any) => {
                 <Divider />
               </Box>
             ))}
+            <Box px={1}>
+              <AddButton text={"Book Now"} onClick={book} />
+            </Box>
           </Grid>
           {/* <BarView textClass={classes.menuSelected} /> */}
 

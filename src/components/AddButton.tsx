@@ -6,16 +6,14 @@ import Button from "@material-ui/core/Button";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     addNewButton: {
-      color: "#428BCA",
-      textTransform: "capitalize",
-      fontStyle: "italic",
+      color: "#654C1B",
+      backgroundColor: "#CC9932",
       fontSize: 12,
-      lineHeight: 0.5,
+      lineHeight: 1,
       marginBottom: -5,
       marginLeft: 8,
-      marginTop: -6,
-      fontWeight: "normal",
-      padding: "6px 15px",
+      marginTop: -9,
+      padding: "10px 15px",
     },
     addIcon: {
       marginLeft: -5,
@@ -28,14 +26,15 @@ const useStyles = makeStyles((theme: Theme) =>
 interface IProps {
   onClick: () => any;
   text: string;
+  excludeIcon?: boolean;
 }
 const AddButton = (props: IProps) => {
   const classes = useStyles();
   return (
     <Button
       className={classes.addNewButton}
-      startIcon={<AddIcon className={classes.addIcon} />}
-      variant="text"
+      startIcon={props.excludeIcon && <AddIcon className={classes.addIcon} />}
+      variant="contained"
       onClick={props.onClick}
     >
       {props.text}
