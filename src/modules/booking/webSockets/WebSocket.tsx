@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { remoteRoutes } from '../../../data/constants'
 import { getToken } from '../../../utils/ajax';
+import { IState } from "../../../data/types";
 
 
 const WebSocketContext = createContext(null)
@@ -11,7 +11,7 @@ interface IProps {
     children: any
 }
 export default ({ children }: IProps) => {
-    const userProfile: any = useState({ name: "Peter Ocheng", role: "admin" });
+    const userProfile = useSelector((state: IState) => state.core.user);
     const [connection, setConnection]: any = useState();
     let webSocket: any;
 

@@ -8,7 +8,6 @@ import Grid from "@material-ui/core/Grid";
 import Filter from "./Filter";
 import Typography from "@material-ui/core/Typography";
 import { search, get, post, downLoad } from "../../utils/ajax";
-import { remoteRoutes } from "../../data/constants";
 import { ninVerificationHeadCells } from "./config";
 import Box from "@material-ui/core/Box";
 import NinVerificationForm from "./forms/NinVerificationForm";
@@ -187,96 +186,7 @@ const NinVerifications = () => {
         matchingStatus: matchStatus
       };
 
-      const getStatus = (resp: any, id: any) => {
-        if (resp === "processing") {
-          checkStatus(id, getStatus);
-        }
-        else if (resp === "complete") {
-          download(id)
-        }
-
-      }
-      post(
-        remoteRoutes.niraExport,
-        toSave,
-        async (data) => {
-          // setRequestStatus(data.status.toLowerCase());
-          if (data.id) {
-            setExportLoading(true);
-          }
-          if (data.error !== null) {
-            enqueueSnackbar(data.error, {
-              variant: "error",
-            });
-          }
-          await checkStatus(data.id, getStatus)
-
-        },
-        (error) => {
-          if (error.response.body.errors["DateRange.To"]) {
-
-            enqueueSnackbar(error.response.body.errors["DateRange.To"], {
-              variant: "error",
-            });
-          } else {
-            enqueueSnackbar(error.response.body.title, {
-              variant: "error",
-            });
-          }
-          setIsError(true)
-          setExportLoading(false)
-
-        }
-      );
     } else setShowExportInformationMessage(true); //Turns on warning message if no date values selected
-  }
-
-  const checkStatus = (id: string, callback: any) => {
-    get(
-      remoteRoutes.niraExport + `${id}/status`,
-      (res) => {
-        callback(res.status.toLowerCase(), id)
-      },
-      (error) => {
-        enqueueSnackbar(error.response && error.response.body.title, {
-          variant: "error",
-        });
-        setExportLoading(false);
-      },
-      () => undefined
-    );
-
-  }
-
-  function download(requestId: string) {
-    downLoad(
-      remoteRoutes.niraExport + requestId + "/download",
-      (res) => {
-        const data = new Blob([res], { type: 'octet/stream' });
-        const csvURL = window.URL.createObjectURL(data);
-        const fileName = `${printStdDatetimeSeconds(new Date())}-ID_Verification_Requests_Export.zip`;
-        let tempLink = document.createElement('a');
-
-        tempLink.href = csvURL;
-        tempLink.setAttribute('download', fileName);
-        tempLink.click();
-        setExportLoading(false);
-        enqueueSnackbar('Report Downloaded successfully', {
-          variant: "success",
-        });
-      },
-      (error) => {
-        enqueueSnackbar(error.response.body.title, {
-          variant: "error",
-        });
-        setDownloadLoading(false);
-      },
-      () => {
-        setDownloadLoading(false);
-      }
-    );
-    setDownloadLoading(true);
-    setIsExport(true); //At the end, show export button
   }
   return (
     <Navigation>

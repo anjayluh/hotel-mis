@@ -21,6 +21,7 @@ import { GlobalHotKeys, configure } from "react-hotkeys";
 import Home from "../modules/home/Home";
 import Grid from "@material-ui/core/Grid";
 import AddButton from "./AddButton"
+import { IState } from "../data/types";
 
 configure({ ignoreTags: [] });
 
@@ -139,8 +140,7 @@ const Layout: React.FC<IProps> = (props: any) => {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
-  const userProfile: any = useState({ name: "Peter Ocheng", role: "admin" });
-  const [userRole, setUserRole]: any = useState("admin");
+  const userProfile = useSelector((state: IState) => state.core.user);
   const [open, setOpen] = React.useState(false);
   const [navItems, setNavItems]: any[] = useState([
     { name: "HOME", url: "/", component: Home },

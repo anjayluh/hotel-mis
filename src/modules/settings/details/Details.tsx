@@ -7,7 +7,6 @@ import { IRequestDetails } from "../types";
 import Typography from "@material-ui/core/Typography";
 import Summary from "./Summary";
 import { put, search } from "../../../utils/ajax";
-import { remoteRoutes } from "../../../data/constants";
 import { Dispatch } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { successColor } from "../../../theme/custom-colors";
@@ -75,7 +74,7 @@ const Details = (props: IProps) => {
 
 
     }
-  }, );
+  });
 
   function handleClose() {
     if (props.closeSlideOut) {
@@ -84,9 +83,9 @@ const Details = (props: IProps) => {
   }
   return (
     <div>
-        <div className={classes.root}>
+      <div className={classes.root}>
 
-        </div>
+      </div>
     </div>
   );
 };

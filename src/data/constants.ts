@@ -26,191 +26,23 @@ export const redux = {
 
 export const localRoutes = {
   home: "/",
+  login: "/login",
+  adminLogin: "/admin",
+  adminHome: "/admin/home",
   callback: "/callback",
   pending: "/pending",
-  ninVerification: "/verification",
-  participantsDetails: "/participants/:participantId/:subSection",
-  participants: "/participants",
-  billing: "/billing",
-  subscriptions: "/subscriptions",
-  reports: "/reports",
-  devPortal: "/developer-portal",
-  applicationsDetails: "/applications/:caseId",
-  dashboard: "/dashboard",
-  contacts: "/contacts",
-  contactsDetails: "/contacts/:contactId",
   settings: "/settings",
   users: "/users",
-  usersDetails: "/users/:userId",
-  help: "/help",
 };
 
 const servers: any = {
   dev: {
-    Auth: "https://bou-auth-api-test.test001.laboremus.no",
-    Nin: "https://bou-niv-api-test.test001.laboremus.no",
-    devPortal: "https://bou-niv-api-test.test001.laboremus.no",
-    clientId: "laboremus-backoffice:portal",
-    envScope: "openid profile roles offline_access laboremus_BNVS_API",
   },
   test: {
-    Auth: "https://bou-auth-api-test.test001.laboremus.no",
-    Nin: "https://bou-niv-api-test.test001.laboremus.no",
-    devPortal: "https://bou-niv-api-test.test001.laboremus.no",
-    clientId: "laboremus-backoffice:portal",
-    envScope: "openid profile roles offline_access laboremus_BNVS_API"
   },
   staging: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
-    Crm: "https://crm-api-test.bou.or.ug",
-    Nin: "https://bou-niv-api-staging.test001.laboremus.no",
-    devPortal: "https://bou-niv-api-staging.test001.laboremus.no/",
-    clientId: "laboremus-backoffice:portal",
-    envScope: "openid profile roles offline_access laboremus_BNVS_API"
-  },
-  sit: {
-    Auth: "https://bou-auth-api-test.proxy001.laboremus.no",
-    Nin: "https://bou-niv-api-test.test001.laboremus.no",
-    devPortal: "https://bou-niv-api-test.test001.laboremus.no",
-    clientId: "laboremus-backoffice:portal",
-    envScope: "backoffice:portal"
-  },
-  capitalTest: {
-    Auth: "https://bou-auth-api-test.test001.laboremus.no",
-    Nin: "https://capitalbank-niv-api-test.test001.laboremus.no",
-    devPortal: "https://capitalbank-niv-api-test.test001.laboremus.no",
-    clientId: "capitalbank-backoffice:portal",
-    envScope: "openid profile roles offline_access capitalbank_BNVS_API"
-  },
-  capitalStaging: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
-    Nin: "https://capitalbank-niv-api-staging.test001.laboremus.no",
-    devPortal: "https://capitalbank-niv-api-test.test001.laboremus.no",
-    clientId: "capitalbank-backoffice:portal",
-    envScope: "openid profile roles offline_access capitalbank_BNVS_API"
-  },
-  stateTest: {
-    Auth: "https://bou-auth-api-test.test001.laboremus.no",
-    Nin: "https://statebank-niv-api-test.test001.laboremus.no",
-    devPortal: "https://statebank-niv-api-test.test001.laboremus.no",
-    clientId: "statebank-backoffice:portal",
-    envScope: "openid profile roles offline_access statebank_BNVS_API"
-  },
-  stateStaging: {
-    Auth: "https://bou-auth-api-staging.proxy001.laboremus.no",
-    Nin: "https://statebank-niv-api-staging.test001.laboremus.no",
-    devPortal: "https://statebank-niv-api-test.test001.laboremus.no",
-    clientId: "statebank-backoffice:portal",
-    envScope: "openid profile roles offline_access statebank_BNVS_API"
-  },
-  prideUat: {
-    Auth: "https://niv-auth-api-uat.pride.co.ug",
-    Nin: "https://niv-api-uat.pride.co.ug",
-    devPortal: "https://niv-api-uat.pride.co.ug",
-    clientId: "pride-backoffice:portal",
-    envScope: "openid profile roles offline_access pride_BNVS_API"
-  },
-  eximUat: {
-    Auth: "https://auth-api-uat.eximbank-ug.com",
-    Nin: "https://niv-api-uat.eximbank-ug.com",
-    devPortal: "https://niv-api-uat.eximbank-ug.com",
-    clientId: "exim-backoffice:portal",
-    envScope: "openid profile roles offline_access exim_BNVS_API"
-  },
-  stanbicUat: {
-    Auth: "https://niv-auth-api-uat.stanbic.com",
-    Nin: "https://niv-api-uat.stanbic.com",
-    devPortal: "https://niv-api-uat.stanbic.com",
-    clientId: "stanbic-backoffice:portal",
-    envScope: "openid profile roles offline_access stanbic_BNVS_API"
-  },
-  housingUat: {
-    Auth: "https://niv-auth-api-uat.housingfinance.com",
-    Nin: "https://niv-api-uat.housingfinance.com",
-    devPortal: "https://niv-api-uat.housingfinance.com",
-    clientId: "housingfinance-backoffice:portal",
-    envScope: "openid profile roles offline_access housingfinance_BNVS_API"
-  },
-  fincaUat: {
-    Auth: "https://niv-auth-api-uat.finca.com",
-    Nin: "https://niv-api-uat.finca.com",
-    devPortal: "https://niv-api-uat.finca.com",
-    clientId: "finca-backoffice:portal",
-    envScope: "openid profile roles offline_access finca_BNVS_API"
-  },
-  ecoUat: {
-    Auth: "https://niv-auth-api-uat.ecobank.com",
-    Nin: "https://niv-api-uat.ecobank.com",
-    devPortal: "https://niv-api-uat.ecobank.com",
-    clientId: "ecobank-backoffice:portal",
-    envScope: "openid profile roles offline_access ecobank_BNVS_API"
-  },
-  dfcuUat: {
-    Auth: "https://niv-auth-api-uat.dfcugroup.com",
-    Nin: "https://niv-api-uat.dfcugroup.com",
-    devPortal: "https://niv-api-uat.dfcugroup.com",
-    clientId: "dfcu-backoffice:portal",
-    envScope: "openid profile roles offline_access dfcu_BNVS_API"
-  },
-  yakoUat: {
-    Auth: "https://niv-auth-api-uat.yako.com",
-    Nin: "https://niv-api-uat.yako.com",
-    devPortal: "https://niv-api-uat.yako.com",
-    clientId: "yako-backoffice:portal",
-    envScope: "openid profile roles offline_access yako_BNVS_API"
-  },
-  bouUat: {
-    Auth: "https://auth-api-test.bou.or.ug",
-    Nin: "https://niv-api-test.bou.or.ug",
-    devPortal: "https://niv-api-test.bou.or.ug",
-    clientId: "backoffice:portal",
-    envScope: "openid profile roles offline_access bou_BNVS_API"
-  },
-  equityUat: {
-    Auth: "https://niv-auth-api-uat.ug.ebsafrica.com",
-    Nin: "https://niv-api-uat.ug.ebsafrica.com",
-    devPortal: "https://niv-api-uat.ug.ebsafrica.com",
-    clientId: "equity-backoffice:portal",
-    envScope: "openid profile roles offline_access equity_BNVS_API"
-  },
-  stanchartUat: {
-    Auth: "https://niv-auth-api-uat.ugwpatsyb03.gdc.standardchartered.com",
-    Nin: "https://niv-api-uat.ugwpatsyb03.gdc.standardchartered.com",
-    devPortal: "https://niv-api-uat.ugwpatsyb03.gdc.standardchartered.com",
-    clientId: "stanchart-backoffice:portal",
-    envScope: "openid profile roles offline_access stanchart_BNVS_API"
-  },
-  gtbankUat: {
-    Auth: "https://niv-auth-api-uat.inhousetest1.gtbank1.ug",
-    Nin: "https://niv-api-uat.inhousetest1.gtbank1.ug",
-    devPortal: "https://niv-api-uat.inhousetest1.gtbank1.ug",
-    clientId: "gtbank-backoffice:portal",
-    envScope: "openid profile roles offline_access gtbank_BNVS_API"
-  },
-  opportunityUat: {
-    Auth: "https://niv-auth-api-uat.opportunityug.com",
-    Nin: "https://niv-api-uat.opportunityug.com",
-    devPortal: "https://niv-api-uat.opportunityug.com",
-    clientId: "opportunity-backoffice:portal",
-    envScope: "openid profile roles offline_access opportunity_BNVS_API"
-  },
-  ugafodeUat: {
-    Auth: "https://niv-auth-api-uat.ugafodemfl.co.ug",
-    Nin: "https://niv-api-uat.ugafodemfl.co.ug",
-    devPortal: "https://niv-api-uat.ugafodemfl.co.ug",
-    clientId: "ugafode-backoffice:portal",
-    envScope: "openid profile roles offline_access ugafode_BNVS_API"
   },
   production: {
-    Gateway: "https://bou-niv-gatewayservice.laboremus.no",
-    clientId: "bou:backoffice",
-    envScope: "backoffice:portal"
-  },
-  fallBack: {
-    Auth: "https://bou-auth-api-test.test001.laboremus.no",
-    Nin: "https://bou-niv-api-test.test001.laboremus.no",
-    devPortal: "https://bou-niv-api-test.test001.laboremus.no",
-    envScope: "backoffice:portal"
   },
 };
 
@@ -224,13 +56,6 @@ const devPortal = env.devPortal;
 const NinVerificationURL = env.Nin;
 
 export const remoteRoutes = {
-  ninRequests: NinVerificationURL + "/api/requests",
-  niraNotification: NinVerificationURL + "/health",
-  niraExport: NinVerificationURL + "/api/exports/",
-  niraCredentials: NinVerificationURL + "/api/credentials",
-  niraCurrentCredentials: NinVerificationURL + "/api/credentials/current",
-  webSockets: NinVerificationURL + "/hubs/requesthub",
-  authServer: authURL,
   login: authURL + "/api/test/login",
   profile: authURL + "/api/test/profile",
   register: authURL + "/api/auth/register",

@@ -8,7 +8,6 @@ import RefreshOutlinedIcon from "@material-ui/icons/RefreshOutlined";
 import { printDateTime } from "../../utils/dateHelpers";
 import { white } from "../../theme/custom-colors";
 import { get } from "../../utils/ajax";
-import { remoteRoutes } from "../../data/constants";
 import { useSnackbar } from "notistack";
 import snackbarMessages from "../../data/snackbarMessages";
 import { Chip } from "@material-ui/core";
@@ -92,30 +91,8 @@ const NiraApiNotification = () => {
   const [refresh, setRefresh] = useState<boolean>(false);
   useEffect(() => {
     setLoading(true);
-    getHealthStatus();
   }, []);
 
-  function getHealthStatus() {
-    get(
-      remoteRoutes.niraNotification,
-      (res) => {
-        const status = res.entries.externalServiceReport.data.nira.status;
-        sethealthStatus(status);
-        if (refresh) {
-          enqueueSnackbar(snackbarMessages.NiraApiNotification.online, {
-            variant: healthStatus === "Healthy" ? "success" : "error",
-          });
-        }
-        setRefresh(true);
-      },
-      () => {
-        enqueueSnackbar(snackbarMessages.NiraApiNotification.offline, {
-          variant: "error",
-        });
-      },
-      () => setLoading(false)
-    );
-  }
   function showInformation() {
     setShowPaper(!showPaper);
   }
@@ -139,7 +116,7 @@ const NiraApiNotification = () => {
                 style={{ lineHeight: 1.3 }}
                 variant="body2"
               >
-                <span style={{ textTransform: "uppercase", color: "#9e9e9e", fontSize:"10px"}}>
+                <span style={{ textTransform: "uppercase", color: "#9e9e9e", fontSize: "10px" }}>
                   Last checked
                 </span>{" "}
                 {printDateTime(new Date())}
@@ -150,7 +127,6 @@ const NiraApiNotification = () => {
                 aria-label="refresh"
                 className={classes.iconButton}
                 disabled={loading}
-                onClick={getHealthStatus}
               >
                 <RefreshOutlinedIcon
                   style={{ color: loading ? "rgb(189 189 189)" : white }}
@@ -165,7 +141,7 @@ const NiraApiNotification = () => {
         variant="default"
         size="small"
         label={
-          loading ? 'Connecting...': (healthStatus === "Healthy" ? "NIRA is online" : "NIRA is offline")
+          loading ? 'Connecting...' : (healthStatus === "Healthy" ? "NIRA is online" : "NIRA is offline")
         }
         onDelete={showInformation}
         onClick={showInformation}

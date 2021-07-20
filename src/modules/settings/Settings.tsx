@@ -12,7 +12,6 @@ import ParticipantType from "./details/participantType/ParticipantType";
 import ContactPersonRole from "./details/contactPersonRole/ContactPersonRole";
 import ServiceCategory from "./details/serviceCategory/ServiceCategory";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
-import NiraPasswordStatus from "./details/NiraPasswordStatus/NiraPasswordStatus";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,11 +51,6 @@ const Settings = () => {
               </Grid>
             </Box>
             <Grid item xs={12}>
-              {/* <ErrorBoundary><AccountSettings /></ErrorBoundary> */}
-              <ErrorBoundary><NiraPasswordStatus /></ErrorBoundary>
-              {/* <ErrorBoundary><ParticipantType /></ErrorBoundary>
-              <ErrorBoundary><ContactPersonRole /></ErrorBoundary>
-              <ErrorBoundary><ServiceCategory /></ErrorBoundary> */}
             </Grid>
           </Box>
         </Grid>

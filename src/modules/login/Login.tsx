@@ -8,20 +8,24 @@ import Typography from '@material-ui/core/Typography';
 import { Form, Formik, FormikActions } from 'formik';
 import { useDispatch } from 'react-redux'
 import { handleLogin } from "../../data/redux/coreActions";
-
+import { useLocation } from 'react-router-dom';
 import * as yup from "yup";
 import XTextInput from "../../components/inputs/XTextInput";
 import { useLoginStyles } from "./loginStyles";
 import { Dispatch } from "redux";
 import { useSnackbar } from "notistack";
-
+import { useHistory } from "react-router-dom";
 
 function Login() {
     const { enqueueSnackbar } = useSnackbar();
     const classes = useLoginStyles();
     const dispatch: Dispatch<any> = useDispatch();
+    const location = useLocation();
+    const history = useHistory();
+
     const onSubmit = (data: any, actions: FormikActions<any>) => {
-        dispatch(handleLogin(true));
+        dispatch(handleLogin({ username: "admin", role: "admin" }));
+        history.push("/admin/home");
         enqueueSnackbar("Successfully logged in user")
     }
 

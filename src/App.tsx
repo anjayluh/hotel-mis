@@ -12,14 +12,17 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 const App: React.FC = () => {
     console.log("Starting App")
     const authState: ICoreState = useSelector((state: any) => state.core)
-    const { isLoading, isLoggedIn } = authState
+    const { isLoading } = authState
+    const user = {
+        username: "admin", role: "admin"
+    }
     if (isLoading) {
-        return <Splash />
+        return <Router><Splash /></Router>
     } else {
         return <Router>
             <ToastContainer />
             <>
-                {isLoggedIn ?
+                {user ?
                     <React.Fragment>
                         <ErrorBoundary><ContentSwitch /></ErrorBoundary>
                     </React.Fragment>

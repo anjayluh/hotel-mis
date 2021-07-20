@@ -20,7 +20,6 @@ import { Grid } from "@material-ui/core";
 import { Box } from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import DetailView, { IRec } from "./DetailView";
-import authService from "../data/oidc/AuthService";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export const BarView = (props: any) => {
   const classes = useStyles();
-  const [userProfile, setUserProfile]: any = useState({ name: "Peter Ocheng", role: "admin" });
+  const userProfile = useSelector((state: IState) => state.core.user);
   const dispatch = useDispatch();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -63,7 +62,6 @@ export const BarView = (props: any) => {
 
   async function doLogout() {
     dispatch(handleLogout());
-    await authService.logout();
   }
 
   function closeDialog() {

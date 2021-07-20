@@ -1,9 +1,8 @@
 //import binaryParser from "superagent-binary-parser";
 import * as superagent from 'superagent'
 import Toast from './Toast'
-import {AUTH_TOKEN_KEY} from "../data/constants";
-import authService from "../data/oidc/AuthService";
-import {useSnackbar} from "notistack";
+import { AUTH_TOKEN_KEY } from "../data/constants";
+import { useSnackbar } from "notistack";
 
 export const getToken = (): string | null => {
     return localStorage.getItem(AUTH_TOKEN_KEY)
@@ -18,10 +17,10 @@ export const handleError = (err: any = {}, res: superagent.Response) => {
     const defaultMessage = "Invalid request, please contact admin";
     if ((res && res.forbidden) || (res && res.unauthorized)) {
         Toast.error("Authentication Error")
-        
+
     } else if (res && res.badRequest) {
-        const {message, errors} = res.body
-        let msg = message||'' + '\n'
+        const { message, errors } = res.body
+        let msg = message || '' + '\n'
         for (const key in errors) {
             if (errors.hasOwnProperty(key)) {
                 const error = errors[key][0]
@@ -29,13 +28,13 @@ export const handleError = (err: any = {}, res: superagent.Response) => {
             }
         }
         Toast.error(msg || defaultMessage)
-        
+
     } else if ((res && res.clientError) || (res && res.notAcceptable) || (res && res.error)) {
         Toast.error(defaultMessage)
-        
+
     } else if (res && res.body && res.body.message) {
         Toast.error(res.body.message)
-        
+
     } else {
         const message = err.message || 'Unknown error, contact admin'
         const finalMessage = message.indexOf("offline") !== -1

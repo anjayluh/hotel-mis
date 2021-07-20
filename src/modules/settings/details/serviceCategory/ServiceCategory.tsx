@@ -5,7 +5,6 @@ import {
   ISettingsState,
 } from "../../../../data/redux/settings/reducer";
 import { get } from "../../../../utils/ajax";
-import { remoteRoutes } from "../../../../data/constants";
 import { IState } from "../../../../data/types";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import ExpansionCard from "../../../../components/ExpansionCard";

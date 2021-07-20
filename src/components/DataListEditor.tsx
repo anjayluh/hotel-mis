@@ -1,20 +1,20 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import Paper from '@material-ui/core/Paper';
-import {createStyles, makeStyles, Theme, useTheme} from "@material-ui/core";
+import { createStyles, makeStyles, Theme, useTheme } from "@material-ui/core";
 import XTable from "./table/XTable";
-import {XHeadCell} from "./table/XTableHead";
+import { XHeadCell } from "./table/XTableHead";
 import Grid from '@material-ui/core/Grid';
-import {localRoutes} from "../data/constants";
+import { localRoutes } from "../data/constants";
 import Loading from "./Loading";
 import EditDialog from "./EditDialog";
 import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
-import {IMobileRow} from "./DataList";
+import { IMobileRow } from "./DataList";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -44,17 +44,17 @@ interface IProps {
     data: any[]
     loading: boolean
     showFilter: boolean
-    toMobileRow : (data: any)=> IMobileRow
+    toMobileRow: (data: any) => IMobileRow
     columns: XHeadCell[]
 }
 
-const DataListEditor = ({data, loading,showFilter,onFilter,onCloseFilter,toMobileRow,columns}: IProps) => {
+const DataListEditor = ({ data, loading, showFilter, onFilter, onCloseFilter, toMobileRow, columns }: IProps) => {
     const history = useHistory();
     const theme = useTheme();
     const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
     const classes = useStyles();
     if (loading) {
-        return <Loading/>
+        return <Loading />
     }
 
     if (isSmall) {
@@ -65,7 +65,7 @@ const DataListEditor = ({data, loading,showFilter,onFilter,onCloseFilter,toMobil
                         const mobileRow = toMobileRow(row)
                         return <Fragment key={row.id}>
                             <ListItem alignItems="flex-start" button disableGutters
-                                      onClick={() => history.push(`${localRoutes.contacts}/${row.id}`)}
+                                onClick={() => console.log("I have been clicked")}
                             >
                                 <ListItemAvatar>
                                     {mobileRow.avatar}
@@ -75,7 +75,7 @@ const DataListEditor = ({data, loading,showFilter,onFilter,onCloseFilter,toMobil
                                     secondary={mobileRow.secondary}
                                 />
                             </ListItem>
-                            <Divider component="li"/>
+                            <Divider component="li" />
                         </Fragment>
                     })
                 }
@@ -95,7 +95,7 @@ const DataListEditor = ({data, loading,showFilter,onFilter,onCloseFilter,toMobil
                     initialRowsPerPage={10}
                 />
             </Grid>
-            <Grid item xs={3} style={{display: showFilter ? "block" : "none"}}>
+            <Grid item xs={3} style={{ display: showFilter ? "block" : "none" }}>
                 <Paper className={classes.filterPaper} elevation={0}>
 
                 </Paper>

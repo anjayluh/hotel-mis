@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
+import { handleLogin } from "../../data/redux/coreActions";
 import { Box, Button, Grid } from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import authService from "../../data/oidc/AuthService";
 import { useLoginStyles } from "./loginStyles";
 import logo from "../../assets/download.png";
 import Divider from "@material-ui/core/Divider";
@@ -13,33 +14,28 @@ import { ICoreState } from "../../data/redux/coreReducer";
 import { useSelector } from "react-redux";
 import { useSnackbar } from 'notistack';
 import snackbarMessages from "../../data/snackbarMessages";
+import { useHistory } from "react-router-dom";
 
 
 function Login() {
+  const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const classes = useLoginStyles();
   const [loading, setLoading] = useState(false)
   const authState: ICoreState = useSelector((state: any) => state.core)
-  const { isLoading, isLoggedIn } = authState
+  const history = useHistory();
+  const { isLoading, user } = authState
   const authenticateUser = (event: React.ChangeEvent<any>) => {
     // Setitem to monitor opening of slideout
     localStorage.setItem('isFormOpen', 'true')
 
     event.preventDefault();
     setLoading(true)
+    dispatch(handleLogin({ username: "admin", role: "admin" }));
+    history.push("/admin/home");
+    enqueueSnackbar("Successfully logged in user")
+    setLoading(false)
 
-    authService.login()
-      .then((json) => {
-        if (isLoggedIn) {
-          setLoading(false)
-        }
-      })
-      .catch((error) => {
-        if (error.message === 'Network Error') {
-          enqueueSnackbar(snackbarMessages.Login.NetworkError, { variant: 'error' })
-        }
-        setLoading(false)
-      })
 
   }
 
@@ -64,11 +60,6 @@ function Login() {
                   Hotel MIS
                 </Typography>
               </Box>
-              {/* <Box flexGrow={1}>
-                <Typography variant={"body2"} style={{ paddingRight: 16 }}>
-                  Authentication of current and prospective customer information against records maintained by NIRA
-                </Typography>
-              </Box> */}
               <Box flexGrow={1} pb={1}>
                 <form className={classes.form}>
                   <Button

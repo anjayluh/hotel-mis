@@ -4,13 +4,12 @@ import * as yup from "yup";
 import { reqNin, reqCardNumber } from "../../../data/validations";
 import { FormikActions } from "formik";
 import Grid from "@material-ui/core/Grid";
+import { IState } from "../../../data/types";
 import XFormSimple from "../../../components/forms/XFormSimple";
 import XTextInput from "../../../components/inputs/XTextInput";
 import XDateInput from "../../../components/inputs/XDateInput";
 import { useDispatch, useSelector } from "react-redux";
 import { WebSocketContext } from '../webSockets/WebSocket';
-import { IState } from "../../../data/types";
-import { remoteRoutes } from "../../../data/constants";
 import { get, post } from "../../../utils/ajax";
 import { useSnackbar } from "notistack";
 import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
@@ -105,7 +104,7 @@ const NinVerificationForm = (props: IProps) => {
   })
   const [keyStrokes, setKeyStrokes] = useState(0)
   const dispatch = useDispatch();
-  const userProfile: any = useState({ name: "Peter Ocheng", role: "admin" });
+  const userProfile = useSelector((state: IState) => state.core.user);
 
   function handleSubmit(values: any, actions: FormikActions<any>) {
     const toSave: any = {
@@ -115,28 +114,6 @@ const NinVerificationForm = (props: IProps) => {
       nin: values.nin,
       cardNumber: values.cardNumber,
     };
-    post(
-      remoteRoutes.ninRequests,
-      toSave,
-      (data) => {
-        actions.resetForm();
-        // Invoke websocket to fetch requests and Update table to show recently added request
-        webSocket.getRequests();
-
-        enqueueSnackbar(snackbarMessages.NinVerification.new, {
-          variant: "success",
-        });
-        actions.resetForm();
-        handleClose();
-        if (props.done) props.done();
-
-      },
-      () => {
-        enqueueSnackbar(snackbarMessages.default.fail, {
-          variant: "error",
-        });
-      }
-    );
   }
 
   function handleClose() {
